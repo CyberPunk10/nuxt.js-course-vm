@@ -12,6 +12,6 @@
   </el-container>
 </template>
 
-<style>
+<style lang="sass" scoped>
 
 </style>
