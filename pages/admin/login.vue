@@ -58,6 +58,7 @@ export default {
       }
     }
   },
+
   mounted() {
     const {message} = this.$route.query
 
@@ -71,6 +72,7 @@ export default {
     }
 
   },
+
   methods: {
     onSubmit() {
       this.$refs.formLogin.validate(async valid => {
@@ -86,6 +88,7 @@ export default {
             await this.$store.dispatch('auth/login', formData)
             this.$router.push('/admin')
             this.$message.success('Вы зашли с правами админа')
+            this.loading = false
           } catch (error) {
             this.loading = false
             console.log(error)

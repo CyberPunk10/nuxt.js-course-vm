@@ -30,44 +30,28 @@
         </template>
       </el-table-column>
 
-      <el-table-column align="right">
+      <el-table-column label="Действия" align="right">
         <template slot-scope="{row}">
 
-          <el-button
-            size="mini"
-            class="btn-icon-mobile"
-            @click="handleEdit(row._id)"
-            circle
-          >
-            <i class="el-icon-edit"></i>
-          </el-button>
-          
-          <el-button
-            size="mini"
-            class="btn-icon-desktop"
-            @click="handleEdit(row._id)"
-          >
-            Редактировать
-          </el-button>
+          <el-tooltip class="item" effect="dark" content="Редактировать" placement="top">
+            <el-button
+              size="mini"
+              @click="handleEdit(row._id)"
+              icon="el-icon-edit"
+              circle
+            />
+          </el-tooltip>
 
-          <el-button
-            size="mini"
-            type="danger"
-            class="btn-icon-mobile"
-            @click="handleDelete(row._id)"
-            circle
-          >
-            <i class="el-icon-delete"></i>
-          </el-button>
-
-          <el-button
-            size="mini"
-            type="danger"
-            class="btn-icon-desktop"
-            @click="handleDelete(row._id)"
-          >
-            Удалить
-          </el-button>
+          <el-tooltip class="item" effect="dark" content="Удалить" placement="top-end">
+            <el-button
+              size="mini"
+              type="danger"
+              @click="handleDelete(row._id)"
+              circle
+            >
+              <i class="el-icon-delete"></i>
+            </el-button>
+          </el-tooltip>
 
         </template>
       </el-table-column>
@@ -116,14 +100,5 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@media screen and (max-width: 1024px)
-  .el-button.btn-icon-mobile
-    display: block
-  .el-button.btn-icon-desktop
-    display: none
-@media screen and (min-width: 1025px)
-  .el-button.btn-icon-mobile
-    display: none
-  .el-button.btn-icon-desktop
-    display: block
+
 </style>
