@@ -12,6 +12,10 @@ export default {
     ]
   },
 
+  serverMiddleware: [
+    { path: "/api", handler: "~/api/index.js" },
+  ],
+
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
     'element-ui/lib/theme-chalk/index.css',
@@ -20,7 +24,8 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    '@/plugins/globals'
+    '@/plugins/globals',
+    '~/plugins/api-client.js'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -34,6 +39,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '~/modules/mongodb_setup.js'
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
