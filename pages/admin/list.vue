@@ -30,30 +30,29 @@
         </template>
       </el-table-column>
 
-      <el-table-column
-        label="Действия"
-        align="right">
-        <template slot-scope="scope">
-          <el-input
-            v-model="search"
-            :value="scope"
-            size="mini"
-            placeholder="Type to search"/>
-        </template>
+      <el-table-column label="Действия" align="right">
         <template slot-scope="{row}">
-          <el-button
-            size="mini"
-            @click="handleEdit(row._id)"
-          >
-            Редактировать
-          </el-button>
-          <el-button
-            size="mini"
-            type="danger"
-            @click="handleDelete(row._id)"
-          >
-            Удалить
-          </el-button>
+
+          <el-tooltip class="item" effect="dark" content="Редактировать" placement="top">
+            <el-button
+              size="mini"
+              @click="handleEdit(row._id)"
+              icon="el-icon-edit"
+              circle
+            />
+          </el-tooltip>
+
+          <el-tooltip class="item" effect="dark" content="Удалить" placement="top-end">
+            <el-button
+              size="mini"
+              type="danger"
+              @click="handleDelete(row._id)"
+              circle
+            >
+              <i class="el-icon-delete"></i>
+            </el-button>
+          </el-tooltip>
+
         </template>
       </el-table-column>
     </el-table>
