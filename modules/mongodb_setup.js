@@ -1,8 +1,10 @@
 import mongodb from '../api/mongodb'
 
 export default function () {
-  this.nuxt.hook('render:setupMiddleware', async () => {
-    await mongodb.connect()
-    console.log('MongoDB connected...')
+  this.nuxt.hook('render:setupMiddleware', () => {
+    mongodb.connect()
+      .then(console.log('MongoDB connected...'))
+      .catch(error => console.error(error))
+    
   })
 }
