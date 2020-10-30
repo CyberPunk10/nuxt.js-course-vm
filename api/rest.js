@@ -1,7 +1,7 @@
 import bodyParser from 'body-parser'
 const app = require('express')()
 import passport from 'passport'
-import passportStrategy from '../middleware/passport-strategy'
+import passportStrategy from './middleware/passport-strategy'
 
 import authRoutes from './routes/auth.routes'
 import postRoutes from './routes/post.routes'

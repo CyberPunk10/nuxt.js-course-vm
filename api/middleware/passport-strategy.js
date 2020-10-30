@@ -1,6 +1,6 @@
 import { Strategy, ExtractJwt } from 'passport-jwt'
 import { model } from 'mongoose'
-import keys from '../api/keys'
+import keys from '../keys'
 
 const User = model('users')
 
