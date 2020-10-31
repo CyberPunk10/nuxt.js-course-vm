@@ -13,8 +13,18 @@ export default {
   },
 
   serverMiddleware: [
-    { path: "/api", handler: "~/api/rest.js" },
-    // { path: "/api", handler: "~/api/index.js" },
+    { path: "/api", handler: require("body-parser").json() },
+    { path: "/api", handler: (req, res, next) => {
+        const url = require("url");
+        req.query = url.parse(req.url, true).query
+        req.params = { ...req.query, ...req.body }
+        next()
+      }
+    },
+    { path: "/api", handler: "~/serverMiddleware/api-server.js" }
+
+    // { path: "/api", handler: "~/apiOld/rest.js" },
+    // { path: "/api", handler: "~/apiOld/index.js" },
   ],
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
@@ -27,6 +37,7 @@ export default {
   plugins: [
     '@/plugins/globals',
     '~/plugins/api-client.js'
+
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -51,3 +62,12 @@ export default {
     transpile: [/^element-ui/],
   }
 }
+
+// Деплоим изоморфное веб-приложение на примере Nuxt.js
+// https://habr.com/ru/post/438862/
+
+// Nuxt as fullstack server: frontend + backend API Server (Часть 1)
+// https://habr.com/ru/post/501652/
+
+// Use Express with Nuxt.js
+// https://bithacker.dev/use-express-with-nuxt-js

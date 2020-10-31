@@ -1,6 +1,6 @@
 export const state = () => ({
-  token: null
-  // token: true // temp for development
+  // token: null
+  token: true // temp for development
 })
 
 export const mutations = {
@@ -32,9 +32,10 @@ export const actions = {
     commit('clearTokenMutation')
   },
 
-  async createUser({commit}, formData) {
+  async create({commit}, formData) {
     try {
       console.log('create user', formData)
+      await this.$axios.$post('/api/auth/admin/create', formData)
     } catch (error) {
       commit('setError', error, {root: true})
       throw error

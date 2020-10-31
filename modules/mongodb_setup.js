@@ -5,6 +5,6 @@ export default function () {
     mongodb.connect()
       .then(console.log('MongoDB connected...'))
       .catch(error => console.error(error))
-    
+
   })
 }
