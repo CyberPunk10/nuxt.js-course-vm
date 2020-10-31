@@ -1,4 +1,4 @@
-import mongodb from './mongodb'
+import mongodb from '../api/mongodb'
 
 async function handleCall(req, res, next) {
   if (req.url !== '/date') {

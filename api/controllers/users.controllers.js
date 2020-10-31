@@ -3,7 +3,7 @@ async function getDataFromBD() {
     .data
 }
 
-async function index() {
+module.exports.index = async () => {
   let res = await getDataFromBD()
 
   // some business logic
@@ -18,5 +18,3 @@ async function index() {
 
   return ret
 }
-
-export { index }

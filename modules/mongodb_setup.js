@@ -1,4 +1,4 @@
-import mongodb from '../apiOld/mongodb'
+import mongodb from '../api/mongodb'
 
 export default function () {
   this.nuxt.hook('render:setupMiddleware', () => {
