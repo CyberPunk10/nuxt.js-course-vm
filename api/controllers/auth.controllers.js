@@ -5,11 +5,12 @@ import keys from '../keys'
 const User = require('../models/user.model')
 
 module.exports.login = async (req, res) => {
-  console.log('tets')
-  const candidate = await User.findOne({login: req.body.login})
+  const { login, password } = req.body
+
+  const candidate = await User.findOne({login})
 
   if (candidate) {
-    const isPasswordCorrect = bcrypt.compareSync(req.body.password, candidate.password)
+    const isPasswordCorrect = bcrypt.compareSync(password, candidate.password)
 
     // create token
     if (isPasswordCorrect) {
@@ -28,16 +29,17 @@ module.exports.login = async (req, res) => {
 }
 
 module.exports.createUser = async (req, res) => {
-  const candidate = await User.findOne({login: req.body.login})
+  const { login, password } = req.body
+  const candidate = await User.findOne({login})
 
   if (candidate) {
-    res.status(409).json({message: 'Такой пользователь уже занят'})
+    res.status(409).json({message: 'Такой login уже занят'})
   } else {
     const salt = bcrypt.genSaltSync(10)
 
     const user = new User({
-      login: req.body.login,
-      password: bcrypt.hashSync(req.body.password, salt)
+      login,
+      password: bcrypt.hashSync(password, salt)
     })
 
     await user.save()
