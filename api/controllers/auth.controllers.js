@@ -1,29 +1,32 @@
 import bcrypt from 'bcrypt-nodejs'
 import jwt from 'jsonwebtoken'
-const User = require('../models/user.model')
 import keys from '../keys'
-
-const JWT = keys.JWT
-console.log(JWT);
+// const keys = require('../keys')
+const User = require('../models/user.model')
 
 module.exports.login = async (req, res) => {
+  console.log('tets')
   const candidate = await User.findOne({login: req.body.login})
-  console.log(candidate)
+
   if (candidate) {
     const isPasswordCorrect = bcrypt.compareSync(req.body.password, candidate.password)
+
+    // create token
     if (isPasswordCorrect) {
       const token = jwt.sign({
         login: candidate.login,
         userId: candidate._id
-      }, JWT, {expiresIn: 60 * 60})
+      }, keys.JWT, {expiresIn: 60 * 60})
       res.json({token})
     } else {
       res.status(401).json({message: 'Пароль неверный'})
     }
+
   } else {
     res.status(404).json({message: 'Пользователь не найден'})
   }
 }
+
 module.exports.createUser = async (req, res) => {
   const candidate = await User.findOne({login: req.body.login})
 

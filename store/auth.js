@@ -15,7 +15,7 @@ export const mutations = {
 export const actions = {
   async login({commit, dispatch}, formData) {
     try {
-      const {token} = this.$axios.$post('/api/auth/admin/login', formData)
+      const { token } = this.$axios.$post('/api/auth/admin/login', formData)
       console.log(token)
       dispatch('setToken', token)
     } catch (error) {
@@ -32,9 +32,8 @@ export const actions = {
     commit('clearTokenMutation')
   },
 
-  async create({commit}, formData) {
+  async createUser({commit}, formData) {
     try {
-      console.log('create user', formData)
       await this.$axios.$post('/api/auth/admin/create', formData)
     } catch (error) {
       commit('setError', error, {root: true})
