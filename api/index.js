@@ -1,11 +1,13 @@
 import bodyParser from 'body-parser'
 import passport from 'passport'
-import passportStrategy from './middleware/passport-strategy'
+
+const passportStrategy  = require('./middleware/passport-strategy')
 
 const app = require('express')()
 
 const authRoutes = require('./routes/auth.routes')
 const postRoutes = require('./routes/post.routes')
+const commentRoutes = require('./routes/comment.routes')
 
 app.use(passport.initialize())
 passport.use(passportStrategy)
@@ -15,6 +17,7 @@ app.use(bodyParser.json())
 
 app.use('/auth', authRoutes)
 app.use('/post', postRoutes)
+app.use('/comment', commentRoutes)
 
 app.get('/echo/:what', (req, res) => {
     res.json(req.params)
