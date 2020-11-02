@@ -1,6 +1,6 @@
 // const { login, createUser } = require('../controllers/auth.controllers')
-import { login, createUser } from '../controllers/auth.controllers'
-const { Router } = require('express')
+import { Router } from 'express'
+const { login, createUser } = require('../controllers/auth.controllers')
 
 const router = Router()
 

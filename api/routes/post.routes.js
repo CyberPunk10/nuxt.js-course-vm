@@ -1,5 +1,5 @@
 import passport from 'passport'
-import {Router} from 'express'
+import { Router } from 'express'
 import { login, createUser } from '../controllers/auth.controllers'
 // возможно такой импорт не сработает
 import ctr from '../controllers/post.controllers'
@@ -12,7 +12,7 @@ const router = Router()
 router.post(
   '/admin/',
   passport.authenticate('jwt', {session: false}),
-  upload.single('image'),
+  upload.single('image'), // 'image' должно совпадать с store/post > formData
   ctr.create
 )
 
