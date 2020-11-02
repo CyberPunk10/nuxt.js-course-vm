@@ -17,3 +17,13 @@ module.exports.createComment = async (req, res) => {
    res.status(500).json(error)
  }
 }
+
+module.exports.editComment = async (req, res) => {
+ try {
+   const { name, text, postId } = req.body
+
+   res.status(201).json(comment)
+ } catch (error) {
+   res.status(500).json(error)
+ }
+}
