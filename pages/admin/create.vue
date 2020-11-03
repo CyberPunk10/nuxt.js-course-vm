@@ -12,7 +12,7 @@
       <el-form-item label="Текст в формате .md или .html" prop="title">
         <el-input
           type="text"
-          v-model.trim="controls.title"
+          v-model="controls.title"
         />
       </el-form-item>
 
