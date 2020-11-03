@@ -75,12 +75,10 @@ export default {
               login: this.controls.login,
               password: this.controls.password
             }
-            console.log(formData)
             await this.$store.dispatch('auth/createUser', formData)
             this.$message.success('Новый пользователь добавлен')
             this.controls.login = this.controls.password = ''
             this.loading = false
-
           } catch (error) {
             this.loading = false
             console.log(error)

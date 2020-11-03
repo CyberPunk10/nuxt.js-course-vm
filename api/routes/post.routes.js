@@ -1,6 +1,5 @@
 import passport from 'passport'
 import { Router } from 'express'
-import { login, createUser } from '../controllers/auth.controllers'
 // возможно такой импорт не сработает
 import ctr from '../controllers/post.controllers'
 const upload = require('../middleware/upload')
