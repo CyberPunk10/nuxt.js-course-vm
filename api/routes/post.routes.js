@@ -1,7 +1,6 @@
 import passport from 'passport'
 import { Router } from 'express'
-// возможно такой импорт не сработает
-import ctr from '../controllers/post.controllers'
+const ctr = require('../controllers/post.controllers')
 const upload = require('../middleware/upload')
 
 const router = Router()
@@ -9,14 +8,14 @@ const router = Router()
 // Admin
 // /api/post/admin
 router.post(
-  '/admin/',
+  '/admin/create',
   passport.authenticate('jwt', {session: false}),
   upload.single('image'), // 'image' должно совпадать с store/post > formData
   ctr.create
 )
 
 router.get(
-  '/admin/',
+  '/admin/list',
   passport.authenticate('jwt', {session: false}),
   ctr.getAll
 )

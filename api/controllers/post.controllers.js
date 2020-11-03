@@ -2,6 +2,7 @@ const Post = require('../models/post.model')
 
 
 module.exports.create = async (req, res) => {
+  console.log(req.file.filename)
   const post = new Post({
     title: req.body.title,
     text: req.body.text,

@@ -21,11 +21,12 @@ export const actions = {
       fd.append('text', text)
       fd.append('image', image, image.name)
 
-      return await new Promise(resolve => {
-        setTimeout(() => {
-          resolve()
-        }, 500)
-      })
+      // return await new Promise(resolve => {
+      //   setTimeout(() => {
+      //     resolve()
+      //   }, 500)
+      // })
+      await this.$axios.post('/api/post/admin/create', fd)
     } catch (error) {
       commit('setError', error, {root: true})
       throw error
