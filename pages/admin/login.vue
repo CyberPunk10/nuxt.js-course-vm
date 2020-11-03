@@ -69,6 +69,9 @@ export default {
       case 'logout':
         this.$message.success('Вы успешно вышли из системы')
         break
+      case 'session':
+        this.$message.warning('Время сессии истекло, пожалуйста зайдите заного')
+        break
     }
 
   },
@@ -84,7 +87,6 @@ export default {
               login: this.controls.login,
               password: this.controls.password
             }
-
             await this.$store.dispatch('auth/login', formData)
             this.$router.push('/admin')
             this.$message.success('Вы зашли с правами админа')
