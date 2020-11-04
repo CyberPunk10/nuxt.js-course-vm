@@ -1,7 +1,6 @@
 import bcrypt from 'bcrypt-nodejs'
 import jwt from 'jsonwebtoken'
-import keys from '../keys'
-// const keys = require('../keys')
+const keys = require('../keys')
 const User = require('../models/user.model')
 
 module.exports.login = async (req, res) => {

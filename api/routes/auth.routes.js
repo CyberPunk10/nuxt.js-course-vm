@@ -1,8 +1,6 @@
 import passport from 'passport'
 import { Router } from 'express'
-// const { login, createUser } = require('../controllers/auth.controllers')
 const { login, createUser } = require('../controllers/auth.controllers')
-
 const router = Router()
 
 // /api/auth/admin/login
@@ -13,6 +11,6 @@ router.post(
   '/admin/create',
   passport.authenticate('jwt', {session: false}),
   createUser
- )
+)
 
 module.exports = router

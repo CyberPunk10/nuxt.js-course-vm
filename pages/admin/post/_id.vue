@@ -4,7 +4,8 @@
       <el-breadcrumb-item to="/admin/list">Посты</el-breadcrumb-item>
       <el-breadcrumb-item>{{post.title}}</el-breadcrumb-item>
     </el-breadcrumb>
-    <h1>Post with title: {{post.title}}</h1>
+    <h1>Войти в панель администратора</h1>
+    <h3>Post with title: {{post.title}}</h3>
 
     <el-form
       ref="form"
@@ -12,9 +13,6 @@
       :rules="rules"
       @submit.native.prevent="onSubmit"
     >
-
-      <!-- <h2>Войти в панель администратора</h2> -->
-
       <el-form-item label="Текст в формате .md или .html" prop="text">
         <el-input
           type="textarea"
@@ -46,7 +44,6 @@
         </el-button>
       </el-form-item>
     </el-form>
-
   </div>
 </template>
 
@@ -54,11 +51,17 @@
 export default {
   layout: 'admin',
   middleware: ['admin-auth'],
+
+  mounted() {
+    this.controls.text = this.post.text
+  },
+
   head() {
     return {
       title: `Пост | ${this.post.title}`
     }
   },
+
   validate({params}) {
     return Boolean(params.id)
   },

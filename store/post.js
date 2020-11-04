@@ -5,12 +5,18 @@ const posts = [
 ]
 
 export const actions = {
-  async fetchAdmin({}) {
-    return await new Promise(resolve => {
-      setTimeout(() => {
-        resolve(posts)
-      }, 500)
-    })
+  async fetchAdmin({commit}) {
+    try {
+      return await this.$axios.$get('/api/post/admin/list')
+    } catch (error) {
+      commit('setError', error, {root: true})
+      throw error
+    }
+    // return await new Promise(resolve => {
+    //   setTimeout(() => {
+    //     resolve(posts)
+    //   }, 500)
+    // })
   },
 
   async create({commit}, {title, text, image}) {
@@ -21,31 +27,47 @@ export const actions = {
       fd.append('text', text)
       fd.append('image', image, image.name)
 
+      await this.$axios.$post('/api/post/admin/create', fd)
       // return await new Promise(resolve => {
       //   setTimeout(() => {
       //     resolve()
       //   }, 500)
       // })
-      await this.$axios.post('/api/post/admin/create', fd)
     } catch (error) {
       commit('setError', error, {root: true})
       throw error
     }
   },
 
-  async update({}, {id, text}) {
-
+  async update({commit}, {id, text}) {
+    try {
+      return await this.$axios.$put(`/api/post/admin/${id}`, text)
+    } catch (error) {
+      commit('setError', error, {root: true})
+      throw error
+    }
   },
 
-  async remove({}, id) {
-
+  async remove({commit}, id) {
+    try {
+      return await this.$axios.$delete(`/api/post/admin/${id}`)
+    } catch (error) {
+      commit('setError', error, {root: true})
+      throw error
+    }
   },
 
-  async fetchAdminById({}, id) {
-    return await new Promise(resolve => {
-      setTimeout(() => {
-        resolve(posts.find(p => p._id === id))
-      }, 500)
-    })
+  async fetchAdminById({commit}, id) {
+    try {
+      return await this.$axios.$post(`/api/post/admin/${id}`)
+    } catch (error) {
+      commit('setError', error, {root: true})
+      throw error
+    }
+    // return await new Promise(resolve => {
+    //   setTimeout(() => {
+    //     resolve(posts.find(p => p._id === id))
+    //   }, 500)
+    // })
   }
 }
