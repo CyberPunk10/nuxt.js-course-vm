@@ -19,8 +19,9 @@ app.use('/auth', authRoutes)
 app.use('/post', postRoutes)
 app.use('/comment', commentRoutes)
 
+// for test
 app.get('/echo/:what', (req, res) => {
-    res.json(req.params)
+  res.json(req.params)
 })
 
 module.exports = {

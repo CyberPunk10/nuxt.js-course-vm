@@ -18,6 +18,6 @@ module.exports = new Strategy(options, async (payload, done) => {
       done(null, false)
     }
   } catch (error) {
-    console.log(error)
+    console.log('passport-strategy.js: ', error)
   }
 })

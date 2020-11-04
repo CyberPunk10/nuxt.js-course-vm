@@ -59,3 +59,8 @@ export default {
 
 // Use Express with Nuxt.js
 // https://bithacker.dev/use-express-with-nuxt-js
+
+
+
+// 1. При перезагрузке страницы удаляется токен аунтификации - из-за этого нельзя повторно создать пост или добавить пользователя
+// 2. 
