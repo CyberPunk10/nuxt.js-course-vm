@@ -18,6 +18,7 @@ module.exports.create = async (req, res) => {
 
 module.exports.getAll = async (req, res) => {
   try {
+    console.log('post.controllers.js')
     const posts = await Post.find().sort({date: -1})
     res.json(posts)
   } catch (error) {
@@ -30,7 +31,6 @@ module.exports.getById = async (req, res) => {
     await Post.findById(req.params.id).populate('comments').exec((error, post) => {
       res.json(post)
     })
-    res.json(posts)
   } catch (error) {
     res.status(500).json(error)
   }

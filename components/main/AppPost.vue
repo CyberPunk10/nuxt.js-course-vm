@@ -8,16 +8,16 @@
       slot="header"
       class="post-header"
     >
-      <h3>Post title</h3>
+      <h3>{{post.title}}</h3>
       <small>
         <i class="el-icon-time"></i>
-        {{new Date().toLocaleString()}}
+        {{new Date(post.date).toLocaleString()}}
       </small>
     </header>
 
     <div class="post-body">
       <img
-        src="https://img-s1.onedio.com/id-5b979e50e18b36f32143ba30/rev-0/raw/s-7a3af757103396c79d519de4c7db9ff06627c421.jpg"
+        :src="post.imageUrl"
         alt="Post image"
         class="post-img"
       >
@@ -28,7 +28,7 @@
 
       <span>
         <i class="el-icon-message"></i>
-        12
+        {{post.comments.length}}
       </span>
     </footer>
   </el-card>
@@ -36,9 +36,15 @@
 
 <script>
 export default {
+  props: {
+    post: {
+      type: Object,
+      requeired: true
+    }
+  },
   methods: {
     openPost() {
-      const id = 'test-id'
+      const id = this.post._id
       this.$router.push(`/post/${id}`)
     }
   }

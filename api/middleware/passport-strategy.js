@@ -10,6 +10,7 @@ const options = {
 
 module.exports = new Strategy(options, async (payload, done) => {
   try {
+    console.log('passport-strategy.js')
     const candidate = await User.findById(payload.userId).select('id')
 
     if (candidate) {
