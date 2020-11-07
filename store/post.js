@@ -1,3 +1,5 @@
+import { addView } from "~/api/controllers/post.controllers"
+
 const posts = [
   {title: 'Post1', date: new Date(), views: 22, comments: [1,2], _id: '1'},
   {title: 'Post2', date: new Date(), views: 22, comments: [1,2], _id: '2'},
@@ -5,6 +7,8 @@ const posts = [
 ]
 
 export const actions = {
+
+  // admin
   async fetchAdmin({commit}) {
     try {
       return await this.$axios.$get('/api/post/admin/list')
@@ -27,7 +31,7 @@ export const actions = {
       fd.append('text', text)
       fd.append('image', image, image.name)
 
-      await this.$axios.$post('/api/post/admin/create', fd)
+      return await this.$axios.$post('/api/post/admin/create', fd)
       // return await new Promise(resolve => {
       //   setTimeout(() => {
       //     resolve()
@@ -41,7 +45,7 @@ export const actions = {
 
   async update({commit}, {id, text}) {
     try {
-      return await this.$axios.$put(`/api/post/admin/${id}`, text)
+      return await this.$axios.$put(`/api/post/admin/${id}`, {text})
     } catch (error) {
       commit('setError', error, {root: true})
       throw error
@@ -59,7 +63,7 @@ export const actions = {
 
   async fetchAdminById({commit}, id) {
     try {
-      return await this.$axios.$post(`/api/post/admin/${id}`)
+      return await this.$axios.$get(`/api/post/admin/${id}`)
     } catch (error) {
       commit('setError', error, {root: true})
       throw error
@@ -69,5 +73,35 @@ export const actions = {
     //     resolve(posts.find(p => p._id === id))
     //   }, 500)
     // })
+  },
+
+  // other
+  async fetchById({commit}, id) {
+    try {
+      return await this.$axios.$get(`/api/post/${id}`)
+    } catch (error) {
+      commit('setError', error, {root: true})
+      throw error
+    }
+  },
+
+  async fetch({commit}) {
+    try {
+      console.log('store/post.js')
+      return await this.$axios.$get('/api/post/list')
+    } catch (error) {
+      commit('setError', error, {root: true})
+      throw error
+    }
+  },
+
+  async addView({commit}, { _id, views }) {
+    try {
+      console.log('store/post.js')
+      return await this.$axios.$put(`/api/post/add/view/${_id}`, {views})
+    } catch (error) {
+      commit('setError', error, {root: true})
+      throw error
+    }
   }
 }
