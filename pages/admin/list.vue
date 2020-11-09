@@ -2,7 +2,7 @@
   <div>
     <h1>List</h1>
     <el-table
-      :data="posts.filter(data => !search || data.title.toLowerCase().includes(search.toLowerCase()))"
+      :data="posts"
       style="width: 100%">
       <el-table-column
         prop="title"
@@ -66,13 +66,13 @@ export default {
 
   data() {
     return {
-      search: ''
+      // search: ''
     }
   },
 
-  async asyncData({store}) {
+  async asyncData({ store }) {
     const posts = await store.dispatch('post/fetchAdmin')
-    return {posts}
+    return { posts }
   },
 
   methods: {

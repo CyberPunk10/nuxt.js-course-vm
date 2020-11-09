@@ -30,7 +30,6 @@ module.exports.getById = async (req, res) => {
     await Post.findById(req.params.id).populate('comments').exec((error, post) => {
       res.json(post)
     })
-    res.json(posts)
   } catch (error) {
     res.status(500).json(error)
   }
