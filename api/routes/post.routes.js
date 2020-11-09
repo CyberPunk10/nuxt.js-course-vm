@@ -44,10 +44,9 @@ router.delete(
 
 // /api/post
 // Base
-router.get('/list', ctr.getAll)
+router.get('/', ctr.getAll)
 router.get('/:id', ctr.getById)
-
-router.put('/add/view/:id', ctr.addView)
+router.put('/:id', ctr.addView)
 
 
 module.exports = router
