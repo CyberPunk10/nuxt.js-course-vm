@@ -4,6 +4,7 @@
       <el-breadcrumb-item to="/admin/list">Посты</el-breadcrumb-item>
       <el-breadcrumb-item>{{post.title}}</el-breadcrumb-item>
     </el-breadcrumb>
+    <h1>Войти в панель администратора</h1>
     <h3>Post with title: {{post.title}}</h3>
 
     <el-form
@@ -67,8 +68,7 @@ export default {
 
   async asyncData({store, params}) {
     const post = await store.dispatch('post/fetchAdminById', params.id)
-    await store.dispatch('post/addView', post)
-    return { post }
+    return {post}
   },
 
   data() {
