@@ -1,22 +1,14 @@
 <template>
   <div class="text-field">
     <h3 class="text-field__title">{{ TextArea.title }}</h3>
-    <textarea
-      class="text-field__input"
-      :placeholder="TextArea.placeholder"
+
+    <div
+      class="div-input"
+      contenteditable
       :autofocus="TextArea.autofocus"
-      v-model.trim="valueTextArea"
-    ></textarea>
+    >
+    </div>
 
-    <div style="margin: 20px 0;"></div>
-
-    <el-input
-      class="text-field__input"
-      type="textarea"
-      autosize
-      :placeholder="TextArea.placeholder"
-      v-model.trim="valueTextArea">
-    </el-input>
     <span
       class="text-field__error-msg"
       :class="{invalid: TextArea.invalid.emptyField || TextArea.invalid.incorrect}">
@@ -92,4 +84,12 @@ $color-red: #ff6163
     &.invalid
       opacity: 1
       visibility: visible
+
+.div-input
+  position: relative
+  outline: none
+  border-bottom: 1px solid $color-dark-shade-10
+  &:focus
+    border-bottom: 1px solid #fff
+
 </style>
