@@ -1,10 +1,9 @@
 <template>
-  <div>
-    <form @submit.prevent="onSubmit">
-      <TextArea v-bind:TextArea="TextAreaEmail" @func="setValue"/>
-      <Button v-bind:button="button"/>
-    </form>
-  </div>
+  <form @submit.prevent="onSubmit">
+    <h3 class="title">Чего ты хочешь?</h3>
+    <TextArea v-bind:TextArea="TextAreaEmail" @func="setValue"/>
+    <Button v-bind:button="button" class="btn-opacity"/>
+  </form>
 </template>
 
 <script>
@@ -16,9 +15,9 @@ export default {
   data () {
     return {
       TextAreaEmail: {
-        title: 'Dream',
+        title: '',
         autofocus: true,
-        placeholder: 'просто напиши',
+        placeholder: 'напиши',
         invalid: { emptyField: false, incorrect: false },
       },
       button: { type: 'submit', text: 'Save' },
@@ -75,6 +74,13 @@ export default {
 
 <style lang="sass">
   form
-
+    display: flex
+    justify-content: center
+    flex-direction: column
     padding-bottom: 21vh
+    h3
+      text-align: center
+      font-family: 'M PLUS Rounded 1c', sans-serif
+    .btn-opacity
+      opacity: 0
 </style>
