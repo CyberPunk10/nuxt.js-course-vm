@@ -1,17 +1,19 @@
 <template>
-  <el-row>
-    <el-col :span="8" v-for="(o, index) in 4" :key="o" :offset="index > 0 ? 4 : 0">
-      <el-card :body-style="{ padding: '0px' }">
-        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+  <el-row class="cells-wrap">
+    <!-- <el-col :xs="20" :sm="9" :md="9" :lg="6" v-for="(o) in 8" :key="o" :offset="2"> -->
+    <div v-for="(o) in cells" :key="o.id">
+      <el-card :body-style="{ padding: '0px' }" class="card-cells" shadow="hover">
+        <img :src="o.imageSrc" class="image">
         <div style="padding: 14px;">
-          <span>Yummy hamburger</span>
+          <span>{{o.title}}</span>
           <div class="bottom clearfix">
             <time class="time">{{ currentDate }}</time>
-            <el-button type="text" class="button">Operating</el-button>
+            <el-button type="text" class="button">В корзину</el-button>
           </div>
         </div>
       </el-card>
-    </el-col>
+    </div>
+    <!-- </el-col> -->
   </el-row>
 </template>
 
@@ -22,7 +24,12 @@ export default {
 
   data() {
     return {
-      currentDate: new Date()
+      currentDate: new Date(),
+      cells: [
+        {id: 1, title: 'LG-MJ1', price: 'price', imageSrc: '/landing/LG-MJ1__white.jpg'},
+        {id: 2, title: 'SAMSUNG-25R', price: 'price', imageSrc: '/landing/SAMSUNG-25R__white.jpg'},
+        {id: 3, title: 'SAMSUNG-33G', price: 'price', imageSrc: '/landing/SAMSUNG-33G__white.jpg'}
+      ]
     };
   }
 }
@@ -57,5 +64,16 @@ export default {
 
   .clearfix:after {
       clear: both
+  }
+
+  .card-cells {
+    max-width: 300px;
+    margin: 2rem
+  }
+
+  .cells-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 2rem;
   }
 </style>
