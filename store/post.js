@@ -73,6 +73,15 @@ export const actions = {
     // })
   },
 
+  async getAnalytics({commit}) {
+    try {
+      return await this.$axios.$get('/api/post/admin/get/analytics')
+    } catch (error) {
+      commit('setError', error, {root: true})
+      throw error
+    }
+  },
+
   // other
   async fetchById({commit}, id) {
     try {

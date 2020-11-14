@@ -13,6 +13,7 @@
     "@nuxtjs/axios": "^5.12.2",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.19.0",
+    "chart.js": "^2.9.4",
     "cookie": "^0.4.1",
     "core-js": "^3.6.5",
     "element-ui": "^2.13.2",
@@ -27,6 +28,7 @@
     "nuxt": "^2.14.6",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
+    "vue-chartjs": "^3.5.1",
     "vue-markdown": "^2.2.4"
   },
   "devDependencies": {
