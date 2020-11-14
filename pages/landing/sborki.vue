@@ -97,13 +97,22 @@ export default {
       font-family: system,-apple-system,BlinkMacSystemFont,'Segoe UI','Segoe WP',Roboto,Ubuntu,Oxygen,Cantarell,'Fira Sans','Helvetica Neue',Helvetica,'Lucida Grande','Droid Sans',Tahoma,'Microsoft Sans Serif',sans-serif
       font-weight: 700
       color: #8b8b8b
-      &:before
+      &:before,
+      &:after
         content: ''
         height: 1px
         left: -2px
         padding: 0 2px
         position: absolute
         width: 100%
+
+      &:before
+        background-color: #8b8b8b
+        top: 10px
+
+      &:after
+        background: #fff
+        top: 11px
 
 </style>
 
