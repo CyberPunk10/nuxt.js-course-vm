@@ -41,11 +41,18 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '~/modules/mongodb_setup.js'
+    '~/modules/mongodb_setup.js',
+    '@nuxtjs/pwa'
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
+  axios: {
+    baseURL: process.env.BASE_URL || 'http://localhost:3000'
+  },
+
+  env: {
+    appName: 'SSR Blog'
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
