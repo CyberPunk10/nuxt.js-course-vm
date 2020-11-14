@@ -57,7 +57,6 @@ module.exports.remove = async (req, res) => {
 }
 
 module.exports.addView = async (req, res) => {
-  console.log('testd')
   const $set = {
     views: ++req.body.views
   }
