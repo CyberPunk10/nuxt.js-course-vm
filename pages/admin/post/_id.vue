@@ -18,7 +18,7 @@
           type="textarea"
           resize="none"
           :rows="10"
-          v-model.trim="controls.text"
+          v-model="controls.text"
         />
       </el-form-item>
 
