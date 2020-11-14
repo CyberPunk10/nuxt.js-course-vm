@@ -1,5 +1,7 @@
 # nuxt.js-course-vm
 
+Result: https://nuxtjs-course-vm.herokuapp.com/
+
 ## Build Setup
 
 ```bash
