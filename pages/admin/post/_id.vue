@@ -25,7 +25,7 @@
       <div class="mb">
         <small>
           <i class="el-icon-time"></i>
-          <span>{{new Date(post.date).toLocaleString()}}</span>
+          <span>{{post.date | date}}</span>
         </small>
         <small style="margin-left: 10px">
           <i class="el-icon-view"></i>
@@ -49,17 +49,16 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: `${this.post.title} | ${process.env.appName}`
+    }
+  },
   layout: 'admin',
   middleware: ['admin-auth'],
 
   mounted() {
     this.controls.text = this.post.text
-  },
-
-  head() {
-    return {
-      title: `Пост | ${this.post.title}`
-    }
   },
 
   validate({params}) {

@@ -10,7 +10,7 @@
       <div class="post-info">
         <small>
           <i class="el-icon-time"></i>
-          {{new Date(post.date).toLocaleString()}}
+          {{post.date | date}}
         </small>
         <small>
           <i class="el-icon-view"></i>
@@ -50,6 +50,12 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: `${this.post.title} | ${process.env.appName}`
+    }
+  },
+
   async asyncData({ store, params }) {
     const post = await store.dispatch('post/fetchById', params.id)
     await store.dispatch('post/addView', post)

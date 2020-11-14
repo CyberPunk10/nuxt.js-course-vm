@@ -21,6 +21,9 @@
 
 <script>
 export default {
+  head: {
+    title: `Аналитика | ${process.env.appName}`
+  },
   layout: 'admin',
   middleware: ['admin-auth'],
 
