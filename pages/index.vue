@@ -13,7 +13,7 @@
 <script>
 export default {
   head: {
-    title: 'Main'
+    title: `Главная | ${process.env.appName}`
   },
 
   async asyncData({ store }) {

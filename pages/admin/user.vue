@@ -42,6 +42,9 @@
 
 <script>
 export default {
+  head: {
+    title: `Создать пользователя | ${process.env.appName}`
+  },
   layout: 'admin',
   middleware: ['admin-auth'],
 

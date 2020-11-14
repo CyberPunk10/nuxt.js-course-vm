@@ -41,6 +41,13 @@ router.delete(
   ctr.remove
 )
 
+// /api/post/admin/get/analytics
+router.get(
+  '/admin/get/analytics', // add 'get', потому что иначе 'analytics' будет воспринимться как динамический id, который уже описан выше
+  passport.authenticate('jwt', {session: false}),
+  ctr.getAnalytics
+)
+
 
 // /api/post
 // Base

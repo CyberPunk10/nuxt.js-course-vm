@@ -10,7 +10,7 @@
       <div class="post-info">
         <small>
           <i class="el-icon-time"></i>
-          {{new Date(post.date).toLocaleString()}}
+          {{post.date | date}}
         </small>
         <small>
           <i class="el-icon-view"></i>
@@ -32,11 +32,12 @@
       <AppCommentForm
         v-if="canAddComment"
         @created="crateCommentHandler"
+        :postId="post._id"
       />
       <div class="comments" v-if="true">
         <AppComment
           v-for="comment in post.comments"
-          :key="comment"
+          :key="comment._id"
           :comment="comment"
         />
       </div>
@@ -49,9 +50,18 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: `${this.post.title} | ${process.env.appName}`
+    }
+  },
+
   async asyncData({ store, params }) {
     const post = await store.dispatch('post/fetchById', params.id)
-    return { post }
+    await store.dispatch('post/addView', post)
+    return {
+      post: {...post, views: ++post.views}
+    }
   },
   data() {
     return {
@@ -62,7 +72,8 @@ export default {
     return Boolean(params.id)
   },
   methods: {
-    crateCommentHandler() {
+    crateCommentHandler(comment) {
+      this.post.comments.unshift(comment)
       this.canAddComment = false
     }
   }

@@ -31,7 +31,7 @@ export default {
 
   data() {
     return {
-      currentDate: new Date(),
+      currentDate: new Date().toLocaleString(),
       cells: [
         {id: 1, title: 'LG-MJ1', price: 300, priceLast: 360, imageSrc: '/landing/LG-MJ1__white.jpg'},
         {id: 2, title: 'SAMSUNG-25R', price: 300, priceLast: 360, imageSrc: '/landing/SAMSUNG-25R__white.jpg'},
