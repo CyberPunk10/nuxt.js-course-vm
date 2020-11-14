@@ -1,3 +1,5 @@
+import { plugin } from "mongoose"
+
 export default function ({ $axios, redirect, store }) {
   $axios.interceptors.request.use(request => {
 
@@ -6,9 +8,9 @@ export default function ({ $axios, redirect, store }) {
     if (store.getters['auth/isAuthenticated'] && !request.headers.common['Authorization']) {
       const token = store.getters['auth/token']
       console.log(token)
-      // request.headers.common['Authorization'] = `Bearer ${token}`
+      request.headers.common['Authorization'] = `Bearer ${token}`
     }
-    console.log(request.headers)
+    console.log('plugin/axios.js - Добавление заголовка с токеном для backend (т.к. axios не доступен при SSR)')
     return request
   })
 
