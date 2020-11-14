@@ -27,7 +27,6 @@ export default {
   extends: Bar,
 
   mounted() {
-    console.log(this.labels, this.data, this.title)
     const data = {
       labels: this.labels,
       datasets: [{
