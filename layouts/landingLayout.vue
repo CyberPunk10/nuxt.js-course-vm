@@ -20,7 +20,7 @@
       <el-menu-item index="4"><i class="el-icon-shopping-cart-2"></i>Корзина</el-menu-item>
     </el-menu>
 
-    <el-row class="tac hidden-sm-and-up">
+    <!-- <el-row class="tac hidden-sm-and-up">
       <el-col :span="24">
         <el-menu
           default-active="1-3"
@@ -45,9 +45,10 @@
         </el-menu>
       </el-col>
 
-    </el-row>
+    </el-row> -->
 
     <Nuxt />
+    <TeleportMenu/>
   </div>
 </template>
 

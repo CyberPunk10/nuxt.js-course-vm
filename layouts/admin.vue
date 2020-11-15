@@ -1,12 +1,15 @@
 <template>
-  <el-container class="admin-layout-wrap">
-    <el-aside width="200px">
-      <AppAside />
-    </el-aside>
-    <el-main>
-      <Nuxt />
-    </el-main>
-  </el-container>
+  <div>
+    <el-container class="admin-layout-wrap">
+      <el-aside width="200px">
+        <AppAside />
+      </el-aside>
+      <el-main>
+        <Nuxt />
+      </el-main>
+    </el-container>
+    <TeleportMenu/>
+  </div>
 </template>
 
 <script>

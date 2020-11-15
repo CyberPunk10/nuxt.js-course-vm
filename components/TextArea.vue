@@ -89,6 +89,11 @@ $color-red: #ff6163
   position: relative
   outline: none
   border-bottom: 1px solid $color-dark-shade-10
+
+  line-height: 30px
+  font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif
+  font-size: 18px
+  color: #111
   &:focus
     border-bottom: 1px solid #fff
 
