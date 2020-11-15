@@ -42,7 +42,7 @@ export default {
   head: {
     title: `Вход в панель администратора | ${process.env.appName}`
   },
-  layout: 'empty',
+  layout: 'emptyCenter',
   data() {
     return {
       loading: false,

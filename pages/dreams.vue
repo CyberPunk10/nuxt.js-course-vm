@@ -78,9 +78,14 @@ export default {
     justify-content: center
     flex-direction: column
     padding-bottom: 21vh
+    font-family: Quicksand,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"
     h3
       text-align: center
-      font-family: 'M PLUS Rounded 1c', sans-serif
+      font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif
+      // font-size: 32px
+      // font-weight: 700
+      line-height: 47px
     .btn-opacity
-      opacity: 0
+      cursor: pointer
+      opacity: 0.1
 </style>

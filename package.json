@@ -37,8 +37,10 @@
     "vue-markdown": "^2.2.4"
   },
   "devDependencies": {
+    "@nuxtjs/style-resources": "^1.0.0",
     "fibers": "^5.0.0",
+    "node-sass": "^5.0.0",
     "sass": "^1.27.0",
-    "sass-loader": "^10.0.4"
+    "sass-loader": "^10.1.0"
   }
 }
