@@ -15,6 +15,7 @@ export default {
   head: {
     title: `Главная | ${process.env.appName}`
   },
+  layout: 'ssrBlog',
 
   async asyncData({ store }) {
     const posts = await store.dispatch('post/fetch')
