@@ -1,11 +1,6 @@
 <template>
   <div>
     <h1>Аналитика по постам</h1>
-    <span>{{message}}</span>
-    <el-button @click.prevent="sayGoodbay">
-      Result
-    </el-button>
-    <hr>
     <AnalyticsChart
       title="Количество просмотров"
       :labels="views.labels"
@@ -34,15 +29,12 @@ export default {
 
   data() {
     return {
-      message: 'message'
+
     }
   },
 
   methods: {
-    async sayGoodbay() {
-      const result__ = await this.$api.getDate()
-      this.message = (await result__.json()).date
-    }
+
   }
 }
 </script>

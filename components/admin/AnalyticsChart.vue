@@ -1,6 +1,6 @@
 <template>
   <div class="mb2">
-    <canvas height="100px" ref="canvas"></canvas>
+    <canvas ref="canvas"></canvas>
   </div>
 </template>
 
@@ -66,3 +66,7 @@ export default {
 
 }
 </script>
+
+<style lang="sass" scoped>
+
+</style>
