@@ -1,12 +1,9 @@
 <template>
-  <div>
-    <div class="error-layout">
-      <div class="error-content">
-        <h1 class="error-title">Ошибка 404</h1>
-        <nuxt-link to="/">Вернуться на главную</nuxt-link>
-      </div>
+  <div class="error-layout">
+    <div class="error-content">
+      <h1 class="error-title">Ошибка 404</h1>
+      <nuxt-link to="/">Вернуться на главную</nuxt-link>
     </div>
-    <TeleportMenu/>
   </div>
 </template>
 
@@ -17,13 +14,14 @@
     justify-content: center
     align-items: center
     width: 100%
+    height: 90vh
   &-content
     display: flex
     flex-direction: column
     align-items: center
-    padding-top: 4rem
+
   &-title
-    color: rgb(250, 128, 114)
+    color: $red
     margin-bottom: 1rem
 
 </style>
