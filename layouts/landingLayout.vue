@@ -3,49 +3,24 @@
 
     <el-menu :default-active="activeIndex" class="el-menu-demo hidden-xs-only" mode="horizontal" @select="handleSelect">
       <el-menu-item index="1">Галерея</el-menu-item>
-      <el-submenu index="2">
-        <template slot="title">Сборки</template>
-        <el-menu-item index="2-1">item one</el-menu-item>
-        <el-menu-item index="2-2">item two</el-menu-item>
-        <el-menu-item index="2-3">item three</el-menu-item>
-      </el-submenu>
-      <el-menu-item index="5"><a href="/landing/sborki">Аккумуляторы</a></el-menu-item>
-      <el-submenu index="3">
+      <el-menu-item index="2">Сборки</el-menu-item>
+      <el-menu-item index="3"><a href="/landing/sborki">Аккумуляторы</a></el-menu-item>
+      <el-menu-item index="4">BMS платы</el-menu-item>
+      <el-menu-item index="5">Кастом</el-menu-item>
+      <el-menu-item index="8"><i class="el-icon-shopping-cart-2"></i>Корзина</el-menu-item>
+      <!-- <el-submenu index="6">
         <template slot="title"><a href="/landing/sborki">Аккумуляторы</a></template>
-        <el-menu-item index="2-1">item one</el-menu-item>
-        <el-menu-item index="2-2">item two</el-menu-item>
-        <el-menu-item index="2-3">item three</el-menu-item>
-      </el-submenu>
-      <el-menu-item index="3">BMS платы</el-menu-item>
-      <el-menu-item index="4"><i class="el-icon-shopping-cart-2"></i>Корзина</el-menu-item>
+        <el-menu-item index="6-1">item one</el-menu-item>
+        <el-menu-item index="6-2">item two</el-menu-item>
+        <el-menu-item index="6-3">item three</el-menu-item>
+      </el-submenu> -->
+      <!-- <el-submenu index="7">
+        <template slot="title">Сборки</template>
+        <el-menu-item index="7-1">item one</el-menu-item>
+        <el-menu-item index="7-2">item two</el-menu-item>
+        <el-menu-item index="7-3">item three</el-menu-item>
+      </el-submenu> -->
     </el-menu>
-
-    <!-- <el-row class="tac hidden-sm-and-up">
-      <el-col :span="24">
-        <el-menu
-          default-active="1-3"
-          class="el-menu-vertical-demo"
-          @open="handleOpen"
-          @close="handleClose">
-          <el-submenu index="1">
-            <template slot="title">
-              <i class="el-icon-menu"></i>
-              <span>Меню</span>
-            </template>
-
-            <el-menu-item index="1-1">Галерея</el-menu-item>
-            <el-menu-item index="1-2">Сборки</el-menu-item>
-            <el-menu-item index="1-3">Аккумуляторы</el-menu-item>
-
-            <el-menu-item-group title="Group Two">
-              <el-menu-item index="1-4">item three</el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
-
-        </el-menu>
-      </el-col>
-
-    </el-row> -->
 
     <Nuxt />
     <TeleportMenu/>
@@ -67,10 +42,18 @@ export default {
 
   data() {
     return {
-      activeIndex: '1',
-      activeIndex2: '1'
+      activeIndex: '1'
     };
   },
+  // camputed: {
+  //   activeIndex: this.route.name
+  // },
+  // watch: {
+  //   activeIndex() {
+  //     const activeIndex = document.querySelector('activeIndex').dataset
+  //     return
+  //   }
+  // },
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
