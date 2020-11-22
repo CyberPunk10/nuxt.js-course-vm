@@ -583,27 +583,74 @@ export default {
       function createAllDays(deltaX) {
         let html = ''
         let x = 0
+        const beforeLastCountWeeks = countWeeks - 1
         for (let i = 0; i < countWeeks; i++) {
-          html += `<g transform="translate(${x}, 0)">${createWeek(15)}</g>`
+          if (i !== beforeLastCountWeeks) {
+            html += `<g transform="translate(${x}, 0)">${createWeek(15)}</g>`
+          } else {
+            html += `<g transform="translate(${x}, 0)">${createWeek(15, true)}</g>`
+          }
           x += deltaX
+        }
+
+        createLabels()
+
+        return html
+      }
+
+      function createWeek(deltaY, currentWeek) {
+        let html = ''
+        let y = 0
+        if (!currentWeek) {
+          for (let i = 0; i < 7; i++) {
+            html += `<rect class="day" width="11" height="11" x="16" y="${y}" data-count="0" data-date="${new Date(lastTimestamp).toLocaleDateString()}"></rect>`
+            y += deltaY
+            lastTimestamp = lastTimestamp + (24 * 3600 * 1000)
+          }
+        } else {
+          for (let i = 0; i < (currentDayWeek + 1); i++) {
+            html += `<rect class="day" width="11" height="11" x="16" y="${y}" data-count="0" data-date="${new Date(lastTimestamp).toLocaleDateString()}"></rect>`
+            y += deltaY
+            lastTimestamp = lastTimestamp + (24 * 3600 * 1000)
+          }
         }
         return html
       }
 
-      function createWeek(deltaY) {
-        let html = ''
-        let y = 0
-        for (let i = 0; i < 7; i++) {
-          html += `<rect class="day" width="11" height="11" x="16" y="${y}" data-count="0" data-date="${new Date(lastTimestamp).toLocaleDateString()}"></rect>`
-          y += deltaY
-          lastTimestamp = lastTimestamp + (24 * 3600 * 1000)
-        }
-        return html
+      function createLabels() {
+        // let html = ''
+        // for (let i = 0; i < 12; i++) {
+        //   html += `<text x="751" y="-8" class="month">Ноя</text>`
+        // }
+        // return html
       }
 
       let resultHtml = `
         <div class="mt3 border py-2 graph-before-activity-overview">
-          <svg width="828" height="128" class="js-calendar-graph-svg">${createAllDays(16)}</svg>
+          <svg width="${16 * countWeeks + 28}" height="128" class="js-calendar-graph-svg">
+            <g transform="translate(10, 20)" data-hydro-click="{&quotevent_type&quot:&quotuser_profile.click&quot,&quotpayload&quot:{&quotprofile_user_id&quot:59876378,&quottarget&quot:&quotCONTRIBUTION_CALENDAR_SQUARE&quot,&quotuser_id&quot:59876378,&quotoriginating_url&quot:&quothttps://github.com/CyberPunk10&quot}}" data-hydro-click-hmac="4852aa4a3d29cdad070926f4ff435c872cd50c7f37b83f5d4802f48f13829f8c">
+              ${createAllDays(16)}
+              <text x="31" y="-8" class="month">Дек</text>
+              <text x="106" y="-8" class="month">Янв</text>
+              <text x="166" y="-8" class="month">Фев</text>
+              <text x="226" y="-8" class="month">Мар</text>
+              <text x="301" y="-8" class="month">Апр</text>
+              <text x="361" y="-8" class="month">Май</text>
+              <text x="436" y="-8" class="month">Июн</text>
+              <text x="496" y="-8" class="month">Июл</text>
+              <text x="556" y="-8" class="month">Авг</text>
+              <text x="631" y="-8" class="month">Сен</text>
+              <text x="691" y="-8" class="month">Окт</text>
+              <text x="751" y="-8" class="month">Ноя</text>
+              <text text-anchor="start" class="wday" dx="-10" dy="8" style="display: none">Sun</text>
+              <text text-anchor="start" class="wday" dx="-10" dy="25">Пн</text>
+              <text text-anchor="start" class="wday" dx="-10" dy="32" style="display: none">Tue</text>
+              <text text-anchor="start" class="wday" dx="-10" dy="56">Ср</text>
+              <text text-anchor="start" class="wday" dx="-10" dy="57" style="display: none">Thu</text>
+              <text text-anchor="start" class="wday" dx="-10" dy="85">Пт</text>
+              <text text-anchor="start" class="wday" dx="-10" dy="81" style="display: none">Sat</text>
+            </g>
+          </svg>
         </div>
       `
 
@@ -616,7 +663,7 @@ export default {
 <style lang="sass">
 .calendar-graph-wrap,
 .myCalendar
-  width: 90rem
+  width: 91rem
   margin: 0 auto
 .mt3
   margin-top: 3rem
@@ -632,7 +679,8 @@ export default {
 .border
   border: 1px solid $color-dark-shade-10
 
-.calendar-graph rect.day
+.calendar-graph rect.day,
+.myCalendar rect.day
   shape-rendering: geometricPrecision
   outline: 1px solid $color-dark-shade-10
   outline-offset: -1px
