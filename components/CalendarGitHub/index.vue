@@ -525,6 +525,9 @@ export default {
     handleClickCreateMyCalendar() {
       const $el = document.querySelector('.myCalendar')
 
+      const deltaX = 16
+      const deltaY = 15
+
       const week = `
       <g transform="translate(0, 0)">
         <rect class="day" width="11" height="11" x="16" y="0" fill="var($color-calendar-graph-day-bg)" data-count="0" data-date="2019-11-24"></rect>
@@ -565,6 +568,23 @@ export default {
         'Пятница',
         'Суббота'
       ]
+      const month = [
+        'Янв',
+        'Фев',
+        'Мар',
+        'Апр',
+        'Май',
+        'Июн',
+        'Июл',
+        'Авг',
+        'Сен',
+        'Окт',
+        'Ноя',
+        'Дек'
+      ]
+
+      let arrMonthInMonday = [] // all monday
+      let arrFirstMondayMonth = [] // first monday month
 
       console.log('\n',
         date.toLocaleDateString(),'\n',
@@ -578,35 +598,96 @@ export default {
         lastDayWeek, days[lastDayWeek],'\n',
       )
 
-
-
-      function createAllDays(deltaX) {
+      function createAllDays() {
         let html = ''
         let x = 0
+        const beforeLastCountWeeks = countWeeks - 1
         for (let i = 0; i < countWeeks; i++) {
-          html += `<g transform="translate(${x}, 0)">${createWeek(15)}</g>`
+          if (i !== beforeLastCountWeeks) {
+            html += `<g transform="translate(${x}, 0)">${createWeek()}</g>`
+          } else {
+            html += `<g transform="translate(${x}, 0)">${createWeek(true)}</g>`
+          }
           x += deltaX
+        }
+
+        createArrFirstMondayMonth()
+
+        html += createLabels()
+
+        return html
+      }
+
+      function createWeek(currentWeek) {
+        let html = ''
+        let y = 0
+        if (!currentWeek) {
+          for (let i = 0; i < 7; i++) {
+            if (!i) {
+              arrMonthInMonday.push(new Date(lastTimestamp).getMonth())
+            }
+            html += `<rect class="day" width="11" height="11" x="16" y="${y}" data-count="0" data-date="${new Date(lastTimestamp).toLocaleDateString()}"></rect>`
+            y += deltaY
+            lastTimestamp = lastTimestamp + (24 * 3600 * 1000)
+          }
+        } else {
+          for (let i = 0; i < (currentDayWeek + 1); i++) {
+            html += `<rect class="day" width="11" height="11" x="16" y="${y}" data-count="0" data-date="${new Date(lastTimestamp).toLocaleDateString()}"></rect>`
+            y += deltaY
+            lastTimestamp = lastTimestamp + (24 * 3600 * 1000)
+          }
         }
         return html
       }
 
-      function createWeek(deltaY) {
+      function createArrFirstMondayMonth() {
+        for(let i = 0; i < 12; i++) {
+          arrFirstMondayMonth.push(arrMonthInMonday.indexOf(i))
+        }
+        // const $elems = document.querySelectorAll('svg.js-calendar-graph-svg>g>g')
+        // console.log($elems[7])
+      }
+
+
+
+      function createLabels() {
         let html = ''
-        let y = 0
-        for (let i = 0; i < 7; i++) {
-          html += `<rect class="day" width="11" height="11" x="16" y="${y}" data-count="0" data-date="${new Date(lastTimestamp).toLocaleDateString()}"></rect>`
-          y += deltaY
-          lastTimestamp = lastTimestamp + (24 * 3600 * 1000)
+
+        let firstMonth = arrFirstMondayMonth.findIndex(item => item < 2)
+        let secondMonth = arrFirstMondayMonth.findIndex(item => item > arrFirstMondayMonth[firstMonth] && item < 5)
+        console.log(firstMonth, secondMonth)
+        for (let i = 0; i < (arrFirstMondayMonth.length); i++) {
+          if (i !== firstMonth) {
+            html += `<text x="${deltaX * arrFirstMondayMonth[i] + 16}" y="-8" class="month">${month[i]}</text>`
+          } else {
+            const currentMonthStartPosition = arrMonthInMonday.indexOf(firstMonth, -5)
+            html += `<text x="${deltaX * currentMonthStartPosition + 16}" y="-8" class="month">${month[firstMonth]}</text>`
+          }
         }
         return html
       }
+
+
 
       let resultHtml = `
         <div class="mt3 border py-2 graph-before-activity-overview">
-          <svg width="828" height="128" class="js-calendar-graph-svg">${createAllDays(16)}</svg>
+          <svg width="${deltaX * countWeeks + 28}" height="128" class="js-calendar-graph-svg">
+            <g transform="translate(10, 20)" data-hydro-click="{&quotevent_type&quot:&quotuser_profile.click&quot,&quotpayload&quot:{&quotprofile_user_id&quot:59876378,&quottarget&quot:&quotCONTRIBUTION_CALENDAR_SQUARE&quot,&quotuser_id&quot:59876378,&quotoriginating_url&quot:&quothttps://github.com/CyberPunk10&quot}}" data-hydro-click-hmac="4852aa4a3d29cdad070926f4ff435c872cd50c7f37b83f5d4802f48f13829f8c">
+              ${createAllDays()}
+              <text text-anchor="start" class="wday" dx="-10" dy="8" style="display: none">Sun</text>
+              <text text-anchor="start" class="wday" dx="-10" dy="25">Пн</text>
+              <text text-anchor="start" class="wday" dx="-10" dy="32" style="display: none">Tue</text>
+              <text text-anchor="start" class="wday" dx="-10" dy="56">Ср</text>
+              <text text-anchor="start" class="wday" dx="-10" dy="57" style="display: none">Thu</text>
+              <text text-anchor="start" class="wday" dx="-10" dy="85">Пт</text>
+              <text text-anchor="start" class="wday" dx="-10" dy="81" style="display: none">Sat</text>
+            </g>
+          </svg>
         </div>
       `
 
+      console.log('arrMonthInMonday: ', arrMonthInMonday)
+      console.log('arrFirstMondayMonth: ', arrFirstMondayMonth)
       $el.innerHTML = resultHtml
     }
   }
@@ -616,7 +697,7 @@ export default {
 <style lang="sass">
 .calendar-graph-wrap,
 .myCalendar
-  width: 90rem
+  width: 91rem
   margin: 0 auto
 .mt3
   margin-top: 3rem
@@ -632,12 +713,14 @@ export default {
 .border
   border: 1px solid $color-dark-shade-10
 
-.calendar-graph rect.day
+.calendar-graph rect.day,
+.myCalendar rect.day
   shape-rendering: geometricPrecision
   outline: 1px solid $color-dark-shade-10
   outline-offset: -1px
   rx: 2
   ry: 2
+
 rect
   width: 11
   height: 11
@@ -648,5 +731,27 @@ rect
 .myCalendar rect.day
   rx: 2
   ry: 2
+
+.calendar-graph text.month,
+.myCalendar text.month
+  font-size: 10px
+
+.calendar-graph text.wday,
+.myCalendar text.wday
+  font-size: 9px
+
+*
+  box-sizing: border-box
+
+text
+  display: block
+  white-space: nowrap
+
+.text-center
+  text-align: center !important
+
+body
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji
+  line-height: 1.5
 
 </style>

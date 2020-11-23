@@ -6,7 +6,7 @@
       <el-menu-item index="2">Сборки</el-menu-item>
       <el-menu-item index="3"><a href="/landing/sborki">Аккумуляторы</a></el-menu-item>
       <el-menu-item index="4">BMS платы</el-menu-item>
-      <el-menu-item index="5">Кастом</el-menu-item>
+      <el-menu-item index="5"><a href="/landing/calendar-github">Кастом</a></el-menu-item>
       <el-menu-item index="8"><i class="el-icon-shopping-cart-2"></i>Корзина</el-menu-item>
       <!-- <el-submenu index="6">
         <template slot="title"><a href="/landing/sborki">Аккумуляторы</a></template>

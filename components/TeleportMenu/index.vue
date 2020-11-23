@@ -117,7 +117,7 @@ $color-bg-content: rgb(248,250,252)
       overflow-y: auto
     li
       &.teleport-menu__li-category
-        padding: .8rem 1.6rem .8rem .5rem
+        padding: 1rem 1.6rem .5rem .5rem
         margin: 0 1.5rem 1rem 1.5rem
         border-bottom: 1px dashed $color-dark-shade-25
         color: $color-dark-shade-50
