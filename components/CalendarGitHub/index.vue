@@ -525,6 +525,9 @@ export default {
     handleClickCreateMyCalendar() {
       const $el = document.querySelector('.myCalendar')
 
+      const deltaX = 16
+      const deltaY = 15
+
       const week = `
       <g transform="translate(0, 0)">
         <rect class="day" width="11" height="11" x="16" y="0" fill="var($color-calendar-graph-day-bg)" data-count="0" data-date="2019-11-24"></rect>
@@ -565,6 +568,23 @@ export default {
         'Пятница',
         'Суббота'
       ]
+      const month = [
+        'Янв',
+        'Фев',
+        'Мар',
+        'Апр',
+        'Май',
+        'Июн',
+        'Июл',
+        'Авг',
+        'Сен',
+        'Окт',
+        'Ноя',
+        'Дек'
+      ]
+
+      let arrMonthInMonday = [] // all monday
+      let arrFirstMondayMonth = [] // first monday month
 
       console.log('\n',
         date.toLocaleDateString(),'\n',
@@ -578,31 +598,34 @@ export default {
         lastDayWeek, days[lastDayWeek],'\n',
       )
 
-
-
-      function createAllDays(deltaX) {
+      function createAllDays() {
         let html = ''
         let x = 0
         const beforeLastCountWeeks = countWeeks - 1
         for (let i = 0; i < countWeeks; i++) {
           if (i !== beforeLastCountWeeks) {
-            html += `<g transform="translate(${x}, 0)">${createWeek(15)}</g>`
+            html += `<g transform="translate(${x}, 0)">${createWeek()}</g>`
           } else {
-            html += `<g transform="translate(${x}, 0)">${createWeek(15, true)}</g>`
+            html += `<g transform="translate(${x}, 0)">${createWeek(true)}</g>`
           }
           x += deltaX
         }
 
-        createLabels()
+        createArrFirstMondayMonth()
+
+        html += createLabels()
 
         return html
       }
 
-      function createWeek(deltaY, currentWeek) {
+      function createWeek(currentWeek) {
         let html = ''
         let y = 0
         if (!currentWeek) {
           for (let i = 0; i < 7; i++) {
+            if (!i) {
+              arrMonthInMonday.push(new Date(lastTimestamp).getMonth())
+            }
             html += `<rect class="day" width="11" height="11" x="16" y="${y}" data-count="0" data-date="${new Date(lastTimestamp).toLocaleDateString()}"></rect>`
             y += deltaY
             lastTimestamp = lastTimestamp + (24 * 3600 * 1000)
@@ -617,31 +640,39 @@ export default {
         return html
       }
 
-      function createLabels() {
-        // let html = ''
-        // for (let i = 0; i < 12; i++) {
-        //   html += `<text x="751" y="-8" class="month">Ноя</text>`
-        // }
-        // return html
+      function createArrFirstMondayMonth() {
+        for(let i = 0; i < 12; i++) {
+          arrFirstMondayMonth.push(arrMonthInMonday.indexOf(i))
+        }
+        // const $elems = document.querySelectorAll('svg.js-calendar-graph-svg>g>g')
+        // console.log($elems[7])
       }
+
+
+
+      function createLabels() {
+        let html = ''
+        for (let i = 0; i < arrFirstMondayMonth.length; i++) {
+          if (!i) {
+            html += `<text x="${deltaX * arrFirstMondayMonth[i] + 16}" y="-8" class="month">${month[i]}</text>`
+          } else {
+            if (arrFirstMondayMonth[i] < 2) {
+
+            } else {
+              html += `<text x="${deltaX * arrFirstMondayMonth[i] + 16}" y="-8" class="month">${month[i]}</text>`
+            }
+          }
+        }
+        return html
+      }
+
+
 
       let resultHtml = `
         <div class="mt3 border py-2 graph-before-activity-overview">
-          <svg width="${16 * countWeeks + 28}" height="128" class="js-calendar-graph-svg">
+          <svg width="${deltaX * countWeeks + 28}" height="128" class="js-calendar-graph-svg">
             <g transform="translate(10, 20)" data-hydro-click="{&quotevent_type&quot:&quotuser_profile.click&quot,&quotpayload&quot:{&quotprofile_user_id&quot:59876378,&quottarget&quot:&quotCONTRIBUTION_CALENDAR_SQUARE&quot,&quotuser_id&quot:59876378,&quotoriginating_url&quot:&quothttps://github.com/CyberPunk10&quot}}" data-hydro-click-hmac="4852aa4a3d29cdad070926f4ff435c872cd50c7f37b83f5d4802f48f13829f8c">
-              ${createAllDays(16)}
-              <text x="31" y="-8" class="month">Дек</text>
-              <text x="106" y="-8" class="month">Янв</text>
-              <text x="166" y="-8" class="month">Фев</text>
-              <text x="226" y="-8" class="month">Мар</text>
-              <text x="301" y="-8" class="month">Апр</text>
-              <text x="361" y="-8" class="month">Май</text>
-              <text x="436" y="-8" class="month">Июн</text>
-              <text x="496" y="-8" class="month">Июл</text>
-              <text x="556" y="-8" class="month">Авг</text>
-              <text x="631" y="-8" class="month">Сен</text>
-              <text x="691" y="-8" class="month">Окт</text>
-              <text x="751" y="-8" class="month">Ноя</text>
+              ${createAllDays()}
               <text text-anchor="start" class="wday" dx="-10" dy="8" style="display: none">Sun</text>
               <text text-anchor="start" class="wday" dx="-10" dy="25">Пн</text>
               <text text-anchor="start" class="wday" dx="-10" dy="32" style="display: none">Tue</text>
@@ -654,6 +685,8 @@ export default {
         </div>
       `
 
+      console.log(arrMonthInMonday)
+      console.log(arrFirstMondayMonth)
       $el.innerHTML = resultHtml
     }
   }
@@ -686,6 +719,7 @@ export default {
   outline-offset: -1px
   rx: 2
   ry: 2
+
 rect
   width: 11
   height: 11
@@ -696,5 +730,27 @@ rect
 .myCalendar rect.day
   rx: 2
   ry: 2
+
+.calendar-graph text.month,
+.myCalendar text.month
+  font-size: 10px
+
+.calendar-graph text.wday,
+.myCalendar text.wday
+  font-size: 9px
+
+*
+  box-sizing: border-box
+
+text
+  display: block
+  white-space: nowrap
+
+.text-center
+  text-align: center !important
+
+body
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji
+  line-height: 1.5
 
 </style>
