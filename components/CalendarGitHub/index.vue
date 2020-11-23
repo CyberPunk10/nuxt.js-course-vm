@@ -652,15 +652,16 @@ export default {
 
       function createLabels() {
         let html = ''
-        for (let i = 0; i < arrFirstMondayMonth.length; i++) {
-          if (!i) {
+
+        let firstMonth = arrFirstMondayMonth.findIndex(item => item < 2)
+        let secondMonth = arrFirstMondayMonth.findIndex(item => item > arrFirstMondayMonth[firstMonth] && item < 5)
+        console.log(firstMonth, secondMonth)
+        for (let i = 0; i < (arrFirstMondayMonth.length); i++) {
+          if (i !== firstMonth) {
             html += `<text x="${deltaX * arrFirstMondayMonth[i] + 16}" y="-8" class="month">${month[i]}</text>`
           } else {
-            if (arrFirstMondayMonth[i] < 2) {
-
-            } else {
-              html += `<text x="${deltaX * arrFirstMondayMonth[i] + 16}" y="-8" class="month">${month[i]}</text>`
-            }
+            const currentMonthStartPosition = arrMonthInMonday.indexOf(firstMonth, -5)
+            html += `<text x="${deltaX * currentMonthStartPosition + 16}" y="-8" class="month">${month[firstMonth]}</text>`
           }
         }
         return html
@@ -685,8 +686,8 @@ export default {
         </div>
       `
 
-      console.log(arrMonthInMonday)
-      console.log(arrFirstMondayMonth)
+      console.log('arrMonthInMonday: ', arrMonthInMonday)
+      console.log('arrFirstMondayMonth: ', arrFirstMondayMonth)
       $el.innerHTML = resultHtml
     }
   }
