@@ -525,7 +525,7 @@ export default {
     handleClickCreateMyCalendar() {
       const $el = document.querySelector('.myCalendar')
 
-      const deltaX = 16
+      const deltaX = 15
       const deltaY = 15
 
       const week = `
@@ -699,6 +699,11 @@ export default {
 .myCalendar
   width: 91rem
   margin: 0 auto
+
+.myCalendar > div
+  display: flex
+  justify-content: center
+
 .mt3
   margin-top: 3rem
 

@@ -34,8 +34,13 @@ export default {
       currentDate: new Date().toLocaleString(),
       cells: [
         {id: 1, title: 'LG-MJ1', price: 300, priceLast: 360, imageSrc: '/landing/LG-MJ1__white.jpg'},
-        {id: 2, title: 'SAMSUNG-25R', price: 300, priceLast: 360, imageSrc: '/landing/SAMSUNG-25R__white.jpg'},
-        {id: 3, title: 'SAMSUNG-33G', price: 300, priceLast: 360, imageSrc: '/landing/SAMSUNG-33G__white.jpg'}
+        {id: 2, title: 'LG NH1', price: 300, priceLast: 360, imageSrc: '/landing/SAMSUNG-25R__white.jpg'},
+        // Типоразмер: аккумулятор 18650; Технология: Li-Ion; Кол-во в упаковке (шт): 1; Емкость (мАч): 3500; Напряжение (В): 3.75; Номинальный ток разряда (А): 10;
+        {id: 3, title: 'SAMSUNG 35E', price: 300, priceLast: 360, imageSrc: '/landing/SAMSUNG-35E.jpg',
+          description: {
+            typeSize: '18650', countInBox: 1, container: 3500, V: 3.75, A: 10
+          }
+        }
       ]
     };
   }

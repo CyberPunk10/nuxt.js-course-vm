@@ -2,18 +2,20 @@
   <div class="landing-layout">
 
     <el-menu :default-active="activeIndex" class="el-menu-demo hidden-xs-only" mode="horizontal" @select="handleSelect">
-      <el-menu-item index="1">Галерея</el-menu-item>
+      <el-menu-item index="1"><a href="/landing/">Главная</a></el-menu-item>
       <el-menu-item index="2">Сборки</el-menu-item>
       <el-menu-item index="3"><a href="/landing/sborki">Аккумуляторы</a></el-menu-item>
       <el-menu-item index="4">BMS платы</el-menu-item>
-      <el-menu-item index="5"><a href="/landing/calendar-github">Кастом</a></el-menu-item>
-      <el-menu-item index="8"><i class="el-icon-shopping-cart-2"></i>Корзина</el-menu-item>
-      <!-- <el-submenu index="6">
-        <template slot="title"><a href="/landing/sborki">Аккумуляторы</a></template>
-        <el-menu-item index="6-1">item one</el-menu-item>
-        <el-menu-item index="6-2">item two</el-menu-item>
-        <el-menu-item index="6-3">item three</el-menu-item>
-      </el-submenu> -->
+      <el-menu-item index="5"><a href="/landing/calendar-github">Кастом/тюнинг</a></el-menu-item>
+      <el-menu-item index="6"><a href="/landing/">Галерея</a></el-menu-item>
+      <el-menu-item index="7"><a href="/landing/">О компании</a></el-menu-item>
+      <el-submenu index="9">
+        <template slot="title"><a href="/landing/services">Услуги</a></template>
+        <el-menu-item index="9-1"><a href="/landing/services#lesson">Аренда и обучение</a></el-menu-item>
+        <el-menu-item index="9-2"><a href="/landing/services#vinil">Оклейка винилом</a></el-menu-item>
+        <el-menu-item index="9-3"><a href="/landing/services#gidroisol">Гидроизоляция</a></el-menu-item>
+      </el-submenu>
+      <el-menu-item index="10"><i class="el-icon-shopping-cart-2"></i>Корзина</el-menu-item>
       <!-- <el-submenu index="7">
         <template slot="title">Сборки</template>
         <el-menu-item index="7-1">item one</el-menu-item>
