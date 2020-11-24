@@ -525,7 +525,7 @@ export default {
     handleClickCreateMyCalendar() {
       const $el = document.querySelector('.myCalendar')
 
-      const deltaX = 16
+      const deltaX = 15
       const deltaY = 15
 
       const week = `
@@ -653,11 +653,12 @@ export default {
       function createLabels() {
         let html = ''
 
-        let firstMonth = arrFirstMondayMonth.findIndex(item => item < 2)
-        let secondMonth = arrFirstMondayMonth.findIndex(item => item > arrFirstMondayMonth[firstMonth] && item < 5)
+        let firstMonth = arrFirstMondayMonth.findIndex(item => item < 2) // index in arrFirstMondayMonth
+        let secondMonth = arrFirstMondayMonth.findIndex(item => item > arrFirstMondayMonth[firstMonth] && item < 5) // если нет, то -1
         console.log(firstMonth, secondMonth)
         for (let i = 0; i < (arrFirstMondayMonth.length); i++) {
-          if (i !== firstMonth) {
+          // если есть первый элемент в первых 2 колонаках и есть второй элемент в первых 5 колонаках
+          if (i !== firstMonth && secondMonth !== -1) {
             html += `<text x="${deltaX * arrFirstMondayMonth[i] + 16}" y="-8" class="month">${month[i]}</text>`
           } else {
             const currentMonthStartPosition = arrMonthInMonday.indexOf(firstMonth, -5)
@@ -699,6 +700,11 @@ export default {
 .myCalendar
   width: 91rem
   margin: 0 auto
+
+.myCalendar > div
+  display: flex
+  justify-content: center
+
 .mt3
   margin-top: 3rem
 
