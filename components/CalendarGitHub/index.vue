@@ -523,7 +523,7 @@ export default {
             month: {
               0: {
                 1: {
-                  challange2: {description: 'Первый день месяца', count: 21, color: '-ch2'},
+                  challange2: {description: 'Первый день месяца', count: 21, color: '-ch21'},
                   challange3: {description: 'Первый день месяца', count: 21},
                   challange4: {description: 'Первый день месяца', count: 21}
                 },
@@ -534,12 +534,12 @@ export default {
                   challange4: {description: '43j;lkjasdfjk', count: 21}
                 },
                 30: {
-                  challange2: {description: '43j;lkjasdfjk', count: 21, color: '-ch2'},
+                  challange2: {description: '43j;lkjasdfjk', count: 21, color: '-ch22'},
                   challange3: {description: '43j;lkjasdfjk', count: 21}
                 },
                 31: {
                   challange1: {description: 'Последний день месяца', count: 21},
-                  challange2: {description: 'Последний день месяца', count: 21, color: '-ch2'},
+                  challange2: {description: 'Последний день месяца', count: 21, color: '-ch23'},
                   challange3: {description: 'Последний день месяца', count: 21}
                 }
               },
@@ -548,7 +548,7 @@ export default {
                 1: {
                   challange2: {description: 'Первый день месяца', count: 21},
                   challange3: {description: 'Первый день месяца', count: 21},
-                  challange4: {description: 'Первый день месяца', count: 21, color: '-ch2'}
+                  challange4: {description: 'Первый день месяца', count: 21, color: '-ch24'}
                 },
                 2: {
                   challange5: {description: '43j;lkjasdfjk', count: 21}
@@ -556,14 +556,15 @@ export default {
                 3: {
                   challange4: {description: '43j;lkjasdfjk', count: 21}
                 },
+                28: {
+                  challange1: {description: 'Последний день месяца', count: 21, color: '-ch1'},
+                  challange2: {description: 'Последний день месяца', count: 21, color: '-ch2'},
+                  challange4: {description: 'Последний день месяца', count: 21, color: '-ch3'},
+                  challange3: {description: 'Последний день месяца', count: 21, color: '-ch4'}
+                },
                 30: {
                   challange2: {description: '43j;lkjasdfjk', count: 21},
                   challange3: {description: '43j;lkjasdfjk', count: 21}
-                },
-                31: {
-                  challange1: {description: 'Последний день месяца', count: 21},
-                  challange2: {description: 'Последний день месяца', count: 21, color: '-ch2'},
-                  challange3: {description: 'Последний день месяца', count: 21}
                 }
               },
 
@@ -574,19 +575,19 @@ export default {
                   challange4: {description: 'Первый день месяца', count: 21}
                 },
                 2: {
-                  challange5: {description: '43j;lkjasdfjk', count: 21}
+                  challange5: {description: '43j;lkjasdfjk', count: 21, color: '-ch1'}
                 },
                 3: {
-                  challange4: {description: '43j;lkjasdfjk', count: 21}
+                  challange4: {description: '43j;lkjasdfjk', count: 21, color: '-ch1'}
                 },
                 30: {
-                  challange2: {description: '43j;lkjasdfjk', count: 21},
-                  challange3: {description: '43j;lkjasdfjk', count: 21}
+                  challange2: {description: '43j;lkjasdfjk', count: 21, color: '-ch1'},
+                  challange3: {description: '43j;lkjasdfjk', count: 21, color: '-ch1'}
                 },
                 31: {
-                  challange1: {description: 'Последний день месяца', count: 21},
-                  challange2: {description: 'Последний день месяца', count: 21},
-                  challange3: {description: 'Последний день месяца', count: 21}
+                  challange1: {description: 'Последний день месяца', count: 21, color: '-ch1'},
+                  challange2: {description: 'Последний день месяца', count: 21, color: '-ch1'},
+                  challange3: {description: 'Последний день месяца', count: 21, color: '-ch1'}
                 }
               },
             }
@@ -677,27 +678,13 @@ export default {
               // добавляем номер месяца каждого воскресенья
               arrMonthInMonday.push(new Date(lastTimestamp).getMonth())
             }
-            const color = getColor(lastTimestamp)
-            html += `<rect class="day"
-              width="11" height="11"
-              x="16" y="${y}"
-              fill="var(--color-calendar-graph-day-bg${color})"
-              data-count="0"
-              data-date="${new Date(lastTimestamp).toLocaleDateString()}">
-            </rect>`
+            html += getTemplateDay(y, lastTimestamp)
             y += deltaY
             lastTimestamp = lastTimestamp + (24 * 3600 * 1000)
           }
         } else {
           for (let i = 0; i < (currentDayWeek + 1); i++) {
-            const color = getColor(lastTimestamp)
-            html += `<rect class="day"
-              width="11" height="11"
-              x="16" y="${y}"
-              fill="var(--color-calendar-graph-day-bg${color})"
-              data-count="0"
-              data-date="${new Date(lastTimestamp).toLocaleDateString()}">
-            </rect>`
+            html += getTemplateDay(y, lastTimestamp)
             y += deltaY
             lastTimestamp = lastTimestamp + (24 * 3600 * 1000)
           }
@@ -739,20 +726,115 @@ export default {
           return ''
         }
 
-        let colors = ''
+        let colors = []
+
         for (let i = 0; i < challanges.length; i++) {
           if ( !calendarGraph.years[year].month[month][day][challanges[i]]
             || !calendarGraph.years[year].month[month][day][challanges[i]].color) {
-            colors += ''
           } else {
-            colors += calendarGraph.years[year].month[month][day][challanges[i]].color
+            colors.push(calendarGraph.years[year].month[month][day][challanges[i]].color)
           }
         }
-
+        // console.log(colors)
         if (colors.length > 1) {
-          console.log('НЕСКОЛЬКО ЦВЕТОВ В ОДНОМ RECT!')
+          // console.log('НЕСКОЛЬКО ЦВЕТОВ В ОДНОМ RECT!')
         }
         return colors
+      }
+
+      function getTemplateDay(y, lastTimestamp) {
+        const color = getColor(lastTimestamp)
+        console.log(color)
+        if (color.length === 0) {
+          return `<rect class="day"
+                    width="11" height="11"
+                    x="16" y="${y}"
+                    fill="var(--color-calendar-graph-day-bg)"
+                    data-count="0"
+                    data-date="${new Date(lastTimestamp).toLocaleDateString()}">
+                  </rect>`
+        } else if (color.length === 1) {
+          return `<rect class="day"
+                    width="11" height="11"
+                    x="16" y="${y}"
+                    fill="var(--color-calendar-graph-day-bg${color[0]})"
+                    data-count="0"
+                    data-date="${new Date(lastTimestamp).toLocaleDateString()}">
+                  </rect>`
+        } else if (color.length === 2) {
+          return `<rect class="day"
+                    width="4.8" height="11"
+                    x="16" y="${y}"
+                    fill="var(--color-calendar-graph-day-bg${color[0]})"
+                    data-count="0"
+                    data-date="${new Date(lastTimestamp).toLocaleDateString()}">
+                  </rect>
+                  <rect class="day"
+                    width="4.8" height="11"
+                    x="22" y="${y}"
+                    fill="var(--color-calendar-graph-day-bg${color[1]})"
+                    data-count="0"
+                    data-date="${new Date(lastTimestamp).toLocaleDateString()}">
+                  </rect>`
+        } else if (color.length === 3) {
+          return `<rect class="day"
+                    width="3" height="11"
+                    x="16" y="${y}"
+                    fill="var(--color-calendar-graph-day-bg${color[0]})"
+                    data-count="0"
+                    data-date="${new Date(lastTimestamp).toLocaleDateString()}">
+                  </rect>
+                  <rect class="day"
+                    width="3" height="11"
+                    x="20" y="${y}"
+                    fill="var(--color-calendar-graph-day-bg${color[1]})"
+                    data-count="0"
+                    data-date="${new Date(lastTimestamp).toLocaleDateString()}">
+                  </rect></rect>
+                  <rect class="day"
+                    width="3" height="11"
+                    x="24" y="${y}"
+                    fill="var(--color-calendar-graph-day-bg${color[1]})"
+                    data-count="0"
+                    data-date="${new Date(lastTimestamp).toLocaleDateString()}">
+                  </rect>`
+        } else if (color.length === 4) {
+          return `<rect class="day"
+                    width="5.5" height="5.5"
+                    x="16" y="${y}"
+                    fill="var(--color-calendar-graph-day-bg${color[0]})"
+                    data-count="0"
+                    data-date="${new Date(lastTimestamp).toLocaleDateString()}">
+                  </rect>
+                  <rect class="day"
+                    width="5.5" height="5.5"
+                    x="21.5" y="${y}"
+                    fill="var(--color-calendar-graph-day-bg${color[1]})"
+                    data-count="0"
+                    data-date="${new Date(lastTimestamp).toLocaleDateString()}">
+                  </rect></rect>
+                  <rect class="day"
+                    width="5.5" height="5.5"
+                    x="16" y="${y + deltaY/4 * 2 - 2}"
+                    fill="var(--color-calendar-graph-day-bg${color[3]})"
+                    data-count="0"
+                    data-date="${new Date(lastTimestamp).toLocaleDateString()}">
+                  </rect><rect class="day"
+                    width="5.5" height="5.5"
+                    x="21.5" y="${y + deltaY/4 * 2 - 2}"
+                    fill="var(--color-calendar-graph-day-bg${color[3]})"
+                    data-count="0"
+                    data-date="${new Date(lastTimestamp).toLocaleDateString()}">
+                  </rect>`
+        }
+
+        return `<rect class="day"
+              width="11" height="11"
+              x="16" y="${y}"
+              fill="var(--color-calendar-graph-day-bg${color})"
+              data-count="0"
+              data-date="${new Date(lastTimestamp).toLocaleDateString()}">
+            </rect>`
       }
 
       let resultHtml = `
@@ -783,7 +865,10 @@ export default {
 :root
   --color-calendar-graph-day-bg: #ebedf0
   --color-calendar-graph-day-bg-ch1: rgb(255, 190, 0)
-  --color-calendar-graph-day-bg-ch2: rgb(255, 150, 0)
+  --color-calendar-graph-day-bg-ch1-2: rgb(255, 150, 0)
+  --color-calendar-graph-day-bg-ch2: rgb(200, 150, 0)
+  --color-calendar-graph-day-bg-ch3: rgb(100, 150, 0)
+  --color-calendar-graph-day-bg-ch4: rgb(255, 150, 100)
   --color-calendar-graph-day-bg-l3: #ebedf0
   --color-calendar-graph-day-bg-l4: #ebedf0
 
