@@ -155,7 +155,10 @@ $color-bg-content: rgb(248,250,252)
     width: 4rem
     border-top-right-radius: 2rem
     border-bottom-right-radius: 2rem
-    background-color: transition
+    opacity: .5
+    transition: all .2s ease-in
+    &:hover
+      opacity: 1
     &:hover .teleport-menu__button_target.top-position-1
       top: 5rem
     &:hover .teleport-menu__button_target.top-position-2
@@ -232,15 +235,17 @@ $color-bg-content: rgb(248,250,252)
   pointer-events: none
   transition: all .2s linear
 
-// hide
+// show
 .teleport-menu.active .teleport-menu__bg-gradient
   left: 0
   box-shadow: 4px 2px 4px rgba(0,0,0,.101562)
   -webkit-animation: gradient-shift 30s ease infinite
   animation: gradient-shift 30s ease infinite
 .teleport-menu.active .underlay
-  opacity: 0.3
+  // opacity: 0.3
   pointer-events: auto
+.teleport-menu.active .teleport-menu__btns-wrap
+  opacity: 1
 .teleport-menu.active .teleport-menu__svg-list
   display: none
 .teleport-menu.active .teleport-menu__svg-close

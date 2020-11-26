@@ -8,6 +8,7 @@ const app = require('express')()
 const authRoutes = require('./routes/auth.routes')
 const postRoutes = require('./routes/post.routes')
 const commentRoutes = require('./routes/comment.routes')
+const challengeRoutes = require('./routes/challenge.routes')
 
 app.use(passport.initialize())
 passport.use(passportStrategy)
@@ -18,6 +19,7 @@ app.use(bodyParser.json())
 app.use('/auth', authRoutes)
 app.use('/post', postRoutes)
 app.use('/comment', commentRoutes)
+app.use('/challenge', challengeRoutes)
 
 // for test
 app.get('/echo/:what', (req, res) => {
