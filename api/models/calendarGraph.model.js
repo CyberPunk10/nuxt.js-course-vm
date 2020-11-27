@@ -5,10 +5,20 @@ import { Schema, model } from 'mongoose'
 const calendarGraphSchema = new Schema({
   years: [
     {
-      year: {
-        // type: Date,
-        // default: Date.now
-      }
+      months: [
+        {
+          days: [
+            {
+              challenges: [
+                {
+                  ref: 'Challenge',
+                  type: Schema.Types.ObjectId,
+                },
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
 
