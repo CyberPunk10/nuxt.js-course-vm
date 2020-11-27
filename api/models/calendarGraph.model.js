@@ -3,24 +3,29 @@ import { Schema, model } from 'mongoose'
 // calendarGraph.years[2020].month[0][31].challenge2.description
 
 const calendarGraphSchema = new Schema({
-  years: {
-    // year: {
+  years: [
+    {
+      year: {
+        // type: Date,
+        // default: Date.now
+      }
+    }
+  ],
 
-    // }
-  },
+  challenges: [
+    {
+      challenge: {
+        ref: 'Challenge',
+        type: Schema.Types.ObjectId,
+      },
 
-  // challenges: [
-  //   {
-  //     challenge: {
-  //       type: Object,
-  //       require: true
-  //     },
-  //     progress: {
-  //       type: Object,
-  //       require: true
-  //     }
-  //   }
-  // ],
+      progress: {
+        type: Object,
+        require: true
+      }
+    }
+  ],
+
   user: {
     userId: {
       type: Schema.Types.ObjectId,
@@ -28,6 +33,7 @@ const calendarGraphSchema = new Schema({
       require: true
     }
   },
+
   date: {
     type: Date,
     default: Date.now

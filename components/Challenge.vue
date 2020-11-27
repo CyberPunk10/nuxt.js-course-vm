@@ -1,33 +1,76 @@
 <template>
   <div class="mw500">
-    <el-form ref="form"
-      :model="controls"
-      :rules="rules"
-      label-width="120px"
-      @submit.native.prevent="onSubmit"
-    >
-      <el-form-item label="title">
-        <el-input v-model="controls.title"></el-input>
-      </el-form-item>
-      <el-form-item label="date">
-        <el-input v-model="controls.date"></el-input>
-      </el-form-item>
-      <el-form-item label="color">
-        <el-input v-model="controls.color"></el-input>
-      </el-form-item>
-      <el-form-item label="count">
-        <el-input v-model="controls.count"></el-input>
-      </el-form-item>
 
+    <div class="form-wrap">
+      <h4 class="mb3">Create Challenge</h4>
 
-      <el-form-item>
-        <el-button
-          type="primary"
-          native-type="submit"
-          :loading="loading"
-        >Create</el-button>
-      </el-form-item>
-    </el-form>
+      <el-form ref="form"
+        :model="controls"
+        :rules="rules"
+        label-width="120px"
+        @submit.native.prevent="onSubmitCreateChallenge"
+      >
+        <el-form-item label="Title">
+          <el-input v-model="controls.title"></el-input>
+        </el-form-item>
+        <el-form-item label="Color">
+          <el-input v-model="controls.color"></el-input>
+        </el-form-item>
+        <el-form-item label="Count">
+          <el-input v-model="controls.count"></el-input>
+        </el-form-item>
+
+        <el-form-item label="Date">
+          <el-col :span="11">
+            <el-date-picker type="date" placeholder="Pick a date" v-model="controls.date" style="width: 100%;"></el-date-picker>
+          </el-col>
+        </el-form-item>
+
+        <el-form-item>
+          <el-button
+            type="primary"
+            native-type="submit"
+            :loading="loading"
+          >Create</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
+
+    <div class="form-wrap">
+      <h4 class="mb3">Add progress Challenge</h4>
+
+      <el-form ref="form"
+        :model="controls"
+        :rules="rules"
+        label-width="120px"
+        @submit.native.prevent="onSubmitAddProgressChallenge"
+      >
+        <el-form-item label="Title">
+          <el-input v-model="controls.title"></el-input>
+        </el-form-item>
+        <el-form-item label="Color">
+          <el-input v-model="controls.color"></el-input>
+        </el-form-item>
+        <el-form-item label="Count">
+          <el-input v-model="controls.count"></el-input>
+        </el-form-item>
+
+        <el-form-item label="Date">
+          <el-col :span="11">
+            <el-date-picker type="date" placeholder="Pick a date" v-model="controls.date" style="width: 100%;"></el-date-picker>
+          </el-col>
+        </el-form-item>
+
+        <el-form-item>
+          <el-button
+            type="primary"
+            native-type="submit"
+            :loading="loading"
+          >Create</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
+
   </div>
 </template>
 
@@ -59,7 +102,7 @@
       }
     },
     methods: {
-      onSubmit() {
+      onSubmitCreateChallenge() {
         console.log('submit!');
 
         this.$refs.form.validate(async valid => {
@@ -86,13 +129,46 @@
           }
         })
 
+      },
+
+      onSubmitAddProgressChallenge() {
+      console.log('Add progress Challenge')
+
+      this.$refs.form.validate(async valid => {
+          if (valid) {
+            this.loading = true
+
+            try {
+              const formData = {
+                title: this.controls.title,
+                date: this.controls.date,
+                color: this.controls.color,
+                count: this.controls.count
+              }
+              await this.$store.dispatch('challenge/create', formData)
+              this.$message.success('Challenge создан')
+              this.controls.title = ''
+            } catch (error) {
+              console.log(error)
+            } finally {
+              this.loading = false
+            }
+          } else {
+            this.$message.warning('Заполните все поля')
+          }
+        })
       }
     }
   }
 </script>
 
 <style lang="sass">
+.form-wrap
+  max-width: 50%
+  margin: 3rem
 .mw500
-  max-width: 50rem
-  margin: 3rem auto 0
-</style>
+  display: flex
+  justify-content: center
+.mb3
+  margin-bottom: 3rem
+  </style>
