@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="mw500">
 
     <h4 class="mb3">Создать Ch</h4>
 
@@ -9,16 +9,23 @@
       label-width="120px"
       @submit.native.prevent="onSubmitCreateChallenge"
     >
-      <el-form-item label="Title">
+      <el-form-item label="Название">
         <el-input v-model="controls.title"></el-input>
       </el-form-item>
-      <el-form-item label="Color">
-        <el-input v-model="controls.color"></el-input>
+      <el-form-item label="Цвет">
+        <el-radio-group v-model="controls.radioСolor">
+          <el-radio :label="'green'">Зелёный</el-radio>
+          <el-radio :label="'yellow'">Жёлтый</el-radio>
+          <el-radio :label="'blue'">Синий</el-radio>
+        </el-radio-group>
       </el-form-item>
-      <el-form-item label="Count">
-        <el-input v-model="controls.count"></el-input>
+      <el-form-item label="Кол-во дней">
+        <el-input v-model="controls.count" :disabled="controls.checkbox"></el-input>
+        <el-checkbox label="Бессрочный" v-model="controls.checked"></el-checkbox>
       </el-form-item>
 
+      План минимум
+      Суть ch
       <el-form-item label="Date">
         <el-col :span="14">
           <el-date-picker type="date" placeholder="Pick a date" v-model="controls.date" style="width: 100%;"></el-date-picker>
@@ -48,10 +55,12 @@ export default {
       return {
         loading: false,
         controls: {
-          title: 'challenge-1',
+          title: 'Challenge-1',
           date: null,
-          color: '-ch1',
-          count: 0,
+          radioСolor: 'green',
+          count: null,
+          checked: true,
+          checkbox: true
         },
         rules: {
           title: [
@@ -60,7 +69,7 @@ export default {
           date: [
             {required: false, message: 'Поле не должно быть пустым', trigger: 'blur'}
           ],
-          color: [
+          radioСolor: [
             {required: true, message: 'Поле не должно быть пустым', trigger: 'blur'}
           ],
           count: [
@@ -69,9 +78,9 @@ export default {
         }
       }
     },
+
     methods: {
       onSubmitCreateChallenge() {
-        console.log('submit!');
         this.$refs.form.validate(async valid => {
           if (valid) {
             this.loading = true
@@ -79,9 +88,10 @@ export default {
               const formData = {
                 title: this.controls.title,
                 date: this.controls.date,
-                color: this.controls.color,
+                color: this.controls.radioСolor,
                 count: this.controls.count
               }
+              console.log(formData)
               await this.$store.dispatch('challenge/create', formData)
               this.$message.success('Challenge создан')
               this.controls.title = ''
@@ -101,6 +111,9 @@ export default {
 
 
 <style lang="sass">
+.mw500
+  max-width: 50rem
+  margin: 0 auto
 h4
   text-align: center
 

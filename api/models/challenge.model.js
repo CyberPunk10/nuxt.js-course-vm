@@ -12,7 +12,8 @@ const challengeSchema = new Schema({
   },
   color: {
     type: String,
-    required: true
+    required: true,
+    default: "green"
   },
   count: {
     type: Number,

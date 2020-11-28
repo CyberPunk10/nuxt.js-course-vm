@@ -155,7 +155,7 @@ $color-bg-content: rgb(248,250,252)
     z-index: 9999
     top: 2rem
     right: -4rem
-    height: 16rem
+    height: 20rem
     width: 4rem
     border-top-right-radius: 2rem
     border-bottom-right-radius: 2rem

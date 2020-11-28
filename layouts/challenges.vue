@@ -1,6 +1,6 @@
 <template>
   <div style="position: relative">
-    <div class="empty-center-layout">
+    <div class="container">
       <div class="menu">
         <a href="/challenges/">Главная</a>
         <a href="/challenges/create">Создать ch</a>
@@ -30,13 +30,8 @@ export default {
 <style lang="sass" scoped>
 $height-header: 5rem
 
-.empty-center-layout
-  height: 100vh
-  display: flex
-  justify-content: center
-  align-items: center
-  width: 100%
-
+.container
+  padding-top: calc(#{$height-header} + 3rem)
 .menu
   position: fixed
   top: 0
