@@ -1,6 +1,9 @@
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
+    htmlAttrs: {
+      lang: 'ru'
+    },
     title: 'nuxt.js-course-vm',
     meta: [
       { charset: 'utf-8' },

@@ -2,6 +2,7 @@ const Challenge = require('../models/challenge.model')
 
 
 module.exports.createChallenge = async (req, res) => {
+  console.log(req.body)
   const challenge = new Challenge({
     title: req.body.title,
     color: req.body.color,

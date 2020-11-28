@@ -10,6 +10,11 @@ const userSchema = new Schema({
     type: String,
     required: true,
     minlength: 6
+  },
+  nickname: {
+    type: String,
+    unique: true,
+    defuaul: 123
   }
 })
 

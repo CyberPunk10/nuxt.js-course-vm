@@ -6,7 +6,7 @@
       <el-menu-item index="2">Сборки</el-menu-item>
       <el-menu-item index="3"><a href="/landing/sborki">Аккумуляторы</a></el-menu-item>
       <el-menu-item index="4">BMS платы</el-menu-item>
-      <el-menu-item index="5"><a href="/landing/calendar-github">Кастом/тюнинг</a></el-menu-item>
+      <el-menu-item index="5"><a href="/landing/">Кастом/тюнинг</a></el-menu-item>
       <el-menu-item index="6"><a href="/landing/">Галерея</a></el-menu-item>
       <el-menu-item index="7"><a href="/landing/">О компании</a></el-menu-item>
       <!-- <el-submenu index="8">

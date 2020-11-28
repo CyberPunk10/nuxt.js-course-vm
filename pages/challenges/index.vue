@@ -7,9 +7,13 @@
 
 <script>
 export default {
-  layout: 'landingLayout',
-  head: { title: 'Calendar GitHub' },
-
-
+  head: {
+    title: `Challenges | ${process.env.appName}`
+  },
+  layout: 'challenges'
 }
 </script>
+
+<style>
+
+</style>
