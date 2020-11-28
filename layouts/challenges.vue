@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-$height-header: 5rem
+$height-header: 5.1rem
 
 .container
   padding-top: calc(#{$height-header} + 3rem)
