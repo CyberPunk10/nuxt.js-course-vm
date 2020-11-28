@@ -38,6 +38,9 @@
         <button class="teleport-menu__button teleport-menu__button_target top-position-3">
           <a href="/landing">R</a>
         </button>
+        <button class="teleport-menu__button teleport-menu__button_target top-position-4">
+          <a href="/challenges">Ch</a>
+        </button>
       </div>
     </div>
   </div>
@@ -52,6 +55,7 @@ export default {
         { type: 'link', text: 'SSR блог', url: '/' },
         { type: 'link', text: 'SSR блог админка', url: '/admin' },
         { type: 'link', text: 'Dreams', url: '/dreams' },
+        { type: 'link', text: 'Challenges', url: '/challenges' },
         { type: 'link', text: 'Моноколеса', url: '/landing' },
         { type: 'category', text: 'Другие проекты' },
         { type: 'link', text: 'Курс Exel', url: '/landing' },
@@ -165,6 +169,8 @@ $color-bg-content: rgb(248,250,252)
       top: 9rem
     &:hover .teleport-menu__button_target.top-position-3
       top: 13rem
+    &:hover .teleport-menu__button_target.top-position-4
+      top: 17rem
 
   &__button
     position: absolute
