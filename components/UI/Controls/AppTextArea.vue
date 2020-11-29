@@ -24,8 +24,8 @@ export default {
 <style lang="sass" scoped>
 .text-field
   position: relative
-  max-width: 32rem
   margin-bottom: 1rem
+  color: #606266
 
   &_width-sm
     max-width: 26.6rem
@@ -41,14 +41,17 @@ export default {
     &::-moz-placeholder
       color: $color-dark-shade-25
 
-    &:hover, &:focus
-      border: 1px solid $color-dark-shade-40
+    &:hover
+      border: 1px solid $color-dark-shade-25
+    &:focus
+      border: 1px solid $color-primary
 
   label
     display: inline-block
-    margin-bottom: .7rem
+    margin-bottom: .5rem
     margin-left: .3rem
-    
+    font-size: 1.4rem
+
   &__icon
     position: absolute
     cursor: pointer
@@ -62,5 +65,19 @@ export default {
     right: 1px
     @include text-linear-gradient
 
-
+// label left
+.text-field.label-left
+  $width-label: 12rem
+  display: flex
+  max-width: calc(100% + #{$width-label})
+  label
+    display: flex
+    justify-content: flex-end
+    align-items: center
+    padding-bottom: .2rem
+    margin: 0 1.2rem
+    width: $width-label
+    text-align: right
+  .text-field__input
+    width: calc(100% - #{$width-label})
 </style>

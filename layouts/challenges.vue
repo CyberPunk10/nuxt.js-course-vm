@@ -1,5 +1,5 @@
 <template>
-  <div style="position: relative">
+  <div style="position: relative" class="bg">
     <div class="container">
       <div class="menu">
         <a href="/challenges/">Главная</a>
@@ -30,10 +30,14 @@ export default {
 <style lang="sass" scoped>
 $height-header: 5.1rem
 
+// .bg
+//   @include backgroundShorthandWithExternalVar('challenges/kaspar-allenbach-w9QgdJ3lAPU-unsplash.jpg', center)
+
 .container
   padding-top: calc(#{$height-header} + 3rem)
 .menu
   position: fixed
+  z-index: 9999
   top: 0
   left: 0
   right: 0

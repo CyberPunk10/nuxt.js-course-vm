@@ -2,11 +2,18 @@
   <div class="mw500">
 
     <h4 class="mb3">Создать Ch</h4>
+    <form>
+      <AppInput v-model="user.name" class="label-left">Название</AppInput>
+      <AppTextArea v-model="user.description" label="width: 250px" class="label-left">Описание</AppTextArea>
+      <AppInput v-model="user.category" class="label-left">Категория</AppInput>
+      <!-- <AppInput v-model="user.email" type="email">Email: </AppInput> -->
+
+    </form>
 
     <el-form ref="form"
       :model="controls"
       :rules="rules"
-      label-width="120px"
+      label-width="200px"
       @submit.native.prevent="onSubmitCreateChallenge"
     >
       <el-form-item label="Название">
@@ -49,9 +56,7 @@
 
     <Btn/>
     <Checkbox />
-    <AppInput v-model="user.name">Name: </AppInput>
-    <AppInput v-model="user.email" type="email">Email: </AppInput>
-    <AppTextArea v-model="user.text">Text: </AppTextArea>
+
   </div>
 </template>
 
@@ -93,8 +98,9 @@ export default {
 
       user: {
         name: '',
+        description: '',
+        category: '',
         email: '',
-        text: ''
       }
     }
   },
