@@ -42,7 +42,6 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
-    // https://go.nuxtjs.dev/axios
     '@nuxtjs/style-resources',
     '@nuxtjs/axios',
     '~/modules/mongodb_setup.js',
@@ -79,7 +78,3 @@ export default {
 // Use Express with Nuxt.js
 // https://bithacker.dev/use-express-with-nuxt-js
 
-
-
-// 1. При перезагрузке страницы удаляется токен аунтификации - из-за этого нельзя повторно создать пост или добавить пользователя  (админка не работает)
-// 2.
