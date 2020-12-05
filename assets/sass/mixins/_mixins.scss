@@ -65,15 +65,20 @@
 
 // special for .text-field & .drop-btn
 @mixin text-field-and-drop-btn {
-  background: #FFFFFF;
+  background: rgba(255, 255, 255, .9);
   border: 1px solid $color-dark-shade-15;
   border-radius: 4px;
   padding: 1.2rem 1.5rem;
   width: 100%;
   font-size: 1.4rem;
   // font-family: $Montserrat;
+  letter-spacing: .7px;
   color: $color-dark-shade-75;
   transition: 0.2s ease all;
 }
 
+$imagedir:'~@/static/images/'; // define the base path before the mixin
 
+@mixin backgroundShorthandWithExternalVar($filename,$position:0 0,$repeat: no-repeat) {
+  background: transparent url(#{$imagedir}#{$filename}) $repeat $position;
+}
