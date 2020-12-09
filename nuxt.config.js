@@ -50,6 +50,7 @@ export default {
 
   styleResources: {
     sass: [
+      // ЗДЕСЬ ПОМЕНЯТЬ, ССЫЛАТЬСЯ ТОЛЬКО НА ПЕРЕМЕННЫЕ И МИКСИНЫ!!
       'assets/sass/_main.sass'
     ]
   },
