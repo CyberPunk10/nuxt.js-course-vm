@@ -165,9 +165,9 @@ $width-first-column-grid: 7rem
   justify-content: center
   align-items: center
 .container-mobile
-  max-width: 320px
+  // max-width: 320px
+  // height: 568px
   width: 100%
-  height: 568px
   border: 1px solid $color-dark-shade-10
   background-color: #ffd438
   color: #e6e6e6
