@@ -159,7 +159,7 @@ $color-bg-content: rgb(248,250,252)
     width: 4rem
     border-top-right-radius: 2rem
     border-bottom-right-radius: 2rem
-    opacity: .5
+    opacity: .1
     transition: all .2s ease-in
     &:hover
       opacity: 1

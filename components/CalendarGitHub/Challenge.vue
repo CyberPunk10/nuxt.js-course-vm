@@ -98,7 +98,7 @@
           <div class="cell-input"><input type="text" value="21"></div>
           <div class="cell-input cell-plus"></div>
         </div>
-        <div class="table-squeezings-main-2stroke">
+        <div class="table-squeezings-main-2stroke last-2stroke">
           <div class="cell-input cell-descr name-1">Player 3</div>
           <div class="cell-input"><input type="text" value="21"></div>
           <div class="cell-input"><input type="text" value="281"></div>
@@ -263,6 +263,9 @@ $width-first-column-grid: 7rem
   .name-3
     grid-column: 1/2
     grid-row: 5/7
+.table-squeezings-main-2stroke.last-2stroke
+  padding-bottom: 1rem
+
 .table-squeezings-relax
   grid: repeat(1, 4rem)/$width-first-column-grid 1fr // row/col
   padding-top: .5rem
