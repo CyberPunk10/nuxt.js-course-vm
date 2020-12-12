@@ -150,8 +150,8 @@ export default {
 </script>
 
 <style lang="sass">
-  @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap')
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap')
+  // @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap')
+  // @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap')
 
   #table-price
       padding-bottom: 35px
