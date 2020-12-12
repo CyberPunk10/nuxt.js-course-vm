@@ -1,62 +1,145 @@
 <template>
   <div class="wrap">
     <div class="container-mobile">
-      <div class="table-squeezings-top-label">
-        <div class="cell-input cell-label"></div>
-        <div class="cell-input cell-label">1</div>
-        <div class="cell-input cell-label">2</div>
-        <div class="cell-input cell-label">3</div>
-        <div class="cell-input cell-label">4</div>
-        <div class="cell-input cell-label cell-plus">+</div>
+      <h2>Отжимания</h2>
+      <div class="exaple-table">
+        <div class="table-squeezings-top-label">
+          <div class="cell-input cell-label"></div>
+          <div class="cell-input cell-label">1</div>
+          <div class="cell-input cell-label">2</div>
+          <div class="cell-input cell-label">3</div>
+          <div class="cell-input cell-label">4</div>
+          <div class="cell-input cell-label cell-plus">+</div>
+        </div>
+        <div class="table-squeezings-main">
+          <div class="cell-input cell-descr">Player 1</div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="281"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input cell-plus"></div>
+          <div class="cell-input cell-descr">Player 2</div>
+          <div class="cell-input"><input class="cell-result" type="text" value="21"></div>
+          <div class="cell-input"><input class="cell-record" type="text" value="2981"></div>
+          <div class="cell-input"><input type="text" value=""></div>
+          <div class="cell-input"><input type="text" value=""></div>
+          <div class="cell-input cell-plus"></div>
+          <div class="cell-input cell-descr">Player 3</div>
+          <div class="cell-input"><input type="text" value=""></div>
+          <div class="cell-input"><input type="text" value=""></div>
+          <div class="cell-input"><input type="text" value=""></div>
+          <div class="cell-input"><input type="text" value=""></div>
+          <div class="cell-input cell-plus"></div>
       </div>
-      <div class="table-squeezings-main">
-        <div class="cell-input cell-descr">Player 1</div>
-        <div class="cell-input"><input type="text" value="21"></div>
-        <div class="cell-input"><input type="text" value="281"></div>
-        <div class="cell-input"><input type="text" value="21"></div>
-        <div class="cell-input"><input type="text" value="21"></div>
-        <div class="cell-input cell-plus"></div>
-        <div class="cell-input cell-descr">Player 2</div>
-        <div class="cell-input"><input class="cell-result" type="text" value="21"></div>
-        <div class="cell-input"><input class="cell-record" type="text" value="2981"></div>
-        <div class="cell-input"><input type="text" value=""></div>
-        <div class="cell-input"><input type="text" value=""></div>
-        <div class="cell-input cell-plus"></div>
-        <div class="cell-input cell-descr">Player 3</div>
-        <div class="cell-input"><input type="text" value=""></div>
-        <div class="cell-input"><input type="text" value=""></div>
-        <div class="cell-input"><input type="text" value=""></div>
-        <div class="cell-input"><input type="text" value=""></div>
-        <div class="cell-input cell-plus"></div>
-    </div>
-    <div class="table-squeezings-relax">
-      <div class="cell-input cell-descr">Отдых:</div>
-      <div class="cell-input"><input class="cell-width-x3" type="text" value="вольный"></div>
-    </div>
-    <div class="table-squeezings-result">
-      <div class="cell-input cell-descr">Всего:</div>
-        <div class="cells-group">
-          <p>
-            <span class="name">Player 1</span><br>
-            <span class="">21</span>
-          </p>
+      <div class="table-squeezings-relax">
+        <div class="cell-input cell-descr">Отдых:</div>
+        <div class="cell-input"><input class="cell-width-x3" type="text" value="вольный"></div>
+      </div>
+      <div class="table-squeezings-result">
+        <div class="cell-input cell-descr">Всего:</div>
+          <div class="cells-group">
+            <p>
+              <span class="name">Player 1</span><br>
+              <span class="">21</span>
+            </p>
+          </div>
+          <div class="cells-group">
+            <p>
+              <span class="name">Player 2</span><br>
+              <span class="">21</span>
+            </p>
+          </div>
+          <div class="cells-group">
+            <p>
+              <span class="name">Player 3</span><br>
+              <span class="">21</span>
+            </p>
+          </div>
         </div>
-        <div class="cells-group">
-          <p>
-            <span class="name">Player 2</span><br>
-            <span class="">21</span>
-          </p>
-        </div>
-        <div class="cells-group">
-          <p>
-            <span class="name">Player 3</span><br>
-            <span class="">21</span>
-          </p>
+        <div class="table-squeezings-buttons">
+          <div class="df">
+            <button>Сохранить</button>
+          </div>
         </div>
       </div>
-      <div class="table-squeezings-buttons">
-        <div class="df">
-          <button>Сохранить</button>
+      <h2>Отжимания</h2>
+      <div class="exaple-table">
+        <div class="table-squeezings-top-label">
+          <div class="cell-input cell-label"></div>
+          <div class="cell-input cell-label">1</div>
+          <div class="cell-input cell-label">2</div>
+          <div class="cell-input cell-label">3</div>
+          <div class="cell-input cell-label">4</div>
+          <div class="cell-input cell-label cell-plus">+</div>
+        </div>
+        <div class="table-squeezings-main-2stroke">
+          <div class="cell-input cell-descr name-1">Player 1</div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="281"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input cell-plus"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="281"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input cell-plus"></div>
+        </div>
+        <div class="table-squeezings-main-2stroke">
+          <div class="cell-input cell-descr name-1">Player 2</div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="281"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input cell-plus"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="281"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input cell-plus"></div>
+        </div>
+        <div class="table-squeezings-main-2stroke">
+          <div class="cell-input cell-descr name-1">Player 3</div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="281"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input cell-plus"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="281"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input cell-plus"></div>
+        </div>
+        <div class="table-squeezings-relax">
+          <div class="cell-input cell-descr">Отдых:</div>
+        <div class="cell-input"><input class="cell-width-x3" type="text" value="вольный"></div>
+        </div>
+        <div class="table-squeezings-result">
+          <div class="cell-input cell-descr">Всего:</div>
+            <div class="cells-group">
+              <p>
+                <span class="name">Player 1</span><br>
+                <span class="">21</span>
+              </p>
+            </div>
+            <div class="cells-group">
+              <p>
+                <span class="name">Player 2</span><br>
+                <span class="">21</span>
+              </p>
+            </div>
+            <div class="cells-group">
+              <p>
+                <span class="name">Player 3</span><br>
+                <span class="">21</span>
+              </p>
+            </div>
+          </div>
+          <div class="table-squeezings-buttons">
+          <div class="df">
+            <button>Сохранить</button>
+          </div>
         </div>
       </div>
     </div>
@@ -88,13 +171,18 @@ $width-first-column-grid: 7rem
   border: 1px solid $color-dark-shade-10
   background-color: #ffd438
   color: #e6e6e6
-  padding: 1rem
+  padding: 0 1rem 1rem
+  overflow-y: auto
+  h2
+    @include font-how-h3
+    padding: 1rem .5rem .5rem
 
 .table-squeezings-main,
 .table-squeezings-relax,
 .table-squeezings-result,
 .table-squeezings-top-label,
-.table-squeezings-buttons
+.table-squeezings-buttons,
+.table-squeezings-main-2stroke
   display: grid
   grid-gap: 2px
   padding-left: 1rem
@@ -146,6 +234,7 @@ $width-first-column-grid: 7rem
   //   font-size:
 
 .table-squeezings-main,
+.table-squeezings-main-2stroke,
 .table-squeezings-relax,
 .table-squeezings-result
   font-size: 14px
@@ -161,6 +250,19 @@ $width-first-column-grid: 7rem
 .table-squeezings-main
   grid: repeat(3, 4rem)/$width-first-column-grid repeat(5, 1fr) // row/col
   padding-bottom: .5rem
+.table-squeezings-main-2stroke
+  grid: repeat(2, 3rem)/$width-first-column-grid repeat(5, 1fr) // row/col
+  padding-bottom: .5rem
+  padding-top: .5rem
+  .name-1
+    grid-column: 1/2
+    grid-row: 1/3
+  .name-2
+    grid-column: 1/2
+    grid-row: 3/5
+  .name-3
+    grid-column: 1/2
+    grid-row: 5/7
 .table-squeezings-relax
   grid: repeat(1, 4rem)/$width-first-column-grid 1fr // row/col
   padding-top: .5rem
