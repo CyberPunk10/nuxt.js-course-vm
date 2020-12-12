@@ -1,7 +1,6 @@
 <template>
   <div class="">
     <CalendarGitHub/>
-    <Challenge/>
   </div>
 </template>
 

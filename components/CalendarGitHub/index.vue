@@ -241,8 +241,8 @@ export default {
       'Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'
     ]
 
-    let arrMonthInMonday = [] // all monday
-    let arrFirstMondayMonth = [] // first monday month
+    let arrMonthInSunday = [] // all sunday
+    let arrFirstSundayMonth = [] // first sunday month
 
     // console.log('\n',
     //   'date:', date.toLocaleDateString(),'\n',
@@ -259,7 +259,7 @@ export default {
     function createAllDays() {
       let html = ''
       let x = 0
-      const beforeLastCountWeeks = countWeeks - 1
+      const beforeLastCountWeeks = countWeeks - 1 // все недели кроме текущей
       for (let i = 0; i < countWeeks; i++) {
         if (i !== beforeLastCountWeeks) {
           html += `<g transform="translate(${x}, 0)">${createWeek()}</g>`
@@ -269,7 +269,7 @@ export default {
         x += deltaX
       }
 
-      createArrFirstMondayMonth()
+      createarrFirstSundayMonth()
 
       return html
     }
@@ -281,7 +281,7 @@ export default {
         for (let i = 0; i < 7; i++) {
           if (!i) {
             // добавляем номер месяца каждого воскресенья
-            arrMonthInMonday.push(new Date(lastTimestamp).getMonth())
+            arrMonthInSunday.push(new Date(lastTimestamp).getMonth())
           }
           html += getTemplateDay(y, lastTimestamp)
           y += deltaY
@@ -289,6 +289,10 @@ export default {
         }
       } else {
         for (let i = 0; i < (currentDayWeek + 1); i++) {
+          if (!i) {
+            // добавляем номер месяца каждого воскресенья
+            arrMonthInSunday.push(new Date(lastTimestamp).getMonth())
+          }
           html += getTemplateDay(y, lastTimestamp)
           y += deltaY
           lastTimestamp = lastTimestamp + (24 * 3600 * 1000)
@@ -297,26 +301,35 @@ export default {
       return html
     }
 
-    function createArrFirstMondayMonth() {
+    function createarrFirstSundayMonth() {
       for(let i = 0; i < 12; i++) {
-        arrFirstMondayMonth.push(arrMonthInMonday.indexOf(i))
+        arrFirstSundayMonth.push(arrMonthInSunday.indexOf(i))
       }
     }
 
     function createLabelsMonths() {
       let html = ''
-      let firstMonth = arrFirstMondayMonth.findIndex(item => item < 2) // index in arrFirstMondayMonth
-      let secondMonth = arrFirstMondayMonth.findIndex(item => item > arrFirstMondayMonth[firstMonth] && item < 5) // если нет, то -1 // 5 - максимальное число колонок/недель в одном месяце
-
-      for (let i = 0; i < (arrFirstMondayMonth.length); i++) {
+      let firstMonth = arrFirstSundayMonth.findIndex(item => item < 2) // index in arrFirstSundayMonth
+      let secondMonth = arrFirstSundayMonth.findIndex(item => item > arrFirstSundayMonth[firstMonth] && item < 5) // если нет, то -1 // 5 - максимальное число колонок/недель в одном месяце
+      console.log(arrFirstSundayMonth, firstMonth, secondMonth)
+      for (let i = 0; i < (arrFirstSundayMonth.length); i++) {
         // если есть первый элемент в первых 2 колонаках и есть второй элемент в первых 5 колонаках
         if (i !== firstMonth && secondMonth !== -1) {
-          html += `<text x="${deltaX * arrFirstMondayMonth[i] + 16}" y="-8" class="month">${month[i]}</text>`
+          html += `<text x="${deltaX * arrFirstSundayMonth[i] + 16}" y="-8" class="month">${month[i]}</text>`
         } else {
-          const currentMonthStartPosition = arrMonthInMonday.indexOf(firstMonth, -5) // 5 - максимальное число колонок/недель в одном месяце
+          const currentMonthStartPosition = arrMonthInSunday.indexOf(firstMonth, -5) // 5 - максимальное число колонок/недель в одном месяце
           html += `<text x="${deltaX * currentMonthStartPosition + 16}" y="-8" class="month">${month[firstMonth]}</text>`
+          if (currentMonthStartPosition !== -1) {
+            // если первый месяц переехал в конец графика,
+            // то смотрим сколько пустых колонок в начале графика и если больше 3,
+            // то дублируем этот же месяц в начале
+            if (arrFirstSundayMonth[secondMonth] > 3) {
+              html += `<text x="${deltaX + 1}" y="-8" class="month">${month[firstMonth]}</text>`
+            }
+          }
         }
       }
+
       return html
     }
 
@@ -360,12 +373,12 @@ export default {
       if (colors.length <= 1) {
         return colors.length < 1 ? '' : `${colors[0].color}-${colors[0].count}`
       } else {
-        console.log('НЕСКОЛЬКО ЦВЕТОВ В ОДНОМ RECT!')
+        // console.log('НЕСКОЛЬКО ЦВЕТОВ В ОДНОМ RECT!')
         // console.log(challengesUser)
-        console.log(challenges) // ["challenge1", "challenge2", "challenge3", "challenge4", "challenge5"]
-        console.log(colors) // ["-ch1", "-ch2", "-ch4", "-ch3"]
+        // console.log(challenges) // ["challenge1", "challenge2", "challenge3", "challenge4", "challenge5"]
+        // console.log(colors) // ["-ch1", "-ch2", "-ch4", "-ch3"]
         for (let i = 0; i < challenges.length; i++) {
-          console.log(colors[i])
+          // console.log(colors[i])
           if (colors[i]) {
             return `${colors[i].color}-${colors[i].count}`
           }
