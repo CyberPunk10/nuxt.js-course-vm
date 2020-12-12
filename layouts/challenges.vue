@@ -2,9 +2,13 @@
   <div style="position: relative" class="bg">
     <div class="container">
       <div class="menu">
-        <a href="/challenges/">Главная</a>
-        <a href="/challenges/create">Создать ch</a>
-        <a href="/challenges/addprogress">Добавить прогресс</a>
+
+        <nuxt-link
+          v-for="link in links" :key="link.url"
+          :to="link.url"
+        >
+          {{ link.title}}
+        </nuxt-link>
       </div>
       <Nuxt />
     </div>
@@ -14,6 +18,16 @@
 
 <script>
 export default {
+  data() {
+    return {
+      links: [
+        {title: 'Главная', url: '/challenges/'},
+        {title: 'Создать ch', url: '/challenges/create'},
+        {title: 'Добавить прогресс', url: '/challenges/addprogress'},
+        {title: 'Mobile', url: '/challenges/mobile'}
+      ]
+    }
+  },
   computed: {
     error() {
       return this.$store.getters.error
