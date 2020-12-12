@@ -22,6 +22,11 @@ const calendarGraphSchema = new Schema({
     }
   ],
 
+  // comments: [
+  //   { body: String, date: Date }
+  // ],
+
+
   challenges: [
     {
       challenge: {

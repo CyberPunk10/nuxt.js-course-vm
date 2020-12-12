@@ -24,6 +24,7 @@ export default {
   css: [
     'element-ui/lib/theme-chalk/index.css',
     'element-ui/lib/theme-chalk/display.css',
+    'assets/sass/main.sass',
     '@/theme/index.sass',
   ],
 
@@ -50,8 +51,8 @@ export default {
 
   styleResources: {
     sass: [
-      // ЗДЕСЬ ПОМЕНЯТЬ, ССЫЛАТЬСЯ ТОЛЬКО НА ПЕРЕМЕННЫЕ И МИКСИНЫ!!
-      'assets/sass/_main.sass'
+      'assets/sass/vars/_index.sass',
+      'assets/sass/mixins/_index.sass'
     ]
   },
 

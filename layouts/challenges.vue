@@ -24,7 +24,8 @@ export default {
         {title: 'Главная', url: '/challenges/'},
         {title: 'Создать ch', url: '/challenges/create'},
         {title: 'Добавить прогресс', url: '/challenges/addprogress'},
-        {title: 'Mobile', url: '/challenges/mobile'}
+        {title: 'Mobile', url: '/challenges/mobile'},
+        {title: 'Table', url: '/challenges/table'}
       ]
     }
   },
