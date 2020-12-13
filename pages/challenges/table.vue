@@ -150,7 +150,7 @@ export default {
 </script>
 
 <style lang="sass">
-  // @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap')
+  @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap')
   // @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap')
 
   #table-price
@@ -185,7 +185,9 @@ export default {
     grid-row: 1/2
     font-size: 30px
     font-family: 'Lobster', cursive
-    color: #ecb87f
+    // color: #ecb87f
+    color: #fcb160
+    text-align: center
 
   .subtitle-Obvodny, .subtitle-Ligovskiy
     grid-column: 1/4
