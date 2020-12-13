@@ -2,7 +2,7 @@
   <div class="example-table">
     <h2>{{ formSport.title }}</h2>
     <PartFormTopLabel :count="this.countCol" @addcol="addcol"/>
-    <PartFormMain/>
+    <PartFormMain v-for="(item, index) in players" :key="index" :name="item.name"/>
     <PartFormRelax/>
     <PartFormResult/>
     <PartFormButtons/>
@@ -19,27 +19,28 @@ export default {
   },
   data() {
     return {
-      gridData: [
-        {tag: 'div', class: '', value: ''}
-      ],
       countCol: 4,
       players: [
-        {name: 'Константин'},
-        {name: 'Player 2'},
-        {name: 'Player 3'}
+        {id: 1, name: 'Player 1'},
+        {id: 2, name: 'Player 2'},
+        {id: 3, name: 'Константин'}
       ],
-
     }
   },
+
+  computed: {
+  },
+
   methods: {
-    addcol(count) {
-      console.log('count', count)
+    addcol() {
+      ++this.countCol
     }
   }
 }
 </script>
 
 <style lang="sass">
+
 .example-table
   max-width: 30rem
   margin: 0 auto 3rem
@@ -47,12 +48,12 @@ export default {
     @include font-how-h3
     padding: 1rem .5rem .5rem
 
-.table-squeezings-main,
-.table-squeezings-relax,
-.table-squeezings-result,
-.table-squeezings-top-label,
-.table-squeezings-buttons,
-.table-squeezings-main-2stroke
+.form-sport-top-label,
+.form-sport-main,
+.form-sport-main-2stroke,
+.form-sport-relax,
+.form-sport-result,
+.form-sport-buttons
   display: grid
   grid-gap: 2px
   padding-left: 1rem
@@ -69,12 +70,10 @@ export default {
     min-width: 4rem
 
   .cell-descr
-    // background-color: rgba(255,255,255,.1)
     justify-content: flex-start
   .cell-descr-name
     overflow: hidden
   .cell-plus
-    // @include linear-gradient($direction: 180deg, $fromColor: #292c2f, $toColor: #2a2424)
     color: #ffd438
     font-size: 1.8rem
     padding-top: .2rem
@@ -91,7 +90,6 @@ export default {
     justify-content: space-between
   .cell-plus.jcfe
     justify-content: flex-end
-
 
   input
     border: none
@@ -121,13 +119,15 @@ export default {
   // .cell-label
   //   font-size:
 
-.table-squeezings-main,
-.table-squeezings-main-2stroke,
-.table-squeezings-relax,
-.table-squeezings-result
-  font-size: 14px
-.table-squeezings-top-label
+.form-sport-top-label
   padding-top: 1rem
   font-size: 10px
   color: #aaa
+
+.form-sport-main,
+.form-sport-main-2stroke,
+.form-sport-relax,
+.form-sport-result
+  font-size: 14px
+
 </style>

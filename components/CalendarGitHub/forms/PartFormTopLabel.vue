@@ -1,8 +1,8 @@
 <template>
-  <div class="table-squeezings-top-label">
+  <div class="form-sport-top-label">
     <div class="cell-input cell-label"></div>
     <div v-for="item in count" :key="item" class="cell-input cell-label">{{ item }}</div>
-    <div @input="$emit('addcol', ++this.count)" class="cell-input cell-label cell-plus">+</div>
+    <div @click="$emit('addcol')" class="cell-input cell-label cell-plus">+</div>
   </div>
 </template>
 
@@ -18,5 +18,8 @@ export default {
 </script>
 
 <style lang="sass">
-
+.form-sport-top-label
+  grid: repeat(1, 2rem)/$width-first-column-grid repeat(5, 1fr) // row/col
+  border-top-right-radius: 1rem
+  border-top-left-radius: 1rem
 </style>

@@ -6,7 +6,7 @@
 
       <div class="example-table table-with-tabs">
         <h2>Подтягивания с утяжелением</h2>
-        <div class="table-squeezings-top-label">
+        <div class="form-sport-top-label">
           <div class="cell-input cell-label"></div>
           <div class="cell-input cell-label">1</div>
           <div class="cell-input cell-label">2</div>
@@ -16,7 +16,7 @@
         </div>
 
         <!-- Player 1 stroke2 -->
-        <div class="table-squeezings-main-2stroke">
+        <div class="form-sport-main-2stroke">
           <div class="cell-input cell-descr cell-descr-name name-1">Player 1</div>
           <div class="cell-input"><input type="text" value="21"></div>
           <div class="cell-input"><input type="text" value="281"></div>
@@ -62,7 +62,7 @@
         </div>
 
         <!-- Player 2 stroke2 -->
-        <div class="table-squeezings-main-2stroke">
+        <div class="form-sport-main-2stroke">
           <div class="cell-input cell-descr cell-descr-name name-1">Константин</div>
           <div class="cell-input"><input type="text" value="21"></div>
           <div class="cell-input"><input type="text" value="281"></div>
@@ -108,7 +108,7 @@
         </div>
 
         <!-- Player 3 stroke2 -->
-        <div class="table-squeezings-main-2stroke last-2stroke">
+        <div class="form-sport-main-2stroke last-2stroke">
           <div class="cell-input cell-descr cell-descr-name name-1">Александр</div>
           <div class="cell-input"><input type="text" value="21"></div>
           <div class="cell-input"><input type="text" value="281"></div>
@@ -153,12 +153,12 @@
           </div>
         </div>
 
-        <div class="table-squeezings-relax">
+        <div class="form-sport-relax">
           <div class="cell-input cell-descr">Отдых:</div>
         <div class="cell-input"><input class="cell-width-x3" type="text" value="вольный"></div>
         </div>
 
-        <div class="table-squeezings-result">
+        <div class="form-sport-result">
           <div class="cell-input cell-descr">Всего:</div>
           <div class="cells-group">
             <p>
@@ -180,13 +180,13 @@
           </div>
         </div>
 
-        <div class="table-squeezings-buttons">
+        <div class="form-sport-buttons">
           <div class="buttons">
             <!-- <button>Сохранить</button> -->
           </div>
         </div>
 
-        <div class="table-squeezings-tabs">
+        <div class="form-sport-tabs">
           <div class="tab tab1">
             <div class="decor"></div>
             <div class="content">Сохранить</div>
@@ -344,87 +344,17 @@ $width-first-column-grid: 7rem
   color: #e6e6e6
   padding: 0 1rem 1rem
 
-.table-squeezings-top-label
-  grid: repeat(1, 2rem)/$width-first-column-grid repeat(5, 1fr) // row/col
-  border-top-right-radius: 1rem
-  border-top-left-radius: 1rem
-.table-squeezings-main
-  grid: repeat(3, 4rem)/$width-first-column-grid repeat(5, 1fr) // row/col
-  padding-bottom: .5rem
-  input
-    max-width: 5.5rem
-.table-squeezings-main-2stroke
-  grid: repeat(2, 3rem)/$width-first-column-grid repeat(5, 1fr) // row/col
-  padding-bottom: .5rem
-  padding-top: .5rem
-  input
-    max-width: 5.5rem
-  .name-1
-    grid-column: 1/2
-    grid-row: 1/3
-  .name-2
-    grid-column: 1/2
-    grid-row: 3/5
-  .name-3
-    grid-column: 1/2
-    grid-row: 5/7
 
-.table-squeezings-main-2stroke.last-2stroke
-  padding-bottom: 1rem
 
-.table-squeezings-relax
-  grid: repeat(1, 4rem)/$width-first-column-grid 1fr // row/col
-  padding-top: .5rem
-  border-top: 1px solid rgba(255,255,255,.1)
-  & > div.cell-input
-    padding-right: 1rem
-    input
-      justify-content: flex-start
-      width: 100%
 
-.table-squeezings-result
-  grid: repeat(1, 5rem)/$width-first-column-grid repeat(3, 1fr) // row/col
-  padding-right: 1rem
-  .cell-input
-    min-width: 3rem
-  .cell-width-x3
-    min-width: 9.2rem
-  .cells-group
-    display: flex
-    justify-content: center
-    align-items: center
-    border: 1px solid rgba(255,255,255,.1)
-    border-radius: 4px
-    p
-      text-align: center
-    .name
-      color: #aaa
-      font-size: 1.2rem
 
-.table-squeezings-buttons
-  grid: repeat(1, 2rem)/ repeat(1, 1fr) // row/col
-  padding-left: 0
-  border-bottom-left-radius: 1rem
-  border-bottom-right-radius: 1rem
-  .buttons
-    // padding-bottom: 1rem
-    padding: 0 1rem
-    background-color: #2a2424
-    border-bottom-left-radius: 1rem
-    border-bottom-right-radius: 1rem
-    display: flex
-    justify-content: center
-    align-items: center
-    button
-      background-color: #ffd438
-      border: none
-      border-radius: 4px
-      height: 3rem
-      padding-left: 2rem
-      padding-right: 2rem
-      box-shadow: 0 16px 16px rgba(0,0,0,.06)
 
-// .table-squeezings-tabs
+
+
+
+
+
+// .form-sport-tabs
 //   height: 4.7rem
 //   width: 100%
 //   .tab
@@ -438,20 +368,20 @@ $width-first-column-grid: 7rem
 
 <style lang="scss">
 .table-with-tabs {
-  .table-squeezings-main,
-  .table-squeezings-relax,
-  .table-squeezings-result,
-  .table-squeezings-top-label,
-  .table-squeezings-buttons,
-  .table-squeezings-main-2stroke {
+  .form-sport-main,
+  .form-sport-relax,
+  .form-sport-result,
+  .form-sport-top-label,
+  .form-sport-buttons,
+  .form-sport-main-2stroke {
     box-shadow: 0 40px 40px rgba(0,0,0,.3);
   }
 }
-.example-table.table-with-tabs .table-squeezings-buttons {
+.example-table.table-with-tabs .form-sport-buttons {
   background-color: #ffdd62;
   border-bottom-right-radius: 0;
 }
-.example-table.table-with-tabs .table-squeezings-buttons .buttons {
+.example-table.table-with-tabs .form-sport-buttons .buttons {
   position: relative;
   border-bottom-left-radius: 0;
   // &:before {
@@ -465,7 +395,7 @@ $width-first-column-grid: 7rem
   // }  //
   // border-bottom-right-radius: 0;
 }
-.table-squeezings-tabs {
+.form-sport-tabs {
   display: flex;
   justify-content: center;
   height: 4.7rem;
