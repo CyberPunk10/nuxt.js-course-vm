@@ -60,14 +60,14 @@
         </div>
 
         <div class="table-squeezings-buttons">
-          <div class="df">
+          <div class="buttons">
             <button>Сохранить</button>
           </div>
         </div>
       </div>
 
       <div class="example-table table-with-tabs">
-        <h2>Отжимания</h2>
+        <h2>Подтягивания с утяжелением</h2>
         <div class="table-squeezings-top-label">
           <div class="cell-input cell-label"></div>
           <div class="cell-input cell-label">1</div>
@@ -243,14 +243,20 @@
         </div>
 
         <div class="table-squeezings-buttons">
-          <div class="df">
+          <div class="buttons">
             <button>Сохранить</button>
           </div>
         </div>
 
         <div class="table-squeezings-tabs">
-          <div class="tab tab1"></div>
-          <div class="tab tab2"></div>
+          <div class="tab tab1">
+            <div class="decor"></div>
+            <div class="content">Сохранить</div>
+          </div>
+          <div class="tab tab2">
+            <div class="decor"></div>
+            <div class="content">Настройки</div>
+          </div>
         </div>
       </div>
     </div>
@@ -302,12 +308,9 @@ $width-first-column-grid: 7rem
   grid-gap: 2px
   padding-left: 1rem
   padding-right: 0
-  // background-color: #e2e2e2
-  // border: 1px solid #e2e2e2
   background-color: #2a2424
   font-family: 'Montserrat', sans-serif
-  box-shadow: 0 20px 20px rgba(0,0,0,.3)
-  // @include linear-gradient($direction: 180deg, $fromColor: #292c2f, $toColor: #2a2424)
+  box-shadow: 0 10px 10px rgba(0,0,0,.2)
 
   .cell-input
     position: relative
@@ -403,6 +406,7 @@ $width-first-column-grid: 7rem
   .name-3
     grid-column: 1/2
     grid-row: 5/7
+
 .table-squeezings-main-2stroke.last-2stroke
   padding-bottom: 1rem
 
@@ -437,11 +441,15 @@ $width-first-column-grid: 7rem
 
 .table-squeezings-buttons
   grid: repeat(1, 7rem)/ repeat(1, 1fr) // row/col
-  // padding-bottom: 1rem
-  padding-right: 1rem
-  // border-bottom-left-radius: 1rem
-  // border-bottom-right-radius: 1rem
-  .df
+  padding-left: 0
+  border-bottom-left-radius: 1rem
+  border-bottom-right-radius: 1rem
+  .buttons
+    // padding-bottom: 1rem
+    padding: 0 1rem
+    background-color: #2a2424
+    border-bottom-left-radius: 1rem
+    border-bottom-right-radius: 1rem
     display: flex
     justify-content: center
     align-items: center
@@ -467,7 +475,7 @@ $width-first-column-grid: 7rem
 </style>
 
 <style lang="scss">
-.table-with-tabs >
+.table-with-tabs {
   .table-squeezings-main,
   .table-squeezings-relax,
   .table-squeezings-result,
@@ -475,78 +483,153 @@ $width-first-column-grid: 7rem
   .table-squeezings-buttons,
   .table-squeezings-main-2stroke {
     box-shadow: 0 40px 40px rgba(0,0,0,.3);
-
+  }
+}
+.example-table.table-with-tabs .table-squeezings-buttons {
+  background-color: #ffdd62;
+  border-bottom-right-radius: 0;
+}
+.example-table.table-with-tabs .table-squeezings-buttons .buttons {
+  position: relative;
+  border-bottom-left-radius: 0;
+  // &:before {
+  //   content: '';
+  //   position: absolute;
+  //   bottom: 0;
+  //   right: 0;
+  //   width: 5rem;
+  //   height: 2rem;
+  //   background-color: red;
+  // }  //
+  // border-bottom-right-radius: 0;
 }
 .table-squeezings-tabs {
-  height: 4.7rem;
-  width: 100%;
   display: flex;
   justify-content: center;
+  height: 4.7rem;
   margin-bottom: 5rem;
 }
 .tab {
   position: relative;
   height: 100%;
-  width: calc(50% - 2.5rem);
-  border-bottom-left-radius: 1rem;
-  border-bottom-right-radius: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // border: 1px solid red;
 
-  &.tab1{
-    background-color: #2a2424;
-    margin-right: 2.5rem;
-    &:after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      right: -2.5rem;
-      z-index: 999;
-      width: 5rem;
-      height: 100%;
-      // border: 1px solid #2a2424;
-      background-color: #2a2424;
-      border-bottom-right-radius: 1rem;
-      transform: skewX(-25deg);
+  .content, .decor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
 
-    }
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      // right: -4.7rem;
-      z-index: 999;
-      width: 5rem;
-      // height: calc(4.7rem / 2);
-      background-color: #2a2424;
-    }
+  }
+  .decor {
+    // border: 1px solid blue
+    width: calc(100% - 2.5rem);
+  }
+  .content {
+    width: 100%;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // border: 1px solid green;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
   }
 
-  &.tab2{
-    background-color: #ffdd62;
-    margin-left: 2.5rem;
-    &:after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: -2.5rem;
-      // z-index: 999;
-      width: 5rem;
-      height: 100%;
-      background-color: #ffdd62;
+  &.tab1 {
+    .decor {
       border-bottom-left-radius: 1rem;
-      transform: skewX(25deg);
+      background-color: #2a2424;
+      margin-right: 2.5rem;
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: -2.5rem;
+        z-index: 999;
+        width: 5rem;
+        height: 100%;
+        background-color: #2a2424;
+        border-bottom-right-radius: 1rem;
+        transform: skewX(-25deg);
+      }
+      // &:before {
+        //   content: '';
+      //   position: absolute;
+      //   top: 0;
+      //   // right: -4.7rem;
+      //   z-index: 999;
+      //   width: 5rem;
+      //   height: calc(4.7rem / 2);
+      //   background-color: #2a2424;
+      // }
     }
+    .content {
+      color: #ffdd62
+    }
+  }
+
+  &.tab2 {
     &:before {
       content: '';
       position: absolute;
       top: 0;
-      // right: -4.7rem;
-      // z-index: 999;
-      width: 5rem;
-      // height: calc(4.7rem / 2);
-      background-color: red;
-      // box-shadow: 0 16px 16px rgba(0,0,0,.16);
+      left: .8rem;
+      width: 3rem;
+      height: 3rem;
+      z-index: 999;
+      border-radius: 1rem;
+      background: #ffdd62;
+      // box-shadow: inset 0 16px 16px rgba(0,0,0,.16);
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      top: -1rem;
+      left: .5rem;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 1rem;
+      background: #2a2424;
+      // box-shadow: inset 0 16px 16px rgba(0,0,0,.16);
+    }
+    .decor {
+      border-bottom-right-radius: 1rem;
+      background-color: #ffdd62;
+      margin-left: 2.5rem;
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: -2.5rem;
+        // z-index: 0;
+        width: 5rem;
+        height: 100%;
+        background-color: #ffdd62;
+        border-bottom-left-radius: 1rem;
+        transform: skewX(25deg);
+      }
+      // &:before {
+      //   content: '';
+      //   position: absolute;
+      //   top: -5rem;
+      //   // right: -4.7rem;
+      //   z-index: -1;
+      //   width: 100%;
+      //   height: 5rem;
+      //   background-color: red;
+      //   // box-shadow: 0 16px 16px rgba(0,0,0,.16);
+      // }
+    }
+    .content {
+      color: #2a2424
     }
   }
+
 }
 
 </style>
