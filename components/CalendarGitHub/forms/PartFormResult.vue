@@ -1,5 +1,5 @@
 <template>
-<div class="table-squeezings-result">
+<div class="form-sport-result">
   <div class="cell-input cell-descr">Всего:</div>
     <div class="cells-group">
       <p>
@@ -29,5 +29,22 @@ export default {
 </script>
 
 <style lang="sass">
-
+.form-sport-result
+  grid: repeat(1, 5rem)/$width-first-column-grid repeat(3, 1fr) // row/col
+  padding-right: 1rem
+  .cell-input
+    min-width: 3rem
+  .cell-width-x3
+    min-width: 9.2rem
+  .cells-group
+    display: flex
+    justify-content: center
+    align-items: center
+    border: 1px solid rgba(255,255,255,.1)
+    border-radius: 4px
+    p
+      text-align: center
+    .name
+      color: #aaa
+      font-size: 1.2rem
 </style>
