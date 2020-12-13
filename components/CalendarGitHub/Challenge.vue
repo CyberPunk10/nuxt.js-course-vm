@@ -66,7 +66,7 @@
         </div>
       </div>
 
-      <div class="example-table">
+      <div class="example-table table-with-tabs">
         <h2>Отжимания</h2>
         <div class="table-squeezings-top-label">
           <div class="cell-input cell-label"></div>
@@ -467,6 +467,16 @@ $width-first-column-grid: 7rem
 </style>
 
 <style lang="scss">
+.table-with-tabs >
+  .table-squeezings-main,
+  .table-squeezings-relax,
+  .table-squeezings-result,
+  .table-squeezings-top-label,
+  .table-squeezings-buttons,
+  .table-squeezings-main-2stroke {
+    box-shadow: 0 40px 40px rgba(0,0,0,.3);
+
+}
 .table-squeezings-tabs {
   height: 4.7rem;
   width: 100%;
@@ -487,7 +497,7 @@ $width-first-column-grid: 7rem
     &:after {
       content: '';
       position: absolute;
-      bottom: 0.5px;
+      bottom: 0;
       right: -2.5rem;
       z-index: 999;
       width: 5rem;
@@ -511,25 +521,19 @@ $width-first-column-grid: 7rem
   }
 
   &.tab2{
-    background-color: #ffd438;
+    background-color: #ffdd62;
     margin-left: 2.5rem;
-    border: 1px solid #2a2424;
-    border-top: none;
     &:after {
       content: '';
       position: absolute;
-      bottom: -0.5px;
+      bottom: 0;
       left: -2.5rem;
       // z-index: 999;
       width: 5rem;
       height: 100%;
-      border: 1px solid #2a2424;
-      border-right: none;
-      border-top: none;
-      background-color: #ffd438;
+      background-color: #ffdd62;
       border-bottom-left-radius: 1rem;
       transform: skewX(25deg);
-      // box-shadow: 0 16px 16px rgba(0,0,0,.16);
     }
     &:before {
       content: '';
