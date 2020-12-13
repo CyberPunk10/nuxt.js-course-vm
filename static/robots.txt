@@ -1,2 +1,20 @@
 User-agent: *
-Disallow: /
+Dissalow: /admin/
+Dissalow: /*.pdf
+Dissalow: /*.doc
+Dissalow: /*?*
+Sitemap: https://site.ru/sitemap.xml
+
+User-agent: Googlebot
+Dissalow: /admin/
+Dissalow: /*.pdf
+Dissalow: /*.doc
+Dissalow: /*?*
+
+User-agent: Yandex
+Dissalow: /admin/
+Dissalow: /*.pdf
+Dissalow: /*.doc
+Dissalow: /*?*
+Host: https://site.ru/
+Sitemap: https://site.ru/sitemap.xml
