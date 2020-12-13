@@ -49,7 +49,8 @@ $height-header: 5.1rem
 //   @include backgroundShorthandWithExternalVar('challenges/kaspar-allenbach-w9QgdJ3lAPU-unsplash.jpg', center)
 
 .container
-  padding-top: calc(#{$height-header} + 3rem)
+  // padding-top: calc(#{$height-header} + 3rem)
+  padding-top:$height-header
 .menu
   position: fixed
   z-index: 9999
@@ -62,6 +63,8 @@ $height-header: 5.1rem
   display: flex
   justify-content: center
   align-items: center
+  @media screen and (max-width: $tableWidth)
+    font-size: 6px
   a
     color: #909399
     height: $height-header

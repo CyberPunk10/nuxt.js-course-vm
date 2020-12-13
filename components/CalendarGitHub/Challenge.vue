@@ -1,8 +1,11 @@
 <template>
   <div class="wrap">
     <div class="container-mobile">
-      <h2>Отжимания</h2>
-      <div class="exaple-table">
+
+      <IndexFormSport :formSport="formSport"/>
+
+      <div class="example-table table-with-tabs">
+        <h2>Подтягивания с утяжелением</h2>
         <div class="table-squeezings-top-label">
           <div class="cell-input cell-label"></div>
           <div class="cell-input cell-label">1</div>
@@ -11,32 +14,152 @@
           <div class="cell-input cell-label">4</div>
           <div class="cell-input cell-label cell-plus">+</div>
         </div>
-        <div class="table-squeezings-main">
-          <div class="cell-input cell-descr">Player 1</div>
+
+        <!-- Player 1 stroke2 -->
+        <div class="table-squeezings-main-2stroke">
+          <div class="cell-input cell-descr cell-descr-name name-1">Player 1</div>
           <div class="cell-input"><input type="text" value="21"></div>
           <div class="cell-input"><input type="text" value="281"></div>
           <div class="cell-input"><input type="text" value="21"></div>
           <div class="cell-input"><input type="text" value="21"></div>
-          <div class="cell-input cell-plus"></div>
-          <div class="cell-input cell-descr">Player 2</div>
-          <div class="cell-input"><input class="cell-result" type="text" value="21"></div>
-          <div class="cell-input"><input class="cell-record" type="text" value="2981"></div>
-          <div class="cell-input"><input type="text" value=""></div>
-          <div class="cell-input"><input type="text" value=""></div>
-          <div class="cell-input cell-plus"></div>
-          <div class="cell-input cell-descr">Player 3</div>
-          <div class="cell-input"><input type="text" value=""></div>
-          <div class="cell-input"><input type="text" value=""></div>
-          <div class="cell-input"><input type="text" value=""></div>
-          <div class="cell-input"><input type="text" value=""></div>
-          <div class="cell-input cell-plus"></div>
-      </div>
-      <div class="table-squeezings-relax">
-        <div class="cell-input cell-descr">Отдых:</div>
+          <div class="cell-input cell-plus jcsb">
+            <p>кг</p>
+            <svg
+              id="Capa_1"
+              enable-background="new 0 0 512 512"
+              height="15"
+              viewBox="0 0 512 512"
+              width="15"
+              xmlns="http://www.w3.org/2000/svg">
+              <g id="_x31_5_refresh">
+                <path d="m504.92 229.383c-5.213-.575-26.628-2.939-29.602-3.268-14.437-116.247-113.603-208.697-236.736-208.697-131.863 0-238.582 106.707-238.582 238.582 0 131.864 106.707 238.582 238.582 238.582 69.282 0 131.939-29.528 175.765-77.25 7.796-8.489 7.234-21.692-1.255-29.488-8.489-7.797-21.692-7.234-29.488 1.255-35.991 39.19-87.576 63.742-145.022 63.742-108.539.001-196.842-88.302-196.842-196.841s88.303-196.842 196.842-196.842c96.727 0 177.381 70.131 193.789 162.216-5.804-.641-.08-.009-30.977-3.42-6.096-.673-10.621 5.523-8.126 11.125l41.987 94.272c2.472 5.55 10.007 6.382 13.631 1.505l61.539-82.844c3.656-4.922.59-11.956-5.505-12.629z" fill="#ffd438"/>
+                <g>
+                  <path d="m504.92 229.383c-5.213-.576-26.628-2.939-29.602-3.268-14.437-116.248-113.604-208.697-236.736-208.697-4.894 0-9.748.165-14.568.454 116.282 6.986 208.242 96.639 222.102 208.243 2.974.328 24.389 2.692 29.602 3.268 6.096.673 9.161 7.707 5.504 12.63l-51.385 69.175 5.417 12.164c2.472 5.55 10.008 6.382 13.631 1.505l61.538-82.844c3.658-4.923.592-11.957-5.503-12.63z" fill="#ffd438"/>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="281"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input cell-plus jcfe">
+            <svg
+              id="Capa_1"
+              enable-background="new 0 0 512 512"
+              height="15"
+              viewBox="0 0 512 512"
+              width="15"
+              xmlns="http://www.w3.org/2000/svg">
+              <g id="_x31_5_refresh">
+                <path d="m504.92 229.383c-5.213-.575-26.628-2.939-29.602-3.268-14.437-116.247-113.603-208.697-236.736-208.697-131.863 0-238.582 106.707-238.582 238.582 0 131.864 106.707 238.582 238.582 238.582 69.282 0 131.939-29.528 175.765-77.25 7.796-8.489 7.234-21.692-1.255-29.488-8.489-7.797-21.692-7.234-29.488 1.255-35.991 39.19-87.576 63.742-145.022 63.742-108.539.001-196.842-88.302-196.842-196.841s88.303-196.842 196.842-196.842c96.727 0 177.381 70.131 193.789 162.216-5.804-.641-.08-.009-30.977-3.42-6.096-.673-10.621 5.523-8.126 11.125l41.987 94.272c2.472 5.55 10.007 6.382 13.631 1.505l61.539-82.844c3.656-4.922.59-11.956-5.505-12.629z" fill="#ffd438"/>
+                <g>
+                  <path d="m504.92 229.383c-5.213-.576-26.628-2.939-29.602-3.268-14.437-116.248-113.604-208.697-236.736-208.697-4.894 0-9.748.165-14.568.454 116.282 6.986 208.242 96.639 222.102 208.243 2.974.328 24.389 2.692 29.602 3.268 6.096.673 9.161 7.707 5.504 12.63l-51.385 69.175 5.417 12.164c2.472 5.55 10.008 6.382 13.631 1.505l61.538-82.844c3.658-4.923.592-11.957-5.503-12.63z" fill="#ffd438"/>
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Player 2 stroke2 -->
+        <div class="table-squeezings-main-2stroke">
+          <div class="cell-input cell-descr cell-descr-name name-1">Константин</div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="281"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input cell-plus jcsb">
+            <p>кг</p>
+            <svg
+              id="Capa_1"
+              enable-background="new 0 0 512 512"
+              height="15"
+              viewBox="0 0 512 512"
+              width="15"
+              xmlns="http://www.w3.org/2000/svg">
+              <g id="_x31_5_refresh">
+                <path d="m504.92 229.383c-5.213-.575-26.628-2.939-29.602-3.268-14.437-116.247-113.603-208.697-236.736-208.697-131.863 0-238.582 106.707-238.582 238.582 0 131.864 106.707 238.582 238.582 238.582 69.282 0 131.939-29.528 175.765-77.25 7.796-8.489 7.234-21.692-1.255-29.488-8.489-7.797-21.692-7.234-29.488 1.255-35.991 39.19-87.576 63.742-145.022 63.742-108.539.001-196.842-88.302-196.842-196.841s88.303-196.842 196.842-196.842c96.727 0 177.381 70.131 193.789 162.216-5.804-.641-.08-.009-30.977-3.42-6.096-.673-10.621 5.523-8.126 11.125l41.987 94.272c2.472 5.55 10.007 6.382 13.631 1.505l61.539-82.844c3.656-4.922.59-11.956-5.505-12.629z" fill="#ffd438"/>
+                <g>
+                  <path d="m504.92 229.383c-5.213-.576-26.628-2.939-29.602-3.268-14.437-116.248-113.604-208.697-236.736-208.697-4.894 0-9.748.165-14.568.454 116.282 6.986 208.242 96.639 222.102 208.243 2.974.328 24.389 2.692 29.602 3.268 6.096.673 9.161 7.707 5.504 12.63l-51.385 69.175 5.417 12.164c2.472 5.55 10.008 6.382 13.631 1.505l61.538-82.844c3.658-4.923.592-11.957-5.503-12.63z" fill="#ffd438"/>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="281"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input cell-plus jcfe">
+            <svg
+              id="Capa_1"
+              enable-background="new 0 0 512 512"
+              height="15"
+              viewBox="0 0 512 512"
+              width="15"
+              xmlns="http://www.w3.org/2000/svg">
+              <g id="_x31_5_refresh">
+                <path d="m504.92 229.383c-5.213-.575-26.628-2.939-29.602-3.268-14.437-116.247-113.603-208.697-236.736-208.697-131.863 0-238.582 106.707-238.582 238.582 0 131.864 106.707 238.582 238.582 238.582 69.282 0 131.939-29.528 175.765-77.25 7.796-8.489 7.234-21.692-1.255-29.488-8.489-7.797-21.692-7.234-29.488 1.255-35.991 39.19-87.576 63.742-145.022 63.742-108.539.001-196.842-88.302-196.842-196.841s88.303-196.842 196.842-196.842c96.727 0 177.381 70.131 193.789 162.216-5.804-.641-.08-.009-30.977-3.42-6.096-.673-10.621 5.523-8.126 11.125l41.987 94.272c2.472 5.55 10.007 6.382 13.631 1.505l61.539-82.844c3.656-4.922.59-11.956-5.505-12.629z" fill="#ffd438"/>
+                <g>
+                  <path d="m504.92 229.383c-5.213-.576-26.628-2.939-29.602-3.268-14.437-116.248-113.604-208.697-236.736-208.697-4.894 0-9.748.165-14.568.454 116.282 6.986 208.242 96.639 222.102 208.243 2.974.328 24.389 2.692 29.602 3.268 6.096.673 9.161 7.707 5.504 12.63l-51.385 69.175 5.417 12.164c2.472 5.55 10.008 6.382 13.631 1.505l61.538-82.844c3.658-4.923.592-11.957-5.503-12.63z" fill="#ffd438"/>
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Player 3 stroke2 -->
+        <div class="table-squeezings-main-2stroke last-2stroke">
+          <div class="cell-input cell-descr cell-descr-name name-1">Александр</div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="281"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input cell-plus jcsb">
+            <p>кг</p>
+            <svg
+              id="Capa_1"
+              enable-background="new 0 0 512 512"
+              height="15"
+              viewBox="0 0 512 512"
+              width="15"
+              xmlns="http://www.w3.org/2000/svg">
+              <g id="_x31_5_refresh">
+                <path d="m504.92 229.383c-5.213-.575-26.628-2.939-29.602-3.268-14.437-116.247-113.603-208.697-236.736-208.697-131.863 0-238.582 106.707-238.582 238.582 0 131.864 106.707 238.582 238.582 238.582 69.282 0 131.939-29.528 175.765-77.25 7.796-8.489 7.234-21.692-1.255-29.488-8.489-7.797-21.692-7.234-29.488 1.255-35.991 39.19-87.576 63.742-145.022 63.742-108.539.001-196.842-88.302-196.842-196.841s88.303-196.842 196.842-196.842c96.727 0 177.381 70.131 193.789 162.216-5.804-.641-.08-.009-30.977-3.42-6.096-.673-10.621 5.523-8.126 11.125l41.987 94.272c2.472 5.55 10.007 6.382 13.631 1.505l61.539-82.844c3.656-4.922.59-11.956-5.505-12.629z" fill="#ffd438"/>
+                <g>
+                  <path d="m504.92 229.383c-5.213-.576-26.628-2.939-29.602-3.268-14.437-116.248-113.604-208.697-236.736-208.697-4.894 0-9.748.165-14.568.454 116.282 6.986 208.242 96.639 222.102 208.243 2.974.328 24.389 2.692 29.602 3.268 6.096.673 9.161 7.707 5.504 12.63l-51.385 69.175 5.417 12.164c2.472 5.55 10.008 6.382 13.631 1.505l61.538-82.844c3.658-4.923.592-11.957-5.503-12.63z" fill="#ffd438"/>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="281"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input"><input type="text" value="21"></div>
+          <div class="cell-input cell-plus jcfe">
+            <svg
+              id="Capa_1"
+              enable-background="new 0 0 512 512"
+              height="15"
+              viewBox="0 0 512 512"
+              width="15"
+              xmlns="http://www.w3.org/2000/svg">
+              <g id="_x31_5_refresh">
+                <path d="m504.92 229.383c-5.213-.575-26.628-2.939-29.602-3.268-14.437-116.247-113.603-208.697-236.736-208.697-131.863 0-238.582 106.707-238.582 238.582 0 131.864 106.707 238.582 238.582 238.582 69.282 0 131.939-29.528 175.765-77.25 7.796-8.489 7.234-21.692-1.255-29.488-8.489-7.797-21.692-7.234-29.488 1.255-35.991 39.19-87.576 63.742-145.022 63.742-108.539.001-196.842-88.302-196.842-196.841s88.303-196.842 196.842-196.842c96.727 0 177.381 70.131 193.789 162.216-5.804-.641-.08-.009-30.977-3.42-6.096-.673-10.621 5.523-8.126 11.125l41.987 94.272c2.472 5.55 10.007 6.382 13.631 1.505l61.539-82.844c3.656-4.922.59-11.956-5.505-12.629z" fill="#ffd438"/>
+                <g>
+                  <path d="m504.92 229.383c-5.213-.576-26.628-2.939-29.602-3.268-14.437-116.248-113.604-208.697-236.736-208.697-4.894 0-9.748.165-14.568.454 116.282 6.986 208.242 96.639 222.102 208.243 2.974.328 24.389 2.692 29.602 3.268 6.096.673 9.161 7.707 5.504 12.63l-51.385 69.175 5.417 12.164c2.472 5.55 10.008 6.382 13.631 1.505l61.538-82.844c3.658-4.923.592-11.957-5.503-12.63z" fill="#ffd438"/>
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <div class="table-squeezings-relax">
+          <div class="cell-input cell-descr">Отдых:</div>
         <div class="cell-input"><input class="cell-width-x3" type="text" value="вольный"></div>
-      </div>
-      <div class="table-squeezings-result">
-        <div class="cell-input cell-descr">Всего:</div>
+        </div>
+
+        <div class="table-squeezings-result">
+          <div class="cell-input cell-descr">Всего:</div>
           <div class="cells-group">
             <p>
               <span class="name">Player 1</span><br>
@@ -56,89 +179,121 @@
             </p>
           </div>
         </div>
+
         <div class="table-squeezings-buttons">
-          <div class="df">
-            <button>Сохранить</button>
+          <div class="buttons">
+            <!-- <button>Сохранить</button> -->
           </div>
         </div>
-      </div>
-      <h2>Отжимания</h2>
-      <div class="exaple-table">
-        <div class="table-squeezings-top-label">
-          <div class="cell-input cell-label"></div>
-          <div class="cell-input cell-label">1</div>
-          <div class="cell-input cell-label">2</div>
-          <div class="cell-input cell-label">3</div>
-          <div class="cell-input cell-label">4</div>
-          <div class="cell-input cell-label cell-plus">+</div>
-        </div>
-        <div class="table-squeezings-main-2stroke">
-          <div class="cell-input cell-descr name-1">Player 1</div>
-          <div class="cell-input"><input type="text" value="21"></div>
-          <div class="cell-input"><input type="text" value="281"></div>
-          <div class="cell-input"><input type="text" value="21"></div>
-          <div class="cell-input"><input type="text" value="21"></div>
-          <div class="cell-input cell-plus"></div>
-          <div class="cell-input"><input type="text" value="21"></div>
-          <div class="cell-input"><input type="text" value="281"></div>
-          <div class="cell-input"><input type="text" value="21"></div>
-          <div class="cell-input"><input type="text" value="21"></div>
-          <div class="cell-input cell-plus"></div>
-        </div>
-        <div class="table-squeezings-main-2stroke">
-          <div class="cell-input cell-descr name-1">Player 2</div>
-          <div class="cell-input"><input type="text" value="21"></div>
-          <div class="cell-input"><input type="text" value="281"></div>
-          <div class="cell-input"><input type="text" value="21"></div>
-          <div class="cell-input"><input type="text" value="21"></div>
-          <div class="cell-input cell-plus"></div>
-          <div class="cell-input"><input type="text" value="21"></div>
-          <div class="cell-input"><input type="text" value="281"></div>
-          <div class="cell-input"><input type="text" value="21"></div>
-          <div class="cell-input"><input type="text" value="21"></div>
-          <div class="cell-input cell-plus"></div>
-        </div>
-        <div class="table-squeezings-main-2stroke last-2stroke">
-          <div class="cell-input cell-descr name-1">Player 3</div>
-          <div class="cell-input"><input type="text" value="21"></div>
-          <div class="cell-input"><input type="text" value="281"></div>
-          <div class="cell-input"><input type="text" value="21"></div>
-          <div class="cell-input"><input type="text" value="21"></div>
-          <div class="cell-input cell-plus"></div>
-          <div class="cell-input"><input type="text" value="21"></div>
-          <div class="cell-input"><input type="text" value="281"></div>
-          <div class="cell-input"><input type="text" value="21"></div>
-          <div class="cell-input"><input type="text" value="21"></div>
-          <div class="cell-input cell-plus"></div>
-        </div>
-        <div class="table-squeezings-relax">
-          <div class="cell-input cell-descr">Отдых:</div>
-        <div class="cell-input"><input class="cell-width-x3" type="text" value="вольный"></div>
-        </div>
-        <div class="table-squeezings-result">
-          <div class="cell-input cell-descr">Всего:</div>
-            <div class="cells-group">
-              <p>
-                <span class="name">Player 1</span><br>
-                <span class="">21</span>
-              </p>
-            </div>
-            <div class="cells-group">
-              <p>
-                <span class="name">Player 2</span><br>
-                <span class="">21</span>
-              </p>
-            </div>
-            <div class="cells-group">
-              <p>
-                <span class="name">Player 3</span><br>
-                <span class="">21</span>
-              </p>
-            </div>
+
+        <div class="table-squeezings-tabs">
+          <div class="tab tab1">
+            <div class="decor"></div>
+            <div class="content">Сохранить</div>
           </div>
-          <div class="table-squeezings-buttons">
-          <div class="df">
-            <button>Сохранить</button>
+          <div class="tab tab2">
+            <div class="decor"></div>
+            <div class="content">
+              <svg version="1.1" width="30" height="30" fill="#2a2424" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 480 480" style="enable-background:new 0 0 480 480;" xml:space="preserve">
+<g>
+	<g>
+		<path d="M296,280h-8.8c-3.31,0.006-6.271-2.059-7.408-5.168c-0.976-2.56-2.024-5.064-3.152-7.544
+			c-1.402-3.016-0.762-6.587,1.6-8.928l6.272-6.28c9.311-9.393,9.294-24.541-0.04-33.912l-22.608-22.608
+			c-9.383-9.328-24.537-9.328-33.92,0l-6.272,6.264c-2.346,2.353-5.911,2.992-8.928,1.6c-2.48-1.128-4.984-2.176-7.552-3.2
+			c-3.125-1.129-5.204-4.101-5.192-7.424V184c0-13.255-10.745-24-24-24h-32c-13.255,0-24,10.745-24,24v8.8
+			c0.006,3.31-2.059,6.271-5.168,7.408c-2.56,0.976-5.064,2.024-7.544,3.152c-3.017,1.395-6.583,0.756-8.928-1.6l-6.28-6.272
+			c-9.382-9.322-24.53-9.322-33.912,0l-22.608,22.68c-9.328,9.383-9.328,24.537,0,33.92l6.264,6.272
+			c2.362,2.341,3.002,5.912,1.6,8.928c-1.128,2.48-2.176,4.984-3.16,7.552c-1.145,3.127-4.134,5.194-7.464,5.16H24
+			c-13.255,0-24,10.745-24,24v32c0,13.255,10.745,24,24,24h8.8c3.31-0.006,6.271,2.059,7.408,5.168
+			c0.976,2.56,2.024,5.064,3.152,7.544c1.402,3.016,0.762,6.587-1.6,8.928l-6.272,6.28c-9.322,9.382-9.322,24.53,0,33.912
+			l22.608,22.608c9.383,9.328,24.537,9.328,33.92,0l6.272-6.264c2.346-2.353,5.911-2.992,8.928-1.6
+			c2.48,1.128,4.984,2.176,7.552,3.2c3.141,1.116,5.238,4.091,5.232,7.424v8.8c0,13.255,10.745,24,24,24h32
+			c13.255,0,24-10.745,24-24v-8.8c-0.006-3.31,2.059-6.271,5.168-7.408c2.56-0.976,5.064-2.024,7.544-3.152
+			c3.017-1.395,6.583-0.756,8.928,1.6l6.28,6.272c9.395,9.307,24.539,9.289,33.912-0.04l22.608-22.608
+			c9.328-9.383,9.328-24.537,0-33.92l-6.264-6.272c-2.362-2.341-3.002-5.912-1.6-8.928c1.128-2.48,2.176-4.984,3.2-7.552
+			c1.129-3.125,4.101-5.204,7.424-5.192h8.8c13.255,0,24-10.745,24-24v-32C320,290.745,309.255,280,296,280z M304,336
+			c0,4.418-3.582,8-8,8h-8.8c-9.945,0.037-18.845,6.184-22.4,15.472c-0.848,2.24-1.765,4.445-2.752,6.616
+			c-4.113,9.08-2.205,19.756,4.8,26.848l6.256,6.264c3.126,3.122,3.129,8.188,0.006,11.314c-0.002,0.002-0.004,0.004-0.006,0.006
+			l-22.608,22.608c-3.124,3.123-8.188,3.123-11.312,0l-6.272-6.264c-7.089-7.011-17.769-8.92-26.848-4.8
+			c-2.168,0.984-4.376,1.904-6.6,2.752C190.183,428.37,184.04,437.262,184,447.2v8.8c0,4.418-3.582,8-8,8h-32c-4.418,0-8-3.582-8-8
+			v-8.8c-0.037-9.945-6.184-18.845-15.472-22.4c-2.24-0.848-4.445-1.765-6.616-2.752c-9.08-4.111-19.755-2.202-26.848,4.8
+			l-6.264,6.256c-3.122,3.126-8.188,3.129-11.314,0.006c-0.002-0.002-0.004-0.004-0.006-0.006L46.872,410.52
+			c-3.123-3.124-3.123-8.188,0-11.312l6.264-6.272c7.005-7.092,8.913-17.768,4.8-26.848c-0.984-2.168-1.904-4.376-2.752-6.6
+			C51.638,350.197,42.744,344.044,32.8,344H24c-4.418,0-8-3.582-8-8v-32c0-4.418,3.582-8,8-8h8.8
+			c9.945-0.037,18.845-6.184,22.4-15.472c0.848-2.24,1.765-4.445,2.752-6.616c4.113-9.08,2.204-19.756-4.8-26.848l-6.288-6.264
+			c-3.126-3.122-3.129-8.188-0.006-11.314c0.002-0.002,0.004-0.004,0.006-0.006l22.608-22.608c3.124-3.123,8.188-3.123,11.312,0
+			l6.272,6.264c7.089,7.011,17.769,8.92,26.848,4.8c2.168-0.984,4.376-1.904,6.6-2.752c9.294-3.543,15.451-12.438,15.496-22.384V184
+			c0-4.418,3.582-8,8-8h32c4.418,0,8,3.582,8,8v8.8c0.037,9.945,6.184,18.845,15.472,22.4c2.24,0.848,4.445,1.765,6.616,2.752
+			c9.079,4.12,19.759,2.211,26.848-4.8l6.264-6.256c3.136-3.102,8.184-3.102,11.32,0l22.608,22.608
+			c3.123,3.124,3.123,8.188,0,11.312l-6.264,6.272c-7.004,7.092-8.913,17.768-4.8,26.848c0.984,2.168,1.904,4.376,2.752,6.6
+			c3.554,9.281,12.446,15.424,22.384,15.464h8.8c4.418,0,8,3.582,8,8V336z"/>
+	</g>
+</g>
+<g>
+	<g>
+		<path d="M231.84,316.8c-0.08-1.92-0.216-3.832-0.448-5.736c-0.256-2.048-0.56-4.08-0.984-6.072c-0.28-1.304-0.648-2.592-1-3.888
+			c-0.448-1.648-0.952-3.272-1.512-4.872c-0.392-1.112-0.8-2.216-1.216-3.312c-1.03-2.562-2.208-5.063-3.528-7.488
+			c-0.104-0.184-0.168-0.384-0.272-0.568c-2.081-3.704-4.491-7.215-7.2-10.488c-0.232-0.288-0.496-0.56-0.736-0.84
+			c-1.104-1.304-2.24-2.568-3.432-3.776c-0.624-0.648-1.28-1.256-1.936-1.88c-0.8-0.744-1.6-1.48-2.4-2.184
+			c-0.971-0.843-1.96-1.659-2.968-2.448l-1.312-0.976C190.517,253,175.466,247.992,160,248c-0.8,0-1.6,0.12-2.4,0.152
+			c-1.704,0.048-3.416,0.144-5.136,0.32c-0.904,0.096-1.816,0.2-2.72,0.328c-2.608,0.343-5.196,0.827-7.752,1.448
+			c-38.521,9.954-61.679,49.252-51.725,87.773c6.56,25.384,26.392,45.2,51.781,51.739c0.128,0,0.264,0.04,0.4,0.072
+			c2.763,0.689,5.562,1.224,8.384,1.6c1.864,0.232,3.728,0.28,5.6,0.368c1.248,0.064,2.4,0.248,3.704,0.248
+			c2.28,0,4.648-0.152,7.064-0.392c0.256,0,0.512-0.072,0.8-0.104c1.944-0.216,3.912-0.504,5.92-0.904
+			c0.8-0.152,1.544-0.352,2.312-0.528c1.408-0.328,2.808-0.672,4.248-1.096c1.12-0.336,2.208-0.728,3.304-1.112
+			c1.096-0.384,2.232-0.8,3.368-1.232c1.136-0.432,2.088-0.928,3.12-1.408c1.344-0.616,2.68-1.224,4-1.944h0.048
+			c7.466-3.997,14.362-8.977,20.504-14.808c1.659-1.548,3.102-3.314,4.288-5.248c6.244-10.01,10.346-21.205,12.048-32.88
+			c0.224-1.544,0.424-3.088,0.544-4.664c0.112-1.448,0.192-2.888,0.224-4.328c0-0.456,0.064-0.888,0.064-1.344
+			C232,318.928,231.888,317.888,231.84,316.8z M215.896,322.04c0,0.664-0.056,1.328-0.096,1.984
+			c-0.144,1.936-0.392,3.872-0.72,5.816c-2.99,16.633-13.317,31.033-28.112,39.2c-0.992,0.52-1.968,1.008-2.944,1.456l-0.664,0.32
+			c-4.648,2.11-9.554,3.595-14.592,4.416c-0.352,0.056-0.712,0.12-1.072,0.168c-1,0.144-1.984,0.264-2.96,0.352
+			c-1.288,0.112-2.584,0.176-3.904,0.2c-0.56,0-1.112,0-1.672,0c-1.893-0.022-3.783-0.139-5.664-0.352l-0.96-0.112
+			c-2.2-0.288-4.382-0.699-6.536-1.232c-29.962-7.669-48.034-38.175-40.366-68.137c5.067-19.798,20.517-35.264,40.31-40.351l0-0.008
+			c4.596-1.159,9.316-1.751,14.056-1.76c2.287,0.013,4.572,0.168,6.84,0.464c0.608,0.072,1.208,0.184,1.808,0.272
+			c1.728,0.272,3.44,0.616,5.128,1.048c0.552,0.144,1.104,0.272,1.648,0.424c4.254,1.228,8.349,2.952,12.2,5.136
+			c0.616,0.36,1.216,0.736,1.824,1.112c1.264,0.8,2.488,1.6,3.696,2.512c0.648,0.472,1.304,0.936,1.928,1.44
+			c1.57,1.254,3.073,2.589,4.504,4c0.568,0.576,1.088,1.208,1.64,1.808c0.92,1,1.816,2.024,2.672,3.104
+			c0.592,0.744,1.16,1.512,1.72,2.288c0.8,1.152,1.6,2.352,2.32,3.568c0.4,0.664,0.8,1.312,1.208,1.992
+			c1.032,1.899,1.951,3.857,2.752,5.864c0.32,0.8,0.592,1.6,0.88,2.4c0.52,1.472,0.968,2.96,1.36,4.464
+			c0.2,0.8,0.424,1.512,0.592,2.288c0.467,2.162,0.806,4.35,1.016,6.552c0.048,0.584,0.048,1.176,0.088,1.76
+			C215.936,318.336,215.968,320.184,215.896,322.04z"/>
+	</g>
+</g>
+<g>
+	<g>
+		<path d="M456,168h-25.16c-3.355,0.034-6.356-2.079-7.456-5.248c-2.481-7.431-5.483-14.679-8.984-21.688
+			c-1.486-3.027-0.867-6.666,1.536-9.032l17.84-17.864c9.364-9.371,9.364-24.557,0-33.928L399.76,46.28
+			c-9.371-9.364-24.557-9.364-33.928,0L348,64.104c-2.363,2.402-5.997,3.024-9.024,1.544c-7.01-3.519-14.26-6.537-21.696-9.032
+			c-3.182-1.089-5.31-4.093-5.28-7.456V24c0-13.255-10.745-24-24-24h-48c-13.255,0-24,10.745-24,24v25.16
+			c0.034,3.355-2.078,6.356-5.248,7.456c-7.432,2.494-14.68,5.51-21.688,9.024c-3.027,1.491-6.668,0.872-9.032-1.536l-17.864-17.84
+			c-9.382-9.337-24.546-9.337-33.928,0L94.288,80.216c-9.369,9.372-9.369,24.564,0,33.936l26.232,26.28
+			c3.173,3.074,8.238,2.994,11.312-0.18c2.999-3.096,3.006-8.012,0.016-11.116L105.6,102.864c-3.123-3.124-3.123-8.188,0-11.312
+			L139.552,57.6c3.124-3.123,8.188-3.123,11.312,0l17.872,17.84c7.231,7.274,18.311,9.092,27.488,4.512
+			c6.337-3.173,12.889-5.897,19.608-8.152c9.698-3.283,16.21-12.401,16.168-22.64V24c0-4.418,3.582-8,8-8h48c4.418,0,8,3.582,8,8
+			v25.16c-0.041,10.237,6.471,19.352,16.168,22.632c6.722,2.256,13.277,4.982,19.616,8.16c9.179,4.556,20.244,2.736,27.48-4.52
+			L377.136,57.6c3.124-3.123,8.188-3.123,11.312,0L422.4,91.56c3.118,3.123,3.118,8.181,0,11.304l-17.84,17.872
+			c-7.267,7.235-9.084,18.31-4.512,27.488c3.173,6.337,5.897,12.889,8.152,19.608c3.281,9.7,12.4,16.212,22.64,16.168H456
+			c4.418,0,8,3.582,8,8v48c0,4.418-3.582,8-8,8h-25.16c-10.237-0.041-19.352,6.471-22.632,16.168
+			c-2.255,6.722-4.982,13.277-8.16,19.616c-4.564,9.178-2.743,20.247,4.52,27.48l17.84,17.872c3.123,3.124,3.123,8.188,0,11.312
+			L388.44,374.4c-3.123,3.118-8.181,3.118-11.304,0l-26.288-26.232c-3.074-3.174-8.139-3.254-11.312-0.18
+			c-3.174,3.074-3.254,8.139-0.18,11.312c0.064,0.066,0.13,0.132,0.196,0.196l26.28,26.232c9.371,9.364,24.557,9.364,33.928,0
+			l33.952-33.944c9.369-9.372,9.369-24.564,0-33.936L415.896,300c-2.4-2.364-3.021-5.997-1.544-9.024
+			c3.519-7.01,6.537-14.26,9.032-21.696c1.089-3.182,4.093-5.31,7.456-5.28H456c13.255,0,24-10.745,24-24v-48
+			C480,178.745,469.255,168,456,168z"/>
+	</g>
+</g>
+<g>
+	<g>
+		<path d="M337.536,142.464c-40.638-40.553-106.434-40.553-147.072,0c-3.069,3.178-2.981,8.243,0.197,11.312
+			c3.1,2.994,8.015,2.994,11.115,0c34.135-34.596,89.852-34.969,124.448-0.834c34.596,34.135,34.969,89.852,0.834,124.448
+			c-0.276,0.28-0.554,0.558-0.834,0.834c-3.178,3.07-3.266,8.134-0.196,11.312c3.07,3.178,8.134,3.266,11.312,0.196
+			c0.066-0.064,0.132-0.13,0.196-0.196C378.089,248.898,378.089,183.102,337.536,142.464z"/>
+	</g>
+</g>
+</svg>
+
+            </div>
           </div>
         </div>
       </div>
@@ -150,11 +305,26 @@
 export default {
   data() {
     return {
-      gridData: [
-        {tag: 'div', class: '', value: ''}
-      ]
+      formSport: {
+        title: 'Отжимания'
+      }
+  //     gridData: [
+  //       {tag: 'div', class: '', value: ''}
+  //     ],
+  //     countCol: 4,
+  //     players: [
+  //       {name: 'Константин'},
+  //       {name: 'Player 2'},
+  //       {name: 'Player 3'}
+  //     ],
+
     }
-  }
+  },
+  // methods: {
+  //   addcol(count) {
+  //     console.log('count', count)
+  //   }
+  // }
 }
 </script>
 
@@ -167,81 +337,12 @@ $width-first-column-grid: 7rem
 .container-mobile
   // max-width: 320px
   // height: 568px
+  // overflow-y: auto
   width: 100%
   border: 1px solid $color-dark-shade-10
   background-color: #ffd438
   color: #e6e6e6
   padding: 0 1rem 1rem
-  overflow-y: auto
-  h2
-    @include font-how-h3
-    padding: 1rem .5rem .5rem
-
-.table-squeezings-main,
-.table-squeezings-relax,
-.table-squeezings-result,
-.table-squeezings-top-label,
-.table-squeezings-buttons,
-.table-squeezings-main-2stroke
-  display: grid
-  grid-gap: 2px
-  padding-left: 1rem
-  padding-right: 0
-  // background-color: #e2e2e2
-  // border: 1px solid #e2e2e2
-  background-color: #2a2424
-  font-family: 'Montserrat', sans-serif
-  // @include linear-gradient($direction: 180deg, $fromColor: #292c2f, $toColor: #2a2424)
-
-  .cell-input
-    display: flex
-    justify-content: center
-    align-items: center
-    min-width: 4rem
-
-
-  .cell-descr
-    // background-color: rgba(255,255,255,.1)
-    justify-content: flex-start
-  .cell-plus
-    // @include linear-gradient($direction: 180deg, $fromColor: #292c2f, $toColor: #2a2424)
-    color: #ffd438
-    font-size: 1.8rem
-    padding-top: .2rem
-    padding-right: .2rem
-  input
-    border: none
-    text-align: center
-    color: #fff
-    background-color: rgba(255,255,255,.1)
-    border-radius: 4px
-    min-width: 4rem
-    min-height: 2.4rem
-  .cell-result
-    background-color: transparent
-    color: #ffd438
-  .cell-record
-    background-color: #ffd438
-    color: #2a2424
-    position: relative
-    &:after
-      content: 'record'
-      position: absolute
-      top: -1rem
-      left: 0
-      color: green
-  // .cell-label
-  //   font-size:
-
-.table-squeezings-main,
-.table-squeezings-main-2stroke,
-.table-squeezings-relax,
-.table-squeezings-result
-  font-size: 14px
-.table-squeezings-top-label
-  padding-top: 1rem
-  font-size: 10px
-  color: #aaa
 
 .table-squeezings-top-label
   grid: repeat(1, 2rem)/$width-first-column-grid repeat(5, 1fr) // row/col
@@ -250,10 +351,14 @@ $width-first-column-grid: 7rem
 .table-squeezings-main
   grid: repeat(3, 4rem)/$width-first-column-grid repeat(5, 1fr) // row/col
   padding-bottom: .5rem
+  input
+    max-width: 5.5rem
 .table-squeezings-main-2stroke
   grid: repeat(2, 3rem)/$width-first-column-grid repeat(5, 1fr) // row/col
   padding-bottom: .5rem
   padding-top: .5rem
+  input
+    max-width: 5.5rem
   .name-1
     grid-column: 1/2
     grid-row: 1/3
@@ -263,6 +368,7 @@ $width-first-column-grid: 7rem
   .name-3
     grid-column: 1/2
     grid-row: 5/7
+
 .table-squeezings-main-2stroke.last-2stroke
   padding-bottom: 1rem
 
@@ -296,12 +402,16 @@ $width-first-column-grid: 7rem
       font-size: 1.2rem
 
 .table-squeezings-buttons
-  grid: repeat(1, 7rem)/ repeat(1, 1fr) // row/col
-  // padding-bottom: 1rem
-  padding-right: 1rem
+  grid: repeat(1, 2rem)/ repeat(1, 1fr) // row/col
+  padding-left: 0
   border-bottom-left-radius: 1rem
   border-bottom-right-radius: 1rem
-  .df
+  .buttons
+    // padding-bottom: 1rem
+    padding: 0 1rem
+    background-color: #2a2424
+    border-bottom-left-radius: 1rem
+    border-bottom-right-radius: 1rem
     display: flex
     justify-content: center
     align-items: center
@@ -314,5 +424,177 @@ $width-first-column-grid: 7rem
       padding-right: 2rem
       box-shadow: 0 16px 16px rgba(0,0,0,.06)
 
+// .table-squeezings-tabs
+//   height: 4.7rem
+//   width: 100%
+//   .tab
+//     width: calc(50% - 1rem)
+//     background-color: #2a2424
+//     border-bottom-left-radius: 2rem
+//     border-bottom-right-radius: 2rem
+
+
+</style>
+
+<style lang="scss">
+.table-with-tabs {
+  .table-squeezings-main,
+  .table-squeezings-relax,
+  .table-squeezings-result,
+  .table-squeezings-top-label,
+  .table-squeezings-buttons,
+  .table-squeezings-main-2stroke {
+    box-shadow: 0 40px 40px rgba(0,0,0,.3);
+  }
+}
+.example-table.table-with-tabs .table-squeezings-buttons {
+  background-color: #ffdd62;
+  border-bottom-right-radius: 0;
+}
+.example-table.table-with-tabs .table-squeezings-buttons .buttons {
+  position: relative;
+  border-bottom-left-radius: 0;
+  // &:before {
+  //   content: '';
+  //   position: absolute;
+  //   bottom: 0;
+  //   right: 0;
+  //   width: 5rem;
+  //   height: 2rem;
+  //   background-color: red;
+  // }  //
+  // border-bottom-right-radius: 0;
+}
+.table-squeezings-tabs {
+  display: flex;
+  justify-content: center;
+  height: 4.7rem;
+  margin-bottom: 5rem;
+}
+.tab {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // border: 1px solid red;
+
+  .content, .decor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+
+  }
+  .decor {
+    // border: 1px solid blue
+    width: calc(100% - 2.5rem);
+  }
+  .content {
+    width: 100%;
+    z-index: 99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // border: 1px solid green;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+
+  &.tab1 {
+    .decor {
+      border-bottom-left-radius: 1rem;
+      background-color: #2a2424;
+      margin-right: 2.5rem;
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: -2.5rem;
+        z-index: 99;
+        width: 5rem;
+        height: 100%;
+        background-color: #2a2424;
+        border-bottom-right-radius: 1rem;
+        transform: skewX(-25deg);
+      }
+      // &:before {
+        //   content: '';
+      //   position: absolute;
+      //   top: 0;
+      //   // right: -4.7rem;
+      //   z-index: 999;
+      //   width: 5rem;
+      //   height: calc(4.7rem / 2);
+      //   background-color: #2a2424;
+      // }
+    }
+    .content {
+      color: #ffdd62
+    }
+  }
+
+  &.tab2 {
+    width: 40%;
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: .8rem;
+      width: 3rem;
+      height: 3rem;
+      z-index: 99;
+      border-radius: 1rem;
+      background: #ffdd62;
+      // box-shadow: inset 0 16px 16px rgba(0,0,0,.16);
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      top: -1rem;
+      left: .5rem;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 1rem;
+      background: #2a2424;
+      // box-shadow: inset 0 16px 16px rgba(0,0,0,.16);
+    }
+    .decor {
+      border-bottom-right-radius: 1rem;
+      background-color: #ffdd62;
+      margin-left: 2.5rem;
+      // @include linear-gradient($direction: 180deg, $fromColor: #292c2f, $toColor: #2a2424);
+      // box-shadow: inset 0 16px 16px rgba(0,0,0,.16);
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: -2.5rem;
+        // z-index: 0;
+        width: 5rem;
+        height: 100%;
+        background-color: #ffdd62;
+        border-bottom-left-radius: 1rem;
+        transform: skewX(25deg);
+      }
+      // &:before {
+      //   content: '';
+      //   position: absolute;
+      //   top: -5rem;
+      //   // right: -4.7rem;
+      //   z-index: -1;
+      //   width: 100%;
+      //   height: 5rem;
+      //   background-color: red;
+      //   // box-shadow: 0 16px 16px rgba(0,0,0,.16);
+      // }
+    }
+    .content {
+      color: #2a2424
+    }
+  }
+
+}
 
 </style>

@@ -91,6 +91,8 @@ export default {
 $color-bg-content: rgb(248,250,252)
 
 .teleport-menu
+  @media screen and (max-width: $tableWidth)
+    opacity: .2
   &__bg-gradient
     position: fixed
     z-index: 9999
