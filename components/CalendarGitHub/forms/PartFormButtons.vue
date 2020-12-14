@@ -14,7 +14,7 @@ export default {
 
 <style lang="sass">
 .form-sport-buttons
-  grid: repeat(1, 2rem)/ repeat(1, 1fr) // row/col
+  grid: repeat(1, 6rem)/ repeat(1, 1fr) // row/col
   padding-left: 0
   border-bottom-left-radius: 1rem
   border-bottom-right-radius: 1rem

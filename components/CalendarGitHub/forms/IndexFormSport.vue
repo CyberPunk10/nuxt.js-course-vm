@@ -1,7 +1,11 @@
 <template>
   <div class="form-sport">
     <h2>{{ formSport.title }}</h2>
-    <PartFormTopLabel :count="this.formSport.countCol" @addcol="addcol"/>
+    <PartFormTopLabel
+      :count="this.formSport.countCol"
+      :mode="formSport.mode"
+      @addcol="addcol"
+    />
     <PartFormMain
       v-for="(item, index) in formSport.players" :key="index"
       :mode="formSport.mode"
@@ -71,34 +75,23 @@ export default {
 
   .cell-descr
     justify-content: flex-start
-  .cell-descr-name
-    overflow: hidden
-  .cell-plus
-    color: #ffd438
-    font-size: 1.8rem
-    padding-top: .2rem
-    padding-right: .2rem
-    p
-      font-size: 10px
-      color: #999
-  .cell-plus.jcsb,
-  .cell-plus.jcfe
-    display: flex
-    align-items: center
-    padding-right: 1rem
-  .cell-plus.jcsb
-    justify-content: space-between
-  .cell-plus.jcfe
-    justify-content: flex-end
-
-  input
+  .cell-label
+    font-size: 10px
+    color: #999
+  .input,
+  .input-transparent
     border: none
-    text-align: center
     color: #fff
-    background-color: rgba(255,255,255,.1)
-    border-radius: 4px
     min-height: 2.4rem
     min-width: 4rem
+    width: 100%
+  .input
+    background-color: rgba(255,255,255,.1)
+    border-radius: 4px
+    text-align: center
+  .input-transparent
+    background-color: transparent
+
   .cell-result
     background-color: transparent
     color: #ffd438
@@ -119,10 +112,7 @@ export default {
   // .cell-label
   //   font-size:
 
-.form-sport-top-label
-  padding-top: 1rem
-  font-size: 10px
-  color: #aaa
+
 
 .form-sport-main,
 .form-sport-main-2stroke,

@@ -2,24 +2,24 @@
   <!-- <div class="form-sport-main"></div> -->
   <div class="form-sport-main" :class="{'mode-2': mode == 2, 'form-sport-main_last': index + 1 == players.length}">
 
-    <div class="cell-input cell-descr cell-descr-name">{{ players[index].name }}</div>
+    <!-- <div class="cell-input cell-descr cell-descr-name">{{ players[index].name }}</div> -->
+    <div class="cell-input cell-descr cell-descr-name"><input class="input-transparent" type="text" v-model="name"></div>
 
     <!-- 1 ряд -->
-    <div class="cell-input"><input type="number" min="0" max="9999"></div>
-    <div class="cell-input"><input type="number" min="0" max="9999"></div>
-    <div class="cell-input"><input type="number" min="0" max="9999"></div>
-    <div class="cell-input"><input type="number" min="0" max="9999"></div>
+    <div class="cell-input"><input class="input" type="number" min="0" max="9999"></div>
+    <div class="cell-input"><input class="input" type="number" min="0" max="9999"></div>
+    <div class="cell-input"><input class="input" type="number" min="0" max="9999"></div>
+    <div class="cell-input"><input class="input" type="number" min="0" max="9999"></div>
 
     <!-- button repiat c KГ, если 2 ряда -->
     <!-- <div class="cell-input cell-plus jcsb mode-2"> -->
     <div class="btn-repeat mode-2">
-      <p>кг</p>
+      <p class="cell-label">кг</p>
       <svg
         id="Capa_1"
+        height="14" width="14"
         enable-background="new 0 0 512 512"
-        height="15"
         viewBox="0 0 512 512"
-        width="15"
         xmlns="http://www.w3.org/2000/svg">
         <g id="_x31_5_refresh">
           <path d="m504.92 229.383c-5.213-.575-26.628-2.939-29.602-3.268-14.437-116.247-113.603-208.697-236.736-208.697-131.863 0-238.582 106.707-238.582 238.582 0 131.864 106.707 238.582 238.582 238.582 69.282 0 131.939-29.528 175.765-77.25 7.796-8.489 7.234-21.692-1.255-29.488-8.489-7.797-21.692-7.234-29.488 1.255-35.991 39.19-87.576 63.742-145.022 63.742-108.539.001-196.842-88.302-196.842-196.841s88.303-196.842 196.842-196.842c96.727 0 177.381 70.131 193.789 162.216-5.804-.641-.08-.009-30.977-3.42-6.096-.673-10.621 5.523-8.126 11.125l41.987 94.272c2.472 5.55 10.007 6.382 13.631 1.505l61.539-82.844c3.656-4.922.59-11.956-5.505-12.629z" fill="#ffd438"/>
@@ -31,20 +31,19 @@
     </div>
 
     <!-- 2 ряд -->
-    <div class="cell-input mode-2"><input type="number" min="0" max="9999"></div>
-    <div class="cell-input mode-2"><input type="number" min="0" max="9999"></div>
-    <div class="cell-input mode-2"><input type="number" min="0" max="9999"></div>
-    <div class="cell-input mode-2"><input type="number" min="0" max="9999"></div>
+    <div class="cell-input mode-2"><input class="input" type="number" min="0" max="9999"></div>
+    <div class="cell-input mode-2"><input class="input" type="number" min="0" max="9999"></div>
+    <div class="cell-input mode-2"><input class="input" type="number" min="0" max="9999"></div>
+    <div class="cell-input mode-2"><input class="input" type="number" min="0" max="9999"></div>
 
     <!-- button repiat -->
     <!-- <div class="cell-input cell-plus"> -->
     <div class="btn-repeat">
       <svg
         id="Capa_1"
+        height="14" width="14"
         enable-background="new 0 0 512 512"
-        height="15"
         viewBox="0 0 512 512"
-        width="15"
         xmlns="http://www.w3.org/2000/svg">
         <g id="_x31_5_refresh">
           <path d="m504.92 229.383c-5.213-.575-26.628-2.939-29.602-3.268-14.437-116.247-113.603-208.697-236.736-208.697-131.863 0-238.582 106.707-238.582 238.582 0 131.864 106.707 238.582 238.582 238.582 69.282 0 131.939-29.528 175.765-77.25 7.796-8.489 7.234-21.692-1.255-29.488-8.489-7.797-21.692-7.234-29.488 1.255-35.991 39.19-87.576 63.742-145.022 63.742-108.539.001-196.842-88.302-196.842-196.841s88.303-196.842 196.842-196.842c96.727 0 177.381 70.131 193.789 162.216-5.804-.641-.08-.009-30.977-3.42-6.096-.673-10.621 5.523-8.126 11.125l41.987 94.272c2.472 5.55 10.007 6.382 13.631 1.505l61.539-82.844c3.656-4.922.59-11.956-5.505-12.629z" fill="#ffd438"/>
@@ -78,6 +77,13 @@ export default {
 
   data() {
     return {
+
+    }
+  },
+
+  computed: {
+    name() {
+      return this.players[this.index].name
     }
   }
 }
@@ -150,39 +156,35 @@ export default {
   input::-webkit-inner-spin-button
     -webkit-appearance: none
 
-// typical classses (вынести отдельно? часто ли нужны, пока тут)
-.jcc
-  justify-content: center
-.jcfe
-  justify-content: flex-end
-.jcsb
-  justify-content: space-between
-
 .form-sport-main
   grid: repeat(1, 4rem)/$width-first-column-grid repeat(5, 1fr) // row/col
   padding-bottom: .5rem
+  .input
+    max-width: 5.5rem
+  .btn-repeat
+    display: flex
+    align-items: center
+    justify-content: center
   .mode-2
     display: none
-  input
-    max-width: 5.5rem
 
 .form-sport-main.mode-2
   grid: repeat(2, 3rem)/$width-first-column-grid repeat(5, 1fr) // row/col
   padding-bottom: .5rem
   padding-top: .5rem
-  .mode-2
-    display: flex
   .cell-descr-name
     grid-column: 1/2
     grid-row: 1/3
+    overflow: hidden
   .btn-repeat
-    display: flex
-    align-items: center
-    justify-content: center
     padding-right: 1rem
-    p
-      font-size: 10px
-      color: #999
+    justify-content: flex-end
+
+  .btn-repeat.mode-2
+    padding-right: 1rem
+    justify-content: space-between
+  .mode-2
+    display: flex
 
 .form-sport-main.mode-2.form-sport-main_last
   padding-bottom: 1rem
