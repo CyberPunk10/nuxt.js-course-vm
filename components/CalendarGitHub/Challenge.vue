@@ -4,7 +4,9 @@
 
       <IndexFormSport :formSport="formSport"/>
 
-      <div class="example-table table-with-tabs">
+      <IndexFormSport :formSport="formSport2"/>
+
+      <div class="form-sport table-with-tabs">
         <h2>Подтягивания с утяжелением</h2>
         <div class="form-sport-top-label">
           <div class="cell-input cell-label"></div>
@@ -306,7 +308,24 @@ export default {
   data() {
     return {
       formSport: {
-        title: 'Отжимания'
+        title: 'Отжимания',
+        mode: 1,
+        countCol: 4,
+        players: [
+          {id: 1, name: 'Player 1'},
+          {id: 2, name: 'Player 2'},
+          {id: 3, name: 'Player 3'}
+        ],
+      },
+      formSport2: {
+        title: 'Подтягивания с утяжелением',
+        mode: 2,
+        countCol: 4,
+        players: [
+          {id: 1, name: 'Player 1'},
+          {id: 2, name: 'Player 2'},
+          {id: 3, name: 'Player 3'}
+        ],
       }
   //     gridData: [
   //       {tag: 'div', class: '', value: ''}
@@ -346,12 +365,24 @@ $width-first-column-grid: 7rem
 
 
 
+.form-sport-main-2stroke
+  grid: repeat(2, 3rem)/$width-first-column-grid repeat(5, 1fr) // row/col
+  padding-bottom: .5rem
+  padding-top: .5rem
+  input
+    max-width: 5.5rem
+  .name-1
+    grid-column: 1/2
+    grid-row: 1/3
+  .name-2
+    grid-column: 1/2
+    grid-row: 3/5
+  .name-3
+    grid-column: 1/2
+    grid-row: 5/7
 
-
-
-
-
-
+.form-sport-main-2stroke.last-2stroke
+  padding-bottom: 1rem
 
 
 // .form-sport-tabs
@@ -377,11 +408,11 @@ $width-first-column-grid: 7rem
     box-shadow: 0 40px 40px rgba(0,0,0,.3);
   }
 }
-.example-table.table-with-tabs .form-sport-buttons {
+.form-sport.table-with-tabs .form-sport-buttons {
   background-color: #ffdd62;
   border-bottom-right-radius: 0;
 }
-.example-table.table-with-tabs .form-sport-buttons .buttons {
+.form-sport.table-with-tabs .form-sport-buttons .buttons {
   position: relative;
   border-bottom-left-radius: 0;
   // &:before {

@@ -1,8 +1,13 @@
 <template>
-  <div class="example-table">
+  <div class="form-sport">
     <h2>{{ formSport.title }}</h2>
-    <PartFormTopLabel :count="this.countCol" @addcol="addcol"/>
-    <PartFormMain v-for="(item, index) in players" :key="index" :name="item.name"/>
+    <PartFormTopLabel :count="this.formSport.countCol" @addcol="addcol"/>
+    <PartFormMain
+      v-for="(item, index) in formSport.players" :key="index"
+      :mode="formSport.mode"
+      :index="index"
+      :players="formSport.players"
+    />
     <PartFormRelax/>
     <PartFormResult/>
     <PartFormButtons/>
@@ -19,12 +24,7 @@ export default {
   },
   data() {
     return {
-      countCol: 4,
-      players: [
-        {id: 1, name: 'Player 1'},
-        {id: 2, name: 'Player 2'},
-        {id: 3, name: 'Константин'}
-      ],
+
     }
   },
 
@@ -41,7 +41,7 @@ export default {
 
 <style lang="sass">
 
-.example-table
+.form-sport
   max-width: 30rem
   margin: 0 auto 3rem
   h2
