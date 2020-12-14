@@ -1,21 +1,11 @@
 <template>
 <div class="form-sport-result">
   <div class="cell-input cell-descr">Всего:</div>
-    <div class="cells-group">
+    <div class="cells-group"
+      v-for="(item, index) in players" :key="index"
+    >
       <p>
-        <span class="name">Player 1</span><br>
-        <span class="">21</span>
-      </p>
-    </div>
-    <div class="cells-group">
-      <p>
-        <span class="name">Player 2</span><br>
-        <span class="">21</span>
-      </p>
-    </div>
-    <div class="cells-group">
-      <p>
-        <span class="name">Player 3</span><br>
+        <span class="name">{{players[index].name}}</span><br>
         <span class="">21</span>
       </p>
     </div>
@@ -24,7 +14,24 @@
 
 <script>
 export default {
+  props: {
+    players: {
+      type: Array,
+      require: true
+    },
+  },
 
+  data() {
+    return {
+
+    }
+  },
+
+  computed: {
+    name() {
+      return this.players[this.index].name
+    }
+  }
 }
 </script>
 
@@ -32,10 +39,10 @@ export default {
 .form-sport-result
   grid: repeat(1, 5rem)/$width-first-column-grid repeat(3, 1fr) // row/col
   padding-right: 1rem
-  .cell-input
-    min-width: 3rem
-  .cell-width-x3
-    min-width: 9.2rem
+  // .cell-input
+  //   min-width: 3rem
+  // .cell-width-x3
+  //   min-width: 9.2rem
   .cells-group
     display: flex
     justify-content: center

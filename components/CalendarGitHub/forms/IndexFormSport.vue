@@ -13,8 +13,11 @@
       :players="formSport.players"
     />
     <PartFormRelax/>
-    <PartFormResult/>
+    <PartFormResult
+      :players="formSport.players"
+    />
     <PartFormButtons/>
+    <PartFormBottomTabs/>
   </div>
 </template>
 

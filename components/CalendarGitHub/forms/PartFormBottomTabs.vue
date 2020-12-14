@@ -1,59 +1,14 @@
 <template>
-  <div class="wrap">
-    <div class="container-mobile">
+   <div class="form-sport-tabs">
+    <div class="tab tab1">
+      <div class="decor"></div>
+      <div class="content">Сохранить</div>
+    </div>
 
-      <IndexFormSport :formSport="formSport"/>
-
-      <IndexFormSport :formSport="formSport2"/>
-
-      <div class="form-sport table-with-tabs">
-        <h2>Подтягивания с утяжелением</h2>
-        <div class="form-sport-top-label">
-          <div class="cell-input cell-label"></div>
-          <div class="cell-input cell-label">1</div>
-          <div class="cell-input cell-label">2</div>
-          <div class="cell-input cell-label">3</div>
-          <div class="cell-input cell-label">4</div>
-          <div class="cell-input cell-label cell-plus">+</div>
-        </div>
-
-        <div class="form-sport-result">
-          <div class="cell-input cell-descr">Всего:</div>
-          <div class="cells-group">
-            <p>
-              <span class="name">Player 1</span><br>
-              <span class="">21</span>
-            </p>
-          </div>
-          <div class="cells-group">
-            <p>
-              <span class="name">Player 2</span><br>
-              <span class="">21</span>
-            </p>
-          </div>
-          <div class="cells-group">
-            <p>
-              <span class="name">Player 3</span><br>
-              <span class="">21</span>
-            </p>
-          </div>
-        </div>
-
-        <div class="form-sport-buttons">
-          <div class="buttons">
-            <!-- <button>Сохранить</button> -->
-          </div>
-        </div>
-
-        <div class="form-sport-tabs">
-          <div class="tab tab1">
-            <div class="decor"></div>
-            <div class="content">Сохранить</div>
-          </div>
-          <div class="tab tab2">
-            <div class="decor"></div>
-            <div class="content">
-              <svg version="1.1" width="30" height="30" fill="#2a2424" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    <div class="tab tab2">
+      <div class="decor"></div>
+      <div class="content">
+        <svg version="1.1" width="30" height="30" fill="#2a2424" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 480 480" style="enable-background:new 0 0 480 480;" xml:space="preserve">
 <g>
 	<g>
@@ -150,71 +105,136 @@
 			c0.066-0.064,0.132-0.13,0.196-0.196C378.089,248.898,378.089,183.102,337.536,142.464z"/>
 	</g>
 </g>
-              </svg>
-            </div>
-          </div>
-        </div>
-
+        </svg>
       </div>
-      <p style="color: #242626">Статистика, Свой комментарий к форме, Настройки, Подсказки</p>
     </div>
+
+    <div class="tab tab2">
+      <div class="decor"></div>
+      <div class="content">
+        <p>State</p>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      formSport: {
-        title: 'Отжимания',
-        mode: 1,
-        countCol: 4,
-        players: [
-          {id: 1, name: 'Player 1'},
-          {id: 2, name: 'Player 2'},
-          {id: 3, name: 'Player 3'}
-        ],
-      },
-      formSport2: {
-        title: 'Подтягивания с утяжелением',
-        mode: 2,
-        countCol: 4,
-        players: [
-          {id: 1, name: 'Player 1'},
-          {id: 2, name: 'Player 2'},
-          {id: 3, name: 'Player 3'}
-        ],
-      }
-    }
-  },
 
-  // methods: {
-  //   addcol(count) {
-  //     console.log('count', count)
-  //   }
-  // }
 }
 </script>
 
 <style lang="sass">
-$width-first-column-grid: 7rem
-.wrap
+.table-with-tabs
+  .form-sport-main,
+  .form-sport-relax,
+  .form-sport-result,
+  .form-sport-top-label,
+  .form-sport-buttons
+    box-shadow: 0 40px 40px rgba(0,0,0,.3)
+
+.form-sport-tabs
+  display: flex
+  justify-content: center
+  height: 4.7rem
+  margin-bottom: 5rem
+
+.tab
+  position: relative
+  height: 100%
+  width: 100%
   display: flex
   justify-content: center
   align-items: center
-.container-mobile
-  // max-width: 320px
-  // height: 568px
-  // overflow-y: auto
-  width: 100%
-  border: 1px solid $color-dark-shade-10
-  background-color: #ffd438
-  color: #e6e6e6
-  padding: 0 1rem 1rem
+  // border: 1px solid red
+  .content, .decor
+    position: absolute
+    top: 0
+    left: 0
+    height: 100%
+
+  .decor
+    // border: 1px solid blue
+    width: calc(100% - 2.5rem)
+
+  .content
+    width: 100%
+    z-index: 99
+    display: flex
+    justify-content: center
+    align-items: center
+    // border: 1px solid green
+    border-bottom-left-radius: 1rem
+    border-bottom-right-radius: 1rem
+
+  &.tab1
+    .decor
+      border-bottom-left-radius: 1rem
+      background-color: #2a2424
+      margin-right: 2.5rem
+      &:after
+        content: ''
+        position: absolute
+        bottom: 0
+        right: -2.5rem
+        z-index: 99
+        width: 5rem
+        height: 100%
+        background-color: #2a2424
+        border-bottom-right-radius: 1rem
+        transform: skewX(-25deg)
+
+    .content
+      color: #ffdd6
 
 
-</style>
+  &.tab2
+    width: 40%
+    &:before
+      content: ''
+      position: absolute
+      top: 0
+      left: .8rem
+      width: 3rem
+      height: 3rem
+      z-index: 99
+      border-radius: 1rem
+      background: #ffdd62
+      // box-shadow: inset 0 16px 16px rgba(0,0,0,.16)
 
-<style lang="scss">
+    &:after
+      content: ''
+      position: absolute
+      top: -1rem
+      left: .5rem
+      width: 2rem
+      height: 2rem
+      border-radius: 1rem
+      background: #2a2424
+      // box-shadow: inset 0 16px 16px rgba(0,0,0,.16)
+
+    .decor
+      border-bottom-right-radius: 1rem
+      background-color: #ffdd62
+      margin-left: 2.5rem
+      // @include linear-gradient($direction: 180deg, $fromColor: #292c2f, $toColor: #2a2424)
+      // box-shadow: inset 0 16px 16px rgba(0,0,0,.16)
+      &:after
+        content: ''
+        position: absolute
+        bottom: 0
+        left: -2.5rem
+        // z-index: 0
+        width: 5rem
+        height: 100%
+        background-color: #ffdd62
+        border-bottom-left-radius: 1rem
+        transform: skewX(25deg)
+
+    .content
+      color: #2a2424
+
+
 
 </style>

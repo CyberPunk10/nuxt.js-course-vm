@@ -1,7 +1,7 @@
 <template>
   <div class="form-sport-buttons">
     <div class="buttons">
-      <button>Сохранить</button>
+      <!-- <button>Сохранить</button> -->
     </div>
   </div>
 </template>
@@ -14,19 +14,12 @@ export default {
 
 <style lang="sass">
 .form-sport-buttons
-  grid: repeat(1, 6rem)/ repeat(1, 1fr) // row/col
+  grid: repeat(1, 1.4rem)/ repeat(1, 1fr) // row/col
   padding-left: 0
-  border-bottom-left-radius: 1rem
-  border-bottom-right-radius: 1rem
+  background-color: #ffdd62
   .buttons
-    // padding-bottom: 1rem
-    padding: 0 1rem
-    background-color: #2a2424
-    border-bottom-left-radius: 1rem
     border-bottom-right-radius: 1rem
-    display: flex
-    justify-content: center
-    align-items: center
+    background-color: #2a2424
     button
       background-color: #ffd438
       border: none
@@ -35,4 +28,5 @@ export default {
       padding-left: 2rem
       padding-right: 2rem
       box-shadow: 0 16px 16px rgba(0,0,0,.06)
+
 </style>
