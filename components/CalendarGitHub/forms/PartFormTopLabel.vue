@@ -1,8 +1,8 @@
 <template>
-  <div class="form-sport-top-label">
-    <div class="cell-input cell-label"></div>
-    <div v-for="item in count" :key="item" class="cell-input cell-label">{{ item }}</div>
-    <div @click="$emit('addcol')" class="cell-input cell-label cell-plus">+</div>
+  <div class="form-sport-top-label" :class="{'mode-2': mode == 2}">
+    <div class="top-label"></div>
+    <div v-for="item in count" :key="item" class="top-label">{{ item }}</div>
+    <div @click="$emit('addcol')" class="btn-add-col">+</div>
   </div>
 </template>
 
@@ -10,6 +10,10 @@
 export default {
   props: {
     count: {
+      type: Number,
+      require: true
+    },
+    mode: {
       type: Number,
       require: true
     }
@@ -22,4 +26,24 @@ export default {
   grid: repeat(1, 2rem)/$width-first-column-grid repeat(5, 1fr) // row/col
   border-top-right-radius: 1rem
   border-top-left-radius: 1rem
+  padding-top: 1rem
+  font-size: 10px
+  color: #aaa
+
+  .top-label,
+  .btn-add-col
+    display: flex
+    justify-content: center
+    align-items: center
+
+  .btn-add-col
+    color: #ffd438
+    font-size: 1.8rem
+    // padding-top: .1rem
+    padding-right: .2rem
+
+.form-sport-top-label.mode-2
+  .btn-add-col
+    justify-content: flex-end
+    padding-right: 1.3rem
 </style>
