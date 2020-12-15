@@ -20,13 +20,5 @@ export default {
   .buttons
     border-bottom-right-radius: 1rem
     background-color: #2a2424
-    button
-      background-color: #ffd438
-      border: none
-      border-radius: 4px
-      height: 3rem
-      padding-left: 2rem
-      padding-right: 2rem
-      box-shadow: 0 16px 16px rgba(0,0,0,.06)
 
 </style>

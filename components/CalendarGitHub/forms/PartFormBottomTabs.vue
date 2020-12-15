@@ -2,7 +2,10 @@
    <div class="form-sport-tabs">
     <div class="tab tab1">
       <div class="decor"></div>
-      <div class="content">Сохранить</div>
+      <div class="content">
+        <!-- Сохранить -->
+        <button>Сохранить</button>
+      </div>
     </div>
 
     <div class="tab tab2">
@@ -139,101 +142,111 @@ export default {
   justify-content: center
   height: 4.7rem
   margin-bottom: 5rem
+  button
+    background-color: #ffd438
+    border: none
+    border-radius: 4px
+    height: 3rem
+    padding-left: 2rem
+    padding-right: 2rem
+    padding-bottom: 0.5rem
+    box-shadow: 0 16px 16px rgba(0,0,0,.06)
 
-.tab
-  position: relative
-  height: 100%
-  width: 100%
-  display: flex
-  justify-content: center
-  align-items: center
-  // border: 1px solid red
-  .content, .decor
-    position: absolute
-    top: 0
-    left: 0
+  .tab
+    position: relative
     height: 100%
-
-  .decor
-    // border: 1px solid blue
-    width: calc(100% - 2.5rem)
-
-  .content
     width: 100%
-    z-index: 99
     display: flex
     justify-content: center
     align-items: center
-    // border: 1px solid green
-    border-bottom-left-radius: 1rem
-    border-bottom-right-radius: 1rem
-
-  &.tab1
-    .decor
-      border-bottom-left-radius: 1rem
-      background-color: #2a2424
-      margin-right: 2.5rem
-      &:after
-        content: ''
-        position: absolute
-        bottom: 0
-        right: -2.5rem
-        z-index: 99
-        width: 5rem
-        height: 100%
-        background-color: #2a2424
-        border-bottom-right-radius: 1rem
-        transform: skewX(-25deg)
-
-    .content
-      color: #ffdd6
-
-
-  &.tab2
-    width: 40%
-    &:before
-      content: ''
+    // border: 1px solid red
+    .content, .decor
       position: absolute
       top: 0
-      left: .8rem
-      width: 3rem
-      height: 3rem
-      z-index: 99
-      border-radius: 1rem
-      background: #ffdd62
-      // box-shadow: inset 0 16px 16px rgba(0,0,0,.16)
-
-    &:after
-      content: ''
-      position: absolute
-      top: -1rem
-      left: .5rem
-      width: 2rem
-      height: 2rem
-      border-radius: 1rem
-      background: #2a2424
-      // box-shadow: inset 0 16px 16px rgba(0,0,0,.16)
+      left: 0
+      height: 100%
 
     .decor
+      // border: 1px solid blue
+      width: calc(100% - 2.5rem)
+
+    .content
+      width: 100%
+      z-index: 99
+      display: flex
+      justify-content: center
+      align-items: center
+      // border: 1px solid green
+      padding-bottom: 0.5rem
+      border-bottom-left-radius: 1rem
       border-bottom-right-radius: 1rem
-      background-color: #ffdd62
-      margin-left: 2.5rem
-      // @include linear-gradient($direction: 180deg, $fromColor: #292c2f, $toColor: #2a2424)
-      // box-shadow: inset 0 16px 16px rgba(0,0,0,.16)
+
+    &.tab1
+      .decor
+        border-bottom-left-radius: 1rem
+        background-color: #2a2424
+        margin-right: 2.5rem
+        &:after
+          content: ''
+          position: absolute
+          bottom: 0
+          right: -2.5rem
+          z-index: 99
+          width: 5rem
+          height: 100%
+          background-color: #2a2424
+          border-bottom-right-radius: 1rem
+          transform: skewX(-25deg)
+
+      .content
+        color: #ffdd6
+
+
+    &.tab2
+      width: 40%
+      &:before
+        content: ''
+        position: absolute
+        top: 0
+        left: .8rem
+        width: 3rem
+        height: 3rem
+        z-index: 99
+        border-radius: 1rem
+        background: #ffdd62
+        // box-shadow: inset 0 16px 16px rgba(0,0,0,.16)
+
       &:after
         content: ''
         position: absolute
-        bottom: 0
-        left: -2.5rem
-        // z-index: 0
-        width: 5rem
-        height: 100%
-        background-color: #ffdd62
-        border-bottom-left-radius: 1rem
-        transform: skewX(25deg)
+        top: -1rem
+        left: .5rem
+        width: 2rem
+        height: 2rem
+        border-radius: 1rem
+        background: #2a2424
+        // box-shadow: inset 0 16px 16px rgba(0,0,0,.16)
 
-    .content
-      color: #2a2424
+      .decor
+        border-bottom-right-radius: 1rem
+        background-color: #ffdd62
+        margin-left: 2.5rem
+        // @include linear-gradient($direction: 180deg, $fromColor: #292c2f, $toColor: #2a2424)
+        // box-shadow: inset 0 16px 16px rgba(0,0,0,.16)
+        &:after
+          content: ''
+          position: absolute
+          bottom: 0
+          left: -2.5rem
+          // z-index: 0
+          width: 5rem
+          height: 100%
+          background-color: #ffdd62
+          border-bottom-left-radius: 1rem
+          transform: skewX(25deg)
+
+      .content
+        color: #2a2424
 
 
 
