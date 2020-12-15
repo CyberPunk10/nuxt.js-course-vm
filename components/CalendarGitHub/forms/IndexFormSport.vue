@@ -17,6 +17,7 @@
       :players="formSport.players"
     />
     <PartFormButtons/>
+    <PartFormBottomTabs2/>
     <PartFormBottomTabs/>
   </div>
 </template>

@@ -1,59 +1,40 @@
 <template>
-  <div class="wrap">
-    <div class="container-mobile">
+   <div class="form-sport-tabs-2">
+    <div class="tab tab1">
+      <!-- <div class="decor"></div> -->
 
-      <IndexFormSport :formSport="formSport"/>
+      <svg class="svg-left-tab" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z" fill="#2a2424">
+          <!-- <animate attributeName="d" dur="10000ms" repeatCount="20" fill="freeze" calcMode="linear"
+            restart="whenNotActive"
+            values="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z;
+            M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z;">
+          </animate> -->
+        </path>
+      </svg>
 
-      <IndexFormSport :formSport="formSport2"/>
+      <div class="content">
+        <!-- Сохранить -->
+        <button>Сохранить</button>
+      </div>
 
-      <div class="form-sport table-with-tabs">
-        <h2>Подтягивания с утяжелением</h2>
-        <div class="form-sport-top-label">
-          <div class="cell-input cell-label"></div>
-          <div class="cell-input cell-label">1</div>
-          <div class="cell-input cell-label">2</div>
-          <div class="cell-input cell-label">3</div>
-          <div class="cell-input cell-label">4</div>
-          <div class="cell-input cell-label cell-plus">+</div>
-        </div>
+      <svg class="svg-right-tab" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z" fill="#2a2424">
+          <!-- <animate attributeName="d" dur="10000ms" repeatCount="20" fill="freeze" calcMode="linear"
+            restart="whenNotActive"
+            values="M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z;
+            M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z;">
+          </animate> -->
+        </path>
+      </svg>
 
-        <div class="form-sport-result">
-          <div class="cell-input cell-descr">Всего:</div>
-          <div class="cells-group">
-            <p>
-              <span class="name">Player 1</span><br>
-              <span class="">21</span>
-            </p>
-          </div>
-          <div class="cells-group">
-            <p>
-              <span class="name">Player 2</span><br>
-              <span class="">21</span>
-            </p>
-          </div>
-          <div class="cells-group">
-            <p>
-              <span class="name">Player 3</span><br>
-              <span class="">21</span>
-            </p>
-          </div>
-        </div>
+    </div>
 
-        <div class="form-sport-buttons">
-          <div class="buttons">
-            <!-- <button>Сохранить</button> -->
-          </div>
-        </div>
-
-        <div class="form-sport-tabs">
-          <div class="tab tab1">
-            <div class="decor"></div>
-            <div class="content">Сохранить</div>
-          </div>
-          <div class="tab tab2">
-            <div class="decor"></div>
-            <div class="content">
-              <svg version="1.1" width="30" height="30" fill="#2a2424" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    <div class="tab tab2">
+      <div class="content">
+        <svg version="1.1" width="30" height="30" fill="#2a2424" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 480 480" style="enable-background:new 0 0 480 480;" xml:space="preserve">
 <g>
 	<g>
@@ -150,74 +131,109 @@
 			c0.066-0.064,0.132-0.13,0.196-0.196C378.089,248.898,378.089,183.102,337.536,142.464z"/>
 	</g>
 </g>
-              </svg>
-            </div>
-          </div>
-        </div>
-
+        </svg>
       </div>
-      <p style="color: #242626">Статистика, Свой комментарий к форме, Настройки, Подсказки</p>
-
-
-
     </div>
+
+    <div class="tab tab2">
+      <div class="content">
+        <p>State</p>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      formSport: {
-        title: 'Отжимания',
-        mode: 1,
-        countCol: 4,
-        players: [
-          {id: 1, name: 'Player 1'},
-          {id: 2, name: 'Player 2'},
-          {id: 3, name: 'Player 3'}
-        ],
-      },
-      formSport2: {
-        title: 'Подтягивания с утяжелением',
-        mode: 2,
-        countCol: 4,
-        players: [
-          {id: 1, name: 'Player 1'},
-          {id: 2, name: 'Player 2'},
-          {id: 3, name: 'Player 3'}
-        ],
-      }
-    }
-  },
 
-  // methods: {
-  //   addcol(count) {
-  //     console.log('count', count)
-  //   }
-  // }
 }
 </script>
 
 <style lang="sass">
-$width-first-column-grid: 7rem
-.wrap
+.table-with-tabs
+  .form-sport-main,
+  .form-sport-relax,
+  .form-sport-result,
+  .form-sport-top-label,
+  .form-sport-buttons
+    box-shadow: 0 40px 40px rgba(0,0,0,.3)
+
+.form-sport-tabs-2
+  // position: relative
   display: flex
-  justify-content: center
-  align-items: center
-.container-mobile
-  // max-width: 320px
-  // height: 568px
-  // overflow-y: auto
-  width: 100%
-  border: 1px solid $color-dark-shade-10
-  background-color: #ffd438
-  color: #e6e6e6
-  padding: 0 1rem 1rem
+  justify-content: space-between
+  $height-tabs: 4.7rem
+  height: $height-tabs
+  margin-bottom: 5rem
+  button
+    background-color: #ffd438
+    border: none
+    border-radius: 4px
+    height: 3rem
+    padding-left: 2rem
+    padding-right: 2rem
+    padding-bottom: 0.5rem
+    box-shadow: 0 16px 16px rgba(0,0,0,.06)
+
+  .tab
+    // position: absolute
+    // left: 0
+    // top: 0
+    height: $height-tabs
+    width: 100%
+    // display: flex
+    // justify-content: center
+    // align-items: center
+
+    .content
+      // position: relative
+      width: 100%
+      height: $height-tabs
+      // z-index: 99
+      display: flex
+      justify-content: center
+      align-items: center
+      // border: 1px solid green
+      padding-bottom: 0.5rem
+
+    &.tab1
+      display: grid
+      grid: repeat(1, 1fr) / repeat(3, minmax(min-content, auto)) // row/col
+      margin-left: -20px
+      .svg-left-tab,
+      .svg-right-tab
+        // content: ''
+        // position: absolute
+        // top: -1rem
+        height: $height-tabs
+        // z-index: 99
+
+      .svg-left-tab
+        // right: 0
+        // transform: translateX(100%)
+
+      .svg-left-tab
+        // left: 0
+        -moz-transform: scale(-1, 1)
+        -o-transform: scale(-1, 1)
+        -webkit-transform: scale(-1, 1)
+        transform: scale(-1, 1)
+      .content
+        background-color: #2a2424
 
 
-</style>
+    &.tab2
+      width: 40%
 
-<style lang="scss">
+      .decor
+        border-bottom-right-radius: 1rem
+        background-color: #ffdd62
+        margin-left: 2.5rem
+
+      .content
+        color: #2a2424
+
+
 
 </style>
