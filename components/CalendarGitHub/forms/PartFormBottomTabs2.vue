@@ -3,16 +3,16 @@
     <div class="tab tab1">
       <!-- <div class="decor"></div> -->
 
-      <svg class="svg-left-tab" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- <svg class="svg-left-tab" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd"
-          d="M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z" fill="#2a2424">
+          d="M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z" fill="#2a2424"> -->
           <!-- <animate attributeName="d" dur="10000ms" repeatCount="20" fill="freeze" calcMode="linear"
             restart="whenNotActive"
             values="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z;
             M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z;">
           </animate> -->
-        </path>
-      </svg>
+        <!-- </path>
+      </svg> -->
 
       <div class="content">
         <!-- Сохранить -->
@@ -32,7 +32,31 @@
 
     </div>
 
+    <!-- tab 2 -->
     <div class="tab tab2">
+
+      <!-- <svg class="svg-left-tab" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z" fill="#2a2424"> -->
+          <!-- <animate attributeName="d" dur="10000ms" repeatCount="20" fill="freeze" calcMode="linear"
+            restart="whenNotActive"
+            values="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z;
+            M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z;">
+          </animate> -->
+        <!-- </path>
+      </svg> -->
+
+      <svg class="svg-left-tab" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z" fill="#2a2424">
+          <!-- <animate attributeName="d" dur="10000ms" repeatCount="20" fill="freeze" calcMode="linear"
+            restart="whenNotActive"
+            values="M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z;
+            M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z;">
+          </animate> -->
+        </path>
+      </svg>
+
       <div class="content">
         <svg version="1.1" width="30" height="30" fill="#2a2424" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 480 480" style="enable-background:new 0 0 480 480;" xml:space="preserve">
@@ -133,9 +157,45 @@
 </g>
         </svg>
       </div>
+
+      <svg class="svg-right-tab" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z" fill="#2a2424">
+          <!-- <animate attributeName="d" dur="10000ms" repeatCount="20" fill="freeze" calcMode="linear"
+            restart="whenNotActive"
+            values="M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z;
+            M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z;">
+          </animate> -->
+        </path>
+      </svg>
+
     </div>
 
-    <div class="tab tab2">
+    <!-- tab 3 -->
+    <div class="tab tab3">
+
+      <!-- <svg class="svg-left-tab" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z" fill="#2a2424"> -->
+          <!-- <animate attributeName="d" dur="10000ms" repeatCount="20" fill="freeze" calcMode="linear"
+            restart="whenNotActive"
+            values="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z;
+            M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z;">
+          </animate> -->
+        <!-- </path>
+      </svg> -->
+
+      <svg class="svg-left-tab" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z" fill="#2a2424">
+          <!-- <animate attributeName="d" dur="10000ms" repeatCount="20" fill="freeze" calcMode="linear"
+            restart="whenNotActive"
+            values="M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z;
+            M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z;">
+          </animate> -->
+        </path>
+      </svg>
+
       <div class="content">
         <p>State</p>
       </div>
@@ -197,43 +257,73 @@ export default {
       // border: 1px solid green
       padding-bottom: 0.5rem
 
+    .svg-right-tab,
+    .svg-left-tab
+      height: 100%
+
+    .svg-left-tab
+      -moz-transform: scale(-1, 1)
+      -o-transform: scale(-1, 1)
+      -webkit-transform: scale(-1, 1)
+      transform: scale(-1, 1)
+
     &.tab1
       display: grid
-      grid: repeat(1, 1fr) / repeat(3, minmax(min-content, auto)) // row/col
-      margin-left: -20px
-      .svg-left-tab,
+      grid: repeat(1, $height-tabs) / repeat(2, minmax(min-content, auto)) // row/col
+      z-index: 30
+      // margin-left: -20px
+      // .svg-left-tab,
       .svg-right-tab
         // content: ''
         // position: absolute
         // top: -1rem
-        height: $height-tabs
         // z-index: 99
 
-      .svg-left-tab
+      // .svg-left-tab
         // right: 0
         // transform: translateX(100%)
 
-      .svg-left-tab
-        // left: 0
-        -moz-transform: scale(-1, 1)
-        -o-transform: scale(-1, 1)
-        -webkit-transform: scale(-1, 1)
-        transform: scale(-1, 1)
       .content
+        padding-left: 1.8rem
         background-color: #2a2424
+        border-bottom-left-radius: 1rem
+
+
+    &.tab2,
+    &.tab3
+      .content
+        color: #2a2424
+        background-color: #ffc038
+      .svg-right-tab path,
+      .svg-left-tab path
+        fill: #ffc038
 
 
     &.tab2
-      width: 40%
+      display: grid
+      grid: repeat(1, $height-tabs) / repeat(3, minmax(min-content, auto)) // row/col
+      z-index: 20
 
-      .decor
+      // .content
+
+    &.tab3
+      display: grid
+      grid: repeat(1, $height-tabs) / repeat(2, minmax(min-content, auto)) // row/col
+      z-index: 10
+      .content
+        padding-right: 1.5rem
         border-bottom-right-radius: 1rem
         background-color: #ffdd62
-        margin-left: 2.5rem
+      .svg-left-tab
+        margin-right: -1px
+      .svg-left-tab path
+        fill: #ffdd62
 
-      .content
-        color: #2a2424
+</style>
 
+<style>
+.tt {
+  color: #ffdd62
 
-
+}
 </style>
