@@ -18,7 +18,6 @@
     />
     <PartFormButtons/>
     <PartFormBottomTabs2/>
-    <PartFormBottomTabs/>
   </div>
 </template>
 
@@ -56,6 +55,13 @@ export default {
     @include font-how-h3
     padding: 1rem .5rem .5rem
 
+// .form-sport-main,
+// .form-sport-relax,
+// .form-sport-result,
+// .form-sport-top-label,
+// .form-sport-buttons
+//   box-shadow: 0 40px 40px rgba(0,0,0,.2)
+
 .form-sport-top-label,
 .form-sport-main,
 .form-sport-main-2stroke,
@@ -68,7 +74,7 @@ export default {
   padding-right: 0
   background-color: #2a2424
   font-family: 'Montserrat', sans-serif
-  box-shadow: 0 10px 10px rgba(0,0,0,.2)
+  box-shadow: 0 15px 30px rgba(0,0,0,.2)
 
   .cell-input
     position: relative
@@ -115,8 +121,6 @@ export default {
       height: 10px
   // .cell-label
   //   font-size:
-
-
 
 .form-sport-main,
 .form-sport-main-2stroke,

@@ -14,10 +14,14 @@ export default {
 
 <style lang="sass">
 .form-sport-buttons
+  z-index: 999 // тень от .form-sport-tabs должна быть под этим блоком
+  position: relative
   grid: repeat(1, 1.4rem)/ repeat(1, 1fr) // row/col
   padding-left: 0
-  background-color: #ffdd62
+  background-color: #ffd4385f
+  box-shadow: 10px 0px 30px rgba(0,0,0,.2)
   .buttons
+    z-index: 10
     border-bottom-right-radius: 1rem
     background-color: #2a2424
 
