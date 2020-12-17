@@ -14,11 +14,14 @@ export default {
 
 <style lang="sass">
 .form-sport-buttons
+  z-index: 999 // тень от .form-sport-tabs должна быть под этим блоком
+  position: relative
   grid: repeat(1, 1.4rem)/ repeat(1, 1fr) // row/col
   padding-left: 0
-  background-color: #ffdd62
+  background-color: #ffd4385f
   .buttons
-    border-bottom-right-radius: 1rem
+    z-index: 10
+    border-bottom-right-radius: $borderRadiusForm
     background-color: #2a2424
 
 </style>

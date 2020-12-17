@@ -1,25 +1,14 @@
 <template>
-   <div class="form-sport-tabs-2">
-    <div class="tab tab1">
-      <!-- <div class="decor"></div> -->
-
-      <!-- <svg class="svg-left-tab" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd"
-          d="M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z" fill="#2a2424"> -->
-          <!-- <animate attributeName="d" dur="10000ms" repeatCount="20" fill="freeze" calcMode="linear"
-            restart="whenNotActive"
-            values="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z;
-            M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z;">
-          </animate> -->
-        <!-- </path>
-      </svg> -->
-
+  <div class="form-sport-tabs-2">
+    <div class="shadow"></div>
+    <!-- tab 1 -->
+    <div class="tab tab1 active">
       <div class="content">
         <!-- Сохранить -->
         <button>Сохранить</button>
       </div>
 
-      <svg class="svg-right-tab" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="svg-right-tab" preserveAspectRatio="none" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd"
           d="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z" fill="#2a2424">
           <!-- <animate attributeName="d" dur="10000ms" repeatCount="20" fill="freeze" calcMode="linear"
@@ -29,26 +18,19 @@
           </animate> -->
         </path>
       </svg>
-
     </div>
 
     <!-- tab 2 -->
     <div class="tab tab2">
+      <div class="shadow"></div>
 
-      <!-- <svg class="svg-left-tab" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="svg-left-tab" preserveAspectRatio="none" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <linearGradient id="linear-gradient-left" x1="0%" y1="80%" x2="80%" y2="60%">
+          <stop offset="0%" stop-color="#ffd438"/>
+          <stop offset="100%" stop-color="#e6c241"/>
+        </linearGradient>
         <path fill-rule="evenodd" clip-rule="evenodd"
-          d="M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z" fill="#2a2424"> -->
-          <!-- <animate attributeName="d" dur="10000ms" repeatCount="20" fill="freeze" calcMode="linear"
-            restart="whenNotActive"
-            values="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z;
-            M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z;">
-          </animate> -->
-        <!-- </path>
-      </svg> -->
-
-      <svg class="svg-left-tab" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd"
-          d="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z" fill="#2a2424">
+          d="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z" fill="url(#linear-gradient-left)">
           <!-- <animate attributeName="d" dur="10000ms" repeatCount="20" fill="freeze" calcMode="linear"
             restart="whenNotActive"
             values="M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z;
@@ -58,7 +40,57 @@
       </svg>
 
       <div class="content">
-        <svg version="1.1" width="30" height="30" fill="#2a2424" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        <svg width="26" height="26" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+
+          <path d="M488.399,492h-21.933V173.536c0-14.823-12.06-26.882-26.882-26.882H390.56c-14.823,0-26.882,12.06-26.882,26.882V492
+            h-55.692V317.825c0-14.823-12.059-26.882-26.882-26.882H232.08c-14.823,0-26.882,12.06-26.882,26.882V492h-55.692v-90.204
+            c0-14.823-12.06-26.882-26.882-26.882H73.599c-14.823,0-26.882,12.06-26.882,26.882V492H23.601c-5.523,0-10,4.477-10,10
+            s4.477,10,10,10h464.798c5.523,0,10-4.477,10-10S493.922,492,488.399,492z M129.504,492H66.716v-90.204
+            c0-3.795,3.087-6.882,6.882-6.882h49.024c3.795,0,6.882,3.087,6.882,6.882V492z M287.985,492h-62.788V317.825
+            c0-3.795,3.087-6.882,6.882-6.882h49.024c3.794,0,6.882,3.087,6.882,6.882V492z M446.466,492h-62.788V173.536
+            c0-3.795,3.087-6.882,6.882-6.882h49.024c3.795,0,6.882,3.087,6.882,6.882V492z"/>
+
+          <path d="M466.442,10.516c0.14-2.729-0.82-5.504-2.904-7.588c-2.084-2.084-4.859-3.045-7.588-2.904
+            C455.789,0.017,455.63,0,455.466,0h-60.5c-5.523,0-10,4.477-10,10s4.477,10,10,10h37.357l-98.857,98.858l-37.28-37.28
+            c-1.875-1.875-4.419-2.929-7.071-2.929c-2.652,0-5.196,1.054-7.071,2.929l-179.769,179.77c-3.905,3.905-3.905,10.237,0,14.143
+            c1.953,1.951,4.512,2.927,7.071,2.927s5.119-0.976,7.071-2.929L289.115,102.79l37.28,37.28c3.905,3.905,10.237,3.905,14.143,0
+            L446.466,34.143v33.81c0,5.523,4.477,10,10,10s10-4.477,10-10V11C466.466,10.837,466.449,10.678,466.442,10.516z"/>
+
+          <circle cx="75.64" cy="303.31" r="10"/>
+
+        </svg>
+      </div>
+
+      <svg class="svg-right-tab" preserveAspectRatio="none" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z" fill="#ffd438">
+          <!-- <animate attributeName="d" dur="10000ms" repeatCount="20" fill="freeze" calcMode="linear"
+            restart="whenNotActive"
+            values="M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z;
+            M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z;">
+          </animate> -->
+        </path>
+      </svg>
+    </div>
+
+    <!-- tab 3 -->
+    <div class="tab tab3">
+      <div class="shadow"></div>
+
+      <svg class="svg-left-tab" preserveAspectRatio="none" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z" fill="url(#linear-gradient-left)">
+          <!-- <animate attributeName="d" dur="10000ms" repeatCount="20" fill="freeze" calcMode="linear"
+            restart="whenNotActive"
+            values="M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z;
+            M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z;">
+          </animate> -->
+        </path>
+      </svg>
+
+      <div class="content">
+        <svg version="1.1" width="26" height="26" fill="#2a2424" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 480 480" style="enable-background:new 0 0 480 480;" xml:space="preserve">
 <g>
 	<g>
@@ -157,48 +189,6 @@
 </g>
         </svg>
       </div>
-
-      <svg class="svg-right-tab" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd"
-          d="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z" fill="#2a2424">
-          <!-- <animate attributeName="d" dur="10000ms" repeatCount="20" fill="freeze" calcMode="linear"
-            restart="whenNotActive"
-            values="M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z;
-            M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z;">
-          </animate> -->
-        </path>
-      </svg>
-
-    </div>
-
-    <!-- tab 3 -->
-    <div class="tab tab3">
-
-      <!-- <svg class="svg-left-tab" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd"
-          d="M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z" fill="#2a2424"> -->
-          <!-- <animate attributeName="d" dur="10000ms" repeatCount="20" fill="freeze" calcMode="linear"
-            restart="whenNotActive"
-            values="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z;
-            M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z;">
-          </animate> -->
-        <!-- </path>
-      </svg> -->
-
-      <svg class="svg-left-tab" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd"
-          d="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z" fill="#2a2424">
-          <!-- <animate attributeName="d" dur="10000ms" repeatCount="20" fill="freeze" calcMode="linear"
-            restart="whenNotActive"
-            values="M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z;
-            M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z;">
-          </animate> -->
-        </path>
-      </svg>
-
-      <div class="content">
-        <p>State</p>
-      </div>
     </div>
 
   </div>
@@ -211,21 +201,25 @@ export default {
 </script>
 
 <style lang="sass">
-.table-with-tabs
-  .form-sport-main,
-  .form-sport-relax,
-  .form-sport-result,
-  .form-sport-top-label,
-  .form-sport-buttons
-    box-shadow: 0 40px 40px rgba(0,0,0,.3)
 
 .form-sport-tabs-2
-  // position: relative
-  display: flex
-  justify-content: space-between
   $height-tabs: 4.7rem
+  $width-svg: 4.2rem
+  position: relative
+  display: grid
+  grid: repeat(1, $height-tabs) / 56% 26% 18% // row/col
+  // display: flex
+  // justify-content: space-between
   height: $height-tabs
   margin-bottom: 5rem
+  .shadow
+    position: absolute
+    top: 0
+    border-radius: 1rem
+    width: 100%
+    height: 1rem
+    box-shadow: 0 35px 35px rgba(0,0,0,.36)
+
   button
     background-color: #ffd438
     border: none
@@ -234,32 +228,24 @@ export default {
     padding-left: 2rem
     padding-right: 2rem
     padding-bottom: 0.5rem
-    box-shadow: 0 16px 16px rgba(0,0,0,.06)
+    box-shadow: 0 16px 16px rgba(0,0,0,.04)
 
   .tab
-    // position: absolute
-    // left: 0
-    // top: 0
+    position: relative
+    display: grid
     height: $height-tabs
-    width: 100%
-    // display: flex
-    // justify-content: center
-    // align-items: center
 
     .content
-      // position: relative
       width: 100%
-      height: $height-tabs
-      // z-index: 99
+      height: 100%
       display: flex
       justify-content: center
       align-items: center
-      // border: 1px solid green
-      padding-bottom: 0.5rem
 
     .svg-right-tab,
     .svg-left-tab
       height: 100%
+      width: $width-svg
 
     .svg-left-tab
       -moz-transform: scale(-1, 1)
@@ -268,21 +254,8 @@ export default {
       transform: scale(-1, 1)
 
     &.tab1
-      display: grid
-      grid: repeat(1, $height-tabs) / repeat(2, minmax(min-content, auto)) // row/col
+      grid: repeat(1, $height-tabs) / minmax(min-content, auto) $width-svg // row/col
       z-index: 30
-      // margin-left: -20px
-      // .svg-left-tab,
-      .svg-right-tab
-        // content: ''
-        // position: absolute
-        // top: -1rem
-        // z-index: 99
-
-      // .svg-left-tab
-        // right: 0
-        // transform: translateX(100%)
-
       .content
         padding-left: 1.8rem
         background-color: #2a2424
@@ -291,39 +264,54 @@ export default {
 
     &.tab2,
     &.tab3
+      .shadow
+        position: absolute
+        top: -.6rem
+        left: 0
+        right: 1rem
+        width: calc(100% - 1rem)
+        height: .5rem
+        background-color: #fff
+        box-shadow: 0 5px 20px rgba(0,0,0, .8)
+        z-index: 1
       .content
         color: #2a2424
-        background-color: #ffc038
-      .svg-right-tab path,
-      .svg-left-tab path
-        fill: #ffc038
+        width: calc(100% + 1px)
+        background-color: #fdd545
+        background-color: #ffd438
+        margin-left: -1px
+      // .svg-right-tab path,
+      // .svg-left-tab path
+      //   fill: #fdd545
 
 
     &.tab2
-      display: grid
-      grid: repeat(1, $height-tabs) / repeat(3, minmax(min-content, auto)) // row/col
+      margin-left: -2.9rem
+      grid: repeat(1, $height-tabs) / $width-svg minmax(min-content, auto) $width-svg  // row/col
       z-index: 20
 
-      // .content
-
     &.tab3
-      display: grid
-      grid: repeat(1, $height-tabs) / repeat(2, minmax(min-content, auto)) // row/col
+      margin-left: -3.5rem
+      grid: repeat(1, $height-tabs) / $width-svg minmax(min-content, auto) // row/col
       z-index: 10
       .content
         padding-right: 1.5rem
         border-bottom-right-radius: 1rem
-        background-color: #ffdd62
-      .svg-left-tab
-        margin-right: -1px
-      .svg-left-tab path
-        fill: #ffdd62
+        // background-color: #ffdd62
+      // .svg-left-tab
+      //   margin-right: -1px
+      // .svg-left-tab path
+      //   fill: #ffdd62
+
+  .tab.active
+    .content
+      padding-bottom: 0.5rem
 
 </style>
 
 <style>
 .tt {
-  color: #ffdd62
+  color: #e6c241
 
 }
 </style>

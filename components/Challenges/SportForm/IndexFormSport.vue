@@ -1,24 +1,27 @@
 <template>
   <div class="form-sport">
     <h2>{{ formSport.title }}</h2>
-    <PartFormTopLabel
-      :count="this.formSport.countCol"
-      :mode="formSport.mode"
-      @addcol="addcol"
-    />
-    <PartFormMain
-      v-for="(item, index) in formSport.players" :key="index"
-      :mode="formSport.mode"
-      :index="index"
-      :players="formSport.players"
-    />
-    <PartFormRelax/>
-    <PartFormResult
-      :players="formSport.players"
-    />
-    <PartFormButtons/>
-    <PartFormBottomTabs2/>
-    <PartFormBottomTabs/>
+    <form @submit.prevent="onSubmit">
+      <div class="shadow-form">
+        <PartFormTopLabel
+          :count="this.formSport.countCol"
+          :mode="formSport.mode"
+          @addcol="addcol"
+        />
+        <PartFormMain
+          v-for="(item, index) in formSport.players" :key="index"
+          :mode="formSport.mode"
+          :index="index"
+          :players="formSport.players"
+        />
+        <PartFormRelax/>
+        <PartFormResult
+          :players="formSport.players"
+        />
+        <PartFormButtons/>
+      </div>
+      <PartFormBottomTabs2/>
+    </form>
   </div>
 </template>
 
@@ -32,7 +35,12 @@ export default {
   },
   data() {
     return {
-
+      resultFormData: {
+        players: [
+          {id: 1, name: 'testName', result: [23,45,12]}
+        ],
+        title: 'Отжимания'
+      }
     }
   },
 
@@ -42,12 +50,22 @@ export default {
   methods: {
     addcol() {
       ++this.countCol
+    },
+    onSubmit() {
+      console.log('[onSubmit]', resultFormData)
     }
   }
 }
 </script>
 
 <style lang="sass">
+form
+  border-radius: $borderRadiusForm
+  // background-color: #fff
+  .shadow-form
+    border-radius: $borderRadiusForm
+    border-bottom-right-radius: 0
+    box-shadow: 0 30px 40px rgba(0,0,0,.3)
 
 .form-sport
   max-width: 30rem
@@ -55,6 +73,13 @@ export default {
   h2
     @include font-how-h3
     padding: 1rem .5rem .5rem
+
+// .form-sport-main,
+// .form-sport-relax,
+// .form-sport-result,
+// .form-sport-top-label,
+// .form-sport-buttons
+//   box-shadow: 0 40px 40px rgba(0,0,0,.2)
 
 .form-sport-top-label,
 .form-sport-main,
@@ -68,7 +93,7 @@ export default {
   padding-right: 0
   background-color: #2a2424
   font-family: 'Montserrat', sans-serif
-  box-shadow: 0 10px 10px rgba(0,0,0,.2)
+  // box-shadow: 0 15px 30px rgba(0,0,0,.2)
 
   .cell-input
     position: relative
@@ -115,8 +140,6 @@ export default {
       height: 10px
   // .cell-label
   //   font-size:
-
-
 
 .form-sport-main,
 .form-sport-main-2stroke,

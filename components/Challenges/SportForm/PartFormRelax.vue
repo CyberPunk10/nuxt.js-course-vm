@@ -45,7 +45,7 @@ export default {
     option
       margin: 40px
       background: #2a2424
-      color: #fff
+      color: #aaa
 
     option:not(:checked)
       background-color: #403a3a
