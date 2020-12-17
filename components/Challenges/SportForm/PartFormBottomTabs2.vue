@@ -8,7 +8,7 @@
         <button>Сохранить</button>
       </div>
 
-      <svg class="svg-right-tab" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="svg-right-tab" preserveAspectRatio="none" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd"
           d="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z" fill="#2a2424">
           <!-- <animate attributeName="d" dur="10000ms" repeatCount="20" fill="freeze" calcMode="linear"
@@ -24,7 +24,7 @@
     <div class="tab tab2">
       <div class="shadow"></div>
 
-      <svg class="svg-left-tab" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="svg-left-tab" preserveAspectRatio="none" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
         <linearGradient id="linear-gradient-left" x1="0%" y1="80%" x2="80%" y2="60%">
           <stop offset="0%" stop-color="#fdd545"/>
           <stop offset="100%" stop-color="#e6c241"/>
@@ -66,7 +66,7 @@
         </svg>
       </div>
 
-      <svg class="svg-right-tab" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="svg-right-tab" preserveAspectRatio="none" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd"
           d="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z" fill="url(#linear-gradient-right)">
           <!-- <animate attributeName="d" dur="10000ms" repeatCount="20" fill="freeze" calcMode="linear"
@@ -82,7 +82,7 @@
     <div class="tab tab3">
       <div class="shadow"></div>
 
-      <svg class="svg-left-tab" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="svg-left-tab" preserveAspectRatio="none" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd"
           d="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z" fill="url(#linear-gradient-left)">
           <!-- <animate attributeName="d" dur="10000ms" repeatCount="20" fill="freeze" calcMode="linear"
@@ -208,6 +208,7 @@ export default {
 
 .form-sport-tabs-2
   $height-tabs: 4.7rem
+  $width-svg: 4.2rem
   position: relative
   display: grid
   grid: repeat(1, $height-tabs) / 56% 26% 18% // row/col
@@ -248,6 +249,7 @@ export default {
     .svg-right-tab,
     .svg-left-tab
       height: 100%
+      width: $width-svg
 
     .svg-left-tab
       -moz-transform: scale(-1, 1)
@@ -256,7 +258,7 @@ export default {
       transform: scale(-1, 1)
 
     &.tab1
-      grid: repeat(1, $height-tabs) / repeat(2, minmax(min-content, auto)) // row/col
+      grid: repeat(1, $height-tabs) / minmax(min-content, auto) $width-svg // row/col
       z-index: 30
       .content
         padding-left: 1.8rem
@@ -278,8 +280,9 @@ export default {
         z-index: 1
       .content
         color: #2a2424
-        width: 100%
+        width: calc(100% + 1px)
         background-color: #fdd545
+        margin-left: -1px
       // .svg-right-tab path,
       // .svg-left-tab path
       //   fill: #fdd545
@@ -287,12 +290,12 @@ export default {
 
     &.tab2
       margin-left: -2.9rem
-      grid: repeat(1, $height-tabs) / minmax(min-content, min-content)  minmax(min-content, auto) minmax(min-content, min-content)  // row/col
+      grid: repeat(1, $height-tabs) / $width-svg minmax(min-content, auto) $width-svg  // row/col
       z-index: 20
 
     &.tab3
       margin-left: -3.5rem
-      grid: repeat(1, $height-tabs) / minmax(min-content, min-content) minmax(min-content, auto) // row/col
+      grid: repeat(1, $height-tabs) / $width-svg minmax(min-content, auto) // row/col
       z-index: 10
       .content
         padding-right: 1.5rem
