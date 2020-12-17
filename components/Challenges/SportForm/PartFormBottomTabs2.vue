@@ -26,12 +26,8 @@
 
       <svg class="svg-left-tab" preserveAspectRatio="none" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
         <linearGradient id="linear-gradient-left" x1="0%" y1="80%" x2="80%" y2="60%">
-          <stop offset="0%" stop-color="#fdd545"/>
+          <stop offset="0%" stop-color="#ffd438"/>
           <stop offset="100%" stop-color="#e6c241"/>
-        </linearGradient>
-        <linearGradient id="linear-gradient-right">
-          <stop offset="20%" stop-color="#fdd545"/>
-          <stop offset="100%" stop-color="#f3cc40"/>
         </linearGradient>
         <path fill-rule="evenodd" clip-rule="evenodd"
           d="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z" fill="url(#linear-gradient-left)">
@@ -68,7 +64,7 @@
 
       <svg class="svg-right-tab" preserveAspectRatio="none" viewBox="0 0 53 59" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd"
-          d="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z" fill="url(#linear-gradient-right)">
+          d="M0 0H53C43 0 39.5 4.00002 29 29.5C18.5 55 12.5 59 0 59V0Z" fill="#ffd438">
           <!-- <animate attributeName="d" dur="10000ms" repeatCount="20" fill="freeze" calcMode="linear"
             restart="whenNotActive"
             values="M0 0H27.5C27.5 10 27.5001 32 27.5 44.5C27.5 57 22.0001 59 0 59V0Z;
@@ -222,7 +218,7 @@ export default {
     border-radius: 1rem
     width: 100%
     height: 1rem
-    box-shadow: 5px 35px 35px rgba(0,0,0,.46)
+    box-shadow: 0 35px 35px rgba(0,0,0,.36)
 
   button
     background-color: #ffd438
@@ -282,6 +278,7 @@ export default {
         color: #2a2424
         width: calc(100% + 1px)
         background-color: #fdd545
+        background-color: #ffd438
         margin-left: -1px
       // .svg-right-tab path,
       // .svg-left-tab path
