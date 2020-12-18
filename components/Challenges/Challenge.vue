@@ -2,9 +2,9 @@
   <div class="wrap">
     <div class="container-mobile">
 
-      <IndexFormSport :formSport="formSport"/>
+      <IndexFormSport :formSport="formSport" class="form-sport-component"/>
 
-      <IndexFormSport :formSport="formSport2"/>
+      <IndexFormSport :formSport="formSport2" class="form-sport-component"/>
 
       <div class="form-sport table-with-tabs">
         <h2>Подтягивания с утяжелением</h2>
@@ -215,9 +215,7 @@ $width-first-column-grid: 7rem
   color: #e6e6e6
   padding: 0 1rem 1rem
 
-
-</style>
-
-<style lang="scss">
+.form-sport-component
+  margin-bottom: 5rem
 
 </style>

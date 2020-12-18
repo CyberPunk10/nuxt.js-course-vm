@@ -52,7 +52,7 @@ export default {
       ++this.countCol
     },
     onSubmit() {
-      console.log('[onSubmit]', resultFormData)
+      console.log('[onSubmit]', this.resultFormData)
     }
   }
 }
