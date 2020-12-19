@@ -5,7 +5,7 @@
       class="text-field__input"
       v-bind="$attrs"
       :value="value"
-      type="type"
+      :type="type"
       @input="$emit('input', $event.target.value)"
     >
   </div>

@@ -49,6 +49,7 @@ export default {
     align-items: center
     border: 1px solid rgba(255,255,255,.1)
     border-radius: 4px
+    user-select: none
     p
       text-align: center
     .name

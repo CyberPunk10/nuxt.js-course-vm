@@ -1,6 +1,6 @@
 <template>
   <div class="form-sport-buttons">
-    <div class="buttons">
+    <div class="buttons" :class="{bblr: activeTab != '1', bbrr: activeTab != '3'}">
       <!-- <button>Сохранить</button> -->
     </div>
   </div>
@@ -8,7 +8,12 @@
 
 <script>
 export default {
-
+  props: {
+    activeTab: {
+      type: String,
+      default: '1'
+    }
+  }
 }
 </script>
 
@@ -21,7 +26,12 @@ export default {
   background-color: #ffd4385f
   .buttons
     z-index: 10
+    background-color: $theme-color-black
+  .buttons.bblr
+    border-bottom-left-radius: $borderRadiusForm
+  .buttons.bbrr
     border-bottom-right-radius: $borderRadiusForm
-    background-color: #2a2424
+
+
 
 </style>

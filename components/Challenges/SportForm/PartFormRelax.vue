@@ -37,14 +37,14 @@ export default {
   select.cell
     border: none
     border-radius: 4px
-    padding: 3px 1rem
+    padding: 3px .5rem
     width: 100%
     background-color: rgba(255,255,255,.1)
-    color: #fff
+    color: #bbb
 
     option
       margin: 40px
-      background: #2a2424
+      background: $theme-color-black
       color: #aaa
 
     option:not(:checked)

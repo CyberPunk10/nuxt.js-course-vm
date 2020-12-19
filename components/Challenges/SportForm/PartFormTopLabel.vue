@@ -2,7 +2,7 @@
   <div class="form-sport-top-label" :class="{'mode-2': mode == 2}">
     <div class="top-label"></div>
     <div v-for="item in count" :key="item" class="top-label">{{ item }}</div>
-    <div @click="$emit('addcol')" class="btn-add-col">+</div>
+    <div @click="$emit('addcol')" class="btn-add-col"><span>+</span></div>
   </div>
 </template>
 
@@ -35,12 +35,14 @@ export default {
     display: flex
     justify-content: center
     align-items: center
-
+    user-select: none
   .btn-add-col
-    color: #ffd438
+    color: $theme-color-yellow
     font-size: 1.8rem
-    // padding-top: .1rem
     padding-right: .2rem
+    span
+      line-height: 1.8rem
+      cursor: pointer
 
 .form-sport-top-label.mode-2
   .btn-add-col

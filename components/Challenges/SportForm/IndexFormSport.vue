@@ -18,9 +18,14 @@
         <PartFormResult
           :players="formSport.players"
         />
-        <PartFormButtons/>
+        <PartFormButtons
+          :activeTab="activeTab"
+        />
       </div>
-      <PartFormBottomTabs2/>
+      <PartFormBottomTabs
+        @changeActiveTab="changeActiveTab"
+        :activeTab="activeTab"
+      />
     </form>
   </div>
 </template>
@@ -35,12 +40,11 @@ export default {
   },
   data() {
     return {
-      resultFormData: {
-        players: [
-          {id: 1, name: 'testName', result: [23,45,12]}
-        ],
-        title: 'Отжимания'
-      }
+      activeTab: '1',
+
+      // не меняет входные данные, а копирует их в новый объект,
+      // который будем менять и отправлять в БД
+      resultFormData2: this.formSport
     }
   },
 
@@ -52,7 +56,11 @@ export default {
       ++this.countCol
     },
     onSubmit() {
-      console.log('[onSubmit]', this.resultFormData)
+      console.log(this.formSport.players[0].result)
+      console.log('[onSubmit]', this.resultFormData2)
+    },
+    changeActiveTab(id) {
+      this.activeTab = id
     }
   }
 }
@@ -61,11 +69,11 @@ export default {
 <style lang="sass">
 form
   border-radius: $borderRadiusForm
-  // background-color: #fff
+  color: #bbb
   .shadow-form
     border-radius: $borderRadiusForm
     border-bottom-right-radius: 0
-    box-shadow: 0 30px 40px rgba(0,0,0,.3)
+    box-shadow: 0 30px 40px rgba(130, 100, 0,.4)
 
 .form-sport
   max-width: 30rem
@@ -91,9 +99,9 @@ form
   grid-gap: 2px
   padding-left: 1rem
   padding-right: 0
-  background-color: #2a2424
+  background-color: $theme-color-black
   font-family: 'Montserrat', sans-serif
-  // box-shadow: 0 15px 30px rgba(0,0,0,.2)
+  // box-shadow: 0 15px 30px rgba(130, 100, 0,.4)
 
   .cell-input
     position: relative
@@ -104,29 +112,31 @@ form
 
   .cell-descr
     justify-content: flex-start
+    user-select: none
   .cell-label
     font-size: 10px
     color: #999
   .input,
   .input-transparent
     border: none
-    color: #fff
     min-height: 2.4rem
     min-width: 4rem
     width: 100%
   .input
-    background-color: rgba(255,255,255,.1)
+    background-color: #403a3a
     border-radius: 4px
     text-align: center
+    color: #eee
   .input-transparent
     background-color: transparent
+    color: #bbb
 
   .cell-result
     background-color: transparent
-    color: #ffd438
+    color: $theme-color-yellow
   .cell-record
-    background-color: #ffd438
-    color: #2a2424
+    background-color: $theme-color-yellow
+    color: $theme-color-black
     position: relative
     &:before
       content: 'ок'
