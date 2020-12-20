@@ -1,17 +1,21 @@
 <template>
-  <div class="form-sport">
+  <div class="form-sport"
+    @input="input"
+    @click="click"
+  >
     <h2>{{ formSport.title }}</h2>
     <form @submit.prevent="onSubmit">
       <div class="shadow-form">
         <PartFormTopLabel
           :count="this.formSport.countCol"
           :mode="formSport.mode"
-          @addcol="addcol"
         />
         <PartFormMain
           v-for="(item, index) in formSport.players" :key="index"
+          :idForm="formSport.idForm"
+          :indexForm="indexForm"
           :mode="formSport.mode"
-          :index="index"
+          :indexPlayer="index"
           :players="formSport.players"
         />
         <PartFormRelax/>
@@ -36,6 +40,10 @@ export default {
     formSport: {
       type: Object,
       required: true
+    },
+    indexForm: {
+      type: Number,
+      require: true
     }
   },
   data() {
@@ -53,14 +61,30 @@ export default {
 
   methods: {
     addcol() {
-      ++this.countCol
+      // ++this.countCol
+      console.log('df')
     },
     onSubmit() {
-      console.log(this.formSport.players[0].result)
+      console.log(this.formSport.players)
       console.log('[onSubmit]', this.resultFormData2)
     },
     changeActiveTab(id) {
       this.activeTab = id
+    },
+    input(e) {
+      console.log('filter target', e.target)
+      this.$store.dispatch('challengeForms/input', e.target)
+      // разделяй и влавствуй! (сделать отдельные диспатчи здесь или в mutations?)
+    },
+    click(e) {
+      console.log('click', e.target)
+      // разделяй и влавствуй! (сделать отдельные диспатчи здесь или в mutations?)
+
+      if (e.target.dataset.addCol) {
+        console.log('add col on click!')
+      } else if (e.target.dataset.repeatLastResult) {
+        console.log('repeat Last Result on click!')
+      }
     }
   }
 }

@@ -2,11 +2,14 @@
   <div class="wrap">
     <div class="container-mobile">
 
-      <IndexFormSport :formSport="formSport" class="form-sport-component"/>
+      <IndexFormSport
+        v-for="(formSport, index) in allFormsSport" :key="index"
+        :formSport="formSport"
+        :indexForm="index"
+        class="form-sport-component"
+      />
 
-      <IndexFormSport :formSport="formSport2" class="form-sport-component"/>
-
-      <p style="color: #242626">Статистика, Свой комментарий к форме, Настройки, Подсказки</p>
+      <p style="color: #2a2424">Статистика, Свой комментарий к форме, Настройки, Подсказки</p>
 
     </div>
   </div>
@@ -17,27 +20,12 @@ export default {
   data() {
     return {
 
-      formSport: {
-        title: 'Отжимания',
-        mode: 1,
-        countCol: 4,
-        players: [
-          {id: 1, name: 'Player 1', result: [null, null, null, null]},
-          {id: 2, name: 'Player 2', result: [null, null, null, null]},
-          {id: 3, name: 'Player 3', result: [null, null, null, null]}
-        ],
-      },
+    }
+  },
 
-      formSport2: {
-        title: 'Подтягивания с утяжелением',
-        mode: 2,
-        countCol: 4,
-        players: [
-          {id: 1, name: 'Player 1', result: [null, null, null, null]},
-          {id: 2, name: 'Player 2', result: [null, null, null, null]},
-          {id: 3, name: 'Player 3', result: [null, null, null, null]}
-        ],
-      }
+  computed: {
+    allFormsSport () {
+      return this.$store.state.challengeForms.allFormsSport
     }
   },
 

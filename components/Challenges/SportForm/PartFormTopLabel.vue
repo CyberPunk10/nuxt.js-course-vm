@@ -2,7 +2,7 @@
   <div class="form-sport-top-label" :class="{'mode-2': mode == 2}">
     <div class="top-label"></div>
     <div v-for="item in count" :key="item" class="top-label">{{ item }}</div>
-    <div @click="$emit('addcol')" class="btn-add-col"><span>+</span></div>
+    <div class="btn-add-col"><span data-add-col="true">+</span></div>
   </div>
 </template>
 
