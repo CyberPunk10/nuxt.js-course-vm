@@ -7,10 +7,7 @@
       <div data-tab="1" class="content">
         <!-- Сохранить -->
           <!-- v-if="activeTab == 1" (внутрь button вернуть если нужно) -->
-        <button
-          @click="save"
-          data-tab="1"
-        >
+        <button data-tab="1">
           Сохранить
         </button>
         <!-- <p v-else>Начать</p> -->
@@ -199,15 +196,6 @@ export default {
     }
   },
 
-  data() {
-    return {
-
-    }
-  },
-
-  computed: {
-  },
-
   methods: {
     clickOnTab() {
       let id = event.target.dataset.tab
@@ -215,9 +203,6 @@ export default {
       if (!id) return
 
       this.$emit('changeActiveTab', id)
-    },
-    save() {
-      console.log('save')
     }
   }
 }

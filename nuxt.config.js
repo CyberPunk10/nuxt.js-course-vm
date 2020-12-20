@@ -80,3 +80,7 @@ export default {
 // Use Express with Nuxt.js
 // https://bithacker.dev/use-express-with-nuxt-js
 
+
+// CSS Grid #8 Вложенность grid-элементов (Grid Nesting)
+// https://www.youtube.com/watch?v=XP30BMpJ740
+

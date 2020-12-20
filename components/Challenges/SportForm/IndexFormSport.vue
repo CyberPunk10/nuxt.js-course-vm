@@ -1,7 +1,8 @@
 <template>
   <div class="form-sport"
-    @input="input"
+    @input="setInput"
     @click="click"
+    :data-index-form="indexForm"
   >
     <h2>{{ formSport.title }}</h2>
     <form @submit.prevent="onSubmit">
@@ -12,7 +13,6 @@
         />
         <PartFormMain
           v-for="(item, index) in formSport.players" :key="index"
-          :idForm="formSport.idForm"
           :indexForm="indexForm"
           :mode="formSport.mode"
           :indexPlayer="index"
@@ -60,10 +60,6 @@ export default {
   },
 
   methods: {
-    addcol() {
-      // ++this.countCol
-      console.log('df')
-    },
     onSubmit() {
       console.log(this.formSport.players)
       console.log('[onSubmit]', this.resultFormData2)
@@ -71,9 +67,9 @@ export default {
     changeActiveTab(id) {
       this.activeTab = id
     },
-    input(e) {
+    setInput(e) {
       console.log('filter target', e.target)
-      this.$store.dispatch('challengeForms/input', e.target)
+      this.$store.dispatch('challengeForms/setInput', e.target)
       // разделяй и влавствуй! (сделать отдельные диспатчи здесь или в mutations?)
     },
     click(e) {
@@ -81,9 +77,9 @@ export default {
       // разделяй и влавствуй! (сделать отдельные диспатчи здесь или в mutations?)
 
       if (e.target.dataset.addCol) {
-        console.log('add col on click!')
+        this.$store.dispatch('challengeForms/addCol', e.target)
       } else if (e.target.dataset.repeatLastResult) {
-        console.log('repeat Last Result on click!')
+        this.$store.dispatch('challengeForms/repeatLastResult', e.target)
       }
     }
   }
@@ -92,6 +88,7 @@ export default {
 
 <style lang="sass">
 form
+  // $min-width-input-form-sport: 4rem
   border-radius: $borderRadiusForm
   color: #bbb
   .shadow-form

@@ -60,6 +60,17 @@ export const mutations = {
     } else if (target.dataset.namePlayer) {
       player.name = target.value
     }
+  },
+
+  addCol(state, target) {
+    console.log('addCol', target)
+    const indexForm = target.closest('[data-index-form]').dataset.indexForm
+    ++state.allFormsSport[indexForm].countCol
+  },
+
+  repeatLastResult(state, target) {
+    console.log('repeat Last Result on click!')
+    console.log('repeatLastResult', target)
   }
 }
 
@@ -80,8 +91,16 @@ export const actions = {
   //   Cookies.set('jwt-token', token)
   // },
 
-  input({commit}, target) {
+  setInput({commit}, target) {
     commit('setInput', target)
+  },
+
+  addCol({commit}, target) {
+    commit('addCol', target)
+  },
+
+  repeatLastResult({commit}, target) {
+    commit('repeatLastResult', target)
   },
 
   // logout({commit}) {

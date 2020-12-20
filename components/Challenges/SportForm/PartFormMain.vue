@@ -8,8 +8,8 @@
     <div class="cell-input cell-descr cell-descr-name">
       <input
         :value="players[indexPlayer].name"
-        :data-index-form='indexForm'
-        :data-index-player='indexPlayer'
+        :data-index-form="indexForm"
+        :data-index-player="indexPlayer"
         data-name-player="true"
         class="input-transparent" type="text">
     </div>
@@ -18,32 +18,32 @@
     <div class="cell-input">
       <input
         :value="players[indexPlayer].result[0]"
-        :data-index-form='indexForm'
-        :data-index-player='indexPlayer'
+        :data-index-form="indexForm"
+        :data-index-player="indexPlayer"
         data-index-result="0"
         class="input" type="number" min="0" max="9999">
     </div>
     <div class="cell-input">
       <input
         :value="players[indexPlayer].result[1]"
-        :data-index-form='indexForm'
-        :data-index-player='indexPlayer'
+        :data-index-form="indexForm"
+        :data-index-player="indexPlayer"
         data-index-result="1"
         class="input" type="number" min="0" max="9999">
     </div>
     <div class="cell-input">
       <input
         :value="players[indexPlayer].result[2]"
-        :data-index-form='indexForm'
-        :data-index-player='indexPlayer'
+        :data-index-form="indexForm"
+        :data-index-player="indexPlayer"
         data-index-result="2"
         class="input" type="number" min="0" max="9999">
     </div>
     <div class="cell-input">
       <input
         :value="players[indexPlayer].result[3]"
-        :data-index-form='indexForm'
-        :data-index-player='indexPlayer'
+        :data-index-form="indexForm"
+        :data-index-player="indexPlayer"
         data-index-result="3"
         class="input" type="number" min="0" max="9999">
     </div>
@@ -66,8 +66,8 @@
     <div v-if="mode === 2" class="cell-input">
       <input
         :value="players[indexPlayer].result2[0]"
-        :data-index-form='indexForm'
-        :data-index-player='indexPlayer'
+        :data-index-form="indexForm"
+        :data-index-player="indexPlayer"
         data-mode-result="result2"
         data-index-result="0"
         class="input" type="number" min="0" max="9999">
@@ -75,8 +75,8 @@
     <div v-if="mode === 2" class="cell-input">
       <input
         :value="players[indexPlayer].result2[1]"
-        :data-index-form='indexForm'
-        :data-index-player='indexPlayer'
+        :data-index-form="indexForm"
+        :data-index-player="indexPlayer"
         data-mode-result="result2"
         data-index-result="1"
         class="input" type="number" min="0" max="9999">
@@ -84,8 +84,8 @@
     <div v-if="mode === 2" class="cell-input">
       <input
         :value="players[indexPlayer].result2[2]"
-        :data-index-form='indexForm'
-        :data-index-player='indexPlayer'
+        :data-index-form="indexForm"
+        :data-index-player="indexPlayer"
         data-mode-result="result2"
         data-index-result="2"
         class="input" type="number" min="0" max="9999">
@@ -93,8 +93,8 @@
     <div v-if="mode === 2" class="cell-input">
       <input
         :value="players[indexPlayer].result2[3]"
-        :data-index-form='indexForm'
-        :data-index-player='indexPlayer'
+        :data-index-form="indexForm"
+        :data-index-player="indexPlayer"
         data-mode-result="result2"
         data-index-result="3"
         class="input" type="number" min="0" max="9999">
