@@ -2,7 +2,30 @@ import Cookie from 'cookie' // for parsing
 import Cookies from 'js-cookie' // create and remove cookies
 
 export const state = () => ({
-
+  allFormsSport: [
+    {
+      idForm: 1,
+      title: 'Отжимания',
+      mode: 1,
+      countCol: 4,
+      players: [
+        {id: 1, name: 'Player 1', result: [null, null, null, null], resultAll: 0},
+        {id: 2, name: 'Player 2', result: [null, null, null, null], resultAll: 0},
+        {id: 3, name: 'Player 3', result: [null, null, null, null], resultAll: 0}
+      ],
+    },
+    {
+      idForm: 2,
+      title: 'Подтягивания с утяжелением',
+      mode: 2,
+      countCol: 4,
+      players: [
+        {id: 1, name: 'Player 1', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null]},
+        {id: 2, name: 'Player 2', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null]},
+        {id: 3, name: 'Player 3', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null]}
+      ],
+    }
+  ]
 })
 
 export const mutations = {
@@ -12,6 +35,32 @@ export const mutations = {
   // clearTokenMutation(state) {
   //   state.token = null
   // }
+  setInput(state, target) {
+    console.log(target, target.value)
+    const sportForm = state.allFormsSport[target.dataset.indexForm]
+    const player = sportForm.players[target.dataset.indexPlayer]
+
+    // set input result
+    if (target.dataset.indexResult) {
+      // set input
+      if (!target.dataset.modeResult) {
+        player.result[target.dataset.indexResult] = +target.value
+      } else if (target.dataset.modeResult === 'result2') {
+        player.result2[target.dataset.indexResult] = +target.value
+      }
+
+      // change resultAll
+      if (sportForm.mode === 1) {
+        player.resultAll = arraySum(player.result)
+      } else if (sportForm.mode === 2) {
+        player.resultAll = getResult2(player.result, player.result2)
+      }
+
+    // rename player
+    } else if (target.dataset.namePlayer) {
+      player.name = target.value
+    }
+  }
 }
 
 export const actions = {
@@ -30,6 +79,10 @@ export const actions = {
   //   commit('setTokenMutation', token)
   //   Cookies.set('jwt-token', token)
   // },
+
+  input({commit}, target) {
+    commit('setInput', target)
+  },
 
   // logout({commit}) {
   //   this.$axios.setToken(false)
@@ -63,12 +116,28 @@ export const actions = {
 }
 
 export const getters = {
+  allFormsSport: state => state.allFormsSport
   // isAuthenticated: state => Boolean(state.token),
-  // token: state => state.token
 }
 
 
 // local functions
+
+function arraySum(array){
+  let sum = 0
+  for (let i = 0; i < array.length; i++) {
+    sum += array[i]
+  }
+  return sum
+}
+
+function getResult2(arrayTop, arrayBottom){
+  let sum = 0
+  for (let i = 0; i < arrayTop.length; i++) {
+    sum += arrayTop[i] * arrayBottom[i]
+  }
+  return sum
+}
 
 // function isJwtValid(token) {
 //   if (!token) {

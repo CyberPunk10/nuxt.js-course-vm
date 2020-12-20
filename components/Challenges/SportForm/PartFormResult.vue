@@ -5,8 +5,8 @@
       v-for="(item, index) in players" :key="index"
     >
       <p>
-        <span class="name">{{players[index].name}}</span><br>
-        <span class="">21</span>
+        <span class="name">{{ players[index].name }}</span><br>
+        <span class="">{{ players[index].resultAll ? players[index].resultAll : '-' }}</span>
       </p>
     </div>
   </div>
