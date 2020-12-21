@@ -12,10 +12,9 @@
           :mode="formSport.mode"
         />
         <PartFormMain
-          v-for="(item, index) in formSport.players" :key="index"
           :indexForm="indexForm"
           :mode="formSport.mode"
-          :indexPlayer="index"
+          :countCol="this.formSport.countCol"
           :players="formSport.players"
         />
         <PartFormRelax/>
@@ -113,6 +112,7 @@ form
 .form-sport-top-label,
 .form-sport-main,
 .form-sport-main-2stroke,
+.form-sport-main-TEMP-Right,
 .form-sport-relax,
 .form-sport-result,
 .form-sport-buttons
@@ -174,6 +174,7 @@ form
 
 .form-sport-main,
 .form-sport-main-2stroke,
+.form-sport-main-TEMP-Right,
 .form-sport-relax,
 .form-sport-result
   font-size: 14px
