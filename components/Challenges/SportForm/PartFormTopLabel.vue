@@ -29,12 +29,12 @@ export default {
   border-top-right-radius: 1rem
   border-top-left-radius: 1rem
   padding-top: 1rem
-  font-size: 10px
-  color: #aaa
 
   .grid-nesting
     display: grid
     grid: repeat(1, 100%)/repeat(4, minmax(4rem, 1fr)) // row/col //min-width берется из indexFormSport.vue(.cell-input)
+    font-size: 10px
+    color: #aaa
     overflow-x: scroll
     -ms-overflow-style: none  // IE 10+
     scrollbar-width: none // Firefox
