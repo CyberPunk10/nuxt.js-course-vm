@@ -4,7 +4,7 @@ export default {
     htmlAttrs: {
       lang: 'ru'
     },
-    title: 'nuxt.js-course-vm',
+    title: 'nuxt.js-course-vm3333',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
