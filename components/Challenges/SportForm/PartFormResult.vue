@@ -52,6 +52,8 @@ export default {
     user-select: none
     p
       text-align: center
+      span
+        white-space: nowrap // запрет переноса строк
     .name
       color: #aaa
       font-size: 1.2rem

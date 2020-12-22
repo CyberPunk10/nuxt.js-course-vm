@@ -7,10 +7,6 @@
     <h2>{{ formSport.title }}</h2>
     <form @submit.prevent="onSubmit">
       <div class="shadow-form">
-        <PartFormTopLabel
-          :count="this.formSport.countCol"
-          :mode="formSport.mode"
-        />
         <PartFormMain
           :indexForm="indexForm"
           :mode="formSport.mode"
@@ -102,17 +98,12 @@ form
     @include font-how-h3
     padding: 1rem .5rem .5rem
 
-// .form-sport-main,
 // .form-sport-relax,
 // .form-sport-result,
-// .form-sport-top-label,
 // .form-sport-buttons
 //   box-shadow: 0 40px 40px rgba(0,0,0,.2)
 
-.form-sport-top-label,
 .form-sport-main,
-.form-sport-main-2stroke,
-.form-sport-main-TEMP-Right,
 .form-sport-relax,
 .form-sport-result,
 .form-sport-buttons
@@ -173,8 +164,6 @@ form
   //   font-size:
 
 .form-sport-main,
-.form-sport-main-2stroke,
-.form-sport-main-TEMP-Right,
 .form-sport-relax,
 .form-sport-result
   font-size: 14px
