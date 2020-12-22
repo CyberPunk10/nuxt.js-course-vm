@@ -239,7 +239,7 @@
         <div class="btn-add-col"><span data-add-col="true">+</span></div>
 
         <!-- other-rows -->
-        <div class="btns-repeat"
+        <div class="grid-nesting-btns"
           v-for="(player, index) in players" :key="index"
         >
           <!-- button repeat c KГ, если 2 ряда -->
@@ -257,7 +257,7 @@
           </div>
 
           <!-- button repeat -->
-          <div class="btn-repeat row-2">
+          <div class="btn-repeat" :class="{'row-2': mode == 2}">
             <svg
               height="14" width="14"
               data-repeat-last-result="true"
@@ -389,7 +389,6 @@ export default {
   padding-top: 1rem
   border-top-right-radius: 1rem
   border-top-left-radius: 1rem
-  // grid: repeat(1, 4rem)/$width-first-column-grid repeat(5, 1fr) // row/col
   grid: repeat(1, auto)/$width-first-column-grid 4fr 1fr // row/col
   padding-bottom: .5rem
 
@@ -399,15 +398,6 @@ export default {
 
   .row-typical
     height: $heightRowTypical
-  .input
-    max-width: 5.5rem
-  .btns-repeat
-    height: $heightRowTypical
-    display: flex
-    align-items: center
-    justify-content: center
-    svg
-      cursor: pointer
 
   .grid-nesting-label,
   .grid-nesting-main,
@@ -422,16 +412,24 @@ export default {
       width: 0 // ширина scrollbar'a
       height: 0 // ширина scrollbar'a
     //   background: transparent  // опционально
-
   .grid-nesting-label
     grid: repeat(1, $heightRowTopLabel)/repeat(4, minmax(4rem, 1fr)) // row/col //min-width берется из indexFormSport.vue(.cell-input)
   .grid-nesting-main
     grid: repeat(1, $heightRowTypical)/repeat(4, minmax(4rem, 1fr)) // row/col //min-width берется из indexFormSport.vue(.cell-input)
+    // border: 1px solid red
   .grid-nesting-btns
     grid: repeat(1, $heightRowTypical)/1fr // row/col
+    .btn-repeat
+      display: flex
+      justify-content: center
+      align-items: center
+      height: 100%
+      width: 100%
+    svg
+      cursor: pointer
 
-  // .cell-input.row-2
-  //   margin-bottom: 1rem
+  .cell-input.row-2
+    margin-bottom: 1rem
   // .btn-repeat.row-2
   //   margin-bottom: 1rem
 
@@ -455,6 +453,9 @@ export default {
       line-height: 1.8rem
       cursor: pointer
 
+  .input
+    max-width: 5.5rem
+
   // mode-2
   &.mode-2
     grid: repeat(1, auto)/$width-first-column-grid 4fr 1fr // row/col
@@ -464,6 +465,16 @@ export default {
       grid: repeat(2, $heightRowTypicalMode2)/repeat(4, minmax(4rem, 1fr)) // row/col //min-width берется из indexFormSport.vue(.cell-input)
     .grid-nesting-btns
       grid: repeat(2, $heightRowTypicalMode2)/1fr // row/col
+      .btn-repeat
+        display: flex
+        font-display: column
+        justify-content: center
+        align-items: center
+        height: 100%
+        width: 100%
+      .btn-repeat.mode-2
+        // padding-right: 1rem
+        justify-content: space-between
 
     .row-typical
       height: $heightRowTypicalMode2ForNameColAndBtnsCol
@@ -477,16 +488,14 @@ export default {
     .cell-label
       user-select: none
     .btn-repeat
-      padding-right: 1rem
+      // padding-right: 1rem
       justify-content: flex-end
 
     .btn-add-col
       justify-content: flex-end
       padding-right: 1.3rem
 
-    .btn-repeat.mode-2
-      padding-right: 1rem
-      justify-content: space-between
+
 
 
 
