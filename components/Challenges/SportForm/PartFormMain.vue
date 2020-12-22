@@ -57,6 +57,7 @@
                 :data-index-form="indexForm"
                 :data-index-player="index"
                 :data-index-result="indexResult2"
+                data-result2="true"
                 class="input" type="number" min="0" max="9999">
             </div>
           </div>

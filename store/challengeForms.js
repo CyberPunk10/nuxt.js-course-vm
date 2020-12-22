@@ -43,9 +43,9 @@ export const mutations = {
     // set input result
     if (target.dataset.indexResult) {
       // set input
-      if (!target.dataset.modeResult) {
+      if (!target.dataset.result2) {
         player.result[target.dataset.indexResult] = +target.value
-      } else if (target.dataset.modeResult === 'result2') {
+      } else if (target.dataset.result2) {
         player.result2[target.dataset.indexResult] = +target.value
       }
 
