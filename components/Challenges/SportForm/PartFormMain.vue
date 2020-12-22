@@ -5,7 +5,7 @@
       <!-- name-col -->
       <div class="name-col">
         <!-- top-label-row -->
-        <div class="top-label"></div>
+        <div class="top-row top-label"></div>
 
         <!-- other-rows -->
         <!-- name -->
@@ -24,92 +24,51 @@
       <!-- main-col -->
       <div class="main-col">
         <!-- top-label-row -->
-        <div class="grid-nesting-label">
+        <div class="top-row grid-nesting-label">
           <div v-for="item in countCol" :key="item" class="top-label">{{ item }}</div>
         </div>
 
         <!-- other-rows -->
-        <div class="grid-nesting-main"
+        <div class="main-col-grids-nesting"
           v-for="(player, index) in players" :key="index"
         >
+
           <!-- 1 ряд -->
-          <div class="cell-input">
-            <input
-              :value="players[index].result[0]"
-              :data-index-form="indexForm"
-              :data-index-player="index"
-              data-index-result="0"
-              class="input" type="number" min="0" max="9999">
-          </div>
-          <div class="cell-input">
-            <input
-              :value="players[index].result[1]"
-              :data-index-form="indexForm"
-              :data-index-player="index"
-              data-index-result="1"
-              class="input" type="number" min="0" max="9999">
-          </div>
-          <div class="cell-input">
-            <input
-              :value="players[index].result[2]"
-              :data-index-form="indexForm"
-              :data-index-player="index"
-              data-index-result="2"
-              class="input" type="number" min="0" max="9999">
-          </div>
-          <div class="cell-input">
-            <input
-              :value="players[index].result[3]"
-              :data-index-form="indexForm"
-              :data-index-player="index"
-              data-index-result="3"
-              class="input" type="number" min="0" max="9999">
+          <div class="grid-nesting-main-row-1">
+            <div class="cell-input"
+              v-for="(resultItem, indexResult) in players[index].result" :key="indexResult"
+            >
+              <input
+                :value="players[index].result[indexResult]"
+                :data-index-form="indexForm"
+                :data-index-player="index"
+                :data-index-result="indexResult"
+                class="input" type="number" min="0" max="9999">
+            </div>
           </div>
 
           <!-- 2 ряд -->
-          <div v-if="mode === 2" class="cell-input row-2">
-            <input
-              :value="players[index].result2[0]"
-              :data-index-form="indexForm"
-              :data-index-player="index"
-              data-mode-result="result2"
-              data-index-result="0"
-              class="input" type="number" min="0" max="9999">
+          <div v-if="mode === 2" class="grid-nesting-main-row-2">
+            <div class="cell-input"
+              v-for="(resultItem2, indexResult2) in players[index].result2" :key="indexResult2"
+            >
+              <input
+                :value="players[index].result2[indexResult2]"
+                :data-index-form="indexForm"
+                :data-index-player="index"
+                :data-index-result="indexResult2"
+                class="input" type="number" min="0" max="9999">
+            </div>
           </div>
-          <div v-if="mode === 2" class="cell-input row-2">
-            <input
-              :value="players[index].result2[1]"
-              :data-index-form="indexForm"
-              :data-index-player="index"
-              data-mode-result="result2"
-              data-index-result="1"
-              class="input" type="number" min="0" max="9999">
-          </div>
-          <div v-if="mode === 2" class="cell-input row-2">
-            <input
-              :value="players[index].result2[2]"
-              :data-index-form="indexForm"
-              :data-index-player="index"
-              data-mode-result="result2"
-              data-index-result="2"
-              class="input" type="number" min="0" max="9999">
-          </div>
-          <div v-if="mode === 2" class="cell-input row-2">
-            <input
-              :value="players[index].result2[3]"
-              :data-index-form="indexForm"
-              :data-index-player="index"
-              data-mode-result="result2"
-              data-index-result="3"
-              class="input" type="number" min="0" max="9999">
-          </div>
+
         </div>
+
       </div>
 
       <!-- btns-col -->
       <div class="btns-col">
         <!-- top-label-row -->
-        <div class="btn-add-col"><span data-add-col="true">+</span></div>
+        <div class="top-row btn-add-col"><span data-add-col="true">+</span></div>
 
         <!-- other-rows -->
         <div class="grid-nesting-btns"
@@ -183,73 +142,15 @@ export default {
 
   }
 }
-
-// export default {
-//   props: {
-//     countCol: {
-//       type: Number,
-//       require: true
-//     },
-//     players: {
-//       type: Array,
-//       require: true
-//     }
-//   },
-
-//   data() {
-//     return {
-
-//     }
-//   },
-
-//   async mounted() {
-//     const $el = document.querySelector('.form-sport-main')
-
-//     const players = this.players
-//     const countPlayers = players.length
-//     const countCol = this.countCol
-
-//     $el.style.grid = `repeat(${ countPlayers }, 4rem)/70px repeat(${ countCol + 1 }, 1fr)`
-
-//     // const calendarGraph = this.calendarGraph
-
-//     let resultHtml = ``
-
-
-//     createRow()
-
-//     function createRow() {
-//       for (let i = 0; i < countPlayers; i++) {
-//         resultHtml += `
-//           <div class="cell-input cell-descr cell-descr-name">${players[i].name}</div>
-//           ${ createInputs() }
-//           <div class="cell-input cell-plus"></div>
-//         `
-//       }
-//     }
-//     function createInputs() {
-//       let html = ''
-//       for (let i = 0; i < countCol; i++) {
-//         html += `
-//           <div class="cell-input"><input type="text" value=""></div>
-//         `
-//       }
-//       return html
-//     }
-
-//     $el.innerHTML = resultHtml
-//   }
-// }
 </script>
 
 <style lang="sass">
-
 .form-sport-main
   // vars
   $heightRowTopLabel: 2rem
   $heightRowTypical: 4rem
-  $heightRowTypicalMode2: 3.5rem
-  $heightRowTypicalMode2ForNameColAndBtnsCol: calc(#{$heightRowTypicalMode2} * 2)
+  $heightRowTypicalMode2: 3rem
+  $heightRowTypicalMode2ForNameCol: calc(#{$heightRowTypicalMode2} * 2)
 
   // Убрать стрелочки с <input type=“number”>
   input[type='number']
@@ -264,15 +165,8 @@ export default {
   grid: repeat(1, auto)/$width-first-column-grid 4fr 1fr // row/col
   padding-bottom: .5rem
 
-  // .name-col,
-  // .main-col,
-  // .btns-col
-
-  .grid-nesting-label,
-  .grid-nesting-main,
-  .grid-nesting-btns
-    display: grid
-    grid-gap: 2px
+  .main-col
+    // включаем возможность скроллить, но отключаем видимость скролла
     overflow-x: scroll
     -ms-overflow-style: none  // IE 10+
     scrollbar-width: none // Firefox
@@ -280,10 +174,25 @@ export default {
     &::-webkit-scrollbar // chrome based
       width: 0 // ширина scrollbar'a
       height: 0 // ширина scrollbar'a
-    //   background: transparent  // опционально
+      background: transparent  // опционально
+
+
+  // .main-col-grids-nesting
+  //   .grid-nesting-main-row-2
+
+  .grid-nesting-label,
+  .grid-nesting-main-row-1,
+  .grid-nesting-main-row-2,
+  .grid-nesting-btns
+    display: grid
+    grid-gap: 2px
+  .grid-nesting-btns
+    grid-gap: 0
+
   .grid-nesting-label
     grid: repeat(1, $heightRowTopLabel)/repeat(4, minmax(4rem, 1fr)) // row/col //min-width берется из indexFormSport.vue(.cell-input)
-  .grid-nesting-main
+  .grid-nesting-main-row-1,
+  .grid-nesting-main-row-2
     grid: repeat(1, $heightRowTypical)/repeat(4, minmax(4rem, 1fr)) // row/col //min-width берется из indexFormSport.vue(.cell-input)
     // border: 1px solid red
   .grid-nesting-btns
@@ -297,9 +206,6 @@ export default {
     svg
       cursor: pointer
 
-  .cell-input.row-2
-    margin-bottom: 1rem
-
   .top-label,
   .btn-add-col
     display: flex
@@ -308,14 +214,13 @@ export default {
     user-select: none
     height: $heightRowTopLabel
   .top-label
-    font-size: 10px
+    font-size: 1rem
     line-height: 1.8rem
     color: #aaa
   .btn-add-col
     color: $theme-color-yellow
     font-size: 1.8rem
     padding-right: .2rem
-    height: $heightRowTopLabel
     span
       line-height: 1.8rem
       cursor: pointer
@@ -329,11 +234,21 @@ export default {
 
   // mode-2
   &.mode-2
-    grid: repeat(1, auto)/$width-first-column-grid 4fr 1fr // row/col
-    padding-bottom: .5rem
+    padding-bottom: 0
+    .top-row
+      margin-bottom: .5rem
+    .grid-nesting-main-row-1,
+    .grid-nesting-main-row-2
+      grid: repeat(1, $heightRowTypicalMode2)/repeat(4, minmax(4rem, 1fr)) // row/col //min-width берется из indexFormSport.vue(.cell-input)
 
-    .grid-nesting-main
-      grid: repeat(2, $heightRowTypicalMode2)/repeat(4, minmax(4rem, 1fr)) // row/col //min-width берется из indexFormSport.vue(.cell-input)
+    .cell-descr-name
+      height: $heightRowTypicalMode2ForNameCol
+
+    .cell-descr-name,
+    .grid-nesting-main-row-2,
+    .grid-nesting-btns
+      margin-bottom: 1rem
+
     .grid-nesting-btns
       grid: repeat(2, $heightRowTypicalMode2)/1fr // row/col
       .btn-repeat
@@ -343,14 +258,10 @@ export default {
         height: 100%
         width: 100%
         padding-right: 1rem
-        padding-bottom: 1rem
       .btn-repeat.mode-2
-        padding-bottom: 0
         justify-content: space-between
 
-    .cell-descr-name
-      height: $heightRowTypicalMode2ForNameColAndBtnsCol
-    .cell-label
+    .cell-label // кг
       user-select: none
 
     .btn-add-col
