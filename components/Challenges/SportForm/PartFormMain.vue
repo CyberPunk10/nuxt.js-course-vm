@@ -257,7 +257,7 @@
           </div>
 
           <!-- button repeat -->
-          <div class="btn-repeat" :class="{'row-2': mode == 2}">
+          <div class="btn-repeat">
             <svg
               height="14" width="14"
               data-repeat-last-result="true"
@@ -467,19 +467,18 @@ export default {
       grid: repeat(2, $heightRowTypicalMode2)/1fr // row/col
       .btn-repeat
         display: flex
-        font-display: column
-        justify-content: center
+        justify-content: flex-end
         align-items: center
         height: 100%
         width: 100%
+        padding-right: 1rem
+        padding-bottom: 1rem
       .btn-repeat.mode-2
-        // padding-right: 1rem
+        padding-bottom: 0
         justify-content: space-between
 
     .row-typical
-      height: $heightRowTypicalMode2ForNameColAndBtnsCol
-    .btns-repeat
-      height: $heightRowTypicalMode2ForNameColAndBtnsCol
+      height: $heightRowTypicalMode2ForNameColAndBtnsCol // используется разово, лишний класс вроде
 
     .cell-descr-name
       grid-column: 1/2
@@ -487,9 +486,6 @@ export default {
       overflow: hidden
     .cell-label
       user-select: none
-    .btn-repeat
-      // padding-right: 1rem
-      justify-content: flex-end
 
     .btn-add-col
       justify-content: flex-end
