@@ -7,7 +7,6 @@ export const state = () => ({
       idForm: 1,
       title: 'Отжимания',
       mode: 1,
-      countCol: 4,
       players: [
         {id: 1, name: 'Player 1', result: [null, null, null, null], resultAll: 0},
         {id: 2, name: 'Player 2', result: [null, null, null, null], resultAll: 0},
@@ -18,7 +17,6 @@ export const state = () => ({
       idForm: 2,
       title: 'Подтягивания с утяжелением',
       mode: 2,
-      countCol: 4,
       players: [
         {id: 1, name: 'Player 1', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null]},
         {id: 2, name: 'Player 2', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null]},
@@ -43,9 +41,9 @@ export const mutations = {
     // set input result
     if (target.dataset.indexResult) {
       // set input
-      if (!target.dataset.modeResult) {
+      if (!target.dataset.result2) {
         player.result[target.dataset.indexResult] = +target.value
-      } else if (target.dataset.modeResult === 'result2') {
+      } else if (target.dataset.result2) {
         player.result2[target.dataset.indexResult] = +target.value
       }
 
@@ -63,9 +61,17 @@ export const mutations = {
   },
 
   addCol(state, target) {
-    console.log('addCol', target)
+    // console.log('addCol', target)
     const indexForm = target.closest('[data-index-form]').dataset.indexForm
-    ++state.allFormsSport[indexForm].countCol
+    const targetForm = state.allFormsSport[indexForm]
+
+    targetForm.players.forEach(item => {
+      item.result.push(null)
+
+      if(item.result2) {
+        item.result2.push(null)
+      }
+    });
   },
 
   repeatLastResult(state, target) {
