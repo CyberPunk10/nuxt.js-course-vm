@@ -10,7 +10,6 @@
         <PartFormMain
           :indexForm="indexForm"
           :mode="formSport.mode"
-          :countCol="this.formSport.countCol"
           :players="formSport.players"
         />
         <PartFormRelax/>

@@ -24,8 +24,8 @@
       <!-- main-col -->
       <div class="main-col">
         <!-- top-label-row -->
-        <div class="top-row grid-nesting-label">
-          <div v-for="item in countCol" :key="item" class="top-label">{{ item }}</div>
+        <div class="top-row grid-nesting-label" :style="styleGridTemplateColumns">
+          <div v-for="(item, index) in players[0].result.length" :key="index" class="top-label">{{ ++index }}</div>
         </div>
 
         <!-- other-rows -->
@@ -34,7 +34,7 @@
         >
 
           <!-- 1 ряд -->
-          <div class="grid-nesting-main-row-1">
+          <div class="grid-nesting-main-row-1" :style="styleGridTemplateColumns">
             <div class="cell-input"
               v-for="(resultItem, indexResult) in players[index].result" :key="indexResult"
             >
@@ -48,7 +48,7 @@
           </div>
 
           <!-- 2 ряд -->
-          <div v-if="mode === 2" class="grid-nesting-main-row-2">
+          <div v-if="mode === 2" class="grid-nesting-main-row-2" :style="styleGridTemplateColumns">
             <div class="cell-input"
               v-for="(resultItem2, indexResult2) in players[index].result2" :key="indexResult2"
             >
@@ -122,11 +122,7 @@ export default {
     players: {
       type: Array,
       require: true
-    },
-    countCol: {
-      type: Number,
-      require: true
-    },
+    }
   },
 
   data() {
@@ -136,7 +132,11 @@ export default {
   },
 
   computed: {
-
+    styleGridTemplateColumns: function () {
+        return {
+          gridTemplateColumns: `repeat(${this.players[0].result.length}, minmax(4rem, 1fr))`
+        }
+      }
   },
 
   methods: {
@@ -168,14 +168,14 @@ export default {
 
   .main-col
     // включаем возможность скроллить, но отключаем видимость скролла
-    overflow-x: scroll
+    overflow-x: auto
     -ms-overflow-style: none  // IE 10+
     scrollbar-width: none // Firefox
     scrollbar-height: none // Firefox
     &::-webkit-scrollbar // chrome based
-      width: 0 // ширина scrollbar'a
-      height: 0 // ширина scrollbar'a
-      background: transparent  // опционально
+      width: 3 // ширина scrollbar'a
+      height: 3 // ширина scrollbar'a
+      // background: transparent  // опционально
 
 
   // .main-col-grids-nesting
@@ -194,7 +194,8 @@ export default {
     grid: repeat(1, $heightRowTopLabel)/repeat(4, minmax(4rem, 1fr)) // row/col //min-width берется из indexFormSport.vue(.cell-input)
   .grid-nesting-main-row-1,
   .grid-nesting-main-row-2
-    grid: repeat(1, $heightRowTypical)/repeat(4, minmax(4rem, 1fr)) // row/col //min-width берется из indexFormSport.vue(.cell-input)
+    // grid: repeat(1, $heightRowTypical)/repeat(4, minmax(4rem, 1fr)) // row/col //min-width берется из indexFormSport.vue(.cell-input)
+    grid-template-rows: repeat(1, $heightRowTypical)
     // border: 1px solid red
   .grid-nesting-btns
     grid: repeat(1, $heightRowTypical)/1fr // row/col
