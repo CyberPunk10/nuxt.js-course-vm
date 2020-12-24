@@ -330,7 +330,7 @@ export default {
 <style>
 .tt {
   /* spacial for shadow */
-  color: rgb(130, 100, 0);
+  color: rgb(255, 212, 56);
 
   color: rgb(130, 100, 0)
 

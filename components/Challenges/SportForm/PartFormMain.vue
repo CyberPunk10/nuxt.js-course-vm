@@ -22,7 +22,7 @@
       </div>
 
       <!-- main-col -->
-      <div class="main-col">
+      <div class="main-col layout-scrollbar-sport-form layout-cell-sport-form">
         <!-- top-label-row -->
         <div class="top-row grid-nesting-label" :style="styleGridTemplateColumns">
           <div v-for="(item, index) in players[0].result.length" :key="index" class="top-label">{{ ++index }}</div>
@@ -128,7 +128,7 @@ export default {
   data() {
     return {
 
-    }
+      }
   },
 
   computed: {
@@ -141,7 +141,7 @@ export default {
 
   methods: {
 
-  }
+    }
 }
 </script>
 
@@ -160,23 +160,29 @@ export default {
   input::-webkit-inner-spin-button
     -webkit-appearance: none
 
-  padding-top: 1rem
   border-top-right-radius: 1rem
   border-top-left-radius: 1rem
   grid: repeat(1, auto)/$width-first-column-grid 4fr 1fr // row/col
-  padding-bottom: .5rem
+  grid-gap: 0
+  // padding-bottom: .5rem
+  .top-row
+    padding-top: 1rem
+
+  .name-col,
+  .main-col,
+  .btns-col
+    padding-bottom: .5rem
 
   .main-col
     // включаем возможность скроллить, но отключаем видимость скролла
-    overflow-x: auto
-    -ms-overflow-style: none  // IE 10+
-    scrollbar-width: none // Firefox
-    scrollbar-height: none // Firefox
-    &::-webkit-scrollbar // chrome based
-      width: 3 // ширина scrollbar'a
-      height: 3 // ширина scrollbar'a
-      // background: transparent  // опционально
-
+    overflow-x: scroll
+    // -ms-overflow-style: none  // IE 10+
+    // scrollbar-width: none // Firefox
+    // scrollbar-height: none // Firefox
+    // &::-webkit-scrollbar // chrome based
+    //   width: 8px // ширина scrollbar'a
+    //   height: 8px // ширина scrollbar'a
+    //   // background: transparent  // опционально
 
   // .main-col-grids-nesting
   //   .grid-nesting-main-row-2
@@ -223,8 +229,10 @@ export default {
     color: $theme-color-yellow
     font-size: 1.8rem
     padding-right: .2rem
+    margin-top: 1rem
+    padding-top: 0
     span
-      line-height: 1.8rem
+      line-height: $heightRowTopLabel
       cursor: pointer
 
   .input
@@ -234,11 +242,19 @@ export default {
     overflow: hidden
     height: $heightRowTypical
 
+  .btns-col
+    box-shadow: 0 0 10px rgba(255, 212, 56,.12)
+
   // mode-2
   &.mode-2
     padding-bottom: 0
     .top-row
       margin-bottom: .5rem
+    .name-col,
+    .main-col,
+    .btns-col
+      padding-bottom: 0
+
     .grid-nesting-main-row-1,
     .grid-nesting-main-row-2
       grid: repeat(1, $heightRowTypicalMode2)/repeat(4, minmax(4rem, 1fr)) // row/col //min-width берется из indexFormSport.vue(.cell-input)
@@ -265,6 +281,7 @@ export default {
 
     .cell-label // кг
       user-select: none
+      padding-left: .2rem
 
     .btn-add-col
       justify-content: flex-end
