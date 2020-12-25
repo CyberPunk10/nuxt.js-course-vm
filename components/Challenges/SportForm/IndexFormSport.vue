@@ -107,7 +107,6 @@ form
 .form-sport-result,
 .form-sport-buttons
   display: grid
-  grid-gap: 2px
   padding-left: 1rem
   padding-right: 0
   background-color: $theme-color-black

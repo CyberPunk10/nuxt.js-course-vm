@@ -66,7 +66,7 @@
   --scrollbar-track-color-sport-form: transparent;
   --scrollbar-color-sport-form: #403a3a;
   --scrollbar-color-hover-sport-form: #494444;
-  --scrollbar-color-active-sport-form: #524b4b;
+  --scrollbar-color-active-sport-form: #494444;
 }
 
 /* Use .layout-scrollbar-obtrusive to only use overflow if scrollbars don’t overlay */
