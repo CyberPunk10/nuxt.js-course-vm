@@ -105,7 +105,7 @@
           </div>
         </div>
 
-        <div class="box-shadow"></div>
+        <div class="box-shadow active"></div>
       </div>
     </div>
   </div>
@@ -180,18 +180,7 @@ export default {
     padding-bottom: .5rem
 
   .main-col
-    // включаем возможность скроллить, но отключаем видимость скролла
     overflow-x: scroll
-    // -ms-overflow-style: none  // IE 10+
-    // scrollbar-width: none // Firefox
-    // scrollbar-height: none // Firefox
-    // &::-webkit-scrollbar // chrome based
-    //   width: 8px // ширина scrollbar'a
-    //   height: 8px // ширина scrollbar'a
-    //   // background: transparent  // опционально
-
-  // .main-col-grids-nesting
-  //   .grid-nesting-main-row-2
 
   .grid-nesting-label,
   .grid-nesting-main-row-1,
