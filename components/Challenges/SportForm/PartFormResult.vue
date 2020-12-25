@@ -50,6 +50,13 @@ export default {
     border: 1px solid rgba(255,255,255,.1)
     border-radius: 4px
     user-select: none
+    margin-left: 1px
+    margin-right: 1px
+    &:nth-child(2)
+      margin-left: 0
+    &:last-child
+      margin-right: 0
+
     p
       text-align: center
       span

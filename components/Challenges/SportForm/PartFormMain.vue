@@ -172,7 +172,7 @@ export default {
   grid-gap: 0
   // padding-bottom: .5rem
   .top-row
-    padding-top: 1rem
+    margin-top: 1rem
 
   .name-col,
   .main-col,
@@ -224,8 +224,6 @@ export default {
     color: $theme-color-yellow
     font-size: 1.8rem
     padding-right: .2rem
-    margin-top: 1rem
-    padding-top: 0
     span
       line-height: $heightRowTopLabel
       cursor: pointer
