@@ -1,5 +1,6 @@
 import Cookie from 'cookie' // for parsing
 import Cookies from 'js-cookie' // create and remove cookies
+import Vue from 'vue'
 
 export const state = () => ({
   allFormsSport: [
@@ -33,10 +34,13 @@ export const mutations = {
   // clearTokenMutation(state) {
   //   state.token = null
   // }
-  setInput(state, target) {
+  setInput(state, data) {
+    const indexForm = data.indexForm
+    const target = data.target
+    const targetForm = state.allFormsSport[indexForm]
+    const player = targetForm.players[target.dataset.indexPlayer]
+
     console.log(target, target.value)
-    const sportForm = state.allFormsSport[target.dataset.indexForm]
-    const player = sportForm.players[target.dataset.indexPlayer]
 
     // set input result
     if (target.dataset.indexResult) {
@@ -48,9 +52,9 @@ export const mutations = {
       }
 
       // change resultAll
-      if (sportForm.mode === 1) {
+      if (targetForm.mode === 1) {
         player.resultAll = arraySum(player.result)
-      } else if (sportForm.mode === 2) {
+      } else if (targetForm.mode === 2) {
         player.resultAll = getResult2(player.result, player.result2)
       }
 
@@ -60,23 +64,39 @@ export const mutations = {
     }
   },
 
-  addCol(state, target) {
-    // console.log('addCol', target)
-    const indexForm = target.closest('[data-index-form]').dataset.indexForm
+  addCol(state, indexForm) {
     const targetForm = state.allFormsSport[indexForm]
-
-    targetForm.players.forEach(item => {
-      item.result.push(null)
-
-      if(item.result2) {
-        item.result2.push(null)
-      }
-    });
+    addCol(targetForm) // local func
   },
 
-  repeatLastResult(state, target) {
+  repeatLastResult(state, data) {
+    const indexForm = data.indexForm
+    const target = data.target
+    const targetForm = state.allFormsSport[indexForm]
+    const player = targetForm.players[target.dataset.indexPlayer]
+
+    const readyResult = !target.dataset.mode2
+      ? setValue('result')
+      : setValue('result2')
+
     console.log('repeat Last Result on click!')
-    console.log('repeatLastResult', target)
+
+    function setValue(arr) {
+      console.log(arr)
+      const indexItem = player[arr].indexOf(null, 1)
+
+      if (indexItem !== -1) {
+        return false
+      } else {
+        Vue.set(player[arr], indexItem, player[arr][indexItem - 1])
+        return true
+      }
+    }
+
+    // если все значения не пустые, то добавляем новую колонку
+    if (readyResult) {
+      addCol(targetForm, value) // local func
+    }
   }
 }
 
@@ -97,16 +117,16 @@ export const actions = {
   //   Cookies.set('jwt-token', token)
   // },
 
-  setInput({commit}, target) {
-    commit('setInput', target)
+  setInput({commit}, data) {
+    commit('setInput', data)
   },
 
-  addCol({commit}, target) {
-    commit('addCol', target)
+  addCol({commit}, indexForm) {
+    commit('addCol', indexForm)
   },
 
-  repeatLastResult({commit}, target) {
-    commit('repeatLastResult', target)
+  repeatLastResult({commit}, data) {
+    commit('repeatLastResult', data)
   },
 
   // logout({commit}) {
@@ -162,6 +182,18 @@ function getResult2(arrayTop, arrayBottom){
     sum += arrayTop[i] * arrayBottom[i]
   }
   return sum
+}
+
+function addCol(targetForm, value) {
+  const resultValue = value ? value : null
+
+  targetForm.players.forEach(item => {
+    item.result.push(resultValue)
+
+    if(item.result2) {
+      item.result2.push(resultValue)
+    }
+  })
 }
 
 // function isJwtValid(token) {
