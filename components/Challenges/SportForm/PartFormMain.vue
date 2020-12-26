@@ -4,21 +4,24 @@
 
       <!-- name-col -->
       <div class="name-col">
-        <!-- top-label-row -->
-        <div class="top-row top-label"></div>
+        <div class="box-shadow-content">
+          <!-- top-label-row -->
+          <div class="top-row top-label top-label-empty"></div>
 
-        <!-- other-rows -->
-        <!-- name -->
-        <div class="cell-input cell-descr cell-descr-name "
-          v-for="(player, index) in players" :key="index"
-        >
-          <input
-            :value="players[index].name"
-            :data-index-form="indexForm"
-            :data-index-player="index"
-            data-name-player="true"
-            class="input-transparent" type="text">
+          <!-- other-rows -->
+          <!-- name -->
+          <div class="cell-input cell-descr cell-descr-name "
+            v-for="(player, index) in players" :key="index"
+          >
+            <input
+              :value="players[index].name"
+              :data-index-player="index"
+              data-name-player="true"
+              class="input-transparent" type="text">
+          </div>
         </div>
+
+        <div class="box-shadow"></div>
       </div>
 
       <!-- main-col -->
@@ -40,7 +43,6 @@
             >
               <input
                 :value="players[index].result[indexResult]"
-                :data-index-form="indexForm"
                 :data-index-player="index"
                 :data-index-result="indexResult"
                 class="input" type="number" min="0" max="9999">
@@ -54,7 +56,6 @@
             >
               <input
                 :value="players[index].result2[indexResult2]"
-                :data-index-form="indexForm"
                 :data-index-player="index"
                 :data-index-result="indexResult2"
                 data-result2="true"
@@ -82,11 +83,23 @@
               <svg
                 height="14" width="14"
                 data-repeat-last-result="true"
+                data-mode2="true"
+                :data-index-player="index"
                 enable-background="new 0 0 512 512"
                 viewBox="0 0 512 512"
                 xmlns="http://www.w3.org/2000/svg">
-                <path d="m504.92 229.383c-5.213-.575-26.628-2.939-29.602-3.268-14.437-116.247-113.603-208.697-236.736-208.697-131.863 0-238.582 106.707-238.582 238.582 0 131.864 106.707 238.582 238.582 238.582 69.282 0 131.939-29.528 175.765-77.25 7.796-8.489 7.234-21.692-1.255-29.488-8.489-7.797-21.692-7.234-29.488 1.255-35.991 39.19-87.576 63.742-145.022 63.742-108.539.001-196.842-88.302-196.842-196.841s88.303-196.842 196.842-196.842c96.727 0 177.381 70.131 193.789 162.216-5.804-.641-.08-.009-30.977-3.42-6.096-.673-10.621 5.523-8.126 11.125l41.987 94.272c2.472 5.55 10.007 6.382 13.631 1.505l61.539-82.844c3.656-4.922.59-11.956-5.505-12.629z" fill="#ffd438"/>
-                <path d="m504.92 229.383c-5.213-.576-26.628-2.939-29.602-3.268-14.437-116.248-113.604-208.697-236.736-208.697-4.894 0-9.748.165-14.568.454 116.282 6.986 208.242 96.639 222.102 208.243 2.974.328 24.389 2.692 29.602 3.268 6.096.673 9.161 7.707 5.504 12.63l-51.385 69.175 5.417 12.164c2.472 5.55 10.008 6.382 13.631 1.505l61.538-82.844c3.658-4.923.592-11.957-5.503-12.63z" fill="#ffd438"/>
+                <path
+                  data-repeat-last-result="true"
+                  data-mode2="true"
+                  :data-index-player="index"
+                  fill="#ffd438"
+                  d="m504.92 229.383c-5.213-.575-26.628-2.939-29.602-3.268-14.437-116.247-113.603-208.697-236.736-208.697-131.863 0-238.582 106.707-238.582 238.582 0 131.864 106.707 238.582 238.582 238.582 69.282 0 131.939-29.528 175.765-77.25 7.796-8.489 7.234-21.692-1.255-29.488-8.489-7.797-21.692-7.234-29.488 1.255-35.991 39.19-87.576 63.742-145.022 63.742-108.539.001-196.842-88.302-196.842-196.841s88.303-196.842 196.842-196.842c96.727 0 177.381 70.131 193.789 162.216-5.804-.641-.08-.009-30.977-3.42-6.096-.673-10.621 5.523-8.126 11.125l41.987 94.272c2.472 5.55 10.007 6.382 13.631 1.505l61.539-82.844c3.656-4.922.59-11.956-5.505-12.629z"/>
+                <path
+                  data-repeat-last-result="true"
+                  data-mode2="true"
+                  :data-index-player="index"
+                  fill="#ffd438"
+                  d="m504.92 229.383c-5.213-.576-26.628-2.939-29.602-3.268-14.437-116.248-113.604-208.697-236.736-208.697-4.894 0-9.748.165-14.568.454 116.282 6.986 208.242 96.639 222.102 208.243 2.974.328 24.389 2.692 29.602 3.268 6.096.673 9.161 7.707 5.504 12.63l-51.385 69.175 5.417 12.164c2.472 5.55 10.008 6.382 13.631 1.505l61.538-82.844c3.658-4.923.592-11.957-5.503-12.63z"/>
               </svg>
             </div>
 
@@ -95,17 +108,26 @@
               <svg
                 height="14" width="14"
                 data-repeat-last-result="true"
+                :data-index-player="index"
                 enable-background="new 0 0 512 512"
                 viewBox="0 0 512 512"
                 xmlns="http://www.w3.org/2000/svg">
-                <path d="m504.92 229.383c-5.213-.575-26.628-2.939-29.602-3.268-14.437-116.247-113.603-208.697-236.736-208.697-131.863 0-238.582 106.707-238.582 238.582 0 131.864 106.707 238.582 238.582 238.582 69.282 0 131.939-29.528 175.765-77.25 7.796-8.489 7.234-21.692-1.255-29.488-8.489-7.797-21.692-7.234-29.488 1.255-35.991 39.19-87.576 63.742-145.022 63.742-108.539.001-196.842-88.302-196.842-196.841s88.303-196.842 196.842-196.842c96.727 0 177.381 70.131 193.789 162.216-5.804-.641-.08-.009-30.977-3.42-6.096-.673-10.621 5.523-8.126 11.125l41.987 94.272c2.472 5.55 10.007 6.382 13.631 1.505l61.539-82.844c3.656-4.922.59-11.956-5.505-12.629z" fill="#ffd438"/>
-                <path d="m504.92 229.383c-5.213-.576-26.628-2.939-29.602-3.268-14.437-116.248-113.604-208.697-236.736-208.697-4.894 0-9.748.165-14.568.454 116.282 6.986 208.242 96.639 222.102 208.243 2.974.328 24.389 2.692 29.602 3.268 6.096.673 9.161 7.707 5.504 12.63l-51.385 69.175 5.417 12.164c2.472 5.55 10.008 6.382 13.631 1.505l61.538-82.844c3.658-4.923.592-11.957-5.503-12.63z" fill="#ffd438"/>
+                <path
+                  data-repeat-last-result="true"
+                  :data-index-player="index"
+                  fill="#ffd438"
+                  d="m504.92 229.383c-5.213-.575-26.628-2.939-29.602-3.268-14.437-116.247-113.603-208.697-236.736-208.697-131.863 0-238.582 106.707-238.582 238.582 0 131.864 106.707 238.582 238.582 238.582 69.282 0 131.939-29.528 175.765-77.25 7.796-8.489 7.234-21.692-1.255-29.488-8.489-7.797-21.692-7.234-29.488 1.255-35.991 39.19-87.576 63.742-145.022 63.742-108.539.001-196.842-88.302-196.842-196.841s88.303-196.842 196.842-196.842c96.727 0 177.381 70.131 193.789 162.216-5.804-.641-.08-.009-30.977-3.42-6.096-.673-10.621 5.523-8.126 11.125l41.987 94.272c2.472 5.55 10.007 6.382 13.631 1.505l61.539-82.844c3.656-4.922.59-11.956-5.505-12.629z"/>
+                <path
+                  data-repeat-last-result="true"
+                  :data-index-player="index"
+                  fill="#ffd438"
+                  d="m504.92 229.383c-5.213-.576-26.628-2.939-29.602-3.268-14.437-116.248-113.604-208.697-236.736-208.697-4.894 0-9.748.165-14.568.454 116.282 6.986 208.242 96.639 222.102 208.243 2.974.328 24.389 2.692 29.602 3.268 6.096.673 9.161 7.707 5.504 12.63l-51.385 69.175 5.417 12.164c2.472 5.55 10.008 6.382 13.631 1.505l61.538-82.844c3.658-4.923.592-11.957-5.503-12.63z"/>
               </svg>
             </div>
           </div>
         </div>
 
-        <div class="box-shadow active"></div>
+        <div class="box-shadow"></div>
       </div>
     </div>
   </div>
@@ -114,10 +136,6 @@
 <script>
 export default {
   props: {
-    indexForm: {
-      type: Number,
-      require: true
-    },
     // mode1: 1 stroke, mode2: 2 stroke
     mode: {
       type: Number,
@@ -129,23 +147,30 @@ export default {
     }
   },
 
-  data() {
-    return {
-
-      }
-  },
-
   computed: {
-    styleGridTemplateColumns: function () {
-        return {
-          gridTemplateColumns: `repeat(${this.players[0].result.length}, minmax(4rem, 1fr))`
-        }
+    styleGridTemplateColumns() {
+      return {
+        gridTemplateColumns: `repeat(${this.players[0].result.length}, minmax(4rem, 1fr))`
       }
+    }
   },
 
   methods: {
     scrollMainCol(e) {
-      console.log(e)
+      const $elLeft = e.target.previousElementSibling.querySelector('.box-shadow')
+      const $elRight = e.target.nextElementSibling.querySelector('.box-shadow')
+
+      if (e.target.scrollLeft == 0) {
+        $elLeft.classList.remove('active')
+      } else {
+        $elLeft.classList.add('active')
+      }
+
+      if (e.target.scrollWidth - e.target.scrollLeft == e.target.offsetWidth) {
+        $elRight.classList.remove('active')
+      } else {
+        $elRight.classList.add('active')
+      }
     }
   }
 }
@@ -236,18 +261,20 @@ export default {
     height: $heightRowTypical
 
   // добавление тени при появлении скролла в колонке с ячейками
+  .top-label-empty,
+  .cell-descr-name,
+  .btn-add-col,
+  .grid-nesting-btns
+    z-index: 20
+    background-color: $theme-color-black
+  .name-col,
   .btns-col
     position: relative
-    .btn-add-col,
-    .grid-nesting-btns
-      z-index: 20
-      background-color: $theme-color-black
 
     .box-shadow,
     .box-shadow-content
       position: absolute
       top: 0
-      left: 0
       bottom: 0
       z-index: 1
     .box-shadow
@@ -255,14 +282,25 @@ export default {
       width: 4px
       z-index: 0
       opacity: 0
-      transition: opacity .4s ease
+      transition: opacity .2s ease
     .box-shadow.active
       opacity: 1
     .box-shadow-content
       z-index: 1
       width: 100%
-      border-top-right-radius: 1rem
       background-color: $theme-color-black
+
+  .name-col
+    .box-shadow,
+    .box-shadow-content
+      right: 0
+
+  .btns-col
+    .box-shadow,
+    .box-shadow-content
+      left: 0
+    .box-shadow-content
+      border-top-right-radius: 1rem
 
   // mode-2
   &.mode-2

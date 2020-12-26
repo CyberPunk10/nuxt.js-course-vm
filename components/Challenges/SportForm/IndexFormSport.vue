@@ -2,13 +2,12 @@
   <div class="form-sport"
     @input="setInput"
     @click="click"
-    :data-index-form="indexForm"
+    :id="'index-form-' + indexForm"
   >
     <h2>{{ formSport.title }}</h2>
     <form @submit.prevent="onSubmit">
       <div class="shadow-form">
         <PartFormMain
-          :indexForm="indexForm"
           :mode="formSport.mode"
           :players="formSport.players"
         />
@@ -63,7 +62,7 @@ export default {
     },
     setInput(e) {
       console.log('filter target', e.target)
-      this.$store.dispatch('challengeForms/setInput', e.target)
+      this.$store.dispatch('challengeForms/setInput', {indexForm: this.indexForm, target: e.target})
       // разделяй и влавствуй! (сделать отдельные диспатчи здесь или в mutations?)
     },
     click(e) {
@@ -71,9 +70,22 @@ export default {
       // разделяй и влавствуй! (сделать отдельные диспатчи здесь или в mutations?)
 
       if (e.target.dataset.addCol) {
-        this.$store.dispatch('challengeForms/addCol', e.target)
+        this.$store.dispatch('challengeForms/addCol', this.indexForm)
+
+        // задержку выставляем для того, чтобы успело всё зарендериться
+        this.$nextTick(function () {
+          // оставил setTimeout для более плавного действия
+          setTimeout(() => {
+            const $elMainCol = e.target
+              .parentElement.parentElement.parentElement
+              .previousElementSibling
+
+              $elMainCol.scrollLeft = $elMainCol.scrollWidth - $elMainCol.offsetWidth
+          },100)
+        })
       } else if (e.target.dataset.repeatLastResult) {
-        this.$store.dispatch('challengeForms/repeatLastResult', e.target)
+        this.$store.dispatch('challengeForms/repeatLastResult', {indexForm: this.indexForm, target: e.target})
+
       }
     }
   }
