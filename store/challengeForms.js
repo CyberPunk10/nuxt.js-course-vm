@@ -1,5 +1,3 @@
-import Cookie from 'cookie' // for parsing
-import Cookies from 'js-cookie' // create and remove cookies
 import Vue from 'vue'
 
 export const state = () => ({
@@ -28,35 +26,56 @@ export const state = () => ({
 })
 
 export const mutations = {
-  // setTokenMutation(state, token) {
-  //   state.token = token
-  // },
-  // clearTokenMutation(state) {
-  //   state.token = null
-  // }
   setInput(state, data) {
     const indexForm = data.indexForm
     const target = data.target
     const targetForm = state.allFormsSport[indexForm]
     const player = targetForm.players[target.dataset.indexPlayer]
-
-    console.log(target, target.value)
+    const indexInput = target.dataset.indexInput
 
     // set input result
-    if (target.dataset.indexResult) {
+    if (indexInput) {
       // set input
       if (!target.dataset.result2) {
-        player.result[target.dataset.indexResult] = +target.value
-      } else if (target.dataset.result2) {
-        player.result2[target.dataset.indexResult] = +target.value
+        setValue('result')
+      } else {
+        setValue('result2')
+      }
+
+      function setValue(arr) {
+        Vue.set(player[arr], indexInput, +target.value ? +target.value : null)
+
+        // add/remove class .active --> .btn-add-col
+        if (player[arr].length - 1 == indexInput) {
+          if (+target.value !== 0) {
+            const $btnAddCol = document.getElementById(`index-form-${indexForm}`)
+              .querySelector('.form-sport-main .btns-col .btn-add-col')
+            $btnAddCol.classList.add('active')
+          } else {
+
+            // let notEmptyLastInputs = true
+
+            // for (let i = 0; i < targetForm.players; i++) {
+            //   console.log(notEmptyLastInputs)
+            //   console.log(targetForm.players[i].result[targetForm.players[i].result.length - 1])
+            //   if (targetForm.players[i].result[targetForm.players[i].result.length - 1]) {
+            //     notEmptyLastInputs = false
+            //     break
+            //   }
+            // }
+
+            // if (!notEmptyLastInputs) {
+            //   const $btnAddCol = document.getElementById(`index-form-${indexForm}`)
+            //     .querySelector('.form-sport-main .btns-col .btn-add-col')
+            //   $btnAddCol.classList.remove('active')
+            // }
+
+          }
+        }
       }
 
       // change resultAll
-      if (targetForm.mode === 1) {
-        player.resultAll = arraySum(player.result)
-      } else if (targetForm.mode === 2) {
-        player.resultAll = getResult2(player.result, player.result2)
-      }
+      changeResultAll(targetForm, player)
 
     // rename player
     } else if (target.dataset.namePlayer) {
@@ -75,47 +94,30 @@ export const mutations = {
     const targetForm = state.allFormsSport[indexForm]
     const player = targetForm.players[target.dataset.indexPlayer]
 
-    const readyResult = !target.dataset.mode2
-      ? setValue('result')
-      : setValue('result2')
-
-    console.log('repeat Last Result on click!')
-
-    function setValue(arr) {
-      console.log(arr)
-      const indexItem = player[arr].indexOf(null, 1)
-
-      if (indexItem !== -1) {
-        return false
-      } else {
-        Vue.set(player[arr], indexItem, player[arr][indexItem - 1])
-        return true
-      }
+    if (!target.dataset.mode2) {
+      setRepeatValue('result')
+    } else {
+      setRepeatValue('result2')
     }
 
-    // если все значения не пустые, то добавляем новую колонку
-    if (readyResult) {
-      addCol(targetForm, value) // local func
+    function setRepeatValue(arr) {
+      const indexInput = player[arr].indexOf(null, 1)
+
+      if (indexInput !== -1) { // есть пустые начиная со 2-ой
+        Vue.set(player[arr], indexInput, player[arr][indexInput - 1])
+      } else { // иначе добавляем колонку
+        const index = player[arr].length
+        addCol(targetForm) // local func
+        Vue.set(player[arr], index, player[arr][index - 1])
+      }
+
+      // change resultAll
+      changeResultAll(targetForm, player)
     }
   }
 }
 
 export const actions = {
-  // async login({commit, dispatch}, formData) {
-  //   try {
-  //     const { token } = await this.$axios.$post('/api/auth/admin/login', formData)
-  //     dispatch('setToken', token)
-  //   } catch (error) {
-  //     commit('setError', error, {root: true})
-  //     throw error
-  //   }
-  // },
-
-  // setToken({commit}, token) {
-  //   this.$axios.setToken(token, 'Bearer')
-  //   commit('setTokenMutation', token)
-  //   Cookies.set('jwt-token', token)
-  // },
 
   setInput({commit}, data) {
     commit('setInput', data)
@@ -128,45 +130,22 @@ export const actions = {
   repeatLastResult({commit}, data) {
     commit('repeatLastResult', data)
   },
-
-  // logout({commit}) {
-  //   this.$axios.setToken(false)
-  //   commit('clearTokenMutation')
-  //   Cookies.remove('jwt-token')
-  // },
-
-  // async createUser({commit}, formData) {
-  //   try {
-  //     await this.$axios.$post('/api/auth/admin/create', formData)
-  //   } catch (error) {
-  //     commit('setError', error, {root: true})
-  //     throw error
-  //   }
-  // },
-
-  // autoLogin({dispatch}) {
-  //   const cookieStr = process.browser
-  //     ? document.cookie
-  //     : this.app.context.req.headers.cookie
-
-  //   const cookies = Cookie.parse(cookieStr || '') || {} // если метод ничего не вернет, то вернем пустой объект
-  //   const token = cookies['jwt-token']
-
-  //   if (isJwtValid(token)) {
-  //     dispatch('setToken', token)
-  //   } else {
-  //     dispatch('logout')
-  //   }
-  // }
 }
 
 export const getters = {
   allFormsSport: state => state.allFormsSport
-  // isAuthenticated: state => Boolean(state.token),
 }
 
 
 // local functions
+
+function changeResultAll(targetForm, player) {
+  if (targetForm.mode === 1) {
+    player.resultAll = arraySum(player.result)
+  } else if (targetForm.mode === 2) {
+    player.resultAll = getResult2(player.result, player.result2)
+  }
+}
 
 function arraySum(array){
   let sum = 0
@@ -184,26 +163,12 @@ function getResult2(arrayTop, arrayBottom){
   return sum
 }
 
-function addCol(targetForm, value) {
-  const resultValue = value ? value : null
+function addCol(targetForm) {
+  targetForm.players.forEach(player => {
+    player.result.push(null)
 
-  targetForm.players.forEach(item => {
-    item.result.push(resultValue)
-
-    if(item.result2) {
-      item.result2.push(resultValue)
+    if(player.result2) {
+      player.result2.push(null)
     }
   })
 }
-
-// function isJwtValid(token) {
-//   if (!token) {
-//     return false
-//   }
-//   const jwtData = jwtDecode(token) || {} // return {login: '2222', userId: '5fa13d35b01c6d3244638f96', iat: 1604404038, exp: 1604407638 }
-
-//   // окончание жизни токена
-//   const expires = jwtData.exp || 0
-
-//   return (new Date().getTime() / 1000) < expires // если текущий timeStamp меньше timeStamp токена, то токен валидный и вернем true (иначе false)
-// }
