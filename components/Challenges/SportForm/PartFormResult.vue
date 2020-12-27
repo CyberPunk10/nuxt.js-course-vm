@@ -28,9 +28,7 @@ export default {
   },
 
   computed: {
-    name() {
-      return this.players[this.index].name
-    }
+
   }
 }
 </script>

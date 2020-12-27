@@ -62,14 +62,18 @@ export default {
     },
     setInput(e) {
       console.log('filter target', e.target)
-      this.$store.dispatch('challengeForms/setInput', {indexForm: this.indexForm, target: e.target})
       // разделяй и влавствуй! (сделать отдельные диспатчи здесь или в mutations?)
+      this.$store.dispatch('challengeForms/setInput', {indexForm: this.indexForm, target: e.target})
     },
     click(e) {
-      console.log('click', e.target)
-      // разделяй и влавствуй! (сделать отдельные диспатчи здесь или в mutations?)
+      // console.log('click', e.target)
 
-      if (e.target.dataset.addCol) {
+      const $target = e.target.closest('[data-click]')
+      // console.log('[$target]', $target)
+
+      if(!$target) return
+
+      if ($target.dataset.click === 'addCol') {
         this.$store.dispatch('challengeForms/addCol', this.indexForm)
 
         // скроллим вправо, чтобы видеть новую колонку
@@ -77,8 +81,8 @@ export default {
         this.$nextTick(function () {
           scrollingToRight(this.indexForm)
         })
-      } else if (e.target.dataset.repeatLastResult) {
-        this.$store.dispatch('challengeForms/repeatLastResult', {indexForm: this.indexForm, target: e.target})
+      } else if ($target.dataset.click === 'repeatInputValue') {
+        this.$store.dispatch('challengeForms/repeatLastResult', {indexForm: this.indexForm, target: $target})
 
         // скроллим вправо, чтобы видеть новую колонку
         // выставляем задержку, чтобы всё успело зарендериться перед скроллингом
@@ -91,6 +95,7 @@ export default {
 }
 
 // local functions
+
 function scrollingToRight(indexForm) {
   // оставил setTimeout для более плавного действия
   setTimeout(() => {

@@ -1,5 +1,3 @@
-import Cookie from 'cookie' // for parsing
-import Cookies from 'js-cookie' // create and remove cookies
 import Vue from 'vue'
 
 export const state = () => ({
@@ -28,27 +26,52 @@ export const state = () => ({
 })
 
 export const mutations = {
-  // setTokenMutation(state, token) {
-  //   state.token = token
-  // },
-  // clearTokenMutation(state) {
-  //   state.token = null
-  // }
   setInput(state, data) {
     const indexForm = data.indexForm
     const target = data.target
     const targetForm = state.allFormsSport[indexForm]
     const player = targetForm.players[target.dataset.indexPlayer]
-
-    console.log(target, target.value)
+    const indexInput = target.dataset.indexInput
 
     // set input result
-    if (target.dataset.indexResult) {
+    if (indexInput) {
       // set input
       if (!target.dataset.result2) {
-        player.result[target.dataset.indexResult] = +target.value
-      } else if (target.dataset.result2) {
-        player.result2[target.dataset.indexResult] = +target.value
+        setValue('result')
+      } else {
+        setValue('result2')
+      }
+
+      function setValue(arr) {
+        Vue.set(player[arr], indexInput, +target.value ? +target.value : null)
+
+        // add/remove class .active --> .btn-add-col
+        if (player[arr].length - 1 == indexInput) {
+          if (+target.value !== 0) {
+            const $btnAddCol = document.getElementById(`index-form-${indexForm}`)
+              .querySelector('.form-sport-main .btns-col .btn-add-col')
+            $btnAddCol.classList.add('active')
+          } else {
+
+            // let notEmptyLastInputs = true
+
+            // for (let i = 0; i < targetForm.players; i++) {
+            //   console.log(notEmptyLastInputs)
+            //   console.log(targetForm.players[i].result[targetForm.players[i].result.length - 1])
+            //   if (targetForm.players[i].result[targetForm.players[i].result.length - 1]) {
+            //     notEmptyLastInputs = false
+            //     break
+            //   }
+            // }
+
+            // if (!notEmptyLastInputs) {
+            //   const $btnAddCol = document.getElementById(`index-form-${indexForm}`)
+            //     .querySelector('.form-sport-main .btns-col .btn-add-col')
+            //   $btnAddCol.classList.remove('active')
+            // }
+
+          }
+        }
       }
 
       // change resultAll
@@ -66,34 +89,26 @@ export const mutations = {
   },
 
   repeatLastResult(state, data) {
-    console.log('repeat Last Result on click!')
     const indexForm = data.indexForm
     const target = data.target
     const targetForm = state.allFormsSport[indexForm]
     const player = targetForm.players[target.dataset.indexPlayer]
 
-    // const readyResult = !target.dataset.mode2
-    //   ? setValue('result')
-    //   : setValue('result2')
-
     if (!target.dataset.mode2) {
-      setValue('result')
+      setRepeatValue('result')
     } else {
-      setValue('result2')
+      setRepeatValue('result2')
     }
 
-    function setValue(arr) {
-      const indexItem = player[arr].indexOf(null, 1)
+    function setRepeatValue(arr) {
+      const indexInput = player[arr].indexOf(null, 1)
 
-      if (indexItem !== -1) { // есть пустые начиная со 2-ой
-        Vue.set(player[arr], indexItem, player[arr][indexItem - 1])
+      if (indexInput !== -1) { // есть пустые начиная со 2-ой
+        Vue.set(player[arr], indexInput, player[arr][indexInput - 1])
       } else { // иначе добавляем колонку
-        console.log('[-1]', indexItem)
         const index = player[arr].length
-        // player[arr][index]
         addCol(targetForm) // local func
         Vue.set(player[arr], index, player[arr][index - 1])
-        console.log(state)
       }
 
       // change resultAll
@@ -103,21 +118,6 @@ export const mutations = {
 }
 
 export const actions = {
-  // async login({commit, dispatch}, formData) {
-  //   try {
-  //     const { token } = await this.$axios.$post('/api/auth/admin/login', formData)
-  //     dispatch('setToken', token)
-  //   } catch (error) {
-  //     commit('setError', error, {root: true})
-  //     throw error
-  //   }
-  // },
-
-  // setToken({commit}, token) {
-  //   this.$axios.setToken(token, 'Bearer')
-  //   commit('setTokenMutation', token)
-  //   Cookies.set('jwt-token', token)
-  // },
 
   setInput({commit}, data) {
     commit('setInput', data)
@@ -164,11 +164,11 @@ function getResult2(arrayTop, arrayBottom){
 }
 
 function addCol(targetForm) {
-  targetForm.players.forEach(item => {
-    item.result.push(null)
+  targetForm.players.forEach(player => {
+    player.result.push(null)
 
-    if(item.result2) {
-      item.result2.push(null)
+    if(player.result2) {
+      player.result2.push(null)
     }
   })
 }
