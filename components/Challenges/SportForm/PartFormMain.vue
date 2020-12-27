@@ -35,22 +35,8 @@
         <div class="main-col-grids-nesting"
           v-for="(player, index) in players" :key="index"
         >
-
           <!-- 1 ряд -->
-          <div class="grid-nesting-main-row-1" :style="styleGridTemplateColumns">
-            <div class="cell-input"
-              v-for="(resultItem, indexResult) in players[index].result" :key="indexResult"
-            >
-              <input
-                :value="players[index].result[indexResult]"
-                :data-index-player="index"
-                :data-index-result="indexResult"
-                class="input" type="number" min="0" max="9999">
-            </div>
-          </div>
-
-          <!-- 2 ряд -->
-          <div v-if="mode === 2" class="grid-nesting-main-row-2" :style="styleGridTemplateColumns">
+          <div v-if="mode === 2" class="grid-nesting-main-row-1" :style="styleGridTemplateColumns">
             <div class="cell-input"
               v-for="(resultItem2, indexResult2) in players[index].result2" :key="indexResult2"
             >
@@ -62,9 +48,19 @@
                 class="input" type="number" min="0" max="9999">
             </div>
           </div>
-
+          <!-- 2 ряд -->
+          <div class="grid-nesting-main-row-2" :style="styleGridTemplateColumns">
+            <div class="cell-input"
+              v-for="(resultItem, indexResult) in players[index].result" :key="indexResult"
+            >
+              <input
+                :value="players[index].result[indexResult]"
+                :data-index-player="index"
+                :data-index-result="indexResult"
+                class="input" type="number" min="0" max="9999">
+            </div>
+          </div>
         </div>
-
       </div>
 
       <!-- btns-col -->

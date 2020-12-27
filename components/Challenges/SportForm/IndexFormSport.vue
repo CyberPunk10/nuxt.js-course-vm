@@ -72,23 +72,33 @@ export default {
       if (e.target.dataset.addCol) {
         this.$store.dispatch('challengeForms/addCol', this.indexForm)
 
-        // задержку выставляем для того, чтобы успело всё зарендериться
+        // скроллим вправо, чтобы видеть новую колонку
+        // выставляем задержку, чтобы всё успело зарендериться перед скроллингом
         this.$nextTick(function () {
-          // оставил setTimeout для более плавного действия
-          setTimeout(() => {
-            const $elMainCol = e.target
-              .parentElement.parentElement.parentElement
-              .previousElementSibling
-
-              $elMainCol.scrollLeft = $elMainCol.scrollWidth - $elMainCol.offsetWidth
-          },100)
+          scrollingToRight(this.indexForm)
         })
       } else if (e.target.dataset.repeatLastResult) {
         this.$store.dispatch('challengeForms/repeatLastResult', {indexForm: this.indexForm, target: e.target})
 
+        // скроллим вправо, чтобы видеть новую колонку
+        // выставляем задержку, чтобы всё успело зарендериться перед скроллингом
+        this.$nextTick(function () {
+          scrollingToRight(this.indexForm)
+        })
       }
     }
   }
+}
+
+// local functions
+function scrollingToRight(indexForm) {
+  // оставил setTimeout для более плавного действия
+  setTimeout(() => {
+    const $elMainCol = document.getElementById(`index-form-${indexForm}`)
+      .querySelector('.form-sport-main .main-col')
+
+    $elMainCol.scrollLeft = $elMainCol.scrollWidth - $elMainCol.offsetWidth
+  },100)
 }
 </script>
 

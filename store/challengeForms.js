@@ -52,11 +52,7 @@ export const mutations = {
       }
 
       // change resultAll
-      if (targetForm.mode === 1) {
-        player.resultAll = arraySum(player.result)
-      } else if (targetForm.mode === 2) {
-        player.resultAll = getResult2(player.result, player.result2)
-      }
+      changeResultAll(targetForm, player)
 
     // rename player
     } else if (target.dataset.namePlayer) {
@@ -70,32 +66,38 @@ export const mutations = {
   },
 
   repeatLastResult(state, data) {
+    console.log('repeat Last Result on click!')
     const indexForm = data.indexForm
     const target = data.target
     const targetForm = state.allFormsSport[indexForm]
     const player = targetForm.players[target.dataset.indexPlayer]
 
-    const readyResult = !target.dataset.mode2
-      ? setValue('result')
-      : setValue('result2')
+    // const readyResult = !target.dataset.mode2
+    //   ? setValue('result')
+    //   : setValue('result2')
 
-    console.log('repeat Last Result on click!')
-
-    function setValue(arr) {
-      console.log(arr)
-      const indexItem = player[arr].indexOf(null, 1)
-
-      if (indexItem !== -1) {
-        return false
-      } else {
-        Vue.set(player[arr], indexItem, player[arr][indexItem - 1])
-        return true
-      }
+    if (!target.dataset.mode2) {
+      setValue('result')
+    } else {
+      setValue('result2')
     }
 
-    // если все значения не пустые, то добавляем новую колонку
-    if (readyResult) {
-      addCol(targetForm, value) // local func
+    function setValue(arr) {
+      const indexItem = player[arr].indexOf(null, 1)
+
+      if (indexItem !== -1) { // есть пустые начиная со 2-ой
+        Vue.set(player[arr], indexItem, player[arr][indexItem - 1])
+      } else { // иначе добавляем колонку
+        console.log('[-1]', indexItem)
+        const index = player[arr].length
+        // player[arr][index]
+        addCol(targetForm) // local func
+        Vue.set(player[arr], index, player[arr][index - 1])
+        console.log(state)
+      }
+
+      // change resultAll
+      changeResultAll(targetForm, player)
     }
   }
 }
@@ -128,45 +130,22 @@ export const actions = {
   repeatLastResult({commit}, data) {
     commit('repeatLastResult', data)
   },
-
-  // logout({commit}) {
-  //   this.$axios.setToken(false)
-  //   commit('clearTokenMutation')
-  //   Cookies.remove('jwt-token')
-  // },
-
-  // async createUser({commit}, formData) {
-  //   try {
-  //     await this.$axios.$post('/api/auth/admin/create', formData)
-  //   } catch (error) {
-  //     commit('setError', error, {root: true})
-  //     throw error
-  //   }
-  // },
-
-  // autoLogin({dispatch}) {
-  //   const cookieStr = process.browser
-  //     ? document.cookie
-  //     : this.app.context.req.headers.cookie
-
-  //   const cookies = Cookie.parse(cookieStr || '') || {} // если метод ничего не вернет, то вернем пустой объект
-  //   const token = cookies['jwt-token']
-
-  //   if (isJwtValid(token)) {
-  //     dispatch('setToken', token)
-  //   } else {
-  //     dispatch('logout')
-  //   }
-  // }
 }
 
 export const getters = {
   allFormsSport: state => state.allFormsSport
-  // isAuthenticated: state => Boolean(state.token),
 }
 
 
 // local functions
+
+function changeResultAll(targetForm, player) {
+  if (targetForm.mode === 1) {
+    player.resultAll = arraySum(player.result)
+  } else if (targetForm.mode === 2) {
+    player.resultAll = getResult2(player.result, player.result2)
+  }
+}
 
 function arraySum(array){
   let sum = 0
@@ -184,26 +163,12 @@ function getResult2(arrayTop, arrayBottom){
   return sum
 }
 
-function addCol(targetForm, value) {
-  const resultValue = value ? value : null
-
+function addCol(targetForm) {
   targetForm.players.forEach(item => {
-    item.result.push(resultValue)
+    item.result.push(null)
 
     if(item.result2) {
-      item.result2.push(resultValue)
+      item.result2.push(null)
     }
   })
 }
-
-// function isJwtValid(token) {
-//   if (!token) {
-//     return false
-//   }
-//   const jwtData = jwtDecode(token) || {} // return {login: '2222', userId: '5fa13d35b01c6d3244638f96', iat: 1604404038, exp: 1604407638 }
-
-//   // окончание жизни токена
-//   const expires = jwtData.exp || 0
-
-//   return (new Date().getTime() / 1000) < expires // если текущий timeStamp меньше timeStamp токена, то токен валидный и вернем true (иначе false)
-// }
