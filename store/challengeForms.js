@@ -5,22 +5,36 @@ export const state = () => ({
     {
       idForm: 1,
       title: 'Отжимания',
-      mode: 1,
       players: [
         {id: 1, name: 'Player 1', result: [null, null, null, null], resultAll: 0},
         {id: 2, name: 'Player 2', result: [null, null, null, null], resultAll: 0},
         {id: 3, name: 'Player 3', result: [null, null, null, null], resultAll: 0}
       ],
+      stats: {
+
+      },
+      settings: {
+        mode: 1,
+        defaultCountMainCol: 4,
+        labelMode2: 'кг'
+      }
     },
     {
       idForm: 2,
       title: 'Подтягивания с утяжелением',
-      mode: 2,
       players: [
         {id: 1, name: 'Player 1', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null]},
         {id: 2, name: 'Player 2', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null]},
         {id: 3, name: 'Player 3', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null]}
       ],
+      stats: {
+
+      },
+      settings: {
+        mode: 2,
+        defaultCountMainCol: 4,
+        labelMode2: 'кг'
+      }
     }
   ]
 })
@@ -30,7 +44,8 @@ export const mutations = {
     const indexForm = data.indexForm
     const target = data.target
     const targetForm = state.allFormsSport[indexForm]
-    const player = targetForm.players[target.dataset.indexPlayer]
+    const players = targetForm.players
+    const player = players[target.dataset.indexPlayer]
     const indexInput = target.dataset.indexInput
 
     // set input result
@@ -46,29 +61,34 @@ export const mutations = {
         Vue.set(player[arr], indexInput, +target.value ? +target.value : null)
 
         // add/remove class .active --> .btn-add-col
+        // if current input является крайним..
         if (player[arr].length - 1 == indexInput) {
+          // if input value != 0
           if (+target.value !== 0) {
-            const $btnAddCol = document.getElementById(`index-form-${indexForm}`)
-              .querySelector('.form-sport-main .btns-col .btn-add-col')
-            $btnAddCol.classList.add('active')
+            addClassActiveBtnAddCol(indexForm)
+          // if input value == 0
           } else {
+            // предполагаем что все крайние inputs пусты
+            let emptyLastInputs = true
 
-            // let notEmptyLastInputs = true
+            // перебор result
+            for (let i = 0; i < players.length; i++) {
+              if (players[i].result[players[i].result.length - 1]) {
+                emptyLastInputs = false
+                break
+              }
+            }
+            // перебор result2 (if он есть и if emptyLastInputs по прежнему true)
+            if (emptyLastInputs && player.result2) {
+              for (let i = 0; i < players.length; i++) {
+                if (players[i].result2[players[i].result2.length - 1]) {
+                  emptyLastInputs = false
+                  break
+                }
+              }
+            }
 
-            // for (let i = 0; i < targetForm.players; i++) {
-            //   console.log(notEmptyLastInputs)
-            //   console.log(targetForm.players[i].result[targetForm.players[i].result.length - 1])
-            //   if (targetForm.players[i].result[targetForm.players[i].result.length - 1]) {
-            //     notEmptyLastInputs = false
-            //     break
-            //   }
-            // }
-
-            // if (!notEmptyLastInputs) {
-            //   const $btnAddCol = document.getElementById(`index-form-${indexForm}`)
-            //     .querySelector('.form-sport-main .btns-col .btn-add-col')
-            //   $btnAddCol.classList.remove('active')
-            // }
+            if (emptyLastInputs) removeClassActiveBtnAddCol(indexForm)
 
           }
         }
@@ -101,14 +121,30 @@ export const mutations = {
     }
 
     function setRepeatValue(arr) {
-      const indexInput = player[arr].indexOf(null, 1)
+      const idxInputFirstNull = player[arr].indexOf(null, 1)
 
-      if (indexInput !== -1) { // есть пустые начиная со 2-ой
-        Vue.set(player[arr], indexInput, player[arr][indexInput - 1])
+      if (idxInputFirstNull !== -1) { // есть пустые начиная со 2-ой
+        Vue.set(player[arr], idxInputFirstNull, player[arr][idxInputFirstNull - 1])
+        if (player[arr].length - 1 === idxInputFirstNull) {
+          console.log('lkdjflkasdjfkljaskldjfklasjdflkasjflk')
+          // add class .active to .btn-add-col
+          addClassActiveBtnAddCol(indexForm)
+        }
       } else { // иначе добавляем колонку
         const index = player[arr].length
         addCol(targetForm) // local func
         Vue.set(player[arr], index, player[arr][index - 1])
+
+        // ..и скроллим вправо
+        // if current input является крайним..
+        // if (player[arr].length - 2 == idxInputFirstNull) {
+          // оставил setTimeout для более плавного действия
+          setTimeout(() => {
+            const $elMainCol = document.getElementById(`index-form-${indexForm}`)
+              .querySelector('.form-sport-main .main-col')
+            $elMainCol.scrollLeft = $elMainCol.scrollWidth - $elMainCol.offsetWidth
+          },100)
+        // }
       }
 
       // change resultAll
@@ -140,9 +176,9 @@ export const getters = {
 // local functions
 
 function changeResultAll(targetForm, player) {
-  if (targetForm.mode === 1) {
+  if (targetForm.settings.mode === 1) {
     player.resultAll = arraySum(player.result)
-  } else if (targetForm.mode === 2) {
+  } else if (targetForm.settings.mode === 2) {
     player.resultAll = getResult2(player.result, player.result2)
   }
 }
@@ -172,3 +208,26 @@ function addCol(targetForm) {
     }
   })
 }
+
+function addClassActiveBtnAddCol(indexForm) {
+  const $btnAddCol = document.getElementById(`index-form-${indexForm}`)
+  .querySelector('.form-sport-main .btns-col .btn-add-col')
+  $btnAddCol.classList.add('active')
+}
+function removeClassActiveBtnAddCol(indexForm) {
+  const $btnAddCol = document.getElementById(`index-form-${indexForm}`)
+  .querySelector('.form-sport-main .btns-col .btn-add-col')
+  $btnAddCol.classList.remove('active')
+}
+
+// Что можно улучшить:
+
+// 1. Доработать scroll при repeat value last input
+// (при отмотке влево и многократном нажатии на repeat, скроллится уже только тогда,
+// когда добавляется новая колонка)
+
+// 2. Сделать scroll не через трекер, а просто крутя колесо над областью inputs (.main-col)
+
+// 3. При рендере страницы сначала показываются страшные рандомные скроллы (на desktop)
+
+

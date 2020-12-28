@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="form-sport-main" :class="{'mode-2': mode == 2}">
+    <div class="form-sport-main" :class="{'mode-2': settings.mode == 2}">
 
       <!-- name-col -->
       <div class="name-col">
@@ -25,7 +25,9 @@
       </div>
 
       <!-- main-col -->
-      <div class="main-col layout-scrollbar-sport-form layout-cell-sport-form" @scroll="scrollMainCol">
+      <div class="main-col layout-scrollbar-sport-form layout-cell-sport-form"
+        @scroll="scrollMainCol"
+      >
         <!-- top-label-row -->
         <div class="top-row grid-nesting-label" :style="styleGridTemplateColumns">
           <div v-for="(item, index) in players[0].result.length" :key="index" class="top-label">{{ ++index }}</div>
@@ -36,7 +38,7 @@
           v-for="(player, index) in players" :key="index"
         >
           <!-- 1 ряд -->
-          <div v-if="mode === 2" class="grid-nesting-main-row-1" :style="styleGridTemplateColumns">
+          <div v-if="settings.mode === 2" class="grid-nesting-main-row-1" :style="styleGridTemplateColumns">
             <div class="cell-input"
               v-for="(valueInput2, indexInput2) in players[index].result2" :key="indexInput2"
             >
@@ -76,14 +78,14 @@
             v-for="(player, index) in players" :key="index"
           >
             <!-- button repeat c KГ, если 2 ряда -->
-            <div v-if="mode === 2"
+            <div v-if="settings.mode === 2"
               class="btn-repeat mode-2"
               :class="{active: player.result2[0] !== null}"
               data-click="repeatInputValue"
               :data-index-player="index"
               data-mode2="true"
             >
-              <p class="cell-label">кг</p>
+              <p class="cell-label">{{ settings.labelMode2}}</p>
               <svg
                 height="14" width="14"
                 enable-background="new 0 0 512 512"
@@ -122,10 +124,8 @@
 <script>
 export default {
   props: {
-    // mode1: 1 stroke, mode2: 2 stroke
-    mode: {
-      type: Number,
-      default: 1
+    settings: {
+      type: Object
     },
     players: {
       type: Array,

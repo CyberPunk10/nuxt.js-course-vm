@@ -8,7 +8,7 @@
     <form @submit.prevent="onSubmit">
       <div class="shadow-form">
         <PartFormMain
-          :mode="formSport.mode"
+          :settings="formSport.settings"
           :players="formSport.players"
         />
         <PartFormRelax/>
@@ -45,7 +45,12 @@ export default {
 
       // не меняет входные данные, а копирует их в новый объект,
       // который будем менять и отправлять в БД
-      resultFormData2: this.formSport
+      // resultFormData2: this.formSport
+
+      dataForBD: {
+        idForm: this.formSport.idForm,
+        title: this.formSport.title, // здесь разве что кастомные заголовки отправлять, а иначе боать их из коллекции типовых форм
+      }
     }
   },
 
@@ -67,13 +72,12 @@ export default {
     },
     click(e) {
       // console.log('click', e.target)
-
       const $target = e.target.closest('[data-click]')
       // console.log('[$target]', $target)
 
       if(!$target) return
 
-      if ($target.dataset.click === 'addCol') {
+      if ($target.dataset.click === 'addCol' && $target.classList.contains('active')) {
         this.$store.dispatch('challengeForms/addCol', this.indexForm)
 
         // скроллим вправо, чтобы видеть новую колонку
@@ -81,14 +85,14 @@ export default {
         this.$nextTick(function () {
           scrollingToRight(this.indexForm)
         })
-      } else if ($target.dataset.click === 'repeatInputValue') {
+      } else if ($target.dataset.click === 'repeatInputValue' && $target.classList.contains('active')) {
         this.$store.dispatch('challengeForms/repeatLastResult', {indexForm: this.indexForm, target: $target})
 
         // скроллим вправо, чтобы видеть новую колонку
         // выставляем задержку, чтобы всё успело зарендериться перед скроллингом
-        this.$nextTick(function () {
-          scrollingToRight(this.indexForm)
-        })
+        // this.$nextTick(function () {
+        //   scrollingToRight(this.indexForm)
+        // })
       }
     }
   }
