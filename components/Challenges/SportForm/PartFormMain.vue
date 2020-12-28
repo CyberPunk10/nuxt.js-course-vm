@@ -27,6 +27,7 @@
       <!-- main-col -->
       <div class="main-col layout-scrollbar-sport-form layout-cell-sport-form"
         @scroll="scrollMainCol"
+        @wheel="whellMainCol"
       >
         <!-- top-label-row -->
         <div class="top-row grid-nesting-label" :style="styleGridTemplateColumns">
@@ -157,6 +158,18 @@ export default {
       } else {
         $elRight.classList.add('active')
       }
+    },
+
+    whellMainCol(e) {
+      console.log('asdlfjl;asdkfjl;askjd')
+      const $elMainCol = e.target.closest('.main-col')
+      console.log($elMainCol)
+      console.log(e.deltaY)
+      console.log($elMainCol.scrollLeft)
+      setTimeout(() => {
+        $elMainCol.scrollLeft += e.deltaY
+      },100)
+
     }
   }
 }

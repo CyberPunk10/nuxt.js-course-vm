@@ -126,12 +126,18 @@ export const mutations = {
       if (idxInputFirstNull !== -1) { // есть пустые начиная со 2-ой
         Vue.set(player[arr], idxInputFirstNull, player[arr][idxInputFirstNull - 1])
         if (player[arr].length - 1 === idxInputFirstNull) {
-          console.log('lkdjflkasdjfkljaskldjfklasjdflkasjflk')
           // add class .active to .btn-add-col
           addClassActiveBtnAddCol(indexForm)
         }
       } else { // иначе добавляем колонку
         const index = player[arr].length
+        const $elMainCol = document.getElementById(`index-form-${indexForm}`)
+          .querySelector('.form-sport-main .main-col')
+
+        // $elMainCol.classList.add('.layout-scrollbar-sport-form .layout-cell-sport-form')
+        $elMainCol.style.overflowX = 'scroll'
+        console.log($elMainCol.style)
+
         addCol(targetForm) // local func
         Vue.set(player[arr], index, player[arr][index - 1])
 
@@ -140,8 +146,6 @@ export const mutations = {
         // if (player[arr].length - 2 == idxInputFirstNull) {
           // оставил setTimeout для более плавного действия
           setTimeout(() => {
-            const $elMainCol = document.getElementById(`index-form-${indexForm}`)
-              .querySelector('.form-sport-main .main-col')
             $elMainCol.scrollLeft = $elMainCol.scrollWidth - $elMainCol.offsetWidth
           },100)
         // }
@@ -229,5 +233,9 @@ function removeClassActiveBtnAddCol(indexForm) {
 // 2. Сделать scroll не через трекер, а просто крутя колесо над областью inputs (.main-col)
 
 // 3. При рендере страницы сначала показываются страшные рандомные скроллы (на desktop)
+
+// 4. Не скролица page когда курсор попадает на .main-col.
+// Временное решение - по умоллчанию убирать overflow-x: auto и добавлять
+//  когда add col
 
 
