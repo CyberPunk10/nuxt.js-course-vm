@@ -18,17 +18,7 @@ export default {
     players: {
       type: Array,
       require: true
-    },
-  },
-
-  data() {
-    return {
-
     }
-  },
-
-  computed: {
-
   }
 }
 </script>
@@ -37,10 +27,6 @@ export default {
 .form-sport-result
   grid: repeat(1, 5rem)/$width-first-column-grid repeat(3, 1fr) // row/col
   padding-right: 1rem
-  // .cell-input
-  //   min-width: 3rem
-  // .cell-width-x3
-  //   min-width: 9.2rem
   .cells-group
     display: flex
     justify-content: center

@@ -5,6 +5,7 @@ export const state = () => ({
     {
       idForm: 1,
       title: 'Отжимания',
+      activeTab: '3',
       players: [
         {id: 1, name: 'Player 1', result: [null, null, null, null], resultAll: 0},
         {id: 2, name: 'Player 2', result: [null, null, null, null], resultAll: 0},
@@ -23,6 +24,26 @@ export const state = () => ({
     {
       idForm: 2,
       title: 'Подтягивания с утяжелением',
+      activeTab: '1',
+      players: [
+        {id: 1, name: 'Player 1', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null]},
+        {id: 2, name: 'Player 2', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null]},
+        {id: 3, name: 'Player 3', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null]}
+      ],
+      stats: {
+
+      },
+      settings: {
+        mode: 1,
+        defaultCountMainCol: 4,
+        defaultCountMainColVived: 4, // видимые
+        labelMode2: 'кг'
+      }
+    },
+    {
+      idForm: 3,
+      title: 'Брусья с утяжелением',
+      activeTab: '1',
       players: [
         {id: 1, name: 'Player 1', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null]},
         {id: 2, name: 'Player 2', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null]},
@@ -141,6 +162,10 @@ export const mutations = {
       // change resultAll
       changeResultAll(targetForm, player)
     }
+  },
+
+  changeActiveTab(state, data) {
+    state.allFormsSport[data.indexForm].activeTab = data.idTab
   }
 }
 
@@ -157,6 +182,10 @@ export const actions = {
   repeatLastResult({commit}, data) {
     commit('repeatLastResult', data)
   },
+
+  changeActiveTab({commit}, data) {
+    commit('changeActiveTab', data)
+  }
 }
 
 export const getters = {
@@ -225,4 +254,5 @@ function removeClassActiveBtnAddCol(indexForm) {
 // Временное решение - по умоллчанию убирать overflow-x: auto и добавлять
 //  когда add col
 
+// 5. Реализовать удаление столбцов
 
