@@ -1,8 +1,8 @@
 <template>
   <div class="form-sport-buttons">
-    <div class="buttons" :class="{bblr: activeTab != '1', bbrr: activeTab != '3'}">
-      <!-- <button>Сохранить</button> -->
-    </div>
+    <div class="buttons"
+      :class="{bblr: activeTab != '1', bbrr: activeTab != '3'}"
+    ></div>
   </div>
 </template>
 

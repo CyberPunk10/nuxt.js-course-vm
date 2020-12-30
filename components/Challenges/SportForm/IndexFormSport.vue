@@ -7,21 +7,39 @@
     <h2>{{ formSport.title }}</h2>
     <form @submit.prevent="onSubmit">
       <div class="shadow-form">
+        <!-- tab 1 -->
         <PartFormMain
+          v-if="formSport.activeTab == 1"
           :settings="formSport.settings"
           :players="formSport.players"
         />
-        <PartFormRelax/>
+        <PartFormRelax
+          v-if="formSport.activeTab == 1"
+
+        />
         <PartFormResult
+          v-if="formSport.activeTab == 1"
           :players="formSport.players"
         />
-        <PartFormButtons
-          :activeTab="activeTab"
+
+        <!-- tab 2 -->
+        <PartFormMain
+          v-if="formSport.activeTab == 2"
+          :settings="formSport.settings"
+          :players="formSport.players"
         />
+
+        <!-- tab 3 -->
+        <PartFormSettings
+          v-if="formSport.activeTab == 3"
+          :settings="formSport.settings"
+          :players="formSport.players"
+        />
+
       </div>
       <PartFormBottomTabs
         @changeActiveTab="changeActiveTab"
-        :activeTab="activeTab"
+        :activeTab="formSport.activeTab"
       />
     </form>
   </div>
@@ -41,8 +59,6 @@ export default {
   },
   data() {
     return {
-      activeTab: '1',
-
       // не меняет входные данные, а копирует их в новый объект,
       // который будем менять и отправлять в БД
       // resultFormData2: this.formSport
@@ -57,20 +73,15 @@ export default {
     }
   },
 
-  computed: {
-  },
-
   methods: {
     onSubmit() {
       console.log(this.formSport.players)
       console.log('[onSubmit]', this.resultFormData2)
     },
     changeActiveTab(id) {
-      this.activeTab = id
+      this.$store.dispatch('challengeForms/changeActiveTab', {indexForm: this.indexForm, idTab: id})
     },
     setInput(e) {
-      console.log('filter target', e.target)
-      // разделяй и влавствуй! (сделать отдельные диспатчи здесь или в mutations?)
       this.$store.dispatch('challengeForms/setInput', {indexForm: this.indexForm, target: e.target})
     },
     click(e) {
@@ -131,21 +142,16 @@ form
     @include font-how-h3
     padding: 1rem .5rem .5rem
 
-// .form-sport-relax,
-// .form-sport-result,
-// .form-sport-buttons
-//   box-shadow: 0 40px 40px rgba(0,0,0,.2)
-
 .form-sport-main,
 .form-sport-relax,
 .form-sport-result,
-.form-sport-buttons
+.form-sport-settings
   display: grid
   padding-left: 1rem
   padding-right: 0
   background-color: $theme-color-black
   font-family: 'Montserrat', sans-serif
-  // box-shadow: 0 15px 30px rgba(130, 100, 0,.4)
+  font-size: 1.4rem
 
   .cell-input
     position: relative
@@ -192,12 +198,5 @@ form
       background-color: red
       width: 10px
       height: 10px
-  // .cell-label
-  //   font-size:
-
-.form-sport-main,
-.form-sport-relax,
-.form-sport-result
-  font-size: 14px
 
 </style>

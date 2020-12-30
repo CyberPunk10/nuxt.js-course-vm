@@ -310,7 +310,7 @@ export default {
     function createLabelsMonths() {
       let html = ''
       let firstMonth = arrFirstSundayMonth.findIndex(item => item < 2) // index in arrFirstSundayMonth
-      let secondMonth = arrFirstSundayMonth.findIndex(item => item > arrFirstSundayMonth[firstMonth] && item < 5) // если нет, то -1 // 5 - максимальное число колонок/недель в одном месяце
+      let secondMonth = arrFirstSundayMonth.findIndex(item => item > arrFirstSundayMonth[firstMonth] && item <= 5) // если нет, то -1 // 5 - максимальное число колонок/недель в одном месяце
       console.log(arrFirstSundayMonth, firstMonth, secondMonth)
       for (let i = 0; i < (arrFirstSundayMonth.length); i++) {
         // если есть первый элемент в первых 2 колонаках и есть второй элемент в первых 5 колонаках

@@ -26,7 +26,7 @@
 
       <!-- main-col -->
       <div class="main-col"
-        :class="{'layout-cell-sport-form layout-scrollbar-sport-form': settings.defaultCountMainColVived <= players[0].result.length}"
+        :class="{'layout-cell-sport-form layout-scrollbar-sport-form': players[0].result.length > settings.defaultCountMainColVived}"
         @scroll="scrollMainCol"
       >
         <!-- top-label-row -->
@@ -181,7 +181,6 @@ export default {
   border-top-right-radius: 1rem
   border-top-left-radius: 1rem
   grid: repeat(1, auto)/$width-first-column-grid 4fr 1fr // row/col
-  grid-gap: 0
 
   .top-row
     margin-top: 1rem
