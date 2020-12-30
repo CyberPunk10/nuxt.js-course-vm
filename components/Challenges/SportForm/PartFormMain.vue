@@ -25,7 +25,8 @@
       </div>
 
       <!-- main-col -->
-      <div class="main-col layout-scrollbar-sport-form layout-cell-sport-form"
+      <div class="main-col"
+        :class="{'layout-cell-sport-form layout-scrollbar-sport-form': settings.defaultCountMainColVived <= players[0].result.length}"
         @scroll="scrollMainCol"
       >
         <!-- top-label-row -->
@@ -157,7 +158,7 @@ export default {
       } else {
         $elRight.classList.add('active')
       }
-    }
+    },
   }
 }
 </script>
@@ -190,9 +191,6 @@ export default {
   .btns-col
     padding-bottom: .5rem
 
-  .main-col
-    overflow-x: scroll
-
   .grid-nesting-label,
   .grid-nesting-main-row-1,
   .grid-nesting-main-row-2,
@@ -206,9 +204,7 @@ export default {
     grid: repeat(1, $heightRowTopLabel)/repeat(4, minmax(4rem, 1fr)) // row/col //min-width берется из indexFormSport.vue(.cell-input)
   .grid-nesting-main-row-1,
   .grid-nesting-main-row-2
-    // grid: repeat(1, $heightRowTypical)/repeat(4, minmax(4rem, 1fr)) // row/col //min-width берется из indexFormSport.vue(.cell-input)
     grid-template-rows: repeat(1, $heightRowTypical)
-    // border: 1px solid red
   .grid-nesting-btns
     grid: repeat(1, $heightRowTypical)/1fr // row/col
     svg
@@ -271,6 +267,7 @@ export default {
   .name-col,
   .btns-col
     position: relative
+    z-index: 21
 
     .box-shadow,
     .box-shadow-content
@@ -279,8 +276,9 @@ export default {
       bottom: 0
       z-index: 1
     .box-shadow
-      box-shadow: 0 0 10px rgba(1, 1, 1,.52)
+      box-shadow: 0 0 12px rgba(1, 1, 1,.60)
       width: 4px
+      border: 1px solid #272727
       z-index: 0
       opacity: 0
       transition: opacity .2s ease
@@ -292,16 +290,17 @@ export default {
       background-color: $theme-color-black
 
   .name-col
-    .box-shadow,
+    .box-shadow
+      right: -1px
     .box-shadow-content
       right: 0
 
   .btns-col
-    .box-shadow,
-    .box-shadow-content
-      left: 0
+    .box-shadow
+      left: -1px
     .box-shadow-content
       border-top-right-radius: 1rem
+      left: 0
 
   // mode-2
   &.mode-2

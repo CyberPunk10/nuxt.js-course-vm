@@ -50,6 +50,9 @@ export default {
       dataForBD: {
         idForm: this.formSport.idForm,
         title: this.formSport.title, // здесь разве что кастомные заголовки отправлять, а иначе боать их из коллекции типовых форм
+        players: [
+          {id: 1, name: 'nametest'}
+        ]
       }
     }
   },
@@ -90,9 +93,9 @@ export default {
 
         // скроллим вправо, чтобы видеть новую колонку
         // выставляем задержку, чтобы всё успело зарендериться перед скроллингом
-        // this.$nextTick(function () {
-        //   scrollingToRight(this.indexForm)
-        // })
+        this.$nextTick(function () {
+          scrollingToRight(this.indexForm)
+        })
       }
     }
   }

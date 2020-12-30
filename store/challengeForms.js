@@ -16,6 +16,7 @@ export const state = () => ({
       settings: {
         mode: 1,
         defaultCountMainCol: 4,
+        defaultCountMainColVived: 4, // видимые
         labelMode2: 'кг'
       }
     },
@@ -33,6 +34,7 @@ export const state = () => ({
       settings: {
         mode: 2,
         defaultCountMainCol: 4,
+        defaultCountMainColVived: 4, // видимые
         labelMode2: 'кг'
       }
     }
@@ -126,25 +128,14 @@ export const mutations = {
       if (idxInputFirstNull !== -1) { // есть пустые начиная со 2-ой
         Vue.set(player[arr], idxInputFirstNull, player[arr][idxInputFirstNull - 1])
         if (player[arr].length - 1 === idxInputFirstNull) {
-          console.log('lkdjflkasdjfkljaskldjfklasjdflkasjflk')
           // add class .active to .btn-add-col
           addClassActiveBtnAddCol(indexForm)
         }
       } else { // иначе добавляем колонку
         const index = player[arr].length
+
         addCol(targetForm) // local func
         Vue.set(player[arr], index, player[arr][index - 1])
-
-        // ..и скроллим вправо
-        // if current input является крайним..
-        // if (player[arr].length - 2 == idxInputFirstNull) {
-          // оставил setTimeout для более плавного действия
-          setTimeout(() => {
-            const $elMainCol = document.getElementById(`index-form-${indexForm}`)
-              .querySelector('.form-sport-main .main-col')
-            $elMainCol.scrollLeft = $elMainCol.scrollWidth - $elMainCol.offsetWidth
-          },100)
-        // }
       }
 
       // change resultAll
@@ -229,5 +220,9 @@ function removeClassActiveBtnAddCol(indexForm) {
 // 2. Сделать scroll не через трекер, а просто крутя колесо над областью inputs (.main-col)
 
 // 3. При рендере страницы сначала показываются страшные рандомные скроллы (на desktop)
+
+// 4. Не скролица page когда курсор попадает на .main-col.
+// Временное решение - по умоллчанию убирать overflow-x: auto и добавлять
+//  когда add col
 
 

@@ -16,7 +16,7 @@
 .scrollbar-test,
 .layout-cell {
   overscroll-behavior: contain;
-  overflow-y: auto;
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   scrollbar-width: var(--scrollbar-ff-width);
@@ -73,7 +73,7 @@
 .scrollbar-test-sport-form,
 .layout-cell-sport-form {
   overscroll-behavior: contain;
-  overflow-y: auto;
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   scrollbar-width: var(--scrollbar-ff-width);
