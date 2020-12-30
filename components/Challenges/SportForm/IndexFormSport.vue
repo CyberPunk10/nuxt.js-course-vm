@@ -93,9 +93,9 @@ export default {
 
         // скроллим вправо, чтобы видеть новую колонку
         // выставляем задержку, чтобы всё успело зарендериться перед скроллингом
-        // this.$nextTick(function () {
-        //   scrollingToRight(this.indexForm)
-        // })
+        this.$nextTick(function () {
+          scrollingToRight(this.indexForm)
+        })
       }
     }
   }

@@ -16,6 +16,7 @@ export const state = () => ({
       settings: {
         mode: 1,
         defaultCountMainCol: 4,
+        defaultCountMainColVived: 4, // видимые
         labelMode2: 'кг'
       }
     },
@@ -33,6 +34,7 @@ export const state = () => ({
       settings: {
         mode: 2,
         defaultCountMainCol: 4,
+        defaultCountMainColVived: 4, // видимые
         labelMode2: 'кг'
       }
     }
@@ -131,24 +133,9 @@ export const mutations = {
         }
       } else { // иначе добавляем колонку
         const index = player[arr].length
-        const $elMainCol = document.getElementById(`index-form-${indexForm}`)
-          .querySelector('.form-sport-main .main-col')
-
-        // $elMainCol.classList.add('.layout-scrollbar-sport-form .layout-cell-sport-form')
-        $elMainCol.style.overflowX = 'scroll'
-        console.log($elMainCol.style)
 
         addCol(targetForm) // local func
         Vue.set(player[arr], index, player[arr][index - 1])
-
-        // ..и скроллим вправо
-        // if current input является крайним..
-        // if (player[arr].length - 2 == idxInputFirstNull) {
-          // оставил setTimeout для более плавного действия
-          setTimeout(() => {
-            $elMainCol.scrollLeft = $elMainCol.scrollWidth - $elMainCol.offsetWidth
-          },100)
-        // }
       }
 
       // change resultAll
