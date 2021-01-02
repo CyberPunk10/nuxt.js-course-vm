@@ -2,8 +2,8 @@
   <div>
     <div class="form-sport-settings">
       <ul>
-        <li>Короткие имена</li>
-        <li>2 строки (mode 2)</li>
+        <li><Checkbox title="Короткие имена" id="shot-name" description>descr</Checkbox></li>
+        <li><Checkbox title="2 строки (mode 2)" id="mode2-checked" isChecked tag >descr</Checkbox></li>
         <li>Количество колонок (select/input) (3/4/5/input)</li>
         <li>Несколько человек</li>
         <li></li>
@@ -59,7 +59,7 @@ export default {
 .form-sport-settings
   border-top-right-radius: 1rem
   border-top-left-radius: 1rem
-  grid: repeat(1, min(15rem))/1fr 1fr // row/col
+  grid: repeat(1, min(15rem))/1fr // row/col
 
 
 </style>
