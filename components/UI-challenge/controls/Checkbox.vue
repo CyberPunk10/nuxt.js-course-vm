@@ -1,18 +1,4 @@
 <template>
-  <!--
-  if tag
-    li.checkbox-btn
-      input(type="checkbox", class="checkbox-btn__input", id = id checked = isChecked)
-      label(class = classNameLabel, for = id) !{title}
-      if description
-        p.checkbox-btn__description= description
-  else
-    .checkbox-btn
-      input(type="checkbox", class="checkbox-btn__input", id = id checked = isChecked)
-      label(class = classNameLabel, for = id) !{title}
-      if description
-        p.checkbox-btn__description !{description} -->
-
   <li v-if="tag" class="checkbox-btn">
     <input type="checkbox" class="checkbox-btn__input" :id="id" :checked="isChecked">
     <label :for="id"
@@ -30,7 +16,6 @@
     >{{title}}</label>
     <p v-if="description" class="checkbox-btn__description"><slot/></p>
   </div>
-
 </template>
 
 <script>
@@ -42,7 +27,7 @@ export default {
     },
     isChecked: {
       type: Boolean,
-      default: false // checked: false
+      default: false
     },
     id: {
       type: String,
@@ -56,7 +41,6 @@ export default {
       type: Boolean,
       default: false
     }
-    // classNameLabel += options.description ? " checkbox-btn__label_title" : ""
   }
 }
 </script>
@@ -80,13 +64,11 @@ export default {
       border-color: $theme-color-yellow
 
     &:checked + .checkbox-btn__label
-      // color: $color-dark-shade-75
-      color: #ccc
+      color: #bbb
 
 
   &__label
-    // color: $color-dark-shade-50
-    color: #aaa
+    color: #999
     position: relative
     cursor: pointer
     display: inline-block
@@ -133,14 +115,12 @@ export default {
 
     &_title
       font-weight: bold
-      // color: $color-dark-shade-75
-      color: #ccc
+      color: #999
 
   &__description
     padding: .3rem 0 .1rem 3rem
     font-size: 1.2rem
-    // color: $color-dark-shade-50
-    color: #ccc
+    color: #999
     user-select: none         // делает текст невыделяемым
     line-height: 1.4rem
 

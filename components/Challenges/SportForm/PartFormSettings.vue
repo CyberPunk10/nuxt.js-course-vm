@@ -4,7 +4,11 @@
       <ul>
         <li><Checkbox title="Короткие имена" id="shot-name" description>descr</Checkbox></li>
         <li><Checkbox title="2 строки (mode 2)" id="mode2-checked" isChecked tag >descr</Checkbox></li>
-        <li>Количество колонок (select/input) (3/4/5/input)</li>
+        <li>
+          <RadioBtn title="3" name="countCol" id="count-col-3" />
+          <RadioBtn title="4" name="countCol" id="count-col-4" />
+          <RadioBtn title="5" name="countCol" id="count-col-5" />Количество колонок (select/input) (3/4/5/input)
+        </li>
         <li>Несколько человек</li>
         <li></li>
       </ul>
@@ -60,6 +64,7 @@ export default {
   border-top-right-radius: 1rem
   border-top-left-radius: 1rem
   grid: repeat(1, min(15rem))/1fr // row/col
+  color: #999
 
 
 </style>
