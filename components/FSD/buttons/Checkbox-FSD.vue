@@ -1,49 +1,53 @@
 <template>
-  <!-- mixin checkbox-btn(options)
-  -
-    var title = options.title || "label for checkbox"
-    var isChecked = options.checked || false          // checked: true
-    var id = options.id || false
-    var tag = options.tag || false
+  <li v-if="tagLi" class="checkbox-btn">
+    <input type="checkbox" class="checkbox-btn__input" :id="id" :checked="isChecked">
+    <label :for="id"
+      class="checkbox-btn__label"
+      :class="{'checkbox-btn__label_title': description}"
+    >{{title}}</label>
+    <p v-if="description" class="checkbox-btn__description"><slot/></p>
+  </li>
 
-    // for checkbox-btn__label
-    var classNameLabel = "checkbox-btn__label"
-    var description = options.description || false
-    classNameLabel += options.description ? " checkbox-btn__label_title" : ""
-
-    // for checkbox-btn__description
-    var classNameDescription = "checkbox-btn__description"
-
-
-  if tag
-    li.checkbox-btn
-      input(type="checkbox", class="checkbox-btn__input", id = id checked = isChecked)
-      label(class = classNameLabel, for = id) !{title}
-      if description
-        p.checkbox-btn__description= description
-  else
-    .checkbox-btn
-      input(type="checkbox", class="checkbox-btn__input", id = id checked = isChecked)
-      label(class = classNameLabel, for = id) !{title}
-      if description
-        p.checkbox-btn__description !{description} -->
-
-  <div class="checkbox-btn">
-    <input type="checkbox" class="checkbox-btn__input" id="test">
-    <label for="test" class="checkbox-btn__label">slot</label>
+  <div v-else class="checkbox-btn">
+    <input type="checkbox" class="checkbox-btn__input" :id="id" :checked="isChecked">
+    <label :for="id"
+      class="checkbox-btn__label"
+      :class="{'checkbox-btn__label_title': description}"
+    >{{title}}</label>
+    <p v-if="description" class="checkbox-btn__description"><slot/></p>
   </div>
-
 </template>
 
 <script>
 export default {
-
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
+    isChecked: {
+      type: Boolean,
+      default: false
+    },
+    id: {
+      type: String,
+      required: true
+    },
+    tagLi: {
+      type: Boolean,
+      default: false
+    },
+    description: {
+      type: Boolean,
+      default: false
+    }
+  }
 }
 </script>
 
 <style lang="sass" scoped>
 .checkbox-btn
-  max-width: 32rem
+  // max-width: 32rem
   padding: .3rem 0 .32rem
 
   &__input
