@@ -35,6 +35,7 @@ export default {
 <style lang="sass">
 .radio-btn
   $sizeCircle: 1.6rem
+  $sizeCircleInset: calc(#{$sizeCircle} / 100 * 40)
 
   max-width: 32rem
   padding: .3rem 0
@@ -79,10 +80,10 @@ export default {
     &:after
       content: ""
       position: absolute
-      // left: calc((#{$sizeCircle} - 25%) / 2)
-      top: .7rem
-      width: 1rem
-      height: 1rem
+      left: calc(#{$sizeCircleInset} / 2)
+      top: calc(#{$sizeCircleInset} / 2 + .4rem)
+      width: calc(#{$sizeCircle} - #{$sizeCircleInset})
+      height: calc(#{$sizeCircle} - #{$sizeCircleInset})
       border-radius: 50%
       background-color: $theme-color-yellow
 
