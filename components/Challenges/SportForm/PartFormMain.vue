@@ -171,13 +171,6 @@ export default {
   $heightRowTypicalMode2: 3rem
   $heightRowTypicalMode2ForNameCol: calc(#{$heightRowTypicalMode2} * 2)
 
-  // Убрать стрелочки с <input type=“number”>
-  input[type='number']
-    -moz-appearance: textfield
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button
-    -webkit-appearance: none
-
   border-top-right-radius: 1rem
   border-top-left-radius: 1rem
   grid: repeat(1, auto)/$width-first-column-grid 4fr 1fr // row/col

@@ -1,6 +1,6 @@
 <template>
   <div class="radio-btn">
-    <input type="radio" class="radio-btn__input" :id="id" :name="name" isChecked>
+    <input type="radio" class="radio-btn__input" :id="id" :name="name" :checked="isChecked">
     <label :for="id" class="radio-btn__label" :class="{'radio-btn__label_title': description}">{{title}}</label>
     <p v-if="description" class="radio-btn__description"><slot/></p>
   </div>

@@ -126,21 +126,29 @@ function scrollingToRight(indexForm) {
 </script>
 
 <style lang="sass">
-form
-  // $min-width-input-form-sport: 4rem
-  border-radius: $borderRadiusForm
-  color: #bbb
-  .shadow-form
-    border-radius: $borderRadiusForm
-    border-bottom-right-radius: 0
-    box-shadow: 0 30px 40px rgba(130, 100, 0,.4)
-
 .form-sport
   max-width: 30rem
   margin: 0 auto 3rem
+
+  // Убрать стрелочки с <input type=“number”>
+  input[type='number']
+    -moz-appearance: textfield
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button
+    -webkit-appearance: none
+
   h2
     @include font-how-h3
     padding: 1rem .5rem .5rem
+
+  form
+    // $min-width-input-form-sport: 4rem
+    border-radius: $borderRadiusForm
+    color: #bbb
+    .shadow-form
+      border-radius: $borderRadiusForm
+      border-bottom-right-radius: 0
+      box-shadow: 0 30px 40px rgba(130, 100, 0,.4)
 
 .form-sport-main,
 .form-sport-relax,

@@ -1,5 +1,5 @@
 <template>
-  <li v-if="tag" class="checkbox-btn">
+  <li v-if="tagLi" class="checkbox-btn">
     <input type="checkbox" class="checkbox-btn__input" :id="id" :checked="isChecked">
     <label :for="id"
       class="checkbox-btn__label"
@@ -33,7 +33,7 @@ export default {
       type: String,
       required: true
     },
-    tag: {
+    tagLi: {
       type: Boolean,
       default: false
     },
