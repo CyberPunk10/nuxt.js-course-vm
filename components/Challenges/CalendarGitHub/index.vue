@@ -213,7 +213,7 @@ export default {
       'challenge5', 'challenge1', 'challenge2', 'challenge3', 'challenge4'
     ]
 
-    console.log(calendarGraph.years[2020].month[0][31].challenge2.description) // Последний день месяца)
+    // console.log(calendarGraph.years[2020].month[0][31].challenge2.description) // Последний день месяца)
 
     const deltaX = 15
     const deltaY = 15
@@ -311,14 +311,15 @@ export default {
       let html = ''
       let firstMonth = arrFirstSundayMonth.findIndex(item => item < 2) // index in arrFirstSundayMonth
       let secondMonth = arrFirstSundayMonth.findIndex(item => item > arrFirstSundayMonth[firstMonth] && item <= 5) // если нет, то -1 // 5 - максимальное число колонок/недель в одном месяце
-      console.log(arrFirstSundayMonth, firstMonth, secondMonth)
+      console.log(arrFirstSundayMonth, 'firstMonth: ', firstMonth, 'secondMonth: ', secondMonth)
+
       for (let i = 0; i < (arrFirstSundayMonth.length); i++) {
         // если есть первый элемент в первых 2 колонаках и есть второй элемент в первых 5 колонаках
         if (i !== firstMonth && secondMonth !== -1) {
           html += `<text x="${deltaX * arrFirstSundayMonth[i] + 16}" y="-8" class="month">${month[i]}</text>`
         } else {
           const currentMonthStartPosition = arrMonthInSunday.indexOf(firstMonth, -5) // 5 - максимальное число колонок/недель в одном месяце
-          html += `<text x="${deltaX * currentMonthStartPosition + 16}" y="-8" class="month">${month[firstMonth]}</text>`
+          html += `<text x="${deltaX * currentMonthStartPosition + 16}" y="-8" class="month">${month[firstMonth]}22</text>`
           if (currentMonthStartPosition !== -1) {
             // если первый месяц переехал в конец графика,
             // то смотрим сколько пустых колонок в начале графика и если больше 3,
@@ -349,6 +350,7 @@ export default {
       const day = new Date(timestamp).getDate()
 
       if ( !calendarGraph.years[year]
+        || !calendarGraph.years[year].month
         || !calendarGraph.years[year].month[month]
         || !calendarGraph.years[year].month[month][day]) {
         // ..если нет года, месяца или дня (undefined)
