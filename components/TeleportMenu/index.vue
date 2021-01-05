@@ -59,6 +59,9 @@ export default {
         { type: 'link', text: 'Моноколеса', url: '/landing' },
         { type: 'category', text: 'Другие проекты' },
         { type: 'link', text: 'Курс Exel', url: '/landing' },
+        { type: 'category', text: 'Сторонние сайты, чтобы не потерять' },
+        { type: 'link', text: 'Hotkeys vs code', url: 'https://www.nikomedvedev.ru/other/vscodeshortcuts/hotkeys.html' },
+        { type: 'link', text: 'Animation SVG', url: 'https://shapeshifter.design/' },
         { type: 'category', text: `CurrentRouteName: ${this.$route.name}` },
       ]
     }
