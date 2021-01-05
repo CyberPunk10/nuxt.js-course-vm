@@ -317,16 +317,21 @@ export default {
 
       const positionFirstMonth = sortArrFirstSundayMonth[0] // position on graphic
       const positionSecondMonth = sortArrFirstSundayMonth[1] // position on graphic
+      const positionLastMonth = sortArrFirstSundayMonth[11] // position on graphic
       const nameFirstMonth = arrFirstSundayMonth.indexOf(positionFirstMonth)
       const nameSecondMonth = arrFirstSundayMonth.indexOf(positionSecondMonth)
+      const nameLastMonth = arrFirstSundayMonth.indexOf(positionLastMonth) // не всегда является текущим месяцям!
 
       console.log('\n',
         'arrFirstSundayMonth:', arrFirstSundayMonth,'\n',
         'sortArrFirstSundayMonth:', sortArrFirstSundayMonth,'\n',
         'positionFirstMonth:', positionFirstMonth,'\n',
         'positionSecondMonth:', positionSecondMonth,'\n',
+        'positionLastMonth:', positionLastMonth,'\n',
         'nameFirstMonth:', nameFirstMonth, month[nameFirstMonth], '\n',
         'nameSecondMonth:', nameSecondMonth, month[nameSecondMonth], '\n',
+        'nameLastMonth:', nameLastMonth, month[nameLastMonth], '\n',
+        'currentMonth:', currentMonth, month[currentMonth], '\n',
       )
 
       for (let i = 0; i < (arrFirstSundayMonth.length); i++) {
@@ -355,11 +360,10 @@ export default {
 
 
 
-        // если есть первый элемент в первых 2 колонаках и есть второй элемент в первых 5 колонаках
-        // if (i !== positionFirstMonth && positionSecondMonth !== -1) {
-        if (i !== nameFirstMonth) { // первый месяц отдельно
+        // первый месяц обработаем отдельно
+        if (i !== nameFirstMonth) {
           html += `<text x="${deltaX * arrFirstSundayMonth[i] + 16}" y="-8" class="month">${month[i]}</text>`
-        } else {
+        } else if (positionSecondMonth - positionFirstMonth < 2) {
           // const currentMonthStartPosition = arrMonthInSunday.indexOf(positionFirstMonth, -5) // 5 - максимальное число колонок/недель в одном месяце
           // html += `<text x="${deltaX * currentMonthStartPosition + 16}" y="-8" class="month">${month[positionFirstMonth]}22</text>`
           // if (currentMonthStartPosition !== -1) {
