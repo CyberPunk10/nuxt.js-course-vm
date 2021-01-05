@@ -84,10 +84,11 @@ export default {
 
   ul li
     margin-left: .5rem
-    margin-top: 1rem
+    margin-top: .5rem
 
   .comp-radioBtn
-    margin: .5rem 1rem .5rem 0
+    margin: .5rem .5rem .5rem 0
+    font-size: 1.2rem
 
   .input
     max-width: 4.5rem

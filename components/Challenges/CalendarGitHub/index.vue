@@ -213,12 +213,13 @@ export default {
       'challenge5', 'challenge1', 'challenge2', 'challenge3', 'challenge4'
     ]
 
-    console.log(calendarGraph.years[2020].month[0][31].challenge2.description) // Последний день месяца)
+    // console.log(calendarGraph.years[2020].month[0][31].challenge2.description) // Последний день месяца)
 
     const deltaX = 15
     const deltaY = 15
 
-    const date = new Date()
+    // const date = new Date()
+    const date = new Date(2021, 0, 4)
     const currentYear = date.getFullYear()
     const currentMonth = date.getMonth()
     const currentDay = date.getDate()
@@ -242,7 +243,7 @@ export default {
     ]
 
     let arrMonthInSunday = [] // all sunday
-    let arrFirstSundayMonth = [] // first sunday month
+    let arrFirstSundayMonth = [] // first sunday month (index == month, value == position on graphic)
 
     // console.log('\n',
     //   'date:', date.toLocaleDateString(),'\n',
@@ -309,24 +310,70 @@ export default {
 
     function createLabelsMonths() {
       let html = ''
-      let firstMonth = arrFirstSundayMonth.findIndex(item => item < 2) // index in arrFirstSundayMonth
-      let secondMonth = arrFirstSundayMonth.findIndex(item => item > arrFirstSundayMonth[firstMonth] && item <= 5) // если нет, то -1 // 5 - максимальное число колонок/недель в одном месяце
-      console.log(arrFirstSundayMonth, firstMonth, secondMonth)
+      // сортированный массив позиций первых вс месяцев (index здесь ничего не значит!)
+      // нужен, чтобы корректно определять первый и второй месяц
+      let sortArrFirstSundayMonth = arrFirstSundayMonth.map(item => item)
+        .sort((a, b) => a - b) // copy arr & sort new arr
+
+      const positionFirstMonth = sortArrFirstSundayMonth[0] // position on graphic
+      const positionSecondMonth = sortArrFirstSundayMonth[1] // position on graphic
+      const positionLastMonth = sortArrFirstSundayMonth[11] // position on graphic
+      const nameFirstMonth = arrFirstSundayMonth.indexOf(positionFirstMonth)
+      const nameSecondMonth = arrFirstSundayMonth.indexOf(positionSecondMonth)
+      const nameLastMonth = arrFirstSundayMonth.indexOf(positionLastMonth) // не всегда является текущим месяцям!
+
+      console.log('\n',
+        'arrFirstSundayMonth:', arrFirstSundayMonth,'\n',
+        'sortArrFirstSundayMonth:', sortArrFirstSundayMonth,'\n',
+        'positionFirstMonth:', positionFirstMonth,'\n',
+        'positionSecondMonth:', positionSecondMonth,'\n',
+        'positionLastMonth:', positionLastMonth,'\n',
+        'nameFirstMonth:', nameFirstMonth, month[nameFirstMonth], '\n',
+        'nameSecondMonth:', nameSecondMonth, month[nameSecondMonth], '\n',
+        'nameLastMonth:', nameLastMonth, month[nameLastMonth], '\n',
+        'currentMonth:', currentMonth, month[currentMonth], '\n',
+      )
+
       for (let i = 0; i < (arrFirstSundayMonth.length); i++) {
-        // если есть первый элемент в первых 2 колонаках и есть второй элемент в первых 5 колонаках
-        if (i !== firstMonth && secondMonth !== -1) {
+
+        // switch(positionFirstMonth) {
+        //   case 'value1':  // if (positionFirstMonth === 'value1')
+
+        //     break
+
+        //   case 'value2':  // if (positionFirstMonth === 'value2')
+
+        //     break
+
+        //   default:
+
+        //     break
+        // }
+
+
+        // if (positionSecondMonth - positionFirstMonth < 2) {
+        //   console.log('< 2')
+        // } else {
+
+        // }
+
+
+
+
+        // первый месяц обработаем отдельно
+        if (i !== nameFirstMonth) {
           html += `<text x="${deltaX * arrFirstSundayMonth[i] + 16}" y="-8" class="month">${month[i]}</text>`
-        } else {
-          const currentMonthStartPosition = arrMonthInSunday.indexOf(firstMonth, -5) // 5 - максимальное число колонок/недель в одном месяце
-          html += `<text x="${deltaX * currentMonthStartPosition + 16}" y="-8" class="month">${month[firstMonth]}</text>`
-          if (currentMonthStartPosition !== -1) {
-            // если первый месяц переехал в конец графика,
-            // то смотрим сколько пустых колонок в начале графика и если больше 3,
-            // то дублируем этот же месяц в начале
-            if (arrFirstSundayMonth[secondMonth] > 3) {
-              html += `<text x="${deltaX + 1}" y="-8" class="month">${month[firstMonth]}</text>`
-            }
-          }
+        } else if (positionSecondMonth - positionFirstMonth < 2) {
+          // const currentMonthStartPosition = arrMonthInSunday.indexOf(positionFirstMonth, -5) // 5 - максимальное число колонок/недель в одном месяце
+          // html += `<text x="${deltaX * currentMonthStartPosition + 16}" y="-8" class="month">${month[positionFirstMonth]}22</text>`
+          // if (currentMonthStartPosition !== -1) {
+          //   // если первый месяц переехал в конец графика,
+          //   // то смотрим сколько пустых колонок в начале графика и если больше 3,
+          //   // то дублируем этот же месяц в начале
+          //   if (arrFirstSundayMonth[positionSecondMonth] > 3) {
+          //     html += `<text x="${deltaX + 1}" y="-8" class="month">${month[positionFirstMonth]}</text>`
+          //   }
+          // }
         }
       }
 
@@ -349,6 +396,7 @@ export default {
       const day = new Date(timestamp).getDate()
 
       if ( !calendarGraph.years[year]
+        || !calendarGraph.years[year].month
         || !calendarGraph.years[year].month[month]
         || !calendarGraph.years[year].month[month][day]) {
         // ..если нет года, месяца или дня (undefined)
