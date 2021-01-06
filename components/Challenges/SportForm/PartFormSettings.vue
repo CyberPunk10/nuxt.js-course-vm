@@ -6,15 +6,14 @@
       </div>
       <ul>
         <Checkbox tagLi title="Сокращать имена, если много колонок" id="shot-name" >descr</Checkbox>
-        <li>
-          Количество колонок<br>
+        <li class="ta-justify">
+          Количество колонок
+          <!-- :value="players[index].result[indexInput]" -->
+          <input class="input input-count-col-settings" type="number" min="0" max="100"><br>
           <RadioBtn class="comp-radioBtn" title="3" name="countCol" id="count-col-3" />
           <RadioBtn class="comp-radioBtn" title="4" name="countCol" id="count-col-4" isChecked/>
           <RadioBtn class="comp-radioBtn" title="5" name="countCol" id="count-col-5" />
-            <!-- :value="players[index].result[indexInput]" -->
-          <input
-            class="input" type="number" min="0" max="100">
-          <RadioBtn class="comp-radioBtn" title="по умолчанию" name="countCol" id="count-col-5" />
+          <RadioBtn class="comp-radioBtn" title="по умолчанию" name="countCol" id="count-col-default" />
         </li>
         <Checkbox tagLi title="2 строки (mode 2)" id="mode2-checked" isChecked />
         <Checkbox tagLi title="Несколько человек" id="countPeople" isChecked >descr</Checkbox>
@@ -83,14 +82,17 @@ export default {
     align-items: center
 
   ul li
-    margin-left: .5rem
     margin-top: .5rem
 
   .comp-radioBtn
-    margin: .5rem .5rem .5rem 0
-    font-size: 1.2rem
+    margin: 0 1rem .5rem 0
+    font-size: 1.3rem
 
   .input
     max-width: 4.5rem
+  .input-count-col-settings
+    margin-left: 3rem
+  .ta-justify
+    text-align: justify
 
 </style>
