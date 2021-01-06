@@ -244,6 +244,7 @@ export default {
 
     let arrMonthInSunday = [] // all sunday
     let arrFirstSundayMonth = [] // first sunday month (index == month, value == position on graphic)
+    let arrFirstSundayMonth2 = [] // first sunday month (index == month, value == position on graphic)
 
     // console.log('\n',
     //   'date:', date.toLocaleDateString(),'\n',
@@ -306,6 +307,36 @@ export default {
       for(let i = 0; i < 12; i++) {
         arrFirstSundayMonth.push(arrMonthInSunday.indexOf(i))
       }
+
+      // нужен, чтобы корректно определять первый и второй месяц
+      let sortArrFirstSundayMonth = arrFirstSundayMonth.map(item => item)
+        .sort((a, b) => a - b) // copy arr & sort new arr
+
+      // const fromIndex = sortArrFirstSundayMonth[11] + 1
+      for(let i = 0; i < 12; i++) {
+        if (arrMonthInSunday.indexOf(i, sortArrFirstSundayMonth[11]) != -1
+          && arrMonthInSunday.indexOf(i, sortArrFirstSundayMonth[11]) != sortArrFirstSundayMonth[11]) {
+          arrFirstSundayMonth.push(arrMonthInSunday.indexOf(i, sortArrFirstSundayMonth[11]))
+        }
+      }
+      for(let i = 0; i < 12; i++) {
+        arrFirstSundayMonth2.push(arrMonthInSunday.filter((item, index) => {
+          if (item === i) {
+            return index
+          }
+        }))
+      }
+
+      //   arrFirstSundayMonth2 = arrMonthInSunday.map((item, index) => {
+      // // for(let i = 0; i < 12; i++) {
+      //     if (item === i) {
+      //       arrFirstSundayMonth2.push(index)
+      //     }
+      //   })
+      // // }
+
+      // arrFirstSundayMonth2 = arrMonthInSunday.map(item => item).filter()
+      console.log(arrFirstSundayMonth2, arrMonthInSunday)
     }
 
     function createLabelsMonths() {
@@ -332,48 +363,33 @@ export default {
         'nameSecondMonth:', nameSecondMonth, month[nameSecondMonth], '\n',
         'nameLastMonth:', nameLastMonth, month[nameLastMonth], '\n',
         'currentMonth:', currentMonth, month[currentMonth], '\n',
+        'arrMonthInSunday:', arrMonthInSunday, arrMonthInSunday[43], '\n',
       )
 
       for (let i = 0; i < (arrFirstSundayMonth.length); i++) {
 
-        // switch(positionFirstMonth) {
-        //   case 'value1':  // if (positionFirstMonth === 'value1')
-
-        //     break
-
-        //   case 'value2':  // if (positionFirstMonth === 'value2')
-
-        //     break
-
-        //   default:
-
-        //     break
+        // // первый месяц обработаем отдельно
+        // if (i !== nameFirstMonth) {
+        //   html += `<text x="${deltaX * arrFirstSundayMonth[i] + 16}" y="-8" class="month">${month[i]}</text>`
+        // } else if (positionSecondMonth - positionFirstMonth < 2) {
+        //   const currentMonthStartPosition = arrMonthInSunday.indexOf(positionFirstMonth, -7) // 5 - максимальное число колонок/недель в одном месяце
+        //   html += `<text x="${deltaX * currentMonthStartPosition + 16}" y="-8" class="month">${month[nameFirstMonth]}22</text>`
+        //   if (currentMonthStartPosition !== -1) {
+        //     // если первый месяц переехал в конец графика,
+        //     // то смотрим сколько пустых колонок в начале графика и если больше 3,
+        //     // то дублируем этот же месяц в начале
+        //     if (arrFirstSundayMonth[nameSecondMonth] > 3) {
+        //       html += `<text x="${deltaX + 1}" y="-8" class="month">${month[nameFirstMonth]}</text>`
+        //     }
+        //   }
         // }
 
-
-        // if (positionSecondMonth - positionFirstMonth < 2) {
-        //   console.log('< 2')
-        // } else {
-
-        // }
-
-
-
-
-        // первый месяц обработаем отдельно
-        if (i !== nameFirstMonth) {
+        if (i < 12) {
           html += `<text x="${deltaX * arrFirstSundayMonth[i] + 16}" y="-8" class="month">${month[i]}</text>`
-        } else if (positionSecondMonth - positionFirstMonth < 2) {
-          // const currentMonthStartPosition = arrMonthInSunday.indexOf(positionFirstMonth, -5) // 5 - максимальное число колонок/недель в одном месяце
-          // html += `<text x="${deltaX * currentMonthStartPosition + 16}" y="-8" class="month">${month[positionFirstMonth]}22</text>`
-          // if (currentMonthStartPosition !== -1) {
-          //   // если первый месяц переехал в конец графика,
-          //   // то смотрим сколько пустых колонок в начале графика и если больше 3,
-          //   // то дублируем этот же месяц в начале
-          //   if (arrFirstSundayMonth[positionSecondMonth] > 3) {
-          //     html += `<text x="${deltaX + 1}" y="-8" class="month">${month[positionFirstMonth]}</text>`
-          //   }
-          // }
+
+        } else {
+          html += `<text x="${deltaX * arrFirstSundayMonth[i] + 16}" y="-8" class="month">${month[0]}</text>`
+
         }
       }
 
