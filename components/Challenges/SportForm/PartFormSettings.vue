@@ -8,8 +8,7 @@
         <Checkbox tagLi title="Сокращать имена, если много колонок" id="shot-name" >descr</Checkbox>
         <li class="ta-justify">
           Количество колонок
-          <!-- :value="players[index].result[indexInput]" -->
-          <input class="input input-count-col-settings" type="number" min="0" max="100"><br>
+          <input class="input input-count-col-settings" type="number" min="0" max="100" :value="settings.defaultCountMainCol"><br>
           <RadioBtn class="comp-radioBtn" title="3" name="countCol" id="count-col-3" />
           <RadioBtn class="comp-radioBtn" title="4" name="countCol" id="count-col-4" isChecked/>
           <RadioBtn class="comp-radioBtn" title="5" name="countCol" id="count-col-5" />
