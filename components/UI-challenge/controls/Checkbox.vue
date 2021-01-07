@@ -64,7 +64,7 @@ export default {
       border-color: $theme-color-yellow
 
     &:checked + .checkbox-btn__label
-      color: #bbb
+      color: #afafaf
 
 
   &__label

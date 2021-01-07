@@ -2,7 +2,7 @@
 <div>
   <div class="calendar-graph-wrap">
 
-    <div class="myCalendar"></div>
+    <div v-html="getTemplateCalendarGraph" class="myCalendar"></div>
 
   </div>
 
@@ -202,257 +202,208 @@ export default {
     }
   },
 
-  async mounted() {
-    const $el = document.querySelector('.myCalendar')
+  computed: {
+    getTemplateCalendarGraph() {
 
-    const calendarGraph = this.calendarGraph
-    // const challengesUser = this.challengesUser
+      const calendarGraph = this.calendarGraph
+      // const challengesUser = this.challengesUser
 
-    // приоритет показа челленджей
-    const challenges = [
-      'challenge5', 'challenge1', 'challenge2', 'challenge3', 'challenge4'
-    ]
+      // приоритет показа челленджей
+      const challenges = [
+        'challenge5', 'challenge1', 'challenge2', 'challenge3', 'challenge4'
+      ]
 
-    // console.log(calendarGraph.years[2020].month[0][31].challenge2.description) // Последний день месяца)
+      // console.log(calendarGraph.years[2020].month[0][31].challenge2.description) // Последний день месяца)
 
-    const deltaX = 15
-    const deltaY = 15
+      const deltaX = 15
+      const deltaY = 15
 
-    // const date = new Date()
-    const date = new Date(2021, 0, 4)
-    const currentYear = date.getFullYear()
-    const currentMonth = date.getMonth()
-    const currentDay = date.getDate()
-    const currentDayWeek = date.getDay()
-    const currentTimestamp = date.getTime()
+      const date = new Date()
+      // const date = new Date(2021, 0, 4)
+      const currentYear = date.getFullYear()
+      const currentMonth = date.getMonth()
+      const currentDay = date.getDate()
+      const currentDayWeek = date.getDay()
+      const currentTimestamp = date.getTime()
 
-    const lastYear = currentYear - 1
-    let lastDate = new Date(lastYear, currentMonth , currentDay)
-    const lastDayWeek = lastDate.getDay()
-    // если год начинается не с воскресенья, то сдвинуть до воскресенья
-    const lastDay = (lastDayWeek !== 0) ? currentDay - lastDayWeek : currentDay
-    lastDate = new Date(lastYear, currentMonth , lastDay)
-    let lastTimestamp = lastDate.getTime()
+      const lastYear = currentYear - 1
+      let lastDate = new Date(lastYear, currentMonth , currentDay)
+      const lastDayWeek = lastDate.getDay()
+      // если год начинается не с воскресенья, то сдвинуть до воскресенья
+      const lastDay = (lastDayWeek !== 0) ? currentDay - lastDayWeek : currentDay
+      lastDate = new Date(lastYear, currentMonth , lastDay)
+      let lastTimestamp = lastDate.getTime()
 
-    const deltaTimestamp = currentTimestamp - lastTimestamp
-    const countWeeks = Math.ceil(deltaTimestamp / (24 * 3600 * 1000) / 7) // кол-во недель
+      const deltaTimestamp = currentTimestamp - lastTimestamp
+      const countWeeks = Math.ceil(deltaTimestamp / (24 * 3600 * 1000) / 7) // кол-во недель
 
-    const days = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб']
-    const month = [
-      'Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'
-    ]
+      const days = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб']
+      const month = [
+        'Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'
+      ]
 
-    let arrMonthInSunday = [] // all sunday
-    let arrFirstSundayMonth = [] // first sunday month (index == month, value == position on graphic)
+      let arrMonthInSunday = [] // all sunday
+      let arrFirstSundayMonth = [] // first sunday month {position: 0, month: month[arrMonthInSunday[0]]}
 
-    // console.log('\n',
-    //   'date:', date.toLocaleDateString(),'\n',
-    //   'currentYear', currentYear,
-    //   'currentMonth', currentMonth,
-    //   'currentDay', currentDay,'\n',
-    //   'currentDayWeek', currentDayWeek, days[currentDayWeek],'\n','\n',
-    //   'lastDate:', lastDate.toLocaleDateString(),'\n',
-    //   'lastYear', lastYear,
-    //   'lastDay', lastDay,'\n',
-    //   'lastDayWeek', lastDayWeek, days[lastDayWeek],'\n',
-    // )
+      // console.log('\n',
+      //   'date:', date.toLocaleDateString(),'\n',
+      //   'currentYear', currentYear,
+      //   'currentMonth', currentMonth,
+      //   'currentDay', currentDay,'\n',
+      //   'currentDayWeek', currentDayWeek, days[currentDayWeek],'\n','\n',
+      //   'lastDate:', lastDate.toLocaleDateString(),'\n',
+      //   'lastYear', lastYear,
+      //   'lastDay', lastDay,'\n',
+      //   'lastDayWeek', lastDayWeek, days[lastDayWeek],'\n',
+      // )
 
-    function createAllDays() {
-      let html = ''
-      let x = 0
-      const beforeLastCountWeeks = countWeeks - 1 // все недели кроме текущей
-      for (let i = 0; i < countWeeks; i++) {
-        if (i !== beforeLastCountWeeks) {
-          html += `<g transform="translate(${x}, 0)">${createWeek()}</g>`
+      function createAllDays() {
+        let html = ''
+        let x = 0
+        const beforeLastCountWeeks = countWeeks - 1 // все недели кроме текущей
+        for (let i = 0; i < countWeeks; i++) {
+          if (i !== beforeLastCountWeeks) {
+            html += `<g transform="translate(${x}, 0)">${createWeek()}</g>`
+          } else {
+            html += `<g transform="translate(${x}, 0)">${createWeek(true)}</g>`
+          }
+          x += deltaX
+        }
+
+        createArrFirstSundayMonth()
+
+        return html
+      }
+
+      function createWeek(currentWeek) {
+        let html = ''
+        let y = 0
+        if (!currentWeek) {
+          for (let i = 0; i < 7; i++) {
+            if (!i) {
+              // добавляем номер месяца каждого воскресенья
+              arrMonthInSunday.push(new Date(lastTimestamp).getMonth())
+            }
+            html += getTemplateDay(y, lastTimestamp)
+            y += deltaY
+            lastTimestamp = lastTimestamp + (24 * 3600 * 1000)
+          }
         } else {
-          html += `<g transform="translate(${x}, 0)">${createWeek(true)}</g>`
-        }
-        x += deltaX
-      }
-
-      createarrFirstSundayMonth()
-
-      return html
-    }
-
-    function createWeek(currentWeek) {
-      let html = ''
-      let y = 0
-      if (!currentWeek) {
-        for (let i = 0; i < 7; i++) {
-          if (!i) {
-            // добавляем номер месяца каждого воскресенья
-            arrMonthInSunday.push(new Date(lastTimestamp).getMonth())
+          for (let i = 0; i < (currentDayWeek + 1); i++) {
+            if (!i) {
+              // добавляем номер месяца каждого воскресенья
+              arrMonthInSunday.push(new Date(lastTimestamp).getMonth())
+            }
+            html += getTemplateDay(y, lastTimestamp)
+            y += deltaY
+            lastTimestamp = lastTimestamp + (24 * 3600 * 1000)
           }
-          html += getTemplateDay(y, lastTimestamp)
-          y += deltaY
-          lastTimestamp = lastTimestamp + (24 * 3600 * 1000)
         }
-      } else {
-        for (let i = 0; i < (currentDayWeek + 1); i++) {
-          if (!i) {
-            // добавляем номер месяца каждого воскресенья
-            arrMonthInSunday.push(new Date(lastTimestamp).getMonth())
+        return html
+      }
+
+      function createArrFirstSundayMonth() {
+        // добавляем первый месяц в начало
+        arrFirstSundayMonth.push({position: 0, month: month[arrMonthInSunday[0]]})
+
+        // добавляем все месяцы кроме первого
+        for (let i = 0; i < arrMonthInSunday.length; i++) {
+          if (i !== arrMonthInSunday.length - 1
+            && arrMonthInSunday[i] !== arrMonthInSunday[i + 1]) {
+            arrFirstSundayMonth.push({position: i + 1, month: month[arrMonthInSunday[i+1]]})
           }
-          html += getTemplateDay(y, lastTimestamp)
-          y += deltaY
-          lastTimestamp = lastTimestamp + (24 * 3600 * 1000)
         }
       }
-      return html
-    }
 
-    function createarrFirstSundayMonth() {
-      for(let i = 0; i < 12; i++) {
-        arrFirstSundayMonth.push(arrMonthInSunday.indexOf(i))
-      }
-    }
-
-    function createLabelsMonths() {
-      let html = ''
-      // сортированный массив позиций первых вс месяцев (index здесь ничего не значит!)
-      // нужен, чтобы корректно определять первый и второй месяц
-      let sortArrFirstSundayMonth = arrFirstSundayMonth.map(item => item)
-        .sort((a, b) => a - b) // copy arr & sort new arr
-
-      const positionFirstMonth = sortArrFirstSundayMonth[0] // position on graphic
-      const positionSecondMonth = sortArrFirstSundayMonth[1] // position on graphic
-      const positionLastMonth = sortArrFirstSundayMonth[11] // position on graphic
-      const nameFirstMonth = arrFirstSundayMonth.indexOf(positionFirstMonth)
-      const nameSecondMonth = arrFirstSundayMonth.indexOf(positionSecondMonth)
-      const nameLastMonth = arrFirstSundayMonth.indexOf(positionLastMonth) // не всегда является текущим месяцям!
-
-      console.log('\n',
-        'arrFirstSundayMonth:', arrFirstSundayMonth,'\n',
-        'sortArrFirstSundayMonth:', sortArrFirstSundayMonth,'\n',
-        'positionFirstMonth:', positionFirstMonth,'\n',
-        'positionSecondMonth:', positionSecondMonth,'\n',
-        'positionLastMonth:', positionLastMonth,'\n',
-        'nameFirstMonth:', nameFirstMonth, month[nameFirstMonth], '\n',
-        'nameSecondMonth:', nameSecondMonth, month[nameSecondMonth], '\n',
-        'nameLastMonth:', nameLastMonth, month[nameLastMonth], '\n',
-        'currentMonth:', currentMonth, month[currentMonth], '\n',
-      )
-
-      for (let i = 0; i < (arrFirstSundayMonth.length); i++) {
-
-        // switch(positionFirstMonth) {
-        //   case 'value1':  // if (positionFirstMonth === 'value1')
-
-        //     break
-
-        //   case 'value2':  // if (positionFirstMonth === 'value2')
-
-        //     break
-
-        //   default:
-
-        //     break
-        // }
-
-
-        // if (positionSecondMonth - positionFirstMonth < 2) {
-        //   console.log('< 2')
-        // } else {
-
-        // }
-
-
-
+      function createLabelsMonths() {
+        let html = ''
 
         // первый месяц обработаем отдельно
-        if (i !== nameFirstMonth) {
-          html += `<text x="${deltaX * arrFirstSundayMonth[i] + 16}" y="-8" class="month">${month[i]}</text>`
-        } else if (positionSecondMonth - positionFirstMonth < 2) {
-          // const currentMonthStartPosition = arrMonthInSunday.indexOf(positionFirstMonth, -5) // 5 - максимальное число колонок/недель в одном месяце
-          // html += `<text x="${deltaX * currentMonthStartPosition + 16}" y="-8" class="month">${month[positionFirstMonth]}22</text>`
-          // if (currentMonthStartPosition !== -1) {
-          //   // если первый месяц переехал в конец графика,
-          //   // то смотрим сколько пустых колонок в начале графика и если больше 3,
-          //   // то дублируем этот же месяц в начале
-          //   if (arrFirstSundayMonth[positionSecondMonth] > 3) {
-          //     html += `<text x="${deltaX + 1}" y="-8" class="month">${month[positionFirstMonth]}</text>`
-          //   }
-          // }
+        if (arrFirstSundayMonth[1].position - arrFirstSundayMonth[0].position >= 2 ) {
+          html += `<text x="${deltaX * arrFirstSundayMonth[0].position + 16}" y="-8" class="month">${arrFirstSundayMonth[0].month}</text>`
         }
-      }
-
-      return html
-    }
-
-    function getTemplateDay(y, lastTimestamp) {
-      return `<rect class="day"
-                width="11" height="11"
-                x="16" y="${y}"
-                fill="var(--color-calendar-graph-day-bg${getColor(lastTimestamp)})"
-                data-count="0"
-                data-date="${new Date(lastTimestamp).toLocaleDateString()}">
-              </rect>`
-    }
-
-    function getColor(timestamp) {
-      const year = new Date(timestamp).getFullYear()
-      const month = new Date(timestamp).getMonth()
-      const day = new Date(timestamp).getDate()
-
-      if ( !calendarGraph.years[year]
-        || !calendarGraph.years[year].month
-        || !calendarGraph.years[year].month[month]
-        || !calendarGraph.years[year].month[month][day]) {
-        // ..если нет года, месяца или дня (undefined)
-        return ''
-      }
-
-      let colors = []
-
-      for (let i = 0; i < challenges.length; i++) {
-        if ( !calendarGraph.years[year].month[month][day][challenges[i]]
-          || !calendarGraph.years[year].month[month][day][challenges[i]].color) {
-            // ничего не делаем, если нет challenge или цвета (undefined)
-        } else {
-          const ch = calendarGraph.years[year].month[month][day][challenges[i]]
-          colors.push({
-            color: ch.color,
-            count: ch.count
-          })
+        // остальные месяцы
+        for (let i = 1; i < arrFirstSundayMonth.length; i++) {
+          html += `<text x="${deltaX * arrFirstSundayMonth[i].position + 16}" y="-8" class="month">${arrFirstSundayMonth[i].month}</text>`
         }
+
+        return html
       }
-      // console.log(colors)
-      if (colors.length <= 1) {
-        return colors.length < 1 ? '' : `${colors[0].color}-${colors[0].count}`
-      } else {
-        // console.log('НЕСКОЛЬКО ЦВЕТОВ В ОДНОМ RECT!')
-        // console.log(challengesUser)
-        // console.log(challenges) // ["challenge1", "challenge2", "challenge3", "challenge4", "challenge5"]
-        // console.log(colors) // ["-ch1", "-ch2", "-ch4", "-ch3"]
+
+      function getTemplateDay(y, lastTimestamp) {
+        return `<rect class="day"
+                  width="11" height="11"
+                  x="16" y="${y}"
+                  fill="var(--color-calendar-graph-day-bg${getColor(lastTimestamp)})"
+                  data-count="0"
+                  data-date="${new Date(lastTimestamp).toLocaleDateString()}">
+                </rect>`
+      }
+
+      function getColor(timestamp) {
+        const year = new Date(timestamp).getFullYear()
+        const month = new Date(timestamp).getMonth()
+        const day = new Date(timestamp).getDate()
+
+        if ( !calendarGraph.years[year]
+          || !calendarGraph.years[year].month
+          || !calendarGraph.years[year].month[month]
+          || !calendarGraph.years[year].month[month][day]) {
+          // ..если нет года, месяца или дня (undefined)
+          return ''
+        }
+
+        let colors = []
+
         for (let i = 0; i < challenges.length; i++) {
-          // console.log(colors[i])
-          if (colors[i]) {
-            return `${colors[i].color}-${colors[i].count}`
+          if ( !calendarGraph.years[year].month[month][day][challenges[i]]
+            || !calendarGraph.years[year].month[month][day][challenges[i]].color) {
+              // ничего не делаем, если нет challenge или цвета (undefined)
+          } else {
+            const ch = calendarGraph.years[year].month[month][day][challenges[i]]
+            colors.push({
+              color: ch.color,
+              count: ch.count
+            })
+          }
+        }
+        // console.log(colors)
+        if (colors.length <= 1) {
+          return colors.length < 1 ? '' : `${colors[0].color}-${colors[0].count}`
+        } else {
+          // console.log('НЕСКОЛЬКО ЦВЕТОВ В ОДНОМ RECT!')
+          // console.log(challengesUser)
+          // console.log(challenges) // ["challenge1", "challenge2", "challenge3", "challenge4", "challenge5"]
+          // console.log(colors) // ["-ch1", "-ch2", "-ch4", "-ch3"]
+          for (let i = 0; i < challenges.length; i++) {
+            // console.log(colors[i])
+            if (colors[i]) {
+              return `${colors[i].color}-${colors[i].count}`
+            }
           }
         }
       }
+
+      let resultHtml = `
+        <div class="mt3 border py-2 graph-before-activity-overview">
+          <svg width="${deltaX * countWeeks + 28}" height="128" class="js-calendar-graph-svg">
+            <g transform="translate(10, 20)" data-hydro-click="{&quotevent_type&quot:&quotuser_profile.click&quot,&quotpayload&quot:{&quotprofile_user_id&quot:59876378,&quottarget&quot:&quotCONTRIBUTION_CALENDAR_SQUARE&quot,&quotuser_id&quot:59876378,&quotoriginating_url&quot:&quothttps://github.com/CyberPunk10&quot}}" data-hydro-click-hmac="4852aa4a3d29cdad070926f4ff435c872cd50c7f37b83f5d4802f48f13829f8c">
+              ${createAllDays()}
+              ${createLabelsMonths()}
+              <text text-anchor="start" class="wday" dx="-10" dy="8" style="display: none">Sun</text>
+              <text text-anchor="start" class="wday" dx="-5" dy="25">Пн</text>
+              <text text-anchor="start" class="wday" dx="-5" dy="38" style="display: none">Вт</text>
+              <text text-anchor="start" class="wday" dx="-5" dy="54">Ср</text>
+              <text text-anchor="start" class="wday" dx="-10" dy="57" style="display: none">Thu</text>
+              <text text-anchor="start" class="wday" dx="-5" dy="84">Пт</text>
+              <text text-anchor="start" class="wday" dx="-10" dy="81" style="display: none">Sat</text>
+            </g>
+          </svg>
+        </div>
+      `
+
+      return resultHtml
     }
-
-    let resultHtml = `
-      <div class="mt3 border py-2 graph-before-activity-overview">
-        <svg width="${deltaX * countWeeks + 28}" height="128" class="js-calendar-graph-svg">
-          <g transform="translate(10, 20)" data-hydro-click="{&quotevent_type&quot:&quotuser_profile.click&quot,&quotpayload&quot:{&quotprofile_user_id&quot:59876378,&quottarget&quot:&quotCONTRIBUTION_CALENDAR_SQUARE&quot,&quotuser_id&quot:59876378,&quotoriginating_url&quot:&quothttps://github.com/CyberPunk10&quot}}" data-hydro-click-hmac="4852aa4a3d29cdad070926f4ff435c872cd50c7f37b83f5d4802f48f13829f8c">
-            ${createAllDays()}
-            ${createLabelsMonths()}
-            <text text-anchor="start" class="wday" dx="-10" dy="8" style="display: none">Sun</text>
-            <text text-anchor="start" class="wday" dx="-5" dy="25">Пн</text>
-            <text text-anchor="start" class="wday" dx="-5" dy="38" style="display: none">Вт</text>
-            <text text-anchor="start" class="wday" dx="-5" dy="54">Ср</text>
-            <text text-anchor="start" class="wday" dx="-10" dy="57" style="display: none">Thu</text>
-            <text text-anchor="start" class="wday" dx="-5" dy="84">Пт</text>
-            <text text-anchor="start" class="wday" dx="-10" dy="81" style="display: none">Sat</text>
-          </g>
-        </svg>
-      </div>
-    `
-
-    $el.innerHTML = resultHtml
 
   },
 
