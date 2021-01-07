@@ -198,7 +198,8 @@ export default {
       //   challenge3: {color: 'ch3'},
       //   challenge4: {color: 'ch4'},
       //   challenge5: {color: 'ch5'}
-      // }
+      // },
+
     }
   },
 
@@ -225,7 +226,6 @@ export default {
       const currentDay = date.getDate()
       const currentDayWeek = date.getDay()
       const currentTimestamp = date.getTime()
-
       const lastYear = currentYear - 1
       let lastDate = new Date(lastYear, currentMonth , currentDay)
       const lastDayWeek = lastDate.getDay()
@@ -386,19 +386,27 @@ export default {
 
       let resultHtml = `
         <div class="mt3 border py-2 graph-before-activity-overview">
-          <svg width="${deltaX * countWeeks + 28}" height="128" class="js-calendar-graph-svg">
-            <g transform="translate(10, 20)" data-hydro-click="{&quotevent_type&quot:&quotuser_profile.click&quot,&quotpayload&quot:{&quotprofile_user_id&quot:59876378,&quottarget&quot:&quotCONTRIBUTION_CALENDAR_SQUARE&quot,&quotuser_id&quot:59876378,&quotoriginating_url&quot:&quothttps://github.com/CyberPunk10&quot}}" data-hydro-click-hmac="4852aa4a3d29cdad070926f4ff435c872cd50c7f37b83f5d4802f48f13829f8c">
-              ${createAllDays()}
-              ${createLabelsMonths()}
-              <text text-anchor="start" class="wday" dx="-10" dy="8" style="display: none">Sun</text>
-              <text text-anchor="start" class="wday" dx="-5" dy="25">Пн</text>
-              <text text-anchor="start" class="wday" dx="-5" dy="38" style="display: none">Вт</text>
-              <text text-anchor="start" class="wday" dx="-5" dy="54">Ср</text>
-              <text text-anchor="start" class="wday" dx="-10" dy="57" style="display: none">Thu</text>
-              <text text-anchor="start" class="wday" dx="-5" dy="84">Пт</text>
-              <text text-anchor="start" class="wday" dx="-10" dy="81" style="display: none">Sat</text>
-            </g>
-          </svg>
+          <div class="js-calendar-graph-wrap-label-week">
+            <svg width="${deltaX}" height="128" class="js-calendar-graph-svg">
+              <g transform="translate(0, 20)">
+                <text text-anchor="start" class="wday" dx="0" dy="8" style="display: none">Вс</text>
+                <text text-anchor="start" class="wday" dx="0" dy="25">Пн</text>
+                <text text-anchor="start" class="wday" dx="0" dy="38" style="display: none">Вт</text>
+                <text text-anchor="start" class="wday" dx="0" dy="54">Ср</text>
+                <text text-anchor="start" class="wday" dx="0" dy="57" style="display: none">Чт</text>
+                <text text-anchor="start" class="wday" dx="0" dy="84">Пт</text>
+                <text text-anchor="start" class="wday" dx="0" dy="81" style="display: none">Сб</text>
+              </g>
+            </svg>
+          </div>
+          <div class="js-calendar-graph-wrap-main layout-cell-light-gray-border layout-scrollbar-light-gray-border">
+            <svg width="${deltaX * countWeeks + deltaX - 5}" height="128" class="js-calendar-graph-svg">
+              <g transform="translate(-12, 20)">
+                ${createAllDays()}
+                ${createLabelsMonths()}
+              </g>
+            </svg>
+          </div>
         </div>
       `
 
@@ -462,7 +470,7 @@ export default {
 
 .calendar-graph-wrap,
 .myCalendar
-  width: 91rem
+  max-width: 91rem
   margin: 0 auto
 
 .myCalendar > div
@@ -477,8 +485,10 @@ export default {
   border-top-right-radius: 6px
 
 .py-2
-  padding-top: 8px!important
-  padding-bottom: 8px!important
+  margin: 1rem
+  padding: .8rem 1rem
+  // padding-top: 8px!important
+  // padding-bottom: 8px!important
 
 .border
   border: 1px solid $color-dark-shade-10
@@ -523,5 +533,12 @@ text
 body
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji
   line-height: 1.5
+
+.js-calendar-graph
+  &-wrap-main
+    overflow-x: auto
+    width: max-content
+
+
 
 </style>
