@@ -415,6 +415,11 @@ export default {
 
   },
 
+  async mounted() {
+    const $el = document.querySelector('.js-calendar-graph-wrap-main')
+    $el.scrollLeft = $el.scrollWidth
+  },
+
   methods: {
 
   }
