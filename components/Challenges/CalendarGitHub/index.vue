@@ -320,11 +320,11 @@ export default {
 
         // первый месяц обработаем отдельно
         if (arrFirstSundayMonth[1].position - arrFirstSundayMonth[0].position >= 2 ) {
-          html += `<text x="${deltaX * arrFirstSundayMonth[0].position + 16}" y="-8" class="month">${arrFirstSundayMonth[0].month}</text>`
+          html += `<text x="${deltaX * arrFirstSundayMonth[0].position}" y="-8" class="month">${arrFirstSundayMonth[0].month}</text>`
         }
         // остальные месяцы
         for (let i = 1; i < arrFirstSundayMonth.length; i++) {
-          html += `<text x="${deltaX * arrFirstSundayMonth[i].position + 16}" y="-8" class="month">${arrFirstSundayMonth[i].month}</text>`
+          html += `<text x="${deltaX * arrFirstSundayMonth[i].position}" y="-8" class="month">${arrFirstSundayMonth[i].month}</text>`
         }
 
         return html
@@ -333,7 +333,7 @@ export default {
       function getTemplateDay(y, lastTimestamp) {
         return `<rect class="day"
                   width="11" height="11"
-                  x="16" y="${y}"
+                  x="0" y="${y}"
                   fill="var(--color-calendar-graph-day-bg${getColor(lastTimestamp)})"
                   data-count="0"
                   data-date="${new Date(lastTimestamp).toLocaleDateString()}">
@@ -387,7 +387,7 @@ export default {
       let resultHtml = `
         <div class="mt3 border py-2 graph-before-activity-overview">
           <div class="js-calendar-graph-wrap-label-week">
-            <svg width="${deltaX}" height="128" class="js-calendar-graph-svg">
+            <svg width="20" height="128" class="js-calendar-graph-svg">
               <g transform="translate(0, 20)">
                 <text text-anchor="start" class="wday" dx="0" dy="8" style="display: none">Вс</text>
                 <text text-anchor="start" class="wday" dx="0" dy="25">Пн</text>
@@ -400,8 +400,8 @@ export default {
             </svg>
           </div>
           <div class="js-calendar-graph-wrap-main layout-cell-light-gray-border layout-scrollbar-light-gray-border">
-            <svg width="${deltaX * countWeeks + deltaX - 5}" height="128" class="js-calendar-graph-svg">
-              <g transform="translate(-12, 20)">
+            <svg width="${deltaX * countWeeks + 3}" height="128" class="js-calendar-graph-svg">
+              <g transform="translate(0, 20)">
                 ${createAllDays()}
                 ${createLabelsMonths()}
               </g>
@@ -481,11 +481,10 @@ export default {
   margin-top: 3rem
 
 .graph-before-activity-overview
-  border-top-left-radius: 6px
-  border-top-right-radius: 6px
+  border-radius: 6px
 
 .py-2
-  margin: 1rem
+  margin: 1.5rem
   padding: .8rem 1rem
   // padding-top: 8px!important
   // padding-bottom: 8px!important
