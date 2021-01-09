@@ -1,5 +1,5 @@
 <template>
-  <div style="position: relative" class="bg height-100vh">
+  <div style="position: relative" class="bg height-100vh mm-nav-opened">
     <div class="container">
       <div class="menu">
         <nuxt-link
@@ -54,6 +54,7 @@ export default {
         {title: 'Создать ch', url: '/challenges/create'},
         {title: 'Добавить прогресс', url: '/challenges/addprogress'},
         {title: 'Mobile', url: '/challenges/mobile'},
+        {title: 'MobileMenu', url: '/challengesmmenu'},
         {title: 'Table', url: '/challenges/table'}
       ]
     }
@@ -84,7 +85,7 @@ export default {
 }
 </style>
 
-<style lang="sass">
+<style lang="sass" scoped>
 $height-header: 5.1rem
 
 // .bg
@@ -119,5 +120,4 @@ $height-header: 5.1rem
     padding: 0 1.5rem
     &:hover
       border-bottom: 2px solid #409EFF
-
 </style>
