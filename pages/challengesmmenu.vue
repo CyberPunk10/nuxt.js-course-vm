@@ -1,15 +1,15 @@
 <template>
   <div class="">
-    <CalendarGitHub />
+    <p>Content in pages</p>
   </div>
 </template>
 
 <script>
 export default {
   head: {
-    title: `Challenges | ${process.env.appName}`
+    title: `Mmenu | ${process.env.appName}`
   },
-  layout: 'challenges'
+  layout: 'challengesmmenu'
 }
 </script>
 

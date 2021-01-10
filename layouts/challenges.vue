@@ -1,15 +1,15 @@
 <template>
-  <div style="position: relative" class="bg layout-scrollbar layout-cell height-100vh">
+  <div style="position: relative" class="bg height-100vh mm-nav-opened">
     <div class="container">
       <div class="menu">
         <nuxt-link
           v-for="link in links" :key="link.url"
           :to="link.url"
         >
-          {{ link.title}}
+          {{ link.title }}
         </nuxt-link>
       </div>
-      <Nuxt />
+      <Nuxt class="layout-scrollbar layout-cell height-100vh-minus-header" />
     </div>
     <TeleportMenu/>
   </div>
@@ -54,6 +54,7 @@ export default {
         {title: 'Создать ch', url: '/challenges/create'},
         {title: 'Добавить прогресс', url: '/challenges/addprogress'},
         {title: 'Mobile', url: '/challenges/mobile'},
+        {title: 'MobileMenu', url: '/challengesmmenu'},
         {title: 'Table', url: '/challenges/table'}
       ]
     }
@@ -84,7 +85,7 @@ export default {
 }
 </style>
 
-<style lang="sass">
+<style lang="sass" scoped>
 $height-header: 5.1rem
 
 // .bg
@@ -92,6 +93,8 @@ $height-header: 5.1rem
   // background-color: $theme-color-yellow
 .height-100vh
   height: 100vh
+.height-100vh-minus-header
+  height: calc(100vh - #{$height-header})
 
 .container
   // padding-top: calc(#{$height-header} + 3rem)
@@ -117,5 +120,4 @@ $height-header: 5.1rem
     padding: 0 1.5rem
     &:hover
       border-bottom: 2px solid #409EFF
-
 </style>
