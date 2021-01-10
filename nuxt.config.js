@@ -52,7 +52,13 @@ export default {
   styleResources: {
     sass: [
       'assets/sass/vars/_index.sass',
-      'assets/sass/mixins/_index.sass'
+      'assets/sass/mixins/_index.sass',
+      'assets/sass/common/mmenu/_index.sass',
+      'assets/sass/common/ctblack/_mixins.sass'
+    ],
+    scss: [
+      'assets/sass/common/ctblack/_variables.scss',
+      'assets/sass/common/ctblack/bootstrap/_functions.scss'
     ]
   },
 

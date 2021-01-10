@@ -55,6 +55,7 @@ export default {
         {title: 'Добавить прогресс', url: '/challenges/addprogress'},
         {title: 'Mobile', url: '/challenges/mobile'},
         {title: 'MobileMenu', url: '/challengesmmenu'},
+        {title: 'creativetimblack', url: '/creativetimblack'},
         {title: 'Table', url: '/challenges/table'}
       ]
     }

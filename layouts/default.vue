@@ -1,5 +1,5 @@
 <template>
-  <div class="dfasdf">
+  <div class="default-layout-wrapper">
     <Nuxt />
     <TeleportMenu/>
   </div>
