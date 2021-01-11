@@ -53,6 +53,9 @@ export default {
     sass: [
       'assets/sass/vars/_index.sass',
       'assets/sass/mixins/_index.sass'
+    ],
+    scss: [
+
     ]
   },
 
@@ -84,3 +87,6 @@ export default {
 // CSS Grid #8 Вложенность grid-элементов (Grid Nesting)
 // https://www.youtube.com/watch?v=XP30BMpJ740
 
+
+// Простой многоязычный сайт с Nuxt.js и nuxt-i18n
+// https://favicon.tech/prostoj-mnogoyazychnyj-sajt-s-nuxt-js-i-nuxt-i18n/

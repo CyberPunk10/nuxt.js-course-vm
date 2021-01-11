@@ -6,8 +6,7 @@
       <AppInput v-model="user.name" class="label-left">Название</AppInput>
       <AppTextArea v-model="user.description" label="width: 250px" class="label-left">Описание</AppTextArea>
       <AppInput v-model="user.category" class="label-left">Категория</AppInput>
-      <!-- <AppInput v-model="user.email" type="email">Email: </AppInput> -->
-
+      <AppInput v-model="user.email" type="email">Email: </AppInput>
     </form>
 
     <el-form ref="form"
@@ -54,8 +53,8 @@
       </el-form-item>
     </el-form>
 
-    <Btn/>
-    <Checkbox />
+    <Btn />
+    <Checkbox title="title" id="21-mocup"/>
 
   </div>
 </template>

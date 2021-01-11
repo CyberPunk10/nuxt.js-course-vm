@@ -17,29 +17,9 @@ time, mark, audio, video
   font-size: 100%
   vertical-align: baseline
 
-// Links
-a
-  text-decoration: none
-  &:active, &:hover
-    outline: 0
-
-// List
-ul, li
-  list-style-type: none
-  margin: 0
-  padding: 0
-
-// Headlines
-h1, h2, h3, h4, h5, h6
-  font-size: 100%
-  font-weight: normal
-
-// Default
-html
+html, *, *:before, *:after
   box-sizing: border-box
 
-*, *:before, *:after
-  box-sizing: border-box
 *:focus
   outline: 0
 
@@ -50,6 +30,20 @@ audio, canvas, iframe, video, img, svg
   vertical-align: middle
 iframe
   border: 0
+
+// Headlines
+h1, h2, h3, h4, h5, h6
+  font-weight: normal
+
+// Links
+a
+  text-decoration: none
+  &:active, &:hover
+    outline: 0
+
+// List
+ul, li
+  list-style-type: none
 
 // From
 textarea
@@ -73,5 +67,4 @@ table
   border-collapse: collapse
   border-spacing: 0
 td, th
-  padding: 0
   text-align: left

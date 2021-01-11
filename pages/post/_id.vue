@@ -3,9 +3,9 @@
     <header class="post-header">
       <div class="post-title">
         <h1>{{post.title}}</h1>
-        <nuxt-link to="/">
+        <NuxtLink to="/">
           <i class="el-icon-back"></i>
-        </nuxt-link>
+        </NuxtLink>
       </div>
       <div class="post-info">
         <small>

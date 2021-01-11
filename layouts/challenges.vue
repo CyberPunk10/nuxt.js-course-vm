@@ -2,12 +2,12 @@
   <div style="position: relative" class="bg height-100vh mm-nav-opened">
     <div class="container">
       <div class="menu">
-        <nuxt-link
+        <NuxtLink
           v-for="link in links" :key="link.url"
           :to="link.url"
         >
           {{ link.title }}
-        </nuxt-link>
+        </NuxtLink>
       </div>
       <Nuxt class="layout-scrollbar layout-cell height-100vh-minus-header" />
     </div>
@@ -55,6 +55,7 @@ export default {
         {title: 'Добавить прогресс', url: '/challenges/addprogress'},
         {title: 'Mobile', url: '/challenges/mobile'},
         {title: 'MobileMenu', url: '/challengesmmenu'},
+        {title: 'ctblack-page', url: '/ctblack-page'},
         {title: 'Table', url: '/challenges/table'}
       ]
     }
@@ -86,38 +87,38 @@ export default {
 </style>
 
 <style lang="sass" scoped>
-$height-header: 5.1rem
+  $height-header: 5.1rem
 
-// .bg
-  // @include backgroundShorthandWithExternalVar('challenges/kaspar-allenbach-w9QgdJ3lAPU-unsplash.jpg', center)
-  // background-color: $theme-color-yellow
-.height-100vh
-  height: 100vh
-.height-100vh-minus-header
-  height: calc(100vh - #{$height-header})
+  // .bg
+    // @include backgroundShorthandWithExternalVar('challenges/kaspar-allenbach-w9QgdJ3lAPU-unsplash.jpg', center)
+    // background-color: $theme-color-yellow
+  .height-100vh
+    height: 100vh
+  .height-100vh-minus-header
+    height: calc(100vh - #{$height-header})
 
-.container
-  // padding-top: calc(#{$height-header} + 3rem)
-  padding-top:$height-header
-.menu
-  position: fixed
-  z-index: 9999
-  top: 0
-  left: 0
-  right: 0
-  height: $height-header
-  background-color: #fff
-  border-bottom: 1px solid #e6e6e6
-  display: flex
-  justify-content: center
-  align-items: center
-  @media screen and (max-width: $tableWidth)
-    font-size: 6px
-  a
-    color: #909399
+  .container
+    // padding-top: calc(#{$height-header} + 3rem)
+    padding-top:$height-header
+  .menu
+    position: fixed
+    z-index: 9999
+    top: 0
+    left: 0
+    right: 0
     height: $height-header
-    line-height: $height-header
-    padding: 0 1.5rem
-    &:hover
-      border-bottom: 2px solid #409EFF
+    background-color: #fff
+    border-bottom: 1px solid #e6e6e6
+    display: flex
+    justify-content: center
+    align-items: center
+    @media screen and (max-width: $tableWidth)
+      font-size: 6px
+    a
+      color: #909399
+      height: $height-header
+      line-height: $height-header
+      padding: 0 1.5rem
+      &:hover
+        border-bottom: 2px solid #409EFF
 </style>
