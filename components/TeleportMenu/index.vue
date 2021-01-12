@@ -1,7 +1,7 @@
 <template>
   <div
     class="teleport-menu"
-    v-on:click="handleClickTeleportMenu"
+    @click="handleClickTeleportMenu"
   >
     <div class="underlay"></div>
     <div class="teleport-menu__bg-gradient">
@@ -78,9 +78,10 @@ export default {
 
   methods: {
     handleClickTeleportMenu: function(event) {
+      console.log('click on TeleportMenu', event.target)
       const teleportMenu = document.querySelector('.teleport-menu')
-      const underlay = teleportMenu.querySelector('.underlay')
-      if (event.target.className === 'underlay') {
+      // const underlay = teleportMenu.querySelector('.underlay')
+      if (event.target.className === 'underlay' && event.target.parentElement.classList.contains('teleport-menu')) {
         teleportMenu.classList.toggle('active')
       } else if (event.target.dataset.tmbtn === 'teleport-menu__btn') {
         teleportMenu.classList.toggle('active')
@@ -94,8 +95,7 @@ export default {
 $color-bg-content: rgb(248,250,252)
 
 .teleport-menu
-  @media screen and (max-width: $tableWidth)
-    opacity: .2
+  z-index: 9999
   &__bg-gradient
     position: fixed
     z-index: 9999
@@ -164,7 +164,9 @@ $color-bg-content: rgb(248,250,252)
     width: 4rem
     border-top-right-radius: 2rem
     border-bottom-right-radius: 2rem
-    opacity: .1
+    opacity: .5
+    @media screen and (max-width: $tableWidth)
+      opacity: .2
     transition: all .2s ease-in
     &:hover
       opacity: 1
@@ -235,17 +237,6 @@ $color-bg-content: rgb(248,250,252)
     // background-image: linear-gradient(to bottom, transparent 0%, #FF7571 100%)
     border-bottom-right-radius: 2rem
 
-.underlay
-  position: fixed
-  top: 0
-  left: 0
-  width: 100%
-  height: 100%
-  background-color: #333
-  opacity: 0
-  pointer-events: none
-  transition: all .2s linear
-
 // show
 .teleport-menu.active .teleport-menu__bg-gradient
   left: 0
@@ -253,6 +244,7 @@ $color-bg-content: rgb(248,250,252)
   -webkit-animation: gradient-shift 30s ease infinite
   animation: gradient-shift 30s ease infinite
 .teleport-menu.active .underlay
+  z-index: 9999
   // opacity: 0.3
   pointer-events: auto
 .teleport-menu.active .teleport-menu__btns-wrap
