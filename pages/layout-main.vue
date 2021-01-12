@@ -16,7 +16,7 @@ export default {
     title: `layoutMain | ${process.env.appName}`
   },
 
-  layout: 'layoutMain',
+  layout: 'layoutMainChallenges',
 
   // async asyncData({ store }) {
   //   const posts = await store.dispatch('post/fetch')
