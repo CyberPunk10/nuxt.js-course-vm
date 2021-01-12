@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-layout">
     <Sidebar />
-    <div class="main ">
+    <div class="main layout-scrollbar layout-cell">
 
       <div class="container">
         <div class="menu">
@@ -18,7 +18,7 @@
           </NuxtLink>
         </div>
 
-        <Nuxt class="layout-scrollbar layout-cell"/>
+        <Nuxt />
       </div>
 
     </div>
@@ -103,14 +103,14 @@ $height-header: 5.1rem
   height: 100vh
 
 .main
-  position: absolute
+  position: fixed
   overflow-x: hidden
   top: 0
   bottom: 0
   right: 0
   left: 0
   width: 100%
-  height: 100vh
+  height: 100%
   background-color: #2dce89
   color: #fff
   transition: $transitionSidebar
