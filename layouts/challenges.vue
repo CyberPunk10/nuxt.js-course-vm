@@ -1,5 +1,5 @@
 <template>
-  <div style="position: relative" class="bg height-100vh mm-nav-opened">
+  <div style="position: relative" class="bg height-100vh">
     <div class="container">
       <div class="menu">
         <NuxtLink
@@ -54,8 +54,7 @@ export default {
         {title: 'Создать ch', url: '/challenges/create'},
         {title: 'Добавить прогресс', url: '/challenges/addprogress'},
         {title: 'Mobile', url: '/challenges/mobile'},
-        {title: 'MobileMenu', url: '/challengesmmenu'},
-        {title: 'ctblack-page', url: '/ctblack-page'},
+        {title: 'layout-main', url: '/layout-main'},
         {title: 'Table', url: '/challenges/table'}
       ]
     }
