@@ -1,22 +1,56 @@
 <template>
   <div class="wrapper-layout">
     <Sidebar />
-    <div class="absolute layout-scrollbar layout-cell">
-      <button class="sidebar-toggle"
-        data-btn="sidebar-toggle"
-        @click="handleClickSidebarToggle"
-      >sidebar-toggle</button>
+    <div class="main ">
 
-      <Nuxt />
+      <div class="container">
+        <div class="menu">
+          <button class="sidebar-toggle"
+            data-btn="sidebar-toggle"
+            @click="handleClickSidebarToggle"
+          >sidebar-toggle</button>
+
+          <NuxtLink
+            v-for="link in links" :key="link.url"
+            :to="link.url"
+          >
+            {{ link.title }}
+          </NuxtLink>
+        </div>
+
+        <Nuxt class="layout-scrollbar layout-cell"/>
+      </div>
+
     </div>
     <TeleportMenu />
   </div>
 </template>
 
 <script>
-import Sidebar from '~/components/Sidebar.vue';
 export default {
-  components: { Sidebar },
+  data() {
+    return {
+      links: [
+        {title: 'Главная', url: '/challenges/'},
+        {title: 'Создать ch', url: '/challenges/create'},
+        {title: 'Добавить прогресс', url: '/challenges/addprogress'},
+        {title: 'Mobile', url: '/challenges/mobile'},
+        {title: 'layout-main', url: '/layout-main'},
+        {title: 'Table', url: '/challenges/table'}
+      ]
+    }
+  },
+  computed: {
+    error() {
+      return this.$store.getters.error
+    }
+  },
+  watch: {
+    error(value) {
+      this.$message.error(value.response.data.message)
+    }
+  },
+
   mounted(){
     /* Работа со скоролом */
     // взято отсюда: https://habr.com/ru/company/ruvds/blog/468405/
@@ -60,20 +94,23 @@ export default {
 </script>
 
 <style lang="sass">
+// vars
+$height-header: 5.1rem
+
 .wrapper-layout
   position: relative
   width: 100%
   height: 100vh
 
-.absolute
-  position: fixed
+.main
+  position: absolute
   overflow-x: hidden
   top: 0
   bottom: 0
   right: 0
   left: 0
   width: 100%
-  height: 100%
+  height: 100vh
   background-color: #2dce89
   color: #fff
   transition: $transitionSidebar
@@ -82,8 +119,31 @@ export default {
   margin: 1rem
   padding: 1rem
 
-.sidebar-wrapper.active + .absolute
+.sidebar-wrapper.active + .main
   left: 80%
 
 
+.container
+  padding-top:$height-header
+  .menu
+    position: fixed
+    z-index: 444
+    top: 0
+    left: 0
+    right: 0
+    height: $height-header
+    background-color: #fff
+    border-bottom: 1px solid #e6e6e6
+    display: flex
+    justify-content: center
+    align-items: center
+    @media screen and (max-width: $tableWidth)
+      font-size: 6px
+    a
+      color: #909399
+      height: $height-header
+      line-height: $height-header
+      padding: 0 1.5rem
+      &:hover
+        border-bottom: 2px solid #409EFF
 </style>

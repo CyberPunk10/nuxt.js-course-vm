@@ -78,12 +78,10 @@ export default {
 
   methods: {
     handleClickTeleportMenu: function(event) {
-      console.log('click on TeleportMenu', event.target)
+      // console.log('click on TeleportMenu', event.target)
       const teleportMenu = document.querySelector('.teleport-menu')
-      // const underlay = teleportMenu.querySelector('.underlay')
-      if (event.target.className === 'underlay' && event.target.parentElement.classList.contains('teleport-menu')) {
-        teleportMenu.classList.toggle('active')
-      } else if (event.target.dataset.tmbtn === 'teleport-menu__btn') {
+      if ( event.target.className === 'underlay' && event.target.parentElement.classList.contains('teleport-menu')
+        || event.target.dataset.tmbtn === 'teleport-menu__btn' ) {
         teleportMenu.classList.toggle('active')
       }
     }
@@ -164,9 +162,9 @@ $color-bg-content: rgb(248,250,252)
     width: 4rem
     border-top-right-radius: 2rem
     border-bottom-right-radius: 2rem
-    opacity: .5
+    opacity: .3
     @media screen and (max-width: $tableWidth)
-      opacity: .2
+      opacity: .1
     transition: all .2s ease-in
     &:hover
       opacity: 1

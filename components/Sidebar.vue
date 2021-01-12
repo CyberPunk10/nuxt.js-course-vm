@@ -13,15 +13,11 @@
 export default {
   methods: {
     handleClickSidebar: function(event) {
-      console.log('click on Sidebar', event.target)
+      // console.log('click on Sidebar', event.target)
       const sideBar = document.querySelector('.sidebar-wrapper')
-      // const underlay = sideBar.querySelector('.underlay')
-      if (event.target.className === 'underlay' && event.target.parentElement.classList.contains('sidebar-wrapper')) {
+      if ( event.target.className === 'underlay' && event.target.parentElement.classList.contains('sidebar-wrapper')) {
         sideBar.classList.toggle('active')
       }
-      //  else if (event.target.dataset.tmbtn === 'sidebar-wrapper__btn') {
-      //   sideBar.classList.toggle('active')
-      // }
     }
   }
 }
@@ -33,10 +29,6 @@ export default {
 .sidebar-wrapper
   z-index: 999
   position: fixed
-  // top: 0
-  // bottom: 0
-  // left: 0
-  // right: 0
 
   .underlay,
   .sidebar
@@ -44,13 +36,13 @@ export default {
     top: 0
     bottom: 0
     height: 100%
+    transition: $transitionSidebar
 
   .sidebar
     left: -80%
     width: 80%
-    background-color: #242424
-    color: #888
-    transition: all .4s ease
+    background-color: #fff
+    color: #242424
 
 // show
 .sidebar-wrapper.active .sidebar
@@ -58,15 +50,9 @@ export default {
   box-shadow: 4px 2px 4px rgba(0,0,0,.101562)
 .sidebar-wrapper.active .underlay
   z-index: 999
-  opacity: 0.3
+  opacity: 0.2
   left: 80%
   width: 20%
   pointer-events: auto
-// .sidebar-wrapper.active .sidebar-wrapper__btns-wrap
-//   opacity: 1
-// .sidebar-wrapper.active .sidebar-wrapper__svg-list
-//   display: none
-// .sidebar-wrapper.active .sidebar-wrapper__svg-close
-//   display: block
 
 </style>
