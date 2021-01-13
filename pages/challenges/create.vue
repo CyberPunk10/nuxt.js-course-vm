@@ -64,7 +64,7 @@ export default {
   head: {
     title: `Challenges | ${process.env.appName}`
   },
-  layout: 'challenges',
+  layout: 'layoutMainChallenges',
 
   data() {
     return {

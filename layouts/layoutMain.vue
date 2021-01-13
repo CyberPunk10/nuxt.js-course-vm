@@ -60,30 +60,30 @@ export default {
 </script>
 
 <style lang="sass">
-.wrapper-layout
-  position: relative
-  width: 100%
-  height: 100vh
+// .wrapper-layout
+//   position: relative
+//   width: 100%
+//   height: 100vh
 
-.absolute
-  position: fixed
-  overflow-x: hidden
-  top: 0
-  bottom: 0
-  right: 0
-  left: 0
-  width: 100%
-  height: 100%
-  background-color: #2dce89
-  color: #fff
-  transition: $transitionSidebar
+// .absolute
+//   position: fixed
+//   overflow-x: hidden
+//   top: 0
+//   bottom: 0
+//   right: 0
+//   left: 0
+//   width: 100%
+//   height: 100%
+//   background-color: #2dce89
+//   color: #fff
+//   transition: $transitionSidebar
 
-.sidebar-toggle
-  margin: 1rem
-  padding: 1rem
+// .sidebar-toggle
+//   margin: 1rem
+//   padding: 1rem
 
-.sidebar-wrapper.active + .absolute
-  left: 80%
+// .sidebar-wrapper.active + .absolute
+//   left: 80%
 
 
 </style>

@@ -1,45 +1,27 @@
 <template>
-  <div class="wrapper-layout">
+  <div class="layout-wrapper main-container_transform-x">
     <Sidebar />
-    <div class="main layout-scrollbar layout-cell">
 
-      <div class="container">
-        <div class="menu">
-          <button class="sidebar-toggle"
-            data-btn="sidebar-toggle"
-            @click="handleClickSidebarToggle"
-          >sidebar-toggle</button>
+    <div class="main-container"
+      @click="handleClickSidebarToggle"
+    >
+      <div class="underlay"></div>
 
-          <NuxtLink
-            v-for="link in links" :key="link.url"
-            :to="link.url"
-          >
-            {{ link.title }}
-          </NuxtLink>
+      <Header/>
+
+      <div class="main-wrapper layout-scrollbar layout-cell">
+        <div class="container">
+          <Nuxt />
         </div>
-
-        <Nuxt />
       </div>
-
     </div>
+
     <TeleportMenu />
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      links: [
-        {title: 'Главная', url: '/challenges/'},
-        {title: 'Создать ch', url: '/challenges/create'},
-        {title: 'Добавить прогресс', url: '/challenges/addprogress'},
-        {title: 'Mobile', url: '/challenges/mobile'},
-        {title: 'layout-main', url: '/layout-main'},
-        {title: 'Table', url: '/challenges/table'}
-      ]
-    }
-  },
   computed: {
     error() {
       return this.$store.getters.error
@@ -83,9 +65,11 @@ export default {
 
   methods: {
     handleClickSidebarToggle: function(event) {
-      // console.log('click on Sidebar-toggle', event.target)
+      console.log('click layout (layoutMainChallenges.vue)', event.target)
       const sideBar = document.querySelector('.sidebar-wrapper')
-      if (event.target.dataset.btn === 'sidebar-toggle') {
+      const mainContainer = document.querySelector('.main-container')
+      if ( event.target.dataset.btn === 'sidebar-toggle'
+        || event.target.className === 'underlay' && event.target.parentElement.classList.contains('main-container')) {
         sideBar.classList.toggle('active')
       }
     }
@@ -94,56 +78,51 @@ export default {
 </script>
 
 <style lang="sass">
-// vars
-$height-header: 5.1rem
-
-.wrapper-layout
+.layout-wrapper
   position: relative
   width: 100%
   height: 100vh
 
-.main
+.main-container
   position: fixed
-  overflow-x: hidden
+  overflow: hidden
   top: 0
   bottom: 0
   right: 0
   left: 0
   width: 100%
-  height: 100%
-  background-color: #2dce89
-  color: #fff
+  height: 100vh
+  background-color: #f7f7f7
+  color: #555
   transition: $transitionSidebar
+  .underlay
+    position: absolute
 
-.sidebar-toggle
-  margin: 1rem
-  padding: 1rem
+.header-wrapper,
+.main-wrapper
+  position: absolute
+  bottom: 0
+  left: 0
+  right: 0
+  width: 100%
 
-.sidebar-wrapper.active + .main
-  left: 80%
+.main-wrapper
+  top: $height-header
+  height: calc(100% - #{$height-header})
+  overflow-x: hidden
 
+.sidebar-wrapper.active + .main-container
+  .underlay
+    z-index:555
+    pointer-events: auto
+    opacity: .2
 
-.container
-  padding-top:$height-header
-  .menu
-    position: fixed
-    z-index: 444
-    top: 0
-    left: 0
-    right: 0
-    height: $height-header
-    background-color: #fff
-    border-bottom: 1px solid #e6e6e6
-    display: flex
-    justify-content: center
-    align-items: center
-    @media screen and (max-width: $tableWidth)
-      font-size: 6px
-    a
-      color: #909399
-      height: $height-header
-      line-height: $height-header
-      padding: 0 1.5rem
-      &:hover
-        border-bottom: 2px solid #409EFF
+// если main-container not static (need add .main-container_transform-x)
+.layout-wrapper.main-container_transform-x
+  .sidebar-wrapper
+    z-index: 0
+  // show
+  .sidebar-wrapper.active + .main-container
+    left: $sidebarWidth
+
 </style>
