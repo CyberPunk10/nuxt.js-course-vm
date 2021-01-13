@@ -1,8 +1,20 @@
 <template>
   <div class="header-wrapper">
-    <button class="sidebar-toggle" data-btn="sidebar-toggle">Меню</button>
+    <button class="sidebar-toggle"
+      data-btn="sidebar-toggle"
+      href="#headerMenu"
+    >
+      <span data-btn="sidebar-toggle">
+        <svg data-btn="sidebar-toggle" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <rect data-btn="sidebar-toggle" y="9" width="20" height="2"></rect>
+          <rect data-btn="sidebar-toggle" y="3" width="20" height="2"></rect>
+          <rect data-btn="sidebar-toggle" y="15" width="20" height="2"></rect>
+        </svg>
+      </span>
+      <span data-btn="sidebar-toggle">Меню</span>
+    </button>
 
-    <div class="menu">
+    <div class="menu" id="headerMenu">
       <NuxtLink
         v-for="link in links" :key="link.url"
         :to="link.url"
@@ -37,13 +49,24 @@ export default {
   display: flex
   justify-content: space-between
   background-color: #fff
+  border-bottom: 1px solid #e6e6e6
   .sidebar-toggle
-    margin: .5rem
-    padding: 1rem
+    display: flex
+    justify-content: center
+    align-items: center
+    box-sizing: border-box
+    height: 100%
+    padding: 0 1rem
+    background-color: transparent
+    border: none
+    font-size: 1.4rem
+    white-space: nowrap // запрет переноса строк
+    span
+      padding-right: 1rem
+
   .menu
     height: $height-header
     width: 100%
-    border-bottom: 1px solid #e6e6e6
     display: flex
     justify-content: center
     align-items: center

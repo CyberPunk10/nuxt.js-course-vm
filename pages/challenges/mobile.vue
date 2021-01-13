@@ -1,17 +1,15 @@
 <template>
-  <div class="wrap">
-    <div class="container-mobile">
+  <div class="container-mobile layout-scrollbar layout-cell">
 
-      <IndexFormSport
-        v-for="(formSport, index) in allFormsSport" :key="index"
-        :formSport="formSport"
-        :indexForm="index"
-        class="form-sport-component"
-      />
+    <IndexFormSport
+      v-for="(formSport, index) in allFormsSport" :key="index"
+      :formSport="formSport"
+      :indexForm="index"
+      class="form-sport-component"
+    />
 
-      <p style="color: #2a2424">Статистика, Свой комментарий к форме, Настройки, Подсказки</p>
+    <p style="color: #2a2424">Статистика, Свой комментарий к форме, Настройки, Подсказки</p>
 
-    </div>
   </div>
 </template>
 
@@ -20,7 +18,7 @@
     head: {
       title: `Challenges | ${process.env.appName}`
     },
-    layout: 'challenges',
+    layout: 'layoutMainChallenges',
     computed: {
       allFormsSport () {
         return this.$store.state.challengeForms.allFormsSport
@@ -32,15 +30,10 @@
 
 <style lang="sass">
 $width-first-column-grid: 7rem
-.wrap
-  display: flex
-  justify-content: center
-  align-items: center
 .container-mobile
-  // max-width: 320px
-  // height: 568px
-  // overflow-y: auto
   width: 100%
+  height: calc(100vh - #{$height-header})
+  overflow-y: auto
   border: 1px solid $color-dark-shade-10
   background-color: $theme-color-yellow
   color: #e6e6e6

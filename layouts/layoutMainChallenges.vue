@@ -92,8 +92,8 @@ export default {
   left: 0
   width: 100%
   height: 100vh
-  background-color: #2dce89
-  color: #fff
+  background-color: #f7f7f7
+  color: #555
   transition: $transitionSidebar
   .underlay
     position: absolute
