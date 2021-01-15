@@ -99,12 +99,14 @@ export default function(el, customSettings) {
     startY = event.pageY
     startTime = new Date().getTime()
     if (isMouse) isMouseDown = true // поддержка мыши
+    console.log('start')
   }
 
   // Обработчик движения указателя.
   // @param e {Event} - получает событие.
   const checkMove = function(e) {
     if (isMouse && !isMouseDown) return // выход из функции, если мышь перестала быть активна во время движения
+    console.log('move')
     let event = eventsUnify(e)
     distX = event.pageX - startX
     distY = event.pageY - startY
@@ -115,6 +117,7 @@ export default function(el, customSettings) {
   // Обработчик окончания касания указателем.
   // @param e {Event} - получает событие.
   let checkEnd = function(e) {
+    console.log('end')
     if (isMouse && !isMouseDown) { // выход из функции и сброс проверки нажатия мыши
       isMouseDown = false
       return

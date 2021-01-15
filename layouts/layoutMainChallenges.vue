@@ -132,7 +132,7 @@ export default {
   .underlay
     z-index:555
     pointer-events: auto
-    opacity: .2
+    opacity: .5
 
 // если main-container not static (need add .main-container_transform-x)
 .layout-wrapper.main-container_transform-x

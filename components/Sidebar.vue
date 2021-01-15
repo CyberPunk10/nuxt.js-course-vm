@@ -15,8 +15,8 @@
       </div>
 
       <div class="sidebar-settings">
-        <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-1" isChecked title="Sidebar not static and top" />
-        <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-2" title="Main-container not static and static Sidebar" />
+        <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-1" title="Sidebar not static and top" />
+        <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-2" isChecked title="Main-container not static and static Sidebar" />
         <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-3" title="Main-container not static"/>
       </div>
 
