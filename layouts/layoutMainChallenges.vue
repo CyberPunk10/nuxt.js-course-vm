@@ -64,11 +64,11 @@ export default {
 
     getScrollbar()
 
-    console.log(swipe, document)
-    swipe(document, { maxTime: 1000, minTime: 100, maxDist: 150,  minDist: 60 })
+    swipe(document, { maxTime: 1000, minTime: 60, maxDist: 150,  minDist: 60 })
 
     document.addEventListener("swipe", function(e) {
-      console.log(e.detail)
+      console.log(e.detail.full.type)
+      document.querySelector('.container').innerHTML = e.detail.full.type
 
       switch (e.detail.dir) {
         case 'right':

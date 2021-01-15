@@ -120,9 +120,7 @@ export default function(el, customSettings) {
       return
     }
 
-    if (!isMouse) { // для touch дистанция нужна меньше
-      settings.minDist = settings.minDist / 10
-    }
+    if (!isMouse) settings.minDist = settings.minDist / 10 // для touch дистанция нужна меньше
 
     let endTime = new Date().getTime()
     let time = endTime - startTime
@@ -134,7 +132,7 @@ export default function(el, customSettings) {
       }
     }
     dist = (dir === "left" || dir === "right") ? Math.abs(distX) : Math.abs(distY) // опредление пройденной указателем дистанции
-    console.log(settings, swipeType, distX, distY)
+
     // генерация кастомного события swipe
     if (swipeType !== "none" && dist >= settings.minDist) {
       let swipeEvent = new CustomEvent("swipe", {
