@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import swipe from '@/common/swipe'
+
 export default {
   computed: {
     error() {
@@ -61,6 +63,21 @@ export default {
     }
 
     getScrollbar()
+
+    swipe(document, { maxTime: 1000, minTime: 60, maxDist: 150,  minDist: 60 })
+
+    document.addEventListener("swipe", function(e) {
+      console.log(e.detail.full.type)
+
+      switch (e.detail.dir) {
+        case 'right':
+          document.querySelector('.sidebar-wrapper').classList.add('active')
+          break
+        case 'left':
+          document.querySelector('.sidebar-wrapper').classList.remove('active')
+          break
+      }
+    })
   },
 
   methods: {
