@@ -7,7 +7,7 @@ export default {
     title: 'nuxt.js-course-vm3333',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'robots', content: 'none'} // закрыть сайт от индексации
     ],

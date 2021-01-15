@@ -119,9 +119,7 @@ export default function(el, customSettings) {
       isMouseDown = false
       return
     }
-    console.log(settings.minDist, e)
-    if (!isMouse) settings.minDist = settings.minDist / 10 // для touch дистанция нужна меньше
-    console.log(settings.minDist)
+    if (!isMouse) settings.minDist = settings.minDist / 7 // для touch дистанция нужна меньше
 
     let endTime = new Date().getTime()
     let time = endTime - startTime
@@ -149,7 +147,7 @@ export default function(el, customSettings) {
       el.dispatchEvent(swipeEvent)
     }
 
-    if (!isMouse) settings.minDist = settings.minDist * 10 // для touch вернуть значение
+    if (!isMouse) settings.minDist = settings.minDist * 7 // для touch вернуть значение
   }
 
   // добавление поддерживаемых событий

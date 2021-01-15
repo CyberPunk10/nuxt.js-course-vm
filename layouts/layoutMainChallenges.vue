@@ -68,7 +68,6 @@ export default {
 
     document.addEventListener("swipe", function(e) {
       console.log(e.detail.full.type)
-      document.querySelector('.container').innerHTML = e.detail.full.type
 
       switch (e.detail.dir) {
         case 'right':
