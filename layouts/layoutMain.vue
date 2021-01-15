@@ -14,49 +14,47 @@
 </template>
 
 <script>
-import Sidebar from '~/components/Sidebar.vue';
-export default {
-  components: { Sidebar },
-  mounted(){
-    /* Работа со скоролом */
-    // взято отсюда: https://habr.com/ru/company/ruvds/blog/468405/
-    // легкий простой код на проверку фиксированные ли scroll-ы у пользователя или нет
-    // Scrollbar Width Test
-    // Adds `layout-scrollbar-obtrusive` class to body if scrollbars use up screen real estate
+// export default {
+//   mounted(){
+//     /* Работа со скоролом */
+//     // взято отсюда: https://habr.com/ru/company/ruvds/blog/468405/
+//     // легкий простой код на проверку фиксированные ли scroll-ы у пользователя или нет
+//     // Scrollbar Width Test
+//     // Adds `layout-scrollbar-obtrusive` class to body if scrollbars use up screen real estate
 
-    function getScrollbar () {
+//     function getScrollbar () {
 
-      var parent = document.createElement("div");
-      parent.setAttribute("style", "width:30px; height:30px;");
-      parent.classList.add('scrollbar-test');
+//       var parent = document.createElement("div");
+//       parent.setAttribute("style", "width:30px; height:30px;");
+//       parent.classList.add('scrollbar-test');
 
-      var child = document.createElement("div");
-      child.setAttribute("style", "width:100%; height:40px");
-      parent.appendChild(child);
-      document.body.appendChild(parent);
+//       var child = document.createElement("div");
+//       child.setAttribute("style", "width:100%; height:40px");
+//       parent.appendChild(child);
+//       document.body.appendChild(parent);
 
-      // Measure the child element, if it is not
-      // 30px wide the scrollbars are obtrusive.
-      var scrollbarWidth = 30 - parent.firstChild.clientWidth;
-      if(scrollbarWidth) {
-        document.body.classList.add("layout-scrollbar-obtrusive");
-      }
-      document.body.removeChild(parent);
-    }
+//       // Measure the child element, if it is not
+//       // 30px wide the scrollbars are obtrusive.
+//       var scrollbarWidth = 30 - parent.firstChild.clientWidth;
+//       if(scrollbarWidth) {
+//         document.body.classList.add("layout-scrollbar-obtrusive");
+//       }
+//       document.body.removeChild(parent);
+//     }
 
-    getScrollbar()
-  },
+//     getScrollbar()
+//   },
 
-  methods: {
-    handleClickSidebarToggle: function(event) {
-      // console.log('click on Sidebar-toggle', event.target)
-      const sideBar = document.querySelector('.sidebar-wrapper')
-      if (event.target.dataset.btn === 'sidebar-toggle') {
-        sideBar.classList.toggle('active')
-      }
-    }
-  }
-}
+//   methods: {
+//     handleClickSidebarToggle: function(event) {
+//       // console.log('click on Sidebar-toggle', event.target)
+//       const sideBar = document.querySelector('.sidebar-wrapper')
+//       if (event.target.dataset.btn === 'sidebar-toggle') {
+//         sideBar.classList.toggle('active')
+//       }
+//     }
+//   }
+// }
 </script>
 
 <style lang="sass">
