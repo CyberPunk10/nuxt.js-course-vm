@@ -498,30 +498,24 @@ export default {
 
 .calendar-graph rect.day,
 .myCalendar rect.day
-  shape-rendering: geometricPrecision
+  // shape-rendering: geometricPrecision
   outline: 1px solid $color-dark-shade-10
   outline-offset: -1px
   rx: 2
   ry: 2
-
-rect
-  width: 11
-  height: 11
-  // x: 16
-  // y: 0
+  // stroke-width: 1
+  // stroke: $color-dark-shade-10
   // fill: #ebedf0
-
-.myCalendar rect.day
-  rx: 2
-  ry: 2
 
 .calendar-graph text.month,
 .myCalendar text.month
   font-size: 10px
+  user-select: none
 
 .calendar-graph text.wday,
 .myCalendar text.wday
   font-size: 9px
+  user-select: none
 
 *
   box-sizing: border-box

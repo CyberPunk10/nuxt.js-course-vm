@@ -61,9 +61,9 @@ export default {
       }
       document.body.removeChild(parent);
     }
-
     getScrollbar()
 
+    // swipe
     swipe(document, { maxTime: 1000, minTime: 60, maxDist: 150,  minDist: 60 })
 
     document.addEventListener("swipe", function(e) {

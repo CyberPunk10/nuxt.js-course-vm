@@ -24,8 +24,10 @@ export default {
   css: [
     'element-ui/lib/theme-chalk/index.css',
     'element-ui/lib/theme-chalk/display.css',
+    'assets/font-awesome/releases/v5.15.1/css/all.min.css',
+    "assets/nucleo/css/nucleo.css",
     'assets/sass/main.sass',
-    '@/theme/index.sass',
+    '@/theme/index.sass'
   ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
@@ -90,3 +92,9 @@ export default {
 
 // Простой многоязычный сайт с Nuxt.js и nuxt-i18n
 // https://favicon.tech/prostoj-mnogoyazychnyj-sajt-s-nuxt-js-i-nuxt-i18n/
+
+
+// Как оптимизируйте шрифт Awesome
+// https://techblog.sdstudio.top/kak-optimizirujte-shrift-awesome-do-smeshnogo-razmera-v-10kb-i-uluchshit-skorost-sajta/
+// https://icomoon.io/app/#/select
+
