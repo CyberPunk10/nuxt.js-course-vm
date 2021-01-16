@@ -1,5 +1,6 @@
 <template>
   <div class="layout-wrapper main-container_transform-x">
+    <div class="underlay underlay-swipe"></div>
     <Sidebar />
 
     <div class="main-container"
@@ -99,6 +100,13 @@ export default {
   position: relative
   width: 100%
   height: 100vh
+  .underlay.underlay-swipe
+    z-index: 99999988
+    background-color: red
+    opacity: .1
+    pointer-events: none
+    touch-action: manipulation
+
 
 .main-container
   position: fixed
