@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar-wrapper" @click="handleClickSidebar">
-    <div class="sidebar layout-scrollbar layout-cell">
+    <div class="sidebar layout-scrollbar-sidebar-transparent layout-cell-sidebar-transparent">
 
       <div class="sidenav-header d-flex align-items-center">
         <a href="#" class="navbar-brand">
@@ -15,8 +15,8 @@
       </div>
 
       <div class="sidebar-settings">
-        <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-1" isChecked title="Sidebar not static and top" />
-        <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-2" title="Main-container not static and static Sidebar" />
+        <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-1" title="Sidebar not static and top" />
+        <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-2" isChecked title="Main-container not static and static Sidebar" />
         <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-3" title="Main-container not static"/>
       </div>
 
@@ -256,6 +256,7 @@ export default {
 }
 </script>
 
+
 <style lang="sass">
 .sidebar-wrapper
   z-index: 999
@@ -268,8 +269,10 @@ export default {
     transition: $transitionSidebar
     left: 0
     width: $sidebarWidth
-    background-color: #fff
+    background-color: $color-bg-sidebar
+    border: 2px solid $color-bg-sidebar // для отступа scroll-бегунка
     color: #242424
+
 
 // если sidebar-wrapper not static (need add .transform-x)
 .sidebar-wrapper.transform-x .sidebar
@@ -283,15 +286,67 @@ export default {
   left: 0
 
 
+
+
+
+
+
 .navbar-inner
   .navbar-nav
     li
       a
         padding: 1rem 2.4rem
         color: rgba(0,0,0,.6)
+        display: flex
+        // -webkit-box-align: center
+        align-items: center
+        &.active
+          position: relative
+
+      // Icon
+      i
+        min-width: 3rem
+        font-size: 1.6rem
+        line-height: 2.4rem
+        color: $danger-color
+
+      // Dropdown
+      .dropdown-menu
+        border: none
+        .dropdown-menu
+          margin-left: 1rem / 2
+
 
 .sidenav-header,
 .sidebar-settings
   padding: 1rem 2.4rem
+
+
+
+
+
+
+.navbar-nav .nav-link[data-toggle="collapse"]
+  &:after
+    display: inline-block
+    font-style: normal
+    font-variant: normal
+    text-rendering: auto
+    -webkit-font-smoothing: antialiased
+    font-family: 'Font Awesome 5 Free'
+    font-weight: 900
+    content: "\f105"
+    margin-left: auto
+    color: $color-purple
+    // @include transition($transition-base)
+
+  // Expanded
+  &[aria-expanded="true"]
+    &:after
+      color: theme-color("primary")
+      transform: rotate(90deg)
+
+
+
 
 </style>
