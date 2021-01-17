@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar-wrapper" @click="handleClickSidebar">
+  <div class="sidebar-wrapper active" @click="handleClickSidebar">
     <div class="sidebar layout-scrollbar-sidebar-transparent layout-cell-sidebar-transparent">
 
       <div class="sidenav-header d-flex align-items-center">
@@ -19,6 +19,41 @@
         <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-2" isChecked title="Main-container not static and static Sidebar" />
         <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-3" title="Main-container not static"/>
       </div>
+
+
+
+      <div class="navbar-inner">
+        <ul class="navbar-nav">
+          <li class="nav-item"
+            v-for="(link, index) in sidebarLinks"
+            :key="link.name + index"
+          >
+            <SidebarItemOld
+              :link="link"
+            />
+          </li>
+
+          <!-- <slot name="links">
+            <sidebar-item
+              v-for="(link, index) in sidebarLinks"
+              :key="link.name + index"
+              :link="link"
+            >
+              <sidebar-item
+                v-for="(subLink, index) in link.children"
+                :key="subLink.name + index"
+                :link="subLink"
+              >
+              </sidebar-item>
+            </sidebar-item>
+          </slot> -->
+
+        </ul>
+        <slot name="links-after"></slot>
+      </div>
+
+
+      <hr class="my-3">
 
       <div class="navbar-inner">
         <ul class="navbar-nav">
@@ -224,12 +259,58 @@
         </ul>
       </div>
 
+
+
+      <a
+        href="https://www.creative-tim.com/product/nuxt-argon-dashboard-pro-laravel"
+        target="_blank"
+        class="btn btn-sm btn-danger btn-icon mx-sm-5 mb-2 d-none d-md-block"
+        ><span class="btn-inner--icon"
+          ><i class="fas fa-download mr-2"></i
+        ></span>
+        <span class="nav-link-inner--text">Upgrade to PRO</span></a
+      >
+
+      <a
+        href="https://nuxt-argon-dashboard-laravel.creative-tim.com/documentation/"
+        target="_blank"
+        class="btn btn-sm btn-neutral btn-icon mx-sm-5 mb-2 d-none d-md-block"
+        ><span class="btn-inner--icon"><i class="fas fa-file-alt"></i></span>
+        <span class="nav-link-inner--text">Documentation</span></a
+      >
+
+      <a
+        href="https://www.creative-tim.com/product/nuxt-argon-dashboard-laravel"
+        target="_blank"
+        class="btn btn-sm btn-info btn-icon mx-sm-5 mb-2 d-none d-md-block"
+        ><span class="btn-inner--icon"><i class="fas fa-gift"></i></span>
+        <span class="nav-link-inner--text">Download now</span></a
+      >
+
+      <a
+        href="https://github.com/creativetimofficial/nuxt-argon-dashboard-laravel"
+        target="_blank"
+        class="btn btn-sm btn-dark btn-icon mx-sm-5 mb-2 d-none d-md-block"
+        ><span class="btn-inner--icon"><i class="fab fa-github"></i></span>
+        <span class="nav-link-inner--text">Star us on Github</span></a
+      >
+
+
+
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    sidebarLinks: {
+      type: Array,
+      default: () => [],
+      description:
+        "List of sidebar links as an array if you don't want to use components for these.",
+    },
+  },
   methods: {
     handleClickSidebar: function(event) {
       console.log('click on Sidebar', event.target)
