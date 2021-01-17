@@ -1,5 +1,4 @@
 <template>
-<div class="test">
   <component
     :is="baseComponent"
     :to="link.path ? link.path : '/'"
@@ -17,27 +16,28 @@
     >
       <template v-if="addLink">
         <span class="nav-link-text">
-          {{ link.name }}
+          {{ link.name }} <b class="caret"></b>
         </span>
       </template>
       <template v-else>
         <i :class="link.icon"></i>
-        <span class="nav-link-text">{{ link.name }}</span>
+        <span class="nav-link-text">{{ link.name }} <b class="caret"></b></span>
       </template>
     </a>
 
-    <collapse-transition>
+    <!-- <collapse-transition> -->
       <div v-show="!collapsed" class="collapse show">
         <ul class="nav nav-sm flex-column">
           <slot></slot>
         </ul>
       </div>
-    </collapse-transition>
+    <!-- </collapse-transition> -->
 
     <slot
       name="title"
       v-if="children.length === 0 && !$slots.default && link.path"
     >
+      <p>test</p>
       <component
         :to="link.path"
         @click.native="linkClick"
@@ -58,82 +58,139 @@
       </component>
     </slot>
   </component>
-
-
-
-
-
-  <li to="/" tag="li" class="nav-item"><a data-toggle="collapse" class="sidebar-menu-item nav-link" aria-expanded="true"><i class="ni ni-ui-04 text-info"></i> <span class="nav-link-text">Components </span></a>
-    <div class="collapse show" style="animation-fill-mode: both; animation-timing-function: ease-out;" data-old-padding-top="" data-old-padding-bottom="" data-old-overflow="">
-      <ul class="nav nav-sm flex-column">
-        <li class="nav-item">
-          <div class="collapse show" style="display:none">
-            <ul class="nav nav-sm flex-column"></ul>
-          </div> <a href="/components/buttons" class="nav-link"><span class="nav-link-text">Buttons</span></a>
-        </li>
-        <li class="nav-item">
-          <div class="collapse show" style="display:none">
-            <ul class="nav nav-sm flex-column"></ul>
-          </div> <a href="/components/cards" class="nav-link"><span class="nav-link-text">Cards</span></a>
-        </li>
-        <li class="nav-item">
-          <div class="collapse show" style="display:none">
-            <ul class="nav nav-sm flex-column"></ul>
-          </div> <a href="/components/grid-system" class="nav-link"><span class="nav-link-text">Grid</span></a>
-        </li>
-        <li class="nav-item">
-          <div class="collapse show" style="display:none">
-            <ul class="nav nav-sm flex-column"></ul>
-          </div> <a href="/components/notifications" class="nav-link"><span class="nav-link-text">Notifications</span></a>
-        </li>
-        <li class="nav-item">
-          <div class="collapse show" style="display:none">
-            <ul class="nav nav-sm flex-column"></ul>
-          </div> <a href="/components/icons" class="nav-link"><span class="nav-link-text">Icons</span></a>
-        </li>
-        <li class="nav-item">
-          <div class="collapse show" style="display:none">
-            <ul class="nav nav-sm flex-column"></ul>
-          </div> <a href="/components/typography" class="nav-link"><span class="nav-link-text">Typography</span></a>
-        </li>
-        <li to="/" tag="li" class="nav-item">
-          <a data-toggle="collapse" class="sidebar-menu-item nav-link">
-            <span class="nav-link-text">Multi Level
-
-            </span>
-          </a>
-          <div class="collapse show" style="display:none">
-            <ul class="nav nav-sm flex-column">
-              <li class="nav-item">
-                <div class="collapse show" style="display:none">
-                  <ul class="nav nav-sm flex-column"></ul>
-                </div> <a href="#" class="nav-link"><span class="nav-link-text">Third level menu</span></a>
-              </li>
-              <li class="nav-item">
-                <div class="collapse show" style="display:none">
-                  <ul class="nav nav-sm flex-column"></ul>
-                </div> <a href="#" class="nav-link"><span class="nav-link-text">Just another link</span></a>
-              </li>
-              <li class="nav-item">
-                <div class="collapse show" style="display:none">
-                  <ul class="nav nav-sm flex-column"></ul>
-                </div> <a href="#" class="nav-link"><span class="nav-link-text">One last link</span></a>
-              </li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </li>
-</div>
 </template>
-
 <script>
+
 export default {
-
-}
+  props: {
+    menu: {
+      type: Boolean,
+      default: false,
+      description:
+        "Whether the item is a menu. Most of the item it's not used and should be used only if you want to override the default behavior.",
+    },
+    opened: {
+      type: Boolean,
+      default: false
+    },
+    link: {
+      type: Object,
+      default: () => {
+        return {
+          name: "",
+          path: "",
+          children: [],
+        };
+      },
+      description:
+        "Sidebar link. Can contain name, path, icon and other attributes. See examples for more info",
+    },
+  },
+  provide() {
+    return {
+      addLink: this.addChild,
+      removeLink: this.removeChild,
+    };
+  },
+  inject: {
+    addLink: { default: null },
+    removeLink: { default: null },
+    autoClose: {
+      default: true,
+    },
+  },
+  data() {
+    return {
+      children: [],
+      collapsed: !this.opened
+      // collapsed: true,
+    };
+  },
+  computed: {
+    baseComponent() {
+      return this.isMenu || this.link.isRoute ? "li" : "router-link";
+    },
+    linkPrefix() {
+      if (this.link.name) {
+        let words = this.link.name.split(" ");
+        return words.map((word) => word.substring(0, 1)).join("");
+      }
+      return false;
+    },
+    isMenu() {
+      console.log(this.$slots.default)
+      if (!this.$slots.default) {
+        return false;
+      }
+      return this.$slots.default.some((item) =>
+        item.tag.endsWith("sidebar-item")
+      );
+    },
+    isActive() {
+      if (this.$route && this.$route.path) {
+        let matchingRoute = this.children.find((c) =>
+          this.$route.path.startsWith(c.link.path)
+        );
+        if (matchingRoute !== undefined) {
+          return true;
+        }
+      }
+      return false;
+    },
+  },
+  methods: {
+    addChild(item) {
+      const index = this.$slots.default.indexOf(item.$vnode);
+      this.children.splice(index, 0, item);
+    },
+    removeChild(item) {
+      const tabs = this.children;
+      const index = tabs.indexOf(item);
+      tabs.splice(index, 1);
+    },
+    elementType(link, isParent = true) {
+      if (link.isRoute === false) {
+        return isParent ? "li" : "a";
+      } else {
+        return "router-link";
+      }
+    },
+    linkClick() {
+      if (
+        this.autoClose &&
+        this.$sidebar &&
+        this.$sidebar.showSidebar === true
+      ) {
+        this.$sidebar.displaySidebar(false);
+      }
+    },
+    collapseMenu() {
+      this.collapsed = !this.collapsed;
+    },
+  },
+  mounted() {
+    if (this.addLink) {
+      this.addLink(this);
+    }
+    if (this.link.collapsed !== undefined) {
+      this.collapsed = this.link.collapsed;
+    }
+    if (this.isActive && this.isMenu) {
+      this.collapsed = true;
+    }
+  },
+  destroyed() {
+    if (this.$el && this.$el.parentNode) {
+      this.$el.parentNode.removeChild(this.$el);
+    }
+    if (this.removeLink) {
+      this.removeLink(this);
+    }
+  },
+};
 </script>
-
-<style lang="sass">
-
+<style>
+.sidebar-menu-item {
+  cursor: pointer;
+}
 </style>
