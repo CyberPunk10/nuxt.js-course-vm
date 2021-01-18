@@ -401,7 +401,7 @@ export default {
           </div>
           <div class="js-calendar-graph-wrap-main layout-cell-light-gray-border layout-scrollbar-light-gray-border">
             <svg width="${deltaX * countWeeks + 3}" height="128" class="js-calendar-graph-svg">
-              <g transform="translate(0, 20)">
+              <g transform="translate(1, 20)">
                 ${createAllDays()}
                 ${createLabelsMonths()}
               </g>
@@ -499,12 +499,12 @@ export default {
 .calendar-graph rect.day,
 .myCalendar rect.day
   // shape-rendering: geometricPrecision
-  outline: 1px solid $color-dark-shade-10
-  outline-offset: -1px
+  // outline: 1px solid $color-dark-shade-10
+  // outline-offset: -1px
   rx: 2
   ry: 2
-  // stroke-width: 1
-  // stroke: $color-dark-shade-10
+  stroke-width: 1
+  stroke: $color-dark-shade-10
   // fill: #ebedf0
 
 .calendar-graph text.month,
