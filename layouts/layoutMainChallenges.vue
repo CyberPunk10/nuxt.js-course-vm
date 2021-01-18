@@ -1,6 +1,6 @@
 gi<template>
   <div class="layout-wrapper main-container_transform-x">
-    <Sidebar :sidebarLinks="sidebarLinks" />
+    <Sidebar />
 
     <div class="main-container"
       @click="handleClickSidebarToggle"
@@ -9,7 +9,7 @@ gi<template>
 
       <Header/>
 
-      <div class="main-wrapper layout-scrollbar layout-cell">
+      <div class="main-content layout-scrollbar layout-cell">
         <div class="container">
           <Nuxt />
         </div>
@@ -33,9 +33,6 @@ export default {
   computed: {
     error() {
       return this.$store.getters.error
-    },
-    sidebarLinks () {
-      return this.$store.state.sidebarLayoutChellanges.sidebarLinks
     }
   },
   watch: {
@@ -80,10 +77,10 @@ export default {
 
       switch (e.detail.dir) {
         case 'right':
-          document.querySelector('.sidebar-wrapper').classList.add('active')
+          document.querySelector('.sidebar').classList.add('active')
           break
         case 'left':
-          document.querySelector('.sidebar-wrapper').classList.remove('active')
+          document.querySelector('.sidebar').classList.remove('active')
           break
       }
     })
@@ -92,7 +89,7 @@ export default {
   methods: {
     handleClickSidebarToggle: function(event) {
       console.log('click layout (layoutMainChallenges.vue)', event.target)
-      const sideBar = document.querySelector('.sidebar-wrapper')
+      const sideBar = document.querySelector('.sidebar')
       const mainContainer = document.querySelector('.main-container')
       if ( event.target.dataset.btn === 'sidebar-toggle'
         || event.target.className === 'underlay' && event.target.parentElement.classList.contains('main-container')) {
@@ -109,47 +106,83 @@ export default {
   width: 100%
   height: 100vh
 
-.main-container
-  position: fixed
-  overflow: hidden
-  top: 0
-  bottom: 0
-  right: 0
-  left: 0
-  width: 100%
-  height: 100vh
-  background-color: #f7f7f7
-  color: #555
-  transition: $transitionSidebar
-  .underlay
-    position: absolute
+  &>.sidebar,
+  &>.main-container
+    position: fixed
+    top: 0
+    left: 0
+    bottom: 0
+    transition: $transitionSidebar
 
-.header-wrapper,
-.main-wrapper
-  position: absolute
-  bottom: 0
-  left: 0
-  right: 0
-  width: 100%
+  &>.sidebar
+    z-index: 999
+    height: 100%
+    width: $sidebarWidth
+    background-color: $color-bg-sidebar
+    border: 2px solid $color-bg-sidebar // для отступа scroll-бегунка
+    color: #242424
+    @media screen and (max-width: 400px)
+      width: $sidebarWidthPhone
 
-.main-wrapper
-  top: $height-header
-  height: calc(100% - #{$height-header})
-  overflow-x: hidden
+  &>.main-container
+    overflow: hidden
+    right: 0
+    width: 100%
+    height: 100vh
+    background-color: #f7f7f7
+    color: #555
+    .underlay
+      position: absolute
 
-.sidebar-wrapper.active + .main-container
-  .underlay
-    z-index:555
-    pointer-events: auto
-    // opacity: .5
+    header,
+    .main-content
+      position: absolute
+      left: 0
+      right: 0
+      bottom: 0
+      width: 100%
 
-// если main-container not static (need add .main-container_transform-x)
-.layout-wrapper.main-container_transform-x
-  .sidebar-wrapper
-    z-index: 0
-  // show
-  .sidebar-wrapper.active + .main-container
-    left: $sidebarWidth
-    @media screen and (max-width: $tableWidth)
-      left: $sidebarMaxWidth
+    .main-content
+      top: $height-header
+      height: calc(100% - #{$height-header})
+      overflow-x: hidden
+      // .container
+      //   border: 1px solid $color-dark-shade-10
+
+  // если sidebar not static (need add .transform-x)
+  &>.sidebar.transform-x
+    left: -$sidebarWidth
+    @media screen and (max-width: 400px)
+      left: -$sidebarWidthPhone
+
+  // show sidebar
+  &>.sidebar.active
+    left: 0
+    box-shadow: 4px 2px 4px rgba(0,0,0,.101562)
+  &>.sidebar.transform-x.active
+    left: 0
+
+  &>.sidebar.active + .main-container
+    .underlay
+      z-index:555
+      pointer-events: auto
+      // opacity: .5
+
+  // если main-container not static (need add .main-container_transform-x)
+  &.main-container_transform-x
+    &>.sidebar
+      z-index: 0
+    // show
+    &>.sidebar.active + .main-container
+      left: $sidebarWidth
+      @media screen and (max-width: 400px)
+        left: $sidebarWidthPhone
+
+      // width display
+      // $desktopWidth            : 1280px
+      // $smDesktopWidth          : 980px
+      // $tableWidth              : 768px
+      // $phoneWidth              : 480px
+      // $smPhoneWidth            : 320px
+
 </style>

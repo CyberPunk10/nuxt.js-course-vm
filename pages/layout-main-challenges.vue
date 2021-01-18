@@ -13,7 +13,7 @@
 <script>
 export default {
   head: {
-    title: `layoutMain | ${process.env.appName}`
+    title: `layoutMainChallenges | ${process.env.appName}`
   },
 
   layout: 'layoutMainChallenges',

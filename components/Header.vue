@@ -1,8 +1,7 @@
 <template>
-  <div class="header-wrapper">
+  <header>
     <button class="sidebar-toggle"
       data-btn="sidebar-toggle"
-      href="#headerMenu"
     >
       <span data-btn="sidebar-toggle">
         <svg data-btn="sidebar-toggle" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -22,7 +21,7 @@
         {{ link.title }}
       </NuxtLink>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>
@@ -43,7 +42,7 @@ export default {
 </script>
 
 <style lang="sass">
-.header-wrapper
+header
   top: 0
   height: $height-header
   display: flex
