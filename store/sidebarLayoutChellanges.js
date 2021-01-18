@@ -2,120 +2,66 @@
 
 export const state = () => ({
   sidebarLinks: [
-    {
-      name: 'Dashboards',
-      icon: 'ni ni-shop text-primary',
-      isMain: true,
-      // isCollapse: 'collapse',
-      children: [
-        {
-          name: 'Dashboard',
-          icon: 'ni ni-shop text-primary',
-          path: '/dashboard'
-        },
-        {
-          name: 'Alternative',
-          icon: 'ni ni-shop text-primary',
-          path: '/alternative'
-        },
-      ]
-    },
-
-    {
-      name: 'Examples',
-      icon: 'ni ni-shop text-primary',
-    },
-    {
-      name: 'Components',
-      icon: 'ni ni-shop',
-      children: [
-        {
-          name: 'Buttons',
-          icon: 'ni ni-shop text-primary',
-          path: '/Buttons'
-        },
-        {
-          name: 'Cards',
-          icon: 'ni ni-shop text-primary',
-          path: '/Cards'
-        },
-        {
-          name: 'Notifications',
-          icon: 'ni ni-shop text-primary',
-          path: '/Notifications'
-        },
-        {
-          name: 'Grid',
-          icon: 'ni ni-shop text-primary',
-          path: '/Grid'
-        },
-        {
-          name: 'Icons',
-          icon: 'ni ni-shop text-primary',
-          path: '/Icons'
-        },
-      ]
-    },
-    {
-      name: 'Typography',
-      icon: 'ni ni-shop text-primary',
-      children: [
-        {
-          name: 'Notifications',
-          icon: 'ni ni-shop text-primary',
-          path: '/Notifications'
-        },
-        {
-          name: 'Grid',
-          icon: 'ni ni-shop text-primary',
-          path: '/Grid'
-        },
-        {
-          name: 'Icons',
-          icon: 'ni ni-shop text-primary',
-          path: '/Icons'
-        },
-      ]
-    },
-    {
-      name: 'Icons',
-      icon: 'ni ni-align-left-2',
-      path: '/Icons'
-    },
-
     // challenges
+    {
+      name: 'Главная',
+      icon: 'ni ni-compass-04',
+      url: '/challenges',
+      onHeader: true
+    },
     {
       name: 'Мой профиль',
       icon: 'ni ni-user-run',
-      path: '/challenges/my-profile'
+      url: '/challenges/my-profile',
+      onHeader: true
     },
     {
       name: 'Мои челленджи',
-      icon: 'ni ni-shop',
-      path: '/challenges/my-profile',
-      isMain: true,
+      icon: 'ni ni-align-left-2',
       children: [
         {
           name: 'Dashboard',
           icon: 'ni ni-shop text-primary',
-          path: '/dashboard',
+          url: '/dashboard',
         },
         {
           name: 'Alternative',
           icon: 'ni ni-shop text-primary',
-          path: '/alternative',
+          url: '/alternative',
         },
       ]
     },
     {
       name: 'Создать челлендж',
       icon: 'ni ni-controller',
-      path: '/challenges/my-profile'
+      url: '/challenges/create'
     },
     {
-      name: 'Добавить результат',
-      icon: 'ni ni-save',
-      path: '/challenges/my-profile'
+      name: 'Добавить прогресс',
+      icon: 'ni ni-fat-add',
+      url: '/challenges/addprogress',
+      onHeader: true
+    },
+    {
+      name: 'Тренировка',
+      icon: 'ni ni-camera-compact',
+      url: '/challenges/mobile',
+      onHeader: true
+    },
+    {
+      name: 'layoutMainChallenges',
+      icon: 'ni ni-ruler-pencil',
+      url: '/layout-main-challenges'
+    },
+    {
+      name: 'Tаблицы',
+      icon: 'ni ni-box-2',
+      url: '/challenges/table'
+    },
+    {
+      name: 'Настройки',
+      icon: 'ni ni-settings',
+      url: '/challenges/settings'
     }
   ]
 })
@@ -129,7 +75,7 @@ export const actions = {
 }
 
 export const getters = {
-  sidebarLinks: state => state.sidebarLinks
+  // sidebarLinks: state => state.sidebarLinks
 }
 
 

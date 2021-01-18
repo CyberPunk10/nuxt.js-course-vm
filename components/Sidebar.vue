@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar-wrapper active" @click="handleClickSidebar">
+  <div class="sidebar-wrapper" @click="handleClickSidebar">
     <div class="sidebar layout-scrollbar-sidebar-transparent layout-cell-sidebar-transparent">
 
       <div class="sidenav-header d-flex align-items-center">
@@ -14,288 +14,63 @@
         </div>
       </div>
 
-      <div class="sidebar-settings">
-        <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-1" title="Sidebar not static and top" />
-        <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-2" isChecked title="Main-container not static and static Sidebar" />
-        <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-3" title="Main-container not static"/>
-      </div>
-
-
-
       <div class="navbar-inner">
         <ul class="navbar-nav">
           <li class="nav-item"
             v-for="(link, index) in sidebarLinks"
             :key="link.name + index"
           >
-            <SidebarItemOld
+            <SidebarItem
               :link="link"
             />
           </li>
-
-          <!-- <slot name="links">
-            <sidebar-item
-              v-for="(link, index) in sidebarLinks"
-              :key="link.name + index"
-              :link="link"
-            >
-              <sidebar-item
-                v-for="(subLink, index) in link.children"
-                :key="subLink.name + index"
-                :link="subLink"
-              >
-              </sidebar-item>
-            </sidebar-item>
-          </slot> -->
-
         </ul>
-        <slot name="links-after"></slot>
-      </div>
 
-
-      <hr class="my-3">
-
-      <div class="navbar-inner">
-        <ul class="navbar-nav">
-          <li to="/" tag="li" class="nav-item active">
-            <a data-toggle="collapse" class="sidebar-menu-item nav-link active" aria-expanded="true"><i class="ni ni-shop text-primary"></i> <span class="nav-link-text">Dashboards <b class="caret"></b></span></a>
-            <div class="collapse show" style="animation-fill-mode: both; animation-timing-function: ease-out;" data-old-padding-top="" data-old-padding-bottom="" data-old-overflow="">
-              <ul class="nav nav-sm flex-column">
-                <li class="nav-item">
-                  <div class="collapse show" style="display:none">
-                    <ul class="nav nav-sm flex-column"></ul>
-                  </div>
-                  <a href="/dashboard" class="nav-link">
-                    <span class="nav-link-text">Dashboard</span>
-                  </a>
-                </li>
-                <li class="nav-item active nuxt-link-active">
-                  <div class="collapse show" style="display:none">
-                    <ul class="nav nav-sm flex-column"></ul>
-                  </div>
-                  <a href="/alternative" class="nav-link active nuxt-link-active">
-                    <span class="nav-link-text">Alternative</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li to="/" tag="li" class="nav-item"><a data-toggle="collapse" class="sidebar-menu-item nav-link"><i class="ni ni-ungroup text-orange"></i> <span class="nav-link-text">Examples <b class="caret"></b></span></a>
-            <div class="collapse show" style="display:none">
-              <ul class="nav nav-sm flex-column">
-                <li class="nav-item">
-                  <div class="collapse show" style="display:none">
-                    <ul class="nav nav-sm flex-column"></ul>
-                  </div> <a href="/pricing" class="nav-link"><span class="nav-link-text">Pricing</span></a>
-                </li>
-                <li class="nav-item">
-                  <div class="collapse show" style="display:none">
-                    <ul class="nav nav-sm flex-column"></ul>
-                  </div> <a href="/login" class="nav-link"><span class="nav-link-text">Login</span></a>
-                </li>
-                <li class="nav-item">
-                  <div class="collapse show" style="display:none">
-                    <ul class="nav nav-sm flex-column"></ul>
-                  </div> <a href="/register" class="nav-link"><span class="nav-link-text">Register</span></a>
-                </li>
-                <li class="nav-item">
-                  <div class="collapse show" style="display:none">
-                    <ul class="nav nav-sm flex-column"></ul>
-                  </div> <a href="/lock" class="nav-link"><span class="nav-link-text">Lock</span></a>
-                </li>
-                <li class="nav-item">
-                  <div class="collapse show" style="display:none">
-                    <ul class="nav nav-sm flex-column"></ul>
-                  </div> <a href="/pages/timeline" class="nav-link"><span class="nav-link-text">Timeline</span></a>
-                </li>
-                <li class="nav-item">
-                  <div class="collapse show" style="display:none">
-                    <ul class="nav nav-sm flex-column"></ul>
-                  </div> <a href="/pages/user" class="nav-link"><span class="nav-link-text">Profile</span></a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li to="/" tag="li" class="nav-item"><a data-toggle="collapse" class="sidebar-menu-item nav-link" aria-expanded="true"><i class="ni ni-ui-04 text-info"></i> <span class="nav-link-text">Components <b class="caret"></b></span></a>
-            <div class="collapse show" style="animation-fill-mode: both; animation-timing-function: ease-out;" data-old-padding-top="" data-old-padding-bottom="" data-old-overflow="">
-              <ul class="nav nav-sm flex-column">
-                <li class="nav-item">
-                  <div class="collapse show" style="display:none">
-                    <ul class="nav nav-sm flex-column"></ul>
-                  </div> <a href="/components/buttons" class="nav-link"><span class="nav-link-text">Buttons</span></a>
-                </li>
-                <li class="nav-item">
-                  <div class="collapse show" style="display:none">
-                    <ul class="nav nav-sm flex-column"></ul>
-                  </div> <a href="/components/cards" class="nav-link"><span class="nav-link-text">Cards</span></a>
-                </li>
-                <li class="nav-item">
-                  <div class="collapse show" style="display:none">
-                    <ul class="nav nav-sm flex-column"></ul>
-                  </div> <a href="/components/grid-system" class="nav-link"><span class="nav-link-text">Grid</span></a>
-                </li>
-                <li class="nav-item">
-                  <div class="collapse show" style="display:none">
-                    <ul class="nav nav-sm flex-column"></ul>
-                  </div> <a href="/components/notifications" class="nav-link"><span class="nav-link-text">Notifications</span></a>
-                </li>
-                <li class="nav-item">
-                  <div class="collapse show" style="display:none">
-                    <ul class="nav nav-sm flex-column"></ul>
-                  </div> <a href="/components/icons" class="nav-link"><span class="nav-link-text">Icons</span></a>
-                </li>
-                <li class="nav-item">
-                  <div class="collapse show" style="display:none">
-                    <ul class="nav nav-sm flex-column"></ul>
-                  </div> <a href="/components/typography" class="nav-link"><span class="nav-link-text">Typography</span></a>
-                </li>
-                <li to="/" tag="li" class="nav-item"><a data-toggle="collapse" class="sidebar-menu-item nav-link"><span class="nav-link-text">
-                      Multi Level <b class="caret"></b></span></a>
-                  <div class="collapse show" style="display:none">
-                    <ul class="nav nav-sm flex-column">
-                      <li class="nav-item">
-                        <div class="collapse show" style="display:none">
-                          <ul class="nav nav-sm flex-column"></ul>
-                        </div> <a href="#" class="nav-link"><span class="nav-link-text">Third level menu</span></a>
-                      </li>
-                      <li class="nav-item">
-                        <div class="collapse show" style="display:none">
-                          <ul class="nav nav-sm flex-column"></ul>
-                        </div> <a href="#" class="nav-link"><span class="nav-link-text">Just another link</span></a>
-                      </li>
-                      <li class="nav-item">
-                        <div class="collapse show" style="display:none">
-                          <ul class="nav nav-sm flex-column"></ul>
-                        </div> <a href="#" class="nav-link"><span class="nav-link-text">One last link</span></a>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li to="/" tag="li" class="nav-item"><a data-toggle="collapse" class="sidebar-menu-item nav-link"><i class="ni ni-single-copy-04 text-pink"></i> <span class="nav-link-text">Forms <b class="caret"></b></span></a>
-            <div class="collapse show" style="display:none">
-              <ul class="nav nav-sm flex-column">
-                <li class="nav-item">
-                  <div class="collapse show" style="display:none">
-                    <ul class="nav nav-sm flex-column"></ul>
-                  </div> <a href="/forms/elements" class="nav-link"><span class="nav-link-text">Elements</span></a>
-                </li>
-                <li class="nav-item">
-                  <div class="collapse show" style="display:none">
-                    <ul class="nav nav-sm flex-column"></ul>
-                  </div> <a href="/forms/components" class="nav-link"><span class="nav-link-text">Components</span></a>
-                </li>
-                <li class="nav-item">
-                  <div class="collapse show" style="display:none">
-                    <ul class="nav nav-sm flex-column"></ul>
-                  </div> <a href="/forms/validation" class="nav-link"><span class="nav-link-text">Validation</span></a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li to="/" tag="li" class="nav-item"><a data-toggle="collapse" class="sidebar-menu-item nav-link"><i class="ni ni-align-left-2 text-default"></i> <span class="nav-link-text">Tables <b class="caret"></b></span></a>
-            <div class="collapse show" style="display:none">
-              <ul class="nav nav-sm flex-column">
-                <li class="nav-item">
-                  <div class="collapse show" style="display:none">
-                    <ul class="nav nav-sm flex-column"></ul>
-                  </div> <a href="/tables/regular" class="nav-link"><span class="nav-link-text">Tables</span></a>
-                </li>
-                <li class="nav-item">
-                  <div class="collapse show" style="display:none">
-                    <ul class="nav nav-sm flex-column"></ul>
-                  </div> <a href="/tables/sortable" class="nav-link"><span class="nav-link-text">Sortable</span></a>
-                </li>
-                <li class="nav-item">
-                  <div class="collapse show" style="display:none">
-                    <ul class="nav nav-sm flex-column"></ul>
-                  </div> <a href="/tables/paginated" class="nav-link"><span class="nav-link-text">Paginated Tables</span></a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li to="/" tag="li" class="nav-item"><a data-toggle="collapse" class="sidebar-menu-item nav-link"><i class="ni ni-map-big text-primary"></i> <span class="nav-link-text">Maps <b class="caret"></b></span></a>
-            <div class="collapse show" style="display:none">
-              <ul class="nav nav-sm flex-column">
-                <li class="nav-item">
-                  <div class="collapse show" style="display:none">
-                    <ul class="nav nav-sm flex-column"></ul>
-                  </div> <a href="/maps/google" class="nav-link"><span class="nav-link-text">Google</span></a>
-                </li>
-                <li class="nav-item">
-                  <div class="collapse show" style="display:none">
-                    <ul class="nav nav-sm flex-column"></ul>
-                  </div> <a href="/maps/vector" class="nav-link"><span class="nav-link-text">Vector</span></a>
-                </li>
-              </ul>
-            </div>
-
-          </li>
-          <li class="nav-item">
-            <div class="collapse show" style="display:none">
-              <ul class="nav nav-sm flex-column"></ul>
-            </div> <a href="/widgets" class="nav-link"><i class="ni ni-archive-2 text-green"></i> <span class="nav-link-text">Widgets</span></a>
-          </li>
-          <li class="nav-item">
-            <div class="collapse show" style="display:none">
-              <ul class="nav nav-sm flex-column"></ul>
-            </div> <a href="/charts" class="nav-link"><i class="ni ni-chart-pie-35 text-info"></i> <span class="nav-link-text">Charts</span></a>
-          </li>
-          <li class="nav-item">
-          <div class="collapse show" style="display:none">
-            <ul class="nav nav-sm flex-column"></ul>
-          </div> <a href="/calendar" class="nav-link"><i class="ni ni-calendar-grid-58 text-red"></i> <span class="nav-link-text">Calendar</span></a>
-          </li>
-        </ul>
         <hr class="my-3">
+
+        <div class="sidebar-settings">
+          <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-1" title="Sidebar not static and top" />
+          <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-2" isChecked title="Main-container not static and static Sidebar" />
+          <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-3" title="Main-container not static"/>
+        </div>
+
+        <hr class="my-3">
+
         <h6 class="navbar-heading p-0 text-muted">Documentation</h6>
         <ul class="navbar-nav mb-md-3">
-          <li class="nav-item"><a href="https://demos.creative-tim.com/nuxt-argon-dashboard-pro/documentation" target="_blank" rel="noopener" class="nav-link"><i class="ni ni-spaceship"></i> <span class="nav-link-text">Getting started</span></a></li>
-          <li class="nav-item"><a href="https://demos.creative-tim.com/nuxt-argon-dashboard-pro/documentation/foundation/colors.html" target="_blank" rel="noopener" class="nav-link"><i class="ni ni-palette"></i> <span class="nav-link-text">Foundation</span></a></li>
-          <li class="nav-item"><a href="https://demos.creative-tim.com/nuxt-argon-dashboard-pro/documentation/components/avatars.html" target="_blank" rel="noopener" class="nav-link"><i class="ni ni-ui-04"></i> <span class="nav-link-text">Components</span></a></li>
-          <li class="nav-item"><a href="https://demos.creative-tim.com/nuxt-argon-dashboard-pro/documentation/components/plugin_datepicker.html" target="_blank" rel="noopener" class="nav-link"><i class="ni ni-chart-pie-35"></i> <span class="nav-link-text">Plugins</span></a></li>
+          <li class="nav-item"><a href="#" rel="noopener" class="nav-link"><i class="ni ni-spaceship"></i> <span class="nav-link-text">Getting started</span></a></li>
+          <li class="nav-item"><a href="#" rel="noopener" class="nav-link"><i class="ni ni-palette"></i> <span class="nav-link-text">Foundation</span></a></li>
+          <li class="nav-item"><a href="#" rel="noopener" class="nav-link"><i class="ni ni-ui-04"></i> <span class="nav-link-text">Components</span></a></li>
+          <li class="nav-item"><a href="#" rel="noopener" class="nav-link"><i class="ni ni-chart-pie-35"></i> <span class="nav-link-text">Plugins</span></a></li>
         </ul>
       </div>
 
-
-
       <a
-        href="https://www.creative-tim.com/product/nuxt-argon-dashboard-pro-laravel"
-        target="_blank"
+        href="#"
         class="btn btn-sm btn-danger btn-icon mx-sm-5 mb-2 d-none d-md-block"
         ><span class="btn-inner--icon"
           ><i class="fas fa-download mr-2"></i
         ></span>
         <span class="nav-link-inner--text">Upgrade to PRO</span></a
       >
-
       <a
-        href="https://nuxt-argon-dashboard-laravel.creative-tim.com/documentation/"
-        target="_blank"
+        href="#"
         class="btn btn-sm btn-neutral btn-icon mx-sm-5 mb-2 d-none d-md-block"
         ><span class="btn-inner--icon"><i class="fas fa-file-alt"></i></span>
         <span class="nav-link-inner--text">Documentation</span></a
       >
-
       <a
-        href="https://www.creative-tim.com/product/nuxt-argon-dashboard-laravel"
-        target="_blank"
+        href="#"
         class="btn btn-sm btn-info btn-icon mx-sm-5 mb-2 d-none d-md-block"
         ><span class="btn-inner--icon"><i class="fas fa-gift"></i></span>
         <span class="nav-link-inner--text">Download now</span></a
       >
-
       <a
-        href="https://github.com/creativetimofficial/nuxt-argon-dashboard-laravel"
-        target="_blank"
+        href="#"
         class="btn btn-sm btn-dark btn-icon mx-sm-5 mb-2 d-none d-md-block"
         ><span class="btn-inner--icon"><i class="fab fa-github"></i></span>
         <span class="nav-link-inner--text">Star us on Github</span></a
       >
-
-
 
     </div>
   </div>
@@ -307,8 +82,6 @@ export default {
     sidebarLinks: {
       type: Array,
       default: () => [],
-      description:
-        "List of sidebar links as an array if you don't want to use components for these.",
     },
   },
   methods: {
@@ -350,6 +123,7 @@ export default {
     transition: $transitionSidebar
     left: 0
     width: $sidebarWidth
+    max-width: $sidebarMaxWidth
     background-color: $color-bg-sidebar
     border: 2px solid $color-bg-sidebar // для отступа scroll-бегунка
     color: #242424
@@ -424,7 +198,7 @@ export default {
   // Expanded
   &[aria-expanded="true"]
     &:after
-      color: theme-color("primary")
+      // color: theme-color("primary")
       transform: rotate(90deg)
 
 
