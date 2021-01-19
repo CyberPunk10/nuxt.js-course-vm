@@ -1,61 +1,61 @@
 <template>
-  <div class="mw500">
+  <div>
+    <div class="mw500">
+      <h4 class="mb3">Создать Ch</h4>
+      <form>
+        <AppInput v-model="user.name" class="label-left">Название</AppInput>
+        <AppTextArea v-model="user.description" label="width: 250px" class="label-left">Описание</AppTextArea>
+        <AppInput v-model="user.category" class="label-left">Категория</AppInput>
+        <AppInput v-model="user.email" type="email">Email: </AppInput>
+      </form>
 
-    <h4 class="mb3">Создать Ch</h4>
-    <form>
-      <AppInput v-model="user.name" class="label-left">Название</AppInput>
-      <AppTextArea v-model="user.description" label="width: 250px" class="label-left">Описание</AppTextArea>
-      <AppInput v-model="user.category" class="label-left">Категория</AppInput>
-      <AppInput v-model="user.email" type="email">Email: </AppInput>
-    </form>
+      <el-form ref="form"
+        :model="controls"
+        :rules="rules"
+        label-width="200px"
+        @submit.native.prevent="onSubmitCreateChallenge"
+      >
+        <el-form-item label="Название">
+          <el-input v-model="controls.title"></el-input>
+        </el-form-item>
+        <el-form-item label="Описание">
+          <el-input v-model="controls.description"></el-input>
+        </el-form-item>
+        <el-form-item label="Категория">
+          <el-input v-model="controls.category"></el-input>
+        </el-form-item>
+        <el-form-item label="Цвет">
+          <el-radio-group v-model="controls.radioСolor">
+            <el-radio :label="'green'">Зелёный</el-radio>
+            <el-radio :label="'yellow'">Жёлтый</el-radio>
+            <el-radio :label="'blue'">Синий</el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item label="Кол-во дней">
+          <el-input v-model="controls.count" :disabled="controls.checkbox"></el-input>
+          <el-checkbox label="Бессрочный" v-model="controls.checked"></el-checkbox>
+        </el-form-item>
+        <el-form-item label="Программа минимум">
+          <el-input v-model="controls.planMin"></el-input>
+        </el-form-item>
+        <el-form-item label="Date">
+          <el-col :span="14">
+            <el-date-picker type="date" placeholder="Pick a date" v-model="controls.date" style="width: 100%;"></el-date-picker>
+          </el-col>
+        </el-form-item>
 
-    <el-form ref="form"
-      :model="controls"
-      :rules="rules"
-      label-width="200px"
-      @submit.native.prevent="onSubmitCreateChallenge"
-    >
-      <el-form-item label="Название">
-        <el-input v-model="controls.title"></el-input>
-      </el-form-item>
-      <el-form-item label="Описание">
-        <el-input v-model="controls.description"></el-input>
-      </el-form-item>
-      <el-form-item label="Категория">
-        <el-input v-model="controls.category"></el-input>
-      </el-form-item>
-      <el-form-item label="Цвет">
-        <el-radio-group v-model="controls.radioСolor">
-          <el-radio :label="'green'">Зелёный</el-radio>
-          <el-radio :label="'yellow'">Жёлтый</el-radio>
-          <el-radio :label="'blue'">Синий</el-radio>
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label="Кол-во дней">
-        <el-input v-model="controls.count" :disabled="controls.checkbox"></el-input>
-        <el-checkbox label="Бессрочный" v-model="controls.checked"></el-checkbox>
-      </el-form-item>
-      <el-form-item label="Программа минимум">
-        <el-input v-model="controls.planMin"></el-input>
-      </el-form-item>
-      <el-form-item label="Date">
-        <el-col :span="14">
-          <el-date-picker type="date" placeholder="Pick a date" v-model="controls.date" style="width: 100%;"></el-date-picker>
-        </el-col>
-      </el-form-item>
+        <el-form-item>
+          <el-button
+            type="primary"
+            native-type="submit"
+            :loading="loading"
+          >Создать</el-button>
+        </el-form-item>
+      </el-form>
 
-      <el-form-item>
-        <el-button
-          type="primary"
-          native-type="submit"
-          :loading="loading"
-        >Создать</el-button>
-      </el-form-item>
-    </el-form>
-
-    <Btn />
-    <Checkbox title="title" id="21-mocup"/>
-
+      <Btn />
+      <Checkbox title="title" id="21-mocup"/>
+    </div>
   </div>
 </template>
 

@@ -29,12 +29,8 @@ export default {
   data() {
     return {
       // links: [
-      //   {title: 'Главная', url: '/challenges/'},
       //   {title: 'Создать ch', url: '/challenges/create'},
       //   {title: 'Добавить прогресс', url: '/challenges/addprogress'},
-      //   {title: 'Mobile', url: '/challenges/mobile'},
-      //   {title: 'layout-main', url: '/layout-main'},
-      //   {title: 'Table', url: '/challenges/table'}
       // ]
     }
   },

@@ -1,5 +1,5 @@
 <template>
-  <div class="container-yellow">
+  <div class="container-yellow layout-scrollbar-yellow-container layout-cell-yellow-container">
 
     <IndexFormSport
       v-for="(formSport, index) in allFormsSport" :key="index"
@@ -32,6 +32,7 @@
 $width-first-column-grid: 7rem
 .container-yellow
   border: 1px solid $color-dark-shade-10
+  border-right: none
   background-color: $theme-color-yellow
   color: #e6e6e6
 
