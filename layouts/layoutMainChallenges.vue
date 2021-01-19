@@ -142,7 +142,6 @@ export default {
       top: $height-header
       height: calc(100% - #{$height-header})
       overflow-x: hidden
-      // padding: 1rem 1rem
 
 
   // если sidebar not static (need add .transform-x)
