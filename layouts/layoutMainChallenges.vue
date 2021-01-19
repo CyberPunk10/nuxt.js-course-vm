@@ -108,11 +108,11 @@ export default {
     top: 0
     left: 0
     bottom: 0
+    height: 100%
     transition: $transitionSidebar
 
   &>.sidebar
     z-index: 999
-    height: 100%
     width: $sidebarWidth
     background-color: $color-bg-sidebar
     border: 2px solid $color-bg-sidebar // для отступа scroll-бегунка
@@ -124,8 +124,7 @@ export default {
     overflow: hidden
     right: 0
     width: 100%
-    height: 100vh
-    background-color: #f7f7f7
+    background-color: $color-bg-body
     color: #555
     .underlay
       position: absolute
