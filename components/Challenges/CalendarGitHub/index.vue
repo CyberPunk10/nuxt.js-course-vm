@@ -385,7 +385,7 @@ export default {
       }
 
       let resultHtml = `
-        <div class="mt3 border graph-before-activity-overview">
+        <div class="border graph-before-activity-overview">
           <div class="js-calendar-graph-wrap-label-week">
             <svg width="20" height="128" class="js-calendar-graph-svg">
               <g transform="translate(0, 20)">
@@ -482,13 +482,10 @@ export default {
   display: flex
   justify-content: center
   background-color: #fff
-  margin: 1rem
+  // margin: 1rem
   padding: 1.5rem
   // padding-top: 8px!important
   // padding-bottom: 8px!important
-
-.mt3
-  margin-top: 3rem
 
 .graph-before-activity-overview
   border-radius: 6px
