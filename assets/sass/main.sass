@@ -78,16 +78,22 @@ section, .section
   width: 100%
   flex: 0 0 auto
   position: relative
-  max-width: $desktopWidth
   margin: 0 auto
-  // @media screen and (max-width: $smDesktopWidth)
-  //   max-width: $tableWidth
+  padding: 1rem
+  // max-width: $desktopWidth
+  @media screen and (min-width: $phoneWidth)
+    padding: 1.5rem
 
-  // @media screen and (max-width: $tableWidth)
-  //   max-width: $phoneWidth
+  @media screen and (min-width: $tableWidth)
+    padding: 2rem
 
-  // @media screen and (max-width: $phoneWidth)
-  //   max-width: $smPhoneWidth
+  @media screen and (min-width: $smDesktopWidth)
+    padding: 3rem
+
+  @media screen and (min-width: $desktopWidth)
+    padding: 4rem
+
+
 
 
 /*

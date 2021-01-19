@@ -18,7 +18,7 @@
         v-for="link in links" :key="link.url"
         :to="link.url"
       >
-        {{ link.title }}
+        {{ link.name }}
       </NuxtLink>
     </div>
   </header>
@@ -28,16 +28,22 @@
 export default {
   data() {
     return {
-      links: [
-        {title: 'Главная', url: '/challenges/'},
-        {title: 'Создать ch', url: '/challenges/create'},
-        {title: 'Добавить прогресс', url: '/challenges/addprogress'},
-        {title: 'Mobile', url: '/challenges/mobile'},
-        {title: 'layout-main', url: '/layout-main'},
-        {title: 'Table', url: '/challenges/table'}
-      ]
+      // links: [
+      //   {title: 'Главная', url: '/challenges/'},
+      //   {title: 'Создать ch', url: '/challenges/create'},
+      //   {title: 'Добавить прогресс', url: '/challenges/addprogress'},
+      //   {title: 'Mobile', url: '/challenges/mobile'},
+      //   {title: 'layout-main', url: '/layout-main'},
+      //   {title: 'Table', url: '/challenges/table'}
+      // ]
     }
-  }
+  },
+  computed: {
+    links() {
+      let sidebarLinks = this.$store.state.sidebarLayoutChellanges.sidebarLinks
+      return sidebarLinks.filter(item => item.onHeader)
+    }
+  },
 }
 </script>
 

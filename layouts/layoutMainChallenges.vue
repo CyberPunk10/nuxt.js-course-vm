@@ -9,11 +9,7 @@ gi<template>
 
       <Header/>
 
-      <div class="main-content layout-scrollbar layout-cell">
-        <div class="container">
-          <Nuxt />
-        </div>
-      </div>
+      <Nuxt class="main-content layout-scrollbar layout-cell container" />
     </div>
 
     <TeleportMenu />
@@ -146,8 +142,8 @@ export default {
       top: $height-header
       height: calc(100% - #{$height-header})
       overflow-x: hidden
-      // .container
-      //   border: 1px solid $color-dark-shade-10
+      // padding: 1rem 1rem
+
 
   // если sidebar not static (need add .transform-x)
   &>.sidebar.transform-x
