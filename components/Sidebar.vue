@@ -91,12 +91,6 @@
 
 <script>
 export default {
-  // props: {
-  //   sidebarLinks: {
-  //     type: Array,
-  //     default: () => [],
-  //   },
-  // },
   computed: {
     sidebarLinks () {
       return this.$store.state.sidebarLayoutChellanges.sidebarLinks

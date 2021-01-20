@@ -115,7 +115,6 @@ export default {
     z-index: 999
     width: $sidebarWidth
     background-color: $color-bg-sidebar
-    border: 2px solid $color-bg-sidebar // для отступа scroll-бегунка
     color: #242424
     @media screen and (max-width: 400px)
       width: $sidebarWidthPhone
@@ -140,6 +139,7 @@ export default {
     .main-content
       top: $height-header
       height: calc(100% - #{$height-header})
+      // border: 2px solid $color-bg-body // для отступа scroll-бегунка
       overflow-x: hidden
 
 
@@ -171,12 +171,5 @@ export default {
       left: $sidebarWidth
       @media screen and (max-width: 400px)
         left: $sidebarWidthPhone
-
-      // width display
-      // $desktopWidth            : 1280px
-      // $smDesktopWidth          : 980px
-      // $tableWidth              : 768px
-      // $phoneWidth              : 480px
-      // $smPhoneWidth            : 320px
 
 </style>
