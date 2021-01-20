@@ -1,4 +1,4 @@
-gi<template>
+<template>
   <div class="layout-wrapper main-container_transform-x">
     <Sidebar />
 
@@ -98,6 +98,10 @@ export default {
 
 <style lang="sass">
 .layout-wrapper
+  // vars
+
+  $sidebarWidthIcon: 6rem
+
   position: relative
   width: 100%
   height: 100vh
@@ -118,13 +122,17 @@ export default {
     color: #242424
     @media screen and (max-width: 400px)
       width: $sidebarWidthPhone
-
+    @media screen and (min-width: $tableWidth)
+      width: $sidebarWidthIcon
   &>.main-container
     overflow: hidden
     right: 0
     width: 100%
     background-color: $color-bg-body
     color: #555
+    @media screen and (min-width: $tableWidth)
+      width: auto
+      left: $sidebarWidthIcon
     .underlay
       position: absolute
 
@@ -148,10 +156,13 @@ export default {
     left: -$sidebarWidth
     @media screen and (max-width: 400px)
       left: -$sidebarWidthPhone
+    @media screen and (min-width: $tableWidth)
+      left: 0
 
   // show sidebar
   &>.sidebar.active
     left: 0
+    width: $sidebarWidth
     box-shadow: 4px 2px 4px rgba(0,0,0,.101562)
   &>.sidebar.transform-x.active
     left: 0

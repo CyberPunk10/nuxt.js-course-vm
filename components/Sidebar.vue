@@ -19,12 +19,12 @@
         </div>
       </div>
 
-      <button class="sidebar-toggle_static"
+      <!-- <button class="sidebar-toggle_static"
         data-btn="sidebar-toggle"
       >
         <i class="fas fa-map-pin"></i>
         <span data-btn="sidebar-toggle">Static меню</span>
-      </button>
+      </button> -->
 
     </div>
 
@@ -129,6 +129,7 @@ export default {
 <style lang="sass">
 
 
+// .sidebar_min-width
 
 
 

@@ -31,8 +31,8 @@
 <style lang="sass">
 $width-first-column-grid: 7rem
 .container-yellow
-  border: 1px solid $color-dark-shade-10
-  border-right: none
+  border-top: 1px solid $color-dark-shade-10
+  border-left: 1px solid $color-dark-shade-10
   background-color: $theme-color-yellow
   color: #e6e6e6
 

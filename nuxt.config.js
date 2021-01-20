@@ -98,3 +98,5 @@ export default {
 // https://techblog.sdstudio.top/kak-optimizirujte-shrift-awesome-do-smeshnogo-razmera-v-10kb-i-uluchshit-skorost-sajta/
 // https://icomoon.io/app/#/select
 
+// 5 библиотек для Vue.js, без которых мне не обойтись
+// https://habr.com/ru/company/ruvds/blog/517316/
