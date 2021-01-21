@@ -12,6 +12,7 @@ export default {
       { name: 'robots', content: 'none'} // закрыть сайт от индексации
     ],
     link: [
+      { href: "https://fonts.googleapis.com/icon?family=Material+Icons", rel: "stylesheet" },
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },

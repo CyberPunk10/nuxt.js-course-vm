@@ -9,6 +9,8 @@
         <AppInput v-model="user.email" type="email">Email: </AppInput>
       </form>
 
+      <Select id="select-1"/>
+
       <el-form ref="form"
         :model="controls"
         :rules="rules"
