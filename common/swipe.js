@@ -15,7 +15,8 @@ export default function(el, customSettings) {
   if (settings.maxTime < settings.minTime) settings.maxTime = settings.minTime + 500
   if (settings.maxTime < 100 || settings.minTime < 50) {
     settings.maxTime = 700
-    settings.minTime = 50
+    // settings.minTime = 50
+    settings.minTime = 10
   }
 
   let dir,                  // направление свайпа (horizontal, vertical)
