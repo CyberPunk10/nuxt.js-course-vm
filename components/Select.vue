@@ -53,15 +53,16 @@ export default {
       })
 
       return `
-        <div class="select__backselect" data-type="backselect"></div>
-        <div class="select__input" data-type="input">
-          <span class="dropdown__btn-span" data-type="value">${title}</span>
-          <i class="material-icons" data-type="input">expand_more</i>
-        </div>
-        <div class="select__dropdown layout-scrollbar layout-cell">
-          <ul class="select__list">
-            ${items.join('')}
-          </ul>
+        <div class="select__container">
+          <div class="select__input" data-type="input">
+            <span class="dropdown__btn-span" data-type="value">${title}</span>
+            <i class="material-icons" data-type="input">expand_more</i>
+          </div>
+          <div class="select__dropdown layout-scrollbar layout-cell">
+            <ul class="select__list">
+              ${items.join('')}
+            </ul>
+          </div>
         </div>
       `
     }
@@ -73,10 +74,27 @@ export default {
       const { type } = event.target.dataset
 
       if (type === 'input' || type === 'value') this.toggle($el)
-      else if (type === 'item')
-        this.select($el, event.target)
-      else if (type === 'backselect')
-        this.close($el)
+      else if (type === 'item') this.select($el, event.target)
+      else if (type === 'underlay') this.close($el)
+
+      // add handle event click on document
+      document.addEventListener('click', this.clickOutsideSelect)
+    },
+
+    clickOutsideSelect (e) {
+
+      const target = e.target
+
+      console.log(e.target)
+      // if click on select
+      if (target.closest('.select')) {
+        console.log('[clickOutSideSelect]', e.target)
+        // handlerDropdown(target.closest('.select'))
+      } else {
+        // closeOthersDropdowns(target)
+      }
+
+      // document.removeEventListener('click', this.clickOutsideSelect)
 
     },
 
@@ -98,9 +116,9 @@ export default {
       this.close($el)
     },
 
-    toggle ($el) { $el.classList.toggle('open') },
-    open   ($el) { $el.classList.add('open') },
-    close  ($el) { $el.classList.remove('open') }
+    // open   ( $el ) { $el.classList.add('open') },
+    close  ( $el ) { $el.classList.remove('open') },
+    toggle ( $el ) { $el.classList.toggle('open') }
   }
 }
 </script>
@@ -109,58 +127,43 @@ export default {
 .select
   $height: 4.6rem
   z-index: 101
-
   position: relative
+  margin-bottom: 2rem
+  user-select: none
 
-  &.open
-
-    .select__input
-      border-bottom-left-radius: 0
-      border-bottom-right-radius: 0
-      .material-icons
-        transform: rotate(180deg)
-
-    .select__dropdown,
-    .select__backselect
-      display: block
-
-  &__input
+  &__container
+    height: $height
+    overflow: hidden
     border: 1px solid $color-dark-shade-25
     border-radius: 4px
-    box-sizing: border-box
+    transition: $transitionDefault
+
+  &__input
+    border-bottom: 1px solid $color-dark-shade-25
     height: $height
     display: flex
     align-items: center
     justify-content: space-between
     padding: 0 1rem
+    background-color: #fff
     cursor: pointer
-    user-select: none
+    .material-icons
+      transition: $transitionDefault
 
   &__dropdown
-    display: none
-    position: absolute
-    top: $height
-    left: 0
-    right: 0
-    max-height: calc(3 * #{$height})
+    height: calc(3 * #{$height})
     overflow-y: auto
-    border: 1px solid $color-dark-shade-25
-    border-bottom-left-radius: 4px
-    border-bottom-right-radius: 4px
-    border-top: none
-    box-sizing: border-box
-    box-shadow: 0px 10px 20px $color-dark-shade-5
 
   &__item
     height: $height
     display: flex
     align-items: center
     padding: 0 1rem
-    // border-bottom: 1px solid $color-dark-shade-25
     background-color: #fff
+    // border-bottom: 1px solid $color-dark-shade-25
 
-    &:last-child
-      border-bottom: none
+    // &:last-child
+    //   border-bottom: none
 
     &:hover
       background-color: #ebebeb
@@ -170,14 +173,14 @@ export default {
     &_selected
       background-color: #efefef
 
-  &__backselect
-    position: fixed
-    display: none
-    z-index: -1
-    top: 0
-    left: 0
-    right: 0
-    bottom: 0
-    background-color: transparent
+
+  &.open
+    .select__container
+      height: calc(4 * #{$height} + 1px)
+      box-shadow: 0px 10px 20px $color-dark-shade-5
+    .select__input
+      .material-icons
+        transform: rotate(180deg)
+
 
 </style>
