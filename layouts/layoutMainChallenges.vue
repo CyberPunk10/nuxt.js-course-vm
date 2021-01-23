@@ -66,7 +66,7 @@ export default {
     getScrollbar()
 
     // swipe
-    swipe(document, { maxTime: 1000, minTime: 60, maxDist: 150,  minDist: 60 })
+    swipe(document, { maxTime: 1000, minTime: 10, maxDist: 150,  minDist: 60 })
 
     document.addEventListener("swipe", function(e) {
       console.log(e.detail.full.type)

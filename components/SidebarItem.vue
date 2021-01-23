@@ -1,5 +1,6 @@
 <template>
 
+  <!-- li заменить на component -->
   <li v-if="link.children"
     class="nav-item"
   >
