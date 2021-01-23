@@ -9,10 +9,14 @@
 
       <Header/>
 
+      <div class="border-top"></div>
+      <div class="border-right"></div>
+      <div class="border-left"></div>
+
       <Nuxt class="main-content layout-scrollbar layout-cell container" />
     </div>
 
-    <TeleportMenu />
+    <!-- <TeleportMenu /> -->
   </div>
 </template>
 
@@ -98,10 +102,6 @@ export default {
 
 <style lang="sass">
 .layout-wrapper
-  // vars
-
-  $sidebarWidthIcon: 6rem
-
   position: relative
   width: 100%
   height: 100vh
@@ -120,7 +120,7 @@ export default {
     width: $sidebarWidth
     background-color: $color-bg-sidebar
     color: #242424
-    @media screen and (max-width: 400px)
+    @media screen and (max-width: 370px)
       width: $sidebarWidthPhone
     @media screen and (min-width: $tableWidth)
       width: $sidebarWidthIcon
@@ -147,14 +147,15 @@ export default {
     .main-content
       top: $height-header
       height: calc(100% - #{$height-header})
-      // border: 2px solid $color-bg-body // для отступа scroll-бегунка
       overflow-x: hidden
+      // border-top: 1px solid $color-dark-shade-10
+      // border-left: 1px solid $color-dark-shade-10
 
 
   // если sidebar not static (need add .transform-x)
   &>.sidebar.transform-x
     left: -$sidebarWidth
-    @media screen and (max-width: 400px)
+    @media screen and (max-width: 370px)
       left: -$sidebarWidthPhone
     @media screen and (min-width: $tableWidth)
       left: 0
@@ -180,7 +181,31 @@ export default {
     // show
     &>.sidebar.active + .main-container
       left: $sidebarWidth
-      @media screen and (max-width: 400px)
+      @media screen and (max-width: 370px)
         left: $sidebarWidthPhone
+
+
+  // .border-top/left/right
+  .border-top,
+  .border-left,
+  .border-right
+    z-index: 1 // for scroll (быть выше скролла)
+    position: absolute
+    top: $height-header
+    background-color: rgba(0, 0, 0, 0.05)
+
+  .border-left,
+  .border-right
+    width: 1px
+    height: 100%
+
+  .border-top
+    height: 1px
+    width: 100%
+
+  .border-left
+    left: 0
+  .border-right
+    right: 0
 
 </style>

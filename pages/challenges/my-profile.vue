@@ -2,6 +2,13 @@
 <div class="">
     <h1>my profile</h1>
     <p>mockup</p>
+
+    <br>
+    <hr>
+    <br>
+
+    <CalendarGitHub />
+
   </div>
 </template>
 
