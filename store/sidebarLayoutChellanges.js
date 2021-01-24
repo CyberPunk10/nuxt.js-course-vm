@@ -21,12 +21,10 @@ export const state = () => ({
       children: [
         {
           name: 'Dashboard',
-          icon: 'ni ni-shop text-primary',
           url: '/dashboard',
         },
         {
           name: 'Alternative',
-          icon: 'ni ni-shop text-primary',
           url: '/alternative',
         },
       ]

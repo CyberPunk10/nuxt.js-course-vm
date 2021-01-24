@@ -1,91 +1,58 @@
 <template>
   <aside
-    class=" sidebar
-            layout-scrollbar-sidebar-transparent
-            layout-cell-sidebar-transparent
-            sidebar_static
-          "
+    class="sidebar active"
     @click="handleClickSidebar"
   >
 
-    <div class="sidenav-header d-flex align-items-center">
-      <a href="#" class="navbar-brand">
-        <svg xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 0 163 28" class="h-6 lg:h-8 text-light-onSurfacePrimary dark:text-dark-onSurfacePrimary transition-colors duration-300 ease-linear"><g fill="none" fill-rule="evenodd">
-          <path fill="#00C58E" d="M133.579444 26.5222222c-.88549-.5014932-1.622185-1.2287956-2.135-2.1077778-.152035-.2173666-.238424-.4738349-.248888-.7388888-.000193-.3430171.150578-.6687379.412222-.8905556.222676-.2329753.525939-.3720868.847778-.3888889.48858.0456475.935693.2938871 1.232777.6844445.607819 1.0001935 1.699729 1.6038507 2.87 1.5866666.949877.0221498 1.867941-.3428297 2.543334-1.0111111.68192-.6461735 1.060237-1.5496176 1.042222-2.4888889V9.17777778c-.004199-.35418453.144633-.69295609.408333-.92944445.254951-.25098396.598911-.39080498.956667-.38888889.361385-.01763672.713749.11626146.972222.36944445.247128.24968064.380721.5899909.369445.94111111v12.0166667c.010226 1.0770922-.27347 2.1365818-.820556 3.0644444-.542163.924686-1.320659 1.6884177-2.255556 2.2127778-.980032.5549692-2.089955.8394961-3.216111.8244444-1.043058.0110499-2.07058-.2532084-2.978889-.7661111zM152.386111 26.7244444c-1.083808-.4114434-2.078081-1.0280772-2.928333-1.8161111-.350592-.269001-.560727-.6821233-.571667-1.1238889.004184-.336029.144515-.655984.388889-.8866666.232746-.2506324.560201-.3917768.902222-.3888889.288127-.0039551.566692.1032927.777778.2994444.656906.6271532 1.420815 1.131597 2.255556 1.4894445.839615.3338482 1.737135.4977548 2.640555.4822222 1.028927.0325665 2.043848-.2452155 2.912778-.7972222.723023-.4062612 1.176065-1.1657737 1.19-1.995.013567-.8908368-.437196-1.7246021-1.19-2.2011111-1.092306-.6414419-2.290981-1.0813952-3.538889-1.2988889-1.882222-.3888889-3.325-1.015-4.34-1.89-1.015-.875-1.516667-2.0883334-1.516667-3.6361111-.021436-1.0164805.27792-2.0138785.855556-2.8505556.587391-.83052839 1.395716-1.47988214 2.333333-1.87444443 1.072402-.45239591 2.227347-.67623265 3.391111-.65722223 1.090803-.00693167 2.17427.17869268 3.200556.54833334.905215.30530096 1.735082.79977447 2.434444 1.45055555.373522.27543843.604551.70326957.63 1.16666667-.000023.3295714-.133263.6451397-.369444.875-.22617.252974-.551274.394941-.890556.3888889-.229358.0088112-.453389-.0705043-.626111-.2216667-.567368-.5321772-1.238641-.9412966-1.971666-1.2016666-.759251-.3060841-1.569185-.4670156-2.387778-.4744445-1.025275-.0527238-2.042016.2106243-2.912778.7544445-.676188.4480604-1.082775 1.2052239-1.082775 2.0163888 0 .811165.406587 1.5683285 1.082775 2.0163889.996126.5808801 2.083599.9885181 3.216111 1.2055556 1.202731.2367017 2.376254.6031018 3.5 1.0927778.848078.3750097 1.57323.9815497 2.092222 1.75.525801.8833524.781322 1.9013804.735 2.9283333.015198 1.0094901-.295766 1.996936-.886666 2.8155556-.621706.8441439-1.458334 1.5061946-2.422778 1.9172222-1.060141.4638984-2.206765.6972-3.363889.6844444-1.203988.0224112-2.40234-.1698519-3.538889-.5677778z" class="fill-nuxt-lightgreen"></path></g></svg>
-      </a>
-      <div class="ml-auto">
-        <div class="sidenav-toggler d-none d-xl-block active">
-          <div class="sidenav-toggler-inner"><i class="sidenav-toggler-line"></i> <i class="sidenav-toggler-line"></i> <i class="sidenav-toggler-line"></i></div>
-        </div>
-      </div>
+    <div class="sidebar-header d-flex align-items-center">
 
-      <!-- <button class="sidebar-toggle_static"
+      <!-- <button class="sidebar-toggle"
+        data-btn="sidebar-toggle"
+      >
+        <svg data-btn="sidebar-toggle" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <rect data-btn="sidebar-toggle" y="9" width="20" height="2"></rect>
+          <rect data-btn="sidebar-toggle" y="3" width="20" height="2"></rect>
+          <rect data-btn="sidebar-toggle" y="15" width="20" height="2"></rect>
+        </svg>
+        <span data-btn="sidebar-toggle">Меню</span>
+      </button> -->
+
+      <a href="#" class="navbar-brand">
+
+      </a>
+
+      <!-- <button class="sidebar-toggle_pinned"
         data-btn="sidebar-toggle"
       >
         <i class="fas fa-map-pin"></i>
-        <span data-btn="sidebar-toggle">Static меню</span>
+        <span data-btn="sidebar-toggle">Закрепить меню</span>
       </button> -->
 
     </div>
 
-    <div class="sidenav">
-      <component class="sidenav__nav-item"
-        :is="link.url ? 'NuxtLink' : 'div'" :to="link.url"
-        v-for="(link, index) in sidebarLinks"
-        :key="link.name + index"
-      >
-        <i :class="link.icon"></i>
-        <span class="sidenav__nav-item-text" v-if="link.url">{{ link.name }}</span>
+    <div class="sidebar-main
+                layout-scrollbar-sidebar-transparent
+                layout-cell-sidebar-transparent
+               "
+    >
 
-        <div v-else class="sidenav__nav-item-dropdown">
-          <div class="sidenav__nav-item-dropdown-title"
-            data-toggle="collapse"
-            aria-expanded="true"
+      <div class="sidenav">
+        <Sidenav
+          v-for="(link, index) in sidebarLinks"
+          :key="link.name + index"
+          :link="link"
+        >
+          <Sidenav
+            v-for="(sublink, index) in link.children"
+            :key="sublink.name + index"
+            :link="sublink"
           >
-            <span class="sidenav__nav-item-text">{{ link.name }}</span>
-            <i class="fas fa-angle-right"></i>
-          </div>
-          <div v-if="link.children.length > 11" class="message-for-developer">
-            <p style="font-size:10px; color: red; whiteSpace: normal;">В стилях надо добавить класс .subitem-count-X, где X - это количество subitems</p>
-          </div>
-          <div class="sidenav__nav-item-dropdown-list"
-            :class="`subitem-count-${link.children.length}`"
-          >
-            <component class="sidenav__nav-subitem"
-              :is="sublink.url ? 'nuxt-link' : 'div'" :to="sublink.url"
-              v-for="(sublink, index) in link.children"
-              :key="sublink.name + index"
-            >
-              {{ sublink.name }}
-            </component>
-          </div>
-        </div>
-      </component>
-    </div>
-
-    <div class="flex-variant">
-      <div class="flex-left">
-        <i class="ni ni-shop text-primary"></i>
+          </Sidenav>
+        </Sidenav>
       </div>
-      <div class="flex-right">
-        <span class="sidenav__nav-item-text">asdfasdfs</span>
-      </div>
-    </div>
 
-    <div class="kfjsadsadfasdfasd">
       <div class="navbar-inner">
-        <ul class="navbar-nav">
-          <li class="nav-item"
-            v-for="(link, index) in sidebarLinks"
-            :key="link.name + index"
-          >
-            <SidebarItem
-              :link="link"
-            />
-          </li>
-        </ul>
 
-        <!-- <hr class="my-3"> -->
 
         <!-- <div class="sidebar-settings">
           <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-1" title="Sidebar not static and top" />
@@ -103,34 +70,34 @@
           <li class="nav-item"><a href="#" rel="noopener" class="nav-link"><i class="ni ni-chart-pie-35"></i> <span class="nav-link-text">Plugins</span></a></li>
         </ul> -->
       </div>
-    </div>
 
-    <!-- <a
-      href="#"
-      class="btn btn-sm btn-danger btn-icon mx-sm-5 mb-2 d-none d-md-block"
-      ><span class="btn-inner--icon"
-        ><i class="fas fa-download mr-2"></i
-      ></span>
-      <span class="nav-link-inner--text">Upgrade to PRO</span></a
-    >
-    <a
-      href="#"
-      class="btn btn-sm btn-neutral btn-icon mx-sm-5 mb-2 d-none d-md-block"
-      ><span class="btn-inner--icon"><i class="fas fa-file-alt"></i></span>
-      <span class="nav-link-inner--text">Documentation</span></a
-    >
-    <a
-      href="#"
-      class="btn btn-sm btn-info btn-icon mx-sm-5 mb-2 d-none d-md-block"
-      ><span class="btn-inner--icon"><i class="fas fa-gift"></i></span>
-      <span class="nav-link-inner--text">Download now</span></a
-    >
-    <a
-      href="#"
-      class="btn btn-sm btn-dark btn-icon mx-sm-5 mb-2 d-none d-md-block"
-      ><span class="btn-inner--icon"><i class="fab fa-github"></i></span>
-      <span class="nav-link-inner--text">Star us on Github</span></a
-    > -->
+      <!-- <a
+        href="#"
+        class="btn btn-sm btn-danger btn-icon mx-sm-5 mb-2 d-none d-md-block"
+        ><span class="btn-inner--icon"
+          ><i class="fas fa-download mr-2"></i
+        ></span>
+        <span class="nav-link-inner--text">Upgrade to PRO</span></a
+      >
+      <a
+        href="#"
+        class="btn btn-sm btn-neutral btn-icon mx-sm-5 mb-2 d-none d-md-block"
+        ><span class="btn-inner--icon"><i class="fas fa-file-alt"></i></span>
+        <span class="nav-link-inner--text">Documentation</span></a
+      >
+      <a
+        href="#"
+        class="btn btn-sm btn-info btn-icon mx-sm-5 mb-2 d-none d-md-block"
+        ><span class="btn-inner--icon"><i class="fas fa-gift"></i></span>
+        <span class="nav-link-inner--text">Download now</span></a
+      >
+      <a
+        href="#"
+        class="btn btn-sm btn-dark btn-icon mx-sm-5 mb-2 d-none d-md-block"
+        ><span class="btn-inner--icon"><i class="fab fa-github"></i></span>
+        <span class="nav-link-inner--text">Star us on Github</span></a
+      > -->
+    </div>
 
   </aside>
 </template>
@@ -173,167 +140,49 @@ export default {
 
 <style lang="sass">
 .sidebar
-  // vars
-  $heightSubItem: 3.5rem
-
+  position: relative
   white-space: nowrap
 
-  .sidenav
-    &__nav-item
-      $heightItem: 4.5rem
-      $marginItem: .8rem
-      display: grid
-      grid: minmax($heightItem, max-content ) / calc(#{$sidebarWidthIcon} - 2 * #{$marginItem}) auto // row/col
-      margin: 0 $marginItem
-      width: calc(100% - 2 * #{$marginItem})
-      @media screen and (max-width: 370px)
-        width: calc(95% - 2 * #{$marginItem})
+  // общее
+  &-header,
+  &-main
+    position: absolute
+    left: 0
+    right: 0
+    bottom: 0
+    width: 100%
 
-      overflow: hidden
-      border-radius: 6px
-      transition: $transitionDefault
-      &:hover
-        background-color: rgb(237, 245, 253)
-        // background-color: rgba(94, 114, 228, 0.1)
-      &>i
-        text-align: center
-        font-size: 1.6rem
-        line-height: $heightItem
-        color: $color-text-grey
-        // padding-right: calc(#{$marginItem} * 2)
-      &-text
-        line-height: $heightItem
-        color: rgba(0,0,0,.6)
-        transition: $transitionDefault
-        &:hover
-          color: rgba(0,0,0,.7)
+  &-header
+    top: 0
+    height: $height-header
+    overflow: hidden
+  &-main
+    top: $height-header
+    height: calc(100% - #{$height-header})
+    overflow-x: hidden
 
-      &-dropdown
-        &-title
-          position: relative
-          display: flex
-          justify-content: space-between
-          align-items: center
-          // &.active
-        // &-title[data-toggle="collapse"]
-          // i
-
-          // &:after
-          //   display: inline-block
-          //   font-style: normal
-          //   font-variant: normal
-          //   text-rendering: auto
-          //   -webkit-font-smoothing: antialiased
-          //   font-family: 'Font Awesome 5 Free'
-          //   font-weight: 900
-          //   content: "\f105"
-          //   // margin-left: auto
-          //   margin-right: 1rem
-          //   color: $color-purple
-          //   // @include transition($transition-base)
-
-          // Expanded
-          // &[aria-expanded="true"]
-            // &:after
-            //   // color: theme-color("primary")
-            //   transform: rotate(90deg)
-        &-list
-          height: 0
-          transition: $transitionDefault
-
-          .sidenav__nav-subitem
-            display: block
-            color: rgba(0,0,0,.6)
-            font-size: .93em
-            line-height: $heightSubItem
-            transition: $transitionDefault
-
-  &.active
-    .sidenav__nav-item-dropdown-list.subitem-count-1
-      height: $heightSubItem
-    .sidenav__nav-item-dropdown-list.subitem-count-2
-      height: calc(#{$heightSubItem} * 2)
-    .sidenav__nav-item-dropdown-list.subitem-count-3
-      height: calc(#{$heightSubItem} * 3)
-    .sidenav__nav-item-dropdown-list.subitem-count-4
-      height: calc(#{$heightSubItem} * 4)
-    .sidenav__nav-item-dropdown-list.subitem-count-5
-      height: calc(#{$heightSubItem} * 5)
-    .sidenav__nav-item-dropdown-list.subitem-count-6
-      height: calc(#{$heightSubItem} * 6)
-    .sidenav__nav-item-dropdown-list.subitem-count-7
-      height: calc(#{$heightSubItem} * 7)
-    .sidenav__nav-item-dropdown-list.subitem-count-8
-      height: calc(#{$heightSubItem} * 8)
-    .sidenav__nav-item-dropdown-list.subitem-count-9
-      height: calc(#{$heightSubItem} * 9)
-    .sidenav__nav-item-dropdown-list.subitem-count-10
-      height: calc(#{$heightSubItem} * 10)
-    .sidenav__nav-item-dropdown-list.subitem-count-11
-      height: calc(#{$heightSubItem} * 11)
-
-
-
-
-
-
-
-
-.kfjsadsadfasdfasd
-  .navbar-inner
-    ul.navbar-nav li a
-      padding: 1rem 2.4rem
-      color: rgba(0,0,0,.6)
+  // header
+  &-header
+    .sidebar-toggle
       display: flex
-      // -webkit-box-align: center
+      justify-content: center
       align-items: center
-      &.active
-        position: relative
-
-    // Icon
-    i
-      min-width: 3rem
-      font-size: 1.6rem
-      line-height: 2.4rem
-      color: $danger-color
-
-    // // Dropdown
-    // .dropdown-menu
-    //   border: none
-    //   .dropdown-menu
-    //     margin-left: 1rem / 2
-
-  // .nav-link[data-toggle="collapse"]
-    // &:after
-    //   display: inline-block
-    //   font-style: normal
-    //   font-variant: normal
-    //   text-rendering: auto
-    //   -webkit-font-smoothing: antialiased
-    //   font-family: 'Font Awesome 5 Free'
-    //   font-weight: 900
-    //   content: "\f105"
-    //   margin-left: auto
-    //   color: $color-purple
-    //   // @include transition($transition-base)
-
-    // // Expanded
-    // &[aria-expanded="true"]
-    //   &:after
-    //     // color: theme-color("primary")
-    //     transform: rotate(90deg)
-
-.sidenav-header,
-.sidebar-settings
-  padding: 1rem 2.4rem
+      box-sizing: border-box
+      height: 100%
+      width: 10rem
+      padding: 0 1rem
+      background-color: transparent
+      border: none
+      font-size: 1.4rem
+      white-space: nowrap // запрет переноса строк
+      span
+        padding-left: 1rem
 
 
-
-
-
-
-
-
+  .sidebar-settings
+    padding: 1rem 2.4rem
+    display: block !important
+    white-space: normal
 
 
 </style>
