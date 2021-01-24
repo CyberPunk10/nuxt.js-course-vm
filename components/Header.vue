@@ -50,7 +50,8 @@ header
   display: flex
   justify-content: space-between
   background-color: #fff
-  border-bottom: 1px solid #e6e6e6
+  user-select: none
+  // border-bottom: 1px solid #e6e6e6
   .sidebar-toggle
     display: flex
     justify-content: center

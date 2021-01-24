@@ -19,47 +19,93 @@
         </div>
       </div>
 
-      <button class="sidebar-toggle_static"
+      <!-- <button class="sidebar-toggle_static"
         data-btn="sidebar-toggle"
       >
         <i class="fas fa-map-pin"></i>
         <span data-btn="sidebar-toggle">Static меню</span>
-      </button>
+      </button> -->
 
     </div>
 
-    <div class="navbar-inner">
-      <ul class="navbar-nav">
-        <li class="nav-item"
-          v-for="(link, index) in sidebarLinks"
-          :key="link.name + index"
-        >
-          <SidebarItem
-            :link="link"
-          />
-        </li>
-      </ul>
+    <div class="sidenav">
+      <component class="sidenav__nav-item"
+        :is="link.url ? 'NuxtLink' : 'div'" :to="link.url"
+        v-for="(link, index) in sidebarLinks"
+        :key="link.name + index"
+      >
+        <i :class="link.icon"></i>
+        <span class="sidenav__nav-item-text" v-if="link.url">{{ link.name }}</span>
 
-      <hr class="my-3">
+        <div v-else class="sidenav__nav-item-dropdown">
+          <div class="sidenav__nav-item-dropdown-title"
+            data-toggle="collapse"
+            aria-expanded="true"
+          >
+            <span class="sidenav__nav-item-text">{{ link.name }}</span>
+            <i class="fas fa-angle-right"></i>
+          </div>
+          <div v-if="link.children.length > 11" class="message-for-developer">
+            <p style="font-size:10px; color: red; whiteSpace: normal;">В стилях надо добавить класс .subitem-count-X, где X - это количество subitems</p>
+          </div>
+          <div class="sidenav__nav-item-dropdown-list"
+            :class="`subitem-count-${link.children.length}`"
+          >
+            <component class="sidenav__nav-subitem"
+              :is="sublink.url ? 'nuxt-link' : 'div'" :to="sublink.url"
+              v-for="(sublink, index) in link.children"
+              :key="sublink.name + index"
+            >
+              {{ sublink.name }}
+            </component>
+          </div>
+        </div>
+      </component>
+    </div>
 
-      <div class="sidebar-settings">
-        <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-1" title="Sidebar not static and top" />
-        <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-2" isChecked title="Main-container not static and static Sidebar" />
-        <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-3" title="Main-container not static"/>
+    <div class="flex-variant">
+      <div class="flex-left">
+        <i class="ni ni-shop text-primary"></i>
       </div>
-
-      <hr class="my-3">
-
-      <h6 class="navbar-heading p-0 text-muted">Documentation</h6>
-      <ul class="navbar-nav mb-md-3">
-        <li class="nav-item"><a href="#" rel="noopener" class="nav-link"><i class="ni ni-spaceship"></i> <span class="nav-link-text">Getting started</span></a></li>
-        <li class="nav-item"><a href="#" rel="noopener" class="nav-link"><i class="ni ni-palette"></i> <span class="nav-link-text">Foundation</span></a></li>
-        <li class="nav-item"><a href="#" rel="noopener" class="nav-link"><i class="ni ni-ui-04"></i> <span class="nav-link-text">Components</span></a></li>
-        <li class="nav-item"><a href="#" rel="noopener" class="nav-link"><i class="ni ni-chart-pie-35"></i> <span class="nav-link-text">Plugins</span></a></li>
-      </ul>
+      <div class="flex-right">
+        <span class="sidenav__nav-item-text">asdfasdfs</span>
+      </div>
     </div>
 
-    <a
+    <div class="kfjsadsadfasdfasd">
+      <div class="navbar-inner">
+        <ul class="navbar-nav">
+          <li class="nav-item"
+            v-for="(link, index) in sidebarLinks"
+            :key="link.name + index"
+          >
+            <SidebarItem
+              :link="link"
+            />
+          </li>
+        </ul>
+
+        <!-- <hr class="my-3"> -->
+
+        <!-- <div class="sidebar-settings">
+          <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-1" title="Sidebar not static and top" />
+          <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-2" isChecked title="Main-container not static and static Sidebar" />
+          <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-3" title="Main-container not static"/>
+        </div> -->
+
+        <!-- <hr class="my-3">
+
+        <h6 class="navbar-heading p-0 text-muted">Documentation</h6>
+        <ul class="navbar-nav mb-md-3">
+          <li class="nav-item"><a href="#" rel="noopener" class="nav-link"><i class="ni ni-spaceship"></i> <span class="nav-link-text">Getting started</span></a></li>
+          <li class="nav-item"><a href="#" rel="noopener" class="nav-link"><i class="ni ni-palette"></i> <span class="nav-link-text">Foundation</span></a></li>
+          <li class="nav-item"><a href="#" rel="noopener" class="nav-link"><i class="ni ni-ui-04"></i> <span class="nav-link-text">Components</span></a></li>
+          <li class="nav-item"><a href="#" rel="noopener" class="nav-link"><i class="ni ni-chart-pie-35"></i> <span class="nav-link-text">Plugins</span></a></li>
+        </ul> -->
+      </div>
+    </div>
+
+    <!-- <a
       href="#"
       class="btn btn-sm btn-danger btn-icon mx-sm-5 mb-2 d-none d-md-block"
       ><span class="btn-inner--icon"
@@ -84,7 +130,7 @@
       class="btn btn-sm btn-dark btn-icon mx-sm-5 mb-2 d-none d-md-block"
       ><span class="btn-inner--icon"><i class="fab fa-github"></i></span>
       <span class="nav-link-inner--text">Star us on Github</span></a
-    >
+    > -->
 
   </aside>
 </template>
@@ -125,41 +171,157 @@ export default {
 }
 </script>
 
-
 <style lang="sass">
+.sidebar
+  // vars
+  $heightSubItem: 3.5rem
 
+  white-space: nowrap
 
+  .sidenav
+    &__nav-item
+      $heightItem: 4.5rem
+      $marginItem: .8rem
+      display: grid
+      grid: minmax($heightItem, max-content ) / calc(#{$sidebarWidthIcon} - 2 * #{$marginItem}) auto // row/col
+      margin: 0 $marginItem
+      width: calc(100% - 2 * #{$marginItem})
+      @media screen and (max-width: 370px)
+        width: calc(95% - 2 * #{$marginItem})
 
-
-
-
-
-
-.navbar-inner
-  .navbar-nav
-    li
-      a
-        padding: 1rem 2.4rem
-        color: rgba(0,0,0,.6)
-        display: flex
-        // -webkit-box-align: center
-        align-items: center
-        &.active
-          position: relative
-
-      // Icon
-      i
-        min-width: 3rem
+      overflow: hidden
+      border-radius: 6px
+      transition: $transitionDefault
+      &:hover
+        background-color: rgb(237, 245, 253)
+        // background-color: rgba(94, 114, 228, 0.1)
+      &>i
+        text-align: center
         font-size: 1.6rem
-        line-height: 2.4rem
-        color: $danger-color
+        line-height: $heightItem
+        color: $color-text-grey
+        // padding-right: calc(#{$marginItem} * 2)
+      &-text
+        line-height: $heightItem
+        color: rgba(0,0,0,.6)
+        transition: $transitionDefault
+        &:hover
+          color: rgba(0,0,0,.7)
 
-      // Dropdown
-      .dropdown-menu
-        border: none
-        .dropdown-menu
-          margin-left: 1rem / 2
+      &-dropdown
+        &-title
+          position: relative
+          display: flex
+          justify-content: space-between
+          align-items: center
+          // &.active
+        // &-title[data-toggle="collapse"]
+          // i
 
+          // &:after
+          //   display: inline-block
+          //   font-style: normal
+          //   font-variant: normal
+          //   text-rendering: auto
+          //   -webkit-font-smoothing: antialiased
+          //   font-family: 'Font Awesome 5 Free'
+          //   font-weight: 900
+          //   content: "\f105"
+          //   // margin-left: auto
+          //   margin-right: 1rem
+          //   color: $color-purple
+          //   // @include transition($transition-base)
+
+          // Expanded
+          // &[aria-expanded="true"]
+            // &:after
+            //   // color: theme-color("primary")
+            //   transform: rotate(90deg)
+        &-list
+          height: 0
+          transition: $transitionDefault
+
+          .sidenav__nav-subitem
+            display: block
+            color: rgba(0,0,0,.6)
+            font-size: .93em
+            line-height: $heightSubItem
+            transition: $transitionDefault
+
+  &.active
+    .sidenav__nav-item-dropdown-list.subitem-count-1
+      height: $heightSubItem
+    .sidenav__nav-item-dropdown-list.subitem-count-2
+      height: calc(#{$heightSubItem} * 2)
+    .sidenav__nav-item-dropdown-list.subitem-count-3
+      height: calc(#{$heightSubItem} * 3)
+    .sidenav__nav-item-dropdown-list.subitem-count-4
+      height: calc(#{$heightSubItem} * 4)
+    .sidenav__nav-item-dropdown-list.subitem-count-5
+      height: calc(#{$heightSubItem} * 5)
+    .sidenav__nav-item-dropdown-list.subitem-count-6
+      height: calc(#{$heightSubItem} * 6)
+    .sidenav__nav-item-dropdown-list.subitem-count-7
+      height: calc(#{$heightSubItem} * 7)
+    .sidenav__nav-item-dropdown-list.subitem-count-8
+      height: calc(#{$heightSubItem} * 8)
+    .sidenav__nav-item-dropdown-list.subitem-count-9
+      height: calc(#{$heightSubItem} * 9)
+    .sidenav__nav-item-dropdown-list.subitem-count-10
+      height: calc(#{$heightSubItem} * 10)
+    .sidenav__nav-item-dropdown-list.subitem-count-11
+      height: calc(#{$heightSubItem} * 11)
+
+
+
+
+
+
+
+
+.kfjsadsadfasdfasd
+  .navbar-inner
+    ul.navbar-nav li a
+      padding: 1rem 2.4rem
+      color: rgba(0,0,0,.6)
+      display: flex
+      // -webkit-box-align: center
+      align-items: center
+      &.active
+        position: relative
+
+    // Icon
+    i
+      min-width: 3rem
+      font-size: 1.6rem
+      line-height: 2.4rem
+      color: $danger-color
+
+    // // Dropdown
+    // .dropdown-menu
+    //   border: none
+    //   .dropdown-menu
+    //     margin-left: 1rem / 2
+
+  // .nav-link[data-toggle="collapse"]
+    // &:after
+    //   display: inline-block
+    //   font-style: normal
+    //   font-variant: normal
+    //   text-rendering: auto
+    //   -webkit-font-smoothing: antialiased
+    //   font-family: 'Font Awesome 5 Free'
+    //   font-weight: 900
+    //   content: "\f105"
+    //   margin-left: auto
+    //   color: $color-purple
+    //   // @include transition($transition-base)
+
+    // // Expanded
+    // &[aria-expanded="true"]
+    //   &:after
+    //     // color: theme-color("primary")
+    //     transform: rotate(90deg)
 
 .sidenav-header,
 .sidebar-settings
@@ -170,25 +332,6 @@ export default {
 
 
 
-.navbar-nav .nav-link[data-toggle="collapse"]
-  &:after
-    display: inline-block
-    font-style: normal
-    font-variant: normal
-    text-rendering: auto
-    -webkit-font-smoothing: antialiased
-    font-family: 'Font Awesome 5 Free'
-    font-weight: 900
-    content: "\f105"
-    margin-left: auto
-    color: $color-purple
-    // @include transition($transition-base)
-
-  // Expanded
-  &[aria-expanded="true"]
-    &:after
-      // color: theme-color("primary")
-      transform: rotate(90deg)
 
 
 

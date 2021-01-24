@@ -92,5 +92,24 @@ export default {
 </script>
 
 <style lang="sass">
+.sidebar
+  .nav-item
+    .nav-link-text
+      @media screen and (min-width: $tableWidth)
+        display: none
+    .collapse
+      @media screen and (min-width: $tableWidth)
+        display: none
+
+.sidebar.active
+  .nav-item
+    .nav-link-text
+      @media screen and (min-width: $tableWidth)
+        display: block
+    .collapse
+      @media screen and (min-width: $tableWidth)
+        display: block
+
+
 
 </style>
