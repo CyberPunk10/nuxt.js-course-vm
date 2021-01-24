@@ -26,7 +26,6 @@ export default {
     'element-ui/lib/theme-chalk/index.css',
     'element-ui/lib/theme-chalk/display.css',
     'assets/font-awesome/releases/v5.15.1/css/all.min.css',
-    "assets/nucleo/css/nucleo.css",
     'assets/sass/main.sass',
     '@/theme/index.sass'
   ],
