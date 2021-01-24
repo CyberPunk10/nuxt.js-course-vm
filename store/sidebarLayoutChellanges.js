@@ -5,62 +5,66 @@ export const state = () => ({
     // challenges
     {
       name: 'Главная',
-      icon: 'ni ni-compass-04',
+      icon: 'fas fa-home',
+      url: '/challenges',
+      onHeader: true
+    },
+    {
+      name: 'Статистика',
+      icon: 'fas fa-chevron-right',
       url: '/challenges',
       onHeader: true
     },
     {
       name: 'Мой профиль',
-      icon: 'ni ni-user-run',
+      icon: 'far fa-user',
       url: '/challenges/my-profile',
       onHeader: true
     },
     {
       name: 'Мои челленджи',
-      icon: 'ni ni-align-left-2',
+      icon: 'fas fa-chart-pie',
       children: [
         {
           name: 'Dashboard',
-          icon: 'ni ni-shop text-primary',
           url: '/dashboard',
         },
         {
           name: 'Alternative',
-          icon: 'ni ni-shop text-primary',
           url: '/alternative',
         },
       ]
     },
     {
       name: 'Создать челлендж',
-      icon: 'ni ni-controller',
+      icon: 'fas fa-check',
       url: '/challenges/create'
     },
     {
       name: 'Добавить прогресс',
-      icon: 'ni ni-fat-add',
+      icon: 'far fa-user',
       url: '/challenges/addprogress',
       onHeader: true
     },
     {
       name: 'Тренировка',
-      icon: 'ni ni-camera-compact',
+      icon: 'far fa-heart',
       url: '/challenges/mobile',
       onHeader: true
     },
     {
       name: 'layoutMainChallenges',
-      icon: 'ni ni-ruler-pencil',
+      icon: 'fas fa-home',
       url: '/layout-main-challenges'
     },
     {
       name: 'Tаблицы',
-      icon: 'ni ni-box-2',
+      icon: 'far fa-chart-bar',
       url: '/challenges/table'
     },
     {
       name: 'Настройки',
-      icon: 'ni ni-settings',
+      icon: 'fas fa-angle-right',
       url: '/challenges/settings'
     }
   ]

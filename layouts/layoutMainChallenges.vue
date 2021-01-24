@@ -5,8 +5,6 @@
     <div class="main-container"
       @click="handleClickSidebarToggle"
     >
-      <div class="underlay"></div>
-
       <Header/>
 
       <div class="border-top"></div>
@@ -90,10 +88,12 @@ export default {
     handleClickSidebarToggle: function(event) {
       console.log('click layout (layoutMainChallenges.vue)', event.target)
       const sideBar = document.querySelector('.sidebar')
-      const mainContainer = document.querySelector('.main-container')
-      if ( event.target.dataset.btn === 'sidebar-toggle'
-        || event.target.className === 'underlay' && event.target.parentElement.classList.contains('main-container')) {
+      if (event.target.dataset.btn === 'sidebar-toggle') {
         sideBar.classList.toggle('active')
+        return
+      }
+      if (!sideBar.matches('.pinned')) {
+        sideBar.classList.remove('active')
       }
     }
   }
@@ -113,28 +113,26 @@ export default {
     left: 0
     bottom: 0
     height: 100%
+    overflow: hidden
     transition: $transitionSidebar
 
   &>.sidebar
     z-index: 999
     width: $sidebarWidth
     background-color: $color-bg-sidebar
-    color: #242424
+    // color: #242424
     @media screen and (max-width: 370px)
       width: $sidebarWidthPhone
     @media screen and (min-width: $tableWidth)
       width: $sidebarWidthIcon
   &>.main-container
-    overflow: hidden
     right: 0
     width: 100%
     background-color: $color-bg-body
-    color: #555
+    // color: #555
     @media screen and (min-width: $tableWidth)
       width: auto
       left: $sidebarWidthIcon
-    .underlay
-      position: absolute
 
     header,
     .main-content
@@ -148,9 +146,6 @@ export default {
       top: $height-header
       height: calc(100% - #{$height-header})
       overflow-x: hidden
-      // border-top: 1px solid $color-dark-shade-10
-      // border-left: 1px solid $color-dark-shade-10
-
 
   // если sidebar not static (need add .transform-x)
   &>.sidebar.transform-x
@@ -165,14 +160,10 @@ export default {
     left: 0
     width: $sidebarWidth
     box-shadow: 4px 2px 4px rgba(0,0,0,.101562)
+    @media screen and (max-width: 370px)
+      width: $sidebarWidthPhone
   &>.sidebar.transform-x.active
     left: 0
-
-  &>.sidebar.active + .main-container
-    .underlay
-      z-index:555
-      pointer-events: auto
-      // opacity: .5
 
   // если main-container not static (need add .main-container_transform-x)
   &.main-container_transform-x
@@ -189,10 +180,13 @@ export default {
   .border-top,
   .border-left,
   .border-right
-    z-index: 1 // for scroll (быть выше скролла)
     position: absolute
     top: $height-header
     background-color: rgba(0, 0, 0, 0.05)
+
+  .border-top,
+  .border-left
+    z-index: 1
 
   .border-left,
   .border-right
