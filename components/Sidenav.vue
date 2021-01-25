@@ -6,7 +6,9 @@
 
     <span v-if="link.url" class="sidenav__nav-item-text">{{ link.name }}</span>
 
-    <div v-else class="sidenav__nav-item-menu">
+    <div v-else class="sidenav__nav-item-menu"
+      @click="toggleMenu"
+    >
       <div class="sidenav__nav-item-menu-title"
         data-toggle="collapse"
         aria-expanded="true"
@@ -32,6 +34,14 @@ export default {
     link: {
       type: Object
     }
+  },
+
+  methods: {
+    toggleMenu(event) {
+      console.log(event.target)
+      event.target.closest('.sidenav__nav-item')
+        .classList.toggle('collapsed')
+    }
   }
 }
 </script>
@@ -50,6 +60,7 @@ export default {
       width: calc(100% - 2 * #{$sidebar-marginItem})
       overflow: hidden
       border-radius: 6px
+      margin-bottom: 2px
       transition: $transitionDefault
       &:hover
         background-color: rgb(237, 245, 253)
@@ -101,7 +112,6 @@ export default {
               color: rgba(0,0,0,.6)
               transition: $transitionDefault
 
-
   &.active
     .sidenav__nav-item-menu-list.subitem-count-1
       height: $heightSubItem
@@ -125,6 +135,14 @@ export default {
       height: calc(#{$heightSubItem} * 10)
     .sidenav__nav-item-menu-list.subitem-count-11
       height: calc(#{$heightSubItem} * 11)
+
+    .sidenav__nav-item.collapsed
+      .sidenav__nav-item-menu
+        &-title
+          i
+            transform: rotate(0deg)
+        &-list
+          height: 0
 
 
     // .nav-link[data-toggle="collapse"]

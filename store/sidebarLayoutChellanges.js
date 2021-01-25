@@ -42,7 +42,17 @@ export const state = () => ({
     {
       name: 'Тренировка',
       icon: 'far fa-heart',
-      url: '/challenges/mobile',
+      // url: '/challenges/mobile',
+      children: [
+        {
+          name: 'Dashboard',
+          url: '/challenges/mobile',
+        },
+        {
+          name: 'Alternative',
+          url: '/alternative',
+        },
+      ]
     },
     {
       name: 'layoutMainChallenges',
