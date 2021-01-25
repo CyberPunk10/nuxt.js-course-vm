@@ -44,12 +44,10 @@ export default {
   // sidenav
   .sidenav
     &__nav-item
-      $heightItem: 4.5rem
-      $marginItem: .8rem
       display: grid
-      grid: minmax($heightItem, max-content ) / calc(#{$sidebarWidthIcon} - 2 * #{$marginItem}) minmax(auto, calc(100% - #{$heightItem})) // row/col
-      margin: 0 $marginItem
-      width: calc(100% - 2 * #{$marginItem})
+      grid: minmax($sidebar-heightItem, max-content ) / calc(#{$sidebarWidthIcon} - 2 * #{$sidebar-marginItem}) minmax(auto, calc(100% - #{$sidebar-heightItem})) // row/col
+      margin: 0 $sidebar-marginItem
+      width: calc(100% - 2 * #{$sidebar-marginItem})
       overflow: hidden
       border-radius: 6px
       transition: $transitionDefault
@@ -57,18 +55,18 @@ export default {
         background-color: rgb(237, 245, 253)
         // background-color: rgba(94, 114, 228, 0.1)
       &.nuxt-link-exact-active
-        background-color: rgb(237, 245, 253)
+        background-color: rgba(155, 233, 168, 0.4)
         i, span
-          color: $red
+          color: #30a14e
 
       &>i
         text-align: center
         font-size: 1.6rem
-        line-height: $heightItem
+        line-height: $sidebar-heightItem
         // color: $color-text-grey
         color: $neutral-secondary
       &-text
-        line-height: $heightItem
+        line-height: $sidebar-heightItem
         color: rgba(0,0,0,.6)
         transition: $transitionDefault
         &:hover
@@ -82,7 +80,7 @@ export default {
           align-items: center
           i
             padding: 0 1rem
-            line-height: $heightItem
+            line-height: $sidebar-heightItem
             transform: rotate(90deg)
             color: $color-purple
             transition: $transitionDefault

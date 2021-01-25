@@ -4,37 +4,36 @@
     @click="handleClickSidebar"
   >
 
-    <div class="sidebar-header d-flex align-items-center">
+    <div class="sidebar-header">
+      <div class="wrapper55">
+        <button class="sidebar-toggle"
+          data-btn="sidebar-toggle"
+        >
+          <div class="svg-wrap" data-btn="sidebar-toggle">
+            <svg data-btn="sidebar-toggle" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <rect data-btn="sidebar-toggle" y="9" width="20" height="2"></rect>
+              <rect data-btn="sidebar-toggle" y="3" width="20" height="2"></rect>
+              <rect data-btn="sidebar-toggle" y="15" width="20" height="2"></rect>
+            </svg>
+          </div>
+        </button>
 
-      <!-- <button class="sidebar-toggle"
-        data-btn="sidebar-toggle"
-      >
-        <svg data-btn="sidebar-toggle" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-          <rect data-btn="sidebar-toggle" y="9" width="20" height="2"></rect>
-          <rect data-btn="sidebar-toggle" y="3" width="20" height="2"></rect>
-          <rect data-btn="sidebar-toggle" y="15" width="20" height="2"></rect>
-        </svg>
         <span data-btn="sidebar-toggle">Меню</span>
-      </button> -->
 
-      <a href="#" class="navbar-brand">
+        <NuxtLink to="#" class="navbar-brand">
+          CheckOut
+        </NuxtLink>
 
-      </a>
-
-      <!-- <button class="sidebar-toggle_pinned"
-        data-btn="sidebar-toggle"
-      >
-        <i class="fas fa-map-pin"></i>
-        <span data-btn="sidebar-toggle">Закрепить меню</span>
-      </button> -->
-
+        <!-- <button class="sidebar-toggle_pinned"
+          data-btn="sidebar-toggle"
+        >
+          <i class="fas fa-map-pin"></i>
+          <span data-btn="sidebar-toggle">Закрепить меню</span>
+        </button> -->
+      </div>
     </div>
 
-    <div class="sidebar-main
-                layout-scrollbar-sidebar-transparent
-                layout-cell-sidebar-transparent
-               "
-    >
+    <div class="sidebar-main layout-scrollbar-sidebar-transparent layout-cell-sidebar-transparent">
 
       <div class="sidenav">
         <Sidenav
@@ -54,11 +53,7 @@
       <div class="navbar-inner">
 
 
-        <!-- <div class="sidebar-settings">
-          <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-1" title="Sidebar not static and top" />
-          <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-2" isChecked title="Main-container not static and static Sidebar" />
-          <RadioBtn class="comp-radioBtn" name="mode-view-sidebar" id="mode-view-sidebar-3" title="Main-container not static"/>
-        </div> -->
+
 
         <!-- <hr class="my-3">
 
@@ -113,26 +108,65 @@ export default {
     handleClickSidebar: function(event) {
       console.log('click on Sidebar', event.target)
       const sideBar = document.querySelector('.sidebar')
-      if (event.target.className === 'radio-btn__input') {
-        console.log(event.target.id)
-        const id = event.target.id
-        const layoutWrapper = document.querySelector('.layout-wrapper')
-        if (id === 'mode-view-sidebar-1') {
-          sideBar.classList.add('transform-x')
-          layoutWrapper.classList.remove('main-container_transform-x')
-        }
-        if (id === 'mode-view-sidebar-2') {
-          layoutWrapper.classList.add('main-container_transform-x')
-          sideBar.classList.remove('transform-x')
-        }
-        if (id === 'mode-view-sidebar-3') {
-          layoutWrapper.classList.add('main-container_transform-x')
-          sideBar.classList.add('transform-x')
-        }
-      }
-      if (event.target.className === 'sidebar-toggle_static') {
+      const className = event.target.className
+      const dataAttr = event.target.dataset
 
+      // if (event.target.className === 'radio-btn__input') {
+      //   console.log(event.target.id)
+      //   const id = event.target.id
+      //   const layoutWrapper = document.querySelector('.layout-wrapper')
+      //   if (id === 'mode-view-sidebar-1') {
+      //     sideBar.classList.add('transform-x')
+      //     layoutWrapper.classList.remove('main-container_transform-x')
+      //   }
+      //   if (id === 'mode-view-sidebar-2') {
+      //     layoutWrapper.classList.add('main-container_transform-x')
+      //     sideBar.classList.remove('transform-x')
+      //   }
+      //   if (id === 'mode-view-sidebar-3') {
+      //     layoutWrapper.classList.add('main-container_transform-x')
+      //     sideBar.classList.add('transform-x')
+      //   }
+      // }
+      // if (event.target.className === 'sidebar-toggle_pinned') {
+
+      // }
+
+      switch (className) {
+        case 'radio-btn__input':
+          console.log(event.target.id)
+          const id = event.target.id
+          const layoutWrapper = document.querySelector('.layout-wrapper')
+          if (id === 'mode-view-sidebar-1') {
+            sideBar.classList.add('transform-x')
+            layoutWrapper.classList.remove('main-container_transform-x')
+          }
+          if (id === 'mode-view-sidebar-2') {
+            layoutWrapper.classList.add('main-container_transform-x')
+            sideBar.classList.remove('transform-x')
+          }
+          if (id === 'mode-view-sidebar-3') {
+            layoutWrapper.classList.add('main-container_transform-x')
+            sideBar.classList.add('transform-x')
+          }
+          break
+
+        case 'sidebar-toggle_pinned':
+          console.log('sidebar-toggle_pinned')
+          break
+
+        case 'sidebar-toggle':
+          console.log('sidebar-toggle')
+          break
       }
+
+      switch (dataAttr.btn) {
+        case 'sidebar-toggle':
+          console.log('sidebar-toggle')
+          sideBar.classList.toggle('active')
+          break
+      }
+
     }
   }
 }
@@ -160,29 +194,43 @@ export default {
     top: $height-header
     height: calc(100% - #{$height-header})
     overflow-x: hidden
+    padding-top: 2rem
 
   // header
   &-header
+    .wrapper55
+      display: grid
+      grid: minmax($height-header, max-content ) / calc(#{$sidebarWidthIcon} - 2 * #{$sidebar-marginItem}) minmax(auto, calc(100% - #{$sidebar-heightItem})) minmax(auto, calc(100% - #{$sidebar-heightItem})) // row/col
+      margin: 0 $sidebar-marginItem
+      width: calc(100% - 2 * #{$sidebar-marginItem})
+      overflow: hidden
+      border-radius: 6px
+      transition: $transitionDefault
     .sidebar-toggle
       display: flex
       justify-content: center
       align-items: center
-      box-sizing: border-box
-      height: 100%
-      width: 10rem
-      padding: 0 1rem
+      padding: 0
       background-color: transparent
       border: none
-      font-size: 1.4rem
       white-space: nowrap // запрет переноса строк
+      font-size: 1.4rem
+      .svg-wrap
+        display: flex
+        justify-content: center
+        align-item: center
+        height: 100%
+        min-width: $sidebar-heightItem
       span
-        padding-left: 1rem
+        line-height: $height-header
+
+    // logo
+    .navbar-brand
+      height: 100%
+      width: max-content
+      background-color: red
 
 
-  .sidebar-settings
-    padding: 1rem 2.4rem
-    display: block !important
-    white-space: normal
 
 
 </style>

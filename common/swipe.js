@@ -7,17 +7,14 @@ export default function(el, customSettings) {
     minDist: 60,  // минимальная дистанция, которую должен пройти указатель, чтобы жест считался как свайп (px)
     maxDist: 120, // максимальная дистанция, не превышая которую может пройти указатель, чтобы жест считался как свайп (px)
     maxTime: 700, // максимальное время, за которое должен быть совершен свайп (ms)
-    minTime: 50   // минимальное время, за которое должен быть совершен свайп (ms)
+    minTime: 5   // минимальное время, за которое должен быть совершен свайп (ms)
   }, customSettings)
 
 
   // коррекция времени при ошибочных значениях
   if (settings.maxTime < settings.minTime) settings.maxTime = settings.minTime + 500
-  if (settings.maxTime < 100 || settings.minTime < 50) {
-    settings.maxTime = 700
-    // settings.minTime = 50
-    settings.minTime = 10
-  }
+  if (settings.maxTime < 100 || settings.maxTime > 2000) settings.maxTime = 700
+  if (settings.minTime < 5 || settings.minTime > 1000) settings.minTime = 5
 
   let dir,                  // направление свайпа (horizontal, vertical)
       swipeType,            // тип свайпа (up, down, left, right)

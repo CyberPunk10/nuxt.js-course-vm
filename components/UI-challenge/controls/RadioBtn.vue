@@ -37,9 +37,9 @@ export default {
   $sizeCircle: 1.6rem
   $sizeCircleInset: calc(#{$sizeCircle} / 100 * 50)
 
-  max-width: 32rem
+  // max-width: 32rem
   padding: .3rem 0
-  display: inline-block
+  // display: inline-block
   &__input
     position: absolute
     left: -9999px

@@ -28,10 +28,7 @@
 export default {
   data() {
     return {
-      // links: [
-      //   {title: 'Создать ch', url: '/challenges/create'},
-      //   {title: 'Добавить прогресс', url: '/challenges/addprogress'},
-      // ]
+
     }
   },
   computed: {
@@ -63,6 +60,8 @@ header
     border: none
     font-size: 1.4rem
     white-space: nowrap // запрет переноса строк
+    @media screen and (min-width: $tableWidth)
+      display: none
     span
       padding-right: 1rem
 
