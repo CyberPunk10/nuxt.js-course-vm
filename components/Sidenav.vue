@@ -6,7 +6,9 @@
 
     <span v-if="link.url" class="sidenav__nav-item-text">{{ link.name }}</span>
 
-    <div v-else class="sidenav__nav-item-menu">
+    <div v-else class="sidenav__nav-item-menu"
+      @click="toggleMenu"
+    >
       <div class="sidenav__nav-item-menu-title"
         data-toggle="collapse"
         aria-expanded="true"
@@ -32,6 +34,14 @@ export default {
     link: {
       type: Object
     }
+  },
+
+  methods: {
+    toggleMenu(event) {
+      console.log(event.target)
+      event.target.closest('.sidenav__nav-item')
+        .classList.toggle('collapsed')
+    }
   }
 }
 </script>
@@ -44,31 +54,30 @@ export default {
   // sidenav
   .sidenav
     &__nav-item
-      $heightItem: 4.5rem
-      $marginItem: .8rem
       display: grid
-      grid: minmax($heightItem, max-content ) / calc(#{$sidebarWidthIcon} - 2 * #{$marginItem}) minmax(auto, calc(100% - #{$heightItem})) // row/col
-      margin: 0 $marginItem
-      width: calc(100% - 2 * #{$marginItem})
+      grid: minmax($sidebar-heightItem, max-content ) / calc(#{$sidebarWidthIcon} - 2 * #{$sidebar-marginItem}) minmax(auto, calc(100% - #{$sidebar-heightItem})) // row/col
+      margin: 0 $sidebar-marginItem
+      width: calc(100% - 2 * #{$sidebar-marginItem})
       overflow: hidden
       border-radius: 6px
+      margin-bottom: 2px
       transition: $transitionDefault
       &:hover
         background-color: rgb(237, 245, 253)
         // background-color: rgba(94, 114, 228, 0.1)
       &.nuxt-link-exact-active
-        background-color: rgb(237, 245, 253)
+        background-color: rgba(155, 233, 168, 0.4)
         i, span
-          color: $red
+          color: #30a14e
 
       &>i
         text-align: center
         font-size: 1.6rem
-        line-height: $heightItem
+        line-height: $sidebar-heightItem
         // color: $color-text-grey
         color: $neutral-secondary
       &-text
-        line-height: $heightItem
+        line-height: $sidebar-heightItem
         color: rgba(0,0,0,.6)
         transition: $transitionDefault
         &:hover
@@ -82,7 +91,7 @@ export default {
           align-items: center
           i
             padding: 0 1rem
-            line-height: $heightItem
+            line-height: $sidebar-heightItem
             transform: rotate(90deg)
             color: $color-purple
             transition: $transitionDefault
@@ -102,7 +111,6 @@ export default {
               font-size: .93em
               color: rgba(0,0,0,.6)
               transition: $transitionDefault
-
 
   &.active
     .sidenav__nav-item-menu-list.subitem-count-1
@@ -127,6 +135,14 @@ export default {
       height: calc(#{$heightSubItem} * 10)
     .sidenav__nav-item-menu-list.subitem-count-11
       height: calc(#{$heightSubItem} * 11)
+
+    .sidenav__nav-item.collapsed
+      .sidenav__nav-item-menu
+        &-title
+          i
+            transform: rotate(0deg)
+        &-list
+          height: 0
 
 
     // .nav-link[data-toggle="collapse"]

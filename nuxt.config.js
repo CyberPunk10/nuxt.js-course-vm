@@ -67,7 +67,8 @@ export default {
   },
 
   env: {
-    appName: 'SSR Blog'
+    appName: 'SSR Blog',
+    appNameChallenges: 'Challenges'
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)

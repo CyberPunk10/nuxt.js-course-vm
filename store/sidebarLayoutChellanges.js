@@ -7,13 +7,6 @@ export const state = () => ({
       name: 'Главная',
       icon: 'fas fa-home',
       url: '/challenges',
-      onHeader: true
-    },
-    {
-      name: 'Статистика',
-      icon: 'fas fa-chevron-right',
-      url: '/challenges',
-      onHeader: true
     },
     {
       name: 'Мой профиль',
@@ -49,8 +42,17 @@ export const state = () => ({
     {
       name: 'Тренировка',
       icon: 'far fa-heart',
-      url: '/challenges/mobile',
-      onHeader: true
+      // url: '/challenges/mobile',
+      children: [
+        {
+          name: 'Dashboard',
+          url: '/challenges/mobile',
+        },
+        {
+          name: 'Alternative',
+          url: '/alternative',
+        },
+      ]
     },
     {
       name: 'layoutMainChallenges',
@@ -61,6 +63,11 @@ export const state = () => ({
       name: 'Tаблицы',
       icon: 'far fa-chart-bar',
       url: '/challenges/table'
+    },
+    {
+      name: 'Статистика',
+      icon: 'fas fa-chevron-right',
+      url: '/challenges/statistics',
     },
     {
       name: 'Настройки',
