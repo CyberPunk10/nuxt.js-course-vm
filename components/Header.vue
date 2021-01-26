@@ -33,8 +33,8 @@ export default {
   },
   computed: {
     links() {
-      let sidebarLinks = this.$store.state.sidebarLayoutChellanges.sidebarLinks
-      return sidebarLinks.filter(item => item.onHeader)
+      let navLinks = this.$store.state.sidebarLayoutChellanges.navLinks
+      return navLinks.filter(item => item.onHeader)
     }
   },
 }

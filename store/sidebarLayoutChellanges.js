@@ -1,7 +1,7 @@
 // import Vue from 'vue'
 
 export const state = () => ({
-  sidebarLinks: [
+  navLinks: [
     // challenges
     {
       name: 'Главная',
@@ -23,11 +23,11 @@ export const state = () => ({
       children: [
         {
           name: 'Dashboard',
-          url: '/dashboard',
+          url: '/challenges/settings',
         },
         {
           name: 'Alternative',
-          url: '/alternative',
+          url: '/challenges/settings',
         },
       ]
     },
@@ -54,7 +54,7 @@ export const state = () => ({
         },
         {
           name: 'Alternative',
-          url: '/alternative',
+          url: '/challenges/settings',
         },
       ]
     },
@@ -92,7 +92,7 @@ export const actions = {
 }
 
 export const getters = {
-  // sidebarLinks: state => state.sidebarLinks
+  // navLinks: state => state.navLinks
 }
 
 

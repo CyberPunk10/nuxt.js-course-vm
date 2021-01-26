@@ -1,7 +1,7 @@
 <template>
   <div class="footer-mobile">
     <template
-      v-for="(link, index) in sidebarLinks"
+      v-for="(link, index) in navLinks"
     >
       <NuxtLink :to="link.url" class="navbar-brand"
         :key="link.name + index"
@@ -16,8 +16,8 @@
 <script>
 export default {
   computed: {
-    sidebarLinks () {
-      return this.$store.state.sidebarLayoutChellanges.sidebarLinks
+    navLinks () {
+      return this.$store.state.sidebarLayoutChellanges.navLinks
     }
   },
 }
