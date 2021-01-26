@@ -14,6 +14,10 @@
       <Nuxt class="main-content layout-scrollbar layout-cell container" />
     </div>
 
+    <HeaderLeftChunk />
+
+    <FooterMobile />
+
     <!-- <TeleportMenu /> -->
   </div>
 </template>
@@ -112,9 +116,11 @@ export default {
     top: 0
     left: 0
     bottom: 0
-    height: 100%
+    // height: 100%
     overflow: hidden
     transition: $transitionSidebar
+    @media screen and (max-width: $phoneWidth)
+      bottom: $height-header
 
   &>.sidebar
     z-index: 999
@@ -159,11 +165,12 @@ export default {
   &>.sidebar.active
     left: 0
     width: $sidebarWidth
-    box-shadow: 4px 2px 4px rgba(0,0,0,.101562)
+    max-width: $sidebarWidth
     @media screen and (max-width: 370px)
       width: $sidebarWidthPhone
   &>.sidebar.transform-x.active
     left: 0
+    box-shadow: 4px 2px 4px rgba(0,0,0,.101562)
 
   // если main-container not static (need add .main-container_transform-x)
   &.main-container_transform-x
@@ -174,6 +181,33 @@ export default {
       left: $sidebarWidth
       @media screen and (max-width: 370px)
         left: $sidebarWidthPhone
+
+
+  // HeaderLeftChunk.vue
+  &>.header-left-chunk
+    position: fixed
+    top: 0
+    left: 0
+    height: $height-header
+    // background-color: rgba(0,200,0,.2)
+    // width: $sidebarWidth
+    // @media screen and (max-width: 370px)
+    //   width: $sidebarWidthPhone
+    width: max-content
+
+
+  // HeaderLeftChunk.vue
+  &>.footer-mobile
+    position: fixed
+    bottom: -$height-header
+    right: 0
+    left: 0
+    height: $height-header
+    background-color: #fff
+    // background-color: rgba(0,200,0,.2)
+    transition: $transitionSidebar
+    @media screen and (max-width: $phoneWidth)
+      bottom: 0
 
 
   // .border-top/left/right

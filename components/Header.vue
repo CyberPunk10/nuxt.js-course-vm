@@ -1,6 +1,6 @@
 <template>
   <header>
-    <button class="sidebar-toggle"
+    <!-- <button class="sidebar-toggle"
       data-btn="sidebar-toggle"
     >
       <span data-btn="sidebar-toggle">
@@ -11,16 +11,16 @@
         </svg>
       </span>
       <span data-btn="sidebar-toggle">Меню</span>
-    </button>
+    </button> -->
 
-    <div class="menu" id="headerMenu">
+    <!-- <div class="menu" id="headerMenu">
       <NuxtLink
         v-for="link in links" :key="link.url"
         :to="link.url"
       >
         {{ link.name }}
       </NuxtLink>
-    </div>
+    </div> -->
   </header>
 </template>
 

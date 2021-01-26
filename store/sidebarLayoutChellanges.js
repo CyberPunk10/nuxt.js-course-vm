@@ -12,11 +12,14 @@ export const state = () => ({
       name: 'Мой профиль',
       icon: 'far fa-user',
       url: '/challenges/my-profile',
-      onHeader: true
+      onHeader: true,
+      onFooter: true
     },
     {
       name: 'Мои челленджи',
       icon: 'fas fa-chart-pie',
+      url: '/challenges/settings',
+      onFooter: true,
       children: [
         {
           name: 'Dashboard',
@@ -37,12 +40,13 @@ export const state = () => ({
       name: 'Добавить прогресс',
       icon: 'far fa-user',
       url: '/challenges/addprogress',
-      onHeader: true
+      onHeader: true,
+      onFooter: true
     },
     {
       name: 'Тренировка',
       icon: 'far fa-heart',
-      // url: '/challenges/mobile',
+      url: '/challenges/settings',
       children: [
         {
           name: 'Dashboard',
@@ -62,12 +66,14 @@ export const state = () => ({
     {
       name: 'Tаблицы',
       icon: 'far fa-chart-bar',
-      url: '/challenges/table'
+      url: '/challenges/table',
+      onFooter: true
     },
     {
       name: 'Статистика',
       icon: 'fas fa-chevron-right',
       url: '/challenges/statistics',
+      onFooter: true
     },
     {
       name: 'Настройки',
