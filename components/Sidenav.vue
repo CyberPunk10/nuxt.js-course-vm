@@ -1,10 +1,14 @@
 <template>
   <component class="sidenav__nav-item"
-    :is="link.url ? 'NuxtLink' : 'div'" :to="link.url"
+    :is="!link.children ? 'NuxtLink' : 'div'" :to="!link.children ? link.url : false"
   >
-    <i v-if="link.icon" :class="link.icon"></i>
+    <i v-if="!link.children && link.icon" :class="link.icon"></i>
 
-    <span v-if="link.url" class="sidenav__nav-item-text">{{ link.name }}</span>
+    <NuxtLink v-else-if="link.icon" :to="link.url">
+      <i :class="link.icon"></i>
+    </NuxtLink>
+
+    <span v-if="!link.children" class="sidenav__nav-item-text">{{ link.name }}</span>
 
     <div v-else class="sidenav__nav-item-menu"
       @click="toggleMenu"
@@ -50,6 +54,7 @@ export default {
 .sidebar
   // vars
   $heightSubItem: 3.5rem
+  $borderRadius: 6px
 
   // sidenav
   .sidenav
@@ -59,23 +64,23 @@ export default {
       margin: 0 $sidebar-marginItem
       width: calc(100% - 2 * #{$sidebar-marginItem})
       overflow: hidden
-      border-radius: 6px
+      border-radius: $borderRadius
       margin-bottom: 2px
       transition: $transitionDefault
       &:hover
         background-color: rgb(237, 245, 253)
         // background-color: rgba(94, 114, 228, 0.1)
-      &.nuxt-link-exact-active
-        background-color: rgba(155, 233, 168, 0.4)
-        i, span
-          color: #30a14e
 
-      &>i
+      &>i,
+      &>a
         text-align: center
         font-size: 1.6rem
         line-height: $sidebar-heightItem
+        height: $sidebar-heightItem
         // color: $color-text-grey
         color: $neutral-secondary
+        border-radius: $borderRadius
+
       &-text
         line-height: $sidebar-heightItem
         color: rgba(0,0,0,.6)
@@ -89,6 +94,7 @@ export default {
           display: flex
           justify-content: space-between
           align-items: center
+          cursor: pointer
           i
             padding: 0 1rem
             line-height: $sidebar-heightItem
@@ -105,14 +111,27 @@ export default {
           transition: $transitionDefault
           .sidenav__nav-item
             display: block
+            margin-left: 0
             margin: 0
+            padding: 0 $sidebar-marginItem
+            width: calc(100% - #{$sidebar-marginItem} * 4)
             span
               line-height: $heightSubItem
               font-size: .93em
               color: rgba(0,0,0,.6)
-              transition: $transitionDefault
+              opacity: 0
+              transition: opacity .4s ease .1s
+
+    .nuxt-link-exact-active
+      background-color: rgba(155, 233, 168, 0.4)
+      i, span
+        color: #30a14e
 
   &.active
+    .sidenav__nav-item-menu-list
+      span
+        opacity: 1
+
     .sidenav__nav-item-menu-list.subitem-count-1
       height: $heightSubItem
     .sidenav__nav-item-menu-list.subitem-count-2

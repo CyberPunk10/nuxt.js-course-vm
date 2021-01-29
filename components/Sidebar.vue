@@ -10,7 +10,7 @@
 
       <div class="sidenav">
         <Sidenav
-          v-for="(link, index) in sidebarLinks"
+          v-for="(link, index) in navLinks"
           :key="link.name + index"
           :link="link"
         >
@@ -73,8 +73,8 @@
 <script>
 export default {
   computed: {
-    sidebarLinks () {
-      return this.$store.state.sidebarLayoutChellanges.sidebarLinks
+    navLinks () {
+      return this.$store.getters['sidebarLayoutChellanges/sidenavLinks']
     }
   },
   methods: {

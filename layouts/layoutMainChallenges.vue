@@ -10,6 +10,7 @@
       <div class="border-top"></div>
       <div class="border-right"></div>
       <div class="border-left"></div>
+      <div class="border-bottom"></div>
 
       <Nuxt class="main-content layout-scrollbar layout-cell container" />
     </div>
@@ -213,10 +214,15 @@ export default {
   // .border-top/left/right
   .border-top,
   .border-left,
-  .border-right
+  .border-right,
+  .border-bottom
     position: absolute
+    background-color: $color-border-default
+
+  .border-top,
+  .border-left,
+  .border-right
     top: $height-header
-    background-color: rgba(0, 0, 0, 0.05)
 
   .border-top,
   .border-left
@@ -227,13 +233,16 @@ export default {
     width: 1px
     height: 100%
 
+  .border-bottom,
   .border-top
     height: 1px
     width: 100%
-
-  .border-left
-    left: 0
+    
   .border-right
     right: 0
+  .border-left
+    left: 0
+  .border-bottom
+    bottom: 0
 
 </style>
