@@ -123,9 +123,10 @@ export default {
               transition: opacity .4s ease .1s
 
     .nuxt-link-exact-active
-      background-color: rgba(155, 233, 168, 0.4)
+      // background-color: rgba(155, 233, 168, 0.4)
       i, span
         color: #30a14e
+        color: #8c4fe8
         // color: #FF0000
 
   &.active

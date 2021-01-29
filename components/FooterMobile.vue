@@ -40,6 +40,7 @@ export default {
     i, span
       color: #30a14e
       color: $color-purple
+      color: #8c4fe8
       // color: #FF0000
 
 </style>
