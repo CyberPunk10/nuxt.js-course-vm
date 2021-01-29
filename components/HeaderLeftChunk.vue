@@ -52,6 +52,7 @@ export default {
   overflow: hidden
   user-select: none
   transition: $transitionDefault
+  border-bottom: 1px solid $color-border-default
   .sidebar-toggle
     display: flex
     justify-content: center

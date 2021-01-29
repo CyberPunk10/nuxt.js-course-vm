@@ -126,6 +126,7 @@ export default {
       background-color: rgba(155, 233, 168, 0.4)
       i, span
         color: #30a14e
+        // color: #FF0000
 
   &.active
     .sidenav__nav-item-menu-list

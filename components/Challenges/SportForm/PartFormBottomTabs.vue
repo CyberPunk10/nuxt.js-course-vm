@@ -246,7 +246,7 @@ export default {
     border-radius: 1rem
     width: 100%
     height: 1rem
-    box-shadow: 0 35px 35px rgba(130, 100, 0, .6)
+    box-shadow: 0 35px 35px #c98202
 
   button
     border: none
@@ -272,7 +272,7 @@ export default {
       border-radius: 0
       width: calc(100% - 1rem)
       height: .5rem
-      box-shadow: 0 5px 20px rgba(130, 100, 0, .8)
+      box-shadow: 0 5px 20px #c98202
       z-index: 1
     .content
       width: 100%
@@ -355,7 +355,8 @@ export default {
   /* spacial for shadow */
   color: rgb(255, 212, 56);
 
-  color: rgb(130, 100, 0)
+  /* color: rgb(130, 100, 0) */
+  color: #c98202
 
 }
 </style>

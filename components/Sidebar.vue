@@ -4,8 +4,6 @@
     @click="handleClickSidebar"
   >
 
-    <div class="sidebar-header"></div>
-
     <div class="sidebar-main layout-scrollbar-sidebar-transparent layout-cell-sidebar-transparent">
 
       <div class="sidenav">
@@ -140,27 +138,18 @@ export default {
 .sidebar
   position: relative
   white-space: nowrap
+  // color: #242424
 
   // общее
-  &-header,
   &-main
     position: absolute
+    top: 0
     left: 0
     right: 0
     bottom: 0
     width: 100%
-
-  &-header
-    top: 0
-    height: $height-header
-    overflow: hidden
-  &-main
-    top: $height-header
-    height: calc(100% - #{$height-header})
+    height: 100%
     overflow-x: hidden
     padding-top: 2rem
-
-  // header
-  // &-header
 
 </style>

@@ -1,21 +1,22 @@
 <template>
   <div class="layout-wrapper main-container_transform-x">
+    <Header @click="handleClickSidebarToggle"/>
+
     <Sidebar />
 
     <div class="main-container"
       @click="handleClickSidebarToggle"
     >
-      <Header/>
 
-      <div class="border-top"></div>
+      <!-- <div class="border-top"></div> -->
       <div class="border-right"></div>
       <div class="border-left"></div>
-      <div class="border-bottom"></div>
+      <!-- <div class="border-bottom"></div> -->
 
       <Nuxt class="main-content layout-scrollbar layout-cell container" />
     </div>
 
-    <HeaderLeftChunk />
+    <!-- <HeaderLeftChunk /> -->
 
     <FooterMobile />
 
@@ -111,15 +112,24 @@ export default {
   width: 100%
   height: 100vh
 
+  &>header,
   &>.sidebar,
   &>.main-container
     position: fixed
-    top: 0
     left: 0
-    bottom: 0
-    // height: 100%
     overflow: hidden
     transition: $transitionSidebar
+
+  &>header
+    top: 0
+    left: 0
+    right: 0
+    height: $height-header
+
+  &>.sidebar,
+  &>.main-container
+    top: $height-header
+    bottom: 0
     @media screen and (max-width: $phoneWidth)
       bottom: $height-header
 
@@ -127,7 +137,6 @@ export default {
     z-index: 999
     width: $sidebarWidth
     background-color: $color-bg-sidebar
-    // color: #242424
     @media screen and (max-width: 370px)
       width: $sidebarWidthPhone
     @media screen and (min-width: $tableWidth)
@@ -141,17 +150,14 @@ export default {
       width: auto
       left: $sidebarWidthIcon
 
-    header,
     .main-content
       position: absolute
+      top: 0
       left: 0
       right: 0
       bottom: 0
       width: 100%
-
-    .main-content
-      top: $height-header
-      height: calc(100% - #{$height-header})
+      height: 100%
       overflow-x: hidden
 
   // если sidebar not static (need add .transform-x)
@@ -185,19 +191,6 @@ export default {
 
 
   // HeaderLeftChunk.vue
-  &>.header-left-chunk
-    position: fixed
-    top: 0
-    left: 0
-    height: $height-header
-    // background-color: rgba(0,200,0,.2)
-    // width: $sidebarWidth
-    // @media screen and (max-width: 370px)
-    //   width: $sidebarWidthPhone
-    width: max-content
-
-
-  // HeaderLeftChunk.vue
   &>.footer-mobile
     position: fixed
     bottom: -$height-header
@@ -211,38 +204,19 @@ export default {
       bottom: 0
 
 
-  // .border-top/left/right
-  .border-top,
+  // .border-left/right
   .border-left,
-  .border-right,
-  .border-bottom
+  .border-right
     position: absolute
     background-color: $color-border-default
-
-  .border-top,
-  .border-left,
-  .border-right
-    top: $height-header
-
-  .border-top,
-  .border-left
-    z-index: 1
-
-  .border-left,
-  .border-right
+    top: 0
     width: 1px
     height: 100%
 
-  .border-bottom,
-  .border-top
-    height: 1px
-    width: 100%
-    
   .border-right
     right: 0
   .border-left
+    z-index: 1
     left: 0
-  .border-bottom
-    bottom: 0
 
 </style>
