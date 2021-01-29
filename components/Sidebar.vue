@@ -74,7 +74,7 @@
 export default {
   computed: {
     navLinks () {
-      return this.$store.state.sidebarLayoutChellanges.navLinks
+      return this.$store.getters['sidebarLayoutChellanges/sidenavLinks']
     }
   },
   methods: {

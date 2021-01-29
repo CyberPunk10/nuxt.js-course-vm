@@ -21,7 +21,7 @@
     layout: 'layoutMainChallenges',
     computed: {
       allFormsSport () {
-        return this.$store.state.challengeForms.allFormsSport
+        return this.$store.getters['challengeForms/allFormsSport']
       }
     },
   }

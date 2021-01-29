@@ -5,7 +5,6 @@
     >
       <NuxtLink :to="link.url" class="navbar-brand"
         :key="link.name + index"
-        v-if="link.onFooter"
       >
         <i :class="link.icon"></i>
       </NuxtLink>
@@ -17,7 +16,7 @@
 export default {
   computed: {
     navLinks () {
-      return this.$store.state.sidebarLayoutChellanges.navLinks
+      return this.$store.getters['sidebarLayoutChellanges/footerMobileLinks']
     }
   },
 }
