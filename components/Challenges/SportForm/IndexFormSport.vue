@@ -148,7 +148,7 @@ function scrollingToRight(indexForm) {
     .shadow-form
       border-radius: $borderRadiusForm
       border-bottom-right-radius: 0
-      box-shadow: 0 30px 40px #c98202
+      box-shadow: 0 30px 40px rgba($theme-color-orange, .4)
 
 .form-sport-main,
 .form-sport-relax,

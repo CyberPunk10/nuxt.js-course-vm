@@ -77,8 +77,7 @@ export default {
         font-size: 1.6rem
         line-height: $sidebar-heightItem
         height: $sidebar-heightItem
-        // color: $color-text-grey
-        color: $neutral-secondary
+        color: $color-text-grey
         border-radius: $borderRadius
 
       &-text

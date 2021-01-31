@@ -8,7 +8,7 @@
       @click="handleClickSidebarToggle"
     >
 
-      <!-- <div class="border-top"></div> -->
+      <div class="border-top"></div>
       <div class="border-right"></div>
       <div class="border-left"></div>
       <!-- <div class="border-bottom"></div> -->
@@ -204,19 +204,72 @@ export default {
       bottom: 0
 
 
-  // .border-left/right
+  // .border-left/right/top/bottom
+
+  .border-top,
+  .border-bottom,
   .border-left,
   .border-right
     position: absolute
     background-color: $color-border-default
-    top: 0
+
+  .border-top,
+  .border-bottom
+    width: 100%
+    height: 1px
+
+  .border-left,
+  .border-right
     width: 1px
     height: 100%
 
+  .border-top
+    z-index: 1
+    top: 0
+  .border-bottom
+    bottom: 0
   .border-right
     right: 0
   .border-left
     z-index: 1
     left: 0
+
+
+
+
+
+  // .border-top/left/right
+  // .border-top
+  // // .border-left/right
+  // .border-left,
+  // .border-right,
+  // .border-bottom
+  // .border-right
+    // position: absolute
+    // background-color: $color-border-default
+  // .border-top,
+  // .border-left,
+  // .border-right
+  //   top: $height-header
+  // .border-top,
+  // .border-left
+  //   z-index: 1
+  // .border-left,
+  // .border-right
+  //   top: 0
+  //   width: 1px
+  //   height: 100%
+  // .border-bottom,
+  // .border-top
+  //   height: 1px
+  //   width: 100%
+
+  // .border-right
+  //   right: 0
+  // .border-left
+  //   z-index: 1
+  //   left: 0
+  // .border-bottom
+  //   bottom: 0
 
 </style>

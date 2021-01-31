@@ -34,7 +34,7 @@ export default {
     font-weight: bold
     font-size: 2rem
     color: $color-purple
-    color: $neutral-secondary
+    color: $color-text-grey
     width: 100%
   .nuxt-link-exact-active
     i, span
