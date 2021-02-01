@@ -7,7 +7,8 @@ export const state = () => ({
       name: 'Главная',
       icon: 'fas fa-home',
       url: '/challenges',
-      onSidenav: true
+      onSidenav: true,
+      onFooterMobile: true
     },
     {
       name: 'Мой профиль',
@@ -16,13 +17,26 @@ export const state = () => ({
       onSidenav: true,
       onHeader: true,
       onFooterMobile: true,
+      children: [
+        {
+          name: 'Статистика',
+          // icon: 'far fa-chart-bar',
+          url: '/challenges/statistics'
+        },
+      ]
+    },
+    {
+      name: 'Друзья',
+      icon: 'fas fa-user-friends',
+      url: '/challenges/statistics',
+      onSidenav: true,
+      onFooterMobile: true
     },
     {
       name: 'Мои челленджи',
       icon: 'fas fa-chart-pie',
       url: '/challenges/settings',
       onSidenav: true,
-      onFooterMobile: true,
       children: [
         {
           name: 'Dashboard',
@@ -36,13 +50,13 @@ export const state = () => ({
     },
     {
       name: 'Создать челлендж',
-      icon: 'fas fa-check',
+      icon: 'far fa-file',
       url: '/challenges/create',
       onSidenav: true
     },
     {
       name: 'Добавить прогресс',
-      icon: 'far fa-user',
+      icon: 'fas fa-plus',
       url: '/challenges/addprogress',
       onSidenav: true,
       onHeader: true,
@@ -51,7 +65,7 @@ export const state = () => ({
     {
       name: 'Тренировка',
       icon: 'far fa-heart',
-      url: '/challenges/settings',
+      url: '/challenges/mobile',
       onSidenav: true,
       children: [
         {
@@ -66,27 +80,22 @@ export const state = () => ({
     },
     {
       name: 'layoutMainChallenges',
-      icon: 'fas fa-home',
+      icon: 'far fa-heart',
       url: '/layout-main-challenges',
       onSidenav: true
     },
     {
       name: 'Tаблицы',
-      icon: 'far fa-chart-bar',
+      // icon: 'fas fa-chevron-right',
+      icon: 'fas fa-heart',
       url: '/challenges/table',
       onSidenav: true,
       onFooterMobile: true
     },
     {
-      name: 'Статистика',
-      icon: 'fas fa-chevron-right',
-      url: '/challenges/statistics',
-      onSidenav: true,
-      onFooterMobile: true
-    },
-    {
       name: 'Настройки',
-      icon: 'fas fa-angle-right',
+      // icon: 'fas fa-angle-right',
+      icon: 'fas fa-heart',
       url: '/challenges/settings',
       onSidenav: true
     }
@@ -115,6 +124,7 @@ export const getters = {
 
     // меняем порядок
     let footerMobileLinks = []
+    let linksOther = []
     const countLinks = tempFooterMobileLinks.length
 
     tempFooterMobileLinks.forEach(el => {
@@ -135,9 +145,14 @@ export const getters = {
           footerMobileLinks[countLinks - 5] = el
           break
         default:
-          footerMobileLinks.unshift(el)
+          linksOther.push(el)
       }
     })
+    footerMobileLinks = linksOther.concat(footerMobileLinks)
+
+    // удаление пустых элементов, которые могут возникнуть после switch
+    footerMobileLinks = footerMobileLinks.filter(n => n)
+
     return footerMobileLinks
   }
 }

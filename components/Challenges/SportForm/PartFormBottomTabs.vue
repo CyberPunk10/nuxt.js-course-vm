@@ -224,7 +224,7 @@ export default {
   display: grid
   grid: repeat(1, 1.4rem)/ repeat(1, 1fr) // row/col
   padding-left: 0
-  background-color: #ffd4385f
+  background-color: rgba($theme-color-yellow, .8)
   .buttons
     z-index: 10
     background-color: $theme-color-black
@@ -246,7 +246,7 @@ export default {
     border-radius: 1rem
     width: 100%
     height: 1rem
-    box-shadow: 0 35px 35px rgba(130, 100, 0, .6)
+    box-shadow: 0 35px 35px rgba($theme-color-orange, .8)
 
   button
     border: none
@@ -272,7 +272,7 @@ export default {
       border-radius: 0
       width: calc(100% - 1rem)
       height: .5rem
-      box-shadow: 0 5px 20px rgba(130, 100, 0, .8)
+      box-shadow: 0 5px 20px rgba($theme-color-orange, .9)
       z-index: 1
     .content
       width: 100%
@@ -348,14 +348,4 @@ export default {
         fill: $theme-color-black
 
 
-</style>
-
-<style>
-.tt {
-  /* spacial for shadow */
-  color: rgb(255, 212, 56);
-
-  color: rgb(130, 100, 0)
-
-}
 </style>

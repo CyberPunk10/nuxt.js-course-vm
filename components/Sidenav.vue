@@ -77,8 +77,7 @@ export default {
         font-size: 1.6rem
         line-height: $sidebar-heightItem
         height: $sidebar-heightItem
-        // color: $color-text-grey
-        color: $neutral-secondary
+        color: $color-text-grey
         border-radius: $borderRadius
 
       &-text
@@ -123,9 +122,11 @@ export default {
               transition: opacity .4s ease .1s
 
     .nuxt-link-exact-active
-      background-color: rgba(155, 233, 168, 0.4)
+      // background-color: rgba(155, 233, 168, 0.4)
       i, span
         color: #30a14e
+        color: #8c4fe8
+        // color: #FF0000
 
   &.active
     .sidenav__nav-item-menu-list

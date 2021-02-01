@@ -9,7 +9,7 @@
         <div class="mockup-top"></div>
         <ul>
           <li v-for="item in items" :key="item.text" :class="'teleport-menu__li-' + item.type">
-            <a v-if="item.type === 'link'" :href="item.url">{{item.text}}</a>
+            <NuxtLink v-if="item.type === 'link'" :to="item.url">{{item.text}}</NuxtLink>
             <span v-if="item.type === 'category'">{{item.text}}</span>
           </li>
         </ul>
@@ -30,16 +30,16 @@
           </svg>
         </button>
         <button class="teleport-menu__button teleport-menu__button_target top-position-1">
-          <a href="/admin">A</a>
+          <NuxtLink to="/admin">A</NuxtLink>
         </button>
         <button class="teleport-menu__button teleport-menu__button_target top-position-2">
-          <a href="/dreams">D</a>
+          <NuxtLink to="/dreams">D</NuxtLink>
         </button>
         <button class="teleport-menu__button teleport-menu__button_target top-position-3">
-          <a href="/landing">R</a>
+          <NuxtLink to="/landing">R</NuxtLink>
         </button>
         <button class="teleport-menu__button teleport-menu__button_target top-position-4">
-          <a href="/challenges">Ch</a>
+          <NuxtLink to="/challenges">Ch</NuxtLink>
         </button>
       </div>
     </div>
