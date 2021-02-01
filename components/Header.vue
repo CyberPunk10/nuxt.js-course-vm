@@ -1,6 +1,6 @@
 <template>
   <header
-    @click="handleClickSidebar"
+    @click="clickHeader"
   >
     <button class="sidebar-toggle"
       data-btn="sidebar-toggle"
@@ -56,13 +56,16 @@ export default {
     }
   },
   methods: {
-    handleClickSidebar: function(event) {
-      const sideBar = document.querySelector('.sidebar')
+    clickHeader: function(event) {
+      const layout = document.querySelector('.layout-wrapper')
       const dataAttr = event.target.dataset
 
       if (dataAttr.btn === 'sidebar-toggle') {
-        sideBar.classList.toggle('active')
+        if (layout.dataset.sidebarActive === 'true') layout.dataset.sidebarActive = 'false'
+        else layout.dataset.sidebarActive = 'true'
+        return
       }
+      if (!layout.matches('.pinned')) layout.dataset.sidebarActive = 'false'
     }
   }
 }

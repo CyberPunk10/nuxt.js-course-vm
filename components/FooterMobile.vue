@@ -1,5 +1,7 @@
 <template>
-  <div class="footer-mobile">
+  <div class="footer-mobile"
+    @click="clickFooterMobile"
+  >
     <template
       v-for="(link, index) in navLinks"
     >
@@ -19,6 +21,13 @@ export default {
       return this.$store.getters['sidebarLayoutChellanges/footerMobileLinks']
     }
   },
+  methods: {
+    clickFooterMobile: function(event) {
+      const layout = document.querySelector('.layout-wrapper')
+
+      if (!layout.matches('.pinned')) layout.dataset.sidebarActive = 'false'
+    }
+  }
 }
 </script>
 

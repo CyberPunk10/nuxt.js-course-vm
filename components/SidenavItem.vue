@@ -112,7 +112,7 @@ export default {
             display: block
             margin-left: 0
             margin: 0
-            padding: 0 $sidebar-marginItem
+            // padding: 0 $sidebar-marginItem
             width: calc(100% - #{$sidebar-marginItem} * 4)
             span
               line-height: $heightSubItem

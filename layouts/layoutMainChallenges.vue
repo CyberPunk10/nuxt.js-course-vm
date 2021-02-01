@@ -1,8 +1,10 @@
 <template>
-  <div class="layout-wrapper main-container_transform-x">
-    <Header @click="handleClickSidebarToggle"/>
+  <div class="layout-wrapper main-container_transform-x" data-sidebar-active="true">
+
+    <Header />
 
     <Sidebar />
+
 
     <div class="main-container"
       @click="handleClickSidebarToggle"
@@ -15,8 +17,6 @@
 
       <Nuxt class="main-content layout-scrollbar layout-cell container" />
     </div>
-
-    <!-- <HeaderLeftChunk /> -->
 
     <FooterMobile />
 
@@ -81,10 +81,10 @@ export default {
 
       switch (e.detail.dir) {
         case 'right':
-          document.querySelector('.sidebar').classList.add('active')
+          document.querySelector('.layout-wrapper').dataset.sidebarActive = 'true'
           break
         case 'left':
-          document.querySelector('.sidebar').classList.remove('active')
+          document.querySelector('.layout-wrapper').dataset.sidebarActive = 'false'
           break
       }
     })
@@ -93,14 +93,15 @@ export default {
   methods: {
     handleClickSidebarToggle: function(event) {
       console.log('click layout (layoutMainChallenges.vue)', event.target)
-      const sideBar = document.querySelector('.sidebar')
-      if (event.target.dataset.btn === 'sidebar-toggle') {
-        sideBar.classList.toggle('active')
-        return
-      }
-      if (!sideBar.matches('.pinned')) {
-        sideBar.classList.remove('active')
-      }
+      const layout = document.querySelector('.layout-wrapper')
+
+      // if (event.target.dataset.btn === 'sidebar-toggle') {
+      //   if (layout.dataset.sidebarActive) layout.dataset.sidebarActive = 'false'
+      //   else layout.dataset.sidebarActive = 'true'
+      //   return
+      // }
+      if (!layout.matches('.pinned')) layout.dataset.sidebarActive = 'false'
+
     }
   }
 }
@@ -168,29 +169,6 @@ export default {
     @media screen and (min-width: $tableWidth)
       left: 0
 
-  // show sidebar
-  &>.sidebar.active
-    left: 0
-    width: $sidebarWidth
-    max-width: $sidebarWidth
-    @media screen and (max-width: 370px)
-      width: $sidebarWidthPhone
-  &>.sidebar.transform-x.active
-    left: 0
-    box-shadow: 4px 2px 4px rgba(0,0,0,.101562)
-
-  // если main-container not static (need add .main-container_transform-x)
-  &.main-container_transform-x
-    &>.sidebar
-      z-index: 0
-    // show
-    &>.sidebar.active + .main-container
-      left: $sidebarWidth
-      @media screen and (max-width: 370px)
-        left: $sidebarWidthPhone
-
-
-  // HeaderLeftChunk.vue
   &>.footer-mobile
     position: fixed
     bottom: -$height-header
@@ -202,6 +180,37 @@ export default {
     transition: $transitionSidebar
     @media screen and (max-width: $phoneWidth)
       bottom: 0
+
+
+  // show sidebar
+  &[data-sidebar-active="true"]
+    &>.sidebar
+      left: 0
+      width: $sidebarWidth
+      max-width: $sidebarWidth
+      @media screen and (max-width: 370px)
+        width: $sidebarWidthPhone
+    &>.sidebar.transform-x
+      left: 0
+      box-shadow: 4px 2px 4px rgba(0,0,0,.101562)
+
+
+  // если main-container not static (need add .main-container_transform-x)
+  &.main-container_transform-x
+    &>.sidebar
+      z-index: 0
+
+  // show
+  &.main-container_transform-x[data-sidebar-active="true"]
+    .main-container
+      left: $sidebarWidth
+      @media screen and (max-width: 370px)
+        left: $sidebarWidthPhone
+
+
+
+
+
 
 
   // .border-left/right/top/bottom
@@ -234,42 +243,5 @@ export default {
     z-index: 1
     left: 0
 
-
-
-
-
-  // .border-top/left/right
-  // .border-top
-  // // .border-left/right
-  // .border-left,
-  // .border-right,
-  // .border-bottom
-  // .border-right
-    // position: absolute
-    // background-color: $color-border-default
-  // .border-top,
-  // .border-left,
-  // .border-right
-  //   top: $height-header
-  // .border-top,
-  // .border-left
-  //   z-index: 1
-  // .border-left,
-  // .border-right
-  //   top: 0
-  //   width: 1px
-  //   height: 100%
-  // .border-bottom,
-  // .border-top
-  //   height: 1px
-  //   width: 100%
-
-  // .border-right
-  //   right: 0
-  // .border-left
-  //   z-index: 1
-  //   left: 0
-  // .border-bottom
-  //   bottom: 0
-
+// у элемента цвет красный, то скрываем сайдбар
 </style>

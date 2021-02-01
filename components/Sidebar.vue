@@ -7,18 +7,18 @@
     <div class="sidebar-main layout-scrollbar-sidebar-transparent layout-cell-sidebar-transparent">
 
       <div class="sidenav">
-        <Sidenav
+        <SidenavItem
           v-for="(link, index) in navLinks"
           :key="link.name + index"
           :link="link"
         >
-          <Sidenav
+          <SidenavItem
             v-for="(sublink, index) in link.children"
             :key="sublink.name + index"
             :link="sublink"
           >
-          </Sidenav>
-        </Sidenav>
+          </SidenavItem>
+        </SidenavItem>
       </div>
 
       <div class="navbar-inner">
@@ -129,6 +129,18 @@ export default {
           console.log('sidebar-toggle')
           break
       }
+
+      // $tableWidth 768px
+      const layout = document.querySelector('.layout-wrapper')
+      const dataAttr = event.target.dataset
+      console.log(document.documentElement.clientWidth)
+
+      if (dataAttr.autoCloseSidebar === 'true') {
+        if (layout.dataset.sidebarActive === 'true') layout.dataset.sidebarActive = 'false'
+        else layout.dataset.sidebarActive = 'true'
+        return
+      }
+      if (!layout.matches('.pinned')) layout.dataset.sidebarActive = 'false'
     }
   }
 }
