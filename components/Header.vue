@@ -104,6 +104,10 @@ header
     color: $color-purple
     // margin-left: calc(#{$sidebar-marginItem} * 3)
     margin: 0 auto
+    transition: $transitionDefault
+    @media screen and (min-width: $tableWidth)
+      transition: $transitionDefault
+      margin: 0
 
   .header-user-block
     display: flex
