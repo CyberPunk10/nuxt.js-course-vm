@@ -1,6 +1,6 @@
 <template>
   <aside
-    class="sidebar active"
+    class="sidebar"
     @click="handleClickSidebar"
   >
 
@@ -22,9 +22,6 @@
       </div>
 
       <div class="navbar-inner">
-
-
-
 
         <!-- <hr class="my-3">
 
@@ -140,7 +137,7 @@ export default {
         else layout.dataset.sidebarActive = 'true'
         return
       }
-      if (!layout.matches('.pinned')) layout.dataset.sidebarActive = 'false'
+      // if (!layout.matches('.pinned')) layout.dataset.sidebarActive = 'false'
     }
   }
 }
