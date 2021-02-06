@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-wrapper main-container_transform-x" data-sidebar-active="true">
+  <div class="layout-wrapper main-container_transform-x" data-sidebar-active="false">
 
     <Header />
 

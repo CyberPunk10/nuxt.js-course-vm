@@ -160,6 +160,6 @@ export default {
     width: 100%
     height: 100%
     overflow-x: hidden
-    padding-top: 2rem
+    padding-top: 1.5rem
 
 </style>

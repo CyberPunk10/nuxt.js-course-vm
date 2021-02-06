@@ -1,6 +1,7 @@
 <template>
   <component class="sidenav__nav-item"
     :is="!link.children ? 'NuxtLink' : 'div'" :to="!link.children ? link.url : false"
+    :class="{ collapsed: link.children && !link.isMenuExpanded }"
   >
     <i v-if="!link.children && link.icon" :class="link.icon"></i>
 
@@ -64,8 +65,9 @@ export default {
         position: relative
         display: grid
         grid: minmax($sidebar-heightItem, max-content ) / calc(#{$sidebarWidthIcon} - 2 * #{$sidebar-marginItem}) minmax(auto, calc(100% - #{$sidebar-heightItem})) // row/col
-        padding: 0 $sidebar-marginItem
-        width: calc(100% - 2 * #{$sidebar-marginItem})
+        padding-left: $sidebar-marginItem
+        margin-right: 0
+        width: calc(100% - #{$sidebar-marginItem})
         overflow: hidden
         border-top-right-radius: $borderRadius
         border-bottom-right-radius: $borderRadius
@@ -134,7 +136,7 @@ export default {
           // color: #FF0000
 
       &>.nuxt-link-exact-active
-        &:after
+        &:before
           position: absolute
           background-color: $theme-color-main
           content: ''
@@ -144,7 +146,6 @@ export default {
           width: 3px
           border-top-right-radius: 2px
           border-bottom-right-radius: 2px
-          z-index: 100
 
   // show sidebar
   &[data-sidebar-active="true"]

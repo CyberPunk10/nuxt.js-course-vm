@@ -17,13 +17,14 @@ export const state = () => ({
       onSidenav: true,
       onHeader: true,
       onFooterMobile: true,
+      // isMenuExpanded: true,
       children: [
         {
           name: 'Статистика',
           // icon: 'far fa-chart-bar',
           url: '/challenges/statistics'
         },
-      ]
+      ],
     },
     {
       name: 'Друзья',
@@ -37,6 +38,7 @@ export const state = () => ({
       icon: 'fas fa-chart-pie',
       url: '/challenges/settings',
       onSidenav: true,
+      // isMenuExpanded: true,
       children: [
         {
           name: 'Dashboard',
@@ -67,6 +69,7 @@ export const state = () => ({
       icon: 'far fa-heart',
       url: '/challenges/mobile',
       onSidenav: true,
+      // isMenuExpanded: false,
       children: [
         {
           name: 'Dashboard',
@@ -78,12 +81,12 @@ export const state = () => ({
         },
       ]
     },
-    {
-      name: 'layoutMainChallenges',
-      icon: 'far fa-heart',
-      url: '/layout-main-challenges',
-      onSidenav: true
-    },
+    // {
+    //   name: 'layoutMainChallenges',
+    //   icon: 'far fa-heart',
+    //   url: '/layout-main-challenges',
+    //   onSidenav: true
+    // },
     {
       name: 'Tаблицы',
       // icon: 'fas fa-chevron-right',
