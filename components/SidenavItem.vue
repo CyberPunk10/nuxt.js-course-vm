@@ -61,14 +61,17 @@ export default {
     // sidenav
     .sidenav
       &__nav-item
+        position: relative
         display: grid
         grid: minmax($sidebar-heightItem, max-content ) / calc(#{$sidebarWidthIcon} - 2 * #{$sidebar-marginItem}) minmax(auto, calc(100% - #{$sidebar-heightItem})) // row/col
-        margin: 0 $sidebar-marginItem
+        padding: 0 $sidebar-marginItem
         width: calc(100% - 2 * #{$sidebar-marginItem})
         overflow: hidden
-        border-radius: $borderRadius
+        border-top-right-radius: $borderRadius
+        border-bottom-right-radius: $borderRadius
         margin-bottom: 2px
         transition: $transitionDefault
+
         &:hover
           background-color: rgb(237, 245, 253)
           // background-color: rgba(94, 114, 228, 0.1)
@@ -127,9 +130,21 @@ export default {
         // background-color: rgba(155, 233, 168, 0.4)
         i, span
           color: #30a14e
-          color: #8c4fe8
+          color: $theme-color-main
           // color: #FF0000
 
+      &>.nuxt-link-exact-active
+        &:after
+          position: absolute
+          background-color: $theme-color-main
+          content: ''
+          top: 0
+          left: 0
+          bottom: 0
+          width: 3px
+          border-top-right-radius: 2px
+          border-bottom-right-radius: 2px
+          z-index: 100
 
   // show sidebar
   &[data-sidebar-active="true"]

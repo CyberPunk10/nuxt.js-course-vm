@@ -49,7 +49,7 @@ export default {
     i, span
       color: #30a14e
       color: $color-purple
-      color: #8c4fe8
+      color: $theme-color-main
       // color: #FF0000
 
 </style>
