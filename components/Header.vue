@@ -10,13 +10,13 @@
           <rect data-btn="sidebar-toggle" y="15" width="20" height="2"></rect>
         </svg>
       </button>
-      <button class="sidebar-toggle sidebar-toggle_pinned" data-btn="sidebar-toggle_pinned">
-        <svg data-btn="sidebar-toggle_pinned" width="20" height="20" enable-background="new 0 0 512 512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-          <path data-btn="sidebar-toggle_pinned" d="m507.607 127.212-122.818-122.818c-3.676-3.677-8.994-5.187-14.053-3.992-5.06 1.194-9.14 4.923-10.784 9.855l-24.66 73.979-143.208 95.472-1.275-1.275c-14.213-14.213-33.11-22.041-53.21-22.041s-38.997 7.828-53.209 22.041l-9.971 9.971c-5.858 5.858-5.858 15.355 0 21.213l103.376 103.376-173.401 173.401c-5.858 5.858-5.858 15.355 0 21.213 2.928 2.929 6.767 4.393 10.606 4.393s7.678-1.464 10.606-4.394l173.402-173.402 103.376 103.376c2.929 2.929 6.768 4.394 10.606 4.394s7.678-1.464 10.606-4.394l9.971-9.97c14.213-14.213 22.04-33.11 22.04-53.21s-7.827-38.997-22.04-53.209l-1.276-1.276 95.473-143.207 73.978-24.66c4.933-1.644 8.661-5.725 9.855-10.784 1.196-5.059-.315-10.376-3.99-14.052zm-194.622 278.543-206.74-206.74c8.469-8.148 19.568-12.624 31.354-12.624 12.087 0 23.45 4.707 31.997 13.253l142.759 142.76c8.547 8.546 13.253 19.909 13.253 31.996 0 11.787-4.475 22.886-12.623 31.355zm-2.325-107.472-96.942-96.942 132.266-88.178 52.854 52.854zm111.531-151.34-57.133-57.133 15.681-47.041 88.493 88.494z"/>
+      <button class="sidebar-toggle sidebar-pinned" data-btn="sidebar-pinned">
+        <svg data-btn="sidebar-pinned" width="20" height="20" enable-background="new 0 0 512 512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+          <path data-btn="sidebar-pinned" d="m507.607 127.212-122.818-122.818c-3.676-3.677-8.994-5.187-14.053-3.992-5.06 1.194-9.14 4.923-10.784 9.855l-24.66 73.979-143.208 95.472-1.275-1.275c-14.213-14.213-33.11-22.041-53.21-22.041s-38.997 7.828-53.209 22.041l-9.971 9.971c-5.858 5.858-5.858 15.355 0 21.213l103.376 103.376-173.401 173.401c-5.858 5.858-5.858 15.355 0 21.213 2.928 2.929 6.767 4.393 10.606 4.393s7.678-1.464 10.606-4.394l173.402-173.402 103.376 103.376c2.929 2.929 6.768 4.394 10.606 4.394s7.678-1.464 10.606-4.394l9.971-9.97c14.213-14.213 22.04-33.11 22.04-53.21s-7.827-38.997-22.04-53.209l-1.276-1.276 95.473-143.207 73.978-24.66c4.933-1.644 8.661-5.725 9.855-10.784 1.196-5.059-.315-10.376-3.99-14.052zm-194.622 278.543-206.74-206.74c8.469-8.148 19.568-12.624 31.354-12.624 12.087 0 23.45 4.707 31.997 13.253l142.759 142.76c8.547 8.546 13.253 19.909 13.253 31.996 0 11.787-4.475 22.886-12.623 31.355zm-2.325-107.472-96.942-96.942 132.266-88.178 52.854 52.854zm111.531-151.34-57.133-57.133 15.681-47.041 88.493 88.494z"/>
         </svg>
       </button>
 
-      <!-- <button class="sidebar-toggle sidebar-toggle_pinned"
+      <!-- <button class="sidebar-toggle sidebar-pinned"
         data-btn="sidebar-toggle"
       >
         <i class="fas fa-map-pin"></i>
@@ -71,12 +71,15 @@ export default {
         else layout.dataset.sidebarActive = 'true'
         return
       }
-      if (!layout.matches('.pinned') && !event.target.matches('.header-for-sidebar')) layout.dataset.sidebarActive = 'false'
 
-      if (event.target.dataset.btn === 'sidebar-toggle_pinned') {
-        console.log('pinned sidebar!')
+      if (dataAttr.btn === 'sidebar-pinned') {
+        if (layout.dataset.sidebarPinned === 'true') layout.dataset.sidebarPinned = 'false'
+        else layout.dataset.sidebarPinned = 'true'
         return
       }
+
+      if (layout.dataset.sidebarPinned === 'false' && !event.target.matches('.header-for-sidebar')) layout.dataset.sidebarActive = 'false'
+
     }
   }
 }
@@ -116,7 +119,7 @@ header
       &:hover
         svg
           fill: $theme-color-main
-    .sidebar-toggle_pinned
+    .sidebar-pinned
       opacity: 0
       transition: $transitionDefault
       @media screen and (max-width: $tableWidth)
@@ -167,7 +170,7 @@ header
     .header-for-sidebar
       @media screen and (min-width: $tableWidth)
         width: $sidebarWidth
-    .sidebar-toggle_pinned
+    .sidebar-pinned
       opacity: 1
 
     .header-main

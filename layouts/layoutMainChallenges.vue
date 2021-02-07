@@ -1,5 +1,8 @@
 <template>
-  <div class="layout-wrapper main-container_transform-x" data-sidebar-active="false">
+  <div class="layout-wrapper main-container_transform-x"
+    data-sidebar-active="false"
+    data-sidebar-pinned="false"
+  >
 
     <Header />
 
@@ -78,13 +81,17 @@ export default {
 
     document.addEventListener("swipe", function(e) {
       console.log(e.detail.full.type)
+      const layout = document.querySelector('.layout-wrapper')
 
       switch (e.detail.dir) {
         case 'right':
-          document.querySelector('.layout-wrapper').dataset.sidebarActive = 'true'
+          layout.dataset.sidebarActive = 'true'
           break
         case 'left':
-          document.querySelector('.layout-wrapper').dataset.sidebarActive = 'false'
+          console.log('kj', layout)
+          if (layout.dataset.sidebarPinned === 'false') {
+            layout.dataset.sidebarActive = 'false'
+          }
           break
       }
     })
@@ -95,12 +102,7 @@ export default {
       console.log('click layout (layoutMainChallenges.vue)', event.target)
       const layout = document.querySelector('.layout-wrapper')
 
-      // if (event.target.dataset.btn === 'sidebar-toggle') {
-      //   if (layout.dataset.sidebarActive) layout.dataset.sidebarActive = 'false'
-      //   else layout.dataset.sidebarActive = 'true'
-      //   return
-      // }
-      if (!layout.matches('.pinned')) layout.dataset.sidebarActive = 'false'
+      if (layout.dataset.sidebarPinned === 'false') layout.dataset.sidebarActive = !layout.dataset.sidebarActive
 
     }
   }
@@ -146,7 +148,6 @@ export default {
     right: 0
     width: 100%
     background-color: $color-bg-body
-    // color: #555
     @media screen and (min-width: $tableWidth)
       width: auto
       left: $sidebarWidthIcon
@@ -176,7 +177,6 @@ export default {
     left: 0
     height: $height-header
     background-color: #fff
-    // background-color: rgba(0,200,0,.2)
     transition: $transitionSidebar
     @media screen and (max-width: $phoneWidth)
       bottom: 0
@@ -206,10 +206,6 @@ export default {
       left: $sidebarWidth
       @media screen and (max-width: 370px)
         left: $sidebarWidthPhone
-
-
-
-
 
 
 
@@ -243,5 +239,4 @@ export default {
     z-index: 1
     left: 0
 
-// у элемента цвет красный, то скрываем сайдбар
 </style>
