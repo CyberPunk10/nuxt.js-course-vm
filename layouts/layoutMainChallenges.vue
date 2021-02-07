@@ -88,10 +88,7 @@ export default {
           layout.dataset.sidebarActive = 'true'
           break
         case 'left':
-          console.log('kj', layout)
-          if (layout.dataset.sidebarPinned === 'false') {
-            layout.dataset.sidebarActive = 'false'
-          }
+          if (layout.dataset.sidebarPinned === 'false') layout.dataset.sidebarActive = 'false'
           break
       }
     })
@@ -102,7 +99,9 @@ export default {
       console.log('click layout (layoutMainChallenges.vue)', event.target)
       const layout = document.querySelector('.layout-wrapper')
 
-      if (layout.dataset.sidebarPinned === 'false') layout.dataset.sidebarActive = !layout.dataset.sidebarActive
+      if (layout.dataset.sidebarPinned === 'false' && layout.dataset.sidebarActive === 'true' ) {
+        layout.dataset.sidebarActive = 'false'
+      }
 
     }
   }
