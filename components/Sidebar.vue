@@ -7,7 +7,7 @@
     <div class="sidebar-main layout-scrollbar-sidebar-transparent layout-cell-sidebar-transparent">
 
       <div class="sidenav">
-        <SidenavItem
+        <!-- <SidenavItem
           v-for="(link, index) in navLinks"
           :key="link.name + index"
           :link="link"
@@ -18,48 +18,22 @@
             :link="sublink"
           >
           </SidenavItem>
-        </SidenavItem>
+        </SidenavItem> -->
+
+        <SidenavItemOnlyLink
+          v-for="(link, index) in navLinks"
+          :key="link.name + index"
+          :link="link"
+        />
       </div>
 
-      <div class="navbar-inner">
+      <!-- <div class="temp">
+        <i class="fas fa-download mr-2"></i>
+        <i class="fas fa-file-alt"></i>
+        <i class="fas fa-gift"></i>
+        <i class="fab fa-github"></i>
+      </div> -->
 
-        <!-- <hr class="my-3">
-
-        <h6 class="navbar-heading p-0 text-muted">Documentation</h6>
-        <ul class="navbar-nav mb-md-3">
-          <li class="nav-item"><a href="#" rel="noopener" class="nav-link"><i class="ni ni-spaceship"></i> <span class="nav-link-text">Getting started</span></a></li>
-          <li class="nav-item"><a href="#" rel="noopener" class="nav-link"><i class="ni ni-palette"></i> <span class="nav-link-text">Foundation</span></a></li>
-          <li class="nav-item"><a href="#" rel="noopener" class="nav-link"><i class="ni ni-ui-04"></i> <span class="nav-link-text">Components</span></a></li>
-          <li class="nav-item"><a href="#" rel="noopener" class="nav-link"><i class="ni ni-chart-pie-35"></i> <span class="nav-link-text">Plugins</span></a></li>
-        </ul> -->
-      </div>
-
-      <!-- <a
-        href="#"
-        class="btn btn-sm btn-danger btn-icon mx-sm-5 mb-2 d-none d-md-block"
-        ><span class="btn-inner--icon"
-          ><i class="fas fa-download mr-2"></i
-        ></span>
-        <span class="nav-link-inner--text">Upgrade to PRO</span></a
-      >
-      <a
-        href="#"
-        class="btn btn-sm btn-neutral btn-icon mx-sm-5 mb-2 d-none d-md-block"
-        ><span class="btn-inner--icon"><i class="fas fa-file-alt"></i></span>
-        <span class="nav-link-inner--text">Documentation</span></a
-      >
-      <a
-        href="#"
-        class="btn btn-sm btn-info btn-icon mx-sm-5 mb-2 d-none d-md-block"
-        ><span class="btn-inner--icon"><i class="fas fa-gift"></i></span>
-        <span class="nav-link-inner--text">Download now</span></a
-      >
-      <a
-        href="#"
-        class="btn btn-sm btn-dark btn-icon mx-sm-5 mb-2 d-none d-md-block"
-        ><span class="btn-inner--icon"><i class="fab fa-github"></i></span>
-        <span class="nav-link-inner--text">Star us on Github</span></a
-      > -->
     </div>
 
   </aside>
@@ -160,6 +134,9 @@ export default {
     width: 100%
     height: 100%
     overflow-x: hidden
-    padding-top: 1.5rem
+    padding-top: 2rem
+
+  .temp a
+    display: block
 
 </style>

@@ -113,7 +113,8 @@ header
       svg
         fill: $color-text-grey
         transition: fill .2s ease
-        &:hover
+      &:hover
+        svg
           fill: $theme-color-main
     .sidebar-toggle_pinned
       opacity: 0
@@ -135,7 +136,8 @@ header
       margin-left: calc((100% - 8rem) / 2)
       transition: $transitionDefault
       @media screen and (min-width: $tableWidth)
-        margin-left: 1.5rem
+        // margin-left: 1.5rem
+        margin-left: 0
 
     .header-user-block
       display: flex
