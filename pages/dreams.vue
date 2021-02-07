@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="onSubmit">
+  <form class="form-dreams" @submit.prevent="onSubmit">
     <h3 class="title">Чего ты хочешь?</h3>
     <TextArea v-bind:TextArea="TextAreaEmail" @func="setValue"/>
     <Button v-bind:button="button" class="btn-opacity"/>
@@ -73,7 +73,7 @@ export default {
 </script>
 
 <style lang="sass">
-  form
+  .form-dreams
     display: flex
     justify-content: center
     flex-direction: column

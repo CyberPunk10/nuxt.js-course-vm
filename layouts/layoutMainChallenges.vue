@@ -1,8 +1,13 @@
 <template>
-  <div class="layout-wrapper main-container_transform-x">
-    <Header @click="handleClickSidebarToggle"/>
+  <div class="layout-wrapper main-container_transform-x"
+    data-sidebar-active="false"
+    data-sidebar-pinned="false"
+  >
+
+    <Header />
 
     <Sidebar />
+
 
     <div class="main-container"
       @click="handleClickSidebarToggle"
@@ -15,8 +20,6 @@
 
       <Nuxt class="main-content layout-scrollbar layout-cell container" />
     </div>
-
-    <!-- <HeaderLeftChunk /> -->
 
     <FooterMobile />
 
@@ -78,13 +81,14 @@ export default {
 
     document.addEventListener("swipe", function(e) {
       console.log(e.detail.full.type)
+      const layout = document.querySelector('.layout-wrapper')
 
       switch (e.detail.dir) {
         case 'right':
-          document.querySelector('.sidebar').classList.add('active')
+          layout.dataset.sidebarActive = 'true'
           break
         case 'left':
-          document.querySelector('.sidebar').classList.remove('active')
+          if (layout.dataset.sidebarPinned === 'false') layout.dataset.sidebarActive = 'false'
           break
       }
     })
@@ -93,14 +97,12 @@ export default {
   methods: {
     handleClickSidebarToggle: function(event) {
       console.log('click layout (layoutMainChallenges.vue)', event.target)
-      const sideBar = document.querySelector('.sidebar')
-      if (event.target.dataset.btn === 'sidebar-toggle') {
-        sideBar.classList.toggle('active')
-        return
+      const layout = document.querySelector('.layout-wrapper')
+
+      if (layout.dataset.sidebarPinned === 'false' && layout.dataset.sidebarActive === 'true' ) {
+        layout.dataset.sidebarActive = 'false'
       }
-      if (!sideBar.matches('.pinned')) {
-        sideBar.classList.remove('active')
-      }
+
     }
   }
 }
@@ -145,7 +147,6 @@ export default {
     right: 0
     width: 100%
     background-color: $color-bg-body
-    // color: #555
     @media screen and (min-width: $tableWidth)
       width: auto
       left: $sidebarWidthIcon
@@ -168,29 +169,6 @@ export default {
     @media screen and (min-width: $tableWidth)
       left: 0
 
-  // show sidebar
-  &>.sidebar.active
-    left: 0
-    width: $sidebarWidth
-    max-width: $sidebarWidth
-    @media screen and (max-width: 370px)
-      width: $sidebarWidthPhone
-  &>.sidebar.transform-x.active
-    left: 0
-    box-shadow: 4px 2px 4px rgba(0,0,0,.101562)
-
-  // если main-container not static (need add .main-container_transform-x)
-  &.main-container_transform-x
-    &>.sidebar
-      z-index: 0
-    // show
-    &>.sidebar.active + .main-container
-      left: $sidebarWidth
-      @media screen and (max-width: 370px)
-        left: $sidebarWidthPhone
-
-
-  // HeaderLeftChunk.vue
   &>.footer-mobile
     position: fixed
     bottom: -$height-header
@@ -198,10 +176,36 @@ export default {
     left: 0
     height: $height-header
     background-color: #fff
-    // background-color: rgba(0,200,0,.2)
     transition: $transitionSidebar
     @media screen and (max-width: $phoneWidth)
       bottom: 0
+
+
+  // show sidebar
+  &[data-sidebar-active="true"]
+    &>.sidebar
+      left: 0
+      width: $sidebarWidth
+      max-width: $sidebarWidth
+      @media screen and (max-width: 370px)
+        width: $sidebarWidthPhone
+    &>.sidebar.transform-x
+      left: 0
+      box-shadow: 4px 2px 4px rgba(0,0,0,.101562)
+
+
+  // если main-container not static (need add .main-container_transform-x)
+  &.main-container_transform-x
+    &>.sidebar
+      z-index: 0
+
+  // show
+  &.main-container_transform-x[data-sidebar-active="true"]
+    .main-container
+      left: $sidebarWidth
+      @media screen and (max-width: 370px)
+        left: $sidebarWidthPhone
+
 
 
   // .border-left/right/top/bottom
@@ -233,43 +237,5 @@ export default {
   .border-left
     z-index: 1
     left: 0
-
-
-
-
-
-  // .border-top/left/right
-  // .border-top
-  // // .border-left/right
-  // .border-left,
-  // .border-right,
-  // .border-bottom
-  // .border-right
-    // position: absolute
-    // background-color: $color-border-default
-  // .border-top,
-  // .border-left,
-  // .border-right
-  //   top: $height-header
-  // .border-top,
-  // .border-left
-  //   z-index: 1
-  // .border-left,
-  // .border-right
-  //   top: 0
-  //   width: 1px
-  //   height: 100%
-  // .border-bottom,
-  // .border-top
-  //   height: 1px
-  //   width: 100%
-
-  // .border-right
-  //   right: 0
-  // .border-left
-  //   z-index: 1
-  //   left: 0
-  // .border-bottom
-  //   bottom: 0
 
 </style>
