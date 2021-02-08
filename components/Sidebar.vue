@@ -122,7 +122,6 @@ export default {
   position: relative
   white-space: nowrap
   user-select: none
-  // color: #242424
 
   // общее
   &-main

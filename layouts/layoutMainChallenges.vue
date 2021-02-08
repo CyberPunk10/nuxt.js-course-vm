@@ -8,7 +8,6 @@
 
     <Sidebar />
 
-
     <div class="main-container"
       @click="handleClickSidebarToggle"
     >
@@ -16,7 +15,6 @@
       <div class="border-top"></div>
       <div class="border-right"></div>
       <div class="border-left"></div>
-      <!-- <div class="border-bottom"></div> -->
 
       <Nuxt class="main-content layout-scrollbar layout-cell container" />
     </div>
@@ -31,12 +29,6 @@
 import swipe from '@/common/swipe'
 
 export default {
-  data() {
-    return {
-
-    }
-  },
-
   computed: {
     error() {
       return this.$store.getters.error
@@ -119,8 +111,11 @@ export default {
   &>.main-container
     position: fixed
     left: 0
-    overflow: hidden
     transition: $transitionSidebar
+
+  &>.sidebar,
+  &>.main-container
+    overflow: hidden // (без header, потому что нужно показывать контекстное меню под аватаркой)
 
   &>header
     top: 0
@@ -211,14 +206,12 @@ export default {
   // .border-left/right/top/bottom
 
   .border-top,
-  .border-bottom,
   .border-left,
   .border-right
     position: absolute
     background-color: $color-border-default
 
-  .border-top,
-  .border-bottom
+  .border-top
     width: 100%
     height: 1px
 
@@ -230,8 +223,6 @@ export default {
   .border-top
     z-index: 1
     top: 0
-  .border-bottom
-    bottom: 0
   .border-right
     right: 0
   .border-left

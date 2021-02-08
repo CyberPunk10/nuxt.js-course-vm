@@ -91,8 +91,10 @@ export default {
               password: this.controls.password
             }
             await this.$store.dispatch('auth/login', formData)
-            this.$router.push('/admin')
-            this.$message.success('Вы зашли с правами админа')
+            // this.$router.push('/admin')
+            this.$router.push('/challenges/my-profile')
+            // this.$message.success('Вы зашли с правами админа')
+            this.$message.success(`Добро пожаловать, ${this.controls.login}`)
             this.loading = false
           } catch (error) {
             this.loading = false

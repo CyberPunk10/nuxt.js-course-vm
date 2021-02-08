@@ -1,6 +1,6 @@
 <template>
-  <div class="sidenav__nav-item">
-    <NuxtLink :to="link.url">
+  <div class="sidenav__nav-item-wrap">
+    <NuxtLink :to="link.url" class="sidenav__nav-item">
       <i v-if="link.icon" :class="link.icon"></i>
       <span class="sidenav__nav-item-text">{{ link.name }}</span>
     </NuxtLink>
@@ -18,24 +18,24 @@ export default {
 </script>
 
 <style lang="sass">
-.sidenav__nav-item
+.sidenav__nav-item-wrap
   position: relative
   overflow: hidden
   margin-bottom: 2px
   padding-left: $sidebar-marginItem
   margin-right: $sidebar-marginItem
 
-  &>a
+  &>.sidenav__nav-item
     display: grid
     grid: minmax($sidebar-heightItem, max-content ) / calc(#{$sidebarWidthIcon} - 2 * #{$sidebar-marginItem}) minmax(auto, calc(100% - #{$sidebar-heightItem})) // row/col
     width: 100%
     border-radius: $borderRadius
-    transition: $transitionDefault
+    transition: $transitionDefaultHover
     &:hover
       background-color: $color-light-green2
       &>i,
       &>span
-        color: $theme-color-main
+        color: var(--color-calendar-graph-day-bg-ch1-3)
     &>i
       text-align: center
       font-size: 1.6rem
@@ -49,8 +49,6 @@ export default {
       line-height: $sidebar-heightItem
       color: rgba(0,0,0,.7)
       transition: $transitionDefault
-      &:hover
-        color: rgba(0,0,0,.8)
 
     &.nuxt-link-exact-active
       background-color: rgba(140, 79, 232, 0.05)
