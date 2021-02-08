@@ -17,6 +17,7 @@ export const state = () => ({
       onSidenav: true,
       onHeader: true,
       onFooterMobile: true,
+      onHeaderUserAvatarMenu: true,
       // isMenuExpanded: true,
       children: [
         {
@@ -100,7 +101,8 @@ export const state = () => ({
       // icon: 'fas fa-angle-right',
       icon: 'fas fa-heart',
       url: '/challenges/settings',
-      onSidenav: true
+      onSidenav: true,
+      onHeaderUserAvatarMenu: true,
     }
   ]
 })
@@ -120,6 +122,10 @@ export const getters = {
   },
   headerLinks: state => {
     const headerLinks = state.navLinks.filter( el => el.onHeader )
+    return headerLinks
+  },
+  headerUserAvatarMenuLinks: state => {
+    const headerLinks = state.navLinks.filter( el => el.onHeaderUserAvatarMenu )
     return headerLinks
   },
   footerMobileLinks: state => {

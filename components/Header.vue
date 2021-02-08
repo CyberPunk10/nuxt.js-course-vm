@@ -36,9 +36,30 @@
         <NuxtLink v-if="!isAuthTest" to="/admin/login" class="btn btn-link mobile-hidden">
           Регистрация
         </NuxtLink>
-        <NuxtLink v-if="isAuthTest" to="/admin/login" class="btn btn-link mobile-hidden">
-          Мой профиль
-        </NuxtLink>
+        <button v-if="isAuthTest" class="btn-avatar button-default-style-none">
+          <span class="btn btn-link mobile-hidden">
+            Мой профиль
+          </span>
+          <div class="user-avatar-wrap" >
+            <img id="user-avatar" class="user-avatar" alt="Фото профиля" height="32" width="32" src="https://yt3.ggpht.com/ytc/AAUvwni_Erf3P972j4OuRHBDK9ZiaXsh1ORMg56Rpxw-_Q=s68-c-k-c0x00ffffff-no-rj">
+          </div>
+          <div class="user-avatar-menu"
+            data-user-avatar-menu-active="false"
+          >
+            <!-- <ul>
+              <li><NuxtLink to="/challenges/my-profile" class="btn btn-link">Мой профиль</NuxtLink></li>
+              <li><NuxtLink to="/challenges/settings" class="btn btn-link">Настройки</NuxtLink></li>
+              <li v-if="isAuthTest"><NuxtLink to="/challenges/my-profile" class="btn btn-link">Выйти</NuxtLink></li>
+              <li><NuxtLink to="/challenges/my-profile" class="btn btn-link">Мой профиль</NuxtLink></li>
+            </ul> -->
+              <SidenavItemOnlyLink
+                v-for="(link, index) in headerUserAvatarMenuLinks"
+                :key="link.name + index"
+                :link="link"
+              />
+              <NuxtLink v-if="isAuthTest" to="/challenges/my-profile" class="btn btn-link">Выйти</NuxtLink>
+          </div>
+        </button>
       </div>
     </div>
 
@@ -53,9 +74,8 @@ export default {
     }
   },
   computed: {
-    links() {
-      let navLinks = this.$store.state.sidebarLayoutChellanges.navLinks
-      return navLinks.filter(item => item.onHeader)
+    headerUserAvatarMenuLinks () {
+      return this.$store.getters['sidebarLayoutChellanges/headerUserAvatarMenuLinks']
     },
     isAuthTest() {
       return this.$store.getters['auth/isAuthenticated']
@@ -91,7 +111,7 @@ header
   height: $height-header
   user-select: none
   background-color: #fff
-  overflow: hidden
+  z-index: 9
 
   .header-for-sidebar,
   .header-main
@@ -129,8 +149,10 @@ header
     right: 0
     left: $sidebarWidthIcon
     display: grid
-    grid: 100% / auto max-content // row/col
+    grid: 100% / calc(100% - #{$sidebarWidthIcon}) $sidebarWidthIcon // row/col
     // border-bottom: 1px solid $color-border-default
+    @media screen and (min-width: $phoneWidth)
+      grid: 100% / auto max-content // row/col
 
     // logo
     .navbar-brand
@@ -138,9 +160,9 @@ header
       width: 8rem
       margin-left: calc((100% - 8rem) / 2)
       transition: $transitionDefault
-      @media screen and (min-width: $tableWidth)
-        // margin-left: 1.5rem
-        margin-left: 0
+      @media screen and (min-width: $phoneWidth)
+        margin-left: 1rem
+        // margin-left: 0
 
     .header-user-block
       display: flex
@@ -152,7 +174,7 @@ header
         justify-content: space-between
         align-items: center
         font-size: 1.4rem
-        text-transform: none
+        text-transform: none // возможно стоит изменить в источнике
         color: $color-dark-shade-75
         i
           font-size: 20px
@@ -163,6 +185,41 @@ header
         &.mobile-hidden
           @media screen and (max-width: $phoneWidth)
             display: none
+
+    .btn-avatar
+      display: flex
+      justify-content: center
+      align-items: center
+      height: 100%
+      .btn
+        margin: 0
+      .user-avatar-wrap
+        width: $sidebarWidthIcon
+        .user-avatar
+          border-radius: 50%
+
+      .user-avatar-menu
+        position: absolute
+        right: .9rem // calc((#{$height-header) - 32px(img)) / 2)
+        top: $height-header
+        top: 4.7rem
+        background-color: #fff
+        width: 21rem
+        border-radius: $borderRadius
+        border: 1px solid $color-border-default
+        border-top: none
+        display: none
+        padding: 1rem 0
+        &[data-user-avatar-menu-active="false"]
+          box-shadow: 1px 1px 6px rgba(88, 88, 88, 0.2)
+          display: block
+        span
+          text-align: left
+
+      &:hover
+        .user-avatar-menu
+          box-shadow: 1px 1px 6px rgba(88, 88, 88, 0.2)
+          display: block
 
 // if show sidebar:
 .layout-wrapper[data-sidebar-active="true"]
@@ -176,8 +233,5 @@ header
     .header-main
       @media screen and (min-width: $tableWidth)
         left: $sidebarWidth
-    // // logo
-    // .navbar-brand
-    //   @media screen and (min-width: $tableWidth)
-    //     margin-left: calc(#{$sidebarWidth} - #{$sidebarWidthIcon})
+
 </style>
