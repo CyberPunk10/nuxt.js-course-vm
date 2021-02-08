@@ -1,6 +1,6 @@
 <template>
-  <div class="sidenav__nav-item">
-    <NuxtLink :to="link.url">
+  <div class="sidenav__nav-item-wrap">
+    <NuxtLink :to="link.url" class="sidenav__nav-item">
       <i v-if="link.icon" :class="link.icon"></i>
       <span class="sidenav__nav-item-text">{{ link.name }}</span>
     </NuxtLink>
@@ -18,14 +18,14 @@ export default {
 </script>
 
 <style lang="sass">
-.sidenav__nav-item
+.sidenav__nav-item-wrap
   position: relative
   overflow: hidden
   margin-bottom: 2px
   padding-left: $sidebar-marginItem
   margin-right: $sidebar-marginItem
 
-  &>a
+  &>.sidenav__nav-item
     display: grid
     grid: minmax($sidebar-heightItem, max-content ) / calc(#{$sidebarWidthIcon} - 2 * #{$sidebar-marginItem}) minmax(auto, calc(100% - #{$sidebar-heightItem})) // row/col
     width: 100%
