@@ -62,7 +62,8 @@ export default {
         left: 0
         bottom: 0
         width: 3px
-        border-top-right-radius: 2px
-        border-bottom-right-radius: 2px
+        // border-top-right-radius: 2px
+        // border-bottom-right-radius: 2px
+        border-radius: 10px
 
 </style>

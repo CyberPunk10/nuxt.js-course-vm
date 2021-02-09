@@ -133,7 +133,6 @@ export default {
   &>.sidebar
     z-index: 999
     width: $sidebarWidth
-    background-color: $color-bg-sidebar
     @media screen and (max-width: 370px)
       width: $sidebarWidthPhone
     @media screen and (min-width: $tableWidth)

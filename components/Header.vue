@@ -212,10 +212,10 @@ header
         .header-user-block-menu
           box-shadow: 1px 1px 8px rgba(88, 88, 88, 0.2)
           display: block
-      // &:hover
-      //   .header-user-block-menu
-      //     box-shadow: 1px 0px 6px rgba(88, 88, 88, 0.2)
-      //     display: block
+      &:hover
+        .header-user-block-menu
+          box-shadow: 1px 0px 6px rgba(88, 88, 88, 0.2)
+          display: block
 
       .btn.btn-link
         padding: 0 0.5rem
@@ -257,7 +257,7 @@ header
         right: .9rem // calc((#{$height-header) - 32px(img)) / 2)
         // top: $height-header
         top: 4.6rem
-        background-color: #fff
+        background-color: $color-green
         width: 21rem
         border-radius: $borderRadius
         // border: 1px solid $color-border-default
@@ -271,7 +271,12 @@ header
           width: 100%
           border-top: 1px solid $color-dark-shade-10
 
-
+        .sidenav__nav-item
+          i, span
+            color: #fff
+          &:hover
+            i, span
+              color: $theme-color-main
 
 // if show sidebar:
 .layout-wrapper[data-sidebar-active="true"]

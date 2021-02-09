@@ -122,6 +122,7 @@ export default {
   position: relative
   white-space: nowrap
   user-select: none
+  background-color: $color-bg-sidebar
 
   // общее
   &-main
