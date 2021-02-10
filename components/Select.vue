@@ -134,12 +134,12 @@ export default {
   &__container
     height: $height
     overflow: hidden
-    border: 1px solid $color-dark-shade-25
+    border: 1px solid $color-dark-shade-15
     border-radius: 4px
     transition: $transitionDefault
 
   &__input
-    border-bottom: 1px solid $color-dark-shade-25
+    border-bottom: 1px solid $color-dark-shade-15
     height: $height
     display: flex
     align-items: center
@@ -148,6 +148,8 @@ export default {
     background-color: #fff
     cursor: pointer
     .material-icons
+      color: $color-dark-shade-50
+      transform: rotate(270deg)
       transition: $transitionDefault
 
   &__dropdown
@@ -180,7 +182,7 @@ export default {
       box-shadow: 0px 10px 20px $color-dark-shade-5
     .select__input
       .material-icons
-        transform: rotate(180deg)
+        transform: rotate(360deg)
 
 
 </style>

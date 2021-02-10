@@ -12,9 +12,9 @@
       @click="handleClickSidebarToggle"
     >
 
-      <div class="border-top"></div>
-      <div class="border-right"></div>
-      <div class="border-left"></div>
+      <!-- <div class="border-top"></div> -->
+      <!-- <div class="border-right"></div> -->
+      <!-- <div class="border-left"></div> -->
 
       <Nuxt class="main-content layout-scrollbar layout-cell container" />
     </div>
@@ -133,7 +133,6 @@ export default {
   &>.sidebar
     z-index: 999
     width: $sidebarWidth
-    background-color: $color-bg-sidebar
     @media screen and (max-width: 370px)
       width: $sidebarWidthPhone
     @media screen and (min-width: $tableWidth)

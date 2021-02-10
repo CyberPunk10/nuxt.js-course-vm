@@ -20,6 +20,8 @@
           </SidenavItem>
         </SidenavItem> -->
 
+        <div class="separator"></div>
+
         <SidenavItemOnlyLink
           v-for="(link, index) in navLinks"
           :key="link.name + index"
@@ -27,7 +29,7 @@
         />
       </div>
 
-      <!-- <div class="temp">
+      <!-- <div>
         <i class="fas fa-download mr-2"></i>
         <i class="fas fa-file-alt"></i>
         <i class="fas fa-gift"></i>
@@ -122,6 +124,7 @@ export default {
   position: relative
   white-space: nowrap
   user-select: none
+  // background-color: $color-bg-sidebar
 
   // общее
   &-main
@@ -135,7 +138,45 @@ export default {
     overflow-x: hidden
     padding-top: 2rem
 
-  .temp a
-    display: block
+    margin: .5rem 0
+    background-color: #fff
+    // @include linear-gradient($direction: 200deg, $fromColor: #a4adf0, $toColor: #787fc5)
+    border-top-right-radius: $borderRadius
+    border-bottom-right-radius: $borderRadius
+    border: 1px solid $color-border-default
+    border-left: none
+    height: calc(100% - 1rem)
+    // transition: $transitionDefault
+
+    // .sidenav
+    //   margin-top: 0
+    //   transition: $transitionDefault
+    //   .separator
+    //     padding-top: 0
+    //     margin-top: 0
+    //     width: 100%
+    //     border-top: 1px solid transparent
+    //     transition: $transitionDefault
+
+    // @media screen and (min-width: $tableWidth)
+    //   .sidenav
+    //     margin-top: 1.8rem
+    //     .separator
+    //       padding-top: 1rem
+    //       margin-top: 1rem
+    //       width: 100%
+    //       border-top: 1px solid $color-border-default
+
+
+// show
+// .layout-wrapper[data-sidebar-active="true"]
+//   .sidebar-main
+    // border-top-right-radius: 0
+    // border-top: none
+    // margin-top: 0
+    // padding-top: 2.5rem
+    // height: calc(100% - .5rem - 2px)
+
+
 
 </style>
