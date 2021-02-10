@@ -10,11 +10,11 @@
           <rect data-btn="sidebar-toggle" y="15" width="20" height="2"></rect>
         </svg>
       </button>
-      <button class="sidebar-toggle sidebar-pinned" data-btn="sidebar-pinned">
+      <!-- <button class="sidebar-toggle sidebar-pinned" data-btn="sidebar-pinned">
         <svg data-btn="sidebar-pinned" width="20" height="20" enable-background="new 0 0 512 512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
           <path data-btn="sidebar-pinned" d="m507.607 127.212-122.818-122.818c-3.676-3.677-8.994-5.187-14.053-3.992-5.06 1.194-9.14 4.923-10.784 9.855l-24.66 73.979-143.208 95.472-1.275-1.275c-14.213-14.213-33.11-22.041-53.21-22.041s-38.997 7.828-53.209 22.041l-9.971 9.971c-5.858 5.858-5.858 15.355 0 21.213l103.376 103.376-173.401 173.401c-5.858 5.858-5.858 15.355 0 21.213 2.928 2.929 6.767 4.393 10.606 4.393s7.678-1.464 10.606-4.394l173.402-173.402 103.376 103.376c2.929 2.929 6.768 4.394 10.606 4.394s7.678-1.464 10.606-4.394l9.971-9.97c14.213-14.213 22.04-33.11 22.04-53.21s-7.827-38.997-22.04-53.209l-1.276-1.276 95.473-143.207 73.978-24.66c4.933-1.644 8.661-5.725 9.855-10.784 1.196-5.059-.315-10.376-3.99-14.052zm-194.622 278.543-206.74-206.74c8.469-8.148 19.568-12.624 31.354-12.624 12.087 0 23.45 4.707 31.997 13.253l142.759 142.76c8.547 8.546 13.253 19.909 13.253 31.996 0 11.787-4.475 22.886-12.623 31.355zm-2.325-107.472-96.942-96.942 132.266-88.178 52.854 52.854zm111.531-151.34-57.133-57.133 15.681-47.041 88.493 88.494z"/>
         </svg>
-      </button>
+      </button> -->
 
       <!-- <button class="sidebar-toggle sidebar-pinned"
         data-btn="sidebar-toggle"
@@ -149,19 +149,33 @@ header
   height: $height-header
   user-select: none
   background-color: #fff
+  border-bottom: 1px solid $color-border-default
   z-index: 9
+  // @media screen and (min-width: $tableWidth)
+  //   border-bottom: none
 
   .header-for-sidebar,
   .header-main
     position: absolute
     height: 100%
+    top: 0
+    // background-color: #fff
+    // border-bottom: 1px solid $color-border-default
     transition: $transitionDefault
+    // @media screen and (min-width: $tableWidth)
+    //   border: 1px solid $color-border-default
+    //   border-top: none
 
   .header-for-sidebar
     left: 0
     width: $sidebarWidthIcon
     display: flex
     justify-content: space-between
+    @media screen and (min-width: $tableWidth)
+      top: calc(#{$height-header})
+    //   // border-bottom-right-radius: $borderRadius
+    //   display: none
+
 
     .sidebar-toggle
       min-width: $sidebarWidthIcon
@@ -188,9 +202,12 @@ header
     left: $sidebarWidthIcon
     display: grid
     grid: 100% / calc(100% - #{$sidebarWidthIcon}) $sidebarWidthIcon // row/col
-    // border-bottom: 1px solid $color-border-default
     @media screen and (min-width: $phoneWidth)
       grid: 100% / auto max-content // row/col
+    @media screen and (min-width: $tableWidth)
+      // border-bottom-left-radius: $borderRadius
+      // left: calc(#{$sidebarWidthIcon} + .5rem)
+      left: 0
 
     // logo
     .navbar-brand
@@ -201,6 +218,8 @@ header
       @media screen and (min-width: $phoneWidth)
         margin-left: 1rem
         // margin-left: 0
+      @media screen and (min-width: $tableWidth)
+        margin-left: 2rem
 
 
     // .header-user-block
@@ -261,7 +280,7 @@ header
         width: 21rem
         border-radius: $borderRadius
         // border: 1px solid $color-border-default
-        border: 1px solid $color-dark-shade-10
+        border: 1px solid $color-border-default
         border-top: none
         padding: $sidebar-marginItem 0
         padding-bottom: calc(#{$sidebar-marginItem} - 2px) // last item margin-bottom = 2px
@@ -269,7 +288,7 @@ header
           padding-top: 1rem
           margin-top: 1rem
           width: 100%
-          border-top: 1px solid $color-dark-shade-10
+          border-top: 1px solid $color-border-default
 
         .sidenav__nav-item
           i, span
@@ -284,11 +303,20 @@ header
     .header-for-sidebar
       @media screen and (min-width: $tableWidth)
         width: $sidebarWidth
-    .sidebar-pinned
-      opacity: 1
+        border-radius: 0
+        border: none
+        // border-right: 1px solid $color-border-default
+        // &:hover
+        .sidebar-pinned
+          opacity: 1
 
-    .header-main
-      @media screen and (min-width: $tableWidth)
-        left: $sidebarWidth
+    // .header-main
+    //   @media screen and (min-width: $tableWidth)
+        // left: calc(#{$sidebarWidth} + .5rem)
+        // left: $sidebarWidth
+        // border-radius: 0
+        // border: none
+        // border-bottom: 1px solid $color-border-default
+
 
 </style>

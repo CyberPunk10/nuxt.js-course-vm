@@ -35,6 +35,18 @@ export const state = () => ({
       onFooterMobile: true
     },
     {
+      name: 'Друзья',
+      icon: 'fas fa-user-friends',
+      url: '/challenges/statistics',
+      onSidenav: true,
+    },
+    {
+      name: 'Друзья',
+      icon: 'fas fa-user-friends',
+      url: '/challenges/statistics',
+      onSidenav: true,
+    },
+    {
       name: 'Мои челленджи',
       icon: 'fas fa-chart-pie',
       url: '/challenges/settings',

@@ -32,10 +32,11 @@ export default {
     border-radius: $borderRadius
     transition: $transitionDefaultHover
     &:hover
-      background-color: $color-light-green2
+      background-color: rgba(140, 79, 232, 0.1)
       &>i,
       &>span
-        color: var(--color-calendar-graph-day-bg-ch1-3)
+        color: $theme-color-main
+
     &>i
       text-align: center
       font-size: 1.6rem
@@ -51,12 +52,13 @@ export default {
       transition: $transitionDefault
 
     &.nuxt-link-exact-active
-      background-color: rgba(140, 79, 232, 0.05)
+      background-color: rgba(140, 79, 232, 0.08)
       i, span
         color: $theme-color-main
       &:before
         position: absolute
-        background-color: $theme-color-main
+        background-color: rgba(140, 79, 232, 0.8)
+        border: 1px solid $theme-color-main
         content: ''
         top: 0
         left: 0
@@ -66,4 +68,10 @@ export default {
         // border-bottom-right-radius: 2px
         border-radius: 10px
 
+</style>
+
+<style>
+.jkj {
+  color: rgb(119, 126, 197)
+}
 </style>

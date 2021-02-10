@@ -12,9 +12,9 @@
       @click="handleClickSidebarToggle"
     >
 
-      <div class="border-top"></div>
-      <div class="border-right"></div>
-      <div class="border-left"></div>
+      <!-- <div class="border-top"></div> -->
+      <!-- <div class="border-right"></div> -->
+      <!-- <div class="border-left"></div> -->
 
       <Nuxt class="main-content layout-scrollbar layout-cell container" />
     </div>
