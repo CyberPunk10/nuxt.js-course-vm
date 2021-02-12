@@ -35,22 +35,17 @@ export const state = () => ({
       onFooterMobile: true
     },
     {
-      name: 'Друзья',
+      name: 'layoutMainChallenges',
       icon: 'fas fa-user-friends',
-      url: '/challenges/statistics',
-      onSidenav: true,
-    },
-    {
-      name: 'Друзья',
-      icon: 'fas fa-user-friends',
-      url: '/challenges/statistics',
+      url: '/layout-main-challenges',
       onSidenav: true,
     },
     {
       name: 'Мои челленджи',
       icon: 'fas fa-chart-pie',
-      url: '/challenges/settings',
+      url: '/challenges/table',
       onSidenav: true,
+      onFooterMobile: true,
       // isMenuExpanded: true,
       children: [
         {
@@ -94,20 +89,6 @@ export const state = () => ({
         },
       ]
     },
-    // {
-    //   name: 'layoutMainChallenges',
-    //   icon: 'far fa-heart',
-    //   url: '/layout-main-challenges',
-    //   onSidenav: true
-    // },
-    {
-      name: 'Tаблицы',
-      // icon: 'fas fa-chevron-right',
-      icon: 'fas fa-heart',
-      url: '/challenges/table',
-      onSidenav: true,
-      onFooterMobile: true
-    },
     {
       name: 'Настройки',
       // icon: 'fas fa-angle-right',
@@ -118,6 +99,8 @@ export const state = () => ({
     }
   ]
 })
+
+// icon: 'fas fa-chevron-right'
 
 export const mutations = {
 

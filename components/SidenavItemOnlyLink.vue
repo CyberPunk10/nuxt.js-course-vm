@@ -32,7 +32,7 @@ export default {
     border-radius: $borderRadius
     transition: $transitionDefaultHover
     &:hover
-      background-color: rgba(140, 79, 232, 0.1)
+      background-color: rgba(140, 79, 232, 0.03)
       &>i,
       &>span
         color: $theme-color-main

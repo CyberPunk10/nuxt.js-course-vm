@@ -29,12 +29,23 @@
         />
       </div>
 
+      <div class="separator"></div>
+
       <!-- <div>
         <i class="fas fa-download mr-2"></i>
         <i class="fas fa-file-alt"></i>
         <i class="fas fa-gift"></i>
         <i class="fab fa-github"></i>
-      </div> -->
+      </div>
+
+      <div class="separator"></div> -->
+
+      <div class="reklamaF">
+        <div class="content">
+          <!-- <p>Здесь может быть ваша реклама</p>
+          <p>Реклама челленджей</p> -->
+        </div>
+      </div>
 
     </div>
 
@@ -71,9 +82,6 @@ export default {
       //     sideBar.classList.add('transform-x')
       //   }
       // }
-      // if (event.target.className === 'sidebar-toggle_pinned') {
-
-      // }
 
       switch (className) {
         case 'radio-btn__input':
@@ -94,10 +102,6 @@ export default {
           }
           break
 
-        case 'sidebar-toggle_pinned':
-          console.log('sidebar-toggle_pinned')
-          break
-
         case 'sidebar-toggle':
           console.log('sidebar-toggle')
           break
@@ -108,12 +112,10 @@ export default {
       const dataAttr = event.target.dataset
       console.log(document.documentElement.clientWidth)
 
-      if (dataAttr.autoCloseSidebar === 'true') {
-        if (layout.dataset.sidebarActive === 'true') layout.dataset.sidebarActive = 'false'
-        else layout.dataset.sidebarActive = 'true'
-        return
+      if (document.documentElement.clientWidth < 768) {
+        if (event.target.closest('a')) layout.dataset.sidebarActive = 'false'
       }
-      // if (!layout.matches('.pinned')) layout.dataset.sidebarActive = 'false'
+
     }
   }
 }
@@ -126,6 +128,7 @@ export default {
   user-select: none
   // background-color: $color-bg-sidebar
 
+
   // общее
   &-main
     position: absolute
@@ -137,35 +140,51 @@ export default {
     height: 100%
     overflow-x: hidden
     padding-top: 2rem
+    padding-top: 2rem
 
     margin: .5rem 0
     background-color: #fff
+    // background-color: $color-bg-body
     // @include linear-gradient($direction: 200deg, $fromColor: #a4adf0, $toColor: #787fc5)
     border-top-right-radius: $borderRadius
     border-bottom-right-radius: $borderRadius
     border: 1px solid $color-border-default
     border-left: none
     height: calc(100% - 1rem)
-    // transition: $transitionDefault
+    transition: $transitionDefault
 
-    // .sidenav
-    //   margin-top: 0
-    //   transition: $transitionDefault
-    //   .separator
+    .separator
+      padding-top: 1rem
+      margin: 1rem $sidebar-marginItem 0
+      width: calc(100% - 2 * #{$sidebar-marginItem})
+      border-top: 1px solid $color-border-default
+      // border-top: 1px solid transparent
+
+    .sidenav
+      .separator
+        display: none
     //     padding-top: 0
     //     margin-top: 0
     //     width: 100%
     //     border-top: 1px solid transparent
     //     transition: $transitionDefault
 
-    // @media screen and (min-width: $tableWidth)
-    //   .sidenav
-    //     margin-top: 1.8rem
-    //     .separator
-    //       padding-top: 1rem
-    //       margin-top: 1rem
-    //       width: 100%
-    //       border-top: 1px solid $color-border-default
+    .reklamaF
+      display: flex
+      align-items: center
+      // justify-content: center
+      min-height: 10rem
+      margin: $sidebar-marginItem
+      padding: 1rem
+      overflow: hidden
+      border: 1px solid $color-border-default
+      border-radius: $borderRadius
+
+    @media screen and (min-width: $tableWidth)
+      .sidenav
+        margin-top: 1.8rem
+        .separator
+          display: block
 
 
 // show

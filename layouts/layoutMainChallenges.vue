@@ -1,7 +1,6 @@
 <template>
   <div class="layout-wrapper main-container_transform-x"
     data-sidebar-active="false"
-    data-sidebar-pinned="false"
   >
 
     <Header />
@@ -11,11 +10,6 @@
     <div class="main-container"
       @click="handleClickSidebarToggle"
     >
-
-      <!-- <div class="border-top"></div> -->
-      <!-- <div class="border-right"></div> -->
-      <!-- <div class="border-left"></div> -->
-
       <Nuxt class="main-content layout-scrollbar layout-cell container" />
     </div>
 
@@ -80,7 +74,7 @@ export default {
           layout.dataset.sidebarActive = 'true'
           break
         case 'left':
-          if (layout.dataset.sidebarPinned === 'false') layout.dataset.sidebarActive = 'false'
+          layout.dataset.sidebarActive = 'false'
           break
       }
     })
@@ -91,7 +85,7 @@ export default {
       console.log('click layout (layoutMainChallenges.vue)', event.target)
       const layout = document.querySelector('.layout-wrapper')
 
-      if (layout.dataset.sidebarPinned === 'false' && layout.dataset.sidebarActive === 'true' ) {
+      if (document.documentElement.clientWidth < 768 && layout.dataset.sidebarActive === 'true' ) {
         layout.dataset.sidebarActive = 'false'
       }
 
@@ -112,8 +106,9 @@ export default {
     position: fixed
     left: 0
     transition: $transitionSidebar
+    // transition: all 2s ease
 
-  &>.sidebar,
+  // &>.sidebar,
   &>.main-container
     overflow: hidden // (без header, потому что нужно показывать контекстное меню под аватаркой)
 
@@ -132,11 +127,13 @@ export default {
 
   &>.sidebar
     z-index: 999
-    width: $sidebarWidth
-    @media screen and (max-width: 370px)
+    width: $sidebarWidthIcon
+    @media screen and (max-width: 421px)
       width: $sidebarWidthPhone
     @media screen and (min-width: $tableWidth)
       width: $sidebarWidthIcon
+
+
   &>.main-container
     right: 0
     width: 100%
@@ -158,7 +155,7 @@ export default {
   // если sidebar not static (need add .transform-x)
   &>.sidebar.transform-x
     left: -$sidebarWidth
-    @media screen and (max-width: 370px)
+    @media screen and (max-width: 421px)
       left: -$sidebarWidthPhone
     @media screen and (min-width: $tableWidth)
       left: 0
@@ -174,58 +171,74 @@ export default {
     @media screen and (max-width: $phoneWidth)
       bottom: 0
 
+  // если main-container not static (need add .main-container_transform-x)
+  &.main-container_transform-x
+    &>.sidebar
+      z-index: 0
+      @media screen and (min-width: $tableWidth)
+        z-index: 1
+
 
   // show sidebar
   &[data-sidebar-active="true"]
     &>.sidebar
       left: 0
       width: $sidebarWidth
-      max-width: $sidebarWidth
-      @media screen and (max-width: 370px)
+      @media screen and (max-width: $desktopWidth)
+        width: $sidebarWidthTable
+      @media screen and (max-width: 421px)
         width: $sidebarWidthPhone
+
     &>.sidebar.transform-x
       left: 0
       box-shadow: 4px 2px 4px rgba(0,0,0,.101562)
-
-
-  // если main-container not static (need add .main-container_transform-x)
-  &.main-container_transform-x
-    &>.sidebar
-      z-index: 0
 
   // show
   &.main-container_transform-x[data-sidebar-active="true"]
     .main-container
       left: $sidebarWidth
-      @media screen and (max-width: 370px)
+      @media screen and (max-width: $desktopWidth)
+        left: $sidebarWidthTable
+      @media screen and (max-width: 421px)
         left: $sidebarWidthPhone
 
+  // hover sidebar
+  &.main-container_transform-x[data-sidebar-active="false"],
+  &[data-sidebar-active="false"]
+    &>.sidebar
+      @media(hover: hover) and (pointer: fine) // https://webformyself.com/css-hover-na-sensornyx-ekranax/ (решение на чистом CSS для :hover на сенсорных экранах)
+        &:hover
+          @media screen and (min-width: $tableWidth)
+            width: $sidebarWidthTable
+            max-width: $sidebarWidthTable
+            .sidebar-main
+              background-color: #fff
+              box-shadow: 5px 5px 11px rgba(0,0,0,.05)
 
+          @media screen and (min-width: $desktopWidth)
+            width: $sidebarWidth
+            max-width: $sidebarWidth
 
-  // .border-left/right/top/bottom
+            // & + .main-container
+            //   z-index: 0 !important
+            //   left: $sidebarWidth
+      // @media screen and (min-width: $tableWidth)
+      //   @media(hover: hover) and (pointer: fine) // https://webformyself.com/css-hover-na-sensornyx-ekranax/ (решение на чистом CSS для :hover на сенсорных экранах)
+      //     &:hover
+      //       width: $sidebarWidthTable
+      //       max-width: $sidebarWidthTable
+      //       .sidebar-main
+      //         background-color: #fff
+      //         box-shadow: 5px 5px 11px rgba(0,0,0,.05)
 
-  .border-top,
-  .border-left,
-  .border-right
-    position: absolute
-    background-color: $color-border-default
+      // @media screen and (min-width: $desktopWidth)
+      //   @media(hover: hover) and (pointer: fine) // https://webformyself.com/css-hover-na-sensornyx-ekranax/ (решение на чистом CSS для :hover на сенсорных экранах)
+      //     &:hover
+      //       width: $sidebarWidth
+      //       max-width: $sidebarWidth
 
-  .border-top
-    width: 100%
-    height: 1px
-
-  .border-left,
-  .border-right
-    width: 1px
-    height: 100%
-
-  .border-top
-    z-index: 1
-    top: 0
-  .border-right
-    right: 0
-  .border-left
-    z-index: 1
-    left: 0
+      //       // & + .main-container
+      //       //   z-index: 0 !important
+      //       //   left: $sidebarWidth
 
 </style>
