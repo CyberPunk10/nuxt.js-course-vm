@@ -217,6 +217,9 @@ header
         // margin-left: 0
       @media screen and (min-width: $tableWidth)
         margin-left: 2rem
+        margin-left: 8rem
+      @media screen and (min-width: $desktopWidth)
+        margin-left: 10rem
 
 
     // .header-user-block

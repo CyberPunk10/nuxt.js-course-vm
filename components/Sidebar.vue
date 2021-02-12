@@ -38,14 +38,14 @@
         <i class="fab fa-github"></i>
       </div>
 
-      <div class="separator"></div>
+      <div class="separator"></div> -->
 
       <div class="reklamaF">
         <div class="content">
-          <p>Здесь может быть ваша реклама</p>
-          <p>Реклама челленджей</p>
+          <!-- <p>Здесь может быть ваша реклама</p>
+          <p>Реклама челленджей</p> -->
         </div>
-      </div> -->
+      </div>
 
     </div>
 
@@ -140,16 +140,18 @@ export default {
     height: 100%
     overflow-x: hidden
     padding-top: 2rem
+    padding-top: 2rem
 
     margin: .5rem 0
     background-color: #fff
+    // background-color: $color-bg-body
     // @include linear-gradient($direction: 200deg, $fromColor: #a4adf0, $toColor: #787fc5)
     border-top-right-radius: $borderRadius
     border-bottom-right-radius: $borderRadius
     border: 1px solid $color-border-default
     border-left: none
     height: calc(100% - 1rem)
-    // transition: $transitionDefault
+    transition: $transitionDefault
 
     .separator
       padding-top: 1rem
