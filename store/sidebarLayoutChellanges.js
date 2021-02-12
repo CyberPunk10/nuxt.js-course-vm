@@ -37,7 +37,7 @@ export const state = () => ({
     {
       name: 'Друзья',
       icon: 'fas fa-user-friends',
-      url: '/challenges/statistics',
+      url: '/layout-main-challenges',
       onSidenav: true,
     },
     {

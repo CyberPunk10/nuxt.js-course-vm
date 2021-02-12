@@ -1,7 +1,6 @@
 <template>
   <div class="layout-wrapper main-container_transform-x"
     data-sidebar-active="false"
-    data-sidebar-pinned="false"
   >
 
     <Header />
@@ -80,7 +79,7 @@ export default {
           layout.dataset.sidebarActive = 'true'
           break
         case 'left':
-          if (layout.dataset.sidebarPinned === 'false') layout.dataset.sidebarActive = 'false'
+          layout.dataset.sidebarActive = 'false'
           break
       }
     })
@@ -91,7 +90,7 @@ export default {
       console.log('click layout (layoutMainChallenges.vue)', event.target)
       const layout = document.querySelector('.layout-wrapper')
 
-      if (layout.dataset.sidebarPinned === 'false' && layout.dataset.sidebarActive === 'true' ) {
+      if (layout.dataset.sidebarActive === 'true' ) {
         layout.dataset.sidebarActive = 'false'
       }
 
@@ -113,7 +112,7 @@ export default {
     left: 0
     transition: $transitionSidebar
 
-  &>.sidebar,
+  // &>.sidebar,
   &>.main-container
     overflow: hidden // (без header, потому что нужно показывать контекстное меню под аватаркой)
 
@@ -137,6 +136,7 @@ export default {
       width: $sidebarWidthPhone
     @media screen and (min-width: $tableWidth)
       width: $sidebarWidthIcon
+
   &>.main-container
     right: 0
     width: 100%
@@ -199,6 +199,23 @@ export default {
       left: $sidebarWidth
       @media screen and (max-width: 370px)
         left: $sidebarWidthPhone
+
+
+  // hover sidebar
+  &[data-sidebar-active="false"]
+    &>.sidebar
+      @media screen and (min-width: $tableWidth)
+        @media(hover: hover) and (pointer: fine) // https://webformyself.com/css-hover-na-sensornyx-ekranax/ (решение на чистом CSS для :hover на сенсорных экранах)
+          &:hover
+            width: $sidebarWidth
+            // max-width: $sidebarWidth
+            z-index: 2 !important
+            .sidebar-main
+              box-shadow: 5px 5px 11px rgba(0,0,0,.05)
+
+            // & + .main-container
+              // z-index: 0 !important
+              // left: $sidebarWidth
 
 
 

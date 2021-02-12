@@ -25,7 +25,7 @@ export default {
     clickFooterMobile: function(event) {
       const layout = document.querySelector('.layout-wrapper')
 
-      if (!layout.matches('.pinned')) layout.dataset.sidebarActive = 'false'
+      layout.dataset.sidebarActive = 'false'
     }
   }
 }
