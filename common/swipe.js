@@ -29,7 +29,8 @@ export default function(el, customSettings) {
       support = {           // поддерживаемые браузером типы событий
         pointer: !!("PointerEvent" in window || ("msPointerEnabled" in window.navigator)),
         touch: !!(typeof window.orientation !== "undefined" || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || "ontouchstart" in window || navigator.msMaxTouchPoints || "maxTouchPoints" in window.navigator > 1 || "msMaxTouchPoints" in window.navigator > 1)
-      }
+      },
+      targetStartSwipe = null
 
   //  Опредление доступных в браузере событий: pointer, touch и mouse.
   //  @returns {object} - возвращает объект с названиями событий.
@@ -97,7 +98,9 @@ export default function(el, customSettings) {
     startY = event.pageY
     startTime = new Date().getTime()
     if (isMouse) isMouseDown = true // поддержка мыши
-    console.log('start')
+    targetStartSwipe = e.target
+    console.log('start', targetStartSwipe)
+    el.addEventListener(events.move, checkMove)
   }
 
   // Обработчик движения указателя.
@@ -110,6 +113,12 @@ export default function(el, customSettings) {
     distY = event.pageY - startY
     if (Math.abs(distX) > Math.abs(distY)) dir = (distX < 0) ? "left" : "right"
     else dir = (distY < 0) ? "up" : "down"
+    // el.removeEventListener(events.move, checkMove)
+
+    // if (targetStartSwipe.closest('.js-calendar-graph-wrap-main')) {
+    //   const $el = document.querySelector('.js-calendar-graph-wrap-main')
+    //   $el.scrollLeft = distX
+    // }
   }
 
   // Обработчик окончания касания указателем.
@@ -118,6 +127,7 @@ export default function(el, customSettings) {
     console.log('end')
     if (isMouse && !isMouseDown) { // выход из функции и сброс проверки нажатия мыши
       isMouseDown = false
+      el.removeEventListener(events.move, checkMove)
       return
     }
     if (!isMouse) settings.minDist = settings.minDist / 7 // для touch дистанция нужна меньше
@@ -142,13 +152,16 @@ export default function(el, customSettings) {
           full: e, // полное событие Event
           dir:  swipeType, // направление свайпа
           dist: dist, // дистанция свайпа
-          time: time // время, потраченное на свайп
+          time: time, // время, потраченное на свайп
+          targetStartSwipe: targetStartSwipe
         }
       })
       el.dispatchEvent(swipeEvent)
     }
 
     if (!isMouse) settings.minDist = settings.minDist * 7 // для touch вернуть значение
+
+    el.removeEventListener(events.move, checkMove)
   }
 
   // добавление поддерживаемых событий
@@ -159,7 +172,7 @@ export default function(el, customSettings) {
 
   // добавление обработчиков на элемент
   el.addEventListener(events.start, checkStart)
-  el.addEventListener(events.move, checkMove)
+  // el.addEventListener(events.move, checkMove)
   el.addEventListener(events.end, checkEnd)
   if(support.pointer && support.touch) {
     el.addEventListener('lostpointercapture', checkEnd)

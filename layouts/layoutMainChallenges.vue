@@ -68,13 +68,14 @@ export default {
     document.addEventListener("swipe", function(e) {
       console.log(e.detail.full.type)
       const layout = document.querySelector('.layout-wrapper')
+      const ignoreSwipe = e.detail.targetStartSwipe.closest('.layout-swipe-ignore')
 
       switch (e.detail.dir) {
         case 'right':
-          layout.dataset.sidebarActive = 'true'
+          if (!ignoreSwipe) layout.dataset.sidebarActive = 'true'
           break
         case 'left':
-          layout.dataset.sidebarActive = 'false'
+          if (!ignoreSwipe) layout.dataset.sidebarActive = 'false'
           break
       }
     })
@@ -85,7 +86,8 @@ export default {
       console.log('click layout (layoutMainChallenges.vue)', event.target)
       const layout = document.querySelector('.layout-wrapper')
 
-      if (document.documentElement.clientWidth < 768 && layout.dataset.sidebarActive === 'true' ) {
+      if ( document.documentElement.clientWidth < 768
+        && layout.dataset.sidebarActive === 'true' ) {
         layout.dataset.sidebarActive = 'false'
       }
 
@@ -182,12 +184,16 @@ export default {
   // show sidebar
   &[data-sidebar-active="true"]
     &>.sidebar
+      // vars
+      $margin-left-sidebar: .7rem
+
       left: 0
       width: $sidebarWidth
       @media screen and (max-width: $desktopWidth)
         width: $sidebarWidthTable
       @media screen and (max-width: 421px)
-        width: $sidebarWidthPhone
+        left: $margin-left-sidebar
+        width: calc(#{$sidebarWidthPhone} - #{$margin-left-sidebar})
 
     &>.sidebar.transform-x
       left: 0
@@ -213,7 +219,8 @@ export default {
             max-width: $sidebarWidthTable
             .sidebar-main
               background-color: #fff
-              box-shadow: 5px 5px 11px rgba(0,0,0,.05)
+              box-shadow: 2px 2px 11px rgba(88,88,88,.15)
+              // box-shadow: 1px 1px 8px rgba(88, 88, 88, 0.2)
 
           @media screen and (min-width: $desktopWidth)
             width: $sidebarWidth
@@ -222,23 +229,5 @@ export default {
             // & + .main-container
             //   z-index: 0 !important
             //   left: $sidebarWidth
-      // @media screen and (min-width: $tableWidth)
-      //   @media(hover: hover) and (pointer: fine) // https://webformyself.com/css-hover-na-sensornyx-ekranax/ (решение на чистом CSS для :hover на сенсорных экранах)
-      //     &:hover
-      //       width: $sidebarWidthTable
-      //       max-width: $sidebarWidthTable
-      //       .sidebar-main
-      //         background-color: #fff
-      //         box-shadow: 5px 5px 11px rgba(0,0,0,.05)
-
-      // @media screen and (min-width: $desktopWidth)
-      //   @media(hover: hover) and (pointer: fine) // https://webformyself.com/css-hover-na-sensornyx-ekranax/ (решение на чистом CSS для :hover на сенсорных экранах)
-      //     &:hover
-      //       width: $sidebarWidth
-      //       max-width: $sidebarWidth
-
-      //       // & + .main-container
-      //       //   z-index: 0 !important
-      //       //   left: $sidebarWidth
 
 </style>
