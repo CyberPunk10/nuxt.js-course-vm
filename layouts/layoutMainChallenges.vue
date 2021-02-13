@@ -193,7 +193,9 @@ export default {
         width: $sidebarWidthTable
       @media screen and (max-width: 421px)
         left: $margin-left-sidebar
-        width: calc(#{$sidebarWidthPhone} - #{$margin-left-sidebar} - 1px)
+        width: calc(#{$sidebarWidthPhone} - #{$margin-left-sidebar} - 3px)
+        .sidebar-main
+          box-shadow: 0 0 4px rgba(88,88,88,.15)
 
     &>.sidebar.transform-x
       left: 0
