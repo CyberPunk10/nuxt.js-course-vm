@@ -36,9 +36,10 @@ export default {
   display: flex
   justify-content: space-around
   align-items: center
-  border-top: 1px solid $color-border-default
-  border-top-left-radius: $borderRadius
-  border-top-right-radius: $borderRadius
+  // border-top: 1px solid $color-border-default
+  border-top-left-radius: $borderRadiusBig
+  border-top-right-radius: $borderRadiusBig
+  box-shadow: 0 0 2px rgba(88,88,88,.15)
   .navbar-brand
     line-height: $height-header
     text-align: center
