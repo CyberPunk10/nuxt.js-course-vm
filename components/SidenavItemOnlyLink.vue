@@ -32,10 +32,10 @@ export default {
     border-radius: $borderRadius
     transition: $transitionDefaultHover
     &:hover
-      background-color: rgba(140, 79, 232, 0.03)
+      background-color: $theme-color-main-lighten-hover
       &>i,
       &>span
-        color: $theme-color-main
+        color: $theme-color-main !important
 
     &>i
       text-align: center
@@ -49,29 +49,42 @@ export default {
     &>span
       line-height: $sidebar-heightItem
       color: rgba(0,0,0,.7)
+      color: $color-text-grey-dark
       transition: $transitionDefault
 
     &.nuxt-link-exact-active
-      background-color: rgba(140, 79, 232, 0.08)
+      background-color: $theme-color-main-lighten-active
       i, span
-        color: $theme-color-main
+        color: $theme-color-main !important
       &:before
         position: absolute
-        background-color: rgba(140, 79, 232, 0.8)
+        background-color: $theme-color-main-dark
         border: 1px solid $theme-color-main
         content: ''
         top: 0
         left: 0
         bottom: 0
-        width: 3px
+        width: 4px
         // border-top-right-radius: 2px
         // border-bottom-right-radius: 2px
-        border-radius: 10px
+        border-radius: 2px
 
-</style>
+// show/hover sidebar
+.layout-wrapper
+  &[data-sidebar-active="true"] // if show sidebar
+    .sidenav__nav-item-wrap>.sidenav__nav-item
+      &>i,
+      &>span
+        color: $color-text-grey-dark
 
-<style>
-.jkj {
-  color: rgb(119, 126, 197)
-}
+
+  &[data-sidebar-active="false"] // if hover sidebar
+    .sidebar
+      @media(hover: hover) and (pointer: fine) // https://webformyself.com/css-hover-na-sensornyx-ekranax/ (решение на чистом CSS для :hover на сенсорных экранах)
+        &:hover
+          .sidenav__nav-item
+            &>i,
+            &>span
+              color: $color-text-grey-dark
+
 </style>

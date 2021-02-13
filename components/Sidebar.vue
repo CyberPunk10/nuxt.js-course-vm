@@ -29,7 +29,7 @@
         />
       </div>
 
-      <div class="separator"></div>
+      <!-- <div class="separator"></div> -->
 
       <!-- <div>
         <i class="fas fa-download mr-2"></i>
@@ -40,12 +40,12 @@
 
       <div class="separator"></div> -->
 
-      <div class="reklamaF">
-        <div class="content">
+      <!-- <div class="reklamaF">
+        <div class="content"> -->
           <!-- <p>Здесь может быть ваша реклама</p>
           <p>Реклама челленджей</p> -->
-        </div>
-      </div>
+        <!-- </div>
+      </div> -->
 
     </div>
 
@@ -139,8 +139,8 @@ export default {
     width: 100%
     height: 100%
     overflow-x: hidden
-    padding-top: 2rem
-    padding-top: 2rem
+    padding-top: 1.7rem
+    padding-top: 1.7rem
 
     margin: .5rem 0
     background-color: #fff
@@ -148,8 +148,10 @@ export default {
     // @include linear-gradient($direction: 200deg, $fromColor: #a4adf0, $toColor: #787fc5)
     border-top-right-radius: $borderRadius
     border-bottom-right-radius: $borderRadius
-    border: 1px solid $color-border-default
-    border-left: none
+    border-radius: $borderRadius
+    // border: 1px solid $color-border-default
+    // border-left: none
+    box-shadow: 0 0 2px rgba(88,88,88,.15)
     height: calc(100% - 1rem)
     transition: $transitionDefault
 
@@ -161,13 +163,14 @@ export default {
       // border-top: 1px solid transparent
 
     .sidenav
+      transition: $transitionDefault
       .separator
         display: none
     //     padding-top: 0
     //     margin-top: 0
     //     width: 100%
     //     border-top: 1px solid transparent
-    //     transition: $transitionDefault
+        transition: $transitionDefault
 
     .reklamaF
       display: flex

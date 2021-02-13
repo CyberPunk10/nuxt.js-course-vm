@@ -26,7 +26,7 @@
 
       <!-- main-col -->
       <div class="main-col"
-        :class="{'layout-cell-sport-form layout-scrollbar-sport-form': players[0].result.length > settings.defaultCountMainColVived}"
+        :class="{'layout-cell-sport-form layout-scrollbar-sport-form layout-swipe-ignore': players[0].result.length > settings.defaultCountMainColVived}"
         @scroll="scrollMainCol"
       >
         <!-- top-label-row -->

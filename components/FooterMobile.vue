@@ -37,6 +37,8 @@ export default {
   justify-content: space-around
   align-items: center
   border-top: 1px solid $color-border-default
+  border-top-left-radius: $borderRadius
+  border-top-right-radius: $borderRadius
   .navbar-brand
     line-height: $height-header
     text-align: center

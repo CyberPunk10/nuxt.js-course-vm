@@ -121,11 +121,13 @@ export default {
       }
     },
 
+    // можно убрать эту работающую функцию и сотавить только hover
     clickHeaderUserBlock(event) {
-      const userBlock = document.querySelector('.header-user-block-menu')
-      if (userBlock.dataset.headerUserBlockMenuActive === 'true') userBlock.dataset.headerUserBlockMenuActive = 'false'
-      else userBlock.dataset.headerUserBlockMenuActive = 'true'
-      console.log(userBlock)
+    //   const userBlock = event.target.closest('.header-user-block')
+    //   if (userBlock) {
+    //     if (userBlock.dataset.headerUserBlockMenuActive === 'true') userBlock.dataset.headerUserBlockMenuActive = 'false'
+    //     else userBlock.dataset.headerUserBlockMenuActive = 'true'
+    //   }
     }
   }
 }
@@ -138,6 +140,8 @@ header
   user-select: none
   background-color: #fff
   border-bottom: 1px solid $color-border-default
+  border-bottom-left-radius: $borderRadius
+  border-bottom-right-radius: $borderRadius
   z-index: 9
   // @media screen and (min-width: $tableWidth)
   //   border-bottom: none
@@ -147,12 +151,8 @@ header
     position: absolute
     height: 100%
     top: 0
-    // background-color: #fff
-    // border-bottom: 1px solid $color-border-default
     transition: $transitionDefault
-    // @media screen and (min-width: $tableWidth)
-    //   border: 1px solid $color-border-default
-    //   border-top: none
+
 
   .header-for-sidebar
     left: 0
@@ -161,10 +161,6 @@ header
     justify-content: space-between
     @media screen and (min-width: $tableWidth)
       top: calc(#{$height-header})
-
-    //   // border-bottom-right-radius: $borderRadius
-    //   display: none
-
 
     .sidebar-toggle
       min-width: $sidebarWidthIcon
@@ -182,17 +178,19 @@ header
       &:hover
         svg
           fill: $theme-color-main
-
+        i
+          color: $color-text-grey
       i, .btn-close-sidebar
         display: none
-
       svg
         @media screen and (min-width: $tableWidth)
           display: none
-
       .fa-arrow-right
         @media screen and (min-width: $tableWidth)
           display: block
+      i
+        color: #ccc
+        transition: color .1s ease
 
   .header-main
     right: 0
@@ -202,8 +200,6 @@ header
     @media screen and (min-width: $phoneWidth)
       grid: 100% / auto max-content // row/col
     @media screen and (min-width: $tableWidth)
-      // border-bottom-left-radius: $borderRadius
-      // left: calc(#{$sidebarWidthIcon} + .5rem)
       left: 0
 
     // logo
@@ -212,12 +208,8 @@ header
       width: 8rem
       margin-left: calc((100% - 8rem) / 2)
       transition: $transitionDefault
-      @media screen and (min-width: $phoneWidth)
-        margin-left: 1rem
-        // margin-left: 0
       @media screen and (min-width: $tableWidth)
         margin-left: 2rem
-        margin-left: 8rem
       @media screen and (min-width: $desktopWidth)
         margin-left: 10rem
 
@@ -227,13 +219,9 @@ header
       display: flex
       justify-content: space-between
       align-items: center
-      &[data-header-user-block-menu-active="true"]
-        .header-user-block-menu
-          box-shadow: 1px 1px 8px rgba(88, 88, 88, 0.2)
-          display: block
+      &[data-header-user-block-menu-active="true"],
       &:hover
         .header-user-block-menu
-          box-shadow: 1px 0px 6px rgba(88, 88, 88, 0.2)
           display: block
 
       .btn.btn-link
@@ -273,29 +261,21 @@ header
       .header-user-block-menu
         display: none
         position: absolute
-        right: .9rem // calc((#{$height-header) - 32px(img)) / 2)
-        // top: $height-header
+        right: 1.2rem
         top: 4.6rem
         background-color: $color-green
+        background-color: #fff
         width: 21rem
         border-radius: $borderRadius
-        // border: 1px solid $color-border-default
-        border: 1px solid $color-border-default
-        border-top: none
         padding: $sidebar-marginItem 0
         padding-bottom: calc(#{$sidebar-marginItem} - 2px) // last item margin-bottom = 2px
+        box-shadow: 1px 1px 8px rgba(88, 88, 88, 0.2)
         .separator
           padding-top: 1rem
-          margin-top: 1rem
-          width: 100%
+          margin: 1rem 1rem 0
+          width: calc(100% - 2rem)
           border-top: 1px solid $color-border-default
 
-        .sidenav__nav-item
-          i, span
-            color: #fff
-          &:hover
-            i, span
-              color: $theme-color-main
 
 // if show sidebar:
 .layout-wrapper[data-sidebar-active="true"]
@@ -309,23 +289,11 @@ header
         width: $sidebarWidth
         border-radius: 0
         border: none
-        // border-right: 1px solid $color-border-default
-        // &:hover
         .sidebar-toggle .btn-close-sidebar,
         .fa-arrow-right
             display: none
         .fa-arrow-left
             display: block
-
-
-
-    // .header-main
-    //   @media screen and (min-width: $tableWidth)
-        // left: calc(#{$sidebarWidth} + .5rem)
-        // left: $sidebarWidth
-        // border-radius: 0
-        // border: none
-        // border-bottom: 1px solid $color-border-default
 
 
 </style>

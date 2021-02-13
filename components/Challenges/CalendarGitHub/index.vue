@@ -399,7 +399,7 @@ export default {
               </g>
             </svg>
           </div>
-          <div class="js-calendar-graph-wrap-main layout-cell-light-gray-border layout-scrollbar-light-gray-border">
+          <div class="js-calendar-graph-wrap-main layout-cell-light-gray-border layout-scrollbar-light-gray-border layout-swipe-ignore">
             <svg width="${deltaX * countWeeks + 3}" height="128" class="js-calendar-graph-svg">
               <g transform="translate(1, 20)">
                 ${createAllDays()}
