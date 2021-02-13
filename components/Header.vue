@@ -140,12 +140,15 @@ header
   user-select: none
   background-color: #fff
   // border-bottom: 1px solid $color-border-default
-  border-bottom-left-radius: $borderRadiusBig
-  border-bottom-right-radius: $borderRadiusBig
-  box-shadow: 0 0 4px rgba(88,88,88,.15)
+  box-shadow: 0 0 2px rgba(88,88,88,.15)
   z-index: 9
   @media screen and (max-width: $tableWidth)
     overflow: hidden
+  @media screen and (max-width: 421px)
+    border-bottom-left-radius: $borderRadiusBig
+    border-bottom-right-radius: $borderRadiusBig
+    box-shadow: 0 0 4px rgba(88,88,88,.15)
+    
   .header-for-sidebar,
   .header-main
     position: absolute

@@ -37,9 +37,11 @@ export default {
   justify-content: space-around
   align-items: center
   // border-top: 1px solid $color-border-default
-  border-top-left-radius: $borderRadiusBig
-  border-top-right-radius: $borderRadiusBig
-  box-shadow: 0 0 4px rgba(88,88,88,.15)
+  box-shadow: 0 0 2px rgba(88,88,88,.15)
+  @media screen and (max-width: 421px)
+    border-top-left-radius: $borderRadiusBig
+    border-top-right-radius: $borderRadiusBig
+    box-shadow: 0 0 4px rgba(88,88,88,.15)
   .navbar-brand
     line-height: $height-header
     text-align: center
