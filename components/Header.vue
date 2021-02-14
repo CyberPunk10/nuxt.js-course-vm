@@ -142,7 +142,6 @@ header
   // border-bottom: 1px solid $color-border-default
   box-shadow: 0 0 2px rgba(88,88,88,.15)
   z-index: 9
-  transition: $transitionDefault // for .out
   @media screen and (max-width: $phoneWidth)
     border-bottom-left-radius: $borderRadiusBig
     border-bottom-right-radius: $borderRadiusBig
@@ -150,6 +149,7 @@ header
 
   &.out
     transform: translateY(-#{$height-header})
+    border-radius: 0
 
   .header-for-sidebar,
   .header-main
