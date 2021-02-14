@@ -36,6 +36,8 @@ export default {
       &>i,
       &>span
         color: $theme-color-main !important
+      &>span
+        padding-left: .5rem
 
     &>i
       text-align: center
@@ -44,13 +46,13 @@ export default {
       height: $sidebar-heightItem
       color: $color-text-grey
       border-radius: $borderRadius
-      transition: $transitionDefault
+      transition: $transitionDefaultHover
 
     &>span
       line-height: $sidebar-heightItem
       color: rgba(0,0,0,.7)
       color: $color-text-grey-dark
-      transition: $transitionDefault
+      transition: $transitionDefaultHover
 
     &.nuxt-link-exact-active
       background-color: $theme-color-main-lighten-active

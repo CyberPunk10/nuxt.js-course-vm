@@ -142,13 +142,15 @@ header
   // border-bottom: 1px solid $color-border-default
   box-shadow: 0 0 2px rgba(88,88,88,.15)
   z-index: 9
-  @media screen and (max-width: $tableWidth)
-    overflow: hidden
-  @media screen and (max-width: 421px)
+  transition: $transitionDefault // for .out
+  @media screen and (max-width: $phoneWidth)
     border-bottom-left-radius: $borderRadiusBig
     border-bottom-right-radius: $borderRadiusBig
     box-shadow: 0 0 4px rgba(88,88,88,.15)
-    
+
+  &.out
+    transform: translateY(-#{$height-header})
+
   .header-for-sidebar,
   .header-main
     position: absolute
@@ -156,14 +158,15 @@ header
     top: 0
     transition: $transitionDefault
 
-
   .header-for-sidebar
     left: 0
     width: $sidebarWidthIcon
     display: flex
     justify-content: space-between
     @media screen and (min-width: $tableWidth)
-      top: calc(#{$height-header})
+      top: $height-header
+      height: 4rem
+      padding-top: .5rem
 
     .sidebar-toggle
       min-width: $sidebarWidthIcon
@@ -211,6 +214,8 @@ header
       width: 8rem
       margin-left: calc((100% - 8rem) / 2)
       transition: $transitionDefault
+      @media screen and (min-width: $phoneWidth)
+        margin-left: 1rem
       @media screen and (min-width: $tableWidth)
         margin-left: 2rem
       @media screen and (min-width: $desktopWidth)
@@ -237,6 +242,8 @@ header
         font-size: 1.4rem
         text-transform: none // возможно стоит изменить в источнике
         color: $color-dark-shade-75
+        @media screen and (max-width: $phoneWidth)
+          border-bottom-right-radius: $borderRadiusBig
         i
           font-size: 20px
           padding: 1rem
@@ -290,8 +297,6 @@ header
         display: flex
       @media screen and (min-width: $tableWidth)
         width: $sidebarWidth
-        border-radius: 0
-        border: none
         .sidebar-toggle .btn-close-sidebar,
         .fa-arrow-right
             display: none

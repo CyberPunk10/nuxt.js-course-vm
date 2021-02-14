@@ -10,7 +10,10 @@
     <div class="main-container"
       @click="handleClickSidebarToggle"
     >
-      <Nuxt class="main-content layout-scrollbar layout-cell container" />
+      <div class="main-content layout-scrollbar layout-cell">
+        <Nuxt class="container"/>
+        <!-- <Nuxt class="main-content layout-scrollbar layout-cell container" /> -->
+      </div>
     </div>
 
     <FooterMobile />
@@ -23,6 +26,11 @@
 import swipe from '@/common/swipe'
 
 export default {
+  data () {
+    return {
+      scrollPrev: 0
+    }
+  },
   computed: {
     error() {
       return this.$store.getters.error
@@ -79,6 +87,9 @@ export default {
           break
       }
     })
+
+    // addEventListener Scroll
+    document.querySelector('.main-content').addEventListener('scroll', this.handleScroll) // надо ещё удалить этот listener (?)
   },
 
   methods: {
@@ -90,7 +101,20 @@ export default {
         && layout.dataset.sidebarActive === 'true' ) {
         layout.dataset.sidebarActive = 'false'
       }
+      console.log('[test scrollPrev]', this.scrollPrev)
+    },
 
+    handleScroll(event) {
+      console.log('[scroll]')
+      console.log('[event]', event)
+      const $mainContent = document.querySelector('.main-content')
+      const $header = document.querySelector('header')
+      let scrolled = $mainContent.scrollTop
+
+      if (scrolled > 100 && scrolled > this.scrollPrev) $header.classList.add('out')
+      else $header.classList.remove('out')
+
+      this.scrollPrev = scrolled
     }
   }
 }
@@ -101,6 +125,8 @@ export default {
   position: relative
   width: 100%
   height: 100vh
+  transition: $transitionSidebar // for bgc sidebar show
+
 
   &>header,
   &>.sidebar,
@@ -124,13 +150,21 @@ export default {
   &>.main-container
     top: $height-header
     bottom: 0
+  &>.sidebar
     @media screen and (max-width: $phoneWidth)
       bottom: $height-header
+  &>.main-container
+    @media screen and (max-width: $phoneWidth)
+      top: calc(#{$height-header} - #{$borderRadiusBig})
+      bottom: calc(#{$height-header} - #{$borderRadiusBig})
+      .main-content
+        padding-top: calc(#{$borderRadiusBig} + 1.5rem)
+        padding-bottom: calc(#{$borderRadiusBig} + 1.5rem)
 
   &>.sidebar
     z-index: 999
     width: $sidebarWidthIcon
-    @media screen and (max-width: 421px)
+    @media screen and (max-width: $phoneWidth)
       width: $sidebarWidthPhone
     @media screen and (min-width: $tableWidth)
       width: $sidebarWidthIcon
@@ -157,7 +191,7 @@ export default {
   // если sidebar not static (need add .transform-x)
   &>.sidebar.transform-x
     left: -$sidebarWidth
-    @media screen and (max-width: 421px)
+    @media screen and (max-width: $phoneWidth)
       left: -$sidebarWidthPhone
     @media screen and (min-width: $tableWidth)
       left: 0
@@ -183,17 +217,19 @@ export default {
 
   // show sidebar
   &[data-sidebar-active="true"]
+    @media screen and (max-width: $phoneWidth)
+      background-color: $color-bg-body-not-active
     &>.sidebar
       // vars
-      $margin-left-sidebar: .7rem
+      $margin-left-sidebar: 1.8rem
 
       left: 0
       width: $sidebarWidth
       @media screen and (max-width: $desktopWidth)
         width: $sidebarWidthTable
-      @media screen and (max-width: 421px)
+      @media screen and (max-width: $phoneWidth)
         left: $margin-left-sidebar
-        width: calc(#{$sidebarWidthPhone} - #{$margin-left-sidebar} - 3px)
+        width: calc(#{$sidebarWidthPhone} - #{$margin-left-sidebar})
         .sidebar-main
           box-shadow: 0 0 4px rgba(88,88,88,.15)
 
@@ -207,8 +243,9 @@ export default {
       left: $sidebarWidth
       @media screen and (max-width: $desktopWidth)
         left: $sidebarWidthTable
-      @media screen and (max-width: 421px)
+      @media screen and (max-width: $phoneWidth)
         left: $sidebarWidthPhone
+        background-color: $color-bg-body-not-active
 
   // hover sidebar
   &.main-container_transform-x[data-sidebar-active="false"],

@@ -38,7 +38,7 @@ export default {
   align-items: center
   // border-top: 1px solid $color-border-default
   box-shadow: 0 0 2px rgba(88,88,88,.15)
-  @media screen and (max-width: 421px)
+  @media screen and (max-width: $phoneWidth)
     border-top-left-radius: $borderRadiusBig
     border-top-right-radius: $borderRadiusBig
     box-shadow: 0 0 4px rgba(88,88,88,.15)
@@ -55,6 +55,8 @@ export default {
       color: #30a14e
       color: $color-purple
       color: $theme-color-main
+      color: lighten($theme-color-main, 15%)
+
       // color: #FF0000
 
 </style>
