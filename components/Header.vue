@@ -143,13 +143,9 @@ header
   box-shadow: 0 0 2px rgba(88,88,88,.15)
   z-index: 9
   @media screen and (max-width: $phoneWidth)
-    border-bottom-left-radius: $borderRadiusBig
-    border-bottom-right-radius: $borderRadiusBig
+    border-bottom-left-radius: $borderRadius
+    border-bottom-right-radius: $borderRadius
     box-shadow: 0 0 4px rgba(88,88,88,.15)
-
-  &.out
-    transform: translateY(-#{$height-header})
-    border-radius: 0
 
   .header-for-sidebar,
   .header-main
@@ -214,7 +210,7 @@ header
       width: 8rem
       margin-left: calc((100% - 8rem) / 2)
       transition: $transitionDefault
-      @media screen and (min-width: $phoneWidth)
+      @media screen and (min-width: calc(#{$phoneWidth} + 1px))
         margin-left: 1rem
       @media screen and (min-width: $tableWidth)
         margin-left: 2rem
@@ -243,7 +239,7 @@ header
         text-transform: none // возможно стоит изменить в источнике
         color: $color-dark-shade-75
         @media screen and (max-width: $phoneWidth)
-          border-bottom-right-radius: $borderRadiusBig
+          border-bottom-right-radius: $borderRadius
         i
           font-size: 20px
           padding: 1rem

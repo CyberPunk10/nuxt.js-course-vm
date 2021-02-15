@@ -152,7 +152,7 @@ export default {
     box-shadow: 0 0 2px rgba(88,88,88,.15)
     height: calc(100% - 1rem)
     transition: $transitionDefault
-    @media screen and (min-width: $phoneWidth)
+    @media screen and (min-width: calc(#{$phoneWidth} + 1px))
       border-top-left-radius: 0
       border-bottom-left-radius: 0
 

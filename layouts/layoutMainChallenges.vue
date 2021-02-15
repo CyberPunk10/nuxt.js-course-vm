@@ -104,17 +104,23 @@ export default {
       console.log('[test scrollPrev]', this.scrollPrev)
     },
 
-    handleScroll(event) {
-      console.log('[scroll]')
-      console.log('[event]', event)
-      const $mainContent = document.querySelector('.main-content')
-      const $header = document.querySelector('header')
-      let scrolled = $mainContent.scrollTop
+    handleScroll(e) {
+      if (document.documentElement.clientWidth <= 480) {
+          // const $mainContent = document.querySelector('.main-content')
+        const $layout = document.querySelector('.layout-wrapper')
+        let scrolled = e.target.scrollTop
+        // console.log('[scroll]')
+        // console.log('[event]', e)
+        console.log('[scrolled]', scrolled)
+        console.log('[scrollPrev]', this.scrollPrev)
+        // console.log('[target]', e.target)
 
-      if (scrolled > 100 && scrolled > this.scrollPrev) $header.classList.add('out')
-      else $header.classList.remove('out')
+        if (scrolled > 100 && scrolled > this.scrollPrev) $layout.classList.add('header-out')
+        else $layout.classList.remove('header-out')
 
-      this.scrollPrev = scrolled
+        this.scrollPrev = scrolled
+      }
+      return
     }
   }
 }
@@ -155,10 +161,10 @@ export default {
       bottom: $height-header
   &>.main-container
     @media screen and (max-width: $phoneWidth)
-      top: calc(#{$height-header} - #{$borderRadiusBig})
+      top: calc(#{$height-header} - #{$borderRadius})
       bottom: calc(#{$height-header} - #{$borderRadiusBig})
       .main-content
-        padding-top: calc(#{$borderRadiusBig} + 1.5rem)
+        padding-top: calc(#{$borderRadius} + 1.5rem)
         padding-bottom: calc(#{$borderRadiusBig} + 1.5rem)
 
   &>.sidebar
@@ -268,5 +274,16 @@ export default {
             // & + .main-container
             //   z-index: 0 !important
             //   left: $sidebarWidth
+
+
+  &.header-out
+    @media screen and (max-width: $phoneWidth)
+      &>header
+        transform: translateY(-#{$height-header})
+        border-radius: 0
+      &>.sidebar,
+      &>.main-container
+        top: 0
+
 
 </style>
