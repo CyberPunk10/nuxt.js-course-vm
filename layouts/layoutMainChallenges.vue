@@ -28,7 +28,8 @@ import swipe from '@/common/swipe'
 export default {
   data () {
     return {
-      scrollPrev: 0
+      scrollPrev: 0,
+      countEvents: 0
     }
   },
   computed: {
@@ -105,14 +106,17 @@ export default {
     },
 
     handleScroll(e) {
+
       if (document.documentElement.clientWidth <= 480) {
+        this.countEvents += 1
+        console.log(this.countEvents)
           // const $mainContent = document.querySelector('.main-content')
         const $layout = document.querySelector('.layout-wrapper')
         let scrolled = e.target.scrollTop
         // console.log('[scroll]')
         // console.log('[event]', e)
         console.log('[scrolled]', scrolled)
-        console.log('[scrollPrev]', this.scrollPrev)
+        // console.log('[scrollPrev]', this.scrollPrev)
         // console.log('[target]', e.target)
 
         if (scrolled > 100 && scrolled > this.scrollPrev) $layout.classList.add('header-out')
@@ -180,6 +184,8 @@ export default {
     right: 0
     width: 100%
     background-color: $color-bg-body
+    border-top: $height-header solid red
+
     @media screen and (min-width: $tableWidth)
       width: auto
       left: $sidebarWidthIcon
@@ -284,6 +290,7 @@ export default {
       &>.sidebar,
       &>.main-container
         top: 0
+        border-top: none
 
 
 </style>
