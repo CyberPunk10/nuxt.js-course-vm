@@ -143,7 +143,7 @@ export default {
           top: 0
           left: 0
           bottom: 0
-          width: 3px
+          width: 4px
           border-top-right-radius: 2px
           border-bottom-right-radius: 2px
 

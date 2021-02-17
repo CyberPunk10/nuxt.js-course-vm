@@ -97,10 +97,10 @@ $color-bg-content: rgb(248,250,252)
   &__bg-gradient
     position: fixed
     z-index: 9999
-    top: $height-header
+    top: $header-height
     left: -21.2rem
     width: 21.2rem
-    max-height: calc(100vh - #{$height-header})
+    max-height: calc(100vh - #{$header-height})
     border-top-right-radius: 22px
     border-bottom-right-radius: 22px
     padding: 0.2rem 0.2rem 0.2rem 0
@@ -114,13 +114,13 @@ $color-bg-content: rgb(248,250,252)
 
   &__content
     width: 21rem
-    max-height: calc(100vh - #{$height-header} - 4px)
+    max-height: calc(100vh - #{$header-height} - 4px)
     background-color: $color-bg-content
     border-top-right-radius: 20px
     border-bottom-right-radius: 20px
     transition: all .2s linear
     ul
-      max-height: calc(100vh - #{$height-header} - 4rem)
+      max-height: calc(100vh - #{$header-height} - 4rem)
       overflow-y: auto
     li
       &.teleport-menu__li-category

@@ -12,15 +12,12 @@ html
   font-size: $mainFontSize
   color: $mainFontColor
   height: 100vh
-  @media screen and (max-width: $desktopWidth)
-    font-size: 16px
 
-  @media screen and (max-width: $tableWidth)
+  @media screen and (min-width: $tableWidth)
     font-size: 15px
 
-  @media screen and (max-width: $phoneWidth)
-    font-size: 14px
-
+  @media screen and (min-width: $desktopWidth)
+    font-size: 16px
 
 body
   font-family: $mainFont
@@ -50,15 +47,13 @@ ul, li
 
 section, .section
   position: relative
-  padding: 40px 0
-  @media screen and (max-width: $desktopWidth)
-    padding: 36px 0
-
-  @media screen and (max-width: $desktopWidth)
+  padding: 20px 0
+  @media screen and (min-width: $tableWidth)
     padding: 28px 0
-
-  @media screen and (max-width: $desktopWidth)
-    padding: 20px 0
+  @media screen and (min-width: $smDesktopWidth)
+    padding: 36px 0
+  @media screen and (min-width: $desktopWidth)
+    padding: 40px 0
 
 
 .wrapper

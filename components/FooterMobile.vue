@@ -38,12 +38,12 @@ export default {
   align-items: center
   // border-top: 1px solid $color-border-default
   box-shadow: 0 0 2px rgba(88,88,88,.15)
-  @media screen and (max-width: $phoneWidth)
+  @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
     border-top-left-radius: $borderRadiusBig
     border-top-right-radius: $borderRadiusBig
     box-shadow: 0 0 4px rgba(88,88,88,.15)
   .navbar-brand
-    line-height: $height-header
+    line-height: $header-height
     text-align: center
     font-weight: bold
     font-size: 2rem

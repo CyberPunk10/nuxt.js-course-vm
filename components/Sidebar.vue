@@ -134,15 +134,11 @@ export default {
     position: absolute
     top: 0
     left: 0
-    right: 3px // for box-shadow
+    right: 4px // for box-shadow
     bottom: 0
-    // width: 100%
-    // height: 100%
     overflow-x: hidden
     padding-top: 1.7rem
-    padding-top: 1.7rem
 
-    margin: .5rem 0
     background-color: #fff
     // background-color: $color-bg-body
     // @include linear-gradient($direction: 200deg, $fromColor: #a4adf0, $toColor: #787fc5)
@@ -150,9 +146,8 @@ export default {
     // border: 1px solid $color-border-default
     // border-left: none
     box-shadow: 0 0 2px rgba(88,88,88,.15)
-    height: calc(100% - 1rem)
     transition: $transitionDefault
-    @media screen and (min-width: calc(#{$phoneWidth} + 1px))
+    @media screen and (min-width: $phoneWidth)
       border-top-left-radius: 0
       border-bottom-left-radius: 0
 
