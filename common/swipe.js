@@ -7,7 +7,7 @@ export default function(el, customSettings) {
     minDist: 60,  // минимальная дистанция, которую должен пройти указатель, чтобы жест считался как свайп (px)
     maxDist: 120, // максимальная дистанция, не превышая которую может пройти указатель, чтобы жест считался как свайп (px)
     maxTime: 700, // максимальное время, за которое должен быть совершен свайп (ms)
-    minTime: 5   // минимальное время, за которое должен быть совершен свайп (ms)
+    minTime: 5    // минимальное время, за которое должен быть совершен свайп (ms)
   }, customSettings)
 
 
@@ -99,7 +99,7 @@ export default function(el, customSettings) {
     startTime = new Date().getTime()
     if (isMouse) isMouseDown = true // поддержка мыши
     targetStartSwipe = e.target
-    console.log('start', targetStartSwipe)
+    console.log('start')
     el.addEventListener(events.move, checkMove)
   }
 
@@ -113,12 +113,6 @@ export default function(el, customSettings) {
     distY = event.pageY - startY
     if (Math.abs(distX) > Math.abs(distY)) dir = (distX < 0) ? "left" : "right"
     else dir = (distY < 0) ? "up" : "down"
-    // el.removeEventListener(events.move, checkMove)
-
-    // if (targetStartSwipe.closest('.js-calendar-graph-wrap-main')) {
-    //   const $el = document.querySelector('.js-calendar-graph-wrap-main')
-    //   $el.scrollLeft = distX
-    // }
   }
 
   // Обработчик окончания касания указателем.
@@ -153,7 +147,7 @@ export default function(el, customSettings) {
           dir:  swipeType, // направление свайпа
           dist: dist, // дистанция свайпа
           time: time, // время, потраченное на свайп
-          targetStartSwipe: targetStartSwipe
+          targetStartSwipe: targetStartSwipe // элемент, с которого начинается swipe
         }
       })
       el.dispatchEvent(swipeEvent)
@@ -172,7 +166,6 @@ export default function(el, customSettings) {
 
   // добавление обработчиков на элемент
   el.addEventListener(events.start, checkStart)
-  // el.addEventListener(events.move, checkMove)
   el.addEventListener(events.end, checkEnd)
   if(support.pointer && support.touch) {
     el.addEventListener('lostpointercapture', checkEnd)

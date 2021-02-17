@@ -12,8 +12,8 @@
     >
       <div class="main-content layout-scrollbar layout-cell">
         <Nuxt class="container"/>
-        <!-- <Nuxt class="main-content layout-scrollbar layout-cell container" /> -->
       </div>
+      <!-- <Nuxt class="main-content layout-scrollbar layout-cell container" /> -->
     </div>
 
     <FooterMobile />
@@ -28,8 +28,7 @@ import swipe from '@/common/swipe'
 export default {
   data () {
     return {
-      scrollPrev: 0,
-      countEvents: 0
+      scrollPrev: 0, // for event swipe
     }
   },
   computed: {
@@ -75,7 +74,7 @@ export default {
     swipe(document, { maxTime: 1000, minTime: 10, maxDist: 150,  minDist: 60 })
 
     document.addEventListener("swipe", function(e) {
-      console.log(e.detail.full.type)
+      // console.log(e.detail.full.type)
       const layout = document.querySelector('.layout-wrapper')
       const ignoreSwipe = e.detail.targetStartSwipe.closest('.layout-swipe-ignore')
 
@@ -96,29 +95,20 @@ export default {
   methods: {
     handleClickSidebarToggle: function(event) {
       console.log('click layout (layoutMainChallenges.vue)', event.target)
-      const layout = document.querySelector('.layout-wrapper')
 
-      if ( document.documentElement.clientWidth < 768
-        && layout.dataset.sidebarActive === 'true' ) {
-        layout.dataset.sidebarActive = 'false'
+      if (document.documentElement.clientWidth < 768) {
+        const layout = document.querySelector('.layout-wrapper')
+        if (layout.dataset.sidebarActive === 'true' ) {
+            layout.dataset.sidebarActive = 'false'
+        }
       }
-      console.log('[test scrollPrev]', this.scrollPrev)
     },
 
     handleScroll(e) {
 
       if (document.documentElement.clientWidth < 480) {
-        this.countEvents += 1
-        console.log(this.countEvents)
-          // const $mainContent = document.querySelector('.main-content')
         const $layout = document.querySelector('.layout-wrapper')
         let scrolled = e.target.scrollTop
-        // console.log('[scroll]')
-        // console.log('[event]', e)
-        console.log('[scrolled]', scrolled)
-        console.log('[scrollHeight]', e.target.scrollHeight)
-        // console.log('[scrollPrev]', this.scrollPrev)
-        // console.log('[target]', e.target)
 
         if (scrolled > 100 && scrolled > this.scrollPrev) $layout.classList.add('header-out')
         else $layout.classList.remove('header-out')
