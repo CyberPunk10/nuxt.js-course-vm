@@ -8,6 +8,14 @@
       :type="type"
       @input="$emit('input', $event.target.value)"
     >
+    <!-- <span
+      class="text-field__error-msg"
+      :class="{invalid: textField.invalid.emptyField || textField.invalid.incorrect}">
+      {{
+        textField.invalid.emptyField ? messageEmpty
+        : (textField.invalid.incorrect ? messageIncorrect : false)
+      }}
+    </span> -->
   </div>
 </template>
 
@@ -22,7 +30,8 @@ export default {
     type: {
       type: String,
       default: 'text'
-    }
+    },
+    // textField: String,
   }
 }
 </script>
@@ -33,15 +42,20 @@ export default {
   margin-bottom: 1.5rem
   color: #606266
 
-  // &_width-sm
-  //   max-width: 26.6rem
-
   &__input
     // @include text-field-and-drop-btn
     font-size: 1.6rem
     padding: .5rem 1rem
-    border: 1px solid red
+    border: 1px solid rgb(216,218,220)
     border-radius: $borderRadius
+    background-color: lighten($color-bg-body, 1%)
+    width: 100%
+    font-family: "Montserrat Alternates", Avenir, Helvetica, Arial, sans-serif
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji
+    color: $color-dark-shade-75
+    outline: none
+    box-sizing: border-box
+    transition: 0.2s ease all
 
     &::-webkit-input-placeholder
       color: $color-dark-shade-25
@@ -49,9 +63,21 @@ export default {
       color: $color-dark-shade-25
 
     &:hover
-      border: 1px solid $color-dark-shade-10
+      border: 1px solid $color-dark-shade-25
+      background-color: #fff
     &:focus
-      border: 1px solid $light-color
+      border: 1px solid $color-dark-shade-30
+      background-color: #fff
+
+
+  // &__error-msg
+  //   // color: $color-red
+  //   font-size: 1.2rem
+  //   opacity: 0
+  //   visibility: hidden
+  //   &.invalid
+  //     opacity: 1
+  //     visibility: visible
 
   label
     display: inline-block
@@ -87,5 +113,9 @@ export default {
     text-align: right
   .text-field__input
     width: calc(100% - #{$width-label})
+
+.text-field.label_bold
+  label
+    font-weight: bold
 
 </style>

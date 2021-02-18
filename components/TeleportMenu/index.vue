@@ -188,7 +188,7 @@ $color-bg-content: rgb(248,250,252)
     border-left: none
     border-top-right-radius: 2rem
     border-bottom-right-radius: 2rem
-    box-shadow: 4px 2px 4px rgba(0,0,0,.101562)
+    box-shadow: 4px 2px 4px 0 rgba(88,88,88,.1)
     display: flex
     justify-content: center
     align-items: center
@@ -238,7 +238,8 @@ $color-bg-content: rgb(248,250,252)
 // show
 .teleport-menu.active .teleport-menu__bg-gradient
   left: 0
-  box-shadow: 4px 2px 4px rgba(0,0,0,.101562)
+  box-shadow: 0px 2px 12px 0 rgba(44,44,44,.2)
+
   -webkit-animation: gradient-shift 30s ease infinite
   animation: gradient-shift 30s ease infinite
 .teleport-menu.active .underlay

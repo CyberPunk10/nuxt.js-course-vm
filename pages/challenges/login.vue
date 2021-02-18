@@ -1,47 +1,16 @@
 <template>
   <div class="wrap-card-form-login">
     <h2>Войти на Challenges.org</h2>
-    <form class="wrap-card-form">
-      <AppInputChallenge v-model="controls.login" type="email">Логин или Email: </AppInputChallenge>
-      <AppInputChallenge v-model="controls.password" type="password">Пароль: </AppInputChallenge>
-    </form>
-
-    <el-card
-      shadow="always"
-      :style="{width: '500px'}"
+    <form class="wrap-card-form"
+      @submit.prevent="onSubmit"
     >
-      <el-form
-        ref="formLogin"
-        :model="controls"
-        :rules="rules"
-        @submit.native.prevent="onSubmit"
-      >
-
-        <h2>Войти в панель администратора</h2>
-
-        <el-form-item label="Логин" prop="login">
-          <el-input v-model.trim="controls.login" />
-        </el-form-item>
-
-        <el-form-item label="Пароль" prop="password" class="mb2">
-          <el-input
-            type="password"
-            v-model.trim="controls.password"
-          />
-        </el-form-item>
-
-        <el-form-item>
-          <el-button
-            type="primary"
-            native-type="submit"
-            round
-            :loading="loading"
-          >
-            Войти
-          </el-button>
-        </el-form-item>
-      </el-form>
-    </el-card>
+      <AppInputChallenge v-model="controls.login" class="label_bold">Логин или Email: </AppInputChallenge>
+      <AppInputChallenge v-model="controls.password" type="password" class="label_bold">Пароль: </AppInputChallenge>
+      <ButtonChallenge type="submit" class="btn-opacity">Войти</ButtonChallenge>
+    </form>
+    <NuxtLink to="/challenges/register-user" class="btn-create-new-akk">
+      <p>Создать новый аккаунт</p>
+    </NuxtLink>
   </div>
 </template>
 
@@ -59,15 +28,15 @@ export default {
         login: '',
         password: ''
       },
-      rules: {
-        login: [
-          {required: true, message: 'Введите логин', trigger: 'blur'}
-        ],
-        password: [
-          {required: true, message: 'Введите пароль', trigger: 'blur'},
-          {min: 6, message: 'Пароль должен быть не менее 6 символов', trigger: 'blur'}
-        ]
-      }
+      // rules: {
+      //   login: [
+      //     {required: true, message: 'Введите логин', trigger: 'blur'}
+      //   ],
+      //   password: [
+      //     {required: true, message: 'Введите пароль', trigger: 'blur'},
+      //     {min: 6, message: 'Пароль должен быть не менее 6 символов', trigger: 'blur'}
+      //   ]
+      // },
     }
   },
 
@@ -89,28 +58,27 @@ export default {
   },
 
   methods: {
-    onSubmit() {
-      this.$refs.formLogin.validate(async valid => {
-        if (valid) {
+    async onSubmit() {
+      // this.$refs.formLogin.validate(async valid => {
+      //   if (valid) {
           this.loading = true
 
-          try {
-            const formData = {
-              login: this.controls.login,
-              password: this.controls.password
-            }
-            await this.$store.dispatch('auth/login', formData)
-            // this.$router.push('/admin')
-            this.$router.push('/challenges/my-profile')
-            // this.$message.success('Вы зашли с правами админа')
-            this.$message.success(`Добро пожаловать, ${this.controls.login}`)
-            this.loading = false
-          } catch (error) {
-            this.loading = false
-            console.log(error)
+          const formData = {
+            login: this.controls.login,
+            password: this.controls.password
           }
-        }
-      })
+
+          try {
+            await this.$store.dispatch('auth/login', formData)
+            this.$router.push('/challenges/my-profile')
+            this.$message.success(`Добро пожаловать, ${this.controls.login}`)
+          } catch (error) {
+            console.log(error)
+          } finally {
+            this.loading = false
+          }
+        // }
+      // })
     }
   }
 }
@@ -119,19 +87,30 @@ export default {
 <style lang="sass">
 
 .wrap-card-form-login
-  h2
+  width: 30rem
+  h2, p
     text-align: center
+  h2
     margin: 2rem
 
   .wrap-card-form
-    background-color: rgb(236,238,240)
     border: 1px solid rgb(226,228,230)
-    padding: 2rem
-    width: 30rem
-    margin: 0 auto 5rem
     border-radius: $borderRadius
+    background-color: rgb(236,238,240)
+    margin: 0 auto 1rem
+    padding: 2rem
 
-
+  .btn-create-new-akk
+    // padding: 1.5rem
+    transition: all .15s ease
+    width: 100%
+    color: $blueDark
+    font-size: 1.4rem
+    padding-right: .2rem
+    &:hover
+      text-decoration: underline
+    p
+      text-align: right
 
 </style>
 
