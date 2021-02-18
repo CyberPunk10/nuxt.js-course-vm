@@ -59,24 +59,35 @@ export default {
   },
   data() {
     return {
-      // не меняет входные данные, а копирует их в новый объект,
-      // который будем менять и отправлять в БД
-      // resultFormData2: this.formSport
-
-      dataForBD: {
-        idForm: this.formSport.idForm,
-        title: this.formSport.title, // здесь разве что кастомные заголовки отправлять, а иначе боать их из коллекции типовых форм
-        players: [
-          {id: 1, name: 'nametest'}
-        ]
-      }
+      loading: false
     }
   },
 
   methods: {
-    onSubmit() {
-      console.log(this.formSport.players)
-      console.log('[onSubmit]', this.resultFormData2)
+    async onSubmit() {
+      console.log('[onSubmit][this.formSport]', this.formSport)
+
+      this.loading = true
+
+      // есть ли валидация данных с формы? не проверил
+      const formData = {
+        title: this.formSport.title,
+        description: this.formSport.description,
+        idForm: this.formSport.idForm,
+        players: this.formSport.players,
+      }
+
+      try {
+        const newDataTreining = await this.$store.dispatch('challengeForms/addChallengeProgress', formData)
+      //   this.$emit('created', newDataTreining) // если нужно менять что-то на клиенте, то создаем метод ( например очистить форму после отправки данных)
+        this.$message.success('Данные формы сохранены в БД')
+      } catch (error) {
+        // this.loading = false
+        console.log(error)
+      } finally {
+        this.loading = false
+      }
+
     },
     changeActiveTab(id) {
       this.$store.dispatch('challengeForms/changeActiveTab', {indexForm: this.indexForm, idTab: id})

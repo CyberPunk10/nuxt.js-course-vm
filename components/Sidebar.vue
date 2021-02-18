@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     handleClickSidebar: function(event) {
-      console.log('click on Sidebar', event.target)
+      // console.log('click on Sidebar', event.target)
       const sideBar = document.querySelector('.sidebar')
       const className = event.target.className
 
@@ -85,7 +85,7 @@ export default {
 
       switch (className) {
         case 'radio-btn__input':
-          console.log(event.target.id)
+          // console.log(event.target.id)
           const id = event.target.id
           const layoutWrapper = document.querySelector('.layout-wrapper')
           if (id === 'mode-view-sidebar-1') {
@@ -110,7 +110,7 @@ export default {
       // $tableWidth 768px
       const layout = document.querySelector('.layout-wrapper')
       const dataAttr = event.target.dataset
-      console.log(document.documentElement.clientWidth)
+      // console.log(document.documentElement.clientWidth)
 
       if (document.documentElement.clientWidth < 768) {
         if (event.target.closest('a')) layout.dataset.sidebarActive = 'false'
