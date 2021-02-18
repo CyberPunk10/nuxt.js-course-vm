@@ -10,7 +10,10 @@
     <div class="main-container"
       @click="handleClickSidebarToggle"
     >
-      <Nuxt class="main-content layout-scrollbar layout-cell container" />
+      <div class="main-content layout-scrollbar layout-cell">
+        <Nuxt class="container"/>
+      </div>
+      <!-- <Nuxt class="main-content layout-scrollbar layout-cell container" /> -->
     </div>
 
     <FooterMobile />
@@ -23,6 +26,11 @@
 import swipe from '@/common/swipe'
 
 export default {
+  data () {
+    return {
+      scrollPrev: 0, // for event swipe
+    }
+  },
   computed: {
     error() {
       return this.$store.getters.error
@@ -66,7 +74,7 @@ export default {
     swipe(document, { maxTime: 1000, minTime: 10, maxDist: 150,  minDist: 60 })
 
     document.addEventListener("swipe", function(e) {
-      console.log(e.detail.full.type)
+      // console.log(e.detail.full.type)
       const layout = document.querySelector('.layout-wrapper')
       const ignoreSwipe = e.detail.targetStartSwipe.closest('.layout-swipe-ignore')
 
@@ -79,18 +87,35 @@ export default {
           break
       }
     })
+
+    // addEventListener Scroll
+    document.querySelector('.main-content').addEventListener('scroll', this.handleScroll) // надо ещё удалить этот listener (?)
   },
 
   methods: {
     handleClickSidebarToggle: function(event) {
       console.log('click layout (layoutMainChallenges.vue)', event.target)
-      const layout = document.querySelector('.layout-wrapper')
 
-      if ( document.documentElement.clientWidth < 768
-        && layout.dataset.sidebarActive === 'true' ) {
-        layout.dataset.sidebarActive = 'false'
+      if (document.documentElement.clientWidth < 768) {
+        const layout = document.querySelector('.layout-wrapper')
+        if (layout.dataset.sidebarActive === 'true' ) {
+            layout.dataset.sidebarActive = 'false'
+        }
       }
+    },
 
+    handleScroll(e) {
+
+      if (document.documentElement.clientWidth < 480) {
+        const $layout = document.querySelector('.layout-wrapper')
+        let scrolled = e.target.scrollTop
+
+        if (scrolled > 100 && scrolled > this.scrollPrev) $layout.classList.add('header-out')
+        else $layout.classList.remove('header-out')
+
+        this.scrollPrev = scrolled
+      }
+      return
     }
   }
 }
@@ -101,45 +126,55 @@ export default {
   position: relative
   width: 100%
   height: 100vh
+  transition: $transitionSidebar // for bgc sidebar show
 
   &>header,
   &>.sidebar,
   &>.main-container
     position: fixed
+    top: 0
     left: 0
     transition: $transitionSidebar
     // transition: all 2s ease
 
-  // &>.sidebar,
-  &>.main-container
-    overflow: hidden // (без header, потому что нужно показывать контекстное меню под аватаркой)
-
   &>header
-    top: 0
-    left: 0
     right: 0
-    height: $height-header
+    height: $header-height
+
+  &>.sidebar
+    bottom: $header-height
+  &>.main-container
+    bottom: calc(#{$header-height} - #{$borderRadiusBig})
 
   &>.sidebar,
   &>.main-container
-    top: $height-header
-    bottom: 0
-    @media screen and (max-width: $phoneWidth)
-      bottom: $height-header
+    @media screen and (min-width: $phoneWidth)
+      top: $header-height
+      bottom: 0
+
 
   &>.sidebar
     z-index: 999
     width: $sidebarWidthIcon
-    @media screen and (max-width: 421px)
+    @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
       width: $sidebarWidthPhone
     @media screen and (min-width: $tableWidth)
       width: $sidebarWidthIcon
+    .sidebar-main
+      margin-top: calc(#{$header-height} + .5rem)
+      height: calc(100% - 1rem - #{$header-height})
+      @media screen and (min-width: $phoneWidth)
+        margin-top: .5rem
+        height: calc(100% - 1rem)
+
 
 
   &>.main-container
     right: 0
     width: 100%
     background-color: $color-bg-body
+    overflow: hidden // (без header и sidebar, потому что нужно показывать контекстное меню под аватаркой и подсказки)
+
     @media screen and (min-width: $tableWidth)
       width: auto
       left: $sidebarWidthIcon
@@ -153,25 +188,31 @@ export default {
       width: 100%
       height: 100%
       overflow-x: hidden
+      padding-top: $header-height
+      padding-bottom: $borderRadiusBig
+      @media screen and (min-width: $phoneWidth)
+        padding-top: 0
+        padding-bottom: 0
+
 
   // если sidebar not static (need add .transform-x)
   &>.sidebar.transform-x
     left: -$sidebarWidth
-    @media screen and (max-width: 421px)
+    @media screen and (min-width: $phoneWidth)
       left: -$sidebarWidthPhone
     @media screen and (min-width: $tableWidth)
       left: 0
 
   &>.footer-mobile
     position: fixed
-    bottom: -$height-header
     right: 0
     left: 0
-    height: $height-header
+    bottom: 0
+    height: $header-height
     background-color: #fff
     transition: $transitionSidebar
-    @media screen and (max-width: $phoneWidth)
-      bottom: 0
+    @media screen and (min-width: $phoneWidth)
+      bottom: -$header-height
 
   // если main-container not static (need add .main-container_transform-x)
   &.main-container_transform-x
@@ -183,17 +224,25 @@ export default {
 
   // show sidebar
   &[data-sidebar-active="true"]
+    @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
+      background-color: $color-bg-body-not-active
     &>.sidebar
       // vars
-      $margin-left-sidebar: .7rem
+      $margin-left-sidebar: 1.8rem
 
-      left: 0
-      width: $sidebarWidth
-      @media screen and (max-width: $desktopWidth)
+      left: $margin-left-sidebar
+      width: calc(#{$sidebarWidthPhone} - #{$margin-left-sidebar})
+      @media screen and (min-width: $phoneWidth)
+        left: 0
         width: $sidebarWidthTable
-      @media screen and (max-width: 421px)
-        left: $margin-left-sidebar
-        width: calc(#{$sidebarWidthPhone} - #{$margin-left-sidebar})
+        // .sidebar-main
+        //   box-shadow: 0 0 4px rgba(88,88,88,.15)
+      @media screen and (min-width: $desktopWidth)
+        width: $sidebarWidth
+      @media screen and (max-width: calc(#{$smPhoneWidth} - 1px)) // < 320px
+        left:  calc(.5rem + .15rem)
+        width: calc(100% - 1rem)
+
 
     &>.sidebar.transform-x
       left: 0
@@ -203,10 +252,13 @@ export default {
   &.main-container_transform-x[data-sidebar-active="true"]
     .main-container
       left: $sidebarWidth
-      @media screen and (max-width: $desktopWidth)
+      @media screen and (max-width: calc(#{$desktopWidth} - 1px)) // < 1280px
         left: $sidebarWidthTable
-      @media screen and (max-width: 421px)
+      @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
         left: $sidebarWidthPhone
+        background-color: $color-bg-body-not-active
+      @media screen and (max-width: calc(#{$smPhoneWidth} - 1px)) // < 320px
+        left: calc(100% - .5rem)
 
   // hover sidebar
   &.main-container_transform-x[data-sidebar-active="false"],
@@ -229,5 +281,19 @@ export default {
             // & + .main-container
             //   z-index: 0 !important
             //   left: $sidebarWidth
+
+
+  &.header-out
+    @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
+      &>header
+        transform: translateY(-#{$header-height})
+        border-radius: 0
+      &>.sidebar .sidebar-main
+        margin-top: .5rem
+        height: calc(100% - 1rem)
+      &>.main-container .main-content
+        padding-top: 0
+
+
 
 </style>

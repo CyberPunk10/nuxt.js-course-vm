@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     handleClickSidebar: function(event) {
-      console.log('click on Sidebar', event.target)
+      // console.log('click on Sidebar', event.target)
       const sideBar = document.querySelector('.sidebar')
       const className = event.target.className
 
@@ -85,7 +85,7 @@ export default {
 
       switch (className) {
         case 'radio-btn__input':
-          console.log(event.target.id)
+          // console.log(event.target.id)
           const id = event.target.id
           const layoutWrapper = document.querySelector('.layout-wrapper')
           if (id === 'mode-view-sidebar-1') {
@@ -110,7 +110,7 @@ export default {
       // $tableWidth 768px
       const layout = document.querySelector('.layout-wrapper')
       const dataAttr = event.target.dataset
-      console.log(document.documentElement.clientWidth)
+      // console.log(document.documentElement.clientWidth)
 
       if (document.documentElement.clientWidth < 768) {
         if (event.target.closest('a')) layout.dataset.sidebarActive = 'false'
@@ -134,26 +134,22 @@ export default {
     position: absolute
     top: 0
     left: 0
-    right: 0
+    right: 4px // for box-shadow
     bottom: 0
-    width: 100%
-    height: 100%
     overflow-x: hidden
     padding-top: 1.7rem
-    padding-top: 1.7rem
 
-    margin: .5rem 0
     background-color: #fff
     // background-color: $color-bg-body
     // @include linear-gradient($direction: 200deg, $fromColor: #a4adf0, $toColor: #787fc5)
-    border-top-right-radius: $borderRadius
-    border-bottom-right-radius: $borderRadius
     border-radius: $borderRadius
     // border: 1px solid $color-border-default
     // border-left: none
     box-shadow: 0 0 2px rgba(88,88,88,.15)
-    height: calc(100% - 1rem)
     transition: $transitionDefault
+    @media screen and (min-width: $phoneWidth)
+      border-top-left-radius: 0
+      border-bottom-left-radius: 0
 
     .separator
       padding-top: 1rem

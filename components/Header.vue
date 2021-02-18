@@ -136,15 +136,16 @@ export default {
 <style lang="sass">
 header
   position: relative
-  height: $height-header
+  height: $header-height
   user-select: none
   background-color: #fff
-  border-bottom: 1px solid $color-border-default
-  border-bottom-left-radius: $borderRadius
-  border-bottom-right-radius: $borderRadius
+  // border-bottom: 1px solid $color-border-default
+  box-shadow: 0 0 2px rgba(88,88,88,.15)
   z-index: 9
-  // @media screen and (min-width: $tableWidth)
-  //   border-bottom: none
+  @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
+    border-bottom-left-radius: $borderRadius
+    border-bottom-right-radius: $borderRadius
+    box-shadow: 0 0 4px rgba(88,88,88,.15)
 
   .header-for-sidebar,
   .header-main
@@ -153,14 +154,15 @@ header
     top: 0
     transition: $transitionDefault
 
-
   .header-for-sidebar
     left: 0
     width: $sidebarWidthIcon
     display: flex
     justify-content: space-between
     @media screen and (min-width: $tableWidth)
-      top: calc(#{$height-header})
+      top: $header-height
+      height: 4rem
+      padding-top: .5rem
 
     .sidebar-toggle
       min-width: $sidebarWidthIcon
@@ -204,10 +206,12 @@ header
 
     // logo
     .navbar-brand
-      line-height: $height-header
+      line-height: $header-height
       width: 8rem
       margin-left: calc((100% - 8rem) / 2)
       transition: $transitionDefault
+      @media screen and (min-width: $phoneWidth)
+        margin-left: 1rem
       @media screen and (min-width: $tableWidth)
         margin-left: 2rem
       @media screen and (min-width: $desktopWidth)
@@ -234,15 +238,17 @@ header
         font-size: 1.4rem
         text-transform: none // возможно стоит изменить в источнике
         color: $color-dark-shade-75
-        i
-          font-size: 20px
-          padding: 1rem
-          color: $color-text-grey
-          @media screen and (max-width: $phoneWidth)
-            display: none
+        @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
+          border-bottom-right-radius: $borderRadius
         &.mobile-hidden
-          @media screen and (max-width: $phoneWidth)
+          @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
             display: none
+        // i
+        //   font-size: 20px
+        //   padding: 1rem
+        //   color: $color-text-grey
+          // @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
+          //   display: none
 
       .btn-avatar
         display: flex
@@ -287,8 +293,6 @@ header
         display: flex
       @media screen and (min-width: $tableWidth)
         width: $sidebarWidth
-        border-radius: 0
-        border: none
         .sidebar-toggle .btn-close-sidebar,
         .fa-arrow-right
             display: none

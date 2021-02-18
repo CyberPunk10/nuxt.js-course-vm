@@ -185,6 +185,15 @@ export const actions = {
 
   changeActiveTab({commit}, data) {
     commit('changeActiveTab', data)
+  },
+
+  async addChallengeProgress({commit}, fd) {
+    try {
+      return await this.$axios.$post('/api/challenge/add-challenge-progress', fd)
+    } catch (error) {
+      commit('setError', error, {root: true})
+      throw error
+    }
   }
 }
 
@@ -249,10 +258,6 @@ function removeClassActiveBtnAddCol(indexForm) {
 // 2. Сделать scroll не через трекер, а просто крутя колесо над областью inputs (.main-col)
 
 // 3. При рендере страницы сначала показываются страшные рандомные скроллы (на desktop)
-
-// 4. Не скролица page когда курсор попадает на .main-col.
-// Временное решение - по умоллчанию убирать overflow-x: auto и добавлять
-//  когда add col
 
 // 5. Реализовать удаление столбцов
 
