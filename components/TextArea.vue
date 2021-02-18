@@ -39,7 +39,7 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 $color-dark-shade-75: rgba(31, 32, 65, 0.75)
 $color-dark-shade-50: rgba(31, 32, 65, 0.5)
 $color-dark-shade-25: rgba(31, 32, 65, 0.25)
@@ -49,7 +49,7 @@ $color-red: #ff6163
   max-width: 132rem
   min-width: 26rem
   width: calc(100% - 2rem)
-  margin: 1rem
+  // margin: 1rem
   &__title
     padding-bottom: 2.5rem
     user-select: none

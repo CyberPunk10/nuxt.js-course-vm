@@ -38,7 +38,7 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 $color-dark-shade-75: rgba(31, 32, 65, 0.75)
 $color-dark-shade-50: rgba(31, 32, 65, 0.5)
 $color-dark-shade-25: rgba(31, 32, 65, 0.25)

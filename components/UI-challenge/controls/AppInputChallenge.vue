@@ -1,40 +1,47 @@
 <template>
   <div class="control text-field">
     <label><slot/></label>
-    <textarea
+    <input
       class="text-field__input"
+      v-bind="$attrs"
       :value="value"
-      @input="$emit('textarea', $event.target.value)"
+      :type="type"
+      @input="$emit('input', $event.target.value)"
     >
-    </textarea>
   </div>
 </template>
 
 <script>
 export default {
+  inheritAttrs: false,
   props: {
     value: {
       type: String,
       default: ''
+    },
+    type: {
+      type: String,
+      default: 'text'
     }
   }
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 .text-field
   position: relative
-  // margin-bottom: 1rem
+  margin-bottom: 1.5rem
   color: #606266
 
-  &_width-sm
-    max-width: 26.6rem
-
-  // &_margin-bottom-5
-  //   margin-bottom: .5rem
+  // &_width-sm
+  //   max-width: 26.6rem
 
   &__input
-    @include text-field-and-drop-btn
+    // @include text-field-and-drop-btn
+    font-size: 1.6rem
+    padding: .5rem 1rem
+    border: 1px solid red
+    border-radius: $borderRadius
 
     &::-webkit-input-placeholder
       color: $color-dark-shade-25
@@ -42,9 +49,9 @@ export default {
       color: $color-dark-shade-25
 
     &:hover
-      border: 1px solid $color-dark-shade-25
+      border: 1px solid $color-dark-shade-10
     &:focus
-      border: 1px solid $color-primary
+      border: 1px solid $light-color
 
   label
     display: inline-block
@@ -52,18 +59,18 @@ export default {
     margin-left: .3rem
     font-size: 1.4rem
 
-  &__icon
-    position: absolute
-    cursor: pointer
-    @include isFlex
-    height: calc(100% - 2px)
-    width: 4.3rem
-    background-color: #fff
-    border-radius: 5px
-    top: 1px
-    bottom: 0
-    right: 1px
-    @include text-linear-gradient
+  // &__icon
+  //   position: absolute
+  //   cursor: pointer
+  //   @include isFlex
+  //   height: calc(100% - 2px)
+  //   width: 4.3rem
+  //   background-color: #fff
+  //   border-radius: 5px
+  //   top: 1px
+  //   bottom: 0
+  //   right: 1px
+  //   @include text-linear-gradient
 
 // label left
 .text-field.label-left
@@ -80,4 +87,5 @@ export default {
     text-align: right
   .text-field__input
     width: calc(100% - #{$width-label})
+
 </style>
