@@ -4,9 +4,7 @@
     <form class="wrap-card-form"
       @submit.prevent="onSubmit"
     >
-      <AppInputChallenge v-model="controls.login" class="label_bold">Логин или Email: </AppInputChallenge>
-      <AppInputChallenge v-model="controls.password" type="password" class="label_bold">Пароль: </AppInputChallenge>
-      <ButtonChallenge type="submit">Войти</ButtonChallenge>
+      <slot/>
     </form>
     <div class="btn-create-new-akk">
       <p>Создать новый аккаунт?
