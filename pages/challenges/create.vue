@@ -2,11 +2,12 @@
   <div>
     <div class="mw500">
       <h4 class="mb3">Создать Ch</h4>
-      <form>
+      <form @submit.prevent="onSubmit">
         <AppInput v-model="user.name" class="label-left">Название</AppInput>
         <AppTextArea v-model="user.description" label="width: 250px" class="label-left">Описание</AppTextArea>
         <AppInput v-model="user.category" class="label-left">Категория</AppInput>
         <AppInput v-model="user.email" type="email">Email: </AppInput>
+        <!-- <ButtonChallenge type="submit" class="btn-opacity">Создать Ch</ButtonChallenge> -->
       </form>
 
       <Select id="select-1"/>

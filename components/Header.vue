@@ -26,10 +26,10 @@
         data-header-user-block-menu-active="false"
         @click="clickHeaderUserBlock"
       >
-        <NuxtLink v-if="!isAuthTest" to="/admin/login" class="btn btn-link">
+        <NuxtLink v-if="!isAuthTest" to="/challenges/login" class="btn btn-link">
           Войти
         </NuxtLink>
-        <NuxtLink v-if="!isAuthTest" to="/admin/login" class="btn btn-link mobile-hidden">
+        <NuxtLink v-if="!isAuthTest" to="/challenges/register-user" class="btn btn-link mobile-hidden">
           Регистрация
         </NuxtLink>
 

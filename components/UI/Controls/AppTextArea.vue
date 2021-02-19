@@ -24,14 +24,14 @@ export default {
 <style lang="sass" scoped>
 .text-field
   position: relative
-  margin-bottom: 1rem
+  // margin-bottom: 1rem
   color: #606266
 
   &_width-sm
     max-width: 26.6rem
 
-  &_margin-bottom-5
-    margin-bottom: .5rem
+  // &_margin-bottom-5
+  //   margin-bottom: .5rem
 
   &__input
     @include text-field-and-drop-btn

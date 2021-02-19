@@ -38,12 +38,12 @@ export default {
 }
 </script>
 
-<style lang="sass">
-$color-dark-shade-75: rgba(31, 32, 65, 0.75)
-$color-dark-shade-50: rgba(31, 32, 65, 0.5)
-$color-dark-shade-25: rgba(31, 32, 65, 0.25)
-$color-dark-shade-10: #1f20411a
-$color-red: #ff6163
+<style lang="sass" scoped>
+// $color-dark-shade-75: rgba(31, 32, 65, 0.75)
+// $color-dark-shade-50: rgba(31, 32, 65, 0.5)
+// $color-dark-shade-25: rgba(31, 32, 65, 0.25)
+// $color-dark-shade-10: #1f20411a
+// $color-red: #ff6163
 .text-field
   max-width: 132rem
   min-width: 26rem
