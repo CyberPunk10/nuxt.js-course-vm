@@ -5,9 +5,9 @@
       <form class="wrap-card-form"
         @submit.prevent="onSubmit"
       >
-        <AppInputChallenge v-model="controls.name" class="label_bold">Имя или Никнейм: </AppInputChallenge>
-        <AppInputChallenge v-model="controls.email" type="email" class="label_bold">Логин или Email: </AppInputChallenge>
-        <AppInputChallenge v-model="controls.password" type="password" class="label_bold">Пароль: </AppInputChallenge>
+        <AppInputChallenge v-model.trim="controls.name" class="label_bold">Имя или Никнейм: </AppInputChallenge>
+        <AppInputChallenge v-model.trim="controls.email" type="email" class="label_bold">Логин или Email: </AppInputChallenge>
+        <AppInputChallenge v-model.trim="controls.password" type="password" class="label_bold">Пароль: </AppInputChallenge>
         <ButtonChallenge type="submit">Зарегистрироваться</ButtonChallenge>
         <p class="agree">Нажимая кнопку «Зарегистрироваться», вы принимаете пользовательское соглашение и политику конфиденциальности.</p>
       </form>

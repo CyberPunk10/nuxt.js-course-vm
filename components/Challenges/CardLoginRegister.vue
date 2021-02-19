@@ -26,6 +26,7 @@ export default {
   data() {
     return {
       loading: false,
+
       controls: {
         login: '',
         password: ''
@@ -87,6 +88,35 @@ export default {
 </script>
 
 <style lang="sass">
+
+.wrap-card-form-login
+  width: 30rem
+  margin: 1rem
+  box-sizing: content-box
+  h2, p
+    text-align: center
+  h2
+    margin: 2rem
+
+  .wrap-card-form
+    border: 1px solid rgb(226,228,230)
+    border-radius: $borderRadius
+    background-color: rgb(236,238,240)
+    margin: 0 auto 1rem
+    padding: 2rem
+
+  .btn-create-new-akk
+    // padding: 1.5rem
+    transition: all .15s ease
+    width: 100%
+    font-size: 1.4rem
+    padding-right: .2rem
+    p
+      text-align: right
+    a
+      color: $blueDark
+      &:hover
+        text-decoration: underline
 
 
 

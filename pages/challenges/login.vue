@@ -1,11 +1,19 @@
 <template>
-  <div class="wrap-card-form-login">
+<div class="testdel">
+
+  <CardLoginRegister>
+    <AppInputChallenge v-model.trim="controls.login" class="label_bold">Логин или Email: </AppInputChallenge>
+    <AppInputChallenge v-model.trim="controls.password" type="password" class="label_bold">Пароль: </AppInputChallenge>
+    <ButtonChallenge type="submit">Войти</ButtonChallenge>
+  </CardLoginRegister>
+
+  <!-- <div class="wrap-card-form-login">
     <h2>Войти на Challenges.org</h2>
     <form class="wrap-card-form"
       @submit.prevent="onSubmit"
     >
-      <AppInputChallenge v-model="controls.login" class="label_bold">Логин или Email: </AppInputChallenge>
-      <AppInputChallenge v-model="controls.password" type="password" class="label_bold">Пароль: </AppInputChallenge>
+      <AppInputChallenge v-model.trim="controls.login" class="label_bold">Логин или Email: </AppInputChallenge>
+      <AppInputChallenge v-model.trim="controls.password" type="password" class="label_bold">Пароль: </AppInputChallenge>
       <ButtonChallenge type="submit">Войти</ButtonChallenge>
     </form>
     <div class="btn-create-new-akk">
@@ -15,6 +23,7 @@
         </NuxtLink>
       </p>
     </div>
+  </div> -->
   </div>
 </template>
 
@@ -28,6 +37,14 @@ export default {
   data() {
     return {
       loading: false,
+      // TextAreaEmail: {
+      //   title: '',
+      //   autofocus: true,
+      //   placeholder: 'напиши',
+      //   invalid: { emptyField: false, incorrect: false },
+      // },
+      // button: { type: 'submit', text: 'Save' },
+      // valueEmail: '',
       controls: {
         login: '',
         password: ''
@@ -89,8 +106,6 @@ export default {
 </script>
 
 <style lang="sass">
-
-
 
 </style>
 
