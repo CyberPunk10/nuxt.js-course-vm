@@ -24,7 +24,7 @@
     background-color: darken($primary-color, 5%)
   &__title
     width: 100%
-    line-height: 3.4rem
+    line-height: 3.2rem
     text-align: center
     white-space: nowrap
     font-weight: bold

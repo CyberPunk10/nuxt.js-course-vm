@@ -6,11 +6,15 @@
     >
       <AppInputChallenge v-model="controls.login" class="label_bold">Логин или Email: </AppInputChallenge>
       <AppInputChallenge v-model="controls.password" type="password" class="label_bold">Пароль: </AppInputChallenge>
-      <ButtonChallenge type="submit" class="btn-opacity">Войти</ButtonChallenge>
+      <ButtonChallenge type="submit">Войти</ButtonChallenge>
     </form>
-    <NuxtLink to="/challenges/register-user" class="btn-create-new-akk">
-      <p>Создать новый аккаунт</p>
-    </NuxtLink>
+    <div class="btn-create-new-akk">
+      <p>Создать новый аккаунт?
+        <NuxtLink to="/challenges/register-user">
+          Регистрация
+        </NuxtLink>
+      </p>
+    </div>
   </div>
 </template>
 
@@ -88,6 +92,8 @@ export default {
 
 .wrap-card-form-login
   width: 30rem
+  margin: 1rem
+  box-sizing: content-box
   h2, p
     text-align: center
   h2
@@ -104,13 +110,14 @@ export default {
     // padding: 1.5rem
     transition: all .15s ease
     width: 100%
-    color: $blueDark
     font-size: 1.4rem
     padding-right: .2rem
-    &:hover
-      text-decoration: underline
     p
       text-align: right
+    a
+      color: $blueDark
+      &:hover
+        text-decoration: underline
 
 </style>
 

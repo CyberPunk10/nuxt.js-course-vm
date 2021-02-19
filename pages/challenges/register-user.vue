@@ -1,42 +1,24 @@
 <template>
-  <div>
-    <h1>User</h1>
-    <el-card
-      shadow="always"
-      :style="{width: '500px'}"
-    >
-      <el-form
-        ref="form"
-        :model="controls"
-        :rules="rules"
-        @submit.native.prevent="onSubmit"
+  <div class="center">
+    <div class="wrap-card-form-login">
+      <h2>Регистрация на Challenges.org</h2>
+      <form class="wrap-card-form"
+        @submit.prevent="onSubmit"
       >
-
-        <h2>Создать пользователя</h2>
-
-        <el-form-item label="Логин" prop="login">
-          <el-input v-model.trim="controls.login" />
-        </el-form-item>
-
-        <el-form-item label="Пароль" prop="password" class="mb2">
-          <el-input
-            type="password"
-            v-model.trim="controls.password"
-          />
-        </el-form-item>
-
-        <el-form-item>
-          <el-button
-            type="primary"
-            native-type="submit"
-            round
-            :loading="loading"
-          >
-            Создать
-          </el-button>
-        </el-form-item>
-      </el-form>
-    </el-card>
+        <AppInputChallenge v-model="controls.name" class="label_bold">Имя или Никнейм: </AppInputChallenge>
+        <AppInputChallenge v-model="controls.email" type="email" class="label_bold">Логин или Email: </AppInputChallenge>
+        <AppInputChallenge v-model="controls.password" type="password" class="label_bold">Пароль: </AppInputChallenge>
+        <ButtonChallenge type="submit">Зарегистрироваться</ButtonChallenge>
+        <p class="agree">Нажимая кнопку «Зарегистрироваться», вы принимаете пользовательское соглашение и политику конфиденциальности.</p>
+      </form>
+      <div class="btn-create-new-akk">
+        <p>Уже есть аккаунт?
+          <NuxtLink to="/challenges/login">
+            Войти
+          </NuxtLink>
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -52,6 +34,7 @@ export default {
       loading: false,
       controls: {
         login: '',
+        email: '',
         password: ''
       },
       rules: {
@@ -92,6 +75,13 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
-
+<style lang="sass">
+.center
+  display: flex
+  justify-content: center
+  align-items: center
+p.agree
+    font-size: 1.4rem
+    padding-top: 1.5rem
+    text-align: left
 </style>
