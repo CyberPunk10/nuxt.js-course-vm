@@ -84,6 +84,7 @@ export default {
     margin-bottom: .5rem
     margin-left: .3rem
     font-size: 1.4rem
+    user-select: none
 
   // &__icon
   //   position: absolute

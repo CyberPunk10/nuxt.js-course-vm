@@ -1,25 +1,20 @@
 <template>
   <div class="center">
-    <div class="wrap-card-form-login">
-      <h2>Регистрация на Challenges.org</h2>
-      <form class="wrap-card-form"
-        @submit.prevent="onSubmit"
-      >
+      <CardLoginRegister :CardLoginRegister="CardLoginRegister">
         <AppInputChallenge v-model.trim="controls.name" class="label_bold">Имя или Никнейм: </AppInputChallenge>
-        <AppInputChallenge v-model.trim="controls.email" type="email" class="label_bold">Логин или Email: </AppInputChallenge>
+        <AppInputChallenge v-model.trim="controls.email" type="email" class="label_bold">Email: </AppInputChallenge>
         <AppInputChallenge v-model.trim="controls.password" type="password" class="label_bold">Пароль: </AppInputChallenge>
         <ButtonChallenge type="submit">Зарегистрироваться</ButtonChallenge>
         <p class="agree">Нажимая кнопку «Зарегистрироваться», вы принимаете пользовательское соглашение и политику конфиденциальности.</p>
-      </form>
-      <div class="btn-create-new-akk">
-        <p>Уже есть аккаунт?
-          <NuxtLink to="/challenges/login">
-            Войти
-          </NuxtLink>
-        </p>
-      </div>
+
+        <template #afterCardContent>
+          <p>Уже есть аккаунт?
+            <NuxtLink to="/challenges/login">Войти</NuxtLink>
+          </p>
+        </template>
+
+      </CardLoginRegister>
     </div>
-  </div>
 </template>
 
 <script>
@@ -32,6 +27,9 @@ export default {
   data() {
     return {
       loading: false,
+      CardLoginRegister: {
+        title: 'Регистрация аккаунта'
+      },
       controls: {
         login: '',
         email: '',
@@ -77,11 +75,9 @@ export default {
 
 <style lang="sass">
 .center
-  display: flex
-  justify-content: center
-  align-items: center
+  margin: 0 auto
 p.agree
-    font-size: 1.4rem
-    padding-top: 1.5rem
-    text-align: left
+  font-size: 1.4rem
+  padding-top: 1.5rem
+  // text-align: left
 </style>

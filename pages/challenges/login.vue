@@ -1,30 +1,15 @@
 <template>
-<div class="testdel">
-
-  <CardLoginRegister>
+  <CardLoginRegister :CardLoginRegister="CardLoginRegister">
     <AppInputChallenge v-model.trim="controls.login" class="label_bold">Логин или Email: </AppInputChallenge>
     <AppInputChallenge v-model.trim="controls.password" type="password" class="label_bold">Пароль: </AppInputChallenge>
     <ButtonChallenge type="submit">Войти</ButtonChallenge>
-  </CardLoginRegister>
 
-  <!-- <div class="wrap-card-form-login">
-    <h2>Войти на Challenges.org</h2>
-    <form class="wrap-card-form"
-      @submit.prevent="onSubmit"
-    >
-      <AppInputChallenge v-model.trim="controls.login" class="label_bold">Логин или Email: </AppInputChallenge>
-      <AppInputChallenge v-model.trim="controls.password" type="password" class="label_bold">Пароль: </AppInputChallenge>
-      <ButtonChallenge type="submit">Войти</ButtonChallenge>
-    </form>
-    <div class="btn-create-new-akk">
+    <template #afterCardContent>
       <p>Создать новый аккаунт?
-        <NuxtLink to="/challenges/register-user">
-          Регистрация
-        </NuxtLink>
+        <NuxtLink to="/challenges/register-user">Регистрация</NuxtLink>
       </p>
-    </div>
-  </div> -->
-  </div>
+    </template>
+  </CardLoginRegister>
 </template>
 
 
@@ -37,6 +22,9 @@ export default {
   data() {
     return {
       loading: false,
+      CardLoginRegister: {
+        title: 'Войти'
+      },
       // TextAreaEmail: {
       //   title: '',
       //   autofocus: true,

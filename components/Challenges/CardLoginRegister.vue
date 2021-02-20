@@ -1,17 +1,13 @@
 <template>
   <div class="wrap-card-form-login">
-    <h2>Войти на Challenges.org</h2>
+    <h1>{{ CardLoginRegister.title }}</h1>
     <form class="wrap-card-form"
       @submit.prevent="onSubmit"
     >
       <slot/>
     </form>
-    <div class="btn-create-new-akk">
-      <p>Создать новый аккаунт?
-        <NuxtLink to="/challenges/register-user">
-          Регистрация
-        </NuxtLink>
-      </p>
+    <div class="after-card-content">
+      <slot name="afterCardContent"></slot>
     </div>
   </div>
 </template>
@@ -23,6 +19,7 @@ export default {
     title: `Вход на сайт | ${process.env.appName}`
   },
   layout: 'emptyCenter',
+  props: ['CardLoginRegister'],
   data() {
     return {
       loading: false,
@@ -95,8 +92,11 @@ export default {
   box-sizing: content-box
   h2, p
     text-align: center
-  h2
-    margin: 2rem
+  h1
+    margin: 2rem 0
+    font-size: 2.1rem
+    font-family: $Montserrat
+    font-weight: 700
 
   .wrap-card-form
     border: 1px solid rgb(226,228,230)
@@ -105,14 +105,15 @@ export default {
     margin: 0 auto 1rem
     padding: 2rem
 
-  .btn-create-new-akk
+  .after-card-content
     // padding: 1.5rem
     transition: all .15s ease
     width: 100%
     font-size: 1.4rem
-    padding-right: .2rem
-    p
-      text-align: right
+    margin-top: 2rem
+    // padding-right: .2rem
+    // p
+      // text-align: right
     a
       color: $blueDark
       &:hover
