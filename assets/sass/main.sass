@@ -71,23 +71,23 @@ section, .section
 
 .container
   width: 100%
-  flex: 0 0 auto
+  // flex: 0 0 auto
   position: relative
-  margin: 0 auto
+  // margin: 0 auto
   padding: 1rem
   // max-width: $desktopWidth
-  transition: $transitionDefault
+  transition: padding .4s ease, width .4s ease, height .4s ease // надо закомментить чтобы переходы между страницами были не плавными
   @media screen and (min-width: $phoneWidth)
     padding: 1.5rem
-
   @media screen and (min-width: $tableWidth)
     padding: 2rem
-
   @media screen and (min-width: $smDesktopWidth)
     padding: 3rem
-
   @media screen and (min-width: $desktopWidth)
     padding: 4rem
+
+  .content-center
+    margin: 0 auto
 
 
 

@@ -90,13 +90,14 @@ export default {
   width: 30rem
   margin: 1rem
   box-sizing: content-box
-  h2, p
+  p
     text-align: center
   h1
-    margin: 2rem 0
+    margin: 1.5rem 0
     font-size: 2.1rem
     font-family: $Montserrat
     font-weight: 700
+    padding-left: .5rem
 
   .wrap-card-form
     border: 1px solid rgb(226,228,230)

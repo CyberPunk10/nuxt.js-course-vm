@@ -1,20 +1,20 @@
 <template>
-  <div class="center">
-      <CardLoginRegister :CardLoginRegister="CardLoginRegister">
-        <AppInputChallenge v-model.trim="controls.name" class="label_bold">Имя или Никнейм: </AppInputChallenge>
-        <AppInputChallenge v-model.trim="controls.email" type="email" class="label_bold">Email: </AppInputChallenge>
-        <AppInputChallenge v-model.trim="controls.password" type="password" class="label_bold">Пароль: </AppInputChallenge>
-        <ButtonChallenge type="submit">Зарегистрироваться</ButtonChallenge>
-        <p class="agree">Нажимая кнопку «Зарегистрироваться», вы принимаете пользовательское соглашение и политику конфиденциальности.</p>
+  <div class="content-center">
+    <CardLoginRegister :CardLoginRegister="CardLoginRegister">
+      <AppInputChallenge v-model.trim="controls.name" class="label_bold">Имя или Никнейм: </AppInputChallenge>
+      <AppInputChallenge v-model.trim="controls.email" type="email" class="label_bold">Email: </AppInputChallenge>
+      <AppInputChallenge v-model.trim="controls.password" type="password" class="label_bold">Пароль: </AppInputChallenge>
+      <ButtonChallenge type="submit">Зарегистрироваться</ButtonChallenge>
+      <p class="agree">Нажимая кнопку «Зарегистрироваться», вы принимаете пользовательское соглашение и политику конфиденциальности.</p>
 
-        <template #afterCardContent>
-          <p>Уже есть аккаунт?
-            <NuxtLink to="/challenges/login">Войти</NuxtLink>
-          </p>
-        </template>
+      <template #afterCardContent>
+        <p>Уже есть аккаунт?
+          <NuxtLink to="/challenges/login">Войти</NuxtLink>
+        </p>
+      </template>
 
-      </CardLoginRegister>
-    </div>
+    </CardLoginRegister>
+  </div>
 </template>
 
 <script>
@@ -74,8 +74,6 @@ export default {
 </script>
 
 <style lang="sass">
-.center
-  margin: 0 auto
 p.agree
   font-size: 1.4rem
   padding-top: 1.5rem
