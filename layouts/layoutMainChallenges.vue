@@ -152,7 +152,6 @@ export default {
       top: $header-height
       bottom: 0
 
-
   &>.sidebar
     z-index: 999
     width: $sidebarWidthIcon
@@ -190,6 +189,7 @@ export default {
       overflow-x: hidden
       padding-top: $header-height
       padding-bottom: $borderRadiusBig
+      transition: padding .4s ease, width .4s ease, height .4s ease // надо закомментить чтобы переходы между страницами были не плавными // for padding! (иначе скачет)
       @media screen and (min-width: $phoneWidth)
         padding-top: 0
         padding-bottom: 0
@@ -295,5 +295,5 @@ export default {
         padding-top: 0
 
 
-
+// HEADER продолжает прыгать!!!
 </style>

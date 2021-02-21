@@ -1,15 +1,17 @@
 <template>
-  <CardLoginRegister :CardLoginRegister="CardLoginRegister">
-    <AppInputChallenge v-model.trim="controls.login" class="label_bold">Логин или Email: </AppInputChallenge>
-    <AppInputChallenge v-model.trim="controls.password" type="password" class="label_bold">Пароль: </AppInputChallenge>
-    <ButtonChallenge type="submit">Войти</ButtonChallenge>
+  <div class="content-center">
+    <CardLoginRegister :CardLoginRegister="CardLoginRegister">
+      <AppInputChallenge v-model.trim="controls.login" class="label_bold">Логин или Email: </AppInputChallenge>
+      <AppInputChallenge v-model.trim="controls.password" type="password" class="label_bold">Пароль: </AppInputChallenge>
+      <ButtonChallenge type="submit">Войти</ButtonChallenge>
 
-    <template #afterCardContent>
-      <p>Создать новый аккаунт?
-        <NuxtLink to="/challenges/register-user">Регистрация</NuxtLink>
-      </p>
-    </template>
-  </CardLoginRegister>
+      <template #afterCardContent>
+        <p>Создать новый аккаунт?
+          <NuxtLink to="/challenges/register-user">Регистрация</NuxtLink>
+        </p>
+      </template>
+    </CardLoginRegister>
+  </div>
 </template>
 
 

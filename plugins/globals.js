@@ -5,6 +5,15 @@ import locale from 'element-ui/lib/locale/lang/ru-RU'
 
 import DateFilter from '@/common/date.filter'
 
+
 Vue.use(Element, { locale })
 Vue.component('vue-markdown', VueMarkdown)
 Vue.filter('date', DateFilter)
+
+
+// export const methods = {
+//   getDynamicFile(name) {
+//     return require(`@/${name}`)
+//   },
+// }
+// Vue.mixin({methods})
