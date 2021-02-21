@@ -1,9 +1,9 @@
 <template>
   <div class="wrap-card-form-login">
-    <h1>{{ CardLoginRegister.title }}</h1>
     <form class="wrap-card-form"
       @submit.prevent="onSubmit"
     >
+      <h1>{{ CardLoginRegister.title }}</h1>
       <slot/>
     </form>
     <div class="after-card-content">
@@ -87,13 +87,14 @@ export default {
 <style lang="sass">
 
 .wrap-card-form-login
-  width: 30rem
-  margin: 1rem
+  max-width: 31rem
   box-sizing: content-box
+  margin: 0 auto
+
   p
     text-align: center
   h1
-    margin: 1.5rem 0
+    margin: .5rem 0 1.5rem 0
     font-size: 2.1rem
     font-family: $Montserrat
     font-weight: 700
@@ -105,6 +106,10 @@ export default {
     background-color: rgb(236,238,240)
     margin: 0 auto 1rem
     padding: 2rem
+
+    button
+      margin-top: 1.5rem
+      margin-bottom: .5rem
 
   .after-card-content
     // padding: 1.5rem

@@ -1,5 +1,5 @@
 <template>
-  <div class="content-center">
+  <div>
     <CardLoginRegister :CardLoginRegister="CardLoginRegister">
       <AppInputChallenge v-model.trim="controls.login" class="label_bold">Логин или Email: </AppInputChallenge>
       <AppInputChallenge v-model.trim="controls.password" type="password" class="label_bold">Пароль: </AppInputChallenge>
