@@ -1,9 +1,9 @@
 <template>
   <div class="wrap-card-form-login">
+      <h1>{{ CardLoginRegister.title }}</h1>
     <form class="wrap-card-form"
       @submit.prevent="onSubmit"
     >
-      <h1>{{ CardLoginRegister.title }}</h1>
       <slot/>
     </form>
     <div class="after-card-content">
@@ -110,6 +110,8 @@ export default {
     button
       margin-top: 1.5rem
       margin-bottom: .5rem
+    p
+      font-size: 1.2rem
 
   .after-card-content
     // padding: 1.5rem
