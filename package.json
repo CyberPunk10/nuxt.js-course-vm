@@ -34,7 +34,8 @@
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "vue-chartjs": "^3.5.1",
-    "vue-markdown": "^2.2.4"
+    "vue-markdown": "^2.2.4",
+    "vuelidate": "^0.7.6"
   },
   "devDependencies": {
     "@nuxtjs/style-resources": "^1.0.0",

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-// import { email, required, minLength } from 'vuelidate/lib/validators'
+import { email, required, minLength } from 'vuelidate/lib/validators'
 export default {
   layout: 'emptyCenter',
   head: { title: 'Dreams' },
@@ -25,10 +25,10 @@ export default {
     }
   },
 
-  // validations: {
-  //   valueEmail: { email, required },
-  //   valuePassword: { required, minLength: minLength(4) }
-  // },
+  validations: {
+    valueEmail: { email, required },
+    valuePassword: { required, minLength: minLength(4) }
+  },
 
   methods: {
     setValue (value, type) {
