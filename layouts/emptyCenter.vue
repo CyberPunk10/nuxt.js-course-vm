@@ -1,7 +1,7 @@
 <template>
   <div style="position: relative">
     <div class="empty-center-layout">
-      <Nuxt />
+      <Nuxt class="container"/>
     </div>
     <TeleportMenu/>
   </div>

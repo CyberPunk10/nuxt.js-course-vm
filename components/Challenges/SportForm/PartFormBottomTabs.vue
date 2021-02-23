@@ -206,7 +206,7 @@ export default {
   },
 
   methods: {
-    clickOnTab() {
+    clickOnTab(event) {
       let id = event.target.dataset.tab
 
       if (!id) return
