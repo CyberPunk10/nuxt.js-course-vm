@@ -27,15 +27,15 @@ export default {
 
   validations: {
     valueEmail: { email, required },
-    valuePassword: { required, minLength: minLength(4) }
+    // valuePassword: { required, minLength: minLength(4) }
   },
 
   methods: {
     setValue (value, type) {
-      if (type === 'Email') {
+      // if (type === 'Email') {
         this.valueEmail = value
         this.TextAreaEmail.value = value
-      }
+      // }
       this.handlerInputs()
     },
     handlerInputs () {

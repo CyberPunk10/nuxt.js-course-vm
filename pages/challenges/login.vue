@@ -1,6 +1,6 @@
 <template>
   <div>
-    <CardLoginRegister :CardLoginRegister="CardLoginRegister">
+    <CardLoginRegister :CardLoginRegister="CardLoginRegister" @onSubmit="onSubmit">
       <AppInputChallenge v-model.trim="controls.login" class="label_bold">Логин или Email: </AppInputChallenge>
       <AppInputChallenge v-model.trim="controls.password" type="password" class="label_bold">Пароль: </AppInputChallenge>
       <ButtonChallenge type="submit">Войти</ButtonChallenge>
@@ -16,6 +16,8 @@
 
 
 <script>
+import { email, required, minLength } from 'vuelidate/lib/validators'
+
 export default {
   head: {
     title: `Вход на сайт | ${process.env.appName}`
@@ -49,6 +51,11 @@ export default {
       //   ]
       // },
     }
+  },
+
+  validations: {
+    login: { required, minLength: minLength(4) },
+    valuePassword: { required, minLength: minLength(4) }
   },
 
   mounted() {
