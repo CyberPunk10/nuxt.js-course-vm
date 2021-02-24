@@ -1,8 +1,8 @@
 <template>
   <form class="form-dreams" @submit.prevent="onSubmit">
     <h3 class="title">Чего ты хочешь?</h3>
-    <TextArea v-bind:TextArea="TextAreaEmail" @func="setValue"/>
-    <Button v-bind:button="button" class="btn-opacity"/>
+    <TextArea :TextArea="TextAreaEmail" @func="setValue"/>
+    <Button :button="button" class="btn-opacity"/>
   </form>
 </template>
 

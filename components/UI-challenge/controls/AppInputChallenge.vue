@@ -8,20 +8,30 @@
       :type="type"
       @input="$emit('input', $event.target.value)"
     >
-    <!-- <span
+    <span
       class="text-field__error-msg"
-      :class="{invalid: textField.invalid.emptyField || textField.invalid.incorrect}">
+      :class="{invalid: inputData.invalid.emptyField || inputData.invalid.incorrect}"
+    >
       {{
-        textField.invalid.emptyField ? messageEmpty
-        : (textField.invalid.incorrect ? messageIncorrect : false)
+        inputData.invalid.emptyField ? messageEmpty
+        : (inputData.invalid.incorrect ? messageIncorrect : false)
       }}
-    </span> -->
+    </span>
   </div>
 </template>
 
 <script>
 export default {
   inheritAttrs: false,
+
+  data () {
+    return {
+      valueInput: '',
+      messageEmpty: `Поле ${this.inputData.title} не должно быть пустым`,
+      messageIncorrect: `Введите корректный ${this.inputData.title}`
+    }
+  },
+
   props: {
     value: {
       type: String,
@@ -31,8 +41,15 @@ export default {
       type: String,
       default: 'text'
     },
-    // textField: String,
+    inputData: Object,
+  },
+
+  watch: {
+    valueInput (value) {
+      this.$emit('func', value)
+    }
   }
+
 }
 </script>
 
@@ -69,6 +86,12 @@ export default {
       border: 1px solid $color-dark-shade-30
       background-color: #fff
 
+  &.invalid
+    // input
+    //   border-color: red
+    span
+      opacity: 1
+      visibility: visible
 
   // &__error-msg
   //   // color: $color-red
@@ -119,4 +142,59 @@ export default {
   label
     font-weight: bold
 
+
+
+
+$color-red: #ff6163
+.text-field
+  max-width: 132rem
+  min-width: 26rem
+  width: calc(100% - 2rem)
+  // margin: 1rem
+  &__title
+    padding-bottom: 2.5rem
+    user-select: none
+    font-family: "Open Sans", sans-serif
+    white-space: nowrap
+    font-weight: bold
+    font-size: 1.2rem
+    text-transform: uppercase
+  &__input
+    background: #FFFFFF
+    border: none
+    // border-bottom: 1px solid $color-dark-shade-10
+    padding-bottom: .4rem
+    width: 100%
+    font-size: 1.8rem
+    font-family: "Montserrat Alternates", Avenir, Helvetica, Arial, sans-serif
+    color: $color-dark-shade-75
+    outline: none
+    box-sizing: border-box
+    transition: 0.2s ease all
+    &::-webkit-input-placeholder
+      color: $color-dark-shade-25
+    &::-moz-placeholder
+      color: $color-dark-shade-25
+    &:hover, &:focus
+      // border-bottom: 1px solid #fff
+  &__error-msg
+    color: $color-red
+    font-size: 1.2rem
+    opacity: 0
+    visibility: hidden
+    &.invalid
+      opacity: 1
+      visibility: visible
+
+.div-input
+  position: relative
+  outline: none
+  border-bottom: 1px solid $color-dark-shade-10
+
+  line-height: 30px
+  font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif
+  font-size: 18px
+  color: #111
+  &:focus
+    border-bottom: 1px solid #fff
 </style>

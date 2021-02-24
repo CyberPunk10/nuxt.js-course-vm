@@ -1,8 +1,46 @@
 <template>
   <div>
     <CardLoginRegister :CardLoginRegister="CardLoginRegister" @onSubmit="onSubmit">
-      <AppInputChallenge v-model.trim="controls.login" class="label_bold">Логин или Email: </AppInputChallenge>
-      <AppInputChallenge v-model.trim="controls.password" type="password" class="label_bold">Пароль: </AppInputChallenge>
+      <AppInputChallenge
+        v-model.trim="controls.login"
+        class="label_bold"
+        :class="{invalid: ($v.login.$dirty && !$v.login.required)}"
+        :inputData="inputLoginData"
+        @func="setValue"
+      >{{inputLoginData.title}}</AppInputChallenge>
+
+      <AppInputChallenge
+        v-model.trim="controls.password"
+        class="label_bold"
+        :class="{invalid: ($v.password.$dirty && !$v.password.required)}"
+        type="password"
+        :inputData="inputPasswordData"
+        @func="setValue"
+      >{{inputPasswordData.title}}</AppInputChallenge>
+
+      <div class="input-field">
+        <input
+          type="text"
+          id="id-input"
+          v-model.trim="testField"
+          :class="{invalid: ($v.testField.$dirty && !$v.testField.required)
+                         || ($v.testField.$dirty && !$v.testField.minLength)}"
+        >
+        <label for="id-input">label</label>
+        <small
+          v-if="$v.testField.$dirty && !$v.testField.required"
+          class="helper-text invalid"
+        >small required</small>
+        <small
+          v-else-if="$v.testField.$dirty && !$v.testField.minLength"
+          class="helper-text invalid"
+        >small minLength = {{ testField.length }}</small>
+      </div>
+
+      <TestInputField
+        v-model.trim="controls.testCompnentUnputField"
+      />
+
       <ButtonChallenge type="submit">Войти</ButtonChallenge>
 
       <template #afterCardContent>
@@ -29,18 +67,33 @@ export default {
       CardLoginRegister: {
         title: 'Войти'
       },
-      // TextAreaEmail: {
-      //   title: '',
-      //   autofocus: true,
-      //   placeholder: 'напиши',
-      //   invalid: { emptyField: false, incorrect: false },
-      // },
+      inputLoginData: {
+        title: 'Логин или Email: ',
+        autofocus: true,
+        placeholder: 'напиши',
+        invalid: { emptyField: false, incorrect: false },
+      },
+      inputPasswordData: {
+        title: 'Пароль: ',
+        autofocus: true,
+        placeholder: 'напиши',
+        invalid: { emptyField: false, incorrect: false },
+      },
+      testCompnentUnputField: {
+        title: 'Пароль: ',
+        autofocus: true,
+        placeholder: 'напиши',
+        invalid: { emptyField: false, incorrect: false },
+      },
+
       // button: { type: 'submit', text: 'Save' },
       // valueEmail: '',
       controls: {
         login: '',
-        password: ''
+        password: '',
+        testCompnentUnputField: ''
       },
+      testField: ''
       // rules: {
       //   login: [
       //     {required: true, message: 'Введите логин', trigger: 'blur'}
@@ -55,7 +108,10 @@ export default {
 
   validations: {
     login: { required, minLength: minLength(4) },
-    valuePassword: { required, minLength: minLength(4) }
+    // valuePassword: { required, minLength: minLength(4) }
+    password: { required, minLength: minLength(4) },
+    testField: { required, minLength: minLength(4) },
+    testCompnentInputField: { required, minLength: minLength(4) }
   },
 
   mounted() {
@@ -76,7 +132,28 @@ export default {
   },
 
   methods: {
+    setValue (value, type) {
+      // if (type === 'Email') {
+        this.controls.login = value
+        // this.TextAreaEmail.value = value
+      // }
+      this.handlerInputs()
+    },
+
+    handlerInputs () {
+      this.inputLoginData.invalid.emptyField = (this.$v.login.$dirty && !this.$v.login.required)
+      this.inputLoginData.invalid.incorrect = (this.$v.login.$dirty && !this.$v.login.minLength)
+      this.testCompnentUnputField.invalid.emptyField = (this.$v.login.$dirty && !this.$v.login.required)
+      this.testCompnentUnputField.invalid.emptyField = (this.$v.login.$dirty && !this.$v.login.minLength)
+    },
+
     async onSubmit() {
+      if (this.$v.$invalid) {
+        this.$v.$touch()
+        return
+      }
+
+
       // this.$refs.formLogin.validate(async valid => {
       //   if (valid) {
           this.loading = true
@@ -97,12 +174,18 @@ export default {
           }
         // }
       // })
+
+
     }
   }
 }
 </script>
 
 <style lang="sass">
-
+.input-field
+  input.invalid
+    border-color: red
+    // label
+    // small
 </style>
 
