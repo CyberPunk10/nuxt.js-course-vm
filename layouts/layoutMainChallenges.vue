@@ -296,4 +296,5 @@ export default {
 
 
 // HEADER продолжает прыгать!!!
+// SWIPE продолжает работать на других layout!!!
 </style>

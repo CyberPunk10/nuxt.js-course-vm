@@ -46,6 +46,14 @@ export const actions = {
       throw error
     }
   },
+  async createUserFree({commit}, formData) {
+    try {
+      await this.$axios.$post('/api/auth/admin/create-free', formData)
+    } catch (error) {
+      commit('setError', error, {root: true})
+      throw error
+    }
+  },
 
   autoLogin({dispatch}) {
     const cookieStr = process.browser
