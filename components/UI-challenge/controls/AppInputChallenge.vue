@@ -1,38 +1,62 @@
 <template>
   <div class="control text-field">
-    <label><slot/></label>
+    <label :class="{required: inputData.required}"><slot/></label>
     <input
       class="text-field__input"
       v-bind="$attrs"
       :value="value"
-      :type="type"
       @input="$emit('input', $event.target.value)"
     >
-    <!-- <span
+    <span
+      v-if="v.$error"
       class="text-field__error-msg"
-      :class="{invalid: textField.invalid.emptyField || textField.invalid.incorrect}">
+    >
       {{
-        textField.invalid.emptyField ? messageEmpty
-        : (textField.invalid.incorrect ? messageIncorrect : false)
+        (v.$dirty && !v.required) ? messageEmpty
+        : ((v.$dirty && !v.minLength) ? messageIncorrect : '')
       }}
-    </span> -->
+    </span>
   </div>
 </template>
 
 <script>
 export default {
-  inheritAttrs: false,
+  inheritAttrs: false, // чтобы КОРНЕВОЙ элемент компонента НЕ наследовал атрибуты (наследовать будет элемент с v-bind="$attrs")
+
   props: {
     value: {
       type: String,
       default: ''
     },
-    type: {
-      type: String,
-      default: 'text'
+    v: {
+      type: Object,
+      required: true
     },
-    // textField: String,
+    inputData: Object,
+  },
+
+  data () {
+    return {
+      messageEmpty: `Введите ${this.inputData.title}`,
+    }
+  },
+
+  computed: {
+    name: {
+      get() {
+        return this.value
+      },
+      set(value) {
+        this.$emit("input", value)
+      }
+    },
+    messageIncorrect() {
+      // return `Минимальная длина - ${this.v.$params.minLength.min} символов, сейчас: ${this.value.length}`
+      return `Минимальная длина - (если не email) символов, сейчас: ${this.value.length}`
+      //     {min: 6, message: 'Пароль должен быть не менее 6 символов', trigger: 'blur'}
+    }
   }
+
 }
 </script>
 
@@ -45,13 +69,13 @@ export default {
   &__input
     // @include text-field-and-drop-btn
     font-size: 1.6rem
-    padding: .5rem 1rem
+    padding: .5rem 1rem .7rem
     border: 1px solid rgb(216,218,220)
     border-radius: $borderRadius
     background-color: lighten($color-bg-body, 1%)
     width: 100%
-    font-family: "Montserrat Alternates", Avenir, Helvetica, Arial, sans-serif
     font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji
+    letter-spacing: .3px
     color: $color-dark-shade-75
     outline: none
     box-sizing: border-box
@@ -69,22 +93,22 @@ export default {
       border: 1px solid $color-dark-shade-30
       background-color: #fff
 
-
-  // &__error-msg
-  //   // color: $color-red
-  //   font-size: 1.2rem
-  //   opacity: 0
-  //   visibility: hidden
-  //   &.invalid
-  //     opacity: 1
-  //     visibility: visible
+  &.invalid
+    margin-bottom: .5rem
+    input
+      border-color: $color-red
 
   label
     display: inline-block
     margin-bottom: .5rem
     margin-left: .3rem
-    font-size: 1.4rem
+    font-size: 1.6rem
     user-select: none
+  label.required
+    &:after
+      padding-left: 5px
+      color: $color-red
+      content: "*"
 
   // &__icon
   //   position: absolute
@@ -98,6 +122,10 @@ export default {
   //   bottom: 0
   //   right: 1px
   //   @include text-linear-gradient
+
+  &__error-msg
+    color: $color-red
+    font-size: 1.4rem
 
 // label left
 .text-field.label-left
@@ -115,8 +143,13 @@ export default {
   .text-field__input
     width: calc(100% - #{$width-label})
 
+
+// label bold
 .text-field.label_bold
   label
     font-weight: bold
+
+
+
 
 </style>

@@ -4,9 +4,14 @@ const keys = require('../keys')
 const User = require('../models/user.model')
 
 module.exports.login = async (req, res) => {
-  const { login, password } = req.body
+  const { loginOrEmail, password } = req.body
 
-  const candidate = await User.findOne({login})
+  let candidate = await User.findOne({login: loginOrEmail})
+
+  // если по логину не нашлось пользователя, то ищем по email
+  if (!candidate) {
+    candidate = await User.findOne({email: loginOrEmail})
+  }
 
   if (candidate) {
     const isPasswordCorrect = bcrypt.compareSync(password, candidate.password)
@@ -28,16 +33,20 @@ module.exports.login = async (req, res) => {
 }
 
 module.exports.createUser = async (req, res) => {
-  const { login, password } = req.body
-  const candidate = await User.findOne({login})
+  const { login, email, password } = req.body
+  const candidateLogin = await User.findOne({login})
+  const candidateEmail = await User.findOne({email})
 
-  if (candidate) {
+  if (candidateLogin) {
     res.status(409).json({message: 'Такой login уже занят'})
+  } else if (candidateEmail) {
+    res.status(409).json({message: 'Такой email уже занят'})
   } else {
     const salt = bcrypt.genSaltSync(10)
 
     const user = new User({
       login,
+      email,
       password: bcrypt.hashSync(password, salt)
     })
 
