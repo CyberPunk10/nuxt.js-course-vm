@@ -99,7 +99,7 @@ export default function(el, customSettings) {
     startTime = new Date().getTime()
     if (isMouse) isMouseDown = true // поддержка мыши
     targetStartSwipe = e.target
-    console.log('start')
+    console.log('start swipe')
     el.addEventListener(events.move, checkMove)
   }
 
@@ -107,7 +107,7 @@ export default function(el, customSettings) {
   // @param e {Event} - получает событие.
   const checkMove = function(e) {
     if (isMouse && !isMouseDown) return // выход из функции, если мышь перестала быть активна во время движения
-    console.log('move')
+    console.log('move swipe')
     let event = eventsUnify(e)
     distX = event.pageX - startX
     distY = event.pageY - startY
@@ -118,7 +118,7 @@ export default function(el, customSettings) {
   // Обработчик окончания касания указателем.
   // @param e {Event} - получает событие.
   let checkEnd = function(e) {
-    console.log('end')
+    console.log('end swipe')
     if (isMouse && !isMouseDown) { // выход из функции и сброс проверки нажатия мыши
       isMouseDown = false
       el.removeEventListener(events.move, checkMove)
@@ -168,6 +168,7 @@ export default function(el, customSettings) {
   el.addEventListener(events.start, checkStart)
   el.addEventListener(events.end, checkEnd)
   if(support.pointer && support.touch) {
+    // lostpointercapture - Событие запускается при освобождении захваченного указателя
     el.addEventListener('lostpointercapture', checkEnd)
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="container-yellow layout-scrollbar-yellow-container layout-cell-yellow-container">
+  <div class="container-yellow">
 
     <IndexFormSport
       v-for="(formSport, index) in allFormsSport" :key="index"
@@ -25,16 +25,33 @@
         return this.$store.getters['challengeForms/allFormsSport']
       }
     },
+
+    mounted(){
+      // custom body color
+      document.body.classList.add('custom-bgcolor')
+      const $mainContent = document.querySelector('.layout-wrapper>.main-container>.main-content')
+      $mainContent.classList.add('layout-scrollbar-yellow-container', 'layout-cell-yellow-container')
+      $mainContent.classList.remove('layout-scrollbar', 'layout-cell')
+    },
+    beforeDestroy() {
+      // return default body color
+      document.body.classList.remove('custom-bgcolor')
+      const $mainContent = document.querySelector('.layout-wrapper>.main-container>.main-content')
+      $mainContent.classList.add('layout-scrollbar', 'layout-cell')
+      $mainContent.classList.remove('layout-scrollbar-yellow-container', 'layout-cell-yellow-container')
+    }
+
   }
 </script>
 
 
 <style lang="sass">
-$width-first-column-grid: 7rem
+body.custom-bgcolor
+  background-color: var(--theme-color-yellow)
+  .layout-wrapper>.main-container
+    background-color: transparent
+
 .container-yellow
-  // border-top: 1px solid $color-dark-shade-10
-  // border-left: 1px solid $color-dark-shade-10
-  background-color: $theme-color-yellow
   color: #e6e6e6
 
 .form-sport-component

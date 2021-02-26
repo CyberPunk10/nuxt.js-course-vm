@@ -71,26 +71,24 @@ export default {
     getScrollbar()
 
     // swipe
-    swipe(document, { maxTime: 1000, minTime: 10, maxDist: 150,  minDist: 60 })
+    const $layout = document.querySelector('.layout-wrapper')
+    swipe($layout, { maxTime: 1000, minTime: 10, maxDist: 150,  minDist: 60 })
+    $layout.addEventListener("swipe", this.handleSwipe)
 
-    document.addEventListener("swipe", function(e) {
-      // console.log(e.detail.full.type)
-      const layout = document.querySelector('.layout-wrapper')
-      const ignoreSwipe = e.detail.targetStartSwipe.closest('.layout-swipe-ignore')
-
-      switch (e.detail.dir) {
-        case 'right':
-          if (!ignoreSwipe) layout.dataset.sidebarActive = 'true'
-          break
-        case 'left':
-          if (!ignoreSwipe) layout.dataset.sidebarActive = 'false'
-          break
-      }
-    })
-
-    // addEventListener Scroll
-    document.querySelector('.main-content').addEventListener('scroll', this.handleScroll) // надо ещё удалить этот listener (?)
+    // addEventListener Scroll (show/hidden header)
+    document.querySelector('.layout-wrapper>.main-container>.main-content').addEventListener('scroll', this.handleScroll)
   },
+
+  // (не нужно удалять listeners, так как будет удален сам DOM-элемент)
+  // beforeDestroy() {
+  //   // const $layout = document.querySelector('.layout-wrapper')
+
+  //   // swipe
+  //   // $layout.removeEventListener("swipe", this.handleSwipe)
+
+  //   // removeEventListener Scroll (show/hidden header) (не нужно удалять listener, так как будет удален сам DOM-элемент)
+  //   // document.querySelector('.layout-wrapper>.main-container>.main-content').removeEventListener('scroll', this.handleScroll)
+  // },
 
   methods: {
     handleClickSidebarToggle: function(event) {
@@ -104,8 +102,26 @@ export default {
       }
     },
 
-    handleScroll(e) {
+    // (show/hidden header)
+    handleSwipe(e) {
+      // console.log(e.detail.full.type)
+      // console.log(e.detail)
 
+      const layout = document.querySelector('.layout-wrapper')
+      const ignoreSwipe = e.detail.targetStartSwipe.closest('.layout-swipe-ignore')
+
+      switch (e.detail.dir) {
+        case 'right':
+          if (!ignoreSwipe) layout.dataset.sidebarActive = 'true'
+          break
+        case 'left':
+          if (!ignoreSwipe) layout.dataset.sidebarActive = 'false'
+          break
+      }
+    },
+
+    // (show/hidden header)
+    handleScroll(e) {
       if (document.documentElement.clientWidth < 480) {
         const $layout = document.querySelector('.layout-wrapper')
         let scrolled = e.target.scrollTop
