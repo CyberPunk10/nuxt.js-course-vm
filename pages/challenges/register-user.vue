@@ -56,7 +56,7 @@ export default {
   head: {
     title: `Создать пользователя | ${process.env.appName}`
   },
-  layout: 'layoutMainChallenges',
+  layout: 'layout-main-challenges',
 
   data() {
     return {

@@ -18,14 +18,14 @@
     head: {
       title: `Challenges | ${process.env.appName}`
     },
-    layout: 'layoutMainChallenges',
-    middleware: ['scroll-top-to-start'],
+    layout: 'layout-main-challenges',
     computed: {
       allFormsSport () {
         return this.$store.getters['challengeForms/allFormsSport']
       }
     },
 
+    // вместо этого проверять какой роут в layout и там подставлять класс
     mounted(){
       // custom body color
       document.body.classList.add('custom-bgcolor')
@@ -50,6 +50,8 @@ body.custom-bgcolor
   background-color: var(--theme-color-yellow)
   .layout-wrapper>.main-container
     background-color: transparent
+    @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
+      background-color: var(--theme-color-yellow)
 
 .container-yellow
   color: #e6e6e6

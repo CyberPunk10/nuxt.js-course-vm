@@ -35,9 +35,9 @@ export const state = () => ({
       onFooterMobile: true
     },
     {
-      name: 'layoutMainChallenges',
+      name: 'page-challenges-test-scroll',
       icon: 'fas fa-user-friends',
-      url: '/layout-main-challenges',
+      url: '/page-challenges-test-scroll',
       onSidenav: true,
     },
     {

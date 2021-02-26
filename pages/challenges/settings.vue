@@ -20,7 +20,7 @@ export default {
   head: {
     title: `Challenges | ${process.env.appName}`
   },
-  layout: 'layoutMainChallenges',
+  layout: 'layout-main-challenges',
 
   methods: {
 

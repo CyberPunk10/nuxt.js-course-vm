@@ -26,7 +26,7 @@ export default {
     title: `my profile | ${process.env.appName}`
   },
 
-  layout: 'layoutMainChallenges',
+  layout: 'layout-main-challenges',
 
 }
 </script>

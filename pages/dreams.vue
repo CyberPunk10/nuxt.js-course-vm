@@ -9,7 +9,7 @@
 <script>
 import { email, required, minLength } from 'vuelidate/lib/validators'
 export default {
-  layout: 'emptyCenter',
+  layout: 'empty-center',
   head: { title: 'Dreams' },
 
   data () {

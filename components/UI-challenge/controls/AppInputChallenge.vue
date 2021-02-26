@@ -51,9 +51,15 @@ export default {
       }
     },
     messageIncorrect() {
-      // return `Минимальная длина - ${this.v.$params.minLength.min} символов, сейчас: ${this.value.length}`
-      return `Минимальная длина - (если не email) символов, сейчас: ${this.value.length}`
-      //     {min: 6, message: 'Пароль должен быть не менее 6 символов', trigger: 'blur'}
+      // если есть валидация по длине, то выводим сколько символов необходимо
+      if ('minLength' in this.v) {
+        return `${this.inputData.title} должен быть не менее ${this.v.$params.minLength.min} символов, сейчас: ${this.value.length}`
+      }
+      // если есть валидация по email, то выводим требования к написанию почты
+      if ('email' in this.v) {
+        return `${this.inputData.title} должен содержать символ "@". Например myemail@ya.ru`
+      }
+      return `Введите корректный ${this.inputData.title}`
     }
   }
 
@@ -102,7 +108,7 @@ export default {
     display: inline-block
     margin-bottom: .5rem
     margin-left: .3rem
-    font-size: 1.6rem
+    font-size: 1.4rem
     user-select: none
   label.required
     &:after
