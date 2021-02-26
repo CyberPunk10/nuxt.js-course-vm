@@ -50,8 +50,8 @@ body.custom-bgcolor
   background-color: var(--theme-color-yellow)
   .layout-wrapper>.main-container
     background-color: transparent
-    @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
-      background-color: var(--theme-color-yellow)
+    // @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
+    //   background-color: var(--theme-color-yellow)
 
 .container-yellow
   color: #e6e6e6

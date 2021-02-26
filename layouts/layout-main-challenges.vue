@@ -73,7 +73,7 @@ export default {
 
     // swipe
     const $layout = document.querySelector('.layout-wrapper')
-    console.log($layout)
+    // console.log($layout)
     swipe($layout, { maxTime: 1000, minTime: 10, maxDist: 150,  minDist: 60 })
     $layout.addEventListener("swipe", this.handleSwipe)
 
@@ -106,7 +106,6 @@ export default {
       }
     },
 
-    // (show/hidden header)
     handleSwipe(e) {
       // console.log(e.detail.full.type)
       // console.log(e.detail)
@@ -193,8 +192,8 @@ export default {
     width: 100%
     overflow: hidden // (без header и sidebar, потому что нужно показывать контекстное меню под аватаркой и подсказки)
 
-    @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
-      background-color: $color-bg-body
+    // @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
+    //   background-color: $color-bg-body
 
     @media screen and (min-width: $tableWidth)
       width: auto
@@ -278,7 +277,7 @@ export default {
         left: $sidebarWidthTable
       @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
         left: $sidebarWidthPhone
-        background-color: $color-bg-body-not-active
+        // background-color: $color-bg-body-not-active
       @media screen and (max-width: calc(#{$smPhoneWidth} - 1px)) // < 320px
         left: calc(100% - .5rem)
 
@@ -292,7 +291,7 @@ export default {
             width: $sidebarWidthTable
             max-width: $sidebarWidthTable
             .sidebar-main
-              background-color: #fff
+              // background-color: #fff
               box-shadow: 2px 2px 11px rgba(88,88,88,.15)
               // box-shadow: 1px 1px 8px rgba(88, 88, 88, 0.2)
 
