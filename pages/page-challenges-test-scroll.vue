@@ -13,10 +13,10 @@
 <script>
 export default {
   head: {
-    title: `layoutMainChallenges | ${process.env.appName}`
+    title: `page-challenges-test-scroll | ${process.env.appName}`
   },
 
-  layout: 'layoutMainChallenges',
+  layout: 'layout-main-challenges',
 
   // async asyncData({ store }) {
   //   const posts = await store.dispatch('post/fetch')

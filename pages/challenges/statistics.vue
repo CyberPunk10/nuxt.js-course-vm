@@ -11,7 +11,7 @@ export default {
   head: {
     title: `Statistics | ${process.env.appNameChallenges}`
   },
-  layout: 'layoutMainChallenges',
+  layout: 'layout-main-challenges',
 
   methods: {
 

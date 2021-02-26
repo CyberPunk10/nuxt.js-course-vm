@@ -165,12 +165,11 @@ export default function(el, customSettings) {
   if ((support.pointer && !support.touch) || events.type === "mouse") isMouse = true
 
   // добавление обработчиков на элемент
+  // start
   el.addEventListener(events.start, checkStart)
-  el.addEventListener(events.end, checkEnd)
-  if(support.pointer && support.touch) {
-    // lostpointercapture - Событие запускается при освобождении захваченного указателя
-    el.addEventListener('lostpointercapture', checkEnd)
-  }
+  // end
+  if(support.pointer && support.touch) el.addEventListener('lostpointercapture', checkEnd) // lostpointercapture - Событие запускается при освобождении захваченного указателя
+  else el.addEventListener(events.end, checkEnd)
 }
 
 

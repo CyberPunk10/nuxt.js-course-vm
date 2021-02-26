@@ -26,6 +26,7 @@
 import swipe from '@/common/swipe'
 
 export default {
+  name: 'layout-main-challenges', // Иначе ошибка: [Vue warn]: Invalid component name: "layouts/layout-main-challenges.vue". Component names should conform to valid custom element name in html5 specification.
   data () {
     return {
       scrollPrev: 0, // for event swipe
@@ -72,14 +73,17 @@ export default {
 
     // swipe
     const $layout = document.querySelector('.layout-wrapper')
+    // console.log($layout)
     swipe($layout, { maxTime: 1000, minTime: 10, maxDist: 150,  minDist: 60 })
     $layout.addEventListener("swipe", this.handleSwipe)
 
     // addEventListener Scroll (show/hidden header)
-    document.querySelector('.layout-wrapper>.main-container>.main-content').addEventListener('scroll', this.handleScroll)
+    const $MainContent = document.querySelector('.layout-wrapper>.main-container>.main-content')
+    $MainContent.addEventListener('scroll', this.handleScroll)
+    // $MainContent.scrollTop = 1000
   },
 
-  // (не нужно удалять listeners, так как будет удален сам DOM-элемент)
+  // (не нужно удалять listeners, так как будет удален сам DOM-элемент, на которые повешаны эти слушатели)
   // beforeDestroy() {
   //   // const $layout = document.querySelector('.layout-wrapper')
 
@@ -102,7 +106,6 @@ export default {
       }
     },
 
-    // (show/hidden header)
     handleSwipe(e) {
       // console.log(e.detail.full.type)
       // console.log(e.detail)
@@ -170,9 +173,9 @@ export default {
 
   &>.sidebar
     z-index: 999
-    width: $sidebarWidthIcon
-    @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
-      width: $sidebarWidthPhone
+    width: 0
+    // @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
+      // width: $sidebarWidthPhone
     @media screen and (min-width: $tableWidth)
       width: $sidebarWidthIcon
     .sidebar-main
@@ -187,8 +190,10 @@ export default {
   &>.main-container
     right: 0
     width: 100%
-    background-color: $color-bg-body
     overflow: hidden // (без header и sidebar, потому что нужно показывать контекстное меню под аватаркой и подсказки)
+
+    // @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
+    //   background-color: $color-bg-body
 
     @media screen and (min-width: $tableWidth)
       width: auto
@@ -272,7 +277,7 @@ export default {
         left: $sidebarWidthTable
       @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
         left: $sidebarWidthPhone
-        background-color: $color-bg-body-not-active
+        // background-color: $color-bg-body-not-active
       @media screen and (max-width: calc(#{$smPhoneWidth} - 1px)) // < 320px
         left: calc(100% - .5rem)
 
@@ -286,7 +291,7 @@ export default {
             width: $sidebarWidthTable
             max-width: $sidebarWidthTable
             .sidebar-main
-              background-color: #fff
+              // background-color: #fff
               box-shadow: 2px 2px 11px rgba(88,88,88,.15)
               // box-shadow: 1px 1px 8px rgba(88, 88, 88, 0.2)
 
@@ -311,6 +316,12 @@ export default {
         padding-top: 0
 
 
+
 // HEADER продолжает прыгать!!!
-// SWIPE продолжает работать на других layout!!!
+
+// (решено) SWIPE продолжает работать на других layout!!!
+
+// под логином при входе может быть email, поэтому может получиться ситуация,
+// когда найдется другой пользователь,
+// и это требует дополнительных проверок при создании пользователя (?)
 </style>

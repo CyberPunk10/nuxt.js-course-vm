@@ -34,6 +34,9 @@ module.exports.login = async (req, res) => {
 
 module.exports.createUser = async (req, res) => {
   const { login, email, password } = req.body
+  // под логином при входе может быть email, поэтому может получиться ситуация,
+  // когда найдется другой пользователь,
+  // и это требует дополнительных проверок при создании пользователя (?)
   const candidateLogin = await User.findOne({login})
   const candidateEmail = await User.findOne({email})
 
