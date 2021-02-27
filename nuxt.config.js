@@ -21,11 +21,6 @@ export default {
     '~/api/index.js'
   ],
 
-  // router: {
-  //   // Run the middleware/scroll-top-to-start.js on every page
-  //   middleware: 'scroll-top-to-start'
-  // },
-
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
     'element-ui/lib/theme-chalk/index.css',

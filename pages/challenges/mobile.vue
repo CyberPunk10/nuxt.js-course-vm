@@ -19,6 +19,8 @@
       title: `Challenges | ${process.env.appName}`
     },
     layout: 'layout-main-challenges',
+    // middleware: ['scroll-top-to-start'],
+
     computed: {
       allFormsSport () {
         return this.$store.getters['challengeForms/allFormsSport']

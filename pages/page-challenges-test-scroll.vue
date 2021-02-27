@@ -17,6 +17,7 @@ export default {
   },
 
   layout: 'layout-main-challenges',
+  // middleware: ['scroll-top-to-start'],
 
   // async asyncData({ store }) {
   //   const posts = await store.dispatch('post/fetch')

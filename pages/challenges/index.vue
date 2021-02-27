@@ -17,8 +17,7 @@ export default {
     title: `Challenges | ${process.env.appName}`
   },
   layout: 'layout-main-challenges',
-  middleware: ['scroll-top-to-start'],
-  
+
   methods: {
 
   }
