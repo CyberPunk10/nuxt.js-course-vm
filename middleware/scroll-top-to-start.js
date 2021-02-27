@@ -1,11 +1,18 @@
-export default function ({store, redirect}) {
-  // if (!store.getters['auth/isAuthenticated']) {
-  //   redirect('/admin/login?message=login')
-  // }
-  console.log('scroll-top-to-start (middleware)')
-  // ниже способ не работает, когда обновляешь придя с другого layout (document is not defined)
-  // const $MainContent = document.querySelector('.layout-wrapper>.main-container>.main-content')
-  // if ($MainContent) $MainContent.scrollTop = 0
+// export default function ({store, route}) {
+export default function (context) {
+  console.log('[middleware] scroll-top-to-start')
+
+  // если выполнение происходит не на сервере, а на клиенте, то..
+  if (!process.server) {
+    // console.log("middleware from client side")
+
+    const $MainContent = document.querySelector('.layout-wrapper>.main-container>.main-content')
+    if ($MainContent) {
+      $MainContent.style.scrollBehavior = 'auto' // отменяем плавность прокрутки, установленную в css (scroll-behavior: smooth)
+      $MainContent.scrollTop = 0
+      $MainContent.style.scrollBehavior = ''
+    }
+  }
 }
 
 // export default function (context) {

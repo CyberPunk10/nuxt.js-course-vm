@@ -2,7 +2,6 @@
   <div class="layout-wrapper main-container_transform-x"
     data-sidebar-active="false"
   >
-
     <Header />
 
     <Sidebar />
@@ -32,6 +31,7 @@ export default {
       scrollPrev: 0, // for event swipe
     }
   },
+  middleware: ['class', 'scroll-top-to-start'],
   computed: {
     error() {
       return this.$store.getters.error
@@ -52,22 +52,22 @@ export default {
 
     function getScrollbar () {
 
-      var parent = document.createElement("div");
-      parent.setAttribute("style", "width:30px; height:30px;");
-      parent.classList.add('scrollbar-test');
+      const parent = document.createElement("div")
+      parent.setAttribute("style", "width:30px; height:30px;")
+      parent.classList.add('scrollbar-test')
 
-      var child = document.createElement("div");
-      child.setAttribute("style", "width:100%; height:40px");
-      parent.appendChild(child);
-      document.body.appendChild(parent);
+      const child = document.createElement("div")
+      child.setAttribute("style", "width:100%; height:40px")
+      parent.appendChild(child)
+      document.body.appendChild(parent)
 
       // Measure the child element, if it is not
       // 30px wide the scrollbars are obtrusive.
-      var scrollbarWidth = 30 - parent.firstChild.clientWidth;
+      const scrollbarWidth = 30 - parent.firstChild.clientWidth
       if(scrollbarWidth) {
-        document.body.classList.add("layout-scrollbar-obtrusive");
+        document.body.classList.add("layout-scrollbar-obtrusive")
       }
-      document.body.removeChild(parent);
+      document.body.removeChild(parent)
     }
     getScrollbar()
 
@@ -107,8 +107,7 @@ export default {
     },
 
     handleSwipe(e) {
-      // console.log(e.detail.full.type)
-      // console.log(e.detail)
+      // console.log(e.detail.full.type, e.detail)
 
       const layout = document.querySelector('.layout-wrapper')
       const ignoreSwipe = e.detail.targetStartSwipe.closest('.layout-swipe-ignore')

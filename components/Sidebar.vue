@@ -28,6 +28,8 @@
           :link="link"
         />
       </div>
+      
+      <p> test: {{ bodyClass }}</p>
 
       <!-- <div class="separator"></div> -->
 
@@ -57,6 +59,11 @@ export default {
   computed: {
     navLinks () {
       return this.$store.getters['sidebarLayoutChellanges/sidenavLinks']
+    },
+
+    bodyClass() {
+      // console.log(this.$store.getters['class/bodyClassCurrent'])
+      return this.$store.getters['class/bodyClassCurrent']
     }
   },
   methods: {
