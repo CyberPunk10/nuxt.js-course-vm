@@ -29,6 +29,7 @@ export default {
   data () {
     return {
       scrollPrev: 0, // for event swipe
+      scrollTimer: null // for event scroll hidden header
     }
   },
   middleware: ['class', 'scroll-top-to-start'],
@@ -98,12 +99,14 @@ export default {
     handleClickSidebarToggle: function(event) {
       console.log('click layout (layoutMainChallenges.vue)', event.target)
 
-      if (document.documentElement.clientWidth < 768) {
-        const layout = document.querySelector('.layout-wrapper')
-        if (layout.dataset.sidebarActive === 'true' ) {
-            layout.dataset.sidebarActive = 'false'
-        }
-      }
+      // если оставить так, ток не будет работать swipe при такой ширине,
+      // потому что после свайпа сразу происходит клик по .main-container
+      // if (document.documentElement.clientWidth < 768) {
+      //   const layout = document.querySelector('.layout-wrapper')
+      //   if (layout.dataset.sidebarActive === 'true' ) {
+      //       layout.dataset.sidebarActive = 'false'
+      //   }
+      // }
     },
 
     handleSwipe(e) {
@@ -124,16 +127,34 @@ export default {
 
     // (show/hidden header)
     handleScroll(e) {
-      if (document.documentElement.clientWidth < 480) {
-        const $layout = document.querySelector('.layout-wrapper')
-        let scrolled = e.target.scrollTop
-
-        if (scrolled > 100 && scrolled > this.scrollPrev) $layout.classList.add('header-out')
-        else $layout.classList.remove('header-out')
-
-        this.scrollPrev = scrolled
+      // вызвать обработчик один раз после того как юзер закончить скроллить
+      if (this.scrollTimer) {
+          clearTimeout(this.scrollTimer);
       }
-      return
+
+      this.scrollTimer = setTimeout(function() {
+        this.scrollTimer = null
+        console.log('[scroll-hidden-header]')
+
+        // your event handling logic here
+        if (document.documentElement.clientWidth < 480) {
+          requestAnimationFrame(() => {
+
+            const $layout = document.querySelector('.layout-wrapper')
+            let scrolled = e.target.scrollTop
+
+            if (scrolled > 100 && scrolled > this.scrollPrev) {
+              $layout.classList.add('header-out')
+            } else {
+              $layout.classList.remove('header-out')
+            }
+            // console.log(e.target.scrollTop)
+
+            this.scrollPrev = scrolled
+          })
+        }
+      }, 50)
+
     }
   }
 }
@@ -311,8 +332,8 @@ export default {
       &>.sidebar .sidebar-main
         margin-top: .5rem
         height: calc(100% - 1rem)
-      &>.main-container .main-content
-        padding-top: 0
+      // &>.main-container .main-content
+        // padding-top: 0
 
 
 
@@ -323,4 +344,7 @@ export default {
 // под логином при входе может быть email, поэтому может получиться ситуация,
 // когда найдется другой пользователь,
 // и это требует дополнительных проверок при создании пользователя (?)
+
+// Оптимизация window scroll
+// https://gist.github.com/znamilya/f10fe9d8caf20a5e0e7f
 </style>
