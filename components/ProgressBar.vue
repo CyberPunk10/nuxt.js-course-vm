@@ -13,15 +13,16 @@ export default {
 <style lang="sass" scoped>
 .progress-bar
   position: fixed
-  top: calc(#{$header-height} + 5rem)
+  top: $header-height
   height: 7px
-  width: calc(100% + 3rem)
+  width: calc(100% + 3rem) // поправить (.container)
   display: flex
   justify-content: center
   align-items: center
   overflow: hidden
   z-index: 10000
   background-color: $color-green
+  transition: $transitionSidebar
 
   // для
   margin-left: -1.5rem

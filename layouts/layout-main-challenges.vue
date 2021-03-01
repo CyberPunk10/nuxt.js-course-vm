@@ -28,8 +28,8 @@ export default {
   name: 'layout-main-challenges', // Иначе ошибка: [Vue warn]: Invalid component name: "layouts/layout-main-challenges.vue". Component names should conform to valid custom element name in html5 specification.
   data () {
     return {
-      scrollPrev: 0, // for event swipe
-      scrollTimer: null // for event scroll hidden header
+      // scrollTimer: null // for event scroll hidden header
+
     }
   },
   middleware: ['class', 'scroll-top-to-start'],
@@ -80,6 +80,10 @@ export default {
 
     // addEventListener Scroll (show/hidden header)
     const $MainContent = document.querySelector('.layout-wrapper>.main-container>.main-content')
+    window.justExecuted = false
+    window.scrollPrev = 0 // for event swipe
+
+
     $MainContent.addEventListener('scroll', this.handleScroll)
     // $MainContent.scrollTop = 1000
   },
@@ -127,35 +131,32 @@ export default {
 
     // (show/hidden header)
     handleScroll(e) {
-      // вызвать обработчик один раз после того как юзер закончить скроллить
-      if (this.scrollTimer) {
-          clearTimeout(this.scrollTimer);
+      if(window.justExecuted) {
+        return
+      }
+      console.log('[scroll-hidden-header]', window.justExecuted)
+
+      // your event handling logic here
+      if (document.documentElement.clientWidth < 480) {
+        requestAnimationFrame(() => {
+
+          const $layout = document.querySelector('.layout-wrapper')
+          let scrolled = e.target.scrollTop
+
+          if (scrolled > 80 && scrolled > window.scrollPrev) $layout.classList.add('header-out')
+          else $layout.classList.remove('header-out')
+
+          window.scrollPrev = scrolled
+        })
       }
 
-      this.scrollTimer = setTimeout(function() {
-        this.scrollTimer = null
-        console.log('[scroll-hidden-header]')
+      window.justExecuted = true
 
-        // your event handling logic here
-        if (document.documentElement.clientWidth < 480) {
-          requestAnimationFrame(() => {
-
-            const $layout = document.querySelector('.layout-wrapper')
-            let scrolled = e.target.scrollTop
-
-            if (scrolled > 100 && scrolled > this.scrollPrev) {
-              $layout.classList.add('header-out')
-            } else {
-              $layout.classList.remove('header-out')
-            }
-            // console.log(e.target.scrollTop)
-
-            this.scrollPrev = scrolled
-          })
-        }
+      setTimeout(function() {
+        window.justExecuted = false
       }, 50)
-
     }
+
   }
 }
 </script>
@@ -334,6 +335,8 @@ export default {
         height: calc(100% - 1rem)
       // &>.main-container .main-content
         // padding-top: 0
+      .progress-bar
+        transform: translateY(-#{$header-height})
 
 
 
