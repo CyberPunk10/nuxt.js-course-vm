@@ -249,16 +249,15 @@ export default {
         padding-top: 0
 
     .underlay-main-container
+      z-index: -1
       position: fixed
       top: $header-height
       left: 0
       width: calc(100% - 1rem)
-      height: calc(100% - #{$header-height} * 2 - 1rem)
-      border-radius: $borderRadius
-      // background-color: red
-      margin: .5rem
+      height: calc(100% - #{$header-height} * 2)
+      border-radius: 1rem
+      border: .5rem solid $color-bg-body
       transition: $transitionSidebar
-      // transition: all 2s ease
 
 
   // если sidebar not static (need add .transform-x)
@@ -322,15 +321,10 @@ export default {
         left: $sidebarWidthTable
       @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
         left: $sidebarWidthPhone
-        // background-color: $color-bg-body-not-active
         .underlay-main-container
-          width: calc(100% - 1rem)
-          height: calc(100% - #{$header-height} * 2)
-          margin: 0
-          border: .5rem solid $color-bg-body-not-active
-          background-color: rgba(100,100,100,.3)
-          border-radius: 1rem
           z-index: 999
+          border-color: $color-bg-body-not-active
+          background-color: rgba(100,100,100,.3)
           left: $sidebarWidthPhone
         .container
           padding-left: 1.5rem
