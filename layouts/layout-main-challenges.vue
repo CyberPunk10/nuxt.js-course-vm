@@ -11,6 +11,7 @@
     >
       <div class="main-content layout-scrollbar layout-cell">
         <Nuxt class="container" />
+        <div class="underlay-main-container"></div>
       </div>
       <!-- <Nuxt class="main-content layout-scrollbar layout-cell container" /> -->
     </div>
@@ -138,7 +139,7 @@ export default {
       console.log('[scroll-hidden-header]', window.justExecuted)
 
       // your event handling logic here
-      if (document.documentElement.clientWidth < 480) {
+      if (document.documentElement.clientWidth < 480 ) {
         requestAnimationFrame(() => {
 
           const $layout = document.querySelector('.layout-wrapper')
@@ -180,7 +181,7 @@ export default {
   position: relative
   width: 100%
   height: 100vh
-  transition: $transitionSidebar // for bgc sidebar show
+  transition: $transitionDefault // for bgc sidebar show
 
   &>header,
   &>.sidebar,
@@ -247,6 +248,18 @@ export default {
       @media screen and (min-width: $phoneWidth)
         padding-top: 0
 
+    .underlay-main-container
+      position: fixed
+      top: $header-height
+      left: 0
+      width: calc(100% - 1rem)
+      height: calc(100% - #{$header-height} * 2 - 1rem)
+      border-radius: $borderRadius
+      // background-color: red
+      margin: .5rem
+      transition: $transitionSidebar
+      // transition: all 2s ease
+
 
   // если sidebar not static (need add .transform-x)
   &>.sidebar.transform-x
@@ -281,7 +294,7 @@ export default {
       background-color: $color-bg-body-not-active
     &>.sidebar
       // vars
-      $margin-left-sidebar: .5rem
+      $margin-left-sidebar: 1rem
 
       left: $margin-left-sidebar
       width: calc(#{$sidebarWidthPhone} - #{$margin-left-sidebar})
@@ -310,6 +323,17 @@ export default {
       @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
         left: $sidebarWidthPhone
         // background-color: $color-bg-body-not-active
+        .underlay-main-container
+          width: calc(100% - 1rem)
+          height: calc(100% - #{$header-height} * 2)
+          margin: 0
+          border: .5rem solid $color-bg-body-not-active
+          background-color: rgba(100,100,100,.3)
+          border-radius: 1rem
+          z-index: 999
+          left: $sidebarWidthPhone
+        .container
+          padding-left: 1.5rem
       @media screen and (max-width: calc(#{$smPhoneWidth} - 1px)) // < 320px
         left: calc(100% - .5rem)
 
