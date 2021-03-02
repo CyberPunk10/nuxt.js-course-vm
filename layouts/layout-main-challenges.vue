@@ -10,10 +10,12 @@
       @click="handleClickSidebarToggle"
     >
       <div class="main-content layout-scrollbar layout-cell">
-        <Nuxt class="container"/>
+        <Nuxt class="container" />
       </div>
       <!-- <Nuxt class="main-content layout-scrollbar layout-cell container" /> -->
     </div>
+
+    <ProgressBar :value="progress"/>
 
     <FooterMobile />
 
@@ -28,8 +30,7 @@ export default {
   name: 'layout-main-challenges', // Иначе ошибка: [Vue warn]: Invalid component name: "layouts/layout-main-challenges.vue". Component names should conform to valid custom element name in html5 specification.
   data () {
     return {
-      // scrollTimer: null // for event scroll hidden header
-
+      progress: 0,
     }
   },
   middleware: ['class', 'scroll-top-to-start'],
@@ -82,10 +83,10 @@ export default {
     const $MainContent = document.querySelector('.layout-wrapper>.main-container>.main-content')
     window.justExecuted = false
     window.scrollPrev = 0 // for event swipe
-
-
-    $MainContent.addEventListener('scroll', this.handleScroll)
-    // $MainContent.scrollTop = 1000
+    $MainContent.addEventListener('scroll', e => {
+      this.handleScrollHiddenHeader(e)
+      this.handleScrollPregressBar(e)
+    })
   },
 
   // (не нужно удалять listeners, так как будет удален сам DOM-элемент, на которые повешаны эти слушатели)
@@ -130,7 +131,7 @@ export default {
     },
 
     // (show/hidden header)
-    handleScroll(e) {
+    handleScrollHiddenHeader(e) {
       if(window.justExecuted) {
         return
       }
@@ -155,8 +156,21 @@ export default {
       setTimeout(function() {
         window.justExecuted = false
       }, 50)
-    }
+    },
 
+
+    handleScrollPregressBar (e) {
+      // console.log('[ProgressBar]')
+      requestAnimationFrame(() => {
+        let scrollPos = e.target.scrollTop
+        let winHeight = document.documentElement.clientHeight
+        let docHeight = e.target.scrollHeight
+        let perc = (100 * scrollPos) / (docHeight - winHeight)
+        // console.log(scrollPos, docHeight, winHeight, perc)
+        if (scrollPos + winHeight >= docHeight) this.progress = 100 // 100%
+        else this.progress = perc
+      })
+    }
   }
 }
 </script>
@@ -181,10 +195,9 @@ export default {
     right: 0
     height: $header-height
 
-  &>.sidebar
-    bottom: $header-height
+  &>.sidebar,
   &>.main-container
-    bottom: calc(#{$header-height} - #{$borderRadiusBig})
+    bottom: $header-height
 
   &>.sidebar,
   &>.main-container
@@ -230,11 +243,9 @@ export default {
       height: 100%
       overflow-x: hidden
       padding-top: $header-height
-      padding-bottom: $borderRadiusBig
       transition: padding .4s ease, width .4s ease, height .4s ease // надо закомментить чтобы переходы между страницами были не плавными // for padding! (иначе скачет)
       @media screen and (min-width: $phoneWidth)
         padding-top: 0
-        padding-bottom: 0
 
 
   // если sidebar not static (need add .transform-x)
@@ -270,7 +281,7 @@ export default {
       background-color: $color-bg-body-not-active
     &>.sidebar
       // vars
-      $margin-left-sidebar: 1.8rem
+      $margin-left-sidebar: .5rem
 
       left: $margin-left-sidebar
       width: calc(#{$sidebarWidthPhone} - #{$margin-left-sidebar})
@@ -329,7 +340,6 @@ export default {
     @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
       &>header
         transform: translateY(-#{$header-height})
-        border-radius: 0
       &>.sidebar .sidebar-main
         margin-top: .5rem
         height: calc(100% - 1rem)

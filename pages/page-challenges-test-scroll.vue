@@ -3,7 +3,6 @@
 
 
   <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit provident alias eos quos quis suscipit, voluptas natus recusandae!</p> <br> <p>Non ad eius quo veniam sit alias, expedita cum quam voluptatum corporis dolores blanditiis doloribus repellat dicta sint praesentium officiis voluptatem facere!</p> <br> <p>Alias minima dolorem fugiat odit magnam dolore voluptas itaque reprehenderit unde saepe eius aut, officia neque commodi, maiores possimus veniam dolores deserunt adipisci tempora. Neque accusantium dolores sint itaque in soluta, officiis culpa</p> <br> <p>harum velit eum optio laudantium nesciunt, vel architecto animi expedita explicabo recusandae qui dolore autem aliquid! Consequatur deleniti, beatae sunt numquam illum aliquid, eius porro magni odio eos recusandae! Doloribus quasi, asperiores rem veniam nam maxime, voluptate consectetur deserunt beatae dolorum mollitia necessitatibus hic error aut ea saepe corporis aspernatur rerum voluptas natus fugit porro! Rem dignissimos saepe delectus architecto, voluptatibus dolor sit at vitae voluptatem similique labore? Illum labore iure, hic dicta officiis ducimus quod et nostrum a beatae, repellat voluptas corrupti excepturi possimus eum exercitationem commodi, molestias ipsum quo repudiandae eveniet deserunt quia quisquam minus? Ipsum, eveniet aperiam! Id tempora modi tempore adipisci? Quidem labore, ullam, sapiente quae nesciunt expedita corrupti assumenda sit repudiandae temporibus cum praesentium voluptatum iusto provident, reiciendis quisquam voluptas ratione vitae?</p>
-  <ProgressBar :value="progress"/>
   <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit provident alias eos quos quis suscipit, voluptas natus recusandae!</p> <br> <p>Non ad eius quo veniam sit alias, expedita cum quam voluptatum corporis dolores blanditiis doloribus repellat dicta sint praesentium officiis voluptatem facere!</p> <br> <p>Alias minima dolorem fugiat odit magnam dolore voluptas itaque reprehenderit unde saepe eius aut, officia neque commodi, maiores possimus veniam dolores deserunt adipisci tempora. Neque accusantium dolores sint itaque in soluta, officiis culpa</p> <br> <p>harum velit eum optio laudantium nesciunt, vel architecto animi expedita explicabo recusandae qui dolore autem aliquid! Consequatur deleniti, beatae sunt numquam illum aliquid, eius porro magni odio eos recusandae! Doloribus quasi, asperiores rem veniam nam maxime, voluptate consectetur deserunt beatae dolorum mollitia necessitatibus hic error aut ea saepe corporis aspernatur rerum voluptas natus fugit porro! Rem dignissimos saepe delectus architecto, voluptatibus dolor sit at vitae voluptatem similique labore? Illum labore iure, hic dicta officiis ducimus quod et nostrum a beatae, repellat voluptas corrupti excepturi possimus eum exercitationem commodi, molestias ipsum quo repudiandae eveniet deserunt quia quisquam minus? Ipsum, eveniet aperiam! Id tempora modi tempore adipisci? Quidem labore, ullam, sapiente quae nesciunt expedita corrupti assumenda sit repudiandae temporibus cum praesentium voluptatum iusto provident, reiciendis quisquam voluptas ratione vitae?</p><br>
   <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit provident alias eos quos quis suscipit, voluptas natus recusandae!</p> <br> <p>Non ad eius quo veniam sit alias, expedita cum quam voluptatum corporis dolores blanditiis doloribus repellat dicta sint praesentium officiis voluptatem facere!</p> <br> <p>Alias minima dolorem fugiat odit magnam dolore voluptas itaque reprehenderit unde saepe eius aut, officia neque commodi, maiores possimus veniam dolores deserunt adipisci tempora. Neque accusantium dolores sint itaque in soluta, officiis culpa</p> <br> <p>harum velit eum optio laudantium nesciunt, vel architecto animi expedita explicabo recusandae qui dolore autem aliquid! Consequatur deleniti, beatae sunt numquam illum aliquid, eius porro magni odio eos recusandae! Doloribus quasi, asperiores rem veniam nam maxime, voluptate consectetur deserunt beatae dolorum mollitia necessitatibus hic error aut ea saepe corporis aspernatur rerum voluptas natus fugit porro! Rem dignissimos saepe delectus architecto, voluptatibus dolor sit at vitae voluptatem similique labore? Illum labore iure, hic dicta officiis ducimus quod et nostrum a beatae, repellat voluptas corrupti excepturi possimus eum exercitationem commodi, molestias ipsum quo repudiandae eveniet deserunt quia quisquam minus? Ipsum, eveniet aperiam! Id tempora modi tempore adipisci? Quidem labore, ullam, sapiente quae nesciunt expedita corrupti assumenda sit repudiandae temporibus cum praesentium voluptatum iusto provident, reiciendis quisquam voluptas ratione vitae?</p><br>
   <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit provident alias eos quos quis suscipit, voluptas natus recusandae!</p> <br> <p>Non ad eius quo veniam sit alias, expedita cum quam voluptatum corporis dolores blanditiis doloribus repellat dicta sint praesentium officiis voluptatem facere!</p> <br> <p>Alias minima dolorem fugiat odit magnam dolore voluptas itaque reprehenderit unde saepe eius aut, officia neque commodi, maiores possimus veniam dolores deserunt adipisci tempora. Neque accusantium dolores sint itaque in soluta, officiis culpa</p> <br> <p>harum velit eum optio laudantium nesciunt, vel architecto animi expedita explicabo recusandae qui dolore autem aliquid! Consequatur deleniti, beatae sunt numquam illum aliquid, eius porro magni odio eos recusandae! Doloribus quasi, asperiores rem veniam nam maxime, voluptate consectetur deserunt beatae dolorum mollitia necessitatibus hic error aut ea saepe corporis aspernatur rerum voluptas natus fugit porro! Rem dignissimos saepe delectus architecto, voluptatibus dolor sit at vitae voluptatem similique labore? Illum labore iure, hic dicta officiis ducimus quod et nostrum a beatae, repellat voluptas corrupti excepturi possimus eum exercitationem commodi, molestias ipsum quo repudiandae eveniet deserunt quia quisquam minus? Ipsum, eveniet aperiam! Id tempora modi tempore adipisci? Quidem labore, ullam, sapiente quae nesciunt expedita corrupti assumenda sit repudiandae temporibus cum praesentium voluptatum iusto provident, reiciendis quisquam voluptas ratione vitae?</p><br>
@@ -21,7 +20,6 @@ export default {
   },
 
   layout: 'layout-main-challenges',
-  // middleware: ['scroll-top-to-start'],
 
   // async asyncData({ store }) {
   //   const posts = await store.dispatch('post/fetch')
@@ -30,25 +28,11 @@ export default {
 
   data() {
     return {
-      progress: 0
     }
   },
 
   mounted() {
-    const $MainContent = document.querySelector('.layout-wrapper>.main-container>.main-content')
-    $MainContent.addEventListener('scroll', e => {
-      // console.log('[ProgressBar]')
-      requestAnimationFrame(() => {
-        let scrollPos = $MainContent.scrollTop
-        let winHeight = document.documentElement.clientHeight
-        let docHeight = $MainContent.scrollHeight
-        let perc = (100 * scrollPos) / (docHeight - winHeight)
-        this.progress = perc
-        // console.log(winHeight, docHeight)
-        // console.log(scrollPos, perc, this.progress)
-        // console.log(perc, this.progress)
-      })
-    })
+
   }
 }
 </script>
