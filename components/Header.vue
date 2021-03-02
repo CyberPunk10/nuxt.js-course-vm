@@ -143,8 +143,6 @@ header
   box-shadow: 0 0 2px rgba(88,88,88,.15)
   z-index: 9
   @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
-    border-bottom-left-radius: $borderRadius
-    border-bottom-right-radius: $borderRadius
     box-shadow: 0 0 4px rgba(88,88,88,.15)
 
   .header-for-sidebar,
@@ -238,8 +236,6 @@ header
         font-size: 1.4rem
         text-transform: none // возможно стоит изменить в источнике
         color: $color-dark-shade-75
-        @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
-          border-bottom-right-radius: $borderRadius
         &.mobile-hidden
           @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
             display: none
