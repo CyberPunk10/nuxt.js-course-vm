@@ -255,8 +255,9 @@ export default {
       left: 0
       width: calc(100% - 1rem)
       height: calc(100% - #{$header-height} * 2)
-      border-radius: 1rem
-      border: .5rem solid $color-bg-body
+      border-radius: 1.2rem
+      // border: .5rem solid $color-bg-body
+      border: .5rem solid transparent
       transition: $transitionSidebar
 
 
@@ -326,6 +327,7 @@ export default {
           border-color: $color-bg-body-not-active
           background-color: rgba(100,100,100,.3)
           left: $sidebarWidthPhone
+          // box-shadow: 4px 2px 4px rgba(0,0,0,.9101562)
         .container
           padding-left: 1.5rem
       @media screen and (max-width: calc(#{$smPhoneWidth} - 1px)) // < 320px
