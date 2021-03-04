@@ -1,6 +1,7 @@
 <template>
   <div class="layout-wrapper main-container_transform-x"
     data-sidebar-active="false"
+    ref="layout"
   >
     <Header />
 
@@ -9,7 +10,7 @@
     <div class="main-container"
       @click="handleClickSidebarToggle"
     >
-      <div class="main-content layout-scrollbar layout-cell">
+      <div class="main-content layout-scrollbar layout-cell" ref="mainContent">
         <Nuxt class="container" />
         <div class="underlay-main-container"></div>
       </div>
@@ -75,13 +76,15 @@ export default {
     getScrollbar()
 
     // swipe
-    const $layout = document.querySelector('.layout-wrapper')
+    // const $layout = document.querySelector('.layout-wrapper')
+    const $layout = this.$refs.layout
     // console.log($layout)
     swipe($layout, { maxTime: 1000, minTime: 10, maxDist: 150,  minDist: 60 })
     $layout.addEventListener("swipe", this.handleSwipe)
 
     // addEventListener Scroll (show/hidden header)
-    const $MainContent = document.querySelector('.layout-wrapper>.main-container>.main-content')
+    // const $MainContent = document.querySelector('.layout-wrapper>.main-container>.main-content')
+    const $MainContent = this.$refs.mainContent
     window.justExecuted = false
     window.scrollPrev = 0 // for event swipe
     $MainContent.addEventListener('scroll', e => {
@@ -118,15 +121,15 @@ export default {
     handleSwipe(e) {
       // console.log(e.detail.full.type, e.detail)
 
-      const layout = document.querySelector('.layout-wrapper')
+      const $layout = this.$refs.layout
       const ignoreSwipe = e.detail.targetStartSwipe.closest('.layout-swipe-ignore')
 
       switch (e.detail.dir) {
         case 'right':
-          if (!ignoreSwipe) layout.dataset.sidebarActive = 'true'
+          if (!ignoreSwipe) $layout.dataset.sidebarActive = 'true'
           break
         case 'left':
-          if (!ignoreSwipe) layout.dataset.sidebarActive = 'false'
+          if (!ignoreSwipe) $layout.dataset.sidebarActive = 'false'
           break
       }
     },
@@ -142,7 +145,7 @@ export default {
       if (document.documentElement.clientWidth < 480 ) {
         requestAnimationFrame(() => {
 
-          const $layout = document.querySelector('.layout-wrapper')
+          const $layout = this.$refs.layout
           let scrolled = e.target.scrollTop
 
           if (scrolled > 80 && scrolled > window.scrollPrev) $layout.classList.add('header-out')
@@ -195,6 +198,7 @@ export default {
   &>header
     right: 0
     height: $header-height
+    z-index: 9999
 
   &>.sidebar,
   &>.main-container
@@ -255,8 +259,9 @@ export default {
       left: 0
       width: calc(100% - 1rem)
       height: calc(100% - #{$header-height} * 2)
-      border-radius: 1rem
-      border: .5rem solid $color-bg-body
+      border-radius: 1.2rem
+      // background-color: rgba(100, 200, 300, .3)
+      border: .5rem solid transparent
       transition: $transitionSidebar
 
 
@@ -282,7 +287,7 @@ export default {
   // если main-container not static (need add .main-container_transform-x)
   &.main-container_transform-x
     &>.sidebar
-      z-index: 0
+      // z-index: 0
       @media screen and (min-width: $tableWidth)
         z-index: 1
 
@@ -325,7 +330,10 @@ export default {
           z-index: 999
           border-color: $color-bg-body-not-active
           background-color: rgba(100,100,100,.3)
+          // background-color: rgba(100, 200, 300, .3)
           left: $sidebarWidthPhone
+          // backdrop-filter: blur(2px) // This be the blur
+          // box-shadow: 4px 2px 4px rgba(0,0,0,.9101562)
         .container
           padding-left: 1.5rem
       @media screen and (max-width: calc(#{$smPhoneWidth} - 1px)) // < 320px

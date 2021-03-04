@@ -28,7 +28,7 @@
           :link="link"
         />
       </div>
-      
+
       <p> test: {{ bodyClass }}</p>
 
       <!-- <div class="separator"></div> -->
@@ -154,6 +154,9 @@ export default {
     // border-left: none
     box-shadow: 0 0 2px rgba(88,88,88,.15)
     transition: $transitionDefault
+    // &:hover
+    //   background-color: #fff
+
     @media screen and (min-width: $phoneWidth)
       border-top-left-radius: 0
       border-bottom-left-radius: 0
