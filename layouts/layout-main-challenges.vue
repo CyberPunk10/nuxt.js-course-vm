@@ -110,12 +110,12 @@ export default {
 
       // если оставить так, ток не будет работать swipe при такой ширине,
       // потому что после свайпа сразу происходит клик по .main-container
-      // if (document.documentElement.clientWidth < 768) {
-      //   const layout = document.querySelector('.layout-wrapper')
-      //   if (layout.dataset.sidebarActive === 'true' ) {
-      //       layout.dataset.sidebarActive = 'false'
-      //   }
-      // }
+      if (document.documentElement.clientWidth < 768) {
+        const $layout = this.$refs.layout
+        if ($layout.dataset.sidebarActive === 'true' ) {
+            $layout.dataset.sidebarActive = 'false'
+        }
+      }
     },
 
     handleSwipe(e) {
@@ -257,12 +257,14 @@ export default {
       position: fixed
       top: $header-height
       left: 0
-      width: calc(100% - 1rem)
+      width: 100%
       height: calc(100% - #{$header-height} * 2)
       border-radius: 1.2rem
-      // background-color: rgba(100, 200, 300, .3)
+      background-color: rgba(100, 200, 300, .3)
       border: .5rem solid transparent
       transition: $transitionSidebar
+      @media screen and (min-width: $phoneWidth)
+        height: calc(100% - #{$header-height})
 
 
   // если sidebar not static (need add .transform-x)
@@ -321,23 +323,32 @@ export default {
   // show
   &.main-container_transform-x[data-sidebar-active="true"]
     .main-container
-      left: $sidebarWidth
-      @media screen and (max-width: calc(#{$desktopWidth} - 1px)) // < 1280px
-        left: $sidebarWidthTable
-      @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
+      left: $sidebarWidthPhone
+      .underlay-main-container
         left: $sidebarWidthPhone
-        .underlay-main-container
-          z-index: 999
-          border-color: $color-bg-body-not-active
-          background-color: rgba(100,100,100,.3)
-          // background-color: rgba(100, 200, 300, .3)
-          left: $sidebarWidthPhone
-          // backdrop-filter: blur(2px) // This be the blur
-          // box-shadow: 4px 2px 4px rgba(0,0,0,.9101562)
-        .container
-          padding-left: 1.5rem
+        z-index: 999
+        // background-color: rgba(100,100,100,.3)
+        // background-color: rgba(100, 200, 300, .3)
+        // backdrop-filter: blur(2px) // This be the blur
+        // box-shadow: 4px 2px 4px rgba(0,0,0,.9101562)
+        border-color: $color-bg-body-not-active
+      // .container
+      //   padding-left: 1.5rem
       @media screen and (max-width: calc(#{$smPhoneWidth} - 1px)) // < 320px
         left: calc(100% - .5rem)
+      @media screen and (min-width: $phoneWidth)
+        left: $sidebarWidthTable
+        .underlay-main-container
+          left: $sidebarWidthTable
+          border-color: transparent
+        // .container
+        //   padding-left: 1.5rem
+      @media screen and (min-width: $desktopWidth) // >= 1280px
+        left: $sidebarWidth
+        .underlay-main-container
+          left: $sidebarWidth
+
+
 
   // hover sidebar
   &.main-container_transform-x[data-sidebar-active="false"],
