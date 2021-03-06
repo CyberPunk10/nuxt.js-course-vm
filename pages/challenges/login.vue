@@ -8,7 +8,7 @@
         :inputData="inputLoginData"
         :v="$v.formLogin.login"
         autofocus
-        placeholder="логин или email"
+        placeholder="Логин или Email"
       >{{inputLoginData.title}}:</AppInputChallenge>
         <!-- :class="{invalid: ($v.formLogin.login.$dirty && !$v.formLogin.login.required)}" -->
 
@@ -19,7 +19,7 @@
         :inputData="inputPasswordData"
         :v="$v.formLogin.password"
         type="password"
-        placeholder="пароль"
+        placeholder="Пароль"
       >{{inputPasswordData.title}}:</AppInputChallenge>
         <!-- :class="{invalid: ($v.formLogin.password.$dirty && !$v.formLogin.password.required)}" -->
 

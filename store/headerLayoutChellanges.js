@@ -2,19 +2,18 @@
 
 export const state = () => ({
   isHeaderOut: false,
-
 })
 
 export const mutations = {
-  toggleHeader(state) { state.isHeaderOut = !state.isHeaderOut },
-  closeHeader(state) { state.isHeaderOut = false },
-  openHeader(state) { state.isHeaderOut = true }
+  // toggleHeader(state) { state.isHeaderOut = !state.isHeaderOut },
+  addAttrHeaderOut(state) { state.isHeaderOut = true },
+  removeAttrHeaderOut(state) { state.isHeaderOut = false }
 }
 
 export const actions = {
-  toggleHeader({commit}) { commit('toggleHeader') },
-  closeHeader({commit}) { commit('closeHeader') },
-  openHeader({commit}) { commit('openHeader') }
+  // toggleHeader({commit}) { commit('toggleHeader') },
+  addAttrHeaderOut({commit}) { commit('addAttrHeaderOut') },
+  removeAttrHeaderOut({commit}) { commit('removeAttrHeaderOut') }
 }
 
 export const getters = {

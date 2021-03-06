@@ -1,6 +1,7 @@
 <template>
   <div class="layout-wrapper main-container_transform-x"
     :data-sidebar-active="isSidebarActive"
+    :data-header-out="isHeaderOut"
     ref="layout"
   >
     <Header />
@@ -12,7 +13,6 @@
         <Nuxt class="container" />
         <div class="underlay-main-container"
           @click="closeSidebar"
-          v-if="isSidebarActive"
         ></div>
       </div>
       <!-- <Nuxt class="main-content layout-scrollbar layout-cell container" /> -->
@@ -28,6 +28,7 @@
 
 <script>
 import swipe from '@/common/swipe'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'layout-main-challenges', // Иначе ошибка: [Vue warn]: Invalid component name: "layouts/layout-main-challenges.vue". Component names should conform to valid custom element name in html5 specification.
@@ -41,17 +42,13 @@ export default {
     error() {
       return this.$store.getters.error
     },
-    isSidebarActive () {
-        return this.$store.getters['sidebarLayoutChellanges/isSidebarActive']
-    },
-    // isSidebarActive: {
-    //   get() {
+    // isSidebarActive () {
     //     return this.$store.getters['sidebarLayoutChellanges/isSidebarActive']
-    //   },
-    //   set(newValue) {
-    //     this.$store.dispatch('sidebarLayoutChellanges/setValueSidebarActive', newValue)
-    //   }
-    // }
+    // },
+    ...mapGetters({
+      isSidebarActive: 'sidebarLayoutChellanges/isSidebarActive',
+      isHeaderOut: 'headerLayoutChellanges/isHeaderOut'
+    }),
   },
   watch: {
     error(value) {
@@ -87,21 +84,20 @@ export default {
     }
     getScrollbar()
 
-    // swipe
+    // Swipe
     // const $layout = document.querySelector('.layout-wrapper')
     const $layout = this.$refs.layout
-    // console.log($layout)
     swipe($layout, { maxTime: 1000, minTime: 10, maxDist: 150,  minDist: 60 })
     $layout.addEventListener("swipe", this.handleSwipe)
 
-    // addEventListener Scroll (show/hidden header)
+    // Scroll (show/hidden header)
     // const $MainContent = document.querySelector('.layout-wrapper>.main-container>.main-content')
     const $MainContent = this.$refs.mainContent
     window.justExecuted = false
     window.scrollPrev = 0 // for event swipe
     $MainContent.addEventListener('scroll', e => {
       this.handleScrollHiddenHeader(e)
-      this.handleScrollPregressBar(e)
+      this.handleScrollProgressBar(e)
     })
   },
 
@@ -117,14 +113,9 @@ export default {
   // },
 
   methods: {
-    closeSidebar: function(event) {
+    closeSidebar: function() {
       if (document.documentElement.clientWidth < 768) {
         this.$store.dispatch('sidebarLayoutChellanges/closeSidebar')
-
-        // const $layout = this.$refs.layout
-        // if ($layout.dataset.sidebarActive === 'true' ) {
-        //     $layout.dataset.sidebarActive = 'false'
-        // }
       }
     },
 
@@ -158,11 +149,13 @@ export default {
       if (document.documentElement.clientWidth < 480 ) {
         requestAnimationFrame(() => {
 
-          const $layout = this.$refs.layout
           let scrolled = e.target.scrollTop
 
-          if (scrolled > 80 && scrolled > window.scrollPrev) $layout.classList.add('header-out')
-          else $layout.classList.remove('header-out')
+          if (scrolled > 80 && scrolled > window.scrollPrev) {
+            this.$store.dispatch('headerLayoutChellanges/addAttrHeaderOut')
+          } else {
+            this.$store.dispatch('headerLayoutChellanges/removeAttrHeaderOut')
+          }
 
           window.scrollPrev = scrolled
         })
@@ -176,7 +169,7 @@ export default {
     },
 
 
-    handleScrollPregressBar (e) {
+    handleScrollProgressBar (e) {
       // console.log('[ProgressBar]')
       requestAnimationFrame(() => {
         let scrollPos = e.target.scrollTop
@@ -211,7 +204,7 @@ export default {
   &>header
     right: 0
     height: $header-height
-    z-index: 9999
+    z-index: 9
 
   &>.sidebar,
   &>.main-container
@@ -273,7 +266,7 @@ export default {
       width: 100%
       height: calc(100% - #{$header-height} * 2)
       border-radius: 1.2rem
-      background-color: rgba(100, 200, 300, .3)
+      // background-color: rgba(100, 200, 300, .3)
       border: .5rem solid transparent
       transition: $transitionSidebar
       @media screen and (min-width: $phoneWidth)
@@ -308,7 +301,7 @@ export default {
 
 
   // show sidebar
-  &[data-sidebar-active="true"]
+  &[data-sidebar-active]
     @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
       background-color: $color-bg-body-not-active
     &>.sidebar
@@ -334,31 +327,34 @@ export default {
       box-shadow: 4px 2px 4px rgba(0,0,0,.101562)
 
   // show
-  &.main-container_transform-x[data-sidebar-active="true"]
+  &.main-container_transform-x[data-sidebar-active]
     .main-container
       left: $sidebarWidthPhone
       .underlay-main-container
         left: $sidebarWidthPhone
         z-index: 999
-        background-color: rgba(100,100,100,.3)
+        background-color: rgba(150,150,150,.7)
         // background-color: rgba(100, 200, 300, .3)
         // backdrop-filter: blur(2px) // This be the blur
         // box-shadow: 4px 2px 4px rgba(0,0,0,.9101562)
         border-color: $color-bg-body-not-active
         @media screen and (min-width: $phoneWidth)
           background-color: transparent
-      // .container
-      //   padding-left: 1.5rem
+        @media screen and (min-width: $tableWidth)
+          z-index: -1
 
       @media screen and (max-width: calc(#{$smPhoneWidth} - 1px)) // < 320px
         left: calc(100% - .5rem)
-      @media screen and (min-width: $phoneWidth)
+        .underlay-main-container
+          left: 100%
+      @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
+        .container
+          padding-left: 1.5rem
+      @media screen and (min-width: $phoneWidth) // >= 480px
         left: $sidebarWidthTable
         .underlay-main-container
           left: $sidebarWidthTable
           border-color: transparent
-        // .container
-        //   padding-left: 1.5rem
       @media screen and (min-width: $desktopWidth) // >= 1280px
         left: $sidebarWidth
         .underlay-main-container
@@ -366,8 +362,8 @@ export default {
 
 
   // hover sidebar
-  &.main-container_transform-x[data-sidebar-active="false"],
-  &[data-sidebar-active="false"]
+  &.main-container_transform-x:not([data-sidebar-active]),
+  &:not([data-sidebar-active])
     &>.sidebar
       @media(hover: hover) and (pointer: fine) // https://webformyself.com/css-hover-na-sensornyx-ekranax/ (решение на чистом CSS для :hover на сенсорных экранах)
         &:hover
@@ -388,7 +384,7 @@ export default {
             //   left: $sidebarWidth
 
 
-  &.header-out
+  &[data-header-out]
     @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
       &>header
         transform: translateY(-#{$header-height})
@@ -399,6 +395,9 @@ export default {
         // padding-top: 0
       .progress-bar
         transform: translateY(-#{$header-height})
+      .underlay-main-container
+        top: 0
+        height: calc(100% - #{$header-height})
 
 
 
@@ -412,4 +411,8 @@ export default {
 
 // Оптимизация window scroll
 // https://gist.github.com/znamilya/f10fe9d8caf20a5e0e7f
+
+// event scroll for show/hidden header need realization with vue directive (?)
+
+// после swipe сбрасывать выделение текста!
 </style>

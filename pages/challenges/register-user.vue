@@ -9,7 +9,7 @@
         :v="$v.formRegister.login"
         autofocus
         required
-        placeholder="Имя или никнейм"
+        placeholder="Имя или Логин"
       >{{inputLoginData.title}}:</AppInputChallenge>
 
       <AppInputChallenge
@@ -18,7 +18,7 @@
         :class="{invalid: $v.formRegister.email.$error}"
         :inputData="inputEmailData"
         :v="$v.formRegister.email"
-        type="email"
+        type="Email"
         placeholder="email"
       >{{inputEmailData.title}}:</AppInputChallenge>
 
@@ -29,7 +29,7 @@
         :inputData="inputPasswordData"
         :v="$v.formRegister.password"
         type="password"
-        placeholder="пароль"
+        placeholder="Пароль"
       >{{inputPasswordData.title}}:</AppInputChallenge>
 
       <ButtonChallenge type="submit">Зарегистрироваться</ButtonChallenge>
