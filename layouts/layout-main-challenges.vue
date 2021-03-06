@@ -1,18 +1,19 @@
 <template>
   <div class="layout-wrapper main-container_transform-x"
-    data-sidebar-active="false"
+    :data-sidebar-active="isSidebarActive"
     ref="layout"
   >
     <Header />
 
     <Sidebar />
 
-    <div class="main-container"
-      @click="handleClickSidebarToggle"
-    >
+    <div class="main-container">
       <div class="main-content layout-scrollbar layout-cell" ref="mainContent">
         <Nuxt class="container" />
-        <div class="underlay-main-container"></div>
+        <div class="underlay-main-container"
+          @click="closeSidebar"
+          v-if="isSidebarActive"
+        ></div>
       </div>
       <!-- <Nuxt class="main-content layout-scrollbar layout-cell container" /> -->
     </div>
@@ -39,7 +40,18 @@ export default {
   computed: {
     error() {
       return this.$store.getters.error
-    }
+    },
+    isSidebarActive () {
+        return this.$store.getters['sidebarLayoutChellanges/isSidebarActive']
+    },
+    // isSidebarActive: {
+    //   get() {
+    //     return this.$store.getters['sidebarLayoutChellanges/isSidebarActive']
+    //   },
+    //   set(newValue) {
+    //     this.$store.dispatch('sidebarLayoutChellanges/setValueSidebarActive', newValue)
+    //   }
+    // }
   },
   watch: {
     error(value) {
@@ -105,31 +117,32 @@ export default {
   // },
 
   methods: {
-    handleClickSidebarToggle: function(event) {
-      console.log('click layout (layoutMainChallenges.vue)', event.target)
-
-      // если оставить так, ток не будет работать swipe при такой ширине,
-      // потому что после свайпа сразу происходит клик по .main-container
+    closeSidebar: function(event) {
       if (document.documentElement.clientWidth < 768) {
-        const $layout = this.$refs.layout
-        if ($layout.dataset.sidebarActive === 'true' ) {
-            $layout.dataset.sidebarActive = 'false'
-        }
+        this.$store.dispatch('sidebarLayoutChellanges/closeSidebar')
+
+        // const $layout = this.$refs.layout
+        // if ($layout.dataset.sidebarActive === 'true' ) {
+        //     $layout.dataset.sidebarActive = 'false'
+        // }
       }
     },
 
     handleSwipe(e) {
       // console.log(e.detail.full.type, e.detail)
 
-      const $layout = this.$refs.layout
       const ignoreSwipe = e.detail.targetStartSwipe.closest('.layout-swipe-ignore')
 
       switch (e.detail.dir) {
-        case 'right':
-          if (!ignoreSwipe) $layout.dataset.sidebarActive = 'true'
+        case 'right': // open sidebar
+          if (!ignoreSwipe) {
+            this.$store.dispatch('sidebarLayoutChellanges/openSidebar')
+          }
           break
-        case 'left':
-          if (!ignoreSwipe) $layout.dataset.sidebarActive = 'false'
+        case 'left': // close sidebar
+          if (!ignoreSwipe) {
+            this.$store.dispatch('sidebarLayoutChellanges/closeSidebar')
+          }
           break
       }
     },
@@ -327,13 +340,16 @@ export default {
       .underlay-main-container
         left: $sidebarWidthPhone
         z-index: 999
-        // background-color: rgba(100,100,100,.3)
+        background-color: rgba(100,100,100,.3)
         // background-color: rgba(100, 200, 300, .3)
         // backdrop-filter: blur(2px) // This be the blur
         // box-shadow: 4px 2px 4px rgba(0,0,0,.9101562)
         border-color: $color-bg-body-not-active
+        @media screen and (min-width: $phoneWidth)
+          background-color: transparent
       // .container
       //   padding-left: 1.5rem
+
       @media screen and (max-width: calc(#{$smPhoneWidth} - 1px)) // < 320px
         left: calc(100% - .5rem)
       @media screen and (min-width: $phoneWidth)
@@ -347,7 +363,6 @@ export default {
         left: $sidebarWidth
         .underlay-main-container
           left: $sidebarWidth
-
 
 
   // hover sidebar

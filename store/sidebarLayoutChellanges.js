@@ -1,6 +1,7 @@
 // import Vue from 'vue'
 
 export const state = () => ({
+  isSidebarActive: false,
   navLinks: [
     // challenges
     {
@@ -103,11 +104,20 @@ export const state = () => ({
 // icon: 'fas fa-chevron-right'
 
 export const mutations = {
-
+  toggleSidebar(state) {
+    state.isSidebarActive = !state.isSidebarActive
+    console.log('[toggle sidebar]', state.isSidebarActive)
+  },
+  closeSidebar(state) { state.isSidebarActive = false },
+  openSidebar(state) { state.isSidebarActive = true },
+  // setValueSidebarActive(state, value) { state.isSidebarActive = value }
 }
 
 export const actions = {
-
+  toggleSidebar({commit}) { commit('toggleSidebar') },
+  closeSidebar({commit}) { commit('closeSidebar') },
+  openSidebar({commit}) { commit('openSidebar') },
+  // setValueSidebarActive({commit}, value) { commit('openSidebar', value) }
 }
 
 export const getters = {
@@ -158,7 +168,9 @@ export const getters = {
     footerMobileLinks = footerMobileLinks.filter(n => n)
 
     return footerMobileLinks
-  }
+  },
+
+  isSidebarActive: state => state.isSidebarActive
 }
 
 

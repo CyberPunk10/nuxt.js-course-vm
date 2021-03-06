@@ -108,16 +108,21 @@ export default {
       const dataAttr = event.target.dataset
 
       if (dataAttr.btn === 'sidebar-toggle') {
-        if (layout.dataset.sidebarActive === 'true') layout.dataset.sidebarActive = 'false'
-        else layout.dataset.sidebarActive = 'true'
+        // if (layout.dataset.sidebarActive === 'true') layout.dataset.sidebarActive = 'false'
+        // else layout.dataset.sidebarActive = 'true'
+        this.$store.dispatch('sidebarLayoutChellanges/toggleSidebar')
         return
       }
 
-      if (!event.target.matches('.header-for-sidebar')) layout.dataset.sidebarActive = 'false'
+      if (!event.target.matches('.header-for-sidebar')) {
+        // layout.dataset.sidebarActive = 'false'
+        this.$store.dispatch('sidebarLayoutChellanges/closeSidebar')
+      }
 
       if (dataAttr.btnLogout === 'true') {
         this.$store.dispatch('auth/logout')
-        this.$router.push('/admin/login?message=logout')
+        // this.$router.push('/admin/login?message=logout')
+        this.$router.push('/challenges/login?message=logout')
       }
     },
 
