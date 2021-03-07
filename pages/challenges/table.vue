@@ -1,5 +1,19 @@
 <template>
   <div class="">
+    <div class="table-go-frontend">
+      <TableResultChallengesFixed
+        :users_data="players"
+      />
+
+    <br><hr><br>
+
+      <TableResultChallenges
+        :users_data="players"
+      />
+    </div>
+
+    <br><hr><br>
+
     <div class="t-container" id="table-price">
 		<div class="t-row">
 			<div class="t-col t-col_6">
@@ -135,8 +149,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
-
+	  </div>
   </div>
 </template>
 
@@ -145,7 +158,12 @@ export default {
   head: {
     title: `Challenges | ${process.env.appName}`
   },
-  layout: 'layout-main-challenges'
+  layout: 'layout-main-challenges',
+  computed: {
+    players() {
+      return this.$store.getters['tableGoFrontend/getPlayers']
+    }
+  }
 }
 </script>
 

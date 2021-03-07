@@ -174,6 +174,7 @@ header
       background-color: transparent
       border: none
       font-size: 1.4rem
+      cursor: pointer
       svg, i
         fill: $color-text-grey
         color: $color-text-grey

@@ -20,7 +20,10 @@ const userSchema = new Schema({
     type: String,
     unique: true,
     defuaul: 123
-  }
+  },
+  // registration_date: {
+
+  // }
 })
 
 module.exports = model('User', userSchema)

@@ -388,6 +388,7 @@ export default {
     @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
       &>header
         transform: translateY(-#{$header-height})
+        box-shadow: $borderShadowHover
       &>.sidebar .sidebar-main
         margin-top: .5rem
         height: calc(100% - 1rem)
