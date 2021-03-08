@@ -115,12 +115,11 @@ export default {
       }
 
       // $tableWidth 768px
-      const layout = document.querySelector('.layout-wrapper')
-      const dataAttr = event.target.dataset
       // console.log(document.documentElement.clientWidth)
-
       if (document.documentElement.clientWidth < 768) {
-        if (event.target.closest('a')) layout.dataset.sidebarActive = 'false'
+        if (event.target.closest('a')) {
+          this.$store.dispatch('sidebarLayoutChellanges/closeSidebar')
+        }
       }
 
     }

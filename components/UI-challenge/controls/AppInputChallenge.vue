@@ -78,7 +78,7 @@ export default {
     padding: .5rem 1rem .7rem
     border: 1px solid rgb(216,218,220)
     border-radius: $borderRadius
-    background-color: lighten($color-bg-body, 1%)
+    background-color: #fefefe
     width: 100%
     font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji
     letter-spacing: .3px

@@ -101,3 +101,7 @@ export default {
 
 // 5 библиотек для Vue.js, без которых мне не обойтись
 // https://habr.com/ru/company/ruvds/blog/517316/
+
+
+// «Роутинг и защита роутов в SSR приложении на примере Nuxt.js»
+// https://css-tricks.com/routing-route-protection-server-rendered-vue-apps-using-nuxt-js/

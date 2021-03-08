@@ -108,16 +108,18 @@ export default {
       const dataAttr = event.target.dataset
 
       if (dataAttr.btn === 'sidebar-toggle') {
-        if (layout.dataset.sidebarActive === 'true') layout.dataset.sidebarActive = 'false'
-        else layout.dataset.sidebarActive = 'true'
+        this.$store.dispatch('sidebarLayoutChellanges/toggleSidebar')
         return
       }
 
-      if (!event.target.matches('.header-for-sidebar')) layout.dataset.sidebarActive = 'false'
+      if (!event.target.matches('.header-for-sidebar')) {
+        this.$store.dispatch('sidebarLayoutChellanges/closeSidebar')
+      }
 
       if (dataAttr.btnLogout === 'true') {
         this.$store.dispatch('auth/logout')
-        this.$router.push('/admin/login?message=logout')
+        // this.$router.push('/admin/login?message=logout')
+        this.$router.push('/challenges/login?message=logout')
       }
     },
 
@@ -141,7 +143,9 @@ header
   background-color: #fff
   // border-bottom: 1px solid $color-border-default
   box-shadow: 0 0 2px rgba(88,88,88,.15)
-  z-index: 9
+  // z-index: 9
+  border-bottom-left-radius: $borderRadius
+  border-bottom-right-radius: $borderRadius
   @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
     box-shadow: 0 0 4px rgba(88,88,88,.15)
 
@@ -170,6 +174,7 @@ header
       background-color: transparent
       border: none
       font-size: 1.4rem
+      cursor: pointer
       svg, i
         fill: $color-text-grey
         color: $color-text-grey
