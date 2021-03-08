@@ -25,8 +25,10 @@ export default {
 </script>
 
 <style lang="sass">
+.table-fixed-cols
   .v-table-row
     display: flex
+    width: 100%
     border-radius: $borderRadius
     transition: $transitionDefaultHover
     &:hover

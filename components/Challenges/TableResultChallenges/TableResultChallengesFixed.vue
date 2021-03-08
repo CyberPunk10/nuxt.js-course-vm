@@ -22,25 +22,25 @@
       <div class="all-cols layout-cell-light-gray-border layout-scrollbar-light-gray-border layout-swipe-ignore"
       >
         <div class="v-table__header">
-          <p @click="sortByName" class="row">Имя
+          <p @click="sortByName">Имя
             <i class="material-icons">unfold_more</i>
           </p>
-          <p @click="sortById" class="row">Id
+          <p @click="sortById">Id
             <i class="material-icons">unfold_more</i>
           </p>
-          <p @click="sortByName" class="row">Имя
+          <p @click="sortByName">Имя
             <i class="material-icons">unfold_more</i>
           </p>
-          <p @click="sortByResultAll" class="row">Общий
+          <p @click="sortByResultAll">Общий
             <i class="material-icons">unfold_more</i>
           </p>
-          <p @click="sortById" class="row">Id
+          <p @click="sortById">Id
             <i class="material-icons">unfold_more</i>
           </p>
-          <p @click="sortByName" class="row">Имя
+          <p @click="sortByName">Имя
             <i class="material-icons">unfold_more</i>
           </p>
-          <p @click="sortByResultAll" class="row">Общий
+          <p @click="sortByResultAll">Общий
             <i class="material-icons">unfold_more</i>
           </p>
         </div>
@@ -122,28 +122,31 @@ export default {
 
 <style lang="sass">
 .table-fixed-cols
-  //   // vars
-  //   // $heightRowTopLabel: 2rem
-  //   // $heightRowTypical: 4rem
-  //   // $heightRowTypicalMode2: 3rem
-  //   // $heightRowTypicalMode2ForNameCol: calc(#{$heightRowTypicalMode2} * 2)
-
-  //   // display: grid
-  //   // grid: repeat(1, auto)/1fr auto 1fr // row/col
   position: relative
+  .v-table__header
+    display: flex
+    // justify-content: space-around
+    border-bottom: 1px solid #e7e7e7
+    p
+      padding: .8rem 1.6rem
+      flex-basis: 20%
+      display: flex
+      align-items: center
+
   .start-col,
   .end-col
     position: absolute
     top: 0
-    background-color: $color-opacity-test
+    // background-color: $color-opacity-test
+    background-color: #fff
     pointer-events: none
 
   .start-col
     left: 0
 
   .all-cols
-    background-color: $color-green
-    .row
+    // background-color: $color-green
+    p
       min-width: 10rem
       max-width: 10rem
       borer-bottom: 2px solid black !important

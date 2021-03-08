@@ -217,7 +217,7 @@ export default {
       bottom: 0
 
   &>.sidebar
-    z-index: 999
+    // z-index: 999 // если захочется вернуть, то указать причину! (при < 480 перекрывает header и не закрыть sidebar! если включить)
     width: 0
     // @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
       // width: $sidebarWidthPhone
@@ -333,7 +333,7 @@ export default {
       .underlay-main-container
         left: $sidebarWidthPhone
         z-index: 999
-        background-color: rgba(150,150,150,.7)
+        background-color: rgba(100,100,255,.4)
         // background-color: rgba(100, 200, 300, .3)
         // backdrop-filter: blur(2px) // This be the blur
         // box-shadow: 4px 2px 4px rgba(0,0,0,.9101562)

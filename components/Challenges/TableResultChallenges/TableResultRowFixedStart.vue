@@ -1,5 +1,5 @@
 <template>
-  <div class="v-table-row">
+  <div class="v-table-row-start">
     <div class="row row__name">{{row_data.name}}</div>
   </div>
 </template>
@@ -18,8 +18,8 @@ export default {
 </script>
 
 <style lang="sass">
-  .v-table-row
-    display: flex
+.table-fixed-cols
+  .v-table-row-start
     .row
       padding: 8px 16px
       text-align: left

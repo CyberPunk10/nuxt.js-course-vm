@@ -22,6 +22,7 @@ export default {
 </script>
 
 <style lang="sass">
+.v-table
   .v-table-row
     display: flex
     border-radius: $borderRadius
