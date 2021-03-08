@@ -17,7 +17,8 @@
               :value="players[index].name"
               :data-index-player="index"
               data-name-player="true"
-              class="input-transparent" type="text">
+              class="input-transparent" type="text"
+            >
           </div>
         </div>
 

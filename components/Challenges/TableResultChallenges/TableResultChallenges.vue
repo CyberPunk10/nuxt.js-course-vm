@@ -1,36 +1,38 @@
 <template>
-  <div class="v-table">
-    <div class="v-table__header">
-      <p @click="sortById" class="row">Id
-        <i class="material-icons">unfold_more</i>
-      </p>
-      <p @click="sortByName" class="row">Имя
-        <i class="material-icons">unfold_more</i>
-      </p>
-      <p @click="sortByResultAll" class="row">Общий результат
-        <i class="material-icons">unfold_more</i>
-      </p>
-      <p @click="sortByResult" class="row">Массив result
-        <i class="material-icons">unfold_more</i>
-      </p>
-      <p @click="sortByResult2" class="row">Массив result 2
-        <i class="material-icons">unfold_more</i>
-      </p>
-    </div>
-    <div class="v-table__body">
-      <TableResultRowChallenges
-        v-for="row in paginatedUsers"
-        :key="row.id"
-        :row_data="row"
-      />
-    </div>
-    <div class="v-table__pagination">
-      <div class="page"
-        v-for="page in pages"
-        :key="page"
-        @click="pageClick(page)"
-        :class="{'page_selected': page === pageNumber}"
-      >{{ page }}
+  <div class="go-frontend">
+    <div class="v-table">
+      <div class="v-table__header">
+        <p @click="sortById">Id
+          <i class="material-icons">unfold_more</i>
+        </p>
+        <p @click="sortByName">Имя
+          <i class="material-icons">unfold_more</i>
+        </p>
+        <p @click="sortByResultAll">Общий результат
+          <i class="material-icons">unfold_more</i>
+        </p>
+        <p @click="sortByResult">Массив result
+          <i class="material-icons">unfold_more</i>
+        </p>
+        <p @click="sortByResult2">Массив result 2
+          <i class="material-icons">unfold_more</i>
+        </p>
+      </div>
+      <div class="v-table__body">
+        <TableResultRowChallenges
+          v-for="row in paginatedUsers"
+          :key="row.id"
+          :row_data="row"
+        />
+      </div>
+      <div class="v-table__pagination">
+        <div class="page"
+          v-for="page in pages"
+          :key="page"
+          @click="pageClick(page)"
+          :class="{'page_selected': page === pageNumber}"
+        >{{ page }}
+        </div>
       </div>
     </div>
   </div>
@@ -95,46 +97,47 @@ export default {
 </script>
 
 <style lang="sass">
-.v-table
-  max-width: 100%
-  background-color: #fff
-  padding: 2rem 1.5rem
-  border-radius: $borderRadius
-  box-shadow: $borderShadow
-  transition: $transitionDefaultHover
-  &:hover
-    box-shadow: $borderShadowHover
-  &__header
-    display: flex
-    // justify-content: space-around
-    border-bottom: 1px solid #e7e7e7
-    .row
-      padding: .8rem 1.6rem
-      flex-basis: 20%
+.go-frontend
+  .v-table
+    max-width: 100%
+    background-color: #fff
+    padding: 2rem 1.5rem
+    border-radius: $borderRadius
+    box-shadow: $borderShadow
+    transition: $transitionDefaultHover
+    &:hover
+      box-shadow: $borderShadowHover
+    &__header
       display: flex
-      align-items: center
-  &__pagination
-    display: flex
-    justify-content: center
-    margin: 3rem 0 1rem
-    .page
-      height: 3.5rem
-      line-height: 3.3rem
-      width: 3.5rem
-      border-radius: $borderRadius
-      text-align: center
-      border: 1px solid #e7e7e7
-      margin-right: 1rem
-      cursor: pointer
-      transition: $transitionDefaultHover
-      &:hover
+      // justify-content: space-around
+      border-bottom: 1px solid #e7e7e7
+      p
+        padding: .8rem 1.6rem
+        flex-basis: 20%
+        display: flex
+        align-items: center
+    &__pagination
+      display: flex
+      justify-content: center
+      margin: 3rem 0 1rem
+      .page
+        height: 3.5rem
+        line-height: 3.3rem
+        width: 3.5rem
+        border-radius: $borderRadius
+        text-align: center
+        border: 1px solid #e7e7e7
+        margin-right: 1rem
+        cursor: pointer
+        transition: $transitionDefaultHover
+        &:hover
+          background-color: $color-purple
+          color: #fff
+          border: 1px solid $color-purple
+      .page_selected
         background-color: $color-purple
         color: #fff
         border: 1px solid $color-purple
-    .page_selected
-      background-color: $color-purple
-      color: #fff
-      border: 1px solid $color-purple
 
 
 </style>

@@ -1,6 +1,12 @@
 <template>
   <div class="">
     <div class="table-go-frontend">
+      <TableGridResultCh
+        :users_data="players"
+      />
+
+    <br><hr><br>
+
       <TableResultChallengesFixed
         :users_data="players"
       />
