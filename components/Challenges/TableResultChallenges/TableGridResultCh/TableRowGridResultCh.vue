@@ -3,7 +3,7 @@
     :class="{'hover-active': hoverActive === true}"
     :style="gridNestingCols"
   >
-    <div class="cell row__name">{{row_data.name}}</div>
+    <div class="cell row__name">{{row_data[`${testttt}`]}}</div>
     <div class="cell row__id">{{row_data.id}}</div>
     <div class="cell row__name">{{row_data.name}}</div>
   </div>
@@ -41,7 +41,8 @@ export default {
 
   data() {
     return {
-      hoverActive: false
+      hoverActive: false,
+      testttt: 'name'
     }
   },
 
