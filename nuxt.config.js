@@ -41,6 +41,7 @@ export default {
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
+    '@nuxtjs/pwa'
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -48,8 +49,21 @@ export default {
     '@nuxtjs/style-resources',
     '@nuxtjs/axios',
     '~/modules/mongodb_setup.js',
-    '@nuxtjs/pwa'
   ],
+
+  pwa: {
+    meta: {
+      /* meta options */
+      lang: 'ru',
+      theme_color: '#ee4540',
+    },
+    manifest: {
+      name: 'Challenges App',
+      short_name: 'Challenges',
+      lang: 'ru',
+      background_color: 'rgba(100,100,255,.3)'
+    }
+  },
 
   styleResources: {
     sass: [
