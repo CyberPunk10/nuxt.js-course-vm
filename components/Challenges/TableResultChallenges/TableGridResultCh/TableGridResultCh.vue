@@ -173,6 +173,7 @@ export default {
 
     // hover row
     mouseoverRows(e) {
+      console.log('[mouseoverRows]')
       // инфа про Делегирование событий (learn.javascript.ru) отсюда:
       // https://learn.javascript.ru/mousemove-mouseover-mouseout-mouseenter-mouseleave
 
@@ -188,6 +189,7 @@ export default {
       // переход на div[data-row], но вне нашей таблицы (возможно при вложенных таблицах)
       // игнорировать
       const $table = this.$refs.table
+      if(!$table) return // при переходе по ссылке этот компонент может быть уничтожен на момент выполнения этого кода, если это так, то выходим
       if (!$table.contains(target)) return
 
       // ура, мы зашли на новый div[data-row]
@@ -195,6 +197,7 @@ export default {
       // target.style.background = 'pink'
     },
     mouseoutRows(e) {
+      console.log('[mouseoutRows]')
       // если мы вне div[data-row], то игнорируем уход мыши
       // это какой-то переход внутри таблицы, но вне div[data-row]
       if (!this.currentElem) return

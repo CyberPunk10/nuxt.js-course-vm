@@ -416,4 +416,5 @@ export default {
 // event scroll for show/hidden header need realization with vue directive (?)
 
 // после swipe сбрасывать выделение текста!
+
 </style>

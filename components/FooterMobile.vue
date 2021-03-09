@@ -22,10 +22,8 @@ export default {
     }
   },
   methods: {
-    clickFooterMobile: function(event) {
-      const layout = document.querySelector('.layout-wrapper')
-
-      layout.dataset.sidebarActive = 'false'
+    clickFooterMobile() {
+      this.$store.dispatch('sidebarLayoutChellanges/closeSidebar')
     }
   }
 }
