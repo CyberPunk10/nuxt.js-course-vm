@@ -20,7 +20,7 @@ export default {
   justify-content: center
   align-items: center
   overflow: hidden
-  z-index: 999
+  // z-index: 1
   // background-color: $color-green
   transition: $transitionSidebar
 
