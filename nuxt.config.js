@@ -95,10 +95,10 @@ export default {
 
   // Доступ к серверу разработки Nuxt.js на мобильном устройстве
   // https://webinmind.ru/nuxtjs/articles/razrabotka-nuxt-js-na-mobilnom-ustrojstve
-  server: {
-    port: 3000,
-    host: '0.0.0.0',
-  },
+  // server: {
+  //   port: 3000,
+  //   host: '0.0.0.0',
+  // },
 }
 
 // Деплоим изоморфное веб-приложение на примере Nuxt.js
