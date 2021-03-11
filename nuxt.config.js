@@ -51,22 +51,22 @@ export default {
     '~/modules/mongodb_setup.js',
   ],
 
-  // pwa: {
-  //   meta: {
-  //     /* meta options */
-  //     lang: 'ru',
-  //     theme_color: '#ee4540',
-  //   },
-  //   manifest: {
-  //     name: 'Challenges App',
-  //     short_name: 'Challenges',
-  //     lang: 'ru',
-  //     background_color: 'rgba(100,100,255,.3)'
-  //   },
-  //   workbox: {
-  //     /* workbox options */
-  //   }
-  // },
+  pwa: {
+    meta: {
+      /* meta options */
+      lang: 'ru',
+      theme_color: '#ee4540',
+    },
+    manifest: {
+      name: 'Challenges App',
+      short_name: 'Challenges',
+      lang: 'ru',
+      background_color: 'rgba(100,100,255,.3)'
+    },
+    workbox: {
+      /* workbox options */
+    }
+  },
 
   styleResources: {
     sass: [
@@ -95,6 +95,7 @@ export default {
 
   // Доступ к серверу разработки Nuxt.js на мобильном устройстве
   // https://webinmind.ru/nuxtjs/articles/razrabotka-nuxt-js-na-mobilnom-ustrojstve
+  // перед deploy on heroku закомментировать!!!!
   // server: {
   //   port: 3000,
   //   host: '0.0.0.0',
