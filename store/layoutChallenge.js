@@ -7,7 +7,7 @@ export const mutations = {
 }
 
 export const actions = {
-  updateCurrentWidthWindow({commit}, value) { commit('updateCurrentWidthWindow'), value },
+  updateCurrentWidthWindow({commit}, value) { commit('updateCurrentWidthWindow', value) },
 }
 
 export const getters = {

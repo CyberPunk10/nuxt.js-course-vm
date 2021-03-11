@@ -4,8 +4,8 @@
       <TableGridResultCh
         :users_data="players"
         fixed_start_col="true"
+        fixed_last_col="true"
       />
-        <!-- fixed_last_col="true" -->
 
     <br><hr><br>
 
