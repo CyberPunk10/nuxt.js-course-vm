@@ -51,22 +51,22 @@ export default {
     '~/modules/mongodb_setup.js',
   ],
 
-  pwa: {
-    meta: {
-      /* meta options */
-      lang: 'ru',
-      theme_color: '#ee4540',
-    },
-    manifest: {
-      name: 'Challenges App',
-      short_name: 'Challenges',
-      lang: 'ru',
-      background_color: 'rgba(100,100,255,.3)'
-    },
-    workbox: {
-      /* workbox options */
-    }
-  },
+  // pwa: {
+  //   meta: {
+  //     /* meta options */
+  //     lang: 'ru',
+  //     theme_color: '#ee4540',
+  //   },
+  //   manifest: {
+  //     name: 'Challenges App',
+  //     short_name: 'Challenges',
+  //     lang: 'ru',
+  //     background_color: 'rgba(100,100,255,.3)'
+  //   },
+  //   workbox: {
+  //     /* workbox options */
+  //   }
+  // },
 
   styleResources: {
     sass: [
