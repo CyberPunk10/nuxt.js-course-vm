@@ -1,7 +1,6 @@
 <template>
   <div class="wrap-card-content">
     <div class="table-fixed-cols">
-      <p>currentWidthWindow: {{currentWidthWindow}}</p>
       <div class="table-fixed-cols-grid"
         @mouseover="mouseoverRows"
         @mouseout ="mouseoutRows"
@@ -159,20 +158,20 @@ export default {
     },
 
     currentWidthWindow () {
-      let isChangeWidthWindow = this.$store.getters['layoutChallenges/getCurrentWidthWindow']
-    //   if (isChangeWidthWindow) {
-    //     console.log('[lksjf')
-    //   }
-    //   // if center-cols имеет прокручиваемую область, то add .shadow-active к last-col
+      return this.$store.getters['layoutChallenge/getCurrentWidthWindow']
+    }
+  },
 
-    //   // const $centerCols = this.$refs.centerCols
-    //   // // при масштабе экрана 125% появляется погрешность, которую попробуем учесть,
-    //   // // предполагая, что погрешность не составляет больше 1px
-    //   // // исходный вариант был такой: e.target.scrollWidth - e.target.scrollLeft == e.target.offsetWidth
-    //   // const resultValue = $centerCols.scrollWidth - $centerCols.scrollLeft - $centerCols.offsetWidth
-    //   // this.shadowRightActive = (resultValue < 1) ? false : true
-
-      return this.$store.getters['layoutChallanges/getCurrentWidthWindow']
+  watch: {
+    // наблюдаем за изменением computed свойством currentWidthWindow и при изменении выполняем нужную нам логику
+    currentWidthWindow() {
+      // if center-cols имеет прокручиваемую область, то add .shadow-active к last-col
+      const $centerCols = this.$refs.centerCols
+      // при масштабе экрана 125% появляется погрешность, которую попробуем учесть,
+      // предполагая, что погрешность не составляет больше 1px
+      // исходный вариант был такой: e.target.scrollWidth - e.target.scrollLeft == e.target.offsetWidth
+      const resultValue = $centerCols.scrollWidth - $centerCols.scrollLeft - $centerCols.offsetWidth
+      this.shadowRightActive = (resultValue < 1) ? false : true
     }
   },
 
