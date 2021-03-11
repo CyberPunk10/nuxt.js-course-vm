@@ -2,13 +2,14 @@
   <div class="wrap-card-content">
     <div class="table-fixed-cols">
       <div class="table-fixed-cols-grid"
+        :style="gridMainColumns"
         @mouseover="mouseoverRows"
         @mouseout ="mouseoutRows"
         ref="table"
       >
         <!-- first-col -->
         <div class="first-col"
-          v-if="fixed_start_col"
+          v-if="fixed_first_col"
           :class="{'shadow-active': shadowLeftActive}"
         >
           <div class="v-table__header">
@@ -18,7 +19,7 @@
           </div>
 
           <div class="v-table__body"
-            :style="styleGridTemplateRows"
+            :style="gridNestingRows"
           >
             <TableRowGridResultCh
               v-for="(row, index) in paginatedUsers"
@@ -51,7 +52,7 @@
           </div>
 
           <div class="v-table__body"
-            :style="styleGridTemplateRows"
+            :style="gridNestingRows"
           >
             <TableRowGridResultCh
               v-for="(row, index) in paginatedUsers"
@@ -77,7 +78,7 @@
           </div>
 
           <div class="v-table__body"
-            :style="styleGridTemplateRows"
+            :style="gridNestingRows"
           >
             <TableRowGridResultCh
               v-for="(row, index) in paginatedUsers"
@@ -91,7 +92,7 @@
         </div>
 
       </div>
-
+<p>fjasldkjflkajd: {{namesColsForRowRender}}</p>
       <div class="v-table__pagination">
         <div class="page"
           v-for="page in pages"
@@ -114,7 +115,7 @@ export default {
         return []
       }
     },
-    fixed_start_col: {
+    fixed_first_col: {
       type: [String, Boolean],
       default: false
     },
@@ -136,18 +137,31 @@ export default {
   },
 
   computed: {
-    styleGridTemplateRows() {
+    // grid styles
+    gridMainColumns() {
+      const firstCol = this.fixed_first_col ? 'minmax(11rem, 1fr)' : ''
+      const lastCol = this.fixed_last_col ? 'minmax(11rem, 1fr)' : ''
+      return {
+        gridTemplateColumns: `${firstCol} minmax(auto, 100%) ${lastCol}`
+      }
+    },
+    gridNestingRows() {
       return {
         gridTemplateRows: `repeat(${this.paginatedUsers.length}, minmax(4rem, 1fr))`
       }
     },
     gridNestingCols() {
-      const countCol = Object.keys(this.users_data[0]).length - 2 // вычетаем первый и последний столбцы (они фиксрованные)
+      let countFixedCol = 0
+      countFixedCol = this.fixed_first_col ? ++countFixedCol : countFixedCol
+      countFixedCol = this.fixed_last_col  ? ++countFixedCol : countFixedCol
+
+      const countCol = Object.keys(this.users_data[0]).length - countFixedCol // вычетаем первый и последний столбцы (if они фиксрованные)
       return {
         gridTemplateColumns: `repeat(${countCol}, minmax(15rem, 1fr))`
       }
     },
 
+    // pagination
     pages() {
       return Math.ceil(this.users_data.length / 10)
     },
@@ -157,8 +171,14 @@ export default {
       return this.users_data.slice(from, to)
     },
 
-    currentWidthWindow () {
+    // for .shadov-active при изменении ширины экрана
+    currentWidthWindow() {
       return this.$store.getters['layoutChallenge/getCurrentWidthWindow']
+    },
+
+    namesColsForRowRender() {
+      console.log(this.users_data)
+      return []
     }
   },
 
@@ -254,7 +274,6 @@ export default {
 .table-fixed-cols
   .table-fixed-cols-grid
     display: grid
-    grid: auto / minmax(11rem, 1fr) minmax(auto, 100%) minmax(11rem, 1fr) // row/col
     border-radius: $borderRadius
     overflow: hidden // прячет лишнюю тень (.shadow-active)
 
