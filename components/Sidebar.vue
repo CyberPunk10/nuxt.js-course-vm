@@ -29,9 +29,14 @@
         />
       </div>
 
-      <p> test: {{ bodyClass }}</p>
+      <div class="separator"></div>
 
-      <!-- <div class="separator"></div> -->
+      <div class="sidenav__nav-item-wrap">
+        <p class="sidenav__nav-item">
+          <i class="fa heart"></i>
+          <span class="sidenav__nav-item-text">Current route: {{ bodyClass }}</span>
+        </p>
+      </div>
 
       <!-- <div>
         <i class="fas fa-download mr-2"></i>
@@ -42,12 +47,12 @@
 
       <div class="separator"></div> -->
 
-      <!-- <div class="reklamaF">
-        <div class="content"> -->
+      <div class="reklamaF">
+        <div class="content">
           <!-- <p>Здесь может быть ваша реклама</p>
           <p>Реклама челленджей</p> -->
-        <!-- </div>
-      </div> -->
+        </div>
+      </div>
 
     </div>
 
