@@ -17,7 +17,7 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .table-fixed-cols
   .v-table-row-end
     .row

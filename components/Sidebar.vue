@@ -58,7 +58,7 @@
 export default {
   computed: {
     navLinks () {
-      return this.$store.getters['sidebarLayoutChellanges/sidenavLinks']
+      return this.$store.getters['sidebarLayoutChallenges/sidenavLinks']
     },
 
     bodyClass() {
@@ -118,7 +118,7 @@ export default {
       // console.log(document.documentElement.clientWidth)
       if (document.documentElement.clientWidth < 768) {
         if (event.target.closest('a')) {
-          this.$store.dispatch('sidebarLayoutChellanges/closeSidebar')
+          this.$store.dispatch('sidebarLayoutChallenges/closeSidebar')
         }
       }
 
@@ -149,6 +149,7 @@ export default {
     // background-color: $color-bg-body
     // @include linear-gradient($direction: 200deg, $fromColor: #a4adf0, $toColor: #787fc5)
     border-radius: $borderRadius
+    // border-radius: 1.2rem
     // border: 1px solid $color-border-default
     // border-left: none
     box-shadow: 0 0 2px rgba(88,88,88,.15)

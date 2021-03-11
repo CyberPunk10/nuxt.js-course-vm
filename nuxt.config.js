@@ -41,6 +41,7 @@ export default {
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
+    '@nuxtjs/pwa'
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -48,8 +49,24 @@ export default {
     '@nuxtjs/style-resources',
     '@nuxtjs/axios',
     '~/modules/mongodb_setup.js',
-    '@nuxtjs/pwa'
   ],
+
+  pwa: {
+    meta: {
+      /* meta options */
+      lang: 'ru',
+      theme_color: '#ee4540',
+    },
+    manifest: {
+      name: 'Challenges App',
+      short_name: 'Challenges',
+      lang: 'ru',
+      background_color: 'rgba(100,100,255,.3)'
+    },
+    workbox: {
+      /* workbox options */
+    }
+  },
 
   styleResources: {
     sass: [
@@ -74,7 +91,14 @@ export default {
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
     transpile: [/^element-ui/],
-  }
+  },
+
+  // Доступ к серверу разработки Nuxt.js на мобильном устройстве
+  // https://webinmind.ru/nuxtjs/articles/razrabotka-nuxt-js-na-mobilnom-ustrojstve
+  server: {
+    port: 3000,
+    host: '0.0.0.0',
+  },
 }
 
 // Деплоим изоморфное веб-приложение на примере Nuxt.js

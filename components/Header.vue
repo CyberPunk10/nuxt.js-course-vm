@@ -96,7 +96,7 @@ export default {
   },
   computed: {
     headerUserAvatarMenuLinks () {
-      return this.$store.getters['sidebarLayoutChellanges/headerUserAvatarMenuLinks']
+      return this.$store.getters['sidebarLayoutChallenges/headerUserAvatarMenuLinks']
     },
     isAuthTest() {
       return this.$store.getters['auth/isAuthenticated']
@@ -108,12 +108,12 @@ export default {
       const dataAttr = event.target.dataset
 
       if (dataAttr.btn === 'sidebar-toggle') {
-        this.$store.dispatch('sidebarLayoutChellanges/toggleSidebar')
+        this.$store.dispatch('sidebarLayoutChallenges/toggleSidebar')
         return
       }
 
       if (!event.target.matches('.header-for-sidebar')) {
-        this.$store.dispatch('sidebarLayoutChellanges/closeSidebar')
+        this.$store.dispatch('sidebarLayoutChallenges/closeSidebar')
       }
 
       if (dataAttr.btnLogout === 'true') {
@@ -140,14 +140,15 @@ header
   position: relative
   height: $header-height
   user-select: none
-  // background-color: #fff
+  // background-color: $color-bg-body
+  background-color: #fff
   // border-bottom: 1px solid $color-border-default
   box-shadow: 0 0 2px rgba(88,88,88,.15)
   // z-index: 9
-  border-bottom-left-radius: $borderRadius
-  border-bottom-right-radius: $borderRadius
   @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
-    box-shadow: 0 0 4px rgba(88,88,88,.15)
+    border-bottom-left-radius: $borderRadius
+    border-bottom-right-radius: $borderRadius
+  //   box-shadow: 0 0 4px rgba(88,88,88,.15)
 
   .header-for-sidebar,
   .header-main

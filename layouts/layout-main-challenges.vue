@@ -43,11 +43,11 @@ export default {
       return this.$store.getters.error
     },
     // isSidebarActive () {
-    //     return this.$store.getters['sidebarLayoutChellanges/isSidebarActive']
+    //     return this.$store.getters['sidebarLayoutChallenges/isSidebarActive']
     // },
     ...mapGetters({
-      isSidebarActive: 'sidebarLayoutChellanges/isSidebarActive',
-      isHeaderOut: 'headerLayoutChellanges/isHeaderOut'
+      isSidebarActive: 'sidebarLayoutChallenges/isSidebarActive',
+      isHeaderOut: 'headerLayoutChallenges/isHeaderOut'
     }),
   },
   watch: {
@@ -99,6 +99,9 @@ export default {
       this.handleScrollHiddenHeader(e)
       this.handleScrollProgressBar(e)
     })
+
+    // подписываемся на изменения размеров экрана
+    window.addEventListener('resize', this.updateWidthWindow)
   },
 
   // (не нужно удалять listeners, так как будет удален сам DOM-элемент, на которые повешаны эти слушатели)
@@ -115,7 +118,7 @@ export default {
   methods: {
     closeSidebar: function() {
       if (document.documentElement.clientWidth < 768) {
-        this.$store.dispatch('sidebarLayoutChellanges/closeSidebar')
+        this.$store.dispatch('sidebarLayoutChallenges/closeSidebar')
       }
     },
 
@@ -127,12 +130,12 @@ export default {
       switch (e.detail.dir) {
         case 'right': // open sidebar
           if (!ignoreSwipe) {
-            this.$store.dispatch('sidebarLayoutChellanges/openSidebar')
+            this.$store.dispatch('sidebarLayoutChallenges/openSidebar')
           }
           break
         case 'left': // close sidebar
           if (!ignoreSwipe) {
-            this.$store.dispatch('sidebarLayoutChellanges/closeSidebar')
+            this.$store.dispatch('sidebarLayoutChallenges/closeSidebar')
           }
           break
       }
@@ -140,6 +143,8 @@ export default {
 
     // (show/hidden header)
     handleScrollHiddenHeader(e) {
+      // Оптимизация window scroll
+      // https://gist.github.com/znamilya/f10fe9d8caf20a5e0e7f
       if(window.justExecuted) {
         return
       }
@@ -152,9 +157,9 @@ export default {
           let scrolled = e.target.scrollTop
 
           if (scrolled > 80 && scrolled > window.scrollPrev) {
-            this.$store.dispatch('headerLayoutChellanges/addAttrHeaderOut')
+            this.$store.dispatch('headerLayoutChallenges/addAttrHeaderOut')
           } else {
-            this.$store.dispatch('headerLayoutChellanges/removeAttrHeaderOut')
+            this.$store.dispatch('headerLayoutChallenges/removeAttrHeaderOut')
           }
 
           window.scrollPrev = scrolled
@@ -180,7 +185,12 @@ export default {
         if (scrollPos + winHeight >= docHeight) this.progress = 100 // 100%
         else this.progress = perc
       })
-    }
+    },
+
+    // прослушивание изменения ширины окна  (например для добавления тени к фиксированным колонкам таблиц)
+    updateWidthWindow() {
+      this.$store.dispatch('layoutChallenge/updateCurrentWidthWindow', window.innerWidth)
+    },
   }
 }
 </script>
@@ -265,7 +275,7 @@ export default {
       left: 0
       width: 100%
       height: calc(100% - #{$header-height} * 2)
-      border-radius: 1.2rem
+      // border-radius: 1.2rem
       // background-color: rgba(100, 200, 300, .3)
       border: .5rem solid transparent
       transition: $transitionSidebar
@@ -303,10 +313,20 @@ export default {
   // show sidebar
   &[data-sidebar-active]
     @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
-      background-color: $color-bg-body-not-active
+      background-color: #c5c6c7 // gray
+      background-color: #E3E2DF // gray
+      background-color: #EDEAE5 //
+      &>header
+        background-color: #fff
+        border-bottom-left-radius: $borderRadiusBig
+        border-bottom-right-radius: $borderRadiusBig
+      .footer-mobile
+        // box-shadow: 0 0 2px rgba(88,88,88,.15)
+        border-top-left-radius: $borderRadiusBig
+        border-top-right-radius: $borderRadiusBig
     &>.sidebar
       // vars
-      $margin-left-sidebar: 1rem
+      $margin-left-sidebar: 1.2rem
 
       left: $margin-left-sidebar
       width: calc(#{$sidebarWidthPhone} - #{$margin-left-sidebar})
@@ -330,14 +350,15 @@ export default {
   &.main-container_transform-x[data-sidebar-active]
     .main-container
       left: $sidebarWidthPhone
+      // opacity: .3
       .underlay-main-container
         left: $sidebarWidthPhone
         z-index: 999
-        background-color: rgba(100,100,255,.4)
+        // background-color: rgba(100,100,255,.4)
         // background-color: rgba(100, 200, 300, .3)
         // backdrop-filter: blur(2px) // This be the blur
         // box-shadow: 4px 2px 4px rgba(0,0,0,.9101562)
-        border-color: $color-bg-body-not-active
+        // border-color: $color-bg-body-not-active
         @media screen and (min-width: $phoneWidth)
           background-color: transparent
         @media screen and (min-width: $tableWidth)
@@ -410,11 +431,12 @@ export default {
 // когда найдется другой пользователь,
 // и это требует дополнительных проверок при создании пользователя (?)
 
-// Оптимизация window scroll
-// https://gist.github.com/znamilya/f10fe9d8caf20a5e0e7f
-
 // event scroll for show/hidden header need realization with vue directive (?)
 
 // после swipe сбрасывать выделение текста!
+
+// Оптимизация window scroll
+// https://gist.github.com/znamilya/f10fe9d8caf20a5e0e7f
+// записываем переменные прямо в window, переделать или сделать аккуратнее
 
 </style>
