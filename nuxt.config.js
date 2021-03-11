@@ -80,7 +80,7 @@ export default {
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    baseURL: process.env.BASE_URL || 'http://localhost:3000'
+    baseURL: process.env.BASE_URL || 'http://localhost:3000' // for heroku or other hosting
   },
 
   env: {
@@ -95,10 +95,11 @@ export default {
 
   // Доступ к серверу разработки Nuxt.js на мобильном устройстве
   // https://webinmind.ru/nuxtjs/articles/razrabotka-nuxt-js-na-mobilnom-ustrojstve
-  server: {
-    port: 3000,
-    host: '0.0.0.0',
-  },
+  // перед deploy on heroku закомментировать!!!!
+  // server: {
+  //   port: 3000,
+  //   host: '0.0.0.0',
+  // },
 }
 
 // Деплоим изоморфное веб-приложение на примере Nuxt.js
