@@ -1,14 +1,15 @@
 <template>
   <div class="wrap-card-content">
     <div class="table-fixed-cols">
+      <p>currentWidthWindow: {{currentWidthWindow}}</p>
       <div class="table-fixed-cols-grid"
         @mouseover="mouseoverRows"
         @mouseout ="mouseoutRows"
         ref="table"
       >
-
         <!-- first-col -->
         <div class="first-col"
+          v-if="fixed_start_col"
           :class="{'shadow-active': shadowLeftActive}"
         >
           <div class="v-table__header">
@@ -34,6 +35,7 @@
         <!-- center-cols -->
         <div class="center-cols layout-cell-light-gray-border layout-scrollbar-light-gray-border layout-swipe-ignore"
           @scroll="scrollCenterCols"
+          ref="centerCols"
         >
           <div class="v-table__header"
             :style="gridNestingCols"
@@ -66,6 +68,7 @@
 
         <!-- last-col -->
         <div class="last-col"
+          v-if="fixed_last_col"
           :class="{'shadow-active': shadowRightActive}"
         >
           <div class="v-table__header">
@@ -111,16 +114,25 @@ export default {
       default: () => {
         return []
       }
+    },
+    fixed_start_col: {
+      type: [String, Boolean],
+      default: false
+    },
+    fixed_last_col: {
+      type: [String, Boolean],
+      default: false
     }
   },
 
   data() {
     return {
-      userPerPages: 10,
-      pageNumber: 1,
+      userPerPages: 10, // по сколько записей выводить
+      pageNumber: 1, // с какой страницы отсчитывать вывод данных
       shadowLeftActive: false,
       shadowRightActive: false,
-      currentElem: null // for @mouseover="mouseoverRows"
+      currentElem: null, // for @mouseover="mouseoverRows" hover
+
     }
   },
 
@@ -144,6 +156,23 @@ export default {
       let from = (this.pageNumber - 1) * this.userPerPages
       let to = from + this.userPerPages
       return this.users_data.slice(from, to)
+    },
+
+    currentWidthWindow () {
+      let isChangeWidthWindow = this.$store.getters['layoutChallenges/getCurrentWidthWindow']
+    //   if (isChangeWidthWindow) {
+    //     console.log('[lksjf')
+    //   }
+    //   // if center-cols имеет прокручиваемую область, то add .shadow-active к last-col
+
+    //   // const $centerCols = this.$refs.centerCols
+    //   // // при масштабе экрана 125% появляется погрешность, которую попробуем учесть,
+    //   // // предполагая, что погрешность не составляет больше 1px
+    //   // // исходный вариант был такой: e.target.scrollWidth - e.target.scrollLeft == e.target.offsetWidth
+    //   // const resultValue = $centerCols.scrollWidth - $centerCols.scrollLeft - $centerCols.offsetWidth
+    //   // this.shadowRightActive = (resultValue < 1) ? false : true
+
+      return this.$store.getters['layoutChallanges/getCurrentWidthWindow']
     }
   },
 
@@ -216,7 +245,8 @@ export default {
       // мы действительно покинули элемент
       // this.currentElem.style.background = ''
       this.currentElem = null
-    }
+    },
+
   }
 }
 </script>
@@ -229,22 +259,16 @@ export default {
     border-radius: $borderRadius
     overflow: hidden // прячет лишнюю тень (.shadow-active)
 
-    // .first-col,
-    // .center-cols,
-    // .last-col
-    //   padding: 1.5rem
-
     .v-table__body,
     .center-cols .v-table__header
       display: grid
 
     .v-table__header
       p
-        border-bottom: 1px solid #e7e7e7
-        padding: 1rem 1.6rem 1.2rem
-        flex-basis: 20%
         display: flex
         align-items: center
+        border-bottom: 1px solid #e7e7e7
+        padding: 1rem 1.6rem 1.2rem
 
     .first-col,
     .last-col
@@ -252,30 +276,15 @@ export default {
       // background-color: $color-opacity-test
       // background-color: $color-light-blue3
       // background-color: $theme-color-yellow
-      // border-radius: $borderRadius
 
+    .first-col
+      border-right: 1px solid #e7e7e7
+    .last-col
+      border-left: 1px solid #e7e7e7
 
     .shadow-active
       box-shadow: 0 0 10px rgba(0,0,0,.12)
 
-    .first-col
-      border-right: 1px solid #f7f7f7
-      // border-right: 1px solid #e7e7e7
-      &.shadow-active
-        border-right: 1px solid transparent
-      &:hover
-        &.shadow-active
-          border-right: 1px solid #f7f7f7
-
-
-    .last-col
-      border-left: 1px solid #f7f7f7
-      // border-left: 1px solid #e7e7e7
-      &.shadow-active
-        border-left: 1px solid transparent
-      &:hover
-        &.shadow-active
-          border-left: 1px solid #f7f7f7
 
   .v-table__pagination
     display: flex

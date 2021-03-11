@@ -96,7 +96,7 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .go-frontend
   .v-table
     max-width: 100%

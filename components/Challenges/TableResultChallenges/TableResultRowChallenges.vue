@@ -21,7 +21,7 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .v-table
   .v-table-row
     display: flex

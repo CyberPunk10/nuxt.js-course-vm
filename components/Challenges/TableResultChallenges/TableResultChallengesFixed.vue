@@ -120,7 +120,7 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .table-fixed-cols
   position: relative
   .v-table__header

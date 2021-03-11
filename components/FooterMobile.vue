@@ -18,12 +18,12 @@
 export default {
   computed: {
     navLinks () {
-      return this.$store.getters['sidebarLayoutChellanges/footerMobileLinks']
+      return this.$store.getters['sidebarLayoutChallenges/footerMobileLinks']
     }
   },
   methods: {
     clickFooterMobile() {
-      this.$store.dispatch('sidebarLayoutChellanges/closeSidebar')
+      this.$store.dispatch('sidebarLayoutChallenges/closeSidebar')
     }
   }
 }
@@ -38,8 +38,8 @@ export default {
   box-shadow: 0 0 2px rgba(88,88,88,.15)
   border-top-left-radius: $borderRadius
   border-top-right-radius: $borderRadius
-  @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
-    box-shadow: 0 0 4px rgba(88,88,88,.15)
+  // @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
+  //   box-shadow: 0 0 4px rgba(88,88,88,.15)
   .navbar-brand
     line-height: $header-height
     text-align: center

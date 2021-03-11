@@ -3,11 +3,13 @@
     <div class="table-go-frontend">
       <TableGridResultCh
         :users_data="players"
+        fixed_start_col="true"
       />
+        <!-- fixed_last_col="true" -->
 
     <br><hr><br>
 
-      <TableResultChallengesFixed
+      <!-- <TableResultChallengesFixed
         :users_data="players"
       />
 
@@ -15,7 +17,7 @@
 
       <TableResultChallenges
         :users_data="players"
-      />
+      /> -->
     </div>
 
     <br><hr><br>
@@ -178,7 +180,7 @@ export default {
   // @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap')
 
   #table-price
-      padding-bottom: 35px
+    padding-bottom: 35px
 
   #table-Obvodny, #table-Ligovskiy
     margin-top: 30px

@@ -8,13 +8,13 @@
     <div class="cell row__name">{{row_data.name}}</div>
   </div>
 
-  <div v-else-if="renderCol === 'first-col'" class="v-table-row"
+  <div v-else-if="renderCol === 'first-col'" class="v-table-row" data-first-col
     :class="{'hover-active': hoverActive === true}"
   >
     <div class="cell row__name">{{row_data.name}}</div>
   </div>
 
-  <div v-else-if="renderCol === 'last-col'" class="v-table-row"
+  <div v-else-if="renderCol === 'last-col'" class="v-table-row" data-last-col
     :class="{'hover-active': hoverActive === true}"
   >
     <div class="cell row__name">{{row_data.name}}</div>
@@ -54,9 +54,6 @@ export default {
   .v-table-row
     border-bottom: 1px solid #f7f7f7
     transition: $transitionDefaultHover
-    &:hover,
-    &.hover-active
-      background-color: #f7f7f7
     &[data-center-cols]
       display: grid
     .cell
@@ -64,5 +61,15 @@ export default {
       text-align: left
       display: flex
       align-items: center
+
+    // js hover (@mouseoverRows, @mouseoutRows)
+    &.hover-active
+      background-color: #f7f7f7
+    &[data-first-col].hover-active
+      border-top-left-radius: $borderRadius
+      border-bottom-left-radius: $borderRadius
+    &[data-last-col].hover-active
+      border-top-right-radius: $borderRadius
+      border-bottom-right-radius: $borderRadius
 
 </style>
