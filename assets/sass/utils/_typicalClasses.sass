@@ -1,11 +1,22 @@
 .wrap-card-content
   background-color: #fff
-  padding: 1.5rem
+  padding: .5rem
   border-radius: $borderRadius
   box-shadow: $borderShadow
+  font-size: 1.4rem
   transition: $transitionDefaultHover
   &:hover
     box-shadow: $borderShadowHover
+  @media screen and (min-width: $phoneWidth)
+    padding: .5rem
+    font-size: 1.5rem
+  @media screen and (min-width: $tableWidth)
+    padding: 1rem
+    font-size: 1.6rem
+  @media screen and (min-width: $smDesktopWidth)
+    padding: 1.5rem
+  @media screen and (min-width: $desktopWidth)
+    padding: 2rem
 
 .underlay
   position: fixed

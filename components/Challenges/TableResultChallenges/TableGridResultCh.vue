@@ -1,98 +1,97 @@
 <template>
   <div class="wrap-card-content">
-    <div class="table-fixed-cols">
-      <div class="table-fixed-cols-grid"
-        :style="gridMainColumns"
-        @mouseover="mouseoverRows"
-        @mouseout ="mouseoutRows"
-        ref="table"
+    <div class="table-fixed-cols-grid"
+      :style="gridMainColumns"
+      @mouseover="mouseoverRows"
+      @mouseout ="mouseoutRows"
+      ref="table"
+    >
+      <!-- first-col -->
+      <div class="first-col"
+        v-if="fixed_first_col"
+        :class="{'shadow-active': shadowLeftActive}"
+        :style="gridNestingRows"
       >
-        <!-- first-col -->
-        <div class="first-col"
-          v-if="fixed_first_col"
-          :class="{'shadow-active': shadowLeftActive}"
-          :style="gridNestingRows"
+        <!-- header cell -->
+        <p class="cell__header row"
+          @click="`sortBy_${fixed_first_col}`"
+        >{{ fixed_first_col }}
+          <i class="material-icons">unfold_more</i>
+        </p>
+
+        <!-- other cells -->
+        <div class="cell" data-first-col
+          v-for="(row, index) in paginatedUsers"
+          :key="row.id"
+          :class="{'hover-active': currentElem == index}"
+          :data-row="index"
         >
-          <!-- header cell -->
-          <p class="v-table__header row"
-            @click="`sortBy_${fixed_first_col}`"
-          >{{ fixed_first_col }}
-            <i class="material-icons">unfold_more</i>
-          </p>
-
-          <!-- other cells -->
-          <div class="v-table-row cell" data-first-col
-            v-for="(row, index) in paginatedUsers"
-            :key="row.id"
-            :class="{'hover-active': currentElem == index}"
-            :data-row="index"
-          >
-            {{ row[fixed_first_col] }}
-          </div>
+          {{ row[fixed_first_col] }}
         </div>
-
-        <!-- center-cols -->
-        <div class="center-cols layout-cell-light-gray-border layout-scrollbar-light-gray-border layout-swipe-ignore"
-          @scroll="scrollCenterCols"
-          ref="centerCols"
-          :style="[gridNestingRows, gridNestingCols]"
-        >
-          <!-- header cells -->
-          <template v-for="cell in namesColsForRowRender">
-            <p class="v-table__header"
-              :key="cell"
-              @click="`sortBy_${cell}`"
-            >{{ cell }}
-              <i class="material-icons">unfold_more</i>
-            </p>
-          </template>
-
-          <!-- other cells -->
-          <template v-for="(row, indexRow) in paginatedUsers">
-            <div class="cell"
-              v-for="cell in namesColsForRowRender"
-              :key="`${row.id}__${cell}`"
-              :data-row="indexRow + 1"
-              :class="{'hover-active': currentElem == indexRow}"
-            >
-              {{row[cell]}}
-            </div>
-          </template>
-        </div>
-
-        <!-- last-col -->
-        <div class="last-col"
-          v-if="fixed_last_col"
-          :class="{'shadow-active': shadowRightActive}"
-          :style="gridNestingRows"
-        >
-          <!-- header cell -->
-          <p class="v-table__header row"
-            @click="`sortBy_${fixed_last_col}`"
-          >{{ fixed_last_col }}
-            <i class="material-icons">unfold_more</i>
-          </p>
-
-          <!-- other cells -->
-          <div class="v-table-row cell" data-last-col
-            v-for="(row, index) in paginatedUsers"
-            :key="row.id"
-            :data-row="index"
-            :class="{'hover-active': currentElem == index}"
-          >
-            {{ row[fixed_last_col] }}
-          </div>
-        </div>
-
       </div>
-      <div class="v-table__pagination">
-        <div class="page"
-          v-for="page in pages"
-          :key="page"
-          @click="pageClick(page)"
-          :class="{'page_selected': page === pageNumber}"
-        >{{ page }}
+
+      <!-- center-cols -->
+      <div class="center-cols layout-cell-light-gray-border layout-scrollbar-light-gray-border layout-swipe-ignore"
+        @scroll="scrollCenterCols"
+        ref="centerCols"
+        :style="[gridNestingRows, gridNestingCols]"
+      >
+        <!-- header cells -->
+        <template v-for="cell in namesColsForRowRender">
+          <p class="cell__header"
+            :key="cell"
+            @click="`sortBy_${cell}`"
+          >{{ cell }}
+            <i class="material-icons">unfold_more</i>
+          </p>
+        </template>
+
+        <!-- other cells -->
+        <template v-for="(row, indexRow) in paginatedUsers">
+          <div class="cell"
+            v-for="cell in namesColsForRowRender"
+            :key="`${row.id}__${cell}`"
+            :data-row="indexRow"
+            :class="{'hover-active': currentElem == indexRow}"
+          >
+            {{row[cell]}}
+          </div>
+        </template>
+      </div>
+
+      <!-- last-col -->
+      <div class="last-col"
+        v-if="fixed_last_col"
+        :class="{'shadow-active': shadowRightActive}"
+        :style="gridNestingRows"
+      >
+        <!-- header cell -->
+        <p class="cell__header row"
+          @click="`sortBy_${fixed_last_col}`"
+        >{{ fixed_last_col }}
+          <i class="material-icons">unfold_more</i>
+        </p>
+
+        <!-- other cells -->
+        <div class="cell" data-last-col
+          v-for="(row, index) in paginatedUsers"
+          :key="row.id"
+          :data-row="index"
+          :class="{'hover-active': currentElem == index}"
+        >
+          {{ row[fixed_last_col] }}
         </div>
+      </div>
+
+    </div>
+
+    <div class="v-table__pagination">
+      <div class="page"
+        v-for="page in pages"
+        :key="page"
+        @click="pageClick(page)"
+        :class="{'page_selected': page === pageNumber}"
+      >{{ page }}
       </div>
     </div>
   </div>
@@ -270,75 +269,36 @@ export default {
 </script>
 
 <style lang="sass">
-.table-fixed-cols
-  .table-fixed-cols-grid
-    display: grid
-    border-radius: $borderRadius
-    overflow: hidden // прячет лишнюю тень (.shadow-active)
-
-    .first-col,
-    .center-cols,
-    .last-col
-      display: grid
-
-    .v-table__header
-      display: flex
-      align-items: center
-      border-bottom: 1px solid #e7e7e7
-      padding: 1rem 1.6rem 1.2rem
-
-    .first-col,
-    .last-col
-      z-index: 1 // чтобы central-cols при наведении были тоже под тенью
-      // background-color: $color-opacity-test
-      // background-color: $color-light-blue3
-      // background-color: $theme-color-yellow
-
-    .first-col
-      border-right: 1px solid #e7e7e7
-    .last-col
-      border-left: 1px solid #e7e7e7
-
-    .shadow-active
-      box-shadow: 0 0 10px rgba(0,0,0,.12)
-
-  .v-table__pagination
-    display: flex
-    justify-content: center
-    margin: 3rem 0 1rem
-    .page
-      height: 3.5rem
-      line-height: 3.3rem
-      width: 3.5rem
-      border-radius: $borderRadius
-      text-align: center
-      border: 1px solid #e7e7e7
-      margin-right: 1rem
-      cursor: pointer
-      transition: $transitionDefaultHover
-      &:hover
-        background-color: $color-purple
-        color: #fff
-        border: 1px solid $color-purple
-    .page_selected
-      background-color: $color-purple
-      color: #fff
-      border: 1px solid $color-purple
-
-
-
-
-
 .table-fixed-cols-grid
-  // js hover (@mouseoverRows, @mouseoutRows)
-  &.hover-active
-    background-color: #f7f7f7
-  &[data-first-col].hover-active
-    border-top-left-radius: $borderRadius
-    border-bottom-left-radius: $borderRadius
-  &[data-last-col].hover-active
-    border-top-right-radius: $borderRadius
-    border-bottom-right-radius: $borderRadius
+  display: grid
+  border-radius: $borderRadius
+  overflow: hidden // прячет лишнюю тень (.shadow-active)
+
+  .first-col,
+  .center-cols,
+  .last-col
+    display: grid
+
+  .cell__header
+    display: flex
+    align-items: center
+    border-bottom: 1px solid #e7e7e7
+    padding: 1rem 1.6rem 1.2rem
+
+  .first-col,
+  .last-col
+    z-index: 1 // чтобы central-cols при наведении были тоже под тенью
+    // background-color: $color-opacity-test
+    // background-color: $color-light-blue3
+    // background-color: $theme-color-yellow
+
+  .first-col
+    border-right: 1px solid #e7e7e7
+  .last-col
+    border-left: 1px solid #e7e7e7
+
+  .shadow-active
+    box-shadow: 0 0 10px rgba(0,0,0,.12)
 
   .cell
     padding: 8px 16px
@@ -348,21 +308,6 @@ export default {
     white-space: nowrap // ОБЯЗАТЕЛЕН, иначе всё поедет (запрет переноса строк)
     border-bottom: 1px solid #f7f7f7
     transition: $transitionDefaultHover
-    &.hover-active
-      background-color: #f7f7f7
-
-.table-fixed-cols-grid
-  .v-table-row
-    border-bottom: 1px solid #f7f7f7
-    transition: $transitionDefaultHover
-    &[data-center-cols]
-      display: grid
-    .cell
-      padding: 8px 16px
-      text-align: left
-      display: flex
-      align-items: center
-      white-space: nowrap // ОБЯЗАТЕЛЕН, иначе всё поедет (запрет переноса строк)
 
     // js hover (@mouseoverRows, @mouseoutRows)
     &.hover-active
@@ -373,4 +318,28 @@ export default {
     &[data-last-col].hover-active
       border-top-right-radius: $borderRadius
       border-bottom-right-radius: $borderRadius
+
+// pagination
+.v-table__pagination
+  display: flex
+  justify-content: center
+  margin: 3rem 0 1rem
+  .page
+    height: 3.5rem
+    line-height: 3.3rem
+    width: 3.5rem
+    border-radius: $borderRadius
+    text-align: center
+    border: 1px solid #e7e7e7
+    margin-right: 1rem
+    cursor: pointer
+    transition: $transitionDefaultHover
+    &:hover
+      background-color: $color-purple
+      color: #fff
+      border: 1px solid $color-purple
+  .page_selected
+    background-color: $color-purple
+    color: #fff
+    border: 1px solid $color-purple
 </style>
