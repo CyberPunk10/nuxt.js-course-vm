@@ -1,24 +1,20 @@
 <template>
   <div class="">
-    <div class="table-go-frontend">
-      <TableGridResultCh
-        :users_data="players"
-        fixed_first_col="id"
-        fixed_last_col="name"
-      />
 
+    <TableGridResultCh
+      :users_data="players"
+      fixed_first_col="name"
+      fixed_last_col="id"
+    />
     <br><hr><br>
-
-      <!-- <TableResultChallengesFixed
-        :users_data="players"
-      />
-
+    <TableGridResultCh
+      :users_data="players"
+      fixed_first_col="name"
+    />
     <br><hr><br>
-
-      <TableResultChallenges
-        :users_data="players"
-      /> -->
-    </div>
+    <TableGridResultCh
+      :users_data="players"
+    />
 
     <br><hr><br>
 
