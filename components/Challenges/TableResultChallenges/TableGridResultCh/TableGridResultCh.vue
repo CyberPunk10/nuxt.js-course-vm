@@ -25,7 +25,7 @@
               v-for="(row, index) in paginatedUsers"
               :key="row.id"
               :row_data="row"
-              renderCol="first-col"
+              :fixed_first_col="fixed_first_col"
               :data-row="index"
               :class="{'hover-active': currentElem == index}"
             />
@@ -58,6 +58,7 @@
               v-for="(row, index) in paginatedUsers"
               :key="row.id"
               :row_data="row"
+              :namesColsForRowRender="namesColsForRowRender"
               renderCol="center-cols"
               :gridNestingCols="gridNestingCols"
               :data-row="index"
@@ -84,7 +85,7 @@
               v-for="(row, index) in paginatedUsers"
               :key="row.id"
               :row_data="row"
-              renderCol="last-col"
+              :fixed_last_col="fixed_last_col"
               :data-row="index"
               :class="{'hover-active': currentElem == index}"
             />
@@ -92,7 +93,6 @@
         </div>
 
       </div>
-<p>fjasldkjflkajd: {{namesColsForRowRender}}</p>
       <div class="v-table__pagination">
         <div class="page"
           v-for="page in pages"
@@ -139,15 +139,17 @@ export default {
   computed: {
     // grid styles
     gridMainColumns() {
-      const firstCol = this.fixed_first_col ? 'minmax(11rem, 1fr)' : ''
-      const lastCol = this.fixed_last_col ? 'minmax(11rem, 1fr)' : ''
+      const firstCol = this.fixed_first_col ? 'minmax(min-content, 1fr)' : ''
+      const lastCol = this.fixed_last_col ? 'minmax(min-content, 1fr)' : ''
       return {
         gridTemplateColumns: `${firstCol} minmax(auto, 100%) ${lastCol}`
       }
     },
     gridNestingRows() {
       return {
-        gridTemplateRows: `repeat(${this.paginatedUsers.length}, minmax(4rem, 1fr))`
+        gridTemplateRows: `repeat(${this.paginatedUsers.length}, 4rem)`
+        // т.к. этот шаблон применяется в разных столбцах отдельных грядов,
+        // использовать minmax(4rem, 1fr) не приемлимо - в случае переноса строк строки будут иметь разную высоту
       }
     },
     gridNestingCols() {
@@ -157,7 +159,7 @@ export default {
 
       const countCol = Object.keys(this.users_data[0]).length - countFixedCol // вычетаем первый и последний столбцы (if они фиксрованные)
       return {
-        gridTemplateColumns: `repeat(${countCol}, minmax(15rem, 1fr))`
+        gridTemplateColumns: `repeat(${countCol}, minmax(min-content, 1fr))`
       }
     },
 
@@ -177,8 +179,11 @@ export default {
     },
 
     namesColsForRowRender() {
-      console.log(this.users_data)
-      return []
+      console.log('[why 5 times handle?]')
+      const arrAllValue = Object.keys(this.users_data[0]) // например было 5
+      let filteredArrStep1 = arrAllValue.filter(e => e !== this.fixed_first_col) // стало 4
+      let filteredArrStep2 = filteredArrStep1.filter(e => e !== this.fixed_last_col) // стало 3
+      return filteredArrStep2
     }
   },
 
@@ -196,10 +201,12 @@ export default {
   },
 
   methods: {
+    // pagination
     pageClick(page) {
       this.pageNumber = page
     },
 
+    // sort
     sortByName() {
       this.$store.dispatch('tableGoFrontend/sortByName')
     },
@@ -210,6 +217,7 @@ export default {
       this.$store.dispatch('tableGoFrontend/sortByResultAll')
     },
 
+    // add shadow cols by scroll
     scrollCenterCols(e) {
       this.shadowLeftActive = e.target.scrollLeft == 0 ? false : true
       // при масштабе экрана 125% появляется погрешность, которую попробуем учесть,
@@ -302,7 +310,6 @@ export default {
 
     .shadow-active
       box-shadow: 0 0 10px rgba(0,0,0,.12)
-
 
   .v-table__pagination
     display: flex

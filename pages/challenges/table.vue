@@ -3,9 +3,9 @@
     <div class="table-go-frontend">
       <TableGridResultCh
         :users_data="players"
-        fixed_first_col="true"
+        fixed_first_col="id"
+        fixed_last_col="name"
       />
-        <!-- fixed_last_col="true" -->
 
     <br><hr><br>
 
