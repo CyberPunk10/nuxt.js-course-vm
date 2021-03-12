@@ -11,24 +11,23 @@
         <div class="first-col"
           v-if="fixed_first_col"
           :class="{'shadow-active': shadowLeftActive}"
+          :style="gridNestingRows"
         >
-          <div class="v-table__header">
-            <p @click="sortById" class="row">Имя
-              <i class="material-icons">unfold_more</i>
-            </p>
-          </div>
+          <!-- header cell -->
+          <p class="v-table__header row"
+            @click="`sortBy_${fixed_first_col}`"
+          >{{ fixed_first_col }}
+            <i class="material-icons">unfold_more</i>
+          </p>
 
-          <div class="v-table__body"
-            :style="gridNestingRows"
+          <!-- other cells -->
+          <div class="v-table-row cell" data-first-col
+            v-for="(row, index) in paginatedUsers"
+            :key="row.id"
+            :class="{'hover-active': currentElem == index}"
+            :data-row="index"
           >
-            <TableRowGridResultCh
-              v-for="(row, index) in paginatedUsers"
-              :key="row.id"
-              :row_data="row"
-              :fixed_first_col="fixed_first_col"
-              :data-row="index"
-              :class="{'hover-active': currentElem == index}"
-            />
+            {{ row[fixed_first_col] }}
           </div>
         </div>
 
@@ -36,59 +35,52 @@
         <div class="center-cols layout-cell-light-gray-border layout-scrollbar-light-gray-border layout-swipe-ignore"
           @scroll="scrollCenterCols"
           ref="centerCols"
+          :style="[gridNestingRows, gridNestingCols]"
         >
-          <div class="v-table__header"
-            :style="gridNestingCols"
-          >
-            <p @click="sortByName">Имя
+          <!-- header cells -->
+          <template v-for="cell in namesColsForRowRender">
+            <p class="v-table__header"
+              :key="cell"
+              @click="`sortBy_${cell}`"
+            >{{ cell }}
               <i class="material-icons">unfold_more</i>
             </p>
-            <p @click="sortById">Id
-              <i class="material-icons">unfold_more</i>
-            </p>
-            <p @click="sortByName">Имя
-              <i class="material-icons">unfold_more</i>
-            </p>
-          </div>
+          </template>
 
-          <div class="v-table__body"
-            :style="gridNestingRows"
-          >
-            <TableRowGridResultCh
-              v-for="(row, index) in paginatedUsers"
-              :key="row.id"
-              :row_data="row"
-              :namesColsForRowRender="namesColsForRowRender"
-              renderCol="center-cols"
-              :gridNestingCols="gridNestingCols"
-              :data-row="index"
-              :class="{'hover-active': currentElem == index}"
-            />
-          </div>
+          <!-- other cells -->
+          <template v-for="(row, indexRow) in paginatedUsers">
+            <div class="cell"
+              v-for="cell in namesColsForRowRender"
+              :key="`${row.id}__${cell}`"
+              :data-row="indexRow + 1"
+              :class="{'hover-active': currentElem == indexRow}"
+            >
+              {{row[cell]}}
+            </div>
+          </template>
         </div>
 
         <!-- last-col -->
         <div class="last-col"
           v-if="fixed_last_col"
           :class="{'shadow-active': shadowRightActive}"
+          :style="gridNestingRows"
         >
-          <div class="v-table__header">
-            <p @click="sortByResultAll" class="row">Общий
-              <i class="material-icons">unfold_more</i>
-            </p>
-          </div>
+          <!-- header cell -->
+          <p class="v-table__header row"
+            @click="`sortBy_${fixed_last_col}`"
+          >{{ fixed_last_col }}
+            <i class="material-icons">unfold_more</i>
+          </p>
 
-          <div class="v-table__body"
-            :style="gridNestingRows"
+          <!-- other cells -->
+          <div class="v-table-row cell" data-last-col
+            v-for="(row, index) in paginatedUsers"
+            :key="row.id"
+            :data-row="index"
+            :class="{'hover-active': currentElem == index}"
           >
-            <TableRowGridResultCh
-              v-for="(row, index) in paginatedUsers"
-              :key="row.id"
-              :row_data="row"
-              :fixed_last_col="fixed_last_col"
-              :data-row="index"
-              :class="{'hover-active': currentElem == index}"
-            />
+            {{ row[fixed_last_col] }}
           </div>
         </div>
 
@@ -147,7 +139,7 @@ export default {
     },
     gridNestingRows() {
       return {
-        gridTemplateRows: `repeat(${this.paginatedUsers.length}, 4rem)`
+        gridTemplateRows: `5rem repeat(${this.paginatedUsers.length}, 4rem)`
         // т.к. этот шаблон применяется в разных столбцах отдельных грядов,
         // использовать minmax(4rem, 1fr) не приемлимо - в случае переноса строк строки будут иметь разную высоту
       }
@@ -179,7 +171,6 @@ export default {
     },
 
     namesColsForRowRender() {
-      console.log('[why 5 times handle?]')
       const arrAllValue = Object.keys(this.users_data[0]) // например было 5
       let filteredArrStep1 = arrAllValue.filter(e => e !== this.fixed_first_col) // стало 4
       let filteredArrStep2 = filteredArrStep1.filter(e => e !== this.fixed_last_col) // стало 3
@@ -207,13 +198,13 @@ export default {
     },
 
     // sort
-    sortByName() {
+    sortBy_name() {
       this.$store.dispatch('tableGoFrontend/sortByName')
     },
-    sortById() {
+    sortBy_id() {
       this.$store.dispatch('tableGoFrontend/sortById')
     },
-    sortByResultAll() {
+    sortBy_resultAll() {
       this.$store.dispatch('tableGoFrontend/sortByResultAll')
     },
 
@@ -285,16 +276,16 @@ export default {
     border-radius: $borderRadius
     overflow: hidden // прячет лишнюю тень (.shadow-active)
 
-    .v-table__body,
-    .center-cols .v-table__header
+    .first-col,
+    .center-cols,
+    .last-col
       display: grid
 
     .v-table__header
-      p
-        display: flex
-        align-items: center
-        border-bottom: 1px solid #e7e7e7
-        padding: 1rem 1.6rem 1.2rem
+      display: flex
+      align-items: center
+      border-bottom: 1px solid #e7e7e7
+      padding: 1rem 1.6rem 1.2rem
 
     .first-col,
     .last-col
@@ -334,4 +325,52 @@ export default {
       color: #fff
       border: 1px solid $color-purple
 
+
+
+
+
+.table-fixed-cols-grid
+  // js hover (@mouseoverRows, @mouseoutRows)
+  &.hover-active
+    background-color: #f7f7f7
+  &[data-first-col].hover-active
+    border-top-left-radius: $borderRadius
+    border-bottom-left-radius: $borderRadius
+  &[data-last-col].hover-active
+    border-top-right-radius: $borderRadius
+    border-bottom-right-radius: $borderRadius
+
+  .cell
+    padding: 8px 16px
+    text-align: left
+    display: flex
+    align-items: center
+    white-space: nowrap // ОБЯЗАТЕЛЕН, иначе всё поедет (запрет переноса строк)
+    border-bottom: 1px solid #f7f7f7
+    transition: $transitionDefaultHover
+    &.hover-active
+      background-color: #f7f7f7
+
+.table-fixed-cols-grid
+  .v-table-row
+    border-bottom: 1px solid #f7f7f7
+    transition: $transitionDefaultHover
+    &[data-center-cols]
+      display: grid
+    .cell
+      padding: 8px 16px
+      text-align: left
+      display: flex
+      align-items: center
+      white-space: nowrap // ОБЯЗАТЕЛЕН, иначе всё поедет (запрет переноса строк)
+
+    // js hover (@mouseoverRows, @mouseoutRows)
+    &.hover-active
+      background-color: #f7f7f7
+    &[data-first-col].hover-active
+      border-top-left-radius: $borderRadius
+      border-bottom-left-radius: $borderRadius
+    &[data-last-col].hover-active
+      border-top-right-radius: $borderRadius
+      border-bottom-right-radius: $borderRadius
 </style>
