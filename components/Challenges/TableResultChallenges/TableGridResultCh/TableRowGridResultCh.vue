@@ -1,23 +1,28 @@
 <template>
-  <div v-if="renderCol === 'center-cols'" class="v-table-row" data-center-cols
+
+  <!-- if first-col -->
+  <div v-if="fixed_first_col" class="v-table-row" data-first-col
+    :class="{'hover-active': hoverActive === true}"
+  >
+    <div class="cell">{{row_data[fixed_first_col]}}</div>
+  </div>
+
+  <!-- if last-col -->
+  <div v-else-if="fixed_last_col" class="v-table-row" data-last-col
+    :class="{'hover-active': hoverActive === true}"
+  >
+    <div class="cell">{{row_data[fixed_last_col]}}</div>
+  </div>
+
+  <!-- center-cols / all cols -->
+  <div v-else class="v-table-row" data-center-cols
     :class="{'hover-active': hoverActive === true}"
     :style="gridNestingCols"
   >
-    <div class="cell row__name">{{row_data[`${testttt}`]}}</div>
-    <div class="cell row__id">{{row_data.id}}</div>
-    <div class="cell row__name">{{row_data.name}}</div>
-  </div>
-
-  <div v-else-if="renderCol === 'first-col'" class="v-table-row" data-first-col
-    :class="{'hover-active': hoverActive === true}"
-  >
-    <div class="cell row__name">{{row_data.name}}</div>
-  </div>
-
-  <div v-else-if="renderCol === 'last-col'" class="v-table-row" data-last-col
-    :class="{'hover-active': hoverActive === true}"
-  >
-    <div class="cell row__name">{{row_data.name}}</div>
+    <div class="cell"
+      v-for="(col, index) in namesColsForRowRender"
+      :key="index"
+    >{{row_data[namesColsForRowRender[index]]}}</div>
   </div>
 </template>
 
@@ -30,19 +35,31 @@ export default {
         return {}
       }
     },
-    renderCol: {
-      type: String,
-      default: 'all-cols'
+    fixed_first_col: {
+      type: [String, Boolean],
+      default: false
+    },
+    fixed_last_col: {
+      type: [String, Boolean],
+      default: false
     },
     gridNestingCols: {
-      type: Object
+      type: Object,
+      default: () => {
+        return {}
+      }
+    },
+    namesColsForRowRender: {
+      type: Array,
+      default: () => {
+        return []
+      }
     }
   },
 
   data() {
     return {
       hoverActive: false,
-      testttt: 'name'
     }
   },
 
@@ -61,6 +78,7 @@ export default {
       text-align: left
       display: flex
       align-items: center
+      white-space: nowrap // ОБЯЗАТЕЛЕН, иначе всё поедет (запрет переноса строк)
 
     // js hover (@mouseoverRows, @mouseoutRows)
     &.hover-active

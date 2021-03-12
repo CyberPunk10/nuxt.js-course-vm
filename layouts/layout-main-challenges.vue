@@ -34,7 +34,7 @@ export default {
   name: 'layout-main-challenges', // Иначе ошибка: [Vue warn]: Invalid component name: "layouts/layout-main-challenges.vue". Component names should conform to valid custom element name in html5 specification.
   data () {
     return {
-      progress: 0,
+      progress: 0, // for progressBar
     }
   },
   middleware: ['class', 'scroll-top-to-start'],
@@ -124,6 +124,7 @@ export default {
 
     handleSwipe(e) {
       // console.log(e.detail.full.type, e.detail)
+      console.log(e.detail.full.target)
 
       const ignoreSwipe = e.detail.targetStartSwipe.closest('.layout-swipe-ignore')
 
