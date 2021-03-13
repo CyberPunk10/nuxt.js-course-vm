@@ -11,6 +11,8 @@
         <small>
           <i class="el-icon-time"></i>
           {{post.date | date}}
+          , <i class="el-icon-time"></i>
+          Filter date(time): {{post.date | date('time')}}
         </small>
         <small>
           <i class="el-icon-view"></i>
