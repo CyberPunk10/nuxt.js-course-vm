@@ -190,6 +190,18 @@ export default {
     }
   },
 
+  mounted() {
+    // if center-cols имеет прокручиваемую область, то add .shadow-active к last-col
+    const $centerCols = this.$refs.centerCols
+    // ниже строка не нужна, так как мы по умолчанию имеем таблицу со scrollLeft == 0
+    // this.shadowLeftActive = $centerCols.scrollLeft == 0 ? false : true
+    // при масштабе экрана 125% появляется погрешность, которую попробуем учесть,
+    // предполагая, что погрешность не составляет больше 1px
+    // исходный вариант был такой: e.target.scrollWidth - e.target.scrollLeft == e.target.offsetWidth
+    const resultValue = $centerCols.scrollWidth - $centerCols.scrollLeft - $centerCols.offsetWidth
+    this.shadowRightActive = (resultValue < 1) ? false : true
+  },
+
   methods: {
     // pagination
     pageClick(page) {
@@ -323,6 +335,12 @@ export default {
 
     @media screen and (min-width: $phoneWidth) // >= 480px
       padding: 1rem 1rem
+      &[data-first-col].hover-active
+        border-top-left-radius: $borderRadius
+        border-bottom-left-radius: $borderRadius
+      &[data-last-col].hover-active
+        border-top-right-radius: $borderRadius
+        border-bottom-right-radius: $borderRadius
     @media screen and (min-width: $tableWidth) // >= 768px
       padding: 1rem 1.2rem
     @media screen and (min-width: $smDesktopWidth) // >= 980px
@@ -333,12 +351,6 @@ export default {
     // js hover (@mouseoverRows, @mouseoutRows)
     &.hover-active
       background-color: #f7f7f7
-    &[data-first-col].hover-active
-      border-top-left-radius: $borderRadius
-      border-bottom-left-radius: $borderRadius
-    &[data-last-col].hover-active
-      border-top-right-radius: $borderRadius
-      border-bottom-right-radius: $borderRadius
 
 
 // pagination
