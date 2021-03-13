@@ -15,6 +15,7 @@
         <!-- header cell -->
         <p class="cell__header row"
           @click="`sortBy_${fixed_first_col}`"
+          :style="[{gridColumn: '1/2'}, {gridRow: '1/3'}]"
         >{{ fixed_first_col }}
           <i class="material-icons">unfold_more</i>
         </p>
@@ -37,43 +38,49 @@
         :style="[gridNestingRows, gridNestingCols]"
       >
         <!-- header cells -->
-        <template v-for="cell in namesColsForRowRender">
+        <template v-for="(month, indexMonth) in users_data.datesForHeader">
+          <p class="cell__header test-cell-header"
+            :key="indexMonth"
+            :style="[{gridColumn: `${indexMonth + 1}/${indexMonth + 1 + month.numbers.length}`}]"
+          >{{ month.month }}</p>
+        </template>
+
+        <!-- работает для одной строки -->
+        <!-- <template v-for="cell in users_data.dates">
           <p class="cell__header"
             :key="cell"
-            @click="`sortBy_${cell}`"
-          >{{ cell }}
-            <i class="material-icons">unfold_more</i>
+          >{{ cellHandler(cell) | date }}
           </p>
-        </template>
+        </template> -->
 
         <!-- other cells -->
         <template v-for="(row, indexRow) in paginatedUsers">
           <div class="cell"
-            v-for="cell in namesColsForRowRender"
-            :key="`${row.id}__${cell}`"
+            v-for="(cell, index) in row.result"
+            :key="`${row.id}__${index}`"
             :data-row="indexRow"
             :class="{'hover-active': currentElem == indexRow}"
           >
-            {{row[cell]}}
+            {{cell}}
           </div>
         </template>
       </div>
 
       <!-- last-col -->
-      <div class="last-col"
+      <!-- <div class="last-col"
         v-if="fixed_last_col"
         :class="{'shadow-active': shadowRightActive}"
         :style="gridNestingRows"
-      >
+      > -->
         <!-- header cell -->
-        <p class="cell__header row"
+        <!-- <p class="cell__header row"
           @click="`sortBy_${fixed_last_col}`"
         >{{ fixed_last_col }}
           <i class="material-icons">unfold_more</i>
-        </p>
+        </p> -->
 
         <!-- other cells -->
-        <div class="cell" data-last-col
+        <!-- <div class="cell" data-last-col
           v-for="(row, index) in paginatedUsers"
           :key="row.id"
           :data-row="index"
@@ -81,7 +88,7 @@
         >
           {{ row[fixed_last_col] }}
         </div>
-      </div>
+      </div> -->
 
     </div>
 
@@ -101,9 +108,9 @@
 export default {
   props: {
     users_data: {
-      type: Array,
+      type: Object,
       default: () => {
-        return []
+        return {}
       }
     },
     fixed_first_col: {
@@ -137,18 +144,15 @@ export default {
       }
     },
     gridNestingRows() {
+      const countRowHeader = this.users_data.datesForHeader ? '3rem 3rem' : '5rem' // 1 or 2 row in header (for month)
       return {
-        gridTemplateRows: `5rem repeat(${this.paginatedUsers.length}, 4rem)`
+        gridTemplateRows: `${countRowHeader} repeat(${this.paginatedUsers.length}, 4rem)`
         // т.к. этот шаблон применяется в разных столбцах отдельных грядов,
         // использовать minmax(4rem, 1fr) не приемлимо - в случае переноса строк строки будут иметь разную высоту
       }
     },
     gridNestingCols() {
-      let countFixedCol = 0
-      countFixedCol = this.fixed_first_col ? ++countFixedCol : countFixedCol
-      countFixedCol = this.fixed_last_col  ? ++countFixedCol : countFixedCol
-
-      const countCol = Object.keys(this.users_data[0]).length - countFixedCol // вычетаем первый и последний столбцы (if они фиксрованные)
+      const countCol = this.users_data.dates.length
       return {
         gridTemplateColumns: `repeat(${countCol}, minmax(min-content, 1fr))`
       }
@@ -156,12 +160,12 @@ export default {
 
     // pagination
     pages() {
-      return Math.ceil(this.users_data.length / 10)
+      return Math.ceil(this.users_data.players.length / 10)
     },
     paginatedUsers() {
       let from = (this.pageNumber - 1) * this.userPerPages
       let to = from + this.userPerPages
-      return this.users_data.slice(from, to)
+      return this.users_data.players.slice(from, to)
     },
 
     // for .shadov-active при изменении ширины экрана
@@ -169,12 +173,18 @@ export default {
       return this.$store.getters['layoutChallenge/getCurrentWidthWindow']
     },
 
-    namesColsForRowRender() {
-      const arrAllValue = Object.keys(this.users_data[0]) // например было 5
-      let filteredArrStep1 = arrAllValue.filter(e => e !== this.fixed_first_col) // стало 4
-      let filteredArrStep2 = filteredArrStep1.filter(e => e !== this.fixed_last_col) // стало 3
-      return filteredArrStep2
-    }
+    // namesColsForRowRender() {
+    //   const arrAllValue = Object.keys(this.users_data[0]) // например было 5
+    //   let filteredArrStep1 = arrAllValue.filter(e => e !== this.fixed_first_col) // стало 4
+    //   let filteredArrStep2 = filteredArrStep1.filter(e => e !== this.fixed_last_col) // стало 3
+    //   return filteredArrStep2
+    // },
+
+    // arrForRenderHeaderTwoString() {
+    //   const arr = Object.keys(this.users_data.datesForHeader) // only months
+    //   console.log(arr)
+
+    // }
   },
 
   watch: {
@@ -264,6 +274,11 @@ export default {
       this.currentElem = null
     },
 
+    cellHandler(value) {
+      console.log(value)
+      return value
+    }
+
   }
 }
 </script>
@@ -298,6 +313,8 @@ export default {
       font-size: 1.6rem
       @media screen and (min-width: $smDesktopWidth)
         font-size: 1.8rem
+  .test-cell-header
+    background-color: $color-purple
 
   .first-col,
   .last-col

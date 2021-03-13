@@ -1,17 +1,25 @@
 <template>
   <div class="">
-
+    <h2 class="title-table font-how-h2">Таблица результатов</h2>
+    <TableGridResultChRenderByRow
+      :users_data="dataPushUps"
+      fixed_first_col="name"
+    />
+    <br><hr><br>
+    <h2 class="title-table font-how-h2">Таблица результатов</h2>
     <TableGridResultCh
       :users_data="players"
       fixed_first_col="name"
       fixed_last_col="id"
     />
     <br><hr><br>
+    <h2 class="title-table font-how-h2">Таблица результатов</h2>
     <TableGridResultCh
       :users_data="players"
       fixed_first_col="name"
     />
     <br><hr><br>
+    <h2 class="title-table font-how-h2">Таблица результатов</h2>
     <TableGridResultCh
       :users_data="players"
     />
@@ -166,12 +174,25 @@ export default {
   computed: {
     players() {
       return this.$store.getters['tableGoFrontend/getPlayers']
+    },
+    dataPushUps() {
+      return this.$store.getters['tableGoFrontend/getDataPushUps']
+    },
+    dataPushUpsCols() {
+      console.log(Object.entries(this.dataPushUps[0].years))
+      return Object.entries(this.dataPushUps[0].years[2020].month)
     }
   }
 }
 </script>
 
 <style lang="sass">
+  .title-table
+    margin: 1rem .5rem
+    // color: #2F4050
+    @media screen and (min-width: $phoneWidth) // >= 480px
+      margin: 1rem
+
   @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap')
   // @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap')
 
@@ -213,7 +234,7 @@ export default {
 
   .subtitle-Obvodny, .subtitle-Ligovskiy
     grid-column: 1/4
-    grid-row: 10/11
+    grid-row: 9/10
     font-size: 20px
     font-family: 'Lobster', cursive
     color: #ecb87f

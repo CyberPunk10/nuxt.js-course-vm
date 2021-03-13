@@ -50,6 +50,70 @@ export const state = () => ({
     {id: 48, name: 'Player 2', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null]},
     {id: 49, name: 'Player 1', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null]},
   ],
+
+  // отжимания
+  dataPushUps: {
+    players: [
+      { id: 1,
+        name: 'Костя',
+        result: [21, 30, 25, 30, 30, 30, 5 ]
+      },
+      { id: 2,
+        name: 'Игорь',
+        result: [30, 30, 30, 21, 21, 21, 5 ]
+      },
+      { id: 3,
+        name: 'Костя',
+        result: [30, 30, 30, 30, 30, 30, 5 ]
+      },
+      { id: 4,
+        name: 'Игорь',
+        result: [30, 30, 30, 30, 30, 30, 5 ]
+      },
+      { id: 5,
+        name: 'Костя',
+        result: [30, 30, 30, 30, 30, 30, 5 ]
+      },
+      { id: 6,
+        name: 'Игорь',
+        result: [30, 30, 30, 30, 30, 30, 5 ]
+      },
+      { id: 7,
+        name: 'Костя',
+        result: [30, 30, 30, 30, 30, 30, 5 ]
+      },
+      { id: 8,
+        name: 'Игорь',
+        result: [30, 30, 30, 30, 30, 30, 5 ]
+      },
+      { id: 9,
+        name: 'Костя',
+        result: [30, 30, 30, 30, 30, 30, 5 ]
+      },
+      { id: 10,
+        name: 'Игорь',
+        result: [30, 30, 30, 30, 30, 30, 5 ]
+      },
+      { id: 11,
+        name: 'Игорь',
+        result: [30, 30, 30, 30, 30, 30, 5 ]
+      }
+    ],
+    dates: [
+      '2020-11-14T09:29:03.824+00:00',
+      '2020-11-15T09:29:03.824+00:00',
+      '2020-11-16T09:29:03.824+00:00',
+      '2020-11-17T09:29:03.824+00:00',
+      '2020-11-21T09:29:03.824+00:00',
+      '2020-11-29T09:29:03.824+00:00',
+      '2020-11-20T09:29:03.824+00:00'
+    ],
+    datesForHeader: [
+      { month: 'Февраль', numbers: [1,8,9,28] },
+      { month: 'Март', numbers: [1,2,31] },
+    ]
+  }
+
 })
 
 export const mutations = {
@@ -83,7 +147,8 @@ export const actions = {
 }
 
 export const getters = {
-  getPlayers: state => state.players
+  getPlayers: state => state.players,
+  getDataPushUps: state => state.dataPushUps
 }
 
 
