@@ -38,12 +38,19 @@
         :style="[gridNestingRows, gridNestingCols]"
       >
         <!-- header cells -->
-        <template v-for="(month, indexMonth) in users_data.datesForHeader">
-          <p class="cell__header test-cell-header"
-            :key="indexMonth"
-            :style="[{gridColumn: `${indexMonth + 1}/${indexMonth + 1 + month.numbers.length}`}]"
-          >{{ month.month }}</p>
-        </template>
+        <p class="cell__header test-cell-header"
+          v-for="(month, indexMonth) in users_data.datesForHeader"
+          :key="`${month.month}__${indexMonth}`"
+          :style="{
+            gridColumn: `${indexMonth == 0 ? 1 : arrStartGridColumnMonths[indexMonth - 1]}
+            / ${indexMonth == 0 ? (month.numbers.length + 1) : (arrStartGridColumnMonths[indexMonth] - 1)}`
+          }"
+        >{{ month.month }}{{ month.numbers.length + 1 }}</p>
+        <p class="cell__header"
+          v-for="(cell, index) in users_data.dates"
+          :key="index"
+        >{{ cell }}
+        </p>
 
         <!-- работает для одной строки -->
         <!-- <template v-for="cell in users_data.dates">
@@ -91,7 +98,6 @@
       </div> -->
 
     </div>
-
     <div class="v-table__pagination">
       <div class="page"
         v-for="page in pages"
@@ -173,18 +179,14 @@ export default {
       return this.$store.getters['layoutChallenge/getCurrentWidthWindow']
     },
 
-    // namesColsForRowRender() {
-    //   const arrAllValue = Object.keys(this.users_data[0]) // например было 5
-    //   let filteredArrStep1 = arrAllValue.filter(e => e !== this.fixed_first_col) // стало 4
-    //   let filteredArrStep2 = filteredArrStep1.filter(e => e !== this.fixed_last_col) // стало 3
-    //   return filteredArrStep2
-    // },
-
-    // arrForRenderHeaderTwoString() {
-    //   const arr = Object.keys(this.users_data.datesForHeader) // only months
-    //   console.log(arr)
-
-    // }
+    arrStartGridColumnMonths() {
+      const arr = []
+      this.users_data.datesForHeader.forEach( el => {
+        arr.push(el.numbers.length + (arr.length == 0 ? 0 : arr[arr.length - 1]))
+      })
+      console.log(arr)
+      return arr
+    }
   },
 
   watch: {
@@ -198,6 +200,18 @@ export default {
       const resultValue = $centerCols.scrollWidth - $centerCols.scrollLeft - $centerCols.offsetWidth
       this.shadowRightActive = (resultValue < 1) ? false : true
     }
+  },
+
+  mounted() {
+    // if center-cols имеет прокручиваемую область, то add .shadow-active к last-col
+    const $centerCols = this.$refs.centerCols
+    // ниже строка не нужна, так как мы по умолчанию имеем таблицу со scrollLeft == 0
+    // this.shadowLeftActive = $centerCols.scrollLeft == 0 ? false : true
+    // при масштабе экрана 125% появляется погрешность, которую попробуем учесть,
+    // предполагая, что погрешность не составляет больше 1px
+    // исходный вариант был такой: e.target.scrollWidth - e.target.scrollLeft == e.target.offsetWidth
+    const resultValue = $centerCols.scrollWidth - $centerCols.scrollLeft - $centerCols.offsetWidth
+    this.shadowRightActive = (resultValue < 1) ? false : true
   },
 
   methods: {
@@ -315,6 +329,7 @@ export default {
         font-size: 1.8rem
   .test-cell-header
     background-color: $color-purple
+    border: 1px solid $color-green
 
   .first-col,
   .last-col
@@ -340,6 +355,12 @@ export default {
 
     @media screen and (min-width: $phoneWidth) // >= 480px
       padding: 1rem 1rem
+      &[data-first-col].hover-active
+        border-top-left-radius: $borderRadius
+        border-bottom-left-radius: $borderRadius
+      &[data-last-col].hover-active
+        border-top-right-radius: $borderRadius
+        border-bottom-right-radius: $borderRadius
     @media screen and (min-width: $tableWidth) // >= 768px
       padding: 1rem 1.2rem
     @media screen and (min-width: $smDesktopWidth) // >= 980px
@@ -350,12 +371,6 @@ export default {
     // js hover (@mouseoverRows, @mouseoutRows)
     &.hover-active
       background-color: #f7f7f7
-    &[data-first-col].hover-active
-      border-top-left-radius: $borderRadius
-      border-bottom-left-radius: $borderRadius
-    &[data-last-col].hover-active
-      border-top-right-radius: $borderRadius
-      border-bottom-right-radius: $borderRadius
 
 
 // pagination
