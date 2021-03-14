@@ -1,6 +1,6 @@
 <template>
   <div class="wrap-card-content">
-    <div class="table-fixed-cols-grid"
+    <div class="table-fixed-cols-grid-header-2row"
       :style="gridMainColumns"
       @mouseover="mouseoverRows"
       @mouseout ="mouseoutRows"
@@ -10,12 +10,11 @@
       <div class="first-col"
         v-if="fixed_first_col"
         :class="{'shadow-active': shadowLeftActive}"
-        :style="gridNestingRows"
+        :style="{ gridTemplateRows: `6rem repeat(${this.paginatedUsers.length}, 4rem)` }"
       >
         <!-- header cell -->
         <p class="cell-header row"
           @click="`sortBy_${fixed_first_col}`"
-          :style="[{gridColumn: '1/2'}, {gridRow: '1/3'}]"
         >{{ fixed_first_col }}
           <i class="material-icons">unfold_more</i>
         </p>
@@ -37,37 +36,40 @@
         ref="centerCols"
         :style="[gridNestingRows, gridNestingCols]"
       >
-        <!-- header cells -->
+        <!-- header cells (only 1/2 от 1 row, for months) -->
         <div class="cell-header cell-header__month"
           v-for="(month, indexMonth) in users_data.datesForHeader"
-          :key="`${month.month}__${indexMonth}`"
-          :style="{
-            gridColumn: `${indexMonth == 0 ? 1 : arrStartGridColumnMonths[indexMonth - 1]}
-            / ${indexMonth == 0 ? (month.days.length + 1) : (arrStartGridColumnMonths[indexMonth])}`
-          }"
-          :class="{'border-left-none': indexMonth === 0}"
-        >{{ month.month }}</div>
-        <div class="cell-header"
-          v-for="(cell, index) in users_data.dates"
-          :key="index"
-          :class="{'border-left': arrStartGridColumnMonths.includes(index + 1)}"
-          data-jc='center'
-        >{{ cell }}
+          :key="indexMonth"
+        >{{ month.month }}
         </div>
 
-        <!-- other cells -->
-        <template v-for="(row, indexRow) in paginatedUsers">
-          <div class="cell border-right"
-            v-for="(cell, index) in row.result"
-            :key="`${row.id}__${index}`"
-            :data-row="indexRow"
+        <div class="center-cols-nesting-grid-2 border-left"
+          v-for="(month, indexMonth) in users_data.datesForHeader"
+          :key="`${month.month}__${indexMonth}`"
+          :style="[gridNestingRowsLevel2, {
+            gridTemplateColumns: `repeat(${month.days.length}, minmax(min-content, 1fr))`
+          }]"
+        >
+          <!-- cell-header (only 2/2 от 1 row, for count months)  -->
+          <div class="cell cell-header"
+            v-for="(cell, index) in month.days"
+            :key="index"
             data-jc='center'
-            :class="[{'hover-active': currentElem == indexRow},
-              {'border-left': arrStartGridColumnMonths.includes(index + 1)}]"
-          >
-            {{cell}}
+          >{{ cell }}
           </div>
-        </template>
+
+          <!-- other cells -->
+          <template v-for="(row, indexRow) in paginatedUsers">
+            <div class="cell border-right"
+              v-for="(cell, index) in users_data.players[indexRow].years[2020].month[indexMonth]"
+              :key="`${indexRow}__${index}`"
+              data-jc='center'
+              :data-row="indexRow"
+            >
+            {{cell.resultCell}}
+            </div>
+          </template>
+        </div>
       </div>
 
       <!-- last-col -->
@@ -147,17 +149,22 @@ export default {
       }
     },
     gridNestingRows() {
-      const countRowHeader = this.users_data.datesForHeader ? '3rem 3rem' : '5rem' // 1 or 2 row in header (for month)
+      const countRowHeader = this.users_data.datesForHeader ? '3rem' : '5rem' // 1 or 2 row in header (for month)
       return {
-        gridTemplateRows: `${countRowHeader} repeat(${this.paginatedUsers.length}, 4rem)`
-        // т.к. этот шаблон применяется в разных столбцах отдельных грядов,
-        // использовать minmax(4rem, 1fr) не приемлимо - в случае переноса строк строки будут иметь разную высоту
+        gridTemplateRows: `${countRowHeader} auto`
       }
     },
     gridNestingCols() {
-      const countCol = this.users_data.dates.length
+      const countCol = this.users_data.datesForHeader.length
       return {
-        gridTemplateColumns: `repeat(${countCol}, minmax(min-content, 1fr))`
+        gridTemplateColumns: `repeat(${countCol}, auto`
+      }
+    },
+    gridNestingRowsLevel2() {
+      return {
+        gridTemplateRows: `3rem repeat(${this.paginatedUsers.length}, 4rem)`
+        // т.к. этот шаблон применяется в разных столбцах отдельных грядов,
+        // использовать minmax(4rem, 1fr) не приемлимо - в случае переноса строк строки будут иметь разную высоту
       }
     },
 
@@ -298,13 +305,23 @@ export default {
 </script>
 
 <style lang="sass">
-.table-fixed-cols-grid
+.table-fixed-cols-grid-header-2row
   display: grid
   border-radius: $borderRadius
   overflow: hidden // прячет лишнюю тень (.shadow-active)
 
+  .test-block-green,
+  .test-block-blue
+    height: 100%
+
+  .test-block-green
+    background-color: $color-green
+  .test-block-blue
+    background-color: $color-light-blue
+
   .first-col,
   .center-cols,
+  .center-cols-nesting-grid-2,
   .last-col
     display: grid
 

@@ -56,48 +56,88 @@ export const state = () => ({
     players: [
       { id: 1,
         name: 'Костя',
-        result: [21, 30, 25, 30, 30, 30, 5 ]
+        years: {
+          2020: {
+            month: {
+              0: {
+                1: { resultCell: '1янв' },
+                31: { resultCell: '31янв' }
+              },
+              1: {
+                1: { resultCell: '1fev' },
+                2: { resultCell: '2' },
+                23: { resultCell: '23' },
+                28: { resultCell: '28' },
+              },
+              2: {
+                8: { resultCell: '8мар' },
+                13: { resultCell: '13мар' },
+              },
+              3: {
+                1: { resultCell: '1apr' },
+              }
+            }
+          }
+        },
+        // for tableByRow
+        result: [30,30,30,12,34,2,45,45,50]
       },
       { id: 2,
         name: 'Игорь',
-        result: [30, 30, 30, 21, 21, 21, 5 ]
+        years: {
+          2020: {
+            month: {
+              0: {
+                1: { resultCell: '1янв' },
+                31: { resultCell: '31янв' }
+              },
+              1: {
+                1: { resultCell: '1fev' },
+                2: { resultCell: '2' },
+                23: { resultCell: '23' },
+                28: { resultCell: '28' },
+              },
+              2: {
+                8: { resultCell: '8мар' },
+                13: { resultCell: '13мар' },
+              },
+              3: {
+                1: { resultCell: '1apr' },
+              }
+            }
+          }
+        },
+        // for tableByRow
+        result: [21,21,30,12,'-',2,45,45,50]
       },
       { id: 3,
-        name: 'Костя',
-        result: [30, 30, 30, 30, 30, 30, 5 ]
+        name: 'Саша',
+        years: {
+          2020: {
+            month: {
+              0: {
+                1: { resultCell: '1янв' },
+                31: { resultCell: '31янв' }
+              },
+              1: {
+                1: { resultCell: '1fev' },
+                2: { resultCell: '2' },
+                23: { resultCell: '23' },
+                28: { resultCell: '28' },
+              },
+              2: {
+                8: { resultCell: '8мар' },
+                13: { resultCell: '13мар' },
+              },
+              3: {
+                1: { resultCell: '1apr' },
+              }
+            }
+          }
+        },
+        // for tableByRow
+        result: [21,21,'-','-','-',2,45,45,50]
       },
-      { id: 4,
-        name: 'Игорь',
-        result: [30, 30, 30, 30, 30, 30, 5 ]
-      },
-      { id: 5,
-        name: 'Костя',
-        result: [30, 30, 30, 30, 30, 30, 5 ]
-      },
-      { id: 6,
-        name: 'Игорь',
-        result: [30, 30, 30, 30, 30, 30, 5 ]
-      },
-      { id: 7,
-        name: 'Костя',
-        result: [30, 30, 30, 30, 30, 30, 5 ]
-      },
-      { id: 8,
-        name: 'Игорь',
-        result: [30, 30, 30, 30, 30, 30, 5 ]
-      },
-      { id: 9,
-        name: 'Костя',
-        result: [30, 30, 30, 30, 30, 30, 5 ]
-      },
-      { id: 10,
-        name: 'Игорь',
-        result: [30, 30, 30, 30, 30, 30, 5 ]
-      },
-      { id: 11,
-        name: 'Игорь',
-        result: [30, 30, 30, 30, 30, 30, 5, 30, 30, 5, 30, 30, 30, 30, 30, 30 ]
-      }
     ],
     dates: [
       // '2020-11-14T09:29:03.824+00:00',
@@ -111,12 +151,13 @@ export const state = () => ({
     ],
 
     datesForHeader: [
-      { month: 'Январь', numbers: [1,31] },
-      { month: 'Февраль', numbers: [1,2,23,28] },
-      { month: 'Март', numbers: [8,13] },
-      { month: 'Апрель', numbers: [1] },
+      { month: 'Январь', days: [1,31] },
+      { month: 'Февраль', days: [1,2,23,28] },
+      { month: 'Март', days: [8,13] },
+      { month: 'Апрель', days: [1] },
     ]
-  }
+  },
+
 
 })
 

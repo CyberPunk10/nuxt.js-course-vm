@@ -415,7 +415,8 @@ export default {
 
   },
 
-  async mounted() {
+  mounted() {
+    // промотать график вправо при загрузке
     const $el = document.querySelector('.js-calendar-graph-wrap-main')
     $el.scrollLeft = $el.scrollWidth
   },
