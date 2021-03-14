@@ -51,7 +51,7 @@
           }]"
         >
           <!-- cell-header (only 2/2 от 1 row, for count months)  -->
-          <div class="cell-header"
+          <div class="cell cell-header"
             v-for="(cell, index) in month.days"
             :key="index"
             data-jc='center'
@@ -59,17 +59,16 @@
           </div>
 
           <!-- other cells -->
-          <!-- <template v-for="(row, indexRow) in paginatedUsers">
+          <template v-for="(row, indexRow) in paginatedUsers">
             <div class="cell border-right"
-              v-for="(cell, index) in users_data.players[indexRow].result.month.days.length"
+              v-for="(cell, index) in users_data.players[indexRow].years[2020].month[indexMonth]"
               :key="`${indexRow}__${index}`"
               data-jc='center'
               :data-row="indexRow"
-            > -->
-            <!-- {{cell}} -->
-            <!-- 21
+            >
+            {{cell.resultCell}}
             </div>
-          </template> -->
+          </template>
         </div>
       </div>
 
@@ -158,7 +157,7 @@ export default {
     gridNestingCols() {
       const countCol = this.users_data.datesForHeader.length
       return {
-        gridTemplateColumns: `repeat(${countCol}, minmax(min-content, 1fr))`
+        gridTemplateColumns: `repeat(${countCol}, auto`
       }
     },
     gridNestingRowsLevel2() {

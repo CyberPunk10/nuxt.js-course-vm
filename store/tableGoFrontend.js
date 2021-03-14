@@ -61,18 +61,26 @@ export const state = () => ({
             month: {
               0: {
                 1: { resultCell: '1янв' },
-                2: { resultCell: '30' },
-                3: { resultCell: '30' },
-                30: { resultCell: '30' },
                 31: { resultCell: '31янв' }
               },
-
               1: {
-                1: { resultCell: '1мар' },
+                1: { resultCell: '1fev' },
+                2: { resultCell: '2' },
+                23: { resultCell: '23' },
+                28: { resultCell: '28' },
+              },
+              2: {
+                8: { resultCell: '8мар' },
+                13: { resultCell: '13мар' },
+              },
+              3: {
+                1: { resultCell: '1apr' },
               }
             }
           }
-        }
+        },
+        // for tableByRow
+        result: [30,30,30,12,34,2,45,45,50]
       },
       { id: 2,
         name: 'Игорь',
@@ -80,31 +88,55 @@ export const state = () => ({
           2020: {
             month: {
               0: {
-                1: {
-                  resultCell: '1янв'
-                },
-                2: {
-                  resultCell: '30'
-                },
-                3: {
-                  resultCell: '30'
-                },
-                30: {
-                  resultCell: '30'
-                },
-                31: {
-                  resultCell: '31янв'
-                }
+                1: { resultCell: '1янв' },
+                31: { resultCell: '31янв' }
               },
-
               1: {
-                1: {
-                  resultCell: '1мар'
-                },
+                1: { resultCell: '1fev' },
+                2: { resultCell: '2' },
+                23: { resultCell: '23' },
+                28: { resultCell: '28' },
+              },
+              2: {
+                8: { resultCell: '8мар' },
+                13: { resultCell: '13мар' },
+              },
+              3: {
+                1: { resultCell: '1apr' },
               }
             }
           }
-        }
+        },
+        // for tableByRow
+        result: [21,21,30,12,'-',2,45,45,50]
+      },
+      { id: 3,
+        name: 'Саша',
+        years: {
+          2020: {
+            month: {
+              0: {
+                1: { resultCell: '1янв' },
+                31: { resultCell: '31янв' }
+              },
+              1: {
+                1: { resultCell: '1fev' },
+                2: { resultCell: '2' },
+                23: { resultCell: '23' },
+                28: { resultCell: '28' },
+              },
+              2: {
+                8: { resultCell: '8мар' },
+                13: { resultCell: '13мар' },
+              },
+              3: {
+                1: { resultCell: '1apr' },
+              }
+            }
+          }
+        },
+        // for tableByRow
+        result: [21,21,'-','-','-',2,45,45,50]
       },
     ],
     dates: [
@@ -120,8 +152,8 @@ export const state = () => ({
 
     datesForHeader: [
       { month: 'Январь', days: [1,31] },
-      { month: 'Февраль', days: [1,2,3,4,5,6,7,28] },
-      { month: 'Март', days: [8,13,31] },
+      { month: 'Февраль', days: [1,2,23,28] },
+      { month: 'Март', days: [8,13] },
       { month: 'Апрель', days: [1] },
     ]
   },
