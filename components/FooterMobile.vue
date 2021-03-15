@@ -55,6 +55,8 @@ export default {
       color: $theme-color-main
       color: lighten($theme-color-main, 15%)
 
-      // color: #FF0000
+  @media print
+    display: none
+
 
 </style>

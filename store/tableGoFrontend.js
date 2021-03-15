@@ -60,22 +60,39 @@ export const state = () => ({
           2020: {
             month: {
               0: {
-                1: { resultCell: '1янв' },
-                31: { resultCell: '31янв' }
+                1: { resultCell: '40' },
+                31: { resultCell: '40' }
               },
               1: {
-                1: { resultCell: '1fev' },
-                2: { resultCell: '2' },
-                23: { resultCell: '23' },
-                28: { resultCell: '28' },
+                1: { resultCell: '30' },
+                2: { resultCell: '30' },
+                23: { resultCell: '30' },
+                28: { resultCell: '30' },
               },
               2: {
-                8: { resultCell: '8мар' },
-                13: { resultCell: '13мар' },
+                8: { resultCell: '21' },
+                13: { resultCell: '21' },
               },
               3: {
-                1: { resultCell: '1apr' },
+                1: { resultCell: '11' },
               }
+              // 0: {
+              //   1: { resultCell: '1янв' },
+              //   31: { resultCell: '31янв' }
+              // },
+              // 1: {
+              //   1: { resultCell: '1fev' },
+              //   2: { resultCell: '2' },
+              //   23: { resultCell: '23' },
+              //   28: { resultCell: '28' },
+              // },
+              // 2: {
+              //   8: { resultCell: '8мар' },
+              //   13: { resultCell: '13мар' },
+              // },
+              // 3: {
+              //   1: { resultCell: '1apr' },
+              // }
             }
           }
         },
@@ -88,22 +105,39 @@ export const state = () => ({
           2020: {
             month: {
               0: {
-                1: { resultCell: '1янв' },
-                31: { resultCell: '31янв' }
+                1: { resultCell: '40' },
+                31: { resultCell: '40' }
               },
               1: {
-                1: { resultCell: '1fev' },
-                2: { resultCell: '2' },
-                23: { resultCell: '23' },
-                28: { resultCell: '28' },
+                1: { resultCell: '30' },
+                2: { resultCell: '30' },
+                23: { resultCell: '30' },
+                28: { resultCell: '30' },
               },
               2: {
-                8: { resultCell: '8мар' },
-                13: { resultCell: '13мар' },
+                8: { resultCell: '21' },
+                13: { resultCell: '21' },
               },
               3: {
-                1: { resultCell: '1apr' },
+                1: { resultCell: '11' },
               }
+              // 0: {
+              //   1: { resultCell: '1янв' },
+              //   31: { resultCell: '31янв' }
+              // },
+              // 1: {
+              //   1: { resultCell: '1fev' },
+              //   2: { resultCell: '2' },
+              //   23: { resultCell: '23' },
+              //   28: { resultCell: '28' },
+              // },
+              // 2: {
+              //   8: { resultCell: '8мар' },
+              //   13: { resultCell: '13мар' },
+              // },
+              // 3: {
+              //   1: { resultCell: '1apr' },
+              // }
             }
           }
         },
@@ -116,22 +150,39 @@ export const state = () => ({
           2020: {
             month: {
               0: {
-                1: { resultCell: '1янв' },
-                31: { resultCell: '31янв' }
+                1: { resultCell: '40' },
+                31: { resultCell: '40' }
               },
               1: {
-                1: { resultCell: '1fev' },
-                2: { resultCell: '2' },
-                23: { resultCell: '23' },
-                28: { resultCell: '28' },
+                1: { resultCell: '30' },
+                2: { resultCell: '30' },
+                23: { resultCell: '30' },
+                28: { resultCell: '30' },
               },
               2: {
-                8: { resultCell: '8мар' },
-                13: { resultCell: '13мар' },
+                8: { resultCell: '21' },
+                13: { resultCell: '21' },
               },
               3: {
-                1: { resultCell: '1apr' },
+                1: { resultCell: '11' },
               }
+              // 0: {
+              //   1: { resultCell: '1янв' },
+              //   31: { resultCell: '31янв' }
+              // },
+              // 1: {
+              //   1: { resultCell: '1fev' },
+              //   2: { resultCell: '2' },
+              //   23: { resultCell: '23' },
+              //   28: { resultCell: '28' },
+              // },
+              // 2: {
+              //   8: { resultCell: '8мар' },
+              //   13: { resultCell: '13мар' },
+              // },
+              // 3: {
+              //   1: { resultCell: '1apr' },
+              // }
             }
           }
         },

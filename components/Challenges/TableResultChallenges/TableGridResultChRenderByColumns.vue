@@ -34,7 +34,7 @@
       <div class="center-cols layout-cell-light-gray-border layout-scrollbar-light-gray-border layout-swipe-ignore"
         @scroll="scrollCenterCols"
         ref="centerCols"
-        :style="[gridNestingRows, gridNestingCols]"
+        :style="[gridNestingRows, gridNestingCols, {display: 'grid'}]"
       >
         <!-- header cells (only 1/2 от 1 row, for months) -->
         <div class="cell-header cell-header__month"
@@ -294,12 +294,6 @@ export default {
       // this.currentElem.style.background = ''
       this.currentElem = null
     },
-
-    cellHandler(value) {
-      console.log(value)
-      return value
-    }
-
   }
 }
 </script>
@@ -339,6 +333,7 @@ export default {
     box-shadow: 0 0 10px rgba(0,0,0,.12)
 
   .center-cols
+    display: none
     .cell
       min-width: 4.5rem
       // max-width: 21rem // не нравится + влияет на стили первой таблицы
