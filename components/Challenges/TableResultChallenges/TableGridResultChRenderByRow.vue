@@ -35,41 +35,44 @@
       <div class="center-cols layout-cell-light-gray-border layout-scrollbar-light-gray-border layout-swipe-ignore"
         @scroll="scrollCenterCols"
         ref="centerCols"
-        :style="[gridNestingRows, gridNestingCols]"
         :data-pred-render="!showCellMonth"
       >
-        <!-- header cells months-->
-        <div class="cell-header cell-header__month"
-          v-for="(month, indexMonth) in users_data.datesForHeader"
-          :key="`${month.month}__${indexMonth}`"
-          :style="{
-            gridColumn: `${indexMonth == 0 ? 1 : arrStartGridColumnMonths[indexMonth - 1]}
-            / ${indexMonth == 0 ? (month.days.length + 1) : (arrStartGridColumnMonths[indexMonth])}`
-          }"
-        >{{ month.month }}</div>
+        <div class="wrap-center-all-cells"
+          :style="[gridNestingRows, gridNestingCols]"
+        >
+          <!-- header cells months-->
+          <div class="cell-header cell-header__month"
+            v-for="(month, indexMonth) in users_data.datesForHeader"
+            :key="`${month.month}__${indexMonth}`"
+            :style="{
+              gridColumn: `${indexMonth == 0 ? 1 : arrStartGridColumnMonths[indexMonth - 1]}
+              / ${indexMonth == 0 ? (month.days.length + 1) : (arrStartGridColumnMonths[indexMonth])}`
+            }"
+          >{{ month.month }}</div>
 
-        <!-- header cells days-->
-        <div class="cell-header"
-          v-for="(day, index) in users_data.dates"
-          :key="index"
-          :class="{'border-left': arrStartGridColumnMonths.includes(index + 1)}"
-          data-jc='center'
-        >{{ day }}
-        </div>
-
-        <!-- other cells -->
-        <template v-for="(row, indexRow) in paginatedUsers">
-          <div class="cell border-right"
-            v-for="(cell, index) in row.result"
-            :key="`${row.id}__${index}`"
-            :data-row="indexRow"
+          <!-- header cells days-->
+          <div class="cell-header"
+            v-for="(day, index) in users_data.dates"
+            :key="index"
+            :class="{'border-left': arrStartGridColumnMonths.includes(index + 1)}"
             data-jc='center'
-            :class="[{'hover-active': currentElem == indexRow},
-              {'border-left': arrStartGridColumnMonths.includes(index + 1)}]"
-          >
-            {{cell}}
+          >{{ day }}
           </div>
-        </template>
+
+          <!-- other cells -->
+          <template v-for="(row, indexRow) in paginatedUsers">
+            <div class="cell border-right"
+              v-for="(cell, index) in row.result"
+              :key="`${row.id}__${index}`"
+              :data-row="indexRow"
+              data-jc='center'
+              :class="[{'hover-active': currentElem == indexRow},
+                {'border-left': arrStartGridColumnMonths.includes(index + 1)}]"
+            >
+              {{cell}}
+            </div>
+          </template>
+        </div>
       </div>
 
       <!-- last-col -->
@@ -303,7 +306,7 @@ export default {
   overflow: hidden // прячет лишнюю тень (.shadow-active)
 
   .first-col,
-  .center-cols,
+  .wrap-center-all-cells,
   .last-col
     display: grid
 
@@ -321,16 +324,22 @@ export default {
     box-shadow: 0 0 10px rgba(0,0,0,.12)
 
   .center-cols
+    position: relative
     .cell
       min-width: 4.5rem
       // max-width: 21rem // не нравится + влияет на стили первой таблицы
       overflow: hidden // если содержимок не влизает в ячейку, то оно не видно на соседней ячейке
     &[data-pred-render]
+      .wrap-center-all-cells
+        position: absolute
+        height: calc(100% - 10rem)
+        // top: 3rem
+        left: 0
+        right: 0
+        margin-top: 3rem
+        // margin-bottom: -3rem
       .cell-header__month
         display: none
-      .cell-header
-        margin-top: 3rem
-        // grid-template-rows: 3rem 4rem auto !important
 
   .cell,
   .cell-header
