@@ -18,6 +18,7 @@
       :users_data="dataPushUps"
       fixed_first_col="name"
     />
+      <!-- fixed_last_col="max" -->
     <br>
 
     <h2 class="title-table font-how-h2">Таблица результатов</h2>

@@ -34,62 +34,60 @@
       <!-- center-cols -->
       <div class="center-cols layout-cell-light-gray-border layout-scrollbar-light-gray-border layout-swipe-ignore"
         @scroll="scrollCenterCols"
+        :style="[gridNestingRows, gridNestingCols]"
         ref="centerCols"
-        :data-pred-render="!showCellMonth"
       >
-        <div class="wrap-center-all-cells"
-          :style="[gridNestingRows, gridNestingCols]"
-        >
-          <!-- header cells months-->
-          <div class="cell-header cell-header__month"
-            v-for="(month, indexMonth) in users_data.datesForHeader"
-            :key="`${month.month}__${indexMonth}`"
-            :style="{
-              gridColumn: `${indexMonth == 0 ? 1 : arrStartGridColumnMonths[indexMonth - 1]}
-              / ${indexMonth == 0 ? (month.days.length + 1) : (arrStartGridColumnMonths[indexMonth])}`
-            }"
-          >{{ month.month }}</div>
+        <!-- header cells months-->
+        <div class="cell-header cell-header__month"
+          v-for="(month, indexMonth) in users_data.datesForHeader"
+          :key="`${month.month}__${indexMonth}`"
+          :style="{
+            gridColumn: `${indexMonth == 0 ? 1 : arrStartGridColumnMonths[indexMonth - 1]}/${indexMonth == 0 ? (month.days.length + 1) : (arrStartGridColumnMonths[indexMonth])}`
+          }"
+        >{{ month.month }}</div>
 
-          <!-- header cells days-->
-          <div class="cell-header"
-            v-for="(day, index) in users_data.dates"
-            :key="index"
-            :class="{'border-left': arrStartGridColumnMonths.includes(index + 1)}"
-            data-jc='center'
-          >{{ day }}
-          </div>
-
-          <!-- other cells -->
-          <template v-for="(row, indexRow) in paginatedUsers">
-            <div class="cell border-right"
-              v-for="(cell, index) in row.result"
-              :key="`${row.id}__${index}`"
-              :data-row="indexRow"
-              data-jc='center'
-              :class="[{'hover-active': currentElem == indexRow},
-                {'border-left': arrStartGridColumnMonths.includes(index + 1)}]"
-            >
-              {{cell}}
-            </div>
-          </template>
+        <!-- header cells days-->
+        <div class="cell-header"
+          v-for="(day, index) in users_data.dates"
+          :key="index"
+          :class="{'border-left': arrStartGridColumnMonths.includes(index + 1)}"
+          data-jc='center'
+        >{{ day }}
         </div>
+
+        <!-- other cells -->
+        <template v-for="(row, indexRow) in paginatedUsers">
+          <div class="cell border-right"
+            v-for="(cell, index) in row.result"
+            :key="`${row.id}__${index}`"
+            :data-row="indexRow"
+            data-jc='center'
+            :class="[{'hover-active': currentElem == indexRow},
+              {'border-left': arrStartGridColumnMonths.includes(index + 1)},
+              {'border-right-radius': !fixed_last_col && index == row.result.length - 1}
+            ]"
+          >
+            {{cell}}
+          </div>
+        </template>
       </div>
 
       <!-- last-col -->
-      <!-- <div class="last-col"
+      <div class="last-col"
         v-if="fixed_last_col"
         :class="{'shadow-active': shadowRightActive}"
         :style="gridNestingRows"
-      > -->
+      >
         <!-- header cell -->
-        <!-- <p class="cell-header row"
+        <p class="cell-header row"
           @click="`sortBy_${fixed_last_col}`"
+          :style="[{gridColumn: '1/2'}, {gridRow: '1/3'}]"
         >{{ fixed_last_col }}
           <i class="material-icons">unfold_more</i>
-        </p> -->
+        </p>
 
         <!-- other cells -->
-        <!-- <div class="cell" data-last-col
+        <div class="cell" data-last-col
           v-for="(row, index) in paginatedUsers"
           :key="row.id"
           :data-row="index"
@@ -97,6 +95,14 @@
         >
           {{ row[fixed_last_col] }}
         </div>
+      </div>
+
+      <!-- <div class="last-col-empty"
+        v-else
+        :class="{'shadow-active': shadowRightActive}"
+        :style="gridNestingRows"
+      >
+
       </div> -->
 
     </div>
@@ -138,7 +144,6 @@ export default {
       shadowLeftActive: false,
       shadowRightActive: false,
       currentElem: null, // for @mouseover="mouseoverRows" hover
-      showCellMonth: false // показывает месяцы, после того, как inline стили готовы
     }
   },
 
@@ -217,8 +222,6 @@ export default {
 
     // промотать таблицу вправо при загрузке
     $centerCols.scrollLeft =  $centerCols.scrollWidth
-
-    this.showCellMonth = true
   },
 
   methods: {
@@ -306,14 +309,32 @@ export default {
   overflow: hidden // прячет лишнюю тень (.shadow-active)
 
   .first-col,
-  .wrap-center-all-cells,
+  .center-cols,
   .last-col
     display: grid
 
   .first-col,
-  .last-col
+  .last-col,
+  .last-col-empty
     z-index: 1 // чтобы central-cols при наведении были тоже под тенью
     // background-color: $theme-color-yellow
+
+  .last-col-empty
+    height: 100%
+    width: 10px
+
+  .first-col,
+  .last-col
+    .cell-header
+      padding: 1rem 1rem 1.1rem
+      @media screen and (min-width: $phoneWidth)
+        padding: 1rem 1rem 1.2rem
+      @media screen and (min-width: $tableWidth)
+        padding: 1rem 1.2rem 1.5rem
+      @media screen and (min-width: $smDesktopWidth)
+        padding: 1rem 1.4rem 1.7rem
+      @media screen and (min-width: $desktopWidth)
+        padding: 1rem 1.6rem 1.7rem
 
   .first-col
     border-right: 1px solid #e7e7e7
@@ -324,22 +345,10 @@ export default {
     box-shadow: 0 0 10px rgba(0,0,0,.12)
 
   .center-cols
-    position: relative
     .cell
       min-width: 4.5rem
       // max-width: 21rem // не нравится + влияет на стили первой таблицы
       overflow: hidden // если содержимок не влизает в ячейку, то оно не видно на соседней ячейке
-    &[data-pred-render]
-      .wrap-center-all-cells
-        position: absolute
-        height: calc(100% - 10rem)
-        // top: 3rem
-        left: 0
-        right: 0
-        margin-top: 3rem
-        // margin-bottom: -3rem
-      .cell-header__month
-        display: none
 
   .cell,
   .cell-header
@@ -361,13 +370,13 @@ export default {
     border-bottom: 1px solid #e7e7e7
     font-weight: 500
     @media screen and (min-width: $phoneWidth)
-      padding: 1rem 1rem
-    @media screen and (min-width: $tableWidth)
-      padding: 1rem 1.2rem
-    @media screen and (min-width: $smDesktopWidth)
-      padding: 1.2rem 1.4rem 1rem
-    @media screen and (min-width: $desktopWidth)
-      padding: 1.5rem 1.6rem 1.2rem
+      padding: .5rem 1rem .6rem
+    // @media screen and (min-width: $tableWidth)
+    //   padding: .9rem 1.2rem 1rem
+    // @media screen and (min-width: $smDesktopWidth)
+    //   padding: 1.2rem 1.4rem 1.4rem
+    // @media screen and (min-width: $desktopWidth)
+    //   padding: 1.5rem 1.6rem 1.6rem
 
     i
       font-size: 1.6rem
@@ -377,8 +386,8 @@ export default {
     &__month
       // background-color: $color-purple
       border-left: 1px solid #e7e7e7
-      border-bottom: 1px solid #f7f7f7
-      border-bottom: none
+      border-bottom: 1px dotted #f7f7f7
+      // border-bottom: none
       display: flex
       justify-content: center
       &:first-child
@@ -394,7 +403,8 @@ export default {
       &[data-first-col].hover-active
         border-top-left-radius: $borderRadius
         border-bottom-left-radius: $borderRadius
-      &[data-last-col].hover-active
+      &[data-last-col].hover-active,
+      &.border-right-radius
         border-top-right-radius: $borderRadius
         border-bottom-right-radius: $borderRadius
     @media screen and (min-width: $tableWidth) // >= 768px
