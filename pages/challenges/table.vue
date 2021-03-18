@@ -1,36 +1,47 @@
 <template>
   <div class="">
-    <h2 class="title-table font-how-h2">Таблица результатов</h2>
+    <!-- <h2 class="title-table font-how-h2">Таблица результатов</h2>
+    <TableResultCh
+      :users_data="players"
+      fixed_first_col="name"
+    />
+    <br><br> -->
+    <!-- <h2 class="title-table font-how-h2">Таблица результатов</h2>
     <TableGridResultChRenderByColumns
       :users_data="dataPushUps"
       fixed_first_col="name"
     />
-    <br><hr><br>
+    <br> -->
+
     <h2 class="title-table font-how-h2">Таблица результатов</h2>
     <TableGridResultChRenderByRow
       :users_data="dataPushUps"
       fixed_first_col="name"
     />
-    <br><hr><br>
+      <!-- fixed_last_col="max" -->
+    <br>
+
     <h2 class="title-table font-how-h2">Таблица результатов</h2>
     <TableGridResultCh
       :users_data="players"
       fixed_first_col="name"
       fixed_last_col="id"
     />
-    <br><hr><br>
+    <br>
+
     <h2 class="title-table font-how-h2">Таблица результатов</h2>
     <TableGridResultCh
       :users_data="players"
       fixed_first_col="name"
     />
-    <br><hr><br>
+    <br>
+
     <h2 class="title-table font-how-h2">Таблица результатов</h2>
     <TableGridResultCh
       :users_data="players"
     />
 
-    <br><hr><br>
+    <br><br>
 
     <div class="t-container" id="table-price">
 		<div class="t-row">

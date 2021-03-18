@@ -1,4 +1,14 @@
 <template>
+<!--
+Этот вариант таблицы в Center-cols сначала создает колонки
+и потом в каждой колонке формируется своя grid сетка
+Минус в том, что ширина подколок в каждой колонке полчается разной.
+Использовать имеет смысл только когда ширина колонок фиксированная
+(тут количество дней в месяце разное, поэтому и ширина разная)
+или когда не обязательно делать равную ширину подколонок,
+или когда колокнок много, появляется scroll и колонк имеют одинаковую равную ширину
+ -->
+
   <div class="wrap-card-content">
     <div class="table-fixed-cols-grid-header-2row"
       :style="gridMainColumns"
@@ -157,7 +167,7 @@ export default {
     gridNestingCols() {
       const countCol = this.users_data.datesForHeader.length
       return {
-        gridTemplateColumns: `repeat(${countCol}, auto`
+        gridTemplateColumns: `repeat(${countCol}, auto)`
       }
     },
     gridNestingRowsLevel2() {
@@ -294,12 +304,6 @@ export default {
       // this.currentElem.style.background = ''
       this.currentElem = null
     },
-
-    cellHandler(value) {
-      console.log(value)
-      return value
-    }
-
   }
 }
 </script>
