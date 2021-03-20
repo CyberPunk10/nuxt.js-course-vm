@@ -1,4 +1,4 @@
-import { plugin } from "mongoose"
+// import { plugin } from "mongoose"
 
 export default function ({ $axios, redirect, store }) {
   $axios.interceptors.request.use(request => {
