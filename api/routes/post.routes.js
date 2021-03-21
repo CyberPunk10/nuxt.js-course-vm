@@ -1,6 +1,6 @@
 import passport from 'passport'
 import { Router } from 'express'
-const ctr = require('../controllers/post.controllers')
+const ctr = require('../controllers/post.controller') // контроллер с методами
 const upload = require('../middleware/upload')
 const router = Router()
 
@@ -54,7 +54,7 @@ router.get(
 router.get('/list', ctr.getAll)
 router.get('/:id', ctr.getById)
 
-router.put('/add/view/:id', ctr.addView)
+router.put('/add/view/:id', ctr.addView) // метод addView изменяет количество просмотров
 
 
 module.exports = router

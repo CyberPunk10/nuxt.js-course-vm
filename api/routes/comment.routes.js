@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { createComment, editComment } from '../controllers/comment.controllers'
+import { createComment, editComment } from '../controllers/comment.controller'
 const router = Router()
 
 // /api/comment/create

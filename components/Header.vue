@@ -1,5 +1,5 @@
 <template>
-  <header
+  <header class="header-layout-main-challenges"
     @click="clickHeader"
   >
     <div class="header-for-sidebar">
@@ -136,7 +136,7 @@ export default {
 </script>
 
 <style lang="sass">
-header
+.header-layout-main-challenges
   position: relative
   height: $header-height
   user-select: none

@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  name: 'empty-center', // Иначе ошибка: [Vue warn]: Invalid component name: "layouts/layout-main-challenges.vue". Component names should conform to valid custom element name in html5 specification.
   computed: {
     error() {
       return this.$store.getters.error

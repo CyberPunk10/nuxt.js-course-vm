@@ -87,7 +87,7 @@ export default {
 
           try {
             const formData = {
-              login: this.controls.login,
+              loginOrEmail: this.controls.login, // login поменял на loginOrEmail для того, чтобы не переписывать метод
               password: this.controls.password
             }
             await this.$store.dispatch('auth/login', formData)

@@ -71,6 +71,7 @@ export default {
       return this.$store.getters['class/bodyClassCurrent']
     }
   },
+
   methods: {
     handleClickSidebar: function(event) {
       // console.log('click on Sidebar', event.target)

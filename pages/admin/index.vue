@@ -1,11 +1,14 @@
 <template>
-  <div>
+  <div class="page-admin">
     <h1>Аналитика по постам</h1>
-    <AnalyticsChart
-      title="Количество просмотров"
-      :labels="views.labels"
-      :data="views.data"
-    />
+    <div class="wrap-card-content">
+      <AnalyticsChart
+        title="Количество просмотров"
+        :labels="views.labels"
+        :data="views.data"
+
+      />
+    </div>
     <AnalyticsChart
       title="Количество комментариев"
       :labels="comments.labels"
@@ -15,12 +18,15 @@
 </template>
 
 <script>
+import AnalyticsChart from '@/assets/admin/AnalyticsChart.vue'
+
 export default {
   head: {
     title: `Аналитика | ${process.env.appName}`
   },
   layout: 'admin',
   middleware: ['admin-auth'],
+  components: { AnalyticsChart },
 
   async asyncData({store}) {
     const { views, comments } = await store.dispatch('post/getAnalytics')
@@ -39,6 +45,9 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
-
+<style lang="sass">
+.page-admin
+  .wrap-card-content
+    margin-top: 4rem
+    margin-bottom: 4rem
 </style>

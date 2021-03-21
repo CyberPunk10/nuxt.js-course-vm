@@ -1,13 +1,12 @@
 <template>
-  <el-row type="flex" justify="center">
-    <el-col :xs="24" :sm="18" :md="12" :lg="10">
-      <AppPost
-        v-for="post in posts"
-        :key="post._id"
-        :post="post"
-      />
-    </el-col>
-  </el-row>
+  <div class="container-flex-blog">
+    <AppPost
+      v-for="post in posts"
+      :key="post._id"
+      :post="post"
+      class="container-elem"
+    />
+  </div>
 </template>
 
 <script>
@@ -15,7 +14,7 @@ export default {
   head: {
     title: `Главная | ${process.env.appName}`
   },
-  layout: 'ssrBlog',
+  layout: 'layout-main-challenges',
 
   async asyncData({ store }) {
     const posts = await store.dispatch('post/fetch')
@@ -23,3 +22,15 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+.container-flex-blog
+  display: flex
+  flex-wrap: wrap
+  justify-content: space-around
+  .container-elem
+    max-width: 50rem
+    width: 100%
+
+
+</style>

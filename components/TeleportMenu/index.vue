@@ -10,6 +10,7 @@
         <ul>
           <li v-for="item in items" :key="item.text" :class="'teleport-menu__li-' + item.type">
             <NuxtLink v-if="item.type === 'link'" :to="item.url">{{item.text}}</NuxtLink>
+            <a v-if="item.type === 'link-global'" :href="item.url" target="_blank">{{item.text}}</a>
             <span v-if="item.type === 'category'">{{item.text}}</span>
           </li>
         </ul>
@@ -60,8 +61,8 @@ export default {
         { type: 'category', text: 'Другие проекты' },
         { type: 'link', text: 'Курс Exel', url: '/landing' },
         { type: 'category', text: 'Сторонние сайты, чтобы не потерять' },
-        { type: 'link', text: 'Hotkeys vs code', url: 'https://www.nikomedvedev.ru/other/vscodeshortcuts/hotkeys.html' },
-        { type: 'link', text: 'Animation SVG', url: 'https://shapeshifter.design/' },
+        { type: 'link-global', text: 'Hotkeys vs code', url: 'https://www.nikomedvedev.ru/other/vscodeshortcuts/hotkeys.html' },
+        { type: 'link-global', text: 'Animation SVG', url: 'https://shapeshifter.design/' },
         { type: 'category', text: `CurrentRouteName: ${this.$route.name}` },
       ]
     }

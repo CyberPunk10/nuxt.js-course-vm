@@ -3,7 +3,9 @@ import jwt from 'jsonwebtoken'
 const keys = require('../keys')
 const User = require('../models/user.model')
 
+
 module.exports.login = async (req, res) => {
+  console.log('auth.controller.js')
   const { loginOrEmail, password } = req.body
 
   let candidate = await User.findOne({login: loginOrEmail})
@@ -21,16 +23,22 @@ module.exports.login = async (req, res) => {
       const token = jwt.sign({
         login: candidate.login,
         userId: candidate._id
-      }, keys.JWT, {expiresIn: 60 * 60})
-      res.json({token})
-    } else {
-      res.status(401).json({message: 'Пароль неверный'})
-    }
+      }, keys.JWT, {expiresIn: 60 * 60}) // 60 * 60 - 1 час - время жизни токекна
 
+      // дополнительно узнаем является ли пользователь разработчиком этого приложения
+      const isDeveloper = candidate['isDeveloper'] ? true : false
+      console.log('[isDeveloper]: ', isDeveloper)
+
+      // отправляем успех
+      res.json({ token, isDeveloper })
+    } else {
+      res.status(401).json({ message: 'Пароль неверный' })
+    }
   } else {
-    res.status(404).json({message: 'Пользователь не найден'})
+    res.status(404).json({ message: 'Пользователь не найден' })
   }
 }
+
 
 module.exports.createUser = async (req, res) => {
   const { login, email, password } = req.body

@@ -24,5 +24,9 @@
       <i class="el-icon-setting"></i>
       <span>Выйти</span>
     </el-menu-item>
+    <el-menu-item index="/challenges">
+      <i class="el-icon-back"></i>
+      <span>Вернуться</span>
+    </el-menu-item>
   </el-menu>
 </template>

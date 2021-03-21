@@ -22,6 +22,9 @@ const userSchema = new Schema({
     unique: true,
     defuaul: 123
   },
+  isDeveloper: {
+    type: Boolean
+  }
   // name: {
   //   firstName: String,
   //   lastName: String

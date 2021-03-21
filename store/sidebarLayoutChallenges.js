@@ -9,7 +9,7 @@ export const state = () => ({
       icon: 'fas fa-home',
       url: '/challenges',
       onSidenav: true,
-      onFooterMobile: true
+      onFooterMobile: true,
     },
     {
       name: 'Мой профиль',
@@ -33,13 +33,15 @@ export const state = () => ({
       icon: 'fas fa-user-friends',
       url: '/challenges/statistics',
       onSidenav: true,
-      onFooterMobile: true
+      onFooterMobile: true,
+      isDev: true
     },
     {
       name: 'page-challenges-test-scroll',
       icon: 'fas fa-user-friends',
       url: '/page-challenges-test-scroll',
       onSidenav: true,
+      isDev: true
     },
     {
       name: 'Мои челленджи',
@@ -57,13 +59,15 @@ export const state = () => ({
           name: 'Alternative',
           url: '/challenges/settings',
         },
-      ]
+      ],
+      isDev: true
     },
     {
       name: 'Создать челлендж',
       icon: 'far fa-file',
       url: '/challenges/create',
-      onSidenav: true
+      onSidenav: true,
+      isDev: true
     },
     {
       name: 'Добавить прогресс',
@@ -71,7 +75,8 @@ export const state = () => ({
       url: '/challenges/addprogress',
       onSidenav: true,
       onHeader: true,
-      onFooterMobile: true
+      onFooterMobile: true,
+      isDev: true
     },
     {
       name: 'Тренировка',
@@ -88,7 +93,8 @@ export const state = () => ({
           name: 'Alternative',
           url: '/challenges/settings',
         },
-      ]
+      ],
+      isDev: true
     },
     {
       name: 'Настройки',
@@ -97,6 +103,16 @@ export const state = () => ({
       url: '/challenges/settings',
       onSidenav: true,
       onHeaderUserAvatarMenu: true,
+      isDev: true
+    },
+    {
+      name: 'Админ',
+      // icon: 'fas fa-angle-right',
+      icon: 'fas fa-heart',
+      url: '/admin',
+      onSidenav: true,
+      onHeaderUserAvatarMenu: true,
+      isDev: true
     }
   ]
 })

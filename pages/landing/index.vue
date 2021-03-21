@@ -4,9 +4,9 @@
 
 <script>
 export default {
-  layout: 'landingLayout',
+  layout: 'landing-layout',
   head: { title: 'Koleso' },
 
-  
+
 }
 </script>
