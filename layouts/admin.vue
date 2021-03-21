@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import AppAside from '@/assets/admin/AppAside.vue'
+
 export default {
   computed: {
     error() {
@@ -23,7 +25,8 @@ export default {
     error(value) {
       this.$message.error(value.response.data.message)
     }
-  }
+  },
+  components: { AppAside }
 }
 </script>
 

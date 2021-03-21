@@ -2,9 +2,12 @@ import Cookie from 'cookie' // for parsing
 import Cookies from 'js-cookie' // create and remove cookies
 import jwtDecode from 'jwt-decode'
 
+
 export const state = () => ({
-  token: null
+  token: null,
+  isDeveloper: false
 })
+
 
 export const mutations = {
   setTokenMutation(state, token) {
@@ -12,14 +15,22 @@ export const mutations = {
   },
   clearTokenMutation(state) {
     state.token = null
-  }
+  },
+  clearIsDeveloperMutation(state) {
+    state.isDeveloper = false
+  },
+  setIsDeveloperMutation(state, isDeveloper) {
+    state.isDeveloper = !!isDeveloper
+  },
 }
+
 
 export const actions = {
   async login({commit, dispatch}, formData) {
     try {
-      const { token } = await this.$axios.$post('/api/auth/admin/login', formData)
+      const { token, isDeveloper } = await this.$axios.$post('/api/auth/admin/login', formData)
       dispatch('setToken', token)
+      dispatch('setIsDeveloper', isDeveloper)
     } catch (error) {
       commit('setError', error, {root: true})
       throw error
@@ -27,15 +38,24 @@ export const actions = {
   },
 
   setToken({commit}, token) {
+    console.log('[this.$axios]: ', this.$axios.setToken)
     this.$axios.setToken(token, 'Bearer')
     commit('setTokenMutation', token)
     Cookies.set('jwt-token', token)
+  },
+
+  setIsDeveloper({commit}, isDeveloper) {
+    // this.$axios.setIsDeveloper(isDeveloper, 'Bearer') // (?)
+    commit('setIsDeveloperMutation', isDeveloper)
+    Cookies.set('isDeveloper', isDeveloper)
   },
 
   logout({commit}) {
     this.$axios.setToken(false)
     commit('clearTokenMutation')
     Cookies.remove('jwt-token')
+    commit('clearIsDeveloperMutation')
+    Cookies.remove('isDeveloper')
   },
 
   async createUser({commit}, formData) {
@@ -62,18 +82,23 @@ export const actions = {
 
     const cookies = Cookie.parse(cookieStr || '') || {} // если метод ничего не вернет, то вернем пустой объект
     const token = cookies['jwt-token']
+    const isDeveloper = cookies['isDeveloper'] == 'true' ? true : false
+    console.log("cookies['isDeveloper']", isDeveloper)
 
     if (isJwtValid(token)) {
       dispatch('setToken', token)
+      dispatch('setIsDeveloper', isDeveloper) // уместно ли, разобраться в логике (?)
     } else {
       dispatch('logout')
     }
   }
 }
 
+
 export const getters = {
   isAuthenticated: state => Boolean(state.token),
-  token: state => state.token
+  token: state => state.token,
+  isDeveloper: state => Boolean(state.token),
 }
 
 

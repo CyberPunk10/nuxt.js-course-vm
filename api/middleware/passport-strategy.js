@@ -18,6 +18,6 @@ module.exports = new Strategy(options, async (payload, done) => {
       done(null, false)
     }
   } catch (error) {
-    console.log('passport-strategy.js: ', error)
+    console.log('Error in file: passport-strategy.js: ', error)
   }
 })

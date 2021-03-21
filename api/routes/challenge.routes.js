@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { createChallenge, addChallengeProgress } from '../controllers/challenge.controllers'
+import { createChallenge, addChallengeProgress } from '../controllers/challenge.controller'
 const router = Router()
 
 // /api/challenge/create

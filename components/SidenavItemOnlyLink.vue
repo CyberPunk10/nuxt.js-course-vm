@@ -1,9 +1,12 @@
 <template>
-  <div class="sidenav__nav-item-wrap">
+  <div class="sidenav__nav-item-wrap"
+    v-if="isDeveloper"
+  >
     <NuxtLink :to="link.url" class="sidenav__nav-item">
       <i v-if="link.icon" :class="link.icon"></i>
       <span class="sidenav__nav-item-text">{{ link.name }}</span>
     </NuxtLink>
+    {{ isDeveloper }}
   </div>
 </template>
 
@@ -13,7 +16,12 @@ export default {
     link: {
       type: Object
     }
-  }
+  },
+  computed: {
+    isDeveloper() {
+      return this.$store.getters['auth/isDeveloper']
+    }
+  },
 }
 </script>
 

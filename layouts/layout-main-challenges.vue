@@ -52,6 +52,7 @@ export default {
   },
   watch: {
     error(value) {
+      console.log(value)
       this.$message.error(value.response.data.message)
     }
   },

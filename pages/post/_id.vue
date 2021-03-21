@@ -57,7 +57,7 @@ export default {
       title: `${this.post.title} | ${process.env.appName}`
     }
   },
-  layout: 'ssrBlog',
+  layout: 'layout-main-challenges',
 
   async asyncData({ store, params }) {
     const post = await store.dispatch('post/fetchById', params.id)
