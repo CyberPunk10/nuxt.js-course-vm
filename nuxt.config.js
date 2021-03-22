@@ -130,3 +130,9 @@ export default {
 
 // «Роутинг и защита роутов в SSR приложении на примере Nuxt.js»
 // https://css-tricks.com/routing-route-protection-server-rendered-vue-apps-using-nuxt-js/
+
+// для практики
+// https://habr.com/ru/company/timeweb/blog/543090/
+
+// Пишем свое PWA на Nuxt.js
+// https://www.youtube.com/watch?v=A-dywZC301g&ab_channel=ASTRIOagency

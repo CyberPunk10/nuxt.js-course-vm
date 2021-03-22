@@ -29,9 +29,14 @@
         />
       </div>
 
-      <div class="separator"></div>
+      <div class="separator"
+        v-if="isDeveloper"
+      >
+      </div>
 
-      <div class="sidenav__nav-item-wrap">
+      <div class="sidenav__nav-item-wrap"
+        v-if="isDeveloper"
+      >
         <p class="sidenav__nav-item">
           <i class="fa heart"></i>
           <span class="sidenav__nav-item-text">Current route: {{ bodyClass }}</span>
@@ -47,7 +52,9 @@
 
       <div class="separator"></div> -->
 
-      <div class="reklamaF">
+      <div class="reklamaF"
+        v-if="isDeveloper"
+      >
         <div class="content">
           <!-- <p>Здесь может быть ваша реклама</p>
           <p>Реклама челленджей</p> -->
@@ -69,6 +76,10 @@ export default {
     bodyClass() {
       // console.log(this.$store.getters['class/bodyClassCurrent'])
       return this.$store.getters['class/bodyClassCurrent']
+    },
+
+    isDeveloper() {
+      return this.$store.getters['auth/isDeveloper']
     }
   },
 
