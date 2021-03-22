@@ -117,6 +117,7 @@ export default {
         }
 
         try {
+
           // create new user
           await this.$store.dispatch('auth/createUserFree', formData)
           // this.$message.success('Новый пользователь добавлен')
@@ -126,11 +127,13 @@ export default {
           await this.$store.dispatch('auth/login', formData)
           this.$router.push('/challenges/my-profile')
           this.$message.success(`Добро пожаловать, ${formData.login}`)
+
         } catch (error) {
           console.log(error)
         } finally {
           this.loading = false
         }
+
       }
     }
   }

@@ -20,20 +20,20 @@ const userSchema = new Schema({
   nickname: {
     type: String,
     unique: true,
-    defuaul: 123
+    defuaul: 'Default nickname'
   },
   isDeveloper: {
     type: Boolean
+  },
+  name: {
+    firstName: String,
+    lastName: String
+  },
+  lastActiveAt: Date,
+  created: {
+    type: Date,
+    default: Date.now
   }
-  // name: {
-  //   firstName: String,
-  //   lastName: String
-  // },
-  // lastActiveAt: Date,
-  // created: {
-  //   type: Date,
-  //   default: Date.now
-  // }
 })
 
 module.exports = model('User', userSchema)

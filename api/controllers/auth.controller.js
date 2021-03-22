@@ -26,7 +26,7 @@ module.exports.login = async (req, res) => {
       }, keys.JWT, {expiresIn: 60 * 60}) // 60 * 60 - 1 час - время жизни токекна
 
       // дополнительно узнаем является ли пользователь разработчиком этого приложения
-      const isDeveloper = candidate['isDeveloper'] ? true : false
+      const isDeveloper = candidate.isDeveloper ? true : false
 
       // отправляем успех
       res.json({ token, isDeveloper })

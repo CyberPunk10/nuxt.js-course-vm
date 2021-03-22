@@ -40,7 +40,7 @@ export const actions = {
     this.$axios.setToken(token, 'Bearer')
     commit('setTokenMutation', token)
     Cookies.set('jwt-token', token)
-console.log('Вот тут нет isDeveloper: ', isDeveloper)
+
     // обновим isDeveloper in store
     commit('setIsDeveloperMutation', isDeveloper)
     Cookies.set('isDeveloper', isDeveloper)
@@ -79,7 +79,6 @@ console.log('Вот тут нет isDeveloper: ', isDeveloper)
     const cookies = Cookie.parse(cookieStr || '') || {} // если метод ничего не вернет, то вернем пустой объект
     const token = cookies['jwt-token']
     const isDeveloper = cookies['isDeveloper'] == 'true' ? true : false
-    console.log("cookies['isDeveloper']", isDeveloper)
 
     if (isJwtValid(token)) {
       dispatch('setToken', { token, isDeveloper })
@@ -93,7 +92,7 @@ console.log('Вот тут нет isDeveloper: ', isDeveloper)
 export const getters = {
   isAuthenticated: state => Boolean(state.token),
   token: state => state.token,
-  isDeveloper: state => Boolean(state.token),
+  isDeveloper: state => Boolean(state.isDeveloper),
 }
 
 

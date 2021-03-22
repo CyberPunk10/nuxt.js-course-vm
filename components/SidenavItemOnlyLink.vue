@@ -1,12 +1,20 @@
 <template>
   <div class="sidenav__nav-item-wrap"
-    v-if="isDeveloper"
+    v-if="isDeveloper && link.isDev"
   >
     <NuxtLink :to="link.url" class="sidenav__nav-item">
       <i v-if="link.icon" :class="link.icon"></i>
       <span class="sidenav__nav-item-text">{{ link.name }}</span>
     </NuxtLink>
-    {{ isDeveloper }}
+  </div>
+
+  <div class="sidenav__nav-item-wrap"
+    v-else-if="!link.isDev"
+  >
+    <NuxtLink :to="link.url" class="sidenav__nav-item">
+      <i v-if="link.icon" :class="link.icon"></i>
+      <span class="sidenav__nav-item-text">{{ link.name }}</span>
+    </NuxtLink>
   </div>
 </template>
 

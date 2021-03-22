@@ -58,9 +58,12 @@
             </div>
           </div>
 
-          <div class="separator"></div>
+          <div class="separator"
+            v-if="isDeveloper"
+          >
+          </div>
 
-          <div v-if="isAuthTest"
+          <div v-if="isAuthTest && isDeveloper"
             class="sidenav__nav-item-wrap"
             data-btn-logout="true"
           >
@@ -69,7 +72,7 @@
               <span class="sidenav__nav-item-text" data-btn-logout="true">Темная тема</span>
             </div>
           </div>
-          <div v-if="isAuthTest"
+          <div v-if="isAuthTest && isDeveloper"
             class="sidenav__nav-item-wrap"
             data-btn-logout="true"
           >
@@ -100,6 +103,9 @@ export default {
     },
     isAuthTest() {
       return this.$store.getters['auth/isAuthenticated']
+    },
+    isDeveloper() {
+      return this.$store.getters['auth/isDeveloper']
     }
   },
   methods: {
