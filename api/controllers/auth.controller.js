@@ -27,7 +27,6 @@ module.exports.login = async (req, res) => {
 
       // дополнительно узнаем является ли пользователь разработчиком этого приложения
       const isDeveloper = candidate['isDeveloper'] ? true : false
-      console.log('[isDeveloper]: ', isDeveloper)
 
       // отправляем успех
       res.json({ token, isDeveloper })

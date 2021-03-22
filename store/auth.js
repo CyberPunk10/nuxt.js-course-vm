@@ -16,11 +16,11 @@ export const mutations = {
   clearTokenMutation(state) {
     state.token = null
   },
-  clearIsDeveloperMutation(state) {
-    state.isDeveloper = false
-  },
   setIsDeveloperMutation(state, isDeveloper) {
     state.isDeveloper = !!isDeveloper
+  },
+  clearIsDeveloperMutation(state) {
+    state.isDeveloper = false
   },
 }
 
@@ -29,23 +29,19 @@ export const actions = {
   async login({commit, dispatch}, formData) {
     try {
       const { token, isDeveloper } = await this.$axios.$post('/api/auth/admin/login', formData)
-      dispatch('setToken', token)
-      dispatch('setIsDeveloper', isDeveloper)
+      dispatch('setToken', { token, isDeveloper }) // isDeveloper - является ли авторизованный user разработчиком этого приложения
     } catch (error) {
       commit('setError', error, {root: true})
       throw error
     }
   },
 
-  setToken({commit}, token) {
-    console.log('[this.$axios]: ', this.$axios.setToken)
+  setToken({commit}, { token, isDeveloper }) {
     this.$axios.setToken(token, 'Bearer')
     commit('setTokenMutation', token)
     Cookies.set('jwt-token', token)
-  },
-
-  setIsDeveloper({commit}, isDeveloper) {
-    // this.$axios.setIsDeveloper(isDeveloper, 'Bearer') // (?)
+console.log('Вот тут нет isDeveloper: ', isDeveloper)
+    // обновим isDeveloper in store
     commit('setIsDeveloperMutation', isDeveloper)
     Cookies.set('isDeveloper', isDeveloper)
   },
@@ -86,8 +82,7 @@ export const actions = {
     console.log("cookies['isDeveloper']", isDeveloper)
 
     if (isJwtValid(token)) {
-      dispatch('setToken', token)
-      dispatch('setIsDeveloper', isDeveloper) // уместно ли, разобраться в логике (?)
+      dispatch('setToken', { token, isDeveloper })
     } else {
       dispatch('logout')
     }
