@@ -123,10 +123,12 @@ export default {
           // this.$message.success('Новый пользователь добавлен')
           this.formRegister.login = this.formRegister.email = this.formRegister.password = ''
 
+          this.$router.push('/challenges/login')
+          
           // сразу заходим под созданным new user
-          await this.$store.dispatch('auth/login', formData)
-          this.$router.push('/challenges/my-profile')
-          this.$message.success(`Добро пожаловать, ${formData.login}`)
+          // await this.$store.dispatch('auth/login', formData)
+          // this.$router.push('/challenges/my-profile')
+          // this.$message.success(`Добро пожаловать, ${formData.login}`)
 
         } catch (error) {
           console.log(error)

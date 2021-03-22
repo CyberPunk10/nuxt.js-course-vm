@@ -133,3 +133,6 @@ export default {
 
 // для практики
 // https://habr.com/ru/company/timeweb/blog/543090/
+
+// Пишем свое PWA на Nuxt.js
+// https://www.youtube.com/watch?v=A-dywZC301g&ab_channel=ASTRIOagency
