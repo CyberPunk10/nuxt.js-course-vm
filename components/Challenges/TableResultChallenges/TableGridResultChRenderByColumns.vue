@@ -188,7 +188,7 @@ export default {
       return this.users_data.players.slice(from, to)
     },
 
-    // for .shadov-active при изменении ширины экрана
+    // for .shadow-active при изменении ширины экрана
     currentWidthWindow() {
       return this.$store.getters['layoutChallenge/getCurrentWidthWindow']
     },

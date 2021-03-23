@@ -94,7 +94,6 @@ export const actions = {
 
   async fetch({commit}) {
     try {
-      console.log('store/post.js')
       return await this.$axios.$get('/api/post/list')
     } catch (error) {
       commit('setError', error, {root: true})

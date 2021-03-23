@@ -1,6 +1,16 @@
 <template>
   <div>
-    <h1>User</h1>
+    <h2 class="title-table font-how-h2">Таблица результатов</h2>
+    <TableGridResultCh
+      :users_data="posts"
+      fixed_first_col="login"
+      :onlyCols="onlyCols"
+    />
+      <!-- fixed_last_col="max" -->
+    <br>
+
+    <!-- form add new user -->
+    <h2 class="title-table font-how-h2">User</h2>
     <el-card
       shadow="always"
       :style="{width: '500px'}"
@@ -16,6 +26,13 @@
 
         <el-form-item label="Логин" prop="login">
           <el-input v-model.trim="controls.login" />
+        </el-form-item>
+
+        <el-form-item label="Email" prop="email" class="mb2">
+          <el-input
+            type="email"
+            v-model.trim="controls.email"
+          />
         </el-form-item>
 
         <el-form-item label="Пароль" prop="password" class="mb2">
@@ -51,13 +68,28 @@ export default {
   data() {
     return {
       loading: false,
+
+      // onlyCols: ['_id', 'login', 'created', 'email'],
+      onlyCols: [
+        { key: '_id', title: 'id' },
+        { key: 'login', title: 'Логин' },
+        { key: 'email', title: 'Email' },
+        { key: 'created', title: 'Дата создания', formatter: 'date' },
+      ],
+
+      // for form
       controls: {
         login: '',
+        email: '',
         password: ''
       },
       rules: {
         login: [
           {required: true, message: 'Введите логин', trigger: 'blur'}
+        ],
+        email: [
+          {required: true, message: 'Введите email', trigger: 'blur'},
+          { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }
         ],
         password: [
           {required: true, message: 'Введите пароль', trigger: 'blur'},
@@ -67,6 +99,16 @@ export default {
     }
   },
 
+  async asyncData({ store }) {
+    const posts = await store.dispatch('tableGoFrontend/fetchUsers')
+    return { posts }
+  },
+
+  computed: {
+    players() {
+      return this.$store.getters['tableGoFrontend/getPlayers']
+    },
+  },
   methods: {
     onSubmit() {
       this.$refs.form.validate(async valid => {
@@ -76,11 +118,12 @@ export default {
           try {
             const formData = {
               login: this.controls.login,
+              email: this.controls.email,
               password: this.controls.password
             }
             await this.$store.dispatch('auth/createUser', formData)
             this.$message.success('Новый пользователь добавлен')
-            this.controls.login = this.controls.password = ''
+            this.controls.login = this.controls.email = this.controls.password = ''
             this.loading = false
           } catch (error) {
             this.loading = false
@@ -92,7 +135,3 @@ export default {
   }
 }
 </script>
-
-<style lang="sass" scoped>
-
-</style>
