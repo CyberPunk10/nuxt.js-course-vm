@@ -2,43 +2,43 @@
   <div class="">
     <!-- <h2 class="title-table font-how-h2">Таблица результатов</h2>
     <TableResultCh
-      :users_data="players"
-      fixed_first_col="name"
+      :data_tables="players"
+      :fixed_first_col="{key: 'name'}"
     />
     <br><br> -->
     <!-- <h2 class="title-table font-how-h2">Таблица результатов</h2>
     <TableGridResultChRenderByColumns
-      :users_data="dataPushUps"
-      fixed_first_col="name"
+      :data_tables="dataPushUps"
+      :fixed_first_col="{key: 'name'}"
     />
     <br> -->
 
     <h2 class="title-table font-how-h2">Таблица результатов</h2>
     <TableGridResultChRenderByRow
-      :users_data="dataPushUps"
-      fixed_first_col="name"
+      :data_tables="dataPushUps"
+      :fixed_first_col="{key: 'name'}"
     />
       <!-- fixed_last_col="max" -->
     <br>
 
     <h2 class="title-table font-how-h2">Таблица результатов</h2>
     <TableGridResultCh
-      :users_data="players"
-      fixed_first_col="name"
-      fixed_last_col="id"
+      :data_tables="players"
+      :fixed_first_col="{key: 'name'}"
+      :fixed_last_col="{key: 'id'}"
     />
     <br>
 
     <h2 class="title-table font-how-h2">Таблица результатов</h2>
     <TableGridResultCh
-      :users_data="players"
-      fixed_first_col="name"
+      :data_tables="players"
+      :fixed_first_col="{key: 'name'}"
     />
     <br>
 
     <h2 class="title-table font-how-h2">Таблица результатов</h2>
     <TableGridResultCh
-      :users_data="players"
+      :data_tables="players"
     />
 
     <br><br>

@@ -14,8 +14,8 @@
       >
         <!-- header cell -->
         <p class="cell__header row"
-          @click="`sortBy_${fixed_first_col}`"
-        >{{ fixed_first_col }}
+          @click="`sortBy_${fixed_first_col.key}`"
+        >{{ fixed_first_col.title || fixed_first_col.key }}
           <i class="material-icons">unfold_more</i>
         </p>
 
@@ -26,7 +26,7 @@
           :class="{'hover-active': currentElem == index}"
           :data-row="index"
         >
-          {{ row[fixed_first_col] }}
+          {{ row[fixed_first_col.key] }}
         </div>
       </div>
 
@@ -39,9 +39,9 @@
         <!-- header cells -->
         <template v-for="cell in namesColsForRowRender">
           <p class="cell__header"
-            :key="cell"
-            @click="`sortBy_${cell}`"
-          >{{ cell }}
+            :key="cell.key || cell"
+            @click="`sortBy_${cell.key || cell}`"
+          >{{ cell.title || cell }}
             <i class="material-icons">unfold_more</i>
           </p>
         </template>
@@ -50,11 +50,11 @@
         <template v-for="(row, indexRow) in paginatedUsers">
           <div class="cell"
             v-for="cell in namesColsForRowRender"
-            :key="`${row.id || row._id}__${cell}`"
+            :key="`${row.id || row._id}__${cell.key || cell}`"
             :data-row="indexRow"
             :class="{'hover-active': currentElem == indexRow}"
           >
-            {{row[cell]}}
+            {{row[cell.key || cell]}}
           </div>
         </template>
       </div>
@@ -67,8 +67,8 @@
       >
         <!-- header cell -->
         <p class="cell__header row"
-          @click="`sortBy_${fixed_last_col}`"
-        >{{ fixed_last_col }}
+          @click="`sortBy_${fixed_last_col.key}`"
+        >{{ fixed_last_col.title || fixed_last_col.key }}
           <i class="material-icons">unfold_more</i>
         </p>
 
@@ -79,7 +79,7 @@
           :data-row="index"
           :class="{'hover-active': currentElem == index}"
         >
-          {{ row[fixed_last_col] }}
+          {{ row[fixed_last_col.key] }}
         </div>
       </div>
 
@@ -100,21 +100,21 @@
 <script>
 export default {
   props: {
-    users_data: {
+    data_tables: {
       type: Array,
       default: () => {
         return []
       }
     },
     fixed_first_col: {
-      type: [String, Boolean],
+      type: [Object, Boolean],
       default: false
     },
     fixed_last_col: {
-      type: [String, Boolean],
+      type: [Object, Boolean],
       default: false
     },
-    onlyCols: {
+    onlyNeedCenterCols: {
       type: [String, Array, Boolean],
       default: false
     }
@@ -147,31 +147,31 @@ export default {
       }
     },
     gridNestingCols() {
-      // узнаем сколько фиксированных столбцов
-      let countFixedCol = 0
-      countFixedCol = this.fixed_first_col ? ++countFixedCol : countFixedCol
-      countFixedCol = this.fixed_last_col  ? ++countFixedCol : countFixedCol
+      if (this.onlyNeedCenterCols) {
+        return {
+          gridTemplateColumns: `repeat(${this.onlyNeedCenterCols.length}, minmax(min-content, 1fr))`
+        }
+      } else {
+        // узнаем сколько фиксированных столбцов
+        let countFixedCol = 0
+        countFixedCol = this.fixed_first_col ? ++countFixedCol : countFixedCol
+        countFixedCol = this.fixed_last_col  ? ++countFixedCol : countFixedCol
 
-      // узнаем сколько всего столбцов (если передан массив 'onlyCols', то его длина,
-      // если не передан, то смотрим количество ключей в первом объекте users_data)
-      const countAllCols = this.onlyCols
-        ? this.onlyCols.length
-        : Object.keys(this.users_data[0]).length
-
-      const countCol = countAllCols - countFixedCol // вычетаем первый и последний столбцы (if они фиксрованные)
-      return {
-        gridTemplateColumns: `repeat(${countCol}, minmax(min-content, 1fr))`
+        const countCol = Object.keys(this.data_tables[0]).length - countFixedCol // вычетаем первый и последний столбцы (if они фиксрованные)
+        return {
+          gridTemplateColumns: `repeat(${countCol}, minmax(min-content, 1fr))`
+        }
       }
     },
 
     // pagination
     pages() {
-      return Math.ceil(this.users_data.length / 10)
+      return Math.ceil(this.data_tables.length / this.userPerPages)
     },
     paginatedUsers() {
       let from = (this.pageNumber - 1) * this.userPerPages
       let to = from + this.userPerPages
-      return this.users_data.slice(from, to)
+      return this.data_tables.slice(from, to)
     },
 
     // for .shadow-active при изменении ширины экрана
@@ -180,15 +180,16 @@ export default {
     },
 
     namesColsForRowRender() {
-      if (this.onlyCols) {
-        let filteredArrStep1 = this.onlyCols.filter(item => item.key !== this.fixed_first_col) // стало 4
-        let filteredArrStep2 = filteredArrStep1.filter(item => item.key !== this.fixed_last_col) // стало 3
-        let step3 = filteredArrStep2.map(item => item.key)
-        return step3
+      if (this.onlyNeedCenterCols) {
+        // let filteredArrStep1 = this.onlyNeedCenterCols.filter(item => item.key !== this.fixed_first_col) // стало 4
+        // let filteredArrStep2 = filteredArrStep1.filter(item => item.key !== this.fixed_last_col) // стало 3
+        // let step3 = filteredArrStep2.map(item => item.key)
+        // return step3
+        return this.onlyNeedCenterCols
       } else {
-        const arrAllValue = Object.keys(this.users_data[0]) // например было 5
-        let filteredArrStep1 = arrAllValue.filter(item => item !== this.fixed_first_col) // стало 4
-        let filteredArrStep2 = filteredArrStep1.filter(item => item !== this.fixed_last_col) // стало 3
+        const arrAllValue = Object.keys(this.data_tables[0]) // например было 5
+        let filteredArrStep1 = arrAllValue.filter(item => item !== this.fixed_first_col.key) // стало 4
+        let filteredArrStep2 = filteredArrStep1.filter(item => item !== this.fixed_last_col.key) // стало 3
         return filteredArrStep2
       }
     }

@@ -14,9 +14,9 @@
       >
         <!-- header cell -->
         <p class="cell-header row"
-          @click="`sortBy_${fixed_first_col}`"
+          @click="`sortBy_${fixed_first_col.key}`"
           :style="[{gridColumn: '1/2'}, {gridRow: '1/3'}]"
-        >{{ fixed_first_col }}
+        >{{ fixed_first_col.title || fixed_first_col.key}}
           <i class="material-icons">unfold_more</i>
         </p>
 
@@ -27,7 +27,7 @@
           :class="{'hover-active': currentElem == index}"
           :data-row="index"
         >
-          {{ row[fixed_first_col] }}
+          {{ row[fixed_first_col.key] }}
         </div>
       </div>
 
@@ -39,7 +39,7 @@
       >
         <!-- header cells months-->
         <div class="cell-header cell-header__month"
-          v-for="(month, indexMonth) in users_data.datesForHeader"
+          v-for="(month, indexMonth) in data_tables.datesForHeader"
           :key="`${month.month}__${indexMonth}`"
           :style="{
             gridColumn: `${indexMonth == 0 ? 1 : arrStartGridColumnMonths[indexMonth - 1]}/${indexMonth == 0 ? (month.days.length + 1) : (arrStartGridColumnMonths[indexMonth])}`
@@ -48,7 +48,7 @@
 
         <!-- header cells days-->
         <div class="cell-header"
-          v-for="(day, index) in users_data.dates"
+          v-for="(day, index) in data_tables.dates"
           :key="index"
           :class="{'border-left': arrStartGridColumnMonths.includes(index + 1)}"
           data-jc='center'
@@ -121,18 +121,18 @@
 <script>
 export default {
   props: {
-    users_data: {
+    data_tables: {
       type: Object,
       default: () => {
         return {}
       }
     },
     fixed_first_col: {
-      type: [String, Boolean],
+      type: [Object, Boolean],
       default: false
     },
     fixed_last_col: {
-      type: [String, Boolean],
+      type: [Object, Boolean],
       default: false
     }
   },
@@ -157,7 +157,7 @@ export default {
       }
     },
     gridNestingRows() {
-      const countRowHeader = this.users_data.datesForHeader ? '3rem 3rem' : '5rem' // 1 or 2 row in header (for month)
+      const countRowHeader = this.data_tables.datesForHeader ? '3rem 3rem' : '5rem' // 1 or 2 row in header (for month)
       return {
         gridTemplateRows: `${countRowHeader} repeat(${this.paginatedUsers.length}, 4rem)`
         // т.к. этот шаблон применяется в разных столбцах отдельных грядов,
@@ -165,7 +165,7 @@ export default {
       }
     },
     gridNestingCols() {
-      const countCol = this.users_data.dates.length
+      const countCol = this.data_tables.dates.length
       return {
         gridTemplateColumns: `repeat(${countCol}, minmax(min-content, 1fr))`
       }
@@ -173,12 +173,12 @@ export default {
 
     // pagination
     pages() {
-      return Math.ceil(this.users_data.players.length / 10)
+      return Math.ceil(this.data_tables.players.length / 10)
     },
     paginatedUsers() {
       let from = (this.pageNumber - 1) * this.userPerPages
       let to = from + this.userPerPages
-      return this.users_data.players.slice(from, to)
+      return this.data_tables.players.slice(from, to)
     },
 
     // for .shadow-active при изменении ширины экрана
@@ -188,7 +188,7 @@ export default {
 
     arrStartGridColumnMonths() {
       const arr = []
-      this.users_data.datesForHeader.forEach( el => {
+      this.data_tables.datesForHeader.forEach( el => {
         arr.push(el.days.length + (arr.length == 0 ? 1 : arr[arr.length - 1]))
       })
       console.log(arr)
