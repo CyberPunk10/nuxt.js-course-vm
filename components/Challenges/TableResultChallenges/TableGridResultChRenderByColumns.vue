@@ -24,8 +24,8 @@
       >
         <!-- header cell -->
         <p class="cell-header row"
-          @click="`sortBy_${fixed_first_col}`"
-        >{{ fixed_first_col }}
+          @click="`sortBy_${fixed_first_col.key}`"
+        >{{ fixed_first_col.title || fixed_first_col.key }}
           <i class="material-icons">unfold_more</i>
         </p>
 
@@ -36,7 +36,7 @@
           :class="{'hover-active': currentElem == index}"
           :data-row="index"
         >
-          {{ row[fixed_first_col] }}
+          {{ row[fixed_first_col.key] }}
         </div>
       </div>
 
@@ -48,13 +48,13 @@
       >
         <!-- header cells (only 1/2 от 1 row, for months) -->
         <div class="cell-header cell-header__month"
-          v-for="(month, indexMonth) in users_data.datesForHeader"
+          v-for="(month, indexMonth) in data_tables.datesForHeader"
           :key="indexMonth"
         >{{ month.month }}
         </div>
 
         <div class="center-cols-nesting-grid-2 border-left"
-          v-for="(month, indexMonth) in users_data.datesForHeader"
+          v-for="(month, indexMonth) in data_tables.datesForHeader"
           :key="`${month.month}__${indexMonth}`"
           :style="[gridNestingRowsLevel2, {
             gridTemplateColumns: `repeat(${month.days.length}, minmax(min-content, 1fr))`
@@ -71,7 +71,7 @@
           <!-- other cells -->
           <template v-for="(row, indexRow) in paginatedUsers">
             <div class="cell border-right"
-              v-for="(cell, index) in users_data.players[indexRow].years[2020].month[indexMonth]"
+              v-for="(cell, index) in data_tables.players[indexRow].years[2020].month[indexMonth]"
               :key="`${indexRow}__${index}`"
               data-jc='center'
               :data-row="indexRow"
@@ -122,18 +122,18 @@
 <script>
 export default {
   props: {
-    users_data: {
+    data_tables: {
       type: Object,
       default: () => {
         return {}
       }
     },
     fixed_first_col: {
-      type: [String, Boolean],
+      type: [Object, Boolean],
       default: false
     },
     fixed_last_col: {
-      type: [String, Boolean],
+      type: [Object, Boolean],
       default: false
     }
   },
@@ -159,13 +159,13 @@ export default {
       }
     },
     gridNestingRows() {
-      const countRowHeader = this.users_data.datesForHeader ? '3rem' : '5rem' // 1 or 2 row in header (for month)
+      const countRowHeader = this.data_tables.datesForHeader ? '3rem' : '5rem' // 1 or 2 row in header (for month)
       return {
         gridTemplateRows: `${countRowHeader} auto`
       }
     },
     gridNestingCols() {
-      const countCol = this.users_data.datesForHeader.length
+      const countCol = this.data_tables.datesForHeader.length
       return {
         gridTemplateColumns: `repeat(${countCol}, auto)`
       }
@@ -180,12 +180,12 @@ export default {
 
     // pagination
     pages() {
-      return Math.ceil(this.users_data.players.length / 10)
+      return Math.ceil(this.data_tables.players.length / 10)
     },
     paginatedUsers() {
       let from = (this.pageNumber - 1) * this.userPerPages
       let to = from + this.userPerPages
-      return this.users_data.players.slice(from, to)
+      return this.data_tables.players.slice(from, to)
     },
 
     // for .shadow-active при изменении ширины экрана
@@ -195,7 +195,7 @@ export default {
 
     arrStartGridColumnMonths() {
       const arr = []
-      this.users_data.datesForHeader.forEach( el => {
+      this.data_tables.datesForHeader.forEach( el => {
         arr.push(el.days.length + (arr.length == 0 ? 1 : arr[arr.length - 1]))
       })
       console.log(arr)

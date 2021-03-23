@@ -2,11 +2,11 @@
   <div>
     <h2 class="title-table font-how-h2">Таблица результатов</h2>
     <TableGridResultCh
-      :users_data="posts"
-      fixed_first_col="login"
-      :onlyCols="onlyCols"
+      :data_tables="posts"
+      :fixed_first_col="fixed_first_col"
+      :fixed_last_col="fixed_last_col"
+      :onlyNeedCenterCols="onlyNeedCenterCols"
     />
-      <!-- fixed_last_col="max" -->
     <br>
 
     <!-- form add new user -->
@@ -69,11 +69,11 @@ export default {
     return {
       loading: false,
 
-      // onlyCols: ['_id', 'login', 'created', 'email'],
-      onlyCols: [
+      fixed_first_col: { key: 'login', title: 'Логин' },
+      fixed_last_col: { key: 'email', title: 'Email' },
+      onlyNeedCenterCols: [
         { key: '_id', title: 'id' },
-        { key: 'login', title: 'Логин' },
-        { key: 'email', title: 'Email' },
+        { key: 'password', title: 'Пароль' },
         { key: 'created', title: 'Дата создания', formatter: 'date' },
       ],
 

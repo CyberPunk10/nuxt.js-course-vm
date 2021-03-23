@@ -8,7 +8,12 @@ _test_
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/guide/views#layouts).
 
+**TableGridResultCh**
 
+:data_tables="posts" - _данные для таблицы_ (type: [Array])
+fixed_first_col="login" - _если необходимо зафиксировать первый столбец_ (type: [Object]), options: key, title, formatted
+fixed_last_col="max" - _если необходимо зафиксировать последний столбец_ (type: [Object]), options: key, title, formatted
+:onlyNeedCenterCols="onlyNeedCenterCols" - _если нужно вывести не все столбцы, то указываем только те, которые нужны в том порядке, в котором хотим их видеть, при этом фиксированные столбцы здесь задавать не нужно, они задаются отдельно через 'fixed_first_col' и 'fixed_first_col'_ (type: [Array]), options: key, title, formatted
 
 
 **TableGridResultChRenderByRow**
