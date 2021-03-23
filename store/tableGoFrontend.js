@@ -228,6 +228,15 @@ export const mutations = {
 }
 
 export const actions = {
+  async fetchUsers({commit}) {
+    try {
+      return await this.$axios.$get('/api/tables/admin/users')
+    } catch (error) {
+      commit('setError', error, {root: true})
+      throw error
+    }
+  },
+
   // toggleHeader({commit}) { commit('toggleHeader') },
   // addAttrHeaderOut({commit}) { commit('addAttrHeaderOut') },
   // removeAttrHeaderOut({commit}) { commit('removeAttrHeaderOut') }

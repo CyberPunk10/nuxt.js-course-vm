@@ -50,7 +50,7 @@
         <template v-for="(row, indexRow) in paginatedUsers">
           <div class="cell"
             v-for="cell in namesColsForRowRender"
-            :key="`${row.id}__${cell}`"
+            :key="`${row.id || row._id}__${cell}`"
             :data-row="indexRow"
             :class="{'hover-active': currentElem == indexRow}"
           >
@@ -113,6 +113,10 @@ export default {
     fixed_last_col: {
       type: [String, Boolean],
       default: false
+    },
+    onlyCols: {
+      type: [String, Array, Boolean],
+      default: false
     }
   },
 
@@ -123,7 +127,6 @@ export default {
       shadowLeftActive: false,
       shadowRightActive: false,
       currentElem: null, // for @mouseover="mouseoverRows" hover
-
     }
   },
 
@@ -144,11 +147,18 @@ export default {
       }
     },
     gridNestingCols() {
+      // узнаем сколько фиксированных столбцов
       let countFixedCol = 0
       countFixedCol = this.fixed_first_col ? ++countFixedCol : countFixedCol
       countFixedCol = this.fixed_last_col  ? ++countFixedCol : countFixedCol
 
-      const countCol = Object.keys(this.users_data[0]).length - countFixedCol // вычетаем первый и последний столбцы (if они фиксрованные)
+      // узнаем сколько всего столбцов (если передан массив 'onlyCols', то его длина,
+      // если не передан, то смотрим количество ключей в первом объекте users_data)
+      const countAllCols = this.onlyCols
+        ? this.onlyCols.length
+        : Object.keys(this.users_data[0]).length
+
+      const countCol = countAllCols - countFixedCol // вычетаем первый и последний столбцы (if они фиксрованные)
       return {
         gridTemplateColumns: `repeat(${countCol}, minmax(min-content, 1fr))`
       }
@@ -164,16 +174,23 @@ export default {
       return this.users_data.slice(from, to)
     },
 
-    // for .shadov-active при изменении ширины экрана
+    // for .shadow-active при изменении ширины экрана
     currentWidthWindow() {
       return this.$store.getters['layoutChallenge/getCurrentWidthWindow']
     },
 
     namesColsForRowRender() {
-      const arrAllValue = Object.keys(this.users_data[0]) // например было 5
-      let filteredArrStep1 = arrAllValue.filter(e => e !== this.fixed_first_col) // стало 4
-      let filteredArrStep2 = filteredArrStep1.filter(e => e !== this.fixed_last_col) // стало 3
-      return filteredArrStep2
+      if (this.onlyCols) {
+        let filteredArrStep1 = this.onlyCols.filter(item => item.key !== this.fixed_first_col) // стало 4
+        let filteredArrStep2 = filteredArrStep1.filter(item => item.key !== this.fixed_last_col) // стало 3
+        let step3 = filteredArrStep2.map(item => item.key)
+        return step3
+      } else {
+        const arrAllValue = Object.keys(this.users_data[0]) // например было 5
+        let filteredArrStep1 = arrAllValue.filter(item => item !== this.fixed_first_col) // стало 4
+        let filteredArrStep2 = filteredArrStep1.filter(item => item !== this.fixed_last_col) // стало 3
+        return filteredArrStep2
+      }
     }
   },
 

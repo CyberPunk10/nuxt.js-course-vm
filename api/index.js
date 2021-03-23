@@ -9,6 +9,7 @@ const authRoutes = require('./routes/auth.routes')
 const postRoutes = require('./routes/post.routes')
 const commentRoutes = require('./routes/comment.routes')
 const challengeRoutes = require('./routes/challenge.routes')
+const tablesRoutes = require('./routes/tables.routes')
 
 app.use(passport.initialize())
 passport.use(passportStrategy)
@@ -20,6 +21,7 @@ app.use('/auth', authRoutes)
 app.use('/post', postRoutes)
 app.use('/comment', commentRoutes)
 app.use('/challenge', challengeRoutes)
+app.use('/tables', tablesRoutes)
 
 // for test
 app.get('/echo/:what', (req, res) => {
