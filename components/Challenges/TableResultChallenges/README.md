@@ -1,13 +1,5 @@
 # TABLE
 
-**Test.**
-
-This components.
-
-_test_
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/guide/views#layouts).
-
 ## TableGridResultCh
 
 ### props:
