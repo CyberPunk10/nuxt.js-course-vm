@@ -209,7 +209,8 @@ export const state = () => ({
     ]
   },
 
-
+  // users
+  users: null
 })
 
 export const mutations = {
@@ -237,9 +238,6 @@ export const actions = {
     }
   },
 
-  // toggleHeader({commit}) { commit('toggleHeader') },
-  // addAttrHeaderOut({commit}) { commit('addAttrHeaderOut') },
-  // removeAttrHeaderOut({commit}) { commit('removeAttrHeaderOut') }
   sortByName({commit}) {
     commit('sortByName')
   },

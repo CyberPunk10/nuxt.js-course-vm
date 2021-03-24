@@ -13,10 +13,13 @@
         :style="gridNestingRows"
       >
         <!-- header cell -->
-        <p class="cell__header row"
-          @click="`sortBy_${fixed_first_col.key}`"
+        <p v-if="fixed_first_col.sort" class="cell__header row"
+          @click="sortBy( $event, fixed_first_col.sort, fixed_first_col.key )"
         >{{ fixed_first_col.title || fixed_first_col.key }}
           <i class="material-icons">unfold_more</i>
+        </p>
+        <p v-else class="cell__header row">
+          {{ fixed_first_col.title || fixed_first_col.key }}
         </p>
 
         <!-- other cells -->
@@ -38,11 +41,15 @@
       >
         <!-- header cells -->
         <template v-for="cell in namesColsForRowRender">
-          <p class="cell__header"
+          <p v-if="cell.sort" class="cell__header"
             :key="cell.key || cell"
-            @click="`sortBy_${cell.key || cell}`"
+            @click="sortBy( $event, cell.sort, cell.key )"
           >{{ cell.title || cell }}
             <i class="material-icons">unfold_more</i>
+          </p>
+          <p v-else class="cell__header"
+            :key="cell.key || cell"
+          >{{ cell.title || cell }}
           </p>
         </template>
 
@@ -54,7 +61,7 @@
             :data-row="indexRow"
             :class="{'hover-active': currentElem == indexRow}"
           >
-            {{row[cell.key || cell]}}
+            {{ row[cell.key || cell] | date(cell.formatter || 'return without changes') }}
           </div>
         </template>
       </div>
@@ -66,10 +73,13 @@
         :style="gridNestingRows"
       >
         <!-- header cell -->
-        <p class="cell__header row"
-          @click="`sortBy_${fixed_last_col.key}`"
+        <p v-if="fixed_last_col.sort" class="cell__header row"
+          @click="sortBy( $event, fixed_last_col.sort, fixed_last_col.key )"
         >{{ fixed_last_col.title || fixed_last_col.key }}
           <i class="material-icons">unfold_more</i>
+        </p>
+        <p v-else class="cell__header row">
+          {{ fixed_last_col.title || fixed_last_col.key }}
         </p>
 
         <!-- other cells -->
@@ -85,14 +95,31 @@
 
     </div>
 
-    <div class="v-table__pagination">
-      <div class="page"
-        v-for="page in pages"
-        :key="page"
-        @click="pageClick(page)"
-        :class="{'page_selected': page === pageNumber}"
-      >{{ page }}
+    <!-- footer -->
+    <div class="footer-table">
+      <div class="footer-table-left-block"></div>
+      <div class="v-table__pagination">
+        <div class="page"
+          v-for="page in pages"
+          :key="page"
+          @click="pageClick(page)"
+          :class="{'page_selected': page === pageNumber}"
+        >{{ page }}
+        </div>
       </div>
+      <p class="count-row"
+        @click="changeCountRow"
+      >Показывать строк по:
+        <span :class="{'count-row_selected': 10 === userPerPages}"
+          data-count-row="10"
+        >10</span>
+        <span :class="{'count-row_selected': 20 === userPerPages}"
+          data-count-row="20"
+        >20</span>
+        <span :class="{'count-row_selected': 50 === userPerPages}"
+          data-count-row="50"
+        >50</span>
+      </p>
     </div>
   </div>
 </template>
@@ -225,16 +252,44 @@ export default {
     pageClick(page) {
       this.pageNumber = page
     },
+    changeCountRow(event) {
+      if (event.target.dataset.countRow) {
+        this.userPerPages = +event.target.dataset.countRow
+      }
+    },
 
     // sort
-    sortBy_name() {
-      this.$store.dispatch('tableGoFrontend/sortByName')
-    },
-    sortBy_id() {
-      this.$store.dispatch('tableGoFrontend/sortById')
-    },
-    sortBy_resultAll() {
-      this.$store.dispatch('tableGoFrontend/sortByResultAll')
+    sortBy( event, type, key ) {
+      if (!type) return
+
+      let directionSort = event.currentTarget.dataset.sort
+      // если список в первичном рандомном или обратном порядке
+      if (!directionSort || directionSort === 'reversed' ) {
+        // то сортируем по возрастанию
+        switch (type) {
+          case 'text':
+            this.data_tables.sort((a,b) => a[`${key}`].localeCompare(b[`${key}`]))
+            break
+          case 'numbers':
+            this.data_tables.sort((a,b) => a[`${key}`] - b[`${key}`])
+            break
+        }
+        event.currentTarget.dataset.sort = 'abc' // может возникнуть желание заменить эту строку на такую: "directionSort = 'abc'" - это не сработает
+      } else {
+        // иначе сортируем по убыванию
+        switch (type) {
+          case 'text':
+            this.data_tables.sort((a,b) => b[`${key}`].localeCompare(a[`${key}`]))
+            break
+          case 'numbers':
+            this.data_tables.sort((a,b) => b[`${key}`] - a[`${key}`])
+            break
+
+          // default:
+          //   break
+        }
+        event.currentTarget.dataset.sort = 'reversed'
+      }
     },
 
     // add shadow cols by scroll
@@ -249,7 +304,7 @@ export default {
 
     // hover row
     mouseoverRows(e) {
-      console.log('[mouseoverRows]')
+      // console.log('[mouseoverRows]')
       // инфа про Делегирование событий (learn.javascript.ru) отсюда:
       // https://learn.javascript.ru/mousemove-mouseover-mouseout-mouseenter-mouseleave
 
@@ -273,7 +328,7 @@ export default {
       // target.style.background = 'pink'
     },
     mouseoutRows(e) {
-      console.log('[mouseoutRows]')
+      // console.log('[mouseoutRows]')
       // если мы вне div[data-row], то игнорируем уход мыши
       // это какой-то переход внутри таблицы, но вне div[data-row]
       if (!this.currentElem) return
@@ -314,6 +369,7 @@ export default {
     align-items: center
     border-bottom: 1px solid #e7e7e7
     padding: 1rem .8rem
+    cursor: pointer
 
     @media screen and (min-width: $phoneWidth)
       padding: 1rem 1rem
@@ -370,33 +426,59 @@ export default {
     &.hover-active
       background-color: #f7f7f7
 
-
-// pagination
-.v-table__pagination
+.footer-table
   display: flex
-  justify-content: center
+  justify-content: space-between
+  align-items: center
   margin: 1.5rem 1rem
-  transition: $transitionDefaultHover
   @media screen and (min-width: $tableWidth) // >= 768px
     margin: 2rem 1rem 1.5rem
   @media screen and (min-width: $smDesktopWidth) // >= 980px
     margin: 2rem 1rem 1rem
-  .page
-    height: 3.5rem
-    line-height: 3.3rem
-    width: 3.5rem
-    border-radius: $borderRadius
-    text-align: center
-    border: 1px solid #e7e7e7
-    margin-right: 1rem
-    cursor: pointer
+
+  // pagination
+  .v-table__pagination
+    display: flex
+    justify-content: center
     transition: $transitionDefaultHover
-    &:hover
+    .page
+      height: 3.5rem
+      line-height: 3.3rem
+      width: 3.5rem
+      border-radius: $borderRadius
+      text-align: center
+      border: 1px solid #e7e7e7
+      margin-right: 1rem
+      cursor: pointer
+      transition: $transitionDefaultHover
+      &:hover
+        background-color: $color-purple
+        color: #fff
+        border: 1px solid $color-purple
+    .page_selected
       background-color: $color-purple
       color: #fff
       border: 1px solid $color-purple
-  .page_selected
-    background-color: $color-purple
-    color: #fff
-    border: 1px solid $color-purple
+
+  // Количество вывода строк
+  .count-row
+    &>span
+      display: inline-block
+      margin: 0.5rem
+      width: 3rem
+      line-height: 3rem
+      height: 3rem
+      text-align: center
+      background-color: #efefef
+      border-radius: $borderRadius
+      cursor: pointer
+      transition: $transitionDefaultHover
+      &:hover
+        background-color: $color-purple
+        color: #fff
+        border: 1px solid $color-purple
+      &.count-row_selected
+        background-color: $color-purple
+        color: #fff
+        border: 1px solid $color-purple
 </style>

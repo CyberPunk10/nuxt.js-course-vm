@@ -16,6 +16,8 @@
 import AppAside from '@/assets/admin/AppAside.vue'
 
 export default {
+  name: 'admin', // Иначе ошибка: [Vue warn]: Invalid component name: "layouts/layout-main-challenges.vue". Component names should conform to valid custom element name in html5 specification.
+
   components: { AppAside },
 
   computed: {

@@ -19,6 +19,16 @@ More information about the usage of this directory in [the documentation](https:
 **:onlyNeedCenterCols="onlyNeedCenterCols"** - _если нужно вывести не все столбцы, то указываем только те, которые нужны в том порядке, в котором хотим их видеть, при этом фиксированные столбцы здесь задавать не нужно, они задаются отдельно через 'fixed_first_col' и 'fixed_first_col'_ (type: [Array]), options: key, title, formatted
 
 
+
+#### options:
+key: 'created' - ключ, соответствующий ключу в data_tables
+title: 'Дата создания' - заголовок таблицы. Если не обозначать, то подставится key
+sort: 'text' - если указан, значит есть сорьтровка + указываем тип сортировки ('text', 'numbers')
+formatter: 'datetime' - указываем, если нужно отобразить текст в нужном виде. ('date', 'time', 'datetime')
+
+
+
+
 ### TableGridResultChRenderByRow
 
 Версия с датой рендерится по другой логике и принимает в себя вместо массива, объект с массивами
