@@ -10,21 +10,23 @@ More information about the usage of this directory in [the documentation](https:
 
 ### TableGridResultCh
 
-**:data_tables="posts"** - _данные для таблицы_ (type: [Array])
+#### props:
 
-**fixed_first_col="{ key: 'login', title: 'Логин' }"** - _если необходимо зафиксировать первый столбец_ (type: [Object]), options: key, title, formatted
+- **:data_tables="posts"** - _данные для таблицы_ (type: [Array])
 
-**fixed_last_col="{ key: 'login', title: 'Логин' }"** - _если необходимо зафиксировать последний столбец_ (type: [Object]), options: key, title, formatted
+- **fixed_first_col="{ key: 'login', title: 'Логин' }"** - _если необходимо зафиксировать первый столбец_ (type: [Object]), options: key, title, formatted
 
-**:onlyNeedCenterCols="onlyNeedCenterCols"** - _если нужно вывести не все столбцы, то указываем только те, которые нужны в том порядке, в котором хотим их видеть, при этом фиксированные столбцы здесь задавать не нужно, они задаются отдельно через 'fixed_first_col' и 'fixed_first_col'_ (type: [Array]), options: key, title, formatted
+- **fixed_last_col="{ key: 'login', title: 'Логин' }"** - _если необходимо зафиксировать последний столбец_ (type: [Object]), options: key, title, formatted
+
+- **:onlyNeedCenterCols="onlyNeedCenterCols"** - _если нужно вывести не все столбцы, то указываем только те, которые нужны в том порядке, в котором хотим их видеть, при этом фиксированные столбцы здесь задавать не нужно, они задаются отдельно через 'fixed_first_col' и 'fixed_first_col'_ (type: [Array]), options: key, title, formatted
 
 
 
-#### options:
-key: 'created' - ключ, соответствующий ключу в data_tables
-title: 'Дата создания' - заголовок таблицы. Если не обозначать, то подставится key
-sort: 'text' - если указан, значит есть сорьтровка + указываем тип сортировки ('text', 'numbers')
-formatter: 'datetime' - указываем, если нужно отобразить текст в нужном виде. ('date', 'time', 'datetime')
+#### options in onlyNeedCenterCols, fixed_first_col, fixed_last_col:
+- **key:** 'created' - ключ, соответствующий ключу в data_tables
+- **title:** 'Дата создания' - заголовок таблицы. Если не обозначать, то подставится key
+- **sort:** 'text' - если указан, значит есть сорьтровка + указываем тип сортировки ('text', 'numbers'). Даты сортируются как обычный текст.
+- **formatter:** 'datetime' - указываем, если нужно отобразить текст в нужном виде. ('date', 'time', 'datetime')
 
 
 
