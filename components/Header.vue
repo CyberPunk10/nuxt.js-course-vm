@@ -4,16 +4,16 @@
   >
     <div class="header-for-sidebar">
       <button class="sidebar-toggle" data-btn="sidebar-toggle">
-        <svg class="btn-open-sidebar" data-btn="sidebar-toggle" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-          <rect data-btn="sidebar-toggle" y="9" width="20" height="2"></rect>
-          <rect data-btn="sidebar-toggle" y="3" width="20" height="2"></rect>
-          <rect data-btn="sidebar-toggle" y="15" width="20" height="2"></rect>
+        <svg class="btn-open-sidebar" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <rect y="9" width="20" height="2"></rect>
+          <rect y="3" width="20" height="2"></rect>
+          <rect y="15" width="20" height="2"></rect>
         </svg>
-        <svg class="btn-close-sidebar" data-btn="sidebar-toggle" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-          <path data-btn="sidebar-toggle" d="M231.6 256l130.1-130.1c4.7-4.7 4.7-12.3 0-17l-22.6-22.6c-4.7-4.7-12.3-4.7-17 0L192 216.4 61.9 86.3c-4.7-4.7-12.3-4.7-17 0l-22.6 22.6c-4.7 4.7-4.7 12.3 0 17L152.4 256 22.3 386.1c-4.7 4.7-4.7 12.3 0 17l22.6 22.6c4.7 4.7 12.3 4.7 17 0L192 295.6l130.1 130.1c4.7 4.7 12.3 4.7 17 0l22.6-22.6c4.7-4.7 4.7-12.3 0-17L231.6 256z"></path>
+        <svg class="btn-close-sidebar" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+          <path d="M231.6 256l130.1-130.1c4.7-4.7 4.7-12.3 0-17l-22.6-22.6c-4.7-4.7-12.3-4.7-17 0L192 216.4 61.9 86.3c-4.7-4.7-12.3-4.7-17 0l-22.6 22.6c-4.7 4.7-4.7 12.3 0 17L152.4 256 22.3 386.1c-4.7 4.7-4.7 12.3 0 17l22.6 22.6c4.7 4.7 12.3 4.7 17 0L192 295.6l130.1 130.1c4.7 4.7 12.3 4.7 17 0l22.6-22.6c4.7-4.7 4.7-12.3 0-17L231.6 256z"></path>
         </svg>
-        <i class="fas fa-arrow-right" data-btn="sidebar-toggle"></i>
-        <i class="fas fa-arrow-left" data-btn="sidebar-toggle"></i>
+        <i class="fas fa-arrow-right" ></i>
+        <i class="fas fa-arrow-left" ></i>
       </button>
     </div>
 
@@ -52,9 +52,9 @@
             class="sidenav__nav-item-wrap"
             data-btn-logout="true"
           >
-            <div class="sidenav__nav-item" data-btn-logout="true">
-              <i class="fas fa-sign-in-alt" data-btn-logout="true"></i>
-              <span class="sidenav__nav-item-text" data-btn-logout="true">Выйти</span>
+            <div class="sidenav__nav-item" >
+              <i class="fas fa-sign-in-alt" ></i>
+              <span class="sidenav__nav-item-text" >Выйти</span>
             </div>
           </div>
 
@@ -67,18 +67,19 @@
             class="sidenav__nav-item-wrap"
             data-btn-logout="true"
           >
-            <div class="sidenav__nav-item" data-btn-logout="true">
-              <i class="fas fa-sign-in-alt" data-btn-logout="true"></i>
-              <span class="sidenav__nav-item-text" data-btn-logout="true">Темная тема</span>
+            <div class="sidenav__nav-item" >
+              <i class="fas fa-sign-in-alt" ></i>
+              <span class="sidenav__nav-item-text" >Темная тема</span>
             </div>
           </div>
+
           <div v-if="isAuthTest && isDeveloper"
             class="sidenav__nav-item-wrap"
             data-btn-logout="true"
           >
-            <div class="sidenav__nav-item" data-btn-logout="true">
-              <i class="fas fa-sign-in-alt" data-btn-logout="true"></i>
-              <span class="sidenav__nav-item-text" data-btn-logout="true">Темная тема</span>
+            <div class="sidenav__nav-item" >
+              <i class="fas fa-sign-in-alt" ></i>
+              <span class="sidenav__nav-item-text" >Темная тема</span>
             </div>
           </div>
 
@@ -110,10 +111,9 @@ export default {
   },
   methods: {
     clickHeader: function(event) {
-      // const layout = document.querySelector('.layout-wrapper')
       const dataAttr = event.target.dataset
 
-      if (dataAttr.btn === 'sidebar-toggle') {
+      if (event.target.closest('[data-btn="sidebar-toggle"]')) {
         this.$store.dispatch('sidebarLayoutChallenges/toggleSidebar')
         return
       }
@@ -122,7 +122,8 @@ export default {
         this.$store.dispatch('sidebarLayoutChallenges/closeSidebar')
       }
 
-      if (dataAttr.btnLogout === 'true') {
+      // if (dataAttr.btnLogout === 'true') {
+      if (event.target.closest('[data-btn-logout="true"]')) {
         this.$store.dispatch('auth/logout')
         // this.$router.push('/admin/login?message=logout')
         this.$router.push('/challenges/login?message=logout')

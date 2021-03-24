@@ -69,12 +69,12 @@ export default {
     return {
       loading: false,
 
-      fixed_first_col: { key: 'login', title: 'Логин' },
-      fixed_last_col: { key: 'email', title: 'Email' },
+      fixed_first_col: { key: 'login', title: 'Логин', sort: 'text' },
+      fixed_last_col: { key: 'email', title: 'Email', sort: 'text' },
       onlyNeedCenterCols: [
-        { key: '_id', title: 'id' },
-        { key: 'password', title: 'Пароль' },
-        { key: 'created', title: 'Дата создания', formatter: 'date' },
+        { key: '_id', title: 'id', sort: 'text' },
+        { key: 'password', title: 'Пароль', sort: 'text' },
+        { key: 'created', title: 'Дата создания', sort: 'text', formatter: 'datetime'},
       ],
 
       // for form

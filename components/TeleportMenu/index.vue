@@ -18,16 +18,16 @@
       </div>
       <div class="teleport-menu__btns-wrap">
         <button data-tmbtn="teleport-menu__btn" class="teleport-menu__button">
-          <svg data-tmbtn="teleport-menu__btn" class="teleport-menu__svg-close" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-            <path data-tmbtn="teleport-menu__btn" d="M231.6 256l130.1-130.1c4.7-4.7 4.7-12.3 0-17l-22.6-22.6c-4.7-4.7-12.3-4.7-17 0L192 216.4 61.9 86.3c-4.7-4.7-12.3-4.7-17 0l-22.6 22.6c-4.7 4.7-4.7 12.3 0 17L152.4 256 22.3 386.1c-4.7 4.7-4.7 12.3 0 17l22.6 22.6c4.7 4.7 12.3 4.7 17 0L192 295.6l130.1 130.1c4.7 4.7 12.3 4.7 17 0l22.6-22.6c4.7-4.7 4.7-12.3 0-17L231.6 256z"></path>
+          <svg class="teleport-menu__svg-close" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+            <path d="M231.6 256l130.1-130.1c4.7-4.7 4.7-12.3 0-17l-22.6-22.6c-4.7-4.7-12.3-4.7-17 0L192 216.4 61.9 86.3c-4.7-4.7-12.3-4.7-17 0l-22.6 22.6c-4.7 4.7-4.7 12.3 0 17L152.4 256 22.3 386.1c-4.7 4.7-4.7 12.3 0 17l22.6 22.6c4.7 4.7 12.3 4.7 17 0L192 295.6l130.1 130.1c4.7 4.7 12.3 4.7 17 0l22.6-22.6c4.7-4.7 4.7-12.3 0-17L231.6 256z"></path>
           </svg>
-          <svg data-tmbtn="teleport-menu__btn" class="teleport-menu__svg-list" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-            <line data-tmbtn="teleport-menu__btn" x1="8" x2="21" y1="6" y2="6"></line>
-            <line data-tmbtn="teleport-menu__btn" x1="8" x2="21" y1="12" y2="12"></line>
-            <line data-tmbtn="teleport-menu__btn" x1="8" x2="21" y1="18" y2="18"></line>
-            <line data-tmbtn="teleport-menu__btn" x1="3" x2="3" y1="6" y2="6"></line>
-            <line data-tmbtn="teleport-menu__btn" x1="3" x2="3" y1="12" y2="12"></line>
-            <line data-tmbtn="teleport-menu__btn" x1="3" x2="3" y1="18" y2="18"></line>
+          <svg class="teleport-menu__svg-list" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <line x1="8" x2="21" y1="6" y2="6"></line>
+            <line x1="8" x2="21" y1="12" y2="12"></line>
+            <line x1="8" x2="21" y1="18" y2="18"></line>
+            <line x1="3" x2="3" y1="6" y2="6"></line>
+            <line x1="3" x2="3" y1="12" y2="12"></line>
+            <line x1="3" x2="3" y1="18" y2="18"></line>
           </svg>
         </button>
         <button class="teleport-menu__button teleport-menu__button_target top-position-1">
@@ -82,7 +82,7 @@ export default {
       // console.log('click on TeleportMenu', event.target)
       const teleportMenu = document.querySelector('.teleport-menu')
       if ( event.target.className === 'underlay' && event.target.parentElement.classList.contains('teleport-menu')
-        || event.target.dataset.tmbtn === 'teleport-menu__btn' ) {
+        || event.target.closest('[data-tmbtn="teleport-menu__btn"]')) {
         teleportMenu.classList.toggle('active')
       }
     }
@@ -241,8 +241,8 @@ $color-bg-content: rgb(248,250,252)
   left: 0
   box-shadow: 0px 2px 12px 0 rgba(44,44,44,.2)
 
-  -webkit-animation: gradient-shift 30s ease infinite
-  animation: gradient-shift 30s ease infinite
+  -webkit-animation: gradient-shift 21s ease infinite
+  animation: gradient-shift 21s ease infinite
 .teleport-menu.active .underlay
   z-index: 9999
   // opacity: 0.3
