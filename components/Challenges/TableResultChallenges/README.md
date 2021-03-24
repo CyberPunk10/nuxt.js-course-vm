@@ -8,9 +8,9 @@ _test_
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/guide/views#layouts).
 
-### TableGridResultCh
+## TableGridResultCh
 
-#### props:
+### props:
 
 - **:data_tables="posts"** - _данные для таблицы_ (type: [Array])
 
@@ -22,7 +22,7 @@ More information about the usage of this directory in [the documentation](https:
 
 
 
-#### options in onlyNeedCenterCols, fixed_first_col, fixed_last_col:
+### options in onlyNeedCenterCols, fixed_first_col, fixed_last_col:
 - **key:** 'created' - ключ, соответствующий ключу в data_tables
 - **title:** 'Дата создания' - заголовок таблицы. Если не обозначать, то подставится key
 - **sort:** 'text' - если указан, значит есть сорьтровка + указываем тип сортировки ('text', 'numbers'). Даты сортируются как обычный текст.
@@ -31,7 +31,7 @@ More information about the usage of this directory in [the documentation](https:
 
 
 
-### TableGridResultChRenderByRow
+## TableGridResultChRenderByRow
 
 Версия с датой рендерится по другой логике и принимает в себя вместо массива, объект с массивами
 
