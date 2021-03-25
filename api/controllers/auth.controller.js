@@ -27,9 +27,11 @@ module.exports.login = async (req, res) => {
 
       // дополнительно узнаем является ли пользователь разработчиком этого приложения
       const isDeveloper = candidate.isDeveloper ? true : false
+      // дополнительно узнаем является ли пользователь работодателем
+      const isMockup = candidate.isMockup ? true : false
 
       // отправляем успех
-      res.json({ token, userId: candidate._id, isDeveloper })
+      res.json({ token, userId: candidate._id, isDeveloper, isMockup })
     } else {
       res.status(401).json({ message: 'Пароль неверный' })
     }

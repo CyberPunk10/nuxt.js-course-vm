@@ -11,9 +11,6 @@
         <small>
           <i class="el-icon-time"></i>
           {{post.date | date}}
-          , <i class="el-icon-time"></i>
-          Filter date(time): {{post.date | date('time')}}
-          Filter date(date): {{post.date | date('date')}}
         </small>
         <small>
           <i class="el-icon-view"></i>
@@ -88,17 +85,12 @@ export default {
 .post
   max-width: 600px
   margin: 0 auto
-  &-title
-    display: flex
-    justify-content: space-between
-    align-items: center
-    margin-bottom: 1rem
-
+  &-title,
   &-info
     display: flex
     justify-content: space-between
     align-items: center
-    margin-bottom: 0.5rem
+    margin: 2rem 0
 
   &-image img
     width: 100%

@@ -29,22 +29,29 @@ export const mutations = {
   clearIsDeveloperMutation(state) {
     state.isDeveloper = false
   },
+  setIsMockupMutation(state, isMockup) {
+    state.isMockup = !!isMockup
+  },
+  clearIsMockupMutation(state) {
+    state.isMockup = false
+  },
 }
 
 
 export const actions = {
   async login({commit, dispatch}, formData) {
     try {
-      const { token, userId, isDeveloper } = await this.$axios.$post('/api/auth/admin/login', formData)
-      dispatch('setToken', { token, userId, isDeveloper }) // isDeveloper - является ли авторизованный user разработчиком этого приложения
+      const { token, userId, isDeveloper, isMockup } = await this.$axios.$post('/api/auth/admin/login', formData)
+      dispatch('setToken', { token, userId, isDeveloper, isMockup }) // isDeveloper - является ли авторизованный user разработчиком этого приложения
     } catch (error) {
       commit('setError', error, {root: true})
       throw error
     }
   },
 
-  setToken({commit}, { token, userId, isDeveloper }) {
+  setToken({commit}, { token, userId, isDeveloper, isMockup }) {
     this.$axios.setToken(token, 'Bearer')
+
     commit('setTokenMutation', token)
     Cookies.set('jwt-token', token)
 
@@ -55,6 +62,10 @@ export const actions = {
     // обновим isDeveloper in store
     commit('setIsDeveloperMutation', isDeveloper)
     Cookies.set('isDeveloper', isDeveloper)
+
+    // обновим isMockup in store
+    commit('setIsMockupMutation', isMockup)
+    Cookies.set('isMockup', isMockup)
   },
 
   logout({commit}) {
@@ -68,6 +79,9 @@ export const actions = {
 
     commit('clearIsDeveloperMutation')
     Cookies.remove('isDeveloper')
+
+    commit('clearIsMockupMutation')
+    Cookies.remove('isMockup')
   },
 
   async createUser({commit}, formData) {
@@ -96,9 +110,10 @@ export const actions = {
     const token = cookies['jwt-token']
     const userId = cookies['userId']
     const isDeveloper = cookies['isDeveloper'] == 'true' ? true : false
+    const isMockup = cookies['isMockup'] == 'true' ? true : false
 
     if (isJwtValid(token)) {
-      dispatch('setToken', { token, userId, isDeveloper })
+      dispatch('setToken', { token, userId, isDeveloper, isMockup })
     } else {
       dispatch('logout')
     }
@@ -111,6 +126,7 @@ export const getters = {
   token: state => state.token,
   userId: state => state.userId,
   isDeveloper: state => Boolean(state.isDeveloper),
+  isMockup: state => Boolean(state.isMockup),
 }
 
 
