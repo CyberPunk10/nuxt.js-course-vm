@@ -23,13 +23,13 @@ module.exports.login = async (req, res) => {
       const token = jwt.sign({
         login: candidate.login,
         userId: candidate._id
-      }, keys.JWT, {expiresIn: 60 * 60}) // 60 * 60 - 1 час - время жизни токекна
+      }, keys.JWT, {expiresIn: 60 * 60 * 24}) // 60 * 60 - 1 час - время жизни токекна
 
       // дополнительно узнаем является ли пользователь разработчиком этого приложения
       const isDeveloper = candidate.isDeveloper ? true : false
 
       // отправляем успех
-      res.json({ token, isDeveloper })
+      res.json({ token, userId: candidate._id, isDeveloper })
     } else {
       res.status(401).json({ message: 'Пароль неверный' })
     }

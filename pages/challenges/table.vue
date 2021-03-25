@@ -13,7 +13,7 @@
     />
     <br> -->
 
-    <h2 class="title-table font-how-h2">Таблица результатов</h2>
+    <h2 class="title-table font-how-h2">Календарная таблица</h2>
     <TableGridResultChRenderByRow
       :data_tables="dataPushUps"
       :fixed_first_col="{key: 'name'}"

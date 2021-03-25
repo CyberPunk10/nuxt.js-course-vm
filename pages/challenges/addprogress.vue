@@ -1,9 +1,30 @@
 <template>
   <div class="">
 
-    <h4 class="mb3">Добавить прогресс</h4>
+    <h1 class="mb3">Добавить прогресс</h1>
 
-    <el-form ref="form"
+    <div class="wrap-card-content">
+      <form class="wrap-card-form"
+        @submit.prevent="onSubmit"
+      >
+        <AppInputChallenge
+          v-model.trim="controls.value"
+          class="label_bold"
+          placeholder="Количество"
+          autofocus
+          :inputData="{ title: 'Количество отжиманий' }"
+          :v="$v.controls.value"
+          type="number"
+          min="0"
+          :class="{invalid: $v.controls.value.$error}"
+        >Количество отжиманий:</AppInputChallenge>
+
+        <ButtonChallenge type="submit">Сохранить</ButtonChallenge>
+
+      </form>
+    </div>
+
+    <!-- <el-form ref="form"
       :model="controls"
       :rules="rules"
       label-width="120px"
@@ -32,13 +53,18 @@
           :loading="loading"
         >Сохранить</el-button>
       </el-form-item>
-    </el-form>
+    </el-form> -->
 
   </div>
 </template>
 
 <script>
+import { validationMixin } from 'vuelidate'
+import { required, minLength } from 'vuelidate/lib/validators'
+
 export default {
+  mixins: [validationMixin],
+
   head: {
     title: `Challenges | ${process.env.appName}`
   },
@@ -47,65 +73,115 @@ export default {
   data() {
     return {
       loading: false,
+
       controls: {
-        title: 'challenge-1',
-        date: null,
-        color: '-ch1',
-        count: 0,
+        // title: 'challenge-1-Отжимания',
+        // color: '-ch1',
+        value: null,
+        // date: null,
       },
-      rules: {
-        title: [
-          {required: true, message: 'Добавьте название поста', trigger: 'blur'}
-        ],
-        date: [
-          {required: false, message: 'Поле не должно быть пустым', trigger: 'blur'}
-        ],
-        color: [
-          {required: true, message: 'Поле не должно быть пустым', trigger: 'blur'}
-        ],
-        count: [
-          {required: true, message: 'Поле не должно быть пустым', trigger: 'blur'}
-        ]
-      }
+
+
+      // controls: {
+      //   title: 'challenge-1',
+      //   date: null,
+      //   color: '-ch1',
+      //   count: 0,
+      // },
+      // rules: {
+      //   title: [
+      //     {required: true, message: 'Добавьте название поста', trigger: 'blur'}
+      //   ],
+      //   date: [
+      //     {required: false, message: 'Поле не должно быть пустым', trigger: 'blur'}
+      //   ],
+      //   color: [
+      //     {required: true, message: 'Поле не должно быть пустым', trigger: 'blur'}
+      //   ],
+      //   count: [
+      //     {required: true, message: 'Поле не должно быть пустым', trigger: 'blur'}
+      //   ]
+      // }
+    }
+  },
+
+  validations: {
+    controls: {
+      value: { required },
+      // password: {
+      //   // simpleValidation(value) {
+      //   //   console.log(value)
+      //   //   return value.length > 5
+      //   // }
+      //   required, minLength: minLength(6)
+      // }
     }
   },
 
   methods: {
-    onSubmitAddProgressChallenge() {
-      console.log('Add progress Challenge')
-
-      this.$refs.form.validate(async valid => {
-          if (valid) {
-            this.loading = true
-
-            try {
-              const formData = {
-                title: this.controls.title,
-                date: this.controls.date,
-                color: this.controls.color,
-                count: this.controls.count
-              }
-              await this.$store.dispatch('challenge/create', formData)
-              this.$message.success('Challenge создан')
-              this.controls.title = ''
-            } catch (error) {
-              console.log(error)
-            } finally {
-              this.loading = false
-            }
-          } else {
-            this.$message.warning('Заполните все поля')
-          }
-        })
+    async onSubmit() {
+      if (this.$v.controls.$invalid) {
+        this.$v.$touch()
+        return
       }
+      if (!this.$v.controls.$error) {
+        // console.log('Валидация прошла успешно')
+        this.loading = true
+
+        const formData = {
+          value: this.controls.value,
+          // password: this.controls.password
+        }
+        console.log(formData)
+
+        try {
+        //   await this.$store.dispatch('auth/login', formData)
+        //   this.$router.push('/challenges/my-profile')
+        //   this.$message.success(`Добро пожаловать, ${this.controls.login}`)
+        } catch (error) {
+          console.log(error)
+        } finally {
+          this.loading = false
+        }
+      }
+    },
+
+    onSubmitAddProgressChallenge() {
+      // console.log('Add progress Challenge')
+
+      // this.$refs.form.validate(async valid => {
+      //   if (valid) {
+      //     this.loading = true
+
+      //     try {
+      //       const formData = {
+      //         title: this.controls.title,
+      //         date: this.controls.date,
+      //         color: this.controls.color,
+      //         count: this.controls.count
+      //       }
+      //       await this.$store.dispatch('challenge/create', formData)
+      //       this.$message.success('Challenge создан')
+      //       this.controls.title = ''
+      //     } catch (error) {
+      //       console.log(error)
+      //     } finally {
+      //       this.loading = false
+      //     }
+
+      //   } else {
+      //     this.$message.warning('Заполните все поля')
+      //   }
+      // })
     }
   }
+}
 </script>
 
 
 <style lang="sass">
-h4
-  text-align: center
-.mb3
-  margin-bottom: 3rem
-  </style>
+// h4
+//   text-align: center
+// .mb3
+//   margin-bottom: 3rem
+</style>

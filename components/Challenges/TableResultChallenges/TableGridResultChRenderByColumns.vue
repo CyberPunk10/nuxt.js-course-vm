@@ -6,7 +6,7 @@
 Использовать имеет смысл только когда ширина колонок фиксированная
 (тут количество дней в месяце разное, поэтому и ширина разная)
 или когда не обязательно делать равную ширину подколонок,
-или когда колокнок много, появляется scroll и колонк имеют одинаковую равную ширину
+или когда колокнок много, появляется scroll и колонки имеют одинаковую равную ширину
  -->
 
   <div class="wrap-card-content">
@@ -260,7 +260,7 @@ export default {
 
     // hover row
     mouseoverRows(e) {
-      console.log('[mouseoverRows]')
+      // console.log('[mouseoverRows]')
       // инфа про Делегирование событий (learn.javascript.ru) отсюда:
       // https://learn.javascript.ru/mousemove-mouseover-mouseout-mouseenter-mouseleave
 
@@ -284,7 +284,7 @@ export default {
       // target.style.background = 'pink'
     },
     mouseoutRows(e) {
-      console.log('[mouseoutRows]')
+      // console.log('[mouseoutRows]')
       // если мы вне div[data-row], то игнорируем уход мыши
       // это какой-то переход внутри таблицы, но вне div[data-row]
       if (!this.currentElem) return
