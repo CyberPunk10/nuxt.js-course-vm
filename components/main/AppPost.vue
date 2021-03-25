@@ -4,15 +4,12 @@
     :body-style="{padding: 0}"
     class="post"
   >
-    <header
-      slot="header"
-      class="post-header"
-    >
-      <h3>{{post.title}}</h3>
-      <small>
+    <header class="post-header">
+      <h2>{{post.title}}</h2>
+      <span>
         <i class="el-icon-time"></i>
-        {{post.date | date}}
-      </small>
+        {{post.date | date('date')}}
+      </span>
     </header>
 
     <div class="post-body">
@@ -25,12 +22,12 @@
 
     <footer class="post-footer">
       <el-button round @click="openPost">Открыть</el-button>
-
       <span>
         <i class="el-icon-message"></i>
         {{post.comments.length}}
       </span>
     </footer>
+
   </el-card>
 </template>
 
@@ -56,20 +53,32 @@ export default {
     // height: 200px
     margin-bottom: 1.5rem
 
-    &-header
+    &-header,
+    &-footer
       display: flex
       justify-content: space-between
       align-items: center
+      padding: 1rem
+      h2
+        font-size: 1.1em
+      span
+        font-size: .9em
+        white-space: nowrap // запрет переноса строк
+
+      @media screen and (max-width: calc(#{$smPhoneWidth} - 1px)) // < 320px
+        padding: .5rem
+
+      @media screen and (min-width: $phoneWidth) // >= 480px
+        padding: 2rem
+        h2
+          font-size: 1.4em
+        span
+          font-size: 1em
 
     img
       width: 100%
       height: auto
 
-    &-footer
-      padding: 1rem
-      display: flex
-      justify-content: space-between
-      align-items: center
 
 
 </style>

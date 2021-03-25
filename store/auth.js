@@ -5,6 +5,7 @@ import jwtDecode from 'jwt-decode'
 
 export const state = () => ({
   token: null,
+  userId: null,
   isDeveloper: false
 })
 
@@ -16,11 +17,23 @@ export const mutations = {
   clearTokenMutation(state) {
     state.token = null
   },
+  setUserIdMutation(state, userId) {
+    state.userId = userId
+  },
+  clearUserIdMutation(state) {
+    state.userId = null
+  },
   setIsDeveloperMutation(state, isDeveloper) {
     state.isDeveloper = !!isDeveloper
   },
   clearIsDeveloperMutation(state) {
     state.isDeveloper = false
+  },
+  setIsMockupMutation(state, isMockup) {
+    state.isMockup = !!isMockup
+  },
+  clearIsMockupMutation(state) {
+    state.isMockup = false
   },
 }
 
@@ -28,30 +41,47 @@ export const mutations = {
 export const actions = {
   async login({commit, dispatch}, formData) {
     try {
-      const { token, isDeveloper } = await this.$axios.$post('/api/auth/admin/login', formData)
-      dispatch('setToken', { token, isDeveloper }) // isDeveloper - является ли авторизованный user разработчиком этого приложения
+      const { token, userId, isDeveloper, isMockup } = await this.$axios.$post('/api/auth/admin/login', formData)
+      dispatch('setToken', { token, userId, isDeveloper, isMockup }) // isDeveloper - является ли авторизованный user разработчиком этого приложения
     } catch (error) {
       commit('setError', error, {root: true})
       throw error
     }
   },
 
-  setToken({commit}, { token, isDeveloper }) {
+  setToken({commit}, { token, userId, isDeveloper, isMockup }) {
     this.$axios.setToken(token, 'Bearer')
+
     commit('setTokenMutation', token)
     Cookies.set('jwt-token', token)
+
+    // обновим userId in store
+    commit('setUserIdMutation', userId)
+    Cookies.set('userId', userId)
 
     // обновим isDeveloper in store
     commit('setIsDeveloperMutation', isDeveloper)
     Cookies.set('isDeveloper', isDeveloper)
+
+    // обновим isMockup in store
+    commit('setIsMockupMutation', isMockup)
+    Cookies.set('isMockup', isMockup)
   },
 
   logout({commit}) {
     this.$axios.setToken(false)
+
     commit('clearTokenMutation')
     Cookies.remove('jwt-token')
+
+    commit('clearUserIdMutation')
+    Cookies.remove('userId')
+
     commit('clearIsDeveloperMutation')
     Cookies.remove('isDeveloper')
+
+    commit('clearIsMockupMutation')
+    Cookies.remove('isMockup')
   },
 
   async createUser({commit}, formData) {
@@ -78,10 +108,12 @@ export const actions = {
 
     const cookies = Cookie.parse(cookieStr || '') || {} // если метод ничего не вернет, то вернем пустой объект
     const token = cookies['jwt-token']
+    const userId = cookies['userId']
     const isDeveloper = cookies['isDeveloper'] == 'true' ? true : false
+    const isMockup = cookies['isMockup'] == 'true' ? true : false
 
     if (isJwtValid(token)) {
-      dispatch('setToken', { token, isDeveloper })
+      dispatch('setToken', { token, userId, isDeveloper, isMockup })
     } else {
       dispatch('logout')
     }
@@ -92,7 +124,9 @@ export const actions = {
 export const getters = {
   isAuthenticated: state => Boolean(state.token),
   token: state => state.token,
+  userId: state => state.userId,
   isDeveloper: state => Boolean(state.isDeveloper),
+  isMockup: state => Boolean(state.isMockup),
 }
 
 

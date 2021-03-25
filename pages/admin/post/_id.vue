@@ -5,7 +5,7 @@
       <el-breadcrumb-item>{{post.title}}</el-breadcrumb-item>
     </el-breadcrumb>
 
-    <h3>Post with title: {{post.title}}</h3>
+    <h2>Post with title: {{post.title}}</h2>
 
     <el-form
       ref="form"

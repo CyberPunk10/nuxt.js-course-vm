@@ -1,19 +1,23 @@
 <template>
   <div class="page-admin">
     <h1>Аналитика по постам</h1>
-    <div class="wrap-card-content">
-      <AnalyticsChart
-        title="Количество просмотров"
-        :labels="views.labels"
-        :data="views.data"
+    <div class="df jcsa fwrap">
+      <div class="wrap-card-content width-50">
+        <AnalyticsChart
+          title="Количество просмотров"
+          :labels="views.labels"
+          :data="views.data"
 
-      />
+        />
+      </div>
+      <div class="wrap-card-content width-50">
+        <AnalyticsChart
+          title="Количество комментариев"
+          :labels="comments.labels"
+          :data="comments.data"
+        />
+      </div>
     </div>
-    <AnalyticsChart
-      title="Количество комментариев"
-      :labels="comments.labels"
-      :data="comments.data"
-    />
   </div>
 </template>
 
@@ -50,4 +54,5 @@ export default {
   .wrap-card-content
     margin-top: 4rem
     margin-bottom: 4rem
+    min-width: 30rem
 </style>

@@ -5,22 +5,22 @@
         v-model.trim="formLogin.login"
         class="label_bold"
         :class="{invalid: $v.formLogin.login.$error}"
-        :inputData="inputLoginData"
+        :inputData="{ title: 'Логин или Email' }"
         :v="$v.formLogin.login"
         autofocus
         placeholder="Логин или Email"
-      >{{inputLoginData.title}}:</AppInputChallenge>
+      >Логин или Email:</AppInputChallenge>
         <!-- :class="{invalid: ($v.formLogin.login.$dirty && !$v.formLogin.login.required)}" -->
 
       <AppInputChallenge
         v-model.trim="formLogin.password"
         class="label_bold"
         :class="{invalid: $v.formLogin.password.$error}"
-        :inputData="inputPasswordData"
+        :inputData="{ title: 'Пароль' }"
         :v="$v.formLogin.password"
         type="password"
         placeholder="Пароль"
-      >{{inputPasswordData.title}}:</AppInputChallenge>
+      >Пароль:</AppInputChallenge>
         <!-- :class="{invalid: ($v.formLogin.password.$dirty && !$v.formLogin.password.required)}" -->
 
       <ButtonChallenge type="submit">Войти</ButtonChallenge>
@@ -29,6 +29,19 @@
         <p>Создать новый аккаунт?
           <NuxtLink to="/challenges/register-user">Регистрация</NuxtLink>
         </p>
+
+        <div class="temp">
+          <p>Войти под обычным пользователем: </p>
+          <p>
+            <span>Login: 3333</span>
+            <span>Пароль: 333333</span>
+          </p>
+          <p>Войти под профилем разаботчика: </p>
+          <p>
+            <span>Login: 4444</span>
+            <span>Пароль: 444444</span>
+          </p>
+        </div>
       </template>
     </FormLoginRegister>
   </div>
@@ -51,18 +64,10 @@ export default {
     return {
       loading: false,
 
-      formLoginRegister: {
-        title: 'Войти'
-      },
+      formLoginRegister: { title: 'Войти' },
 
-      inputLoginData: {
-        title: 'Логин или Email',
-        // required: true
-      },
-      inputPasswordData: {
-        title: 'Пароль',
-        // required: true
-      },
+      // inputLoginData: { title: 'Логин или Email' },
+      // inputPasswordData: { title: 'Пароль' },
 
       formLogin: {
         login: '',

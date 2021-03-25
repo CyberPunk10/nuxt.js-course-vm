@@ -14,7 +14,6 @@
       >
         <!-- header cell -->
         <p class="cell-header row"
-          @click="`sortBy_${fixed_first_col.key}`"
           :style="[{gridColumn: '1/2'}, {gridRow: '1/3'}]"
         >{{ fixed_first_col.title || fixed_first_col.key}}
           <i class="material-icons">unfold_more</i>
@@ -134,7 +133,7 @@ export default {
     fixed_last_col: {
       type: [Object, Boolean],
       default: false
-    }
+    },
   },
 
   data() {
@@ -173,7 +172,7 @@ export default {
 
     // pagination
     pages() {
-      return Math.ceil(this.data_tables.players.length / 10)
+      return Math.ceil(this.data_tables.players.length / this.userPerPages)
     },
     paginatedUsers() {
       let from = (this.pageNumber - 1) * this.userPerPages
@@ -253,7 +252,7 @@ export default {
 
     // hover row
     mouseoverRows(e) {
-      console.log('[mouseoverRows]')
+      // console.log('[mouseoverRows]')
       // инфа про Делегирование событий (learn.javascript.ru) отсюда:
       // https://learn.javascript.ru/mousemove-mouseover-mouseout-mouseenter-mouseleave
 
@@ -277,7 +276,7 @@ export default {
       // target.style.background = 'pink'
     },
     mouseoutRows(e) {
-      console.log('[mouseoutRows]')
+      // console.log('[mouseoutRows]')
       // если мы вне div[data-row], то игнорируем уход мыши
       // это какой-то переход внутри таблицы, но вне div[data-row]
       if (!this.currentElem) return

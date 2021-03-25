@@ -1,5 +1,5 @@
 <template>
-  <div class="mb2">
+  <div class="wrap-analytics-chart mb2">
     <canvas ref="canvas"></canvas>
   </div>
 </template>
@@ -68,5 +68,6 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-
+.wrap-analytics-chart
+  width: 100%
 </style>

@@ -5,6 +5,7 @@
   box-shadow: $borderShadow
   font-size: 1.4rem
   transition: $transitionDefaultHover
+  width: 100%
   &:hover
     box-shadow: $borderShadowHover
     box-shadow: 0 2px 12px 0 rgba(0,0,0,.1)
@@ -18,6 +19,20 @@
     padding: 1.5rem
   @media screen and (min-width: $desktopWidth)
     padding: 2rem
+  &.width-50
+    max-width: 48%
+
+// flex
+.df
+  display: flex
+.jcsa
+  justify-content: space-around
+.jcsb
+  justify-content: space-between
+.aic
+  align-items: center
+.fwrap
+  flex-wrap: wrap
 
 .underlay
   position: fixed
