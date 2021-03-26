@@ -131,6 +131,37 @@ export const state = () => ({
       isDev: true,
       isMockup: true
     },
+
+    // mockupAdmin
+    {
+      name: 'Аналитика, графики',
+      icon: 'fas fa-chart-pie',
+      url: '/mockup',
+      onSidenav: true,
+      onHeaderUserAvatarMenu: true,
+      isMockupAdmin: true
+    },
+    {
+      name: 'Создать пост',
+      icon: 'fas fa-plus',
+      url: '/mockup/create',
+      onSidenav: true,
+      isMockupAdmin: true
+    },
+    {
+      name: 'Посты',
+      icon: 'fas fa-heart',
+      url: '/mockup/list',
+      onSidenav: true,
+      isMockupAdmin: true
+    },
+    {
+      name: 'Пользователи',
+      icon: 'fas fa-user-friends',
+      url: '/mockup/users',
+      onSidenav: true,
+      isMockupAdmin: true
+    },
   ]
 })
 
