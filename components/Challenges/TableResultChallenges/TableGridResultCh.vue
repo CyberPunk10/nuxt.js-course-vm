@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap-card-content mb2">
+  <div class="wrap-card-content mb2 wrap-card-content-table padding-0">
     <div class="table-fixed-cols-grid"
       :style="gridMainColumns"
       @mouseover="mouseoverRows"
@@ -61,8 +61,7 @@
             :data-row="indexRow"
             :class="{'hover-active': currentElem == indexRow}"
           >
-            <slot v-if="(cell.key || cell)"
-              :name="(cell.key || cell)"
+            <slot :name="(cell.key || cell)"
               :cell="row[cell.key || cell]"
             >{{ row[cell.key || cell] }}</slot>
 
@@ -93,14 +92,20 @@
           :data-row="index"
           :class="{'hover-active': currentElem == index}"
         >
-          {{ row[fixed_last_col.key] }}
+          <slot v-if="!fixed_last_col.key"
+            name="operations"
+            :row_id="row._id"
+          ></slot>
+          <template v-else>
+            {{ row[fixed_last_col.key] }}
+          </template>
         </div>
       </div>
 
     </div>
 
     <!-- footer -->
-    <div class="footer-table">
+    <!-- <div class="footer-table">
       <div class="footer-table-left-block"></div>
       <div class="v-table__pagination">
         <div class="page"
@@ -124,7 +129,7 @@
           data-count-row="50"
         >50</span>
       </p>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -172,7 +177,7 @@ export default {
     },
     gridNestingRows() {
       return {
-        gridTemplateRows: `5rem repeat(${this.paginatedUsers.length}, 5rem)`
+        gridTemplateRows: `5rem repeat(${this.paginatedUsers.length}, 5.3rem)`
         // т.к. этот шаблон применяется в разных столбцах отдельных грядов,
         // использовать minmax(4rem, 1fr) не приемлимо - в случае переноса строк строки будут иметь разную высоту
       }
@@ -364,6 +369,11 @@ export default {
 </script>
 
 <style lang="sass">
+// .wrap-card-content-table
+//   padding-top: 0
+//   padding-bottom: 0
+//   @media screen and (min-width: $tableWidth) // >= 768px
+//     padding: 0 1rem
 .table-fixed-cols-grid
   display: grid
   border-radius: $borderRadius
@@ -381,11 +391,14 @@ export default {
     padding: 1rem .8rem
     cursor: pointer
     font-weight: 600
+    color: #909399
+    color: $neutral-secondary
 
     @media screen and (min-width: $phoneWidth)
       padding: 1rem 1rem
     @media screen and (min-width: $tableWidth)
       padding: 1rem 1.2rem
+      font-size: 1.5rem
     @media screen and (min-width: $smDesktopWidth)
       padding: 1.2rem 1.4rem 1rem
     @media screen and (min-width: $desktopWidth)
@@ -415,19 +428,22 @@ export default {
     display: flex
     align-items: center
     white-space: nowrap // ОБЯЗАТЕЛЕН, иначе всё поедет (запрет переноса строк)
-    border-bottom: 1px solid #f7f7f7
+    // border-bottom: 1px solid #f7f7f7
+    border-bottom: 1px solid #EBEEF5
     transition: $transitionDefaultHover
+    color: #61617e
 
     @media screen and (min-width: $phoneWidth) // >= 480px
       padding: 1rem 1rem
-      &[data-first-col].hover-active
-        border-top-left-radius: $borderRadius
-        border-bottom-left-radius: $borderRadius
-      &[data-last-col].hover-active
-        border-top-right-radius: $borderRadius
-        border-bottom-right-radius: $borderRadius
+      // &[data-first-col].hover-active
+      //   border-top-left-radius: $borderRadius
+      //   border-bottom-left-radius: $borderRadius
+      // &[data-last-col].hover-active
+      //   border-top-right-radius: $borderRadius
+      //   border-bottom-right-radius: $borderRadius
     @media screen and (min-width: $tableWidth) // >= 768px
       padding: 1rem 1.2rem
+      font-size: 1.5rem
     @media screen and (min-width: $smDesktopWidth) // >= 980px
       padding: 1.2rem 1.4rem
     @media screen and (min-width: $desktopWidth) // >= 1280px
@@ -436,6 +452,7 @@ export default {
     // js hover (@mouseoverRows, @mouseoutRows)
     &.hover-active
       background-color: #f7f7f7
+      // background-color: $color-light-purple
 
 .footer-table
   display: flex
@@ -471,7 +488,7 @@ export default {
       color: #fff
       border: 1px solid $color-purple
 
-  // Количество вывода строк
+  // блок, по сколько строк выводить
   .count-row
     &>span
       display: inline-block
