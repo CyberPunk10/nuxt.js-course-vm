@@ -1,15 +1,17 @@
 <template>
-  <div class="container-yellow">
+  <div class="nesting-container-center">
+    <div class="container-yellow">
 
-    <IndexFormSport
-      v-for="(formSport, index) in allFormsSport" :key="index"
-      :formSport="formSport"
-      :indexForm="index"
-      class="form-sport-component"
-    />
+      <IndexFormSport
+        v-for="(formSport, index) in allFormsSport" :key="index"
+        :formSport="formSport"
+        :indexForm="index"
+        class="form-sport-component"
+      />
 
-    <p style="color: #2a2424">Статистика, Свой комментарий к форме, Настройки, Подсказки</p>
+      <p style="color: #2a2424">Статистика, Свой комментарий к форме, Настройки, Подсказки</p>
 
+    </div>
   </div>
 </template>
 

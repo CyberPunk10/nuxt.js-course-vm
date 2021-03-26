@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap-card-content">
+  <div class="wrap-card-content mb2">
     <div class="table-fixed-cols-grid"
       :style="gridMainColumns"
       @mouseover="mouseoverRows"
@@ -61,7 +61,11 @@
             :data-row="indexRow"
             :class="{'hover-active': currentElem == indexRow}"
           >
-            {{ row[cell.key || cell] | date(cell.formatter || 'return without changes') }}
+            <slot v-if="(cell.key || cell)"
+              :name="(cell.key || cell)"
+              :cell="row[cell.key || cell]"
+            >{{ row[cell.key || cell] }}</slot>
+
           </div>
         </template>
       </div>
@@ -168,7 +172,7 @@ export default {
     },
     gridNestingRows() {
       return {
-        gridTemplateRows: `5rem repeat(${this.paginatedUsers.length}, 4rem)`
+        gridTemplateRows: `5rem repeat(${this.paginatedUsers.length}, 5rem)`
         // т.к. этот шаблон применяется в разных столбцах отдельных грядов,
         // использовать minmax(4rem, 1fr) не приемлимо - в случае переноса строк строки будут иметь разную высоту
       }
@@ -273,6 +277,9 @@ export default {
           case 'numbers':
             this.data_tables.sort((a,b) => a[`${key}`] - b[`${key}`])
             break
+        case 'numbers-length':
+          this.data_tables.sort((a,b) => a[`${key}`].length - b[`${key}`].length)
+          break
         }
         event.currentTarget.dataset.sort = 'abc' // может возникнуть желание заменить эту строку на такую: "directionSort = 'abc'" - это не сработает
       } else {
@@ -283,6 +290,9 @@ export default {
             break
           case 'numbers':
             this.data_tables.sort((a,b) => b[`${key}`] - a[`${key}`])
+            break
+          case 'numbers-length':
+            this.data_tables.sort((a,b) => b[`${key}`].length - a[`${key}`].length)
             break
 
           // default:
@@ -370,6 +380,7 @@ export default {
     border-bottom: 1px solid #e7e7e7
     padding: 1rem .8rem
     cursor: pointer
+    font-weight: 600
 
     @media screen and (min-width: $phoneWidth)
       padding: 1rem 1rem

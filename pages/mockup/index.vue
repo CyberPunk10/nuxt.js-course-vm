@@ -5,15 +5,16 @@
       <div class="wrap-card-content width-50">
         <AnalyticsChart
           title="Количество просмотров"
-          :labels="views.labels"
+          :labels="sliceLabel"
           :data="views.data"
 
         />
       </div>
+
       <div class="wrap-card-content width-50">
         <AnalyticsChart
           title="Количество комментариев"
-          :labels="comments.labels"
+          :labels="sliceLabel"
           :data="comments.data"
         />
       </div>
@@ -34,17 +35,8 @@ export default {
 
   async asyncData({store}) {
     const { views, comments } = await store.dispatch('post/getAnalytics')
-    return { views, comments }
-  },
-
-  data() {
-    return {
-
-    }
-  },
-
-  methods: {
-
+    const sliceLabel = comments.labels.map(item => item.slice(0, 5))
+    return { views, comments, sliceLabel }
   }
 }
 </script>

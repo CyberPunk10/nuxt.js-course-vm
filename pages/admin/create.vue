@@ -127,7 +127,8 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 .page-wrap
   max-width: 600px
+
 </style>
