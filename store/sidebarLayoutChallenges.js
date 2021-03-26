@@ -10,6 +10,8 @@ export const state = () => ({
       url: '/challenges',
       onSidenav: true,
       onFooterMobile: true,
+      isChallenges: true,
+      isDev: true,
     },
     {
       name: 'Мой профиль',
@@ -20,6 +22,8 @@ export const state = () => ({
       onFooterMobile: true,
       onHeaderUserAvatarMenu: true,
       // isMenuExpanded: true,
+      isChallenges: true,
+      isDev: true,
       children: [
         {
           name: 'Статистика',
@@ -34,13 +38,6 @@ export const state = () => ({
       url: '/challenges/statistics',
       onSidenav: true,
       onFooterMobile: true,
-      isDev: true
-    },
-    {
-      name: 'page-challenges-test-scroll',
-      icon: 'fas fa-user-friends',
-      url: '/page-challenges-test-scroll',
-      onSidenav: true,
       isDev: true
     },
     {
@@ -67,6 +64,7 @@ export const state = () => ({
       icon: 'far fa-file',
       url: '/challenges/create',
       onSidenav: true,
+      isChallenges: false,
       isDev: true
     },
     {
@@ -113,7 +111,26 @@ export const state = () => ({
       onSidenav: true,
       onHeaderUserAvatarMenu: true,
       isDev: true
-    }
+    },
+
+
+    // mockup
+    {
+      name: 'Главная',
+      icon: 'fas fa-home',
+      url: '/',
+      onSidenav: true,
+      onFooterMobile: true,
+      isMockup: true
+    },
+    {
+      name: 'Страница для scroll-a',
+      icon: 'fas fa-user-friends',
+      url: '/page-challenges-test-scroll',
+      onSidenav: true,
+      isDev: true,
+      isMockup: true
+    },
   ]
 })
 

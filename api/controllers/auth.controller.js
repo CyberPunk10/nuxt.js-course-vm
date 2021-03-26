@@ -8,9 +8,10 @@ module.exports.login = async (req, res) => {
   console.log('auth.controller.js')
   const { loginOrEmail, password } = req.body
 
+  // ищем по логину
   let candidate = await User.findOne({login: loginOrEmail})
 
-  // если по логину не нашлось пользователя, то ищем по email
+  // если по логину пользователя не нашлось, то ищем по email
   if (!candidate) {
     candidate = await User.findOne({email: loginOrEmail})
   }
@@ -23,15 +24,17 @@ module.exports.login = async (req, res) => {
       const token = jwt.sign({
         login: candidate.login,
         userId: candidate._id
-      }, keys.JWT, {expiresIn: 60 * 60 * 24}) // 60 * 60 - 1 час - время жизни токекна
+      }, keys.JWT, {expiresIn: 60 * 60 * 24}) // 60 * 60 * 24 - 24 часа - время жизни токекна
 
       // дополнительно узнаем является ли пользователь разработчиком этого приложения
       const isDeveloper = candidate.isDeveloper ? true : false
-      // дополнительно узнаем является ли пользователь работодателем
-      const isMockup = candidate.isMockup ? true : false
+      // дополнительно узнаем является ли пользователь пользоваетелем приложения challenges
+      const isChallenges = candidate.isChallenges ? true : false
+      // аккаунт mockupAdmin
+      const isMockupAdmin = candidate.isMockupAdmin ? true : false
 
       // отправляем успех
-      res.json({ token, userId: candidate._id, isDeveloper, isMockup })
+      res.json({ token, userId: candidate._id, isDeveloper, isChallenges, isMockupAdmin })
     } else {
       res.status(401).json({ message: 'Пароль неверный' })
     }
@@ -65,5 +68,31 @@ module.exports.createUser = async (req, res) => {
     await user.save()
 
     res.status(201).json(user)
+  }
+}
+
+module.exports.updateUserPasword = async (req, res) => {
+  const { loginOrEmail, password } = req.body
+
+  // ищем по логину
+  let candidate = await User.findOne({login: loginOrEmail})
+
+  // если по логину пользователя не нашлось, то ищем по email
+  if (!candidate) {
+    candidate = await User.findOne({email: loginOrEmail})
+  }
+
+  if (candidate) {
+    const salt = bcrypt.genSaltSync(10)
+    const newPassword = bcrypt.hashSync(password, salt)
+    try {
+      const $set = { password: newPassword }
+      await User.findOneAndUpdate({_id: candidate._id}, {$set})
+      res.status(204).json({})
+    } catch (error) {
+      res.status(500).json(error)
+    }
+  } else {
+    res.status(404).json({ message: 'Пользователь не найден' })
   }
 }

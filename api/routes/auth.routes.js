@@ -1,6 +1,6 @@
 import passport from 'passport'
 import { Router } from 'express'
-const { login, createUser } = require('../controllers/auth.controller')
+const { login, createUser, updateUserPasword } = require('../controllers/auth.controller')
 const router = Router()
 
 // /api/auth/admin/login
@@ -14,6 +14,13 @@ router.post(
   '/admin/create',
   passport.authenticate('jwt', {session: false}), // без авторизации к этой странице не будет доступа
   createUser
+)
+
+// /api/auth/admin/update-user-password
+router.post(
+  '/admin/update-user-password',
+  passport.authenticate('jwt', {session: false}), // без авторизации к этой странице не будет доступа
+  updateUserPasword
 )
 
 module.exports = router

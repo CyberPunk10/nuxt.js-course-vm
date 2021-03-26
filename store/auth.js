@@ -6,7 +6,9 @@ import jwtDecode from 'jwt-decode'
 export const state = () => ({
   token: null,
   userId: null,
-  isDeveloper: false
+  isDeveloper: false,
+  isChallenges: false,
+  isMockupAdmin: false
 })
 
 
@@ -29,11 +31,17 @@ export const mutations = {
   clearIsDeveloperMutation(state) {
     state.isDeveloper = false
   },
-  setIsMockupMutation(state, isMockup) {
-    state.isMockup = !!isMockup
+  setIsChallengesMutation(state, isChallenges) {
+    state.isChallenges = !!isChallenges
   },
-  clearIsMockupMutation(state) {
-    state.isMockup = false
+  clearIsChallengesMutation(state) {
+    state.isChallenges = false
+  },
+  setIsMockupAdminMutation(state, isMockupAdmin) {
+    state.isMockupAdmin = !!isMockupAdmin
+  },
+  clearIsMockupAdminMutation(state) {
+    state.isMockupAdmin = false
   },
 }
 
@@ -41,15 +49,18 @@ export const mutations = {
 export const actions = {
   async login({commit, dispatch}, formData) {
     try {
-      const { token, userId, isDeveloper, isMockup } = await this.$axios.$post('/api/auth/admin/login', formData)
-      dispatch('setToken', { token, userId, isDeveloper, isMockup }) // isDeveloper - является ли авторизованный user разработчиком этого приложения
+      const { token, userId, isDeveloper, isChallenges, isMockupAdmin } = await this.$axios.$post('/api/auth/admin/login', formData)
+      // isDeveloper - является ли авторизованный user разработчиком этого приложения
+      // isChallenges - является ли авторизованный user пользователем приложения challenges
+      // isMockupAdmin - является ли авторизованный user админом mockup приложения
+      dispatch('setToken', { token, userId, isDeveloper, isChallenges, isMockupAdmin })
     } catch (error) {
       commit('setError', error, {root: true})
       throw error
     }
   },
 
-  setToken({commit}, { token, userId, isDeveloper, isMockup }) {
+  setToken({commit}, { token, userId, isDeveloper, isChallenges, isMockupAdmin }) {
     this.$axios.setToken(token, 'Bearer')
 
     commit('setTokenMutation', token)
@@ -63,9 +74,13 @@ export const actions = {
     commit('setIsDeveloperMutation', isDeveloper)
     Cookies.set('isDeveloper', isDeveloper)
 
-    // обновим isMockup in store
-    commit('setIsMockupMutation', isMockup)
-    Cookies.set('isMockup', isMockup)
+    // обновим isChallenges in store
+    commit('setIsChallengesMutation', isChallenges)
+    Cookies.set('isChallenges', isChallenges)
+
+    // обновим isMockupAdmin in store
+    commit('setIsMockupAdminMutation', isMockupAdmin)
+    Cookies.set('isMockupAdmin', isMockupAdmin)
   },
 
   logout({commit}) {
@@ -80,8 +95,11 @@ export const actions = {
     commit('clearIsDeveloperMutation')
     Cookies.remove('isDeveloper')
 
-    commit('clearIsMockupMutation')
-    Cookies.remove('isMockup')
+    commit('clearIsChallengesMutation')
+    Cookies.remove('isChallenges')
+
+    commit('clearIsMockupAdminMutation')
+    Cookies.remove('isMockupAdmin')
   },
 
   async createUser({commit}, formData) {
@@ -101,6 +119,15 @@ export const actions = {
     }
   },
 
+  async updatePassword({commit}, formData) {
+    try {
+      await this.$axios.$post('/api/auth/admin/update-user-password', formData)
+    } catch (error) {
+      commit('setError', error, {root: true})
+      throw error
+    }
+  },
+
   autoLogin({dispatch}) {
     const cookieStr = process.browser
       ? document.cookie
@@ -110,10 +137,11 @@ export const actions = {
     const token = cookies['jwt-token']
     const userId = cookies['userId']
     const isDeveloper = cookies['isDeveloper'] == 'true' ? true : false
-    const isMockup = cookies['isMockup'] == 'true' ? true : false
+    const isChallenges = cookies['isChallenges'] == 'true' ? true : false
+    const isMockupAdmin = cookies['isMockupAdmin'] == 'true' ? true : false
 
     if (isJwtValid(token)) {
-      dispatch('setToken', { token, userId, isDeveloper, isMockup })
+      dispatch('setToken', { token, userId, isDeveloper, isChallenges, isMockupAdmin })
     } else {
       dispatch('logout')
     }
@@ -126,7 +154,8 @@ export const getters = {
   token: state => state.token,
   userId: state => state.userId,
   isDeveloper: state => Boolean(state.isDeveloper),
-  isMockup: state => Boolean(state.isMockup),
+  isChallenges: state => Boolean(state.isChallenges),
+  isMockupAdmin: state => Boolean(state.isMockupAdmin),
 }
 
 

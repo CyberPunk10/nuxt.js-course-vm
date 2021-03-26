@@ -31,15 +31,11 @@
         </p>
 
         <div class="temp">
-          <p>Войти под обычным пользователем: </p>
+          <p>Войти под админом: </p>
           <p>
-            <span>Login: 3333</span>
-            <span>Пароль: 333333</span>
-          </p>
-          <p>Войти под профилем разаботчика: </p>
-          <p>
-            <span>Login: 4444</span>
-            <span>Пароль: 444444</span>
+            <span>Login: 0000</span><br>
+            <span>Email: 0000@0000.ru</span><br>
+            <span>Пароль: Mountains</span>
           </p>
         </div>
       </template>
@@ -73,6 +69,18 @@ export default {
         login: '',
         password: '',
       },
+    }
+  },
+
+  computed: {
+    isDeveloper() {
+      return this.$store.getters['auth/isDeveloper']
+    },
+    isChallenges() {
+      return this.$store.getters['auth/isChallenges']
+    },
+    isMockupAdmin() {
+      return this.$store.getters['auth/isMockupAdmin']
     }
   },
 
@@ -123,7 +131,9 @@ export default {
 
         try {
           await this.$store.dispatch('auth/login', formData)
-          this.$router.push('/challenges/my-profile')
+          if (this.isDeveloper || this.isChallenges) this.$router.push('/challenges/my-profile')
+          if (this.isMockupAdmin) this.$router.push('/')
+
           this.$message.success(`Добро пожаловать, ${this.formLogin.login}`)
         } catch (error) {
           console.log(error)

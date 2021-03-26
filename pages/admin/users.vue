@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="title-table font-how-h2">Таблица результатов</h2>
+    <h2 class="title-table font-how-h2 mb2 mt3">Таблица результатов</h2>
     <TableGridResultCh
       :data_tables="posts"
       :fixed_first_col="fixed_first_col"
@@ -9,21 +9,42 @@
     />
     <br>
 
+    <h2 class="title-table font-how-h2 tac mb2 mt3">Изменить пароль у пользователя</h2>
+    <FormLoginRegister @onSubmit="updatePassword" class="align-left">
+      <AppInputChallenge
+        v-model.trim="formLogin.login"
+        class="label_bold"
+        :class="{invalid: $v.formLogin.login.$error}"
+        :inputData="{ title: 'Логин или Email' }"
+        :v="$v.formLogin.login"
+        autofocus
+        placeholder="Логин или Email"
+      >Логин или Email:</AppInputChallenge>
+        <!-- :class="{invalid: ($v.formLogin.login.$dirty && !$v.formLogin.login.required)}" -->
+
+      <AppInputChallenge
+        v-model.trim="formLogin.password"
+        class="label_bold"
+        :class="{invalid: $v.formLogin.password.$error}"
+        :inputData="{ title: 'Новый пароль' }"
+        :v="$v.formLogin.password"
+        type="password"
+        placeholder="Новый пароль"
+      >Новый пароль:</AppInputChallenge>
+        <!-- :class="{invalid: ($v.formLogin.password.$dirty && !$v.formLogin.password.required)}" -->
+
+      <ButtonChallenge type="submit">Обновить пароль</ButtonChallenge>
+    </FormLoginRegister>
+
     <!-- form add new user -->
-    <h2 class="title-table font-how-h2">User</h2>
-    <el-card
-      shadow="always"
-      :style="{width: '500px'}"
-    >
+    <h2 class="title-table font-how-h2 tac mb2 mt3">Создать пользователя</h2>
+    <div class="wrap-card-content center width-50 wrap-create-users-admin">
       <el-form
         ref="form"
         :model="controls"
         :rules="rules"
         @submit.native.prevent="onSubmit"
       >
-
-        <h2>Создать пользователя</h2>
-
         <el-form-item label="Логин" prop="login">
           <el-input v-model.trim="controls.login" />
         </el-form-item>
@@ -53,12 +74,16 @@
           </el-button>
         </el-form-item>
       </el-form>
-    </el-card>
+    </div>
   </div>
 </template>
 
 <script>
+import { validationMixin } from 'vuelidate'
+import { required, minLength } from 'vuelidate/lib/validators'
+
 export default {
+  mixins: [validationMixin],
   head: {
     title: `Создать пользователя | ${process.env.appName}`
   },
@@ -76,6 +101,13 @@ export default {
         { key: 'password', title: 'Пароль', sort: 'text' },
         { key: 'created', title: 'Дата создания', sort: 'text', formatter: 'datetime'},
       ],
+
+      // for form update password
+
+      formLogin: {
+        login: '',
+        password: '',
+      },
 
       // for form
       controls: {
@@ -109,7 +141,48 @@ export default {
       return this.$store.getters['tableGoFrontend/getPlayers']
     },
   },
+
+  // for form update password
+  validations: {
+    formLogin: {
+      login: { required, minLength: minLength(4) },
+      password: {
+        // simpleValidation(value) {
+        //   console.log(value)
+        //   return value.length > 5
+        // }
+        required, minLength: minLength(8)
+      }
+    }
+  },
+
   methods: {
+    // for form update password
+     async updatePassword() {
+      if (this.$v.formLogin.$invalid) {
+        this.$v.$touch()
+        return
+      }
+      if (!this.$v.formLogin.$error) {
+        this.loading = true
+
+        const formData = {
+          loginOrEmail: this.formLogin.login,
+          password: this.formLogin.password
+        }
+
+        try {
+          await this.$store.dispatch('auth/updatePassword', formData)
+          this.$message.success(`Пароль успешно обновлен`)
+        } catch (error) {
+          console.log(error)
+        } finally {
+          this.loading = false
+        }
+      }
+    },
+
+    // for form create user
     onSubmit() {
       this.$refs.form.validate(async valid => {
         if (valid) {
@@ -135,3 +208,9 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+.wrap-create-users-admin
+  min-width: min-content
+  padding: 2rem
+</style>

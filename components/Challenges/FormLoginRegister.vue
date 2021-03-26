@@ -1,6 +1,8 @@
 <template>
   <div class="wrap-card-form-login">
-    <h1>{{ formLoginRegister.title }}</h1>
+    <h1
+      v-if="formLoginRegister"
+    >{{ formLoginRegister.title }}</h1>
     <form class="wrap-card-form"
       @submit.prevent="$emit('onSubmit')"
     >

@@ -22,9 +22,11 @@ const userSchema = new Schema({
     unique: true,
     defuaul: 'Default nickname'
   },
-  isDeveloper: {
-    type: Boolean
-  },
+
+  isDeveloper: Boolean,
+  isChallenges: Boolean,
+  isMockupAdmin: Boolean,
+
   name: {
     firstName: String,
     lastName: String
