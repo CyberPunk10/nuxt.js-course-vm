@@ -1,4 +1,5 @@
 <template>
+<div class="nesting-container-center">
   <div class="page-wrap">
     <h1 class="mb">Создать новый пост</h1>
 
@@ -60,6 +61,7 @@
         </el-button>
       </el-form-item>
     </el-form>
+  </div>
   </div>
 </template>
 
@@ -130,4 +132,5 @@ export default {
 <style lang="sass" scoped>
 .page-wrap
   max-width: 600px
+  width: 100%
 </style>

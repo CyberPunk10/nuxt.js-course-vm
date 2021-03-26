@@ -1,6 +1,27 @@
 <template>
   <div>
-    <h1>List</h1>
+    <h2 class="title-table font-how-h2 mb2 mt3">Таблица постов</h2>
+
+    <TableGridResultCh
+      :data_tables="posts"
+      :fixed_first_col="fixed_first_col"
+      :fixed_last_col="fixed_last_col"
+      :onlyNeedCenterCols="onlyNeedCenterCols"
+    >
+      <template #comments="{ cell }">
+        <i class="el-icon-message"></i>
+        <span  style="margin-left: 10px">{{cell.length}}</span>
+      </template>
+      <template #date="{ cell }">
+        <i class="el-icon-time"></i>
+        <span  style="margin-left: 10px">{{ cell | date('date') }}</span>
+      </template>
+      <template #views="{ cell }">
+        <i class="el-icon-view"></i>
+        <span  style="margin-left: 10px">{{ cell }}</span>
+      </template>
+    </TableGridResultCh>
+
     <el-table
       :data="posts"
       style="width: 100%">
@@ -69,7 +90,13 @@ export default {
 
   data() {
     return {
-      // search: ''
+      fixed_first_col: { key: 'title', title: 'Название', sort: 'text' },
+      fixed_last_col: { key: 'test', title: 'Действия' },
+      onlyNeedCenterCols: [
+        { key: 'date', title: 'Дата', sort: 'text', formatter: 'datetime'},
+        { key: 'views', title: 'Просмотры', sort: 'numbers' },
+        { key: 'comments', title: 'Комментарии', sort: 'numbers-length' },
+      ],
     }
   },
 

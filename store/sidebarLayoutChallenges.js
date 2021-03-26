@@ -138,7 +138,6 @@ export const state = () => ({
       icon: 'fas fa-chart-pie',
       url: '/mockup',
       onSidenav: true,
-      onHeaderUserAvatarMenu: true,
       isMockupAdmin: true
     },
     {
