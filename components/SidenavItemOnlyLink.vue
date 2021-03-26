@@ -1,6 +1,7 @@
 <template>
+  <!-- challenges prod -->
   <div class="sidenav__nav-item-wrap"
-    v-if="isDeveloper && link.isDev"
+    v-if="isChallenges && link.isChallenges"
   >
     <NuxtLink :to="link.url" class="sidenav__nav-item">
       <i v-if="link.icon" :class="link.icon"></i>
@@ -8,8 +9,29 @@
     </NuxtLink>
   </div>
 
+  <!-- challenges dev -->
   <div class="sidenav__nav-item-wrap"
-    v-else-if="!link.isDev"
+    v-else-if="isDeveloper && (link.isDev || link.isChallenges)"
+  >
+    <NuxtLink :to="link.url" class="sidenav__nav-item">
+      <i v-if="link.icon" :class="link.icon"></i>
+      <span class="sidenav__nav-item-text">{{ link.name }}</span>
+    </NuxtLink>
+  </div>
+
+  <!-- mockup admin-->
+  <div class="sidenav__nav-item-wrap"
+    v-else-if="isMockupAdmin && (link.isMockup || link.isMockupAdmin)"
+  >
+    <NuxtLink :to="link.url" class="sidenav__nav-item">
+      <i v-if="link.icon" :class="link.icon"></i>
+      <span class="sidenav__nav-item-text">{{ link.name }}</span>
+    </NuxtLink>
+  </div>
+
+  <!-- mockup (без авторизации) -->
+  <div class="sidenav__nav-item-wrap"
+    v-else-if="!isChallenges && !isDeveloper && !isMockupAdmin && link.isMockup"
   >
     <NuxtLink :to="link.url" class="sidenav__nav-item">
       <i v-if="link.icon" :class="link.icon"></i>
@@ -28,6 +50,12 @@ export default {
   computed: {
     isDeveloper() {
       return this.$store.getters['auth/isDeveloper']
+    },
+    isChallenges() {
+      return this.$store.getters['auth/isChallenges']
+    },
+    isMockupAdmin() {
+      return this.$store.getters['auth/isMockupAdmin']
     }
   },
 }

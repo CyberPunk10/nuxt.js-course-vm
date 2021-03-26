@@ -42,7 +42,9 @@
           </div>
         </button>
 
-        <div class="header-user-block-menu">
+        <div class="header-user-block-menu"
+          v-if="isAuthTest"
+        >
           <SidenavItemOnlyLink
             v-for="(link, index) in headerUserAvatarMenuLinks"
             :key="link.name + index"
