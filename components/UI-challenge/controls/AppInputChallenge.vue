@@ -131,7 +131,8 @@ export default {
 
   &__error-msg
     color: $color-red
-    font-size: 1.4rem
+    font-size: 1.2rem
+    margin-left: .3rem
 
 // label left
 .text-field.label-left

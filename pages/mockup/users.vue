@@ -45,11 +45,11 @@
         :rules="rules"
         @submit.native.prevent="onSubmit"
       >
-        <el-form-item label="Логин" prop="login">
+        <el-form-item label="Логин" prop="login" class="mb">
           <el-input v-model.trim="controls.login" />
         </el-form-item>
 
-        <el-form-item label="Email" prop="email" class="mb2">
+        <el-form-item label="Email" prop="email" class="mb">
           <el-input
             type="email"
             v-model.trim="controls.email"
@@ -63,7 +63,7 @@
           />
         </el-form-item>
 
-        <el-form-item>
+        <el-form-item class="button-custom-margin">
           <el-button
             type="primary"
             native-type="submit"
@@ -212,7 +212,9 @@ export default {
 <style lang="sass">
 .wrap-create-users-admin
   min-width: 25rem
-  max-width: 45rem
+  max-width: 31rem
   width: 100%
   padding: 2rem
+  .button-custom-margin
+    margin-bottom: 0
 </style>

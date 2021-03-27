@@ -62,9 +62,6 @@ export default {
 
       formLoginRegister: { title: 'Войти' },
 
-      // inputLoginData: { title: 'Логин или Email' },
-      // inputPasswordData: { title: 'Пароль' },
-
       formLogin: {
         login: '',
         password: '',
