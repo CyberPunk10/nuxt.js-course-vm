@@ -5,8 +5,8 @@
     <TableGridResultCh
       :data_tables="posts"
       :fixed_first_col="fixed_first_col"
-      :fixed_last_col="fixed_last_col"
       :onlyNeedCenterCols="onlyNeedCenterCols"
+      :fixed_last_col="fixed_last_col"
     >
       <!-- slots for center_cols -->
       <template #comments="{ cell }">
