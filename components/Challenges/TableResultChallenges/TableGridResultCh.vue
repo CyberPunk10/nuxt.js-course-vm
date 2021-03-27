@@ -1,5 +1,7 @@
 <template>
-  <div class="wrap-card-content mb2 padding-0">
+  <div class="wrap-card-content mb2 padding-0"
+    ref="tableGrid"
+  >
     <div class="table-fixed-cols-grid"
       :style="gridMainColumns"
       @mouseover="mouseoverRows"
@@ -8,28 +10,37 @@
     >
       <!-- first-col -->
       <div class="first-col"
-        v-if="fixed_first_col"
+        v-if="fixed_first_col && (currentWidthTable >= 480 || fixed_first_col.mobileFixed)"
         :class="{'shadow-active': shadowLeftActive}"
         :style="gridNestingRows"
       >
         <!-- header cell -->
-        <p v-if="fixed_first_col.sort" class="cell__header row"
+        <div v-if="fixed_first_col.sort" class="cell__header row"
           @click="sortBy( $event, fixed_first_col.sort, fixed_first_col.key )"
-        >{{ fixed_first_col.title || fixed_first_col.key }}
-          <i class="material-icons">unfold_more</i>
-        </p>
-        <p v-else class="cell__header row">
-          {{ fixed_first_col.title || fixed_first_col.key }}
-        </p>
+          :style="widthCellFirstCol"
+        >
+          <div class="text-truncation-many-lines">
+            {{ fixed_first_col.title || fixed_first_col.key }}
+            <i class="material-icons">unfold_more</i>
+          </div>
+        </div>
+        <div v-else class="cell__header row"
+          :style="widthCellFirstCol"
+        >
+          <div class="text-truncation-many-lines">
+            {{ fixed_first_col.title || fixed_first_col.key }}
+          </div>
+        </div>
 
         <!-- other cells -->
         <div class="cell" data-first-col
           v-for="(row, index) in paginatedUsers"
           :key="row.id"
           :class="{'hover-active': currentElem == index}"
+          :style="widthCellFirstCol"
           :data-row="index"
         >
-          <div class="cell-start-col text-truncation">
+          <div class="text-truncation-many-lines">
             {{ row[fixed_first_col.key] }}
           </div>
         </div>
@@ -75,26 +86,29 @@
 
       <!-- last-col -->
       <div class="last-col"
-        v-if="fixed_last_col"
+        v-if="fixed_last_col && (currentWidthTable >= 480 || fixed_last_col.mobileFixed)"
         :class="{'shadow-active': shadowRightActive}"
         :style="gridNestingRows"
       >
         <!-- header cell -->
-        <p v-if="fixed_last_col.sort" class="cell__header row"
+        <div v-if="fixed_last_col.sort" class="cell__header row"
           @click="sortBy( $event, fixed_last_col.sort, fixed_last_col.key )"
-        >{{ fixed_last_col.title || fixed_last_col.key }}
-          <i class="material-icons">unfold_more</i>
-        </p>
-        <p v-else class="cell__header row">
+          :class="{jcc: fixed_last_col.align === 'center'}"
+        >
           {{ fixed_last_col.title || fixed_last_col.key }}
-        </p>
+          <i class="material-icons">unfold_more</i>
+        </div>
+        <div v-else class="cell__header row"
+          :class="{jcc: fixed_last_col.align === 'center'}"
+        >{{ fixed_last_col.title || fixed_last_col.key }}
+        </div>
 
         <!-- other cells -->
         <div class="cell" data-last-col
           v-for="(row, index) in paginatedUsers"
           :key="row.id"
           :data-row="index"
-          :class="{'hover-active': currentElem == index}"
+          :class="{'hover-active': currentElem == index, jcc: fixed_last_col.align === 'center'}"
         >
           <slot v-if="!fixed_last_col.key"
             name="operations"
@@ -167,17 +181,36 @@ export default {
       shadowLeftActive: false,
       shadowRightActive: false,
       currentElem: null, // for @mouseover="mouseoverRows" hover
+      currentWidthTable: 0 // текущая ширина таблицы (для изменения ширины колонок)
     }
   },
 
   computed: {
+    // for .shadow-active & change width cols table при изменении ширины экрана
+    currentWidthWindow() {
+      return this.$store.getters['layoutChallenge/getCurrentWidthWindow']
+    },
+
     // grid styles
     gridMainColumns() {
-      // const firstCol = this.fixed_first_col ? 'minmax(5rem, 1fr)' : ''
-      const firstCol = this.fixed_first_col ? 'minmax(min-content, 1fr)' : ''
-      const lastCol = this.fixed_last_col ? 'minmax(min-content, 1fr)' : ''
+      const width = this.currentWidthTable
+
+      const firstCol = this.fixed_first_col ? getString(this.fixed_first_col) : ''
+      const lastCol = this.fixed_last_col ? getString(this.fixed_last_col) : ''
+
+      function getString(col) {
+        if (width !== 0 && width < 480) return col.mobileFixed ? `minmax(auto, ${col.maxWidthSmPhone || '7rem'})` : ''
+        else if (width >= 480 && width < 768) return `minmax(auto, ${col.maxWidthPhone || '10rem'})`
+        else if (width >= 768 && width < 980) return `minmax(auto, ${col.maxWidthTablet || '15rem'})`
+        else if (width >= 980 && width < 1280) return `minmax(auto, ${col.maxWidthSmDesktop || '20rem'})`
+        else if (width >= 1280) return col.maxWidthDesktop || 'auto'
+        else if (width === 0) return 'minmax(min-content, 1fr)' // при mounted width === 0
+      }
+
+
+      const centerCols = width < 768 ? 'minmax(auto, 100%)' : 'auto'
       return {
-        gridTemplateColumns: `${firstCol} minmax(auto, 100%) ${lastCol}`
+        gridTemplateColumns: `${firstCol} ${centerCols} ${lastCol}`
       }
     },
     gridNestingRows() {
@@ -204,6 +237,26 @@ export default {
         }
       }
     },
+    widthCellFirstCol() {
+      const width = this.currentWidthTable
+      if (width !== 0 && width < 480) return { maxWidth: this.fixed_first_col.maxWidthSmPhone || '7rem' }
+      else if (width >= 480 && width < 768) return { maxWidth: this.fixed_first_col.maxWidthPhone || '10rem' }
+      else if (width >= 768 && width < 980) return { maxWidth: this.fixed_first_col.maxWidthTablet || '15rem' }
+      else if (width >= 980 && width < 1280) return { maxWidth: this.fixed_first_col.maxWidthSmDesktop || '20rem' }
+      else if (width >= 1280) return this.fixed_first_col.maxWidthDesktop ? { maxWidth: this.fixed_first_col.maxWidthDesktop } : {}
+      else if (width === 0) return {}
+    },
+
+    namesColsForRowRender() {
+      if (this.onlyNeedCenterCols) {
+        return this.onlyNeedCenterCols
+      } else {
+        const arrAllValue = Object.keys(this.data_tables[0]) // например было 5
+        let filteredArrStep1 = arrAllValue.filter(item => item !== this.fixed_first_col.key) // стало 4
+        let filteredArrStep2 = filteredArrStep1.filter(item => item !== this.fixed_last_col.key) // стало 3
+        return filteredArrStep2
+      }
+    },
 
     // pagination
     pages() {
@@ -214,26 +267,6 @@ export default {
       let to = from + this.userPerPages
       return this.data_tables.slice(from, to)
     },
-
-    // for .shadow-active при изменении ширины экрана
-    currentWidthWindow() {
-      return this.$store.getters['layoutChallenge/getCurrentWidthWindow']
-    },
-
-    namesColsForRowRender() {
-      if (this.onlyNeedCenterCols) {
-        // let filteredArrStep1 = this.onlyNeedCenterCols.filter(item => item.key !== this.fixed_first_col) // стало 4
-        // let filteredArrStep2 = filteredArrStep1.filter(item => item.key !== this.fixed_last_col) // стало 3
-        // let step3 = filteredArrStep2.map(item => item.key)
-        // return step3
-        return this.onlyNeedCenterCols
-      } else {
-        const arrAllValue = Object.keys(this.data_tables[0]) // например было 5
-        let filteredArrStep1 = arrAllValue.filter(item => item !== this.fixed_first_col.key) // стало 4
-        let filteredArrStep2 = filteredArrStep1.filter(item => item !== this.fixed_last_col.key) // стало 3
-        return filteredArrStep2
-      }
-    }
   },
 
   watch: {
@@ -246,19 +279,27 @@ export default {
       // исходный вариант был такой: e.target.scrollWidth - e.target.scrollLeft == e.target.offsetWidth
       const resultValue = $centerCols.scrollWidth - $centerCols.scrollLeft - $centerCols.offsetWidth
       this.shadowRightActive = (resultValue < 1) ? false : true
+
+      // обновляем значение ширины таблицы
+      this.currentWidthTable = this.$refs.tableGrid.offsetWidth
     }
   },
 
   mounted() {
     // if center-cols имеет прокручиваемую область, то add .shadow-active к last-col
     const $centerCols = this.$refs.centerCols
-    // ниже строка не нужна, так как мы по умолчанию имеем таблицу со scrollLeft == 0
+    // ниже строка не нужна, так как мы по умолчанию имеем таблицу со scrollLeft == 0 (таблица не прокручена от начала)
     // this.shadowLeftActive = $centerCols.scrollLeft == 0 ? false : true
     // при масштабе экрана 125% появляется погрешность, которую попробуем учесть,
     // предполагая, что погрешность не составляет больше 1px
     // исходный вариант был такой: e.target.scrollWidth - e.target.scrollLeft == e.target.offsetWidth
     const resultValue = $centerCols.scrollWidth - $centerCols.scrollLeft - $centerCols.offsetWidth
     this.shadowRightActive = (resultValue < 1) ? false : true
+
+    // определяем первоначальную ширину таблицы.
+    // далее будем следить за изменением ширины экрана и записывать в эту же переменную
+    // также надо следить за открытием/закрытием sidebar, чтобы пересчитывать ширину таблицы
+    this.currentWidthTable = this.$refs.tableGrid.offsetWidth
   },
 
   methods: {
@@ -425,6 +466,7 @@ export default {
 
     i
       font-size: 1.6rem
+      vertical-align: middle
       @media screen and (min-width: $smDesktopWidth)
         font-size: 1.8rem
 
@@ -457,8 +499,7 @@ export default {
     &.hover-active
       background-color: #f7f7f7
       // background-color: $color-light-purple
-    &.text-truncation
-      display: block
+    &.text-truncation-many-lines
       line-height: calc(5.3rem - 1rem * 2) // связать вместе с js, сделать динамичным
       @media screen and (min-width: $smDesktopWidth) // >= 980px
         line-height: calc(5.3rem - 1.2rem * 2)
