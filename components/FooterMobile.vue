@@ -17,8 +17,63 @@
 <script>
 export default {
   computed: {
+    isDeveloper() {
+      return this.$store.getters['auth/isDeveloper']
+    },
+    isChallenges() {
+      return this.$store.getters['auth/isChallenges']
+    },
+    isMockupAdmin() {
+      return this.$store.getters['auth/isMockupAdmin']
+    },
     navLinks () {
-      return this.$store.getters['sidebarLayoutChallenges/footerMobileLinks']
+      const allLinksFooterMobile =  this.$store.getters['sidebarLayoutChallenges/footerMobileLinks']
+      let onlyNeedLinks
+
+
+      if (this.isDeveloper) {
+        onlyNeedLinks = allLinksFooterMobile.filter( el => (el.isDev || el.isChallenges) )
+      } else if (this.isChallenges) {
+        onlyNeedLinks = allLinksFooterMobile.filter( el => el.isChallenges )
+      } else if (this.isMockupAdmin) {
+        onlyNeedLinks = allLinksFooterMobile.filter( el => (el.isMockup || el.isMockupAdmin) )
+      } else {
+        onlyNeedLinks = allLinksFooterMobile.filter( el => (el.isMockup && !this.isChallenges && !this.isDeveloper && !this.isMockupAdmin) )
+      }
+
+      // меняем порядок
+      let footerMobileLinks = []
+      // let linksOther = []
+      // const countLinks = tempFooterMobileLinks.length
+
+      // tempFooterMobileLinks.forEach(el => {
+      //   switch (el.name) {
+      //     case 'Мой профиль':
+      //       footerMobileLinks[countLinks - 1] = el
+      //       break
+      //     case 'Tаблицы':
+      //       footerMobileLinks[countLinks - 2] = el
+      //       break
+      //     case 'Добавить прогресс':
+      //       footerMobileLinks[countLinks - 3] = el
+      //       break
+      //     case 'Статистика':
+      //       footerMobileLinks[countLinks - 4] = el
+      //       break
+      //     case 'Мои челленджи':
+      //       footerMobileLinks[countLinks - 5] = el
+      //       break
+      //     default:
+      //       linksOther.push(el)
+      //   }
+      // })
+      // footerMobileLinks = linksOther.concat(footerMobileLinks)
+
+      // // удаление пустых элементов, которые могут возникнуть после switch
+      // footerMobileLinks = footerMobileLinks.filter(n => n)
+
+      // return footerMobileLinks
+      return onlyNeedLinks
     }
   },
   methods: {

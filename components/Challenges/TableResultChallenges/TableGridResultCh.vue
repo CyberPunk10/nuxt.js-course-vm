@@ -429,7 +429,7 @@ export default {
     text-align: left
     display: flex
     align-items: center
-    white-space: nowrap // ОБЯЗАТЕЛЕН, иначе всё поедет (запрет переноса строк)
+    // white-space: nowrap // ОБЯЗАТЕЛЕН, иначе всё поедет (запрет переноса строк)
     // border-bottom: 1px solid #f7f7f7
     border-bottom: 1px solid #EBEEF5
     transition: $transitionDefaultHover

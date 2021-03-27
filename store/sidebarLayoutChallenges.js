@@ -138,28 +138,32 @@ export const state = () => ({
       icon: 'fas fa-chart-pie',
       url: '/mockup',
       onSidenav: true,
-      isMockupAdmin: true
+      isMockupAdmin: true,
+      onFooterMobile: true,
     },
     {
       name: 'Создать пост',
       icon: 'fas fa-plus',
       url: '/mockup/create',
       onSidenav: true,
-      isMockupAdmin: true
+      isMockupAdmin: true,
+      onFooterMobile: true,
     },
     {
-      name: 'Посты',
+      name: 'Таблица с постами',
       icon: 'fas fa-heart',
       url: '/mockup/list',
       onSidenav: true,
-      isMockupAdmin: true
+      isMockupAdmin: true,
+      onFooterMobile: true,
     },
     {
       name: 'Пользователи',
       icon: 'fas fa-user-friends',
       url: '/mockup/users',
       onSidenav: true,
-      isMockupAdmin: true
+      isMockupAdmin: true,
+      onFooterMobile: true,
     },
   ]
 })
@@ -192,39 +196,7 @@ export const getters = {
     return headerLinks
   },
   footerMobileLinks: state => {
-    const tempFooterMobileLinks = state.navLinks.filter( el => el.onFooterMobile )
-
-    // меняем порядок
-    let footerMobileLinks = []
-    let linksOther = []
-    const countLinks = tempFooterMobileLinks.length
-
-    tempFooterMobileLinks.forEach(el => {
-      switch (el.name) {
-        case 'Мой профиль':
-          footerMobileLinks[countLinks - 1] = el
-          break
-        case 'Tаблицы':
-          footerMobileLinks[countLinks - 2] = el
-          break
-        case 'Добавить прогресс':
-          footerMobileLinks[countLinks - 3] = el
-          break
-        case 'Статистика':
-          footerMobileLinks[countLinks - 4] = el
-          break
-        case 'Мои челленджи':
-          footerMobileLinks[countLinks - 5] = el
-          break
-        default:
-          linksOther.push(el)
-      }
-    })
-    footerMobileLinks = linksOther.concat(footerMobileLinks)
-
-    // удаление пустых элементов, которые могут возникнуть после switch
-    footerMobileLinks = footerMobileLinks.filter(n => n)
-
+    const footerMobileLinks = state.navLinks.filter( el => el.onFooterMobile )
     return footerMobileLinks
   },
 
