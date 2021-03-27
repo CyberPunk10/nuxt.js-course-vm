@@ -40,6 +40,16 @@
 .fwrap
   flex-wrap: wrap
 
+// Обрезка однострочного текста (если 'display: flex', то не сработает)
+.text-truncation
+  // white-space: nowrap
+  // overflow: hidden
+  // text-overflow: ellipsis
+  display: -webkit-box
+  -webkit-line-clamp: 2
+  -webkit-box-orient: vertical
+  overflow: hidden
+
 .underlay
   position: fixed
   top: 0

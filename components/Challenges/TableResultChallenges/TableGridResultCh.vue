@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap-card-content mb2 wrap-card-content-table padding-0">
+  <div class="wrap-card-content mb2 padding-0">
     <div class="table-fixed-cols-grid"
       :style="gridMainColumns"
       @mouseover="mouseoverRows"
@@ -29,7 +29,9 @@
           :class="{'hover-active': currentElem == index}"
           :data-row="index"
         >
-          {{ row[fixed_first_col.key] }}
+          <div class="cell-start-col text-truncation">
+            {{ row[fixed_first_col.key] }}
+          </div>
         </div>
       </div>
 
@@ -171,6 +173,7 @@ export default {
   computed: {
     // grid styles
     gridMainColumns() {
+      // const firstCol = this.fixed_first_col ? 'minmax(5rem, 1fr)' : ''
       const firstCol = this.fixed_first_col ? 'minmax(min-content, 1fr)' : ''
       const lastCol = this.fixed_last_col ? 'minmax(min-content, 1fr)' : ''
       return {
@@ -371,11 +374,6 @@ export default {
 </script>
 
 <style lang="sass">
-// .wrap-card-content-table
-//   padding-top: 0
-//   padding-bottom: 0
-//   @media screen and (min-width: $tableWidth) // >= 768px
-//     padding: 0 1rem
 .table-fixed-cols-grid
   display: grid
   border-radius: $borderRadius
@@ -386,15 +384,34 @@ export default {
   .last-col
     display: grid
 
+  .first-col,
+  .last-col
+    z-index: 1 // чтобы central-cols при наведении были тоже под тенью
+    overflow: hidden
+    // background-color: $theme-color-yellow
+  .center-cols
+    .cell
+      white-space: nowrap // ОБЯЗАТЕЛЕН, иначе всё поедет (запрет переноса строк)
+
+  .first-col
+    border-right: 1px solid #e7e7e7
+  .last-col
+    border-left: 1px solid #e7e7e7
+
+  .shadow-active
+    box-shadow: 0 0 10px rgba(0,0,0,.12)
+
   .cell__header
+    white-space: nowrap // ОБЯЗАТЕЛЕН, иначе всё поедет (запрет переноса строк)
     display: flex
     align-items: center
     border-bottom: 1px solid #e7e7e7
-    padding: 1rem .8rem
     cursor: pointer
     font-weight: 600
-    color: #909399
-    color: $neutral-secondary
+    // color: #909399
+    color: $color-light-purple2
+    // color: $neutral-secondary
+    padding: 1rem .8rem
 
     @media screen and (min-width: $phoneWidth)
       padding: 1rem 1rem
@@ -411,29 +428,14 @@ export default {
       @media screen and (min-width: $smDesktopWidth)
         font-size: 1.8rem
 
-  .first-col,
-  .last-col
-    z-index: 1 // чтобы central-cols при наведении были тоже под тенью
-    // background-color: $theme-color-yellow
-
-  .first-col
-    border-right: 1px solid #e7e7e7
-  .last-col
-    border-left: 1px solid #e7e7e7
-
-  .shadow-active
-    box-shadow: 0 0 10px rgba(0,0,0,.12)
-
   .cell
     padding: 1rem .8rem
-    text-align: left
+    // text-align: left
+    color: #61617e
     display: flex
     align-items: center
-    white-space: nowrap // ОБЯЗАТЕЛЕН, иначе всё поедет (запрет переноса строк)
-    // border-bottom: 1px solid #f7f7f7
     border-bottom: 1px solid #EBEEF5
     transition: $transitionDefaultHover
-    color: #61617e
 
     @media screen and (min-width: $phoneWidth) // >= 480px
       padding: 1rem 1rem
@@ -455,6 +457,13 @@ export default {
     &.hover-active
       background-color: #f7f7f7
       // background-color: $color-light-purple
+    &.text-truncation
+      display: block
+      line-height: calc(5.3rem - 1rem * 2) // связать вместе с js, сделать динамичным
+      @media screen and (min-width: $smDesktopWidth) // >= 980px
+        line-height: calc(5.3rem - 1.2rem * 2)
+      @media screen and (min-width: $desktopWidth) // >= 1280px
+        line-height: calc(5.3rem - 1.5rem * 2)
 
 .footer-table
   display: flex
