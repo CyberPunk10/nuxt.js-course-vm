@@ -44,11 +44,13 @@
           <p v-if="cell.sort" class="cell__header"
             :key="cell.key || cell"
             @click="sortBy( $event, cell.sort, cell.key )"
+            :class="{jcc: cell.align === 'center'}"
           >{{ cell.title || cell }}
             <i class="material-icons">unfold_more</i>
           </p>
           <p v-else class="cell__header"
             :key="cell.key || cell"
+            :class="{jcc: cell.align === 'center'}"
           >{{ cell.title || cell }}
           </p>
         </template>
@@ -59,7 +61,7 @@
             v-for="cell in namesColsForRowRender"
             :key="`${row.id || row._id}__${cell.key || cell}`"
             :data-row="indexRow"
-            :class="{'hover-active': currentElem == indexRow}"
+            :class="{'hover-active': currentElem == indexRow, jcc: cell.align === 'center'}"
           >
             <slot :name="(cell.key || cell)"
               :cell="row[cell.key || cell]"

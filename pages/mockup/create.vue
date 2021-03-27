@@ -1,6 +1,6 @@
 <template>
 <div class="nesting-container-center">
-  <div class="page-wrap">
+  <div class="page-wrap-mockup-create">
     <h1 class="mb">Создать новый пост</h1>
 
     <el-form
@@ -129,8 +129,13 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
-.page-wrap
+<style lang="sass">
+.page-wrap-mockup-create
   max-width: 600px
   width: 100%
+  .el-upload.el-upload--text,
+  .el-upload-dragger
+    min-width: 20rem
+    max-width: 36rem
+    width: 100% !important
 </style>
