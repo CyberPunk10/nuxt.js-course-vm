@@ -38,7 +38,7 @@
 
     <!-- form add new user -->
     <h2 class="title-table font-how-h2 tac mb2 mt3">Создать пользователя</h2>
-    <div class="wrap-card-content center width-50 wrap-create-users-admin">
+    <div class="wrap-card-content center wrap-create-users-admin">
       <el-form
         ref="form"
         :model="controls"
@@ -211,6 +211,8 @@ export default {
 
 <style lang="sass">
 .wrap-create-users-admin
-  min-width: min-content
+  min-width: 25rem
+  max-width: 45rem
+  width: 100%
   padding: 2rem
 </style>
