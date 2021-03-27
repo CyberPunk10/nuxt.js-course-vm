@@ -61,9 +61,9 @@ export default {
       fixed_first_col: { key: 'title', title: 'Название', sort: 'text' },
       fixed_last_col: { title: 'Действия' }, // если нет key, значит подставится slot с кнопками
       onlyNeedCenterCols: [
-        { key: 'date', title: 'Дата', sort: 'text', formatter: 'datetime'},
-        { key: 'views', title: 'Просмотры', sort: 'numbers' },
-        { key: 'comments', title: 'Комментарии', sort: 'numbers-length' },
+        { key: 'date', title: 'Дата', sort: 'text', formatter: 'datetime', align: 'center'},
+        { key: 'views', title: 'Просмотры', sort: 'numbers', align: 'center' },
+        { key: 'comments', title: 'Комментарии', sort: 'numbers-length', align: 'center' },
       ],
     }
   },
@@ -75,7 +75,7 @@ export default {
 
   methods: {
     handleEdit(id) {
-      this.$router.push(`/admin/post/${id}`)
+      this.$router.push(`/mockup/post/${id}`)
     },
 
     async handleDelete(id) {
