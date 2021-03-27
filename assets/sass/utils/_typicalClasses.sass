@@ -19,8 +19,8 @@
     padding: 1.5rem
   @media screen and (min-width: $desktopWidth)
     padding: 2rem
-  &.width-50
-    max-width: 48%
+  // &.width-50
+  //   max-width: 48%
   &.center
     margin: 0 auto
   &.padding-0
@@ -40,13 +40,17 @@
 .fwrap
   flex-wrap: wrap
 
+// https://habr.com/ru/company/ruvds/blog/535016/
 // Обрезка однострочного текста (если 'display: flex', то не сработает)
 .text-truncation
-  // white-space: nowrap
-  // overflow: hidden
-  // text-overflow: ellipsis
+  text-overflow: ellipsis
+  white-space: nowrap
+  overflow: hidden
+// Обрезка многострочного текста
+// не должно быть padding-ов, иначе срезанный текст будет виден
+.text-truncation-many-lines
   display: -webkit-box
-  -webkit-line-clamp: 2
+  -webkit-line-clamp: 2 // 2 строки
   -webkit-box-orient: vertical
   overflow: hidden
 

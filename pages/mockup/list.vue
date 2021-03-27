@@ -58,8 +58,8 @@ export default {
 
   data() {
     return {
-      fixed_first_col: { key: 'title', title: 'Название', sort: 'text' },
-      fixed_last_col: { title: 'Действия' }, // если нет key, значит подставится slot с кнопками
+      fixed_first_col: { key: 'title', title: 'Название', sort: 'text', mobileFixed: true, maxWidthDesktop: '.3fr' }, //
+      fixed_last_col: { title: 'Действия', maxWidthTablet: '11rem', align: 'center', maxWidthDesktop: '11rem'}, // если нет key, значит подставится slot с кнопками, maxWidthSmPhone: '3rem'
       onlyNeedCenterCols: [
         { key: 'date', title: 'Дата', sort: 'text', formatter: 'datetime', align: 'center'},
         { key: 'views', title: 'Просмотры', sort: 'numbers', align: 'center' },
