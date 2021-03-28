@@ -10,7 +10,7 @@
     >
       <!-- first-col -->
       <div class="first-col"
-        v-if="fixed_first_col && (currentWidthTable >= 480 || fixed_first_col.mobileFixed)"
+        v-if="showFixedFirstCol"
         :class="{'shadow-active': shadowLeftActive}"
         :style="gridNestingRows"
       >
@@ -86,7 +86,7 @@
 
       <!-- last-col -->
       <div class="last-col"
-        v-if="fixed_last_col && (currentWidthTable >= 480 || fixed_last_col.mobileFixed)"
+        v-if="showFixedLastCol"
         :class="{'shadow-active': shadowRightActive}"
         :style="gridNestingRows"
       >
@@ -181,7 +181,7 @@ export default {
       shadowLeftActive: false,
       shadowRightActive: false,
       currentElem: null, // for @mouseover="mouseoverRows" hover
-      currentWidthTable: 0 // текущая ширина таблицы (для изменения ширины колонок)
+      currentWidthTable: 0, // текущая ширина таблицы (для изменения ширины колонок)
     }
   },
 
@@ -191,27 +191,34 @@ export default {
       return this.$store.getters['layoutChallenge/getCurrentWidthWindow']
     },
 
+    // показываем фиксированные столбцы и есть ли они?
+    showFixedFirstCol() {
+      return this.isShowFixedCol(this.fixed_first_col)
+    },
+    showFixedLastCol(){
+      return this.isShowFixedCol(this.fixed_last_col)
+    },
+
     // grid styles
     gridMainColumns() {
       const width = this.currentWidthTable
+      console.log('[WIDTH TABLE]: ', this.currentWidthTable)
 
-      const firstCol = this.fixed_first_col ? getString(this.fixed_first_col) : ''
-      const lastCol = this.fixed_last_col ? getString(this.fixed_last_col) : ''
+      let firstCol = this.showFixedFirstCol ? getMaxWidthCol(this.fixed_first_col) : ''
+      let lastCol = this.showFixedLastCol ? getMaxWidthCol(this.fixed_last_col) : ''
 
-      function getString(col) {
-        if (width !== 0 && width < 480) return col.mobileFixed ? `minmax(auto, ${col.maxWidthSmPhone || '7rem'})` : ''
+      function getMaxWidthCol(col) {
+        if (width > 0 && width < 480) return `minmax(auto, ${col.maxWidthSmPhone || '7rem'})`
         else if (width >= 480 && width < 768) return `minmax(auto, ${col.maxWidthPhone || '10rem'})`
         else if (width >= 768 && width < 980) return `minmax(auto, ${col.maxWidthTablet || '15rem'})`
         else if (width >= 980 && width < 1280) return `minmax(auto, ${col.maxWidthSmDesktop || '20rem'})`
-        else if (width >= 1280) return col.maxWidthDesktop || 'auto'
-        else if (width === 0) return 'minmax(min-content, 1fr)' // при mounted width === 0
+        else if (width >= 1280) return `minmax(auto, ${col.maxWidthDesktop || '1fr'})`
+        else if (width <= 0) return 'minmax(min-content, 1fr)' // при mounted width === 0, также на практике в момент загрузки бывает width < 0 , поэтому смотрим и на меньше чем 0
       }
 
+      const centerCols = width < 1280 ? 'minmax(auto, 100%)' : 'auto' // если здесь меняеть значение, то надо его менять и в widthCellFirstCol()
 
-      const centerCols = width < 768 ? 'minmax(auto, 100%)' : 'auto'
-      return {
-        gridTemplateColumns: `${firstCol} ${centerCols} ${lastCol}`
-      }
+      return { gridTemplateColumns: `${firstCol} ${centerCols} ${lastCol}` }
     },
     gridNestingRows() {
       return {
@@ -228,8 +235,8 @@ export default {
       } else {
         // узнаем сколько фиксированных столбцов
         let countFixedCol = 0
-        countFixedCol = this.fixed_first_col ? ++countFixedCol : countFixedCol
-        countFixedCol = this.fixed_last_col  ? ++countFixedCol : countFixedCol
+        countFixedCol = this.showFixedFirstCol ? ++countFixedCol : countFixedCol
+        countFixedCol = this.showFixedLastCol  ? ++countFixedCol : countFixedCol
 
         const countCol = Object.keys(this.data_tables[0]).length - countFixedCol // вычетаем первый и последний столбцы (if они фиксрованные)
         return {
@@ -243,17 +250,39 @@ export default {
       else if (width >= 480 && width < 768) return { maxWidth: this.fixed_first_col.maxWidthPhone || '10rem' }
       else if (width >= 768 && width < 980) return { maxWidth: this.fixed_first_col.maxWidthTablet || '15rem' }
       else if (width >= 980 && width < 1280) return { maxWidth: this.fixed_first_col.maxWidthSmDesktop || '20rem' }
-      else if (width >= 1280) return this.fixed_first_col.maxWidthDesktop ? { maxWidth: this.fixed_first_col.maxWidthDesktop } : {}
+      else if (width >= 1280) return  { maxWidth: 'none' } // здесь сбрасываем max-width (при этом в gridMainColumns() пользуемся 'maxWidthDesktop' если оно есть)
       else if (width === 0) return {}
     },
 
     namesColsForRowRender() {
+      const firstCol = this.fixed_first_col
+      const lastCol = this.fixed_last_col
+      const width = this.currentWidthTable
+      const arrAllValue = Object.keys(this.data_tables[0]) // массив с ключами, например было 5
+      let filteredArrStep1 = []
+      let filteredArrStep2 = []
+
       if (this.onlyNeedCenterCols) {
         return this.onlyNeedCenterCols
       } else {
-        const arrAllValue = Object.keys(this.data_tables[0]) // например было 5
-        let filteredArrStep1 = arrAllValue.filter(item => item !== this.fixed_first_col.key) // стало 4
-        let filteredArrStep2 = filteredArrStep1.filter(item => item !== this.fixed_last_col.key) // стало 3
+        filteredArrStep1 = isUnfixed(firstCol, arrAllValue) // стало 4
+        filteredArrStep2 = isUnfixed(lastCol, filteredArrStep1) // стало 3
+
+        // console.log('[arrAllValue]: ', arrAllValue.length)
+        // console.log('[filteredArrStep1]: ', filteredArrStep1.length)
+        // console.log('[filteredArrStep2]: ', filteredArrStep2.length)
+
+        function isUnfixed(col, arrAllValue) {
+          if ( col.phoneUnfixed && width < 480
+            || col.tabletUnfixed && width < 768
+            || col.smDesktopUnfixed && width < 980
+            || col.desktopUnfixed && width < 1280
+            // || !this.onlyNeedCenterCols && width >= 1280 // (?)
+          ) return arrAllValue
+
+          return arrAllValue.filter(item => item !== col.key)
+        }
+
         return filteredArrStep2
       }
     },
@@ -286,23 +315,45 @@ export default {
   },
 
   mounted() {
-    // if center-cols имеет прокручиваемую область, то add .shadow-active к last-col
-    const $centerCols = this.$refs.centerCols
-    // ниже строка не нужна, так как мы по умолчанию имеем таблицу со scrollLeft == 0 (таблица не прокручена от начала)
-    // this.shadowLeftActive = $centerCols.scrollLeft == 0 ? false : true
-    // при масштабе экрана 125% появляется погрешность, которую попробуем учесть,
-    // предполагая, что погрешность не составляет больше 1px
-    // исходный вариант был такой: e.target.scrollWidth - e.target.scrollLeft == e.target.offsetWidth
-    const resultValue = $centerCols.scrollWidth - $centerCols.scrollLeft - $centerCols.offsetWidth
-    this.shadowRightActive = (resultValue < 1) ? false : true
-
-    // определяем первоначальную ширину таблицы.
+    // определяем первоначальную ширину таблицы. очередность важна, сначала ширину таблицы, потом остальное.
     // далее будем следить за изменением ширины экрана и записывать в эту же переменную
     // также надо следить за открытием/закрытием sidebar, чтобы пересчитывать ширину таблицы
     this.currentWidthTable = this.$refs.tableGrid.offsetWidth
+
+    // if center-cols имеет прокручиваемую область, то add .shadow-active к last-col
+    // выставляем задержку, чтобы всё успело зарендериться (иначе resultValue = 0 и тень не появляется)
+    this.$nextTick(function () {
+      const $centerCols = this.$refs.centerCols // эта строка должна быть внутри $nextTick, иначе последующие вычисления неверны
+      // ниже строка не нужна, так как мы по умолчанию имеем таблицу со scrollLeft == 0 (таблица не прокручена от начала)
+      // this.shadowLeftActive = $centerCols.scrollLeft == 0 ? false : true
+      // при масштабе экрана 125% появляется погрешность, которую попробуем учесть,
+      // предполагая, что погрешность не составляет больше 1px
+      // исходный вариант был такой: e.target.scrollWidth - e.target.scrollLeft == e.target.offsetWidth
+      const resultValue = $centerCols.scrollWidth - $centerCols.scrollLeft - $centerCols.offsetWidth
+      this.shadowRightActive = (resultValue < 1) ? false : true
+    })
   },
 
   methods: {
+    isShowFixedCol(col) {
+      const width = this.currentWidthTable
+
+      // если передан объект fixed_first_col/last_first_col
+      // тогда проверяем дальше, иначе возвращаем false
+      if (col) {
+
+        // проверка нужно ли прятать col при каком-то размере таблицы
+        if ( col.phoneUnfixed && width < 480
+          || col.tabletUnfixed && width < 768
+          || col.smDesktopUnfixed && width < 980
+          || col.desktopUnfixed && width < 1280
+        ) return false
+
+        return true
+      }
+      return false
+    },
+
     // pagination
     pageClick(page) {
       this.pageNumber = page

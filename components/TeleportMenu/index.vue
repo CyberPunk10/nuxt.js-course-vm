@@ -63,6 +63,7 @@ export default {
         { type: 'category', text: 'Сторонние сайты, чтобы не потерять' },
         { type: 'link-global', text: 'Hotkeys vs code', url: 'https://www.nikomedvedev.ru/other/vscodeshortcuts/hotkeys.html' },
         { type: 'link-global', text: 'Animation SVG', url: 'https://shapeshifter.design/' },
+        { type: 'link-global', text: 'Шпаргалка по Markdown', url: 'https://github.com/sandino/Markdown-Cheatsheet/blob/master/README.md' },
         { type: 'category', text: `CurrentRouteName: ${this.$route.name}` },
       ]
     }
