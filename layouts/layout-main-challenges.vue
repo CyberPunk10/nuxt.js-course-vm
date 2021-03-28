@@ -233,7 +233,7 @@ export default {
     width: 0
     // @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
       // width: $sidebarWidthPhone
-    @media screen and (min-width: $tableWidth)
+    @media screen and (min-width: $tabletWidth)
       width: $sidebarWidthIcon
     .sidebar-main
       margin-top: calc(#{$header-height} + .5rem)
@@ -252,7 +252,7 @@ export default {
     // @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
     //   background-color: $color-bg-body
 
-    @media screen and (min-width: $tableWidth)
+    @media screen and (min-width: $tabletWidth)
       width: auto
       left: $sidebarWidthIcon
 
@@ -290,7 +290,7 @@ export default {
     left: -$sidebarWidth
     @media screen and (min-width: $phoneWidth)
       left: -$sidebarWidthPhone
-    @media screen and (min-width: $tableWidth)
+    @media screen and (min-width: $tabletWidth)
       left: 0
 
   &>.footer-mobile
@@ -308,7 +308,7 @@ export default {
   &.main-container_transform-x
     &>.sidebar
       // z-index: 0
-      @media screen and (min-width: $tableWidth)
+      @media screen and (min-width: $tabletWidth)
         z-index: 1
 
 
@@ -363,7 +363,7 @@ export default {
         // border-color: $color-bg-body-not-active
         @media screen and (min-width: $phoneWidth)
           background-color: transparent
-        @media screen and (min-width: $tableWidth)
+        @media screen and (min-width: $tabletWidth)
           z-index: -1
 
       @media screen and (max-width: calc(#{$smPhoneWidth} - 1px)) // < 320px
@@ -390,7 +390,7 @@ export default {
     &>.sidebar
       @media(hover: hover) and (pointer: fine) // https://webformyself.com/css-hover-na-sensornyx-ekranax/ (решение на чистом CSS для :hover на сенсорных экранах)
         &:hover
-          @media screen and (min-width: $tableWidth)
+          @media screen and (min-width: $tabletWidth)
             width: $sidebarWidthTable
             max-width: $sidebarWidthTable
             .sidebar-main

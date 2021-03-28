@@ -171,7 +171,7 @@ export default {
     width: $sidebarWidthIcon
     display: flex
     justify-content: space-between
-    @media screen and (min-width: $tableWidth)
+    @media screen and (min-width: $tabletWidth)
       top: $header-height
       height: 4rem
       padding-top: .5rem
@@ -198,10 +198,10 @@ export default {
       i, .btn-close-sidebar
         display: none
       svg
-        @media screen and (min-width: $tableWidth)
+        @media screen and (min-width: $tabletWidth)
           display: none
       .fa-arrow-right
-        @media screen and (min-width: $tableWidth)
+        @media screen and (min-width: $tabletWidth)
           display: block
       i
         color: #ccc
@@ -214,7 +214,7 @@ export default {
     grid: 100% / calc(100% - #{$sidebarWidthIcon}) $sidebarWidthIcon // row/col
     @media screen and (min-width: $phoneWidth)
       grid: 100% / auto max-content // row/col
-    @media screen and (min-width: $tableWidth)
+    @media screen and (min-width: $tabletWidth)
       left: 0
 
     // logo
@@ -225,7 +225,7 @@ export default {
       transition: $transitionDefault
       @media screen and (min-width: $phoneWidth)
         margin-left: 1rem
-      @media screen and (min-width: $tableWidth)
+      @media screen and (min-width: $tabletWidth)
         margin-left: 2rem
       @media screen and (min-width: $desktopWidth)
         margin-left: 10rem
@@ -303,7 +303,7 @@ export default {
         display: none
       .sidebar-toggle .btn-close-sidebar
         display: flex
-      @media screen and (min-width: $tableWidth)
+      @media screen and (min-width: $tabletWidth)
         width: $sidebarWidth
         .sidebar-toggle .btn-close-sidebar,
         .fa-arrow-right
