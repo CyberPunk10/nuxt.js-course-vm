@@ -131,7 +131,7 @@ export default {
           break
       }
 
-      // $tableWidth 768px
+      // $tabletWidth 768px
       // console.log(document.documentElement.clientWidth)
       if (document.documentElement.clientWidth < 768) {
         if (event.target.closest('a')) {
@@ -206,7 +206,7 @@ export default {
       border: 1px solid $color-border-default
       border-radius: $borderRadius
 
-    @media screen and (min-width: $tableWidth)
+    @media screen and (min-width: $tabletWidth)
       .sidenav
         margin-top: 1.8rem
         .separator

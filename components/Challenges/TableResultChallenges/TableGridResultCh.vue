@@ -456,7 +456,7 @@ export default {
 
     @media screen and (min-width: $phoneWidth)
       padding: 1rem 1rem
-    @media screen and (min-width: $tableWidth)
+    @media screen and (min-width: $tabletWidth)
       padding: 1rem 1.2rem
       font-size: 1.5rem
     @media screen and (min-width: $smDesktopWidth)
@@ -487,7 +487,7 @@ export default {
       // &[data-last-col].hover-active
       //   border-top-right-radius: $borderRadius
       //   border-bottom-right-radius: $borderRadius
-    @media screen and (min-width: $tableWidth) // >= 768px
+    @media screen and (min-width: $tabletWidth) // >= 768px
       padding: 1rem 1.2rem
       font-size: 1.5rem
     @media screen and (min-width: $smDesktopWidth) // >= 980px
@@ -511,7 +511,7 @@ export default {
   justify-content: space-between
   align-items: center
   margin: 1.5rem 1rem
-  @media screen and (min-width: $tableWidth) // >= 768px
+  @media screen and (min-width: $tabletWidth) // >= 768px
     margin: 2rem 1rem 1.5rem
   @media screen and (min-width: $smDesktopWidth) // >= 980px
     margin: 2rem 1rem 1rem

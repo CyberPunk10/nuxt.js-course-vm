@@ -164,7 +164,7 @@ $color-bg-content: rgb(248,250,252)
     border-top-right-radius: 2rem
     border-bottom-right-radius: 2rem
     opacity: .3
-    @media screen and (max-width: $tableWidth)
+    @media screen and (max-width: $tabletWidth)
       opacity: .1
     transition: all .2s ease-in
     &:hover
