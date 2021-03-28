@@ -13,24 +13,23 @@
     />
     <br> -->
 
-    <h2 class="title-table font-how-h2">Календарная таблица</h2>
+    <!-- <h2 class="title-table font-how-h2">Календарная таблица</h2>
     <TableGridResultChRenderByRow
       :data_tables="dataPushUps"
       :fixed_first_col="{key: 'name'}"
-    />
+    /> -->
       <!-- fixed_last_col="max" -->
     <br>
 
     <h2 class="title-table font-how-h2">Таблица результатов</h2>
-      <!-- :fixed_first_col="{ key: 'title', title: 'Название', sort: 'text', mobileFixed: true, maxWidthDesktop: '.3fr' }" -->
     <TableGridResultCh
-      :fixed_first_col="{key: 'name'}"
       :data_tables="players"
+      :fixed_first_col="{key: 'name'}"
       :fixed_last_col="{key: 'id'}"
     />
     <br>
 
-    <h2 class="title-table font-how-h2">Таблица результатов</h2>
+    <!-- <h2 class="title-table font-how-h2">Таблица результатов</h2>
     <TableGridResultCh
       :data_tables="players"
       :fixed_first_col="{key: 'name'}"
@@ -40,7 +39,7 @@
     <h2 class="title-table font-how-h2">Таблица результатов</h2>
     <TableGridResultCh
       :data_tables="players"
-    />
+    /> -->
 
     <br><br>
 
