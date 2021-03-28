@@ -6,6 +6,7 @@
       v-bind="$attrs"
       :value="value"
       @input="$emit('input', $event.target.value)"
+      ref="input"
     >
     <span
       v-if="v.$error"
@@ -61,6 +62,14 @@ export default {
       }
       return `Введите корректный ${this.inputData.title}`
     }
+  },
+
+  mounted() {
+    // добавляем автофокус, так как автоматом он добавляется только при загрузке страницы (а нам нужно и при переходе между страницами)
+    // (выставляем задержку, чтобы всё успело зарендериться)
+    this.$nextTick(function () {
+      if (this.$refs.input.getAttribute('autofocus')) this.$refs.input.focus()
+    })
   }
 
 }

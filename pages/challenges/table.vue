@@ -22,9 +22,10 @@
     <br>
 
     <h2 class="title-table font-how-h2">Таблица результатов</h2>
+      <!-- :fixed_first_col="{ key: 'title', title: 'Название', sort: 'text', mobileFixed: true, maxWidthDesktop: '.3fr' }" -->
     <TableGridResultCh
-      :data_tables="players"
       :fixed_first_col="{key: 'name'}"
+      :data_tables="players"
       :fixed_last_col="{key: 'id'}"
     />
     <br>

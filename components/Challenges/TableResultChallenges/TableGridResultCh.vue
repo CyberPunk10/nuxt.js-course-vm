@@ -199,19 +199,17 @@ export default {
       const lastCol = this.fixed_last_col ? getString(this.fixed_last_col) : ''
 
       function getString(col) {
-        if (width !== 0 && width < 480) return col.mobileFixed ? `minmax(auto, ${col.maxWidthSmPhone || '7rem'})` : ''
+        if (width > 0 && width < 480) return col.mobileFixed ? `minmax(auto, ${col.maxWidthSmPhone || '7rem'})` : ''
         else if (width >= 480 && width < 768) return `minmax(auto, ${col.maxWidthPhone || '10rem'})`
         else if (width >= 768 && width < 980) return `minmax(auto, ${col.maxWidthTablet || '15rem'})`
         else if (width >= 980 && width < 1280) return `minmax(auto, ${col.maxWidthSmDesktop || '20rem'})`
-        else if (width >= 1280) return col.maxWidthDesktop || 'auto'
-        else if (width === 0) return 'minmax(min-content, 1fr)' // при mounted width === 0
+        else if (width >= 1280) return col.maxWidthDesktop || '(minmax(auto, 1fr)'
+        else if (width <= 0) return 'minmax(min-content, 1fr)' // при mounted width === 0, также на практике в момент загрузки бывает width < 0 , поэтому смотрим и на меньше чем 0
       }
 
+      const centerCols = width < 1280 ? 'minmax(auto, 100%)' : 'auto'
 
-      const centerCols = width < 768 ? 'minmax(auto, 100%)' : 'auto'
-      return {
-        gridTemplateColumns: `${firstCol} ${centerCols} ${lastCol}`
-      }
+      return { gridTemplateColumns: `${firstCol} ${centerCols} ${lastCol}` }
     },
     gridNestingRows() {
       return {
@@ -286,20 +284,23 @@ export default {
   },
 
   mounted() {
-    // if center-cols имеет прокручиваемую область, то add .shadow-active к last-col
-    const $centerCols = this.$refs.centerCols
-    // ниже строка не нужна, так как мы по умолчанию имеем таблицу со scrollLeft == 0 (таблица не прокручена от начала)
-    // this.shadowLeftActive = $centerCols.scrollLeft == 0 ? false : true
-    // при масштабе экрана 125% появляется погрешность, которую попробуем учесть,
-    // предполагая, что погрешность не составляет больше 1px
-    // исходный вариант был такой: e.target.scrollWidth - e.target.scrollLeft == e.target.offsetWidth
-    const resultValue = $centerCols.scrollWidth - $centerCols.scrollLeft - $centerCols.offsetWidth
-    this.shadowRightActive = (resultValue < 1) ? false : true
-
-    // определяем первоначальную ширину таблицы.
+    // определяем первоначальную ширину таблицы. очередность важна, сначала ширину таблицы, потом остальное.
     // далее будем следить за изменением ширины экрана и записывать в эту же переменную
     // также надо следить за открытием/закрытием sidebar, чтобы пересчитывать ширину таблицы
     this.currentWidthTable = this.$refs.tableGrid.offsetWidth
+
+    // if center-cols имеет прокручиваемую область, то add .shadow-active к last-col
+    // выставляем задержку, чтобы всё успело зарендериться (иначе resultValue = 0 и тень не появляется)
+    this.$nextTick(function () {
+      const $centerCols = this.$refs.centerCols // эта строка должна быть внутри $nextTick, иначе последующие вычисления неверны
+      // ниже строка не нужна, так как мы по умолчанию имеем таблицу со scrollLeft == 0 (таблица не прокручена от начала)
+      // this.shadowLeftActive = $centerCols.scrollLeft == 0 ? false : true
+      // при масштабе экрана 125% появляется погрешность, которую попробуем учесть,
+      // предполагая, что погрешность не составляет больше 1px
+      // исходный вариант был такой: e.target.scrollWidth - e.target.scrollLeft == e.target.offsetWidth
+      const resultValue = $centerCols.scrollWidth - $centerCols.scrollLeft - $centerCols.offsetWidth
+      this.shadowRightActive = (resultValue < 1) ? false : true
+    })
   },
 
   methods: {
