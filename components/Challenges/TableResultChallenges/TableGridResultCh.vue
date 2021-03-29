@@ -229,6 +229,7 @@ export default {
     },
     gridNestingCols() {
       if (this.onlyNeedCenterCols) {
+        console.log(this.onlyNeedCenterCols)
         return {
           gridTemplateColumns: `repeat(${this.onlyNeedCenterCols.length}, minmax(min-content, 1fr))`
         }
@@ -257,34 +258,46 @@ export default {
     namesColsForRowRender() {
       const firstCol = this.fixed_first_col
       const lastCol = this.fixed_last_col
-      const width = this.currentWidthTable
-      const arrAllValue = Object.keys(this.data_tables[0]) // массив с ключами, например было 5
-      let filteredArrStep1 = []
-      let filteredArrStep2 = []
+      let resultCenterCols = this.onlyNeedCenterCols
 
-      if (this.onlyNeedCenterCols) {
-        return this.onlyNeedCenterCols
-      } else {
-        filteredArrStep1 = isUnfixed(firstCol, arrAllValue) // стало 4
-        filteredArrStep2 = isUnfixed(lastCol, filteredArrStep1) // стало 3
 
-        // console.log('[arrAllValue]: ', arrAllValue.length)
-        // console.log('[filteredArrStep1]: ', filteredArrStep1.length)
-        // console.log('[filteredArrStep2]: ', filteredArrStep2.length)
+        if (this.onlyNeedCenterCols) {
+          console.log('[this.isUnfixed(firstCol)]: ', this.isUnfixed(firstCol), resultCenterCols[0].key !== firstCol.key)
+          console.log('[this.isUnfixed(lastCol)]: ', this.isUnfixed(lastCol), resultCenterCols[resultCenterCols.length - 1].key !== lastCol.key)
+          // // добавляем firstCol в начало centerCols
+          // // если передан фиксированный firstCol И фиксирования нет И если firstCol ещё нет в CenterCols,
+          // if (firstCol && (this.isUnfixed(firstCol) && this.currentWidthTable !== 0) && (resultCenterCols[0].key !== firstCol.key)) {
+          //   resultCenterCols.unshift(firstCol)
+          // } else {
+          //   if (resultCenterCols[0].key === firstCol.key) {
+          //     resultCenterCols.shift(firstCol)
+          //   }
+          // }
 
-        function isUnfixed(col, arrAllValue) {
-          if ( col.phoneUnfixed && width < 480
-            || col.tabletUnfixed && width < 768
-            || col.smDesktopUnfixed && width < 980
-            || col.desktopUnfixed && width < 1280
-            // || !this.onlyNeedCenterCols && width >= 1280 // (?)
-          ) return arrAllValue
+          // // добавляем lastCol в конец centerCols
+          // // если передан фиксированный lastCol И фиксирования нет при определённой ширине таблицы,
+          // if (lastCol && this.isUnfixed(lastCol) && (resultCenterCols[resultCenterCols.length - 1].key !== lastCol.key)) {
+          //   resultCenterCols.push(lastCol)
+          // }
+          // console.log(resultCenterCols)
+          // return resultCenterCols
 
-          return arrAllValue.filter(item => item !== col.key)
+        } else {
+
+          const arrAllValue = Object.keys(this.data_tables[0]) // массив с ключами, например было 5
+          let filteredArrStep1 = []
+          let filteredArrStep2 = []
+
+          filteredArrStep1 = (firstCol && this.isUnfixed(firstCol))
+            ? arrAllValue
+            : arrAllValue.filter(item => item !== firstCol.key) // стало 4
+
+          filteredArrStep2 = (lastCol && this.isUnfixed(lastCol))
+            ? filteredArrStep1
+            : filteredArrStep1.filter(item => item !== lastCol.key) // стало 3
+
+          return filteredArrStep2
         }
-
-        return filteredArrStep2
-      }
     },
 
     // pagination
@@ -336,21 +349,23 @@ export default {
 
   methods: {
     isShowFixedCol(col) {
-      const width = this.currentWidthTable
-
       // если передан объект fixed_first_col/last_first_col
       // тогда проверяем дальше, иначе возвращаем false
       if (col) {
-
-        // проверка нужно ли прятать col при каком-то размере таблицы
-        if ( col.phoneUnfixed && width < 480
-          || col.tabletUnfixed && width < 768
-          || col.smDesktopUnfixed && width < 980
-          || col.desktopUnfixed && width < 1280
-        ) return false
-
-        return true
+        // проверка нужно ли отменить фиксирование col при каком-либо размере таблицы
+        return !this.isUnfixed(col)
       }
+      return false
+    },
+    // проверка нужно ли отменить фиксирование col при каком-то размере таблицы
+    isUnfixed(col) {
+      const width = this.currentWidthTable
+      if ( col.phoneUnfixed && width < 480
+        || col.tabletUnfixed && width < 768
+        || col.smDesktopUnfixed && width < 980
+        || col.desktopUnfixed && width < 1280
+      ) return true
+
       return false
     },
 

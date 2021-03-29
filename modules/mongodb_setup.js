@@ -7,7 +7,7 @@ export default function () {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false,
-      useCreateIndex: true
+      useCreateIndex: true,
 
     }).then(console.log('MongoDB connected...'))
       .catch(error => console.error('MongoDB disconnected...', error))
