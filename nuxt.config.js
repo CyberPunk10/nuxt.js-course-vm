@@ -18,7 +18,7 @@ export default {
   },
 
   serverMiddleware: [
-    '~/api/index.js'
+    '~/api/index.js' // подключаем rest api
   ],
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
