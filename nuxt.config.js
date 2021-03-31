@@ -4,7 +4,7 @@ export default {
     htmlAttrs: {
       lang: 'ru'
     },
-    title: 'nuxt.js-course-vm3333',
+    title: 'challenges',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -16,8 +16,12 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-
-  serverMiddleware: [
+  loading: {
+    // color: '#ffa33b',
+    color: '#ffd438',
+    // height: '5px'
+  },
+    serverMiddleware: [
     '~/api/index.js' // подключаем rest api
   ],
 

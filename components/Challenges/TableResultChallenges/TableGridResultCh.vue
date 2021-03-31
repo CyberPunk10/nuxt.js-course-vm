@@ -34,11 +34,11 @@
 
         <!-- other cells -->
         <div class="cell" data-first-col
-          v-for="(row, index) in paginatedUsers"
+          v-for="(row, indexRow) in paginatedUsers"
           :key="row.id"
-          :class="{'hover-active': currentElem == index}"
+          :class="{'hover-active': currentElem == indexRow}"
           :style="widthCellFirstCol"
-          :data-row="index"
+          :data-row="indexRow"
         >
           <div class="text-truncation-many-lines">
             {{ row[fixed_first_col.key] }}
@@ -53,33 +53,38 @@
         :style="[gridNestingRows, gridNestingCols]"
       >
         <!-- header cells -->
-        <template v-for="cell in namesColsForRowRender">
+        <template v-for="(cell, indexCol) in namesColsForRowRender">
           <p v-if="cell.sort" class="cell__header"
-            :key="cell.key || cell"
+            :key="indexCol"
             @click="sortBy( $event, cell.sort, cell.key )"
             :class="{jcc: cell.align === 'center'}"
           >{{ cell.title || cell }}
             <i class="material-icons">unfold_more</i>
           </p>
           <p v-else class="cell__header"
-            :key="cell.key || cell"
+            :key="indexCol"
             :class="{jcc: cell.align === 'center'}"
           >{{ cell.title || cell }}
           </p>
         </template>
 
         <!-- other cells -->
+            <!-- :key="`${row.id || row._id}__${cell.key || cell}`" -->
         <template v-for="(row, indexRow) in paginatedUsers">
           <div class="cell"
-            v-for="cell in namesColsForRowRender"
-            :key="`${row.id || row._id}__${cell.key || cell}`"
+            v-for="(cell, indexCol) in namesColsForRowRender"
+            :key="`${indexRow}__${indexCol}`"
             :data-row="indexRow"
+            :data-col="indexCol"
             :class="{'hover-active': currentElem == indexRow, jcc: cell.align === 'center'}"
           >
-            <slot :name="(cell.key || cell)"
+            <slot v-if="!row[cell.key || cell]"
+              name="operations"
+              :row_id="row._id"
+            ></slot>
+            <slot v-else :name="(cell.key || cell)"
               :cell="row[cell.key || cell]"
             >{{ row[cell.key || cell] }}</slot>
-
           </div>
         </template>
       </div>
@@ -105,10 +110,10 @@
 
         <!-- other cells -->
         <div class="cell" data-last-col
-          v-for="(row, index) in paginatedUsers"
+          v-for="(row, indexRow) in paginatedUsers"
           :key="row.id"
-          :data-row="index"
-          :class="{'hover-active': currentElem == index, jcc: fixed_last_col.align === 'center'}"
+          :data-row="indexRow"
+          :class="{'hover-active': currentElem == indexRow, jcc: fixed_last_col.align === 'center'}"
         >
           <slot v-if="!fixed_last_col.key"
             name="operations"
@@ -123,9 +128,9 @@
     </div>
 
     <!-- footer -->
-    <!-- <div class="footer-table">
+    <div v-if="data_tables.length > 10" class="footer-table">
       <div class="footer-table-left-block"></div>
-      <div class="v-table__pagination">
+      <div v-if="data_tables.length > userPerPages" class="v-table__pagination">
         <div class="page"
           v-for="page in pages"
           :key="page"
@@ -147,7 +152,7 @@
           data-count-row="50"
         >50</span>
       </p>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -202,7 +207,7 @@ export default {
     // grid styles
     gridMainColumns() {
       const width = this.currentWidthTable
-      console.log('[WIDTH TABLE]: ', this.currentWidthTable)
+      // console.log('[WIDTH TABLE]: ', this.currentWidthTable)
 
       let firstCol = this.showFixedFirstCol ? getMaxWidthCol(this.fixed_first_col) : ''
       let lastCol = this.showFixedLastCol ? getMaxWidthCol(this.fixed_last_col) : ''
@@ -229,9 +234,8 @@ export default {
     },
     gridNestingCols() {
       if (this.onlyNeedCenterCols) {
-        console.log(this.onlyNeedCenterCols)
         return {
-          gridTemplateColumns: `repeat(${this.onlyNeedCenterCols.length}, minmax(min-content, 1fr))`
+          gridTemplateColumns: `repeat(${this.namesColsForRowRender.length}, minmax(min-content, 1fr))`
         }
       } else {
         // узнаем сколько фиксированных столбцов
@@ -260,44 +264,49 @@ export default {
       const lastCol = this.fixed_last_col
       let resultCenterCols = this.onlyNeedCenterCols
 
-
-        if (this.onlyNeedCenterCols) {
-          console.log('[this.isUnfixed(firstCol)]: ', this.isUnfixed(firstCol), resultCenterCols[0].key !== firstCol.key)
-          console.log('[this.isUnfixed(lastCol)]: ', this.isUnfixed(lastCol), resultCenterCols[resultCenterCols.length - 1].key !== lastCol.key)
-          // // добавляем firstCol в начало centerCols
-          // // если передан фиксированный firstCol И фиксирования нет И если firstCol ещё нет в CenterCols,
-          // if (firstCol && (this.isUnfixed(firstCol) && this.currentWidthTable !== 0) && (resultCenterCols[0].key !== firstCol.key)) {
-          //   resultCenterCols.unshift(firstCol)
-          // } else {
-          //   if (resultCenterCols[0].key === firstCol.key) {
-          //     resultCenterCols.shift(firstCol)
-          //   }
-          // }
-
-          // // добавляем lastCol в конец centerCols
-          // // если передан фиксированный lastCol И фиксирования нет при определённой ширине таблицы,
-          // if (lastCol && this.isUnfixed(lastCol) && (resultCenterCols[resultCenterCols.length - 1].key !== lastCol.key)) {
-          //   resultCenterCols.push(lastCol)
-          // }
-          // console.log(resultCenterCols)
-          // return resultCenterCols
-
-        } else {
-
-          const arrAllValue = Object.keys(this.data_tables[0]) // массив с ключами, например было 5
-          let filteredArrStep1 = []
-          let filteredArrStep2 = []
-
-          filteredArrStep1 = (firstCol && this.isUnfixed(firstCol))
-            ? arrAllValue
-            : arrAllValue.filter(item => item !== firstCol.key) // стало 4
-
-          filteredArrStep2 = (lastCol && this.isUnfixed(lastCol))
-            ? filteredArrStep1
-            : filteredArrStep1.filter(item => item !== lastCol.key) // стало 3
-
-          return filteredArrStep2
+      if (this.onlyNeedCenterCols) {
+        // добавляем firstCol в начало centerCols
+        // если передан фиксированный firstCol И фиксирования нет И если firstCol ещё нет в CenterCols,
+        if (firstCol) {
+          if (this.isUnfixed(firstCol)) {
+            if (this.currentWidthTable !== 0 && (resultCenterCols[0].key !== firstCol.key)) {
+              resultCenterCols.unshift(firstCol)
+            }
+          } else {
+            resultCenterCols = resultCenterCols.filter(el => el.key != firstCol.key)
+          }
         }
+
+        // добавляем lastCol в конец centerCols
+        // если передан фиксированный lastCol И фиксирования нет при определённой ширине таблицы,
+        if (lastCol) {
+          if (this.isUnfixed(lastCol)) {
+            if (resultCenterCols[resultCenterCols.length - 1].key !== lastCol.key) {
+              resultCenterCols.push(lastCol)
+            }
+          } else {
+            resultCenterCols = resultCenterCols.filter(el => el.key != lastCol.key)
+          }
+        }
+
+        return resultCenterCols
+
+      } else {
+
+        const arrAllValue = Object.keys(this.data_tables[0]) // массив с ключами, например было 5
+        let filteredArrStep1 = []
+        let filteredArrStep2 = []
+
+        filteredArrStep1 = (firstCol && this.isUnfixed(firstCol))
+          ? arrAllValue
+          : arrAllValue.filter(item => item !== firstCol.key) // стало 4
+
+        filteredArrStep2 = (lastCol && this.isUnfixed(lastCol))
+          ? filteredArrStep1
+          : filteredArrStep1.filter(item => item !== lastCol.key) // стало 3
+
+        return filteredArrStep2
+      }
     },
 
     // pagination
