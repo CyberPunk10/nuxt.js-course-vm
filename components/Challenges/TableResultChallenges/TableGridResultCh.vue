@@ -505,6 +505,7 @@ export default {
     z-index: 1 // чтобы central-cols при наведении были тоже под тенью
     overflow: hidden
     // background-color: $theme-color-yellow
+    // background-color: $theme-color-orange2
   .center-cols
     .cell
       white-space: nowrap // ОБЯЗАТЕЛЕН, иначе всё поедет (запрет переноса строк)
