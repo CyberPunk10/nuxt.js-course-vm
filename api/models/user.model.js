@@ -5,22 +5,30 @@ const userSchema = new Schema({
   login: {
     type: String,
     unique: true,
-    required: true
+    required: true,
+    trim: true
   },
   email: {
     type: String,
     unique: true,
-    required: true
+    required: true,
+    trim: true
   },
   password: {
     type: String,
     required: true,
-    minlength: 6
+    trim: true,
+    minlength: 6,
   },
   nickname: {
     type: String,
     unique: true,
-    defuaul: 'Default nickname'
+    defuaul: 'Default nickname',
+    trim: true
+  },
+  emailVerified: {
+    type: Boolean,
+    default: false
   },
 
   isDeveloper: Boolean,
