@@ -1,11 +1,12 @@
 <template>
-  <div class="footer-mobile"
+  <div
+    class="footer-mobile"
     @click="clickFooterMobile"
   >
-    <template
-      v-for="(link, index) in navLinks"
-    >
-      <NuxtLink :to="link.url" class="navbar-brand"
+    <template v-for="(link, index) in navLinks">
+      <NuxtLink
+        :to="link.url"
+        class="navbar-brand"
         :key="index"
       >
         <i :class="link.icon"></i>
@@ -18,26 +19,26 @@
 export default {
   computed: {
     isDeveloper() {
-      return this.$store.getters['auth/isDeveloper']
+      return this.$store.getters['authStore/isDeveloper']
     },
     isChallenges() {
-      return this.$store.getters['auth/isChallenges']
+      return this.$store.getters['authStore/isChallenges']
     },
     isMockupAdmin() {
-      return this.$store.getters['auth/isMockupAdmin']
+      return this.$store.getters['authStore/isMockupAdmin']
     },
-    navLinks () {
+    navLinks() {
       const allLinksFooterMobile = this.$store.getters['sidebarLayoutChallenges/footerMobileLinks']
       let onlyNeedLinks // сюда отфильтруем только нужные ссылки в зависимости от контекста
 
       if (this.isDeveloper) {
-        onlyNeedLinks = allLinksFooterMobile.filter( el => (el.isDev || el.isChallenges) )
+        onlyNeedLinks = allLinksFooterMobile.filter(el => (el.isDev || el.isChallenges))
       } else if (this.isChallenges) {
-        onlyNeedLinks = allLinksFooterMobile.filter( el => el.isChallenges )
+        onlyNeedLinks = allLinksFooterMobile.filter(el => el.isChallenges)
       } else if (this.isMockupAdmin) {
-        return allLinksFooterMobile.filter( el => (el.isMockup || el.isMockupAdmin) )
+        return allLinksFooterMobile.filter(el => (el.isMockup || el.isMockupAdmin))
       } else {
-        return allLinksFooterMobile.filter( el => (el.isMockup && !this.isChallenges && !this.isDeveloper && !this.isMockupAdmin) )
+        return allLinksFooterMobile.filter(el => (el.isMockup && !this.isChallenges && !this.isDeveloper && !this.isMockupAdmin))
       }
 
       // меняем порядок
@@ -113,5 +114,4 @@ export default {
 
   @media print
     display: none
-
 </style>

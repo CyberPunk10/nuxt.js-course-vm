@@ -9,7 +9,7 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'robots', content: 'none'} // закрыть сайт от индексации
+      { name: 'robots', content: 'none' } // закрыть сайт от индексации
     ],
     link: [
       { href: "https://fonts.googleapis.com/icon?family=Material+Icons", rel: "stylesheet" },
@@ -21,7 +21,7 @@ export default {
     color: '#ffd438',
     // height: '5px'
   },
-    serverMiddleware: [
+  serverMiddleware: [
     '~/api/index.js' // подключаем rest api
   ],
 
@@ -53,6 +53,7 @@ export default {
     '@nuxtjs/style-resources',
     '@nuxtjs/axios',
     '~/modules/mongodb_setup.js',
+    '@nuxtjs/auth-next'
   ],
 
   pwa: {

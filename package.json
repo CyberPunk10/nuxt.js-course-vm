@@ -14,23 +14,24 @@
   },
   "dependencies": {
     "@nuxtjs/auth": "^4.9.1",
+    "@nuxtjs/auth-next": "5.0.0-1617968180.f699074",
     "@nuxtjs/axios": "^5.12.5",
     "@nuxtjs/pwa": "^3.2.2",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.19.0",
     "chart.js": "^2.9.4",
     "cookie": "^0.4.1",
-    "core-js": "^3.6.5",
+    "core-js": "^3.10.1",
     "element-ui": "^2.13.2",
     "express": "^4.17.1",
     "js-cookie": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.0.0",
     "moment": "^2.29.1",
-    "mongodb": "^3.6.2",
-    "mongoose": "^5.10.11",
+    "mongodb": "^3.6.6",
+    "mongoose": "^5.12.3",
     "multer": "^1.4.2",
-    "nuxt": "^2.14.6",
+    "nuxt": "^2.15.4",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "vue-chartjs": "^3.5.1",
@@ -42,6 +43,6 @@
     "fibers": "^5.0.0",
     "node-sass": "^5.0.0",
     "sass": "^1.27.0",
-    "sass-loader": "^10.1.0"
+    "sass-loader": "^10.1.1"
   }
 }

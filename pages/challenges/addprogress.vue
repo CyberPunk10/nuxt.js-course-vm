@@ -4,7 +4,8 @@
     <h1 class="mb3">Добавить прогресс</h1>
 
     <div class="wrap-card-content">
-      <form class="wrap-card-form"
+      <form
+        class="wrap-card-form"
         @submit.prevent="onSubmit"
       >
         <AppInputChallenge
@@ -135,9 +136,9 @@ export default {
         console.log(formData)
 
         try {
-        //   await this.$store.dispatch('auth/login', formData)
-        //   this.$router.push('/challenges/my-profile')
-        //   this.$message.success(`Добро пожаловать, ${this.controls.login}`)
+          //   await this.$store.dispatch('authStore/login', formData)
+          //   this.$router.push('/challenges/my-profile')
+          //   this.$message.success(`Добро пожаловать, ${this.controls.login}`)
         } catch (error) {
           console.log(error)
         } finally {

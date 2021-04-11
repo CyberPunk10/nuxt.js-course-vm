@@ -1,6 +1,9 @@
 <template>
   <div class="content-center">
-    <FormLoginRegister :formLoginRegister="formLoginRegister" @onSubmit="checkForm">
+    <FormLoginRegister
+      :formLoginRegister="formLoginRegister"
+      @onSubmit="checkForm"
+    >
       <AppInputChallenge
         v-model.trim="formRegister.login"
         class="label_bold"
@@ -119,14 +122,14 @@ export default {
         try {
 
           // create new user
-          await this.$store.dispatch('auth/createUserFree', formData)
+          await this.$store.dispatch('authStore/createUserFree', formData)
           // this.$message.success('Новый пользователь добавлен')
           this.formRegister.login = this.formRegister.email = this.formRegister.password = ''
 
           this.$router.push('/challenges/login')
-          
+
           // сразу заходим под созданным new user
-          // await this.$store.dispatch('auth/login', formData)
+          // await this.$store.dispatch('authStore/login', formData)
           // this.$router.push('/challenges/my-profile')
           // this.$message.success(`Добро пожаловать, ${formData.login}`)
 
