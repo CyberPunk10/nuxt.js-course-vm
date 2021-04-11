@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- <ClientOnly> -->
     <FormLoginRegister
       :formLoginRegister="formLoginRegister"
       @onSubmit="checkForm"
@@ -43,6 +44,7 @@
         </div>
       </template>
     </FormLoginRegister>
+    <!-- </ClientOnly> -->
   </div>
 </template>
 
@@ -74,13 +76,13 @@ export default {
 
   computed: {
     isDeveloper() {
-      return this.$store.getters['authStore/isDeveloper']
+      return this.$store.getters['auth/isDeveloper']
     },
     isChallenges() {
-      return this.$store.getters['authStore/isChallenges']
+      return this.$store.getters['auth/isChallenges']
     },
     isMockupAdmin() {
-      return this.$store.getters['authStore/isMockupAdmin']
+      return this.$store.getters['auth/isMockupAdmin']
     }
   },
 
@@ -130,7 +132,7 @@ export default {
         }
 
         try {
-          await this.$store.dispatch('authStore/login', formData)
+          await this.$store.dispatch('auth/login', formData)
           if (this.isDeveloper || this.isChallenges) this.$router.push('/challenges/my-profile')
           if (this.isMockupAdmin) this.$router.push('/')
 

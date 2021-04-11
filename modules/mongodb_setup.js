@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-const keys = require('../api/keys')
+const keys = require('../api_rest/keys')
 
 export default function () {
   this.nuxt.hook('render:setupMiddleware', () => {

@@ -22,7 +22,8 @@ export default {
     // height: '5px'
   },
   serverMiddleware: [
-    '~/api/index.js' // подключаем rest api
+    '~/api_rest/index.js', // подключаем rest api
+    // '@/api_graphql/index.js'
   ],
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
@@ -53,7 +54,7 @@ export default {
     '@nuxtjs/style-resources',
     '@nuxtjs/axios',
     '~/modules/mongodb_setup.js',
-    '@nuxtjs/auth-next'
+    // '@nuxtjs/auth-next'
   ],
 
   pwa: {

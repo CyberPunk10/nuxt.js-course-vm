@@ -1,0 +1,39 @@
+type Character {
+  id: ID
+  name: String!
+  status: String!
+  gender: String
+  image: String
+  # origin: [Location]
+}
+
+type User {
+  id: ID
+  login: String!
+  email: String!
+  # password: String! // тут его не обязательно обозначать, мы его создаем из UserInput + bcrypt
+  name: String
+  emailVerified: Boolean
+}
+
+input UserInput {
+  login: String!
+  email: String!
+  password: String!
+  name: String
+}
+
+type AuthPayload {
+  token: String!
+  user: User
+}
+
+type Query {
+  characters: [Character]
+  character(id: ID!): Character
+}
+
+type Mutation {
+  addCharacter(name: String!, status: String!, gender: String, image: String): Character
+  signup(user: UserInput): AuthPayload
+}
