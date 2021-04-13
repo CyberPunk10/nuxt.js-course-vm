@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <ClientOnly> -->
     <FormLoginRegister
       :formLoginRegister="formLoginRegister"
       @onSubmit="checkForm"
@@ -44,7 +43,6 @@
         </div>
       </template>
     </FormLoginRegister>
-    <!-- </ClientOnly> -->
   </div>
 </template>
 

@@ -42,7 +42,20 @@ export default {
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
-  components: true,
+  // components: true,
+  components: {
+    dirs: [
+      '~/components',
+      '~/components/Challenges',
+      // '~/components/Challenges/CalendarGitHub',
+      '~/components/Challenges/SportForm',
+      '~/components/Challenges/TableResultChallenges',
+      '~/components/FSD/buttons',
+      '~/components/main',
+      '~/components/UI/Controls',
+      '~/components/UI-challenge/controls',
+    ]
+  },
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
