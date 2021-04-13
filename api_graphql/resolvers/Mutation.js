@@ -4,8 +4,8 @@ const bcrypt = require('bcrypt-nodejs')
 // const { sendConfirmationEmail } = require('./services/EmailService')
 
 // require('dotenv').config()
-const { Character, validateCharacter } = require('./model/Character')
-const { User, validateUser } = require('./model/User')
+const { Character, validateCharacter } = require('../model/Character')
+const { User, validateUser } = require('../model/User')
 
 const Mutation = {
   addCharacter(_, payload) {

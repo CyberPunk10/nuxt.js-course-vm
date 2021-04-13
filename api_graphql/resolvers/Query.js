@@ -1,5 +1,5 @@
 // require('dotenv').config()
-const { Character } = require('./model/Character')
+const { Character } = require('../model/Character')
 
 const Query = {
   characters: () => Character.find({}, (error, characters) => {

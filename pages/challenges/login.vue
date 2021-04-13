@@ -1,5 +1,34 @@
 <template>
   <div>
+    <!-- <div>
+      <h1 class="text-4xl font-semibold text-gray-800 m-2 mb-8">
+        DoingITeasyChannel - Nuxt-series
+      </h1>
+      <nuxt-link
+        to="create"
+        class="bg-purple-700 rounded p-2 text-white font-semibold m-2"
+      >
+        Create Character
+      </nuxt-link>
+      <div class="flex">
+        <ul class="w-64 px-2 text-gray-600">
+          <li
+            v-for="character in characters"
+            :key="character.id"
+          >
+            <nuxt-link
+              :to="character.id"
+              class="hover:font-bold hover:text-gray-900 leading-loose"
+            >
+              {{ character.name }}
+            </nuxt-link>
+          </li>
+        </ul>
+        <div class="flex-grow bg-white min-h-full">
+          <nuxt-child :key="$route.params.id"></nuxt-child>
+        </div>
+      </div>
+    </div> -->
     <FormLoginRegister
       :formLoginRegister="formLoginRegister"
       @onSubmit="checkForm"
@@ -50,10 +79,25 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { required, minLength } from 'vuelidate/lib/validators'
+import gql from 'graphql-tag'
 
 export default {
   mixins: [validationMixin],
+  async asyncData({ app, redirect }) {
+    const result = await app.apolloProvider.defaultClient.query({
+      query: gql`
+        query getCharacters {
+          characters {
+            id
+            name
+          }
+        }
+      `
+    })
 
+    // redirect('/' + result.data.characters[0].id)
+    return result.data
+  },
   head: {
     title: `Вход на сайт | ${process.env.appName}`
   },
@@ -74,13 +118,13 @@ export default {
 
   computed: {
     isDeveloper() {
-      return this.$store.getters['auth/isDeveloper']
+      return this.$store.getters['authStore/isDeveloper']
     },
     isChallenges() {
-      return this.$store.getters['auth/isChallenges']
+      return this.$store.getters['authStore/isChallenges']
     },
     isMockupAdmin() {
-      return this.$store.getters['auth/isMockupAdmin']
+      return this.$store.getters['authStore/isMockupAdmin']
     }
   },
 
@@ -130,7 +174,7 @@ export default {
         }
 
         try {
-          await this.$store.dispatch('auth/login', formData)
+          await this.$store.dispatch('authStore/login', formData)
           if (this.isDeveloper || this.isChallenges) this.$router.push('/challenges/my-profile')
           if (this.isMockupAdmin) this.$router.push('/')
 
