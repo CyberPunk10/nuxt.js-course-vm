@@ -23,7 +23,7 @@ export default {
   },
   serverMiddleware: [
     '~/api_rest/index.js', // подключаем rest api
-    // '@/api_graphql/index.js'
+    { path: '/graphql', handler: '@/api_graphql/index.js' }  // (?) он находится на другом домене: 4000!
   ],
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
@@ -67,7 +67,8 @@ export default {
     '@nuxtjs/style-resources',
     '@nuxtjs/axios',
     '~/modules/mongodb_setup.js',
-    // '@nuxtjs/auth-next'
+    // '@nuxtjs/auth-next',
+    '@nuxtjs/apollo', // https://github.com/nuxt-community/apollo-module
   ],
 
   pwa: {
@@ -100,6 +101,15 @@ export default {
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
     baseURL: process.env.BASE_URL || 'http://localhost:3000' // for heroku or other hosting
+  },
+
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'http://localhost:4000',
+        // httpEndpoint: 'https://rickandmortyapi.com/graphql',
+      }
+    }
   },
 
   env: {

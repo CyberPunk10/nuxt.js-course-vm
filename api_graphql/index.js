@@ -4,8 +4,8 @@ const fs = require('fs')
 const path = require('path')
 
 // require('dotenv').config()
-const Query = require('./Query')
-const Mutation = require('./Mutation')
+const Query = require('./resolvers/Query')
+const Mutation = require('./resolvers/Mutation')
 
 
 // mongoose
