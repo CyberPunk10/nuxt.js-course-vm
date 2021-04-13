@@ -1,6 +1,8 @@
 <template>
   <div class="control text-field">
-    <label :class="{required: inputData.required}"><slot/></label>
+    <label :class="{required: inputData.required}">
+      <slot />
+    </label>
     <input
       class="text-field__input"
       v-bind="$attrs"
@@ -36,7 +38,7 @@ export default {
     inputData: Object,
   },
 
-  data () {
+  data() {
     return {
       messageEmpty: `Введите ${this.inputData.title}`,
     }
@@ -159,13 +161,8 @@ export default {
   .text-field__input
     width: calc(100% - #{$width-label})
 
-
 // label bold
 .text-field.label_bold
   label
     font-weight: bold
-
-
-
-
 </style>

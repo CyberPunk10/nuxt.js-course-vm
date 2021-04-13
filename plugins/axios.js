@@ -5,8 +5,8 @@ export default function ({ $axios, redirect, store }) {
 
     // Добавление заголовка с токеном для backend (так как axios не доступен при SSR)
     // если есть права админа
-    if (store.getters['auth/isAuthenticated'] && !request.headers.common['Authorization']) {
-      const token = store.getters['auth/token']
+    if (store.getters['authStore/isAuthenticated'] && !request.headers.common['Authorization']) {
+      const token = store.getters['authStore/token']
       request.headers.common['Authorization'] = `Bearer ${token}`
     }
     console.log('[request.headers.common]: ', request.headers.common)
@@ -14,11 +14,11 @@ export default function ({ $axios, redirect, store }) {
     return request
   })
 
-  $axios.onError( error => {
+  $axios.onError(error => {
     if (error.response) {
       if (error.response.status === 401) {
         redirect('/challenges/login?message=session')
-        store.dispatch('auth/logout')
+        store.dispatch('authStore/logout')
       }
       if (error.response.status === 500) {
         console.log('Server 500 error')

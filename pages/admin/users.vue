@@ -10,7 +10,10 @@
     <br>
 
     <h2 class="title-table font-how-h2 tac mb2 mt3">Изменить пароль у пользователя</h2>
-    <FormLoginRegister @onSubmit="updatePassword" class="align-left">
+    <FormLoginRegister
+      @onSubmit="updatePassword"
+      class="align-left"
+    >
       <AppInputChallenge
         v-model.trim="formLogin.login"
         class="label_bold"
@@ -20,7 +23,7 @@
         autofocus
         placeholder="Логин или Email"
       >Логин или Email:</AppInputChallenge>
-        <!-- :class="{invalid: ($v.formLogin.login.$dirty && !$v.formLogin.login.required)}" -->
+      <!-- :class="{invalid: ($v.formLogin.login.$dirty && !$v.formLogin.login.required)}" -->
 
       <AppInputChallenge
         v-model.trim="formLogin.password"
@@ -31,7 +34,7 @@
         type="password"
         placeholder="Новый пароль"
       >Новый пароль:</AppInputChallenge>
-        <!-- :class="{invalid: ($v.formLogin.password.$dirty && !$v.formLogin.password.required)}" -->
+      <!-- :class="{invalid: ($v.formLogin.password.$dirty && !$v.formLogin.password.required)}" -->
 
       <ButtonChallenge type="submit">Обновить пароль</ButtonChallenge>
     </FormLoginRegister>
@@ -45,18 +48,29 @@
         :rules="rules"
         @submit.native.prevent="onSubmit"
       >
-        <el-form-item label="Логин" prop="login">
+        <el-form-item
+          label="Логин"
+          prop="login"
+        >
           <el-input v-model.trim="controls.login" />
         </el-form-item>
 
-        <el-form-item label="Email" prop="email" class="mb2">
+        <el-form-item
+          label="Email"
+          prop="email"
+          class="mb2"
+        >
           <el-input
             type="email"
             v-model.trim="controls.email"
           />
         </el-form-item>
 
-        <el-form-item label="Пароль" prop="password" class="mb2">
+        <el-form-item
+          label="Пароль"
+          prop="password"
+          class="mb2"
+        >
           <el-input
             type="password"
             v-model.trim="controls.password"
@@ -99,7 +113,7 @@ export default {
       onlyNeedCenterCols: [
         { key: '_id', title: 'id', sort: 'text' },
         { key: 'password', title: 'Пароль', sort: 'text' },
-        { key: 'created', title: 'Дата создания', sort: 'text', formatter: 'datetime'},
+        { key: 'created', title: 'Дата создания', sort: 'text', formatter: 'datetime' },
       ],
 
       // for form update password
@@ -117,15 +131,15 @@ export default {
       },
       rules: {
         login: [
-          {required: true, message: 'Введите логин', trigger: 'blur'}
+          { required: true, message: 'Введите логин', trigger: 'blur' }
         ],
         email: [
-          {required: true, message: 'Введите email', trigger: 'blur'},
+          { required: true, message: 'Введите email', trigger: 'blur' },
           { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }
         ],
         password: [
-          {required: true, message: 'Введите пароль', trigger: 'blur'},
-          {min: 6, message: 'Пароль должен быть не менее 6 символов', trigger: 'blur'}
+          { required: true, message: 'Введите пароль', trigger: 'blur' },
+          { min: 6, message: 'Пароль должен быть не менее 6 символов', trigger: 'blur' }
         ]
       }
     }
@@ -158,7 +172,7 @@ export default {
 
   methods: {
     // for form update password
-     async updatePassword() {
+    async updatePassword() {
       if (this.$v.formLogin.$invalid) {
         this.$v.$touch()
         return
@@ -172,7 +186,7 @@ export default {
         }
 
         try {
-          await this.$store.dispatch('auth/updatePassword', formData)
+          await this.$store.dispatch('authStore/updatePassword', formData)
           this.$message.success(`Пароль успешно обновлен`)
         } catch (error) {
           console.log(error)
@@ -194,7 +208,7 @@ export default {
               email: this.controls.email,
               password: this.controls.password
             }
-            await this.$store.dispatch('auth/createUser', formData)
+            await this.$store.dispatch('authStore/createUser', formData)
             this.$message.success('Новый пользователь добавлен')
             this.controls.login = this.controls.email = this.controls.password = ''
             this.loading = false

@@ -1,12 +1,11 @@
 <template>
   <div class="wrap-card-form-login">
-    <h1
-      v-if="formLoginRegister"
-    >{{ formLoginRegister.title }}</h1>
-    <form class="wrap-card-form"
+    <h1 v-if="formLoginRegister">{{ formLoginRegister.title }}</h1>
+    <form
+      class="wrap-card-form"
       @submit.prevent="$emit('onSubmit')"
     >
-      <slot/>
+      <slot />
     </form>
     <div class="after-card-content">
       <slot name="afterCardContent"></slot>
@@ -22,7 +21,6 @@ export default {
 </script>
 
 <style lang="sass">
-
 .wrap-card-form-login
   max-width: 31rem
   box-sizing: content-box
@@ -59,8 +57,5 @@ export default {
       color: $blueDark
       &:hover
         text-decoration: underline
-
-
-
 </style>
 

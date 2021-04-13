@@ -1,6 +1,9 @@
 <template>
   <div>
-    <FormLoginRegister :formLoginRegister="formLoginRegister" @onSubmit="checkForm">
+    <FormLoginRegister
+      :formLoginRegister="formLoginRegister"
+      @onSubmit="checkForm"
+    >
       <AppInputChallenge
         v-model.trim="formLogin.login"
         class="label_bold"
@@ -10,7 +13,7 @@
         autofocus
         placeholder="Логин или Email"
       >Логин или Email:</AppInputChallenge>
-        <!-- :class="{invalid: ($v.formLogin.login.$dirty && !$v.formLogin.login.required)}" -->
+      <!-- :class="{invalid: ($v.formLogin.login.$dirty && !$v.formLogin.login.required)}" -->
 
       <AppInputChallenge
         v-model.trim="formLogin.password"
@@ -21,7 +24,7 @@
         type="password"
         placeholder="Пароль"
       >Пароль:</AppInputChallenge>
-        <!-- :class="{invalid: ($v.formLogin.password.$dirty && !$v.formLogin.password.required)}" -->
+      <!-- :class="{invalid: ($v.formLogin.password.$dirty && !$v.formLogin.password.required)}" -->
 
       <ButtonChallenge type="submit">Войти</ButtonChallenge>
 
@@ -95,7 +98,7 @@ export default {
   },
 
   mounted() {
-    const {message} = this.$route.query
+    const { message } = this.$route.query
 
     switch (message) {
       case 'login':

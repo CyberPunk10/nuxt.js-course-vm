@@ -1,40 +1,68 @@
 <template>
   <!-- challenges prod -->
-  <div class="sidenav__nav-item-wrap"
+  <div
+    class="sidenav__nav-item-wrap"
     v-if="isChallenges && link.isChallenges"
   >
-    <NuxtLink :to="link.url" class="sidenav__nav-item">
-      <i v-if="link.icon" :class="link.icon"></i>
+    <NuxtLink
+      :to="link.url"
+      class="sidenav__nav-item"
+    >
+      <i
+        v-if="link.icon"
+        :class="link.icon"
+      ></i>
       <span class="sidenav__nav-item-text">{{ link.name }}</span>
     </NuxtLink>
   </div>
 
   <!-- challenges dev -->
-  <div class="sidenav__nav-item-wrap"
+  <div
+    class="sidenav__nav-item-wrap"
     v-else-if="isDeveloper && (link.isDev || link.isChallenges)"
   >
-    <NuxtLink :to="link.url" class="sidenav__nav-item">
-      <i v-if="link.icon" :class="link.icon"></i>
+    <NuxtLink
+      :to="link.url"
+      class="sidenav__nav-item"
+    >
+      <i
+        v-if="link.icon"
+        :class="link.icon"
+      ></i>
       <span class="sidenav__nav-item-text">{{ link.name }}</span>
     </NuxtLink>
   </div>
 
   <!-- mockup admin-->
-  <div class="sidenav__nav-item-wrap"
+  <div
+    class="sidenav__nav-item-wrap"
     v-else-if="isMockupAdmin && (link.isMockup || link.isMockupAdmin)"
   >
-    <NuxtLink :to="link.url" class="sidenav__nav-item">
-      <i v-if="link.icon" :class="link.icon"></i>
+    <NuxtLink
+      :to="link.url"
+      class="sidenav__nav-item"
+    >
+      <i
+        v-if="link.icon"
+        :class="link.icon"
+      ></i>
       <span class="sidenav__nav-item-text">{{ link.name }}</span>
     </NuxtLink>
   </div>
 
   <!-- mockup (без авторизации) -->
-  <div class="sidenav__nav-item-wrap"
+  <div
+    class="sidenav__nav-item-wrap"
     v-else-if="!isChallenges && !isDeveloper && !isMockupAdmin && link.isMockup"
   >
-    <NuxtLink :to="link.url" class="sidenav__nav-item">
-      <i v-if="link.icon" :class="link.icon"></i>
+    <NuxtLink
+      :to="link.url"
+      class="sidenav__nav-item"
+    >
+      <i
+        v-if="link.icon"
+        :class="link.icon"
+      ></i>
       <span class="sidenav__nav-item-text">{{ link.name }}</span>
     </NuxtLink>
   </div>
@@ -49,13 +77,13 @@ export default {
   },
   computed: {
     isDeveloper() {
-      return this.$store.getters['auth/isDeveloper']
+      return this.$store.getters['authStore/isDeveloper']
     },
     isChallenges() {
-      return this.$store.getters['auth/isChallenges']
+      return this.$store.getters['authStore/isChallenges']
     },
     isMockupAdmin() {
-      return this.$store.getters['auth/isMockupAdmin']
+      return this.$store.getters['authStore/isMockupAdmin']
     }
   },
 }
@@ -123,7 +151,6 @@ export default {
       &>span
         color: $color-text-grey-dark
 
-
   &[data-sidebar-active="false"] // if hover sidebar
     .sidebar
       @media(hover: hover) and (pointer: fine) // https://webformyself.com/css-hover-na-sensornyx-ekranax/ (решение на чистом CSS для :hover на сенсорных экранах)
@@ -132,5 +159,4 @@ export default {
             &>i,
             &>span
               color: $color-text-grey-dark
-
 </style>

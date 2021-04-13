@@ -4,21 +4,26 @@ export default {
     htmlAttrs: {
       lang: 'ru'
     },
-    title: 'nuxt.js-course-vm3333',
+    title: 'challenges',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'robots', content: 'none'} // закрыть сайт от индексации
+      { name: 'robots', content: 'none' } // закрыть сайт от индексации
     ],
     link: [
       { href: "https://fonts.googleapis.com/icon?family=Material+Icons", rel: "stylesheet" },
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-
+  loading: {
+    // color: '#ffa33b',
+    color: '#ffd438',
+    // height: '5px'
+  },
   serverMiddleware: [
-    '~/api/index.js'
+    '~/api_rest/index.js', // подключаем rest api
+    // '@/api_graphql/index.js'
   ],
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
@@ -37,7 +42,20 @@ export default {
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
-  components: true,
+  // components: true,
+  components: {
+    dirs: [
+      '~/components',
+      '~/components/Challenges',
+      // '~/components/Challenges/CalendarGitHub',
+      '~/components/Challenges/SportForm',
+      '~/components/Challenges/TableResultChallenges',
+      '~/components/FSD/buttons',
+      '~/components/main',
+      '~/components/UI/Controls',
+      '~/components/UI-challenge/controls',
+    ]
+  },
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
@@ -49,6 +67,7 @@ export default {
     '@nuxtjs/style-resources',
     '@nuxtjs/axios',
     '~/modules/mongodb_setup.js',
+    // '@nuxtjs/auth-next'
   ],
 
   pwa: {

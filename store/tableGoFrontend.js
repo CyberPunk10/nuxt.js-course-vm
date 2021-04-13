@@ -1,4 +1,17 @@
 export const state = () => ({
+  players10: [
+    {id: 1, name: 'Player 1', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null], fullname: 'Player 1', result3: [null, null, null, null], resultAll2: 0, result4: [null, null, null, null]},
+    {id: 2, name: 'Playefr 2', result: [1, 1, null, null], resultAll: 0, result2: [null, null, null, null], fullname: 'Playefr 2', result3: [1, 1, null, null], resultAll2: 0, result4: [null, null, null, null]},
+    {id: 3, name: 'Playffer 1', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null], fullname: 'Playffer 1', result3: [null, null, null, null], resultAll2: 0, result4: [null, null, null, null]},
+    {id: 4, name: 'Player 2', result: [2, null, null, null], resultAll: 0, result2: [null, null, null, null], fullname: 'Player 2', result3: [2, null, null, null], resultAll2: 0, result4: [null, null, null, null]},
+    {id: 5, name: 'Player 1', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null], fullname: 'Player 1', result3: [null, null, null, null], resultAll2: 0, result4: [null, null, null, null]},
+    {id: 6, name: 'Plaffffyer 2', result: [null, 3, null, null], resultAll: 0, result2: [null, null, null, null], fullname: 'Plaffffyer 2', result3: [null, 3, null, null], resultAll2: 0, result4: [null, null, null, null]},
+    {id: 7, name: 'Player 1', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null], fullname: 'Player 1', result3: [null, null, null, null], resultAll2: 0, result4: [null, null, null, null]},
+    {id: 8, name: 'Player 2', result: [null, 4, null, null], resultAll: 0, result2: [null, null, null, null], fullname: 'Player 2', result3: [null, 4, null, null], resultAll2: 0, result4: [null, null, null, null]},
+    {id: 9, name: 'Player 1', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null], fullname: 'Player 1', result3: [null, null, null, null], resultAll2: 0, result4: [null, null, null, null]},
+    {id: 10, name: 'Player 1', result: [null, null, null, null], resultAll: 100, result2: [null, null, null, null], fullname: 'Player 1', result3: [null, null, null, null], resultAll2: 100, result4: [null, null, null, null]},
+    {id: 11, name: 'Player 1', result: [null, null, null, null], resultAll: 100, result2: [null, null, null, null], fullname: 'Player 1', result3: [null, null, null, null], resultAll2: 100, result4: [null, null, null, null]}
+  ],
   players: [
     {id: 1, name: 'Player 1', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null], fullname: 'Player 1', result3: [null, null, null, null], resultAll2: 0, result4: [null, null, null, null]},
     {id: 2, name: 'Playefr 2', result: [1, 1, null, null], resultAll: 0, result2: [null, null, null, null], fullname: 'Playefr 2', result3: [1, 1, null, null], resultAll2: 0, result4: [null, null, null, null]},
@@ -250,7 +263,7 @@ export const actions = {
 }
 
 export const getters = {
-  getPlayers: state => state.players,
+  getPlayers: state => state.players10,
   getDataPushUps: state => state.dataPushUps
 }
 

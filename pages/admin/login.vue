@@ -12,11 +12,18 @@
 
       <h2>Войти в панель администратора</h2>
 
-      <el-form-item label="Логин" prop="login">
+      <el-form-item
+        label="Логин"
+        prop="login"
+      >
         <el-input v-model.trim="controls.login" />
       </el-form-item>
 
-      <el-form-item label="Пароль" prop="password" class="mb2">
+      <el-form-item
+        label="Пароль"
+        prop="password"
+        class="mb2"
+      >
         <el-input
           type="password"
           v-model.trim="controls.password"
@@ -52,18 +59,18 @@ export default {
       },
       rules: {
         login: [
-          {required: true, message: 'Введите логин', trigger: 'blur'}
+          { required: true, message: 'Введите логин', trigger: 'blur' }
         ],
         password: [
-          {required: true, message: 'Введите пароль', trigger: 'blur'},
-          {min: 6, message: 'Пароль должен быть не менее 6 символов', trigger: 'blur'}
+          { required: true, message: 'Введите пароль', trigger: 'blur' },
+          { min: 6, message: 'Пароль должен быть не менее 6 символов', trigger: 'blur' }
         ]
       }
     }
   },
 
   mounted() {
-    const {message} = this.$route.query
+    const { message } = this.$route.query
 
     switch (message) {
       case 'login':
@@ -90,7 +97,7 @@ export default {
               loginOrEmail: this.controls.login, // login поменял на loginOrEmail для того, чтобы не переписывать метод
               password: this.controls.password
             }
-            await this.$store.dispatch('auth/login', formData)
+            await this.$store.dispatch('authStore/login', formData)
             // this.$router.push('/admin')
             this.$router.push('/challenges/my-profile')
             // this.$message.success('Вы зашли с правами админа')
@@ -108,6 +115,5 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-
 </style>
 

@@ -3,7 +3,8 @@ import { Schema, model } from 'mongoose'
 const addChallengeProgressSchema = new Schema({
   title: {
     type: String,
-    required: true
+    required: true,
+    trim: true
   },
   description: String,
   date: {

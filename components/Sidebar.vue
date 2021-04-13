@@ -29,12 +29,14 @@
         />
       </div>
 
-      <div class="separator"
+      <div
+        class="separator"
         v-if="isDeveloper"
       >
       </div>
 
-      <div class="sidenav__nav-item-wrap"
+      <div
+        class="sidenav__nav-item-wrap"
         v-if="isDeveloper"
       >
         <p class="sidenav__nav-item">
@@ -52,7 +54,8 @@
 
       <div class="separator"></div> -->
 
-      <div class="reklamaF"
+      <div
+        class="reklamaF"
         v-if="isDeveloper"
       >
         <div class="content">
@@ -69,7 +72,7 @@
 <script>
 export default {
   computed: {
-    navLinks () {
+    navLinks() {
       return this.$store.getters['sidebarLayoutChallenges/sidenavLinks']
     },
 
@@ -79,12 +82,12 @@ export default {
     },
 
     isDeveloper() {
-      return this.$store.getters['auth/isDeveloper']
+      return this.$store.getters['authStore/isDeveloper']
     }
   },
 
   methods: {
-    handleClickSidebar: function(event) {
+    handleClickSidebar: function (event) {
       // console.log('click on Sidebar', event.target)
       const sideBar = document.querySelector('.sidebar')
       const className = event.target.className
@@ -151,7 +154,6 @@ export default {
   user-select: none
   // background-color: $color-bg-sidebar
 
-
   // общее
   &-main
     position: absolute
@@ -212,7 +214,6 @@ export default {
         .separator
           display: block
 
-
 // show
 // .layout-wrapper[data-sidebar-active="true"]
 //   .sidebar-main
@@ -221,7 +222,4 @@ export default {
     // margin-top: 0
     // padding-top: 2.5rem
     // height: calc(100% - .5rem - 2px)
-
-
-
 </style>
