@@ -1,14 +1,14 @@
 // require('dotenv').config()
-const { Character } = require('../model/Character')
+const { Push_ups } = require('../model/Push_ups')
 
 const Query = {
-  characters: () => Character.find({}, (error, characters) => {
+  severalPush_ups: () => Push_ups.find({}, (error, severalPush_ups) => {
     if (error) console.log('error', error)
-    return characters
+    return severalPush_ups
   }),
-  character: (_, { id }) => Character.findById(id, (error, character) => {
+  push_ups: (_, { id }) => Push_ups.findById(id, (error, push_ups) => {
     if (error) console.log('error', error)
-    return character
+    return push_ups
   })
 }
 module.exports = Query

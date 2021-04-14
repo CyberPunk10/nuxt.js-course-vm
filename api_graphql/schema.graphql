@@ -1,9 +1,9 @@
-type Character {
+type Push_ups {
   id: ID
-  name: String!
-  status: String!
-  gender: String
-  image: String
+  count: String!
+  createdDate: String
+  createdBy: User!
+  # status: String!
   # origin: [Location]
 }
 
@@ -29,11 +29,11 @@ type AuthPayload {
 }
 
 type Query {
-  characters: [Character]
-  character(id: ID!): Character
+  severalPush_ups: [Push_ups]
+  push_ups(id: ID!): Push_ups
 }
 
 type Mutation {
-  addCharacter(name: String!, status: String!, gender: String, image: String): Character
+  addPush_ups(count: String!, creatorId: String!): Push_ups
   signup(user: UserInput): AuthPayload
 }

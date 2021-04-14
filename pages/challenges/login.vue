@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <div>
+    <div>
       <h1 class="text-4xl font-semibold text-gray-800 m-2 mb-8">
         DoingITeasyChannel - Nuxt-series
       </h1>
@@ -8,19 +8,19 @@
         to="create"
         class="bg-purple-700 rounded p-2 text-white font-semibold m-2"
       >
-        Create Character
+        Create Push_ups
       </nuxt-link>
       <div class="flex">
         <ul class="w-64 px-2 text-gray-600">
           <li
-            v-for="character in characters"
-            :key="character.id"
+            v-for="Push_ups in severalPush_ups"
+            :key="Push_ups.id"
           >
             <nuxt-link
-              :to="character.id"
+              :to="Push_ups.id"
               class="hover:font-bold hover:text-gray-900 leading-loose"
             >
-              {{ character.name }}
+              {{ Push_ups.count }}
             </nuxt-link>
           </li>
         </ul>
@@ -28,7 +28,7 @@
           <nuxt-child :key="$route.params.id"></nuxt-child>
         </div>
       </div>
-    </div> -->
+    </div>
     <FormLoginRegister
       :formLoginRegister="formLoginRegister"
       @onSubmit="checkForm"
@@ -86,16 +86,16 @@ export default {
   async asyncData({ app, redirect }) {
     const result = await app.apolloProvider.defaultClient.query({
       query: gql`
-        query getCharacters {
-          characters {
+        query getSeveralPush_ups {
+          severalPush_ups {
             id
-            name
+            count
           }
         }
       `
     })
 
-    // redirect('/' + result.data.characters[0].id)
+    // redirect('/' + result.data.severalPush_ups[0].id)
     return result.data
   },
   head: {
@@ -116,18 +116,6 @@ export default {
     }
   },
 
-  computed: {
-    isDeveloper() {
-      return this.$store.getters['authStore/isDeveloper']
-    },
-    isChallenges() {
-      return this.$store.getters['authStore/isChallenges']
-    },
-    isMockupAdmin() {
-      return this.$store.getters['authStore/isMockupAdmin']
-    }
-  },
-
   validations: {
     formLogin: {
       login: { required, minLength: minLength(4) },
@@ -138,6 +126,18 @@ export default {
         // }
         required, minLength: minLength(6)
       }
+    }
+  },
+
+  computed: {
+    isDeveloper() {
+      return this.$store.getters['authStore/isDeveloper']
+    },
+    isChallenges() {
+      return this.$store.getters['authStore/isChallenges']
+    },
+    isMockupAdmin() {
+      return this.$store.getters['authStore/isMockupAdmin']
     }
   },
 

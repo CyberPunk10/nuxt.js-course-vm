@@ -4,19 +4,19 @@ const bcrypt = require('bcrypt-nodejs')
 // const { sendConfirmationEmail } = require('./services/EmailService')
 
 // require('dotenv').config()
-const { Character, validateCharacter } = require('../model/Character')
+const { Push_ups, validatePush_ups } = require('../model/Push_ups')
 const { User, validateUser } = require('../model/User')
 
 const Mutation = {
-  addCharacter(_, payload) {
-    // const { value, error } = validateCharacter(payload, { abortEarly: false })
+  addPush_ups(_, payload) {
+    // const { value, error } = validatePush_ups(payload, { abortEarly: false })
     // if (error) {
-    //   throw new UserInputError('Failed to create character due to validation errors', {
+    //   throw new UserInputError('Failed to create Push_ups due to validation errors', {
     //     validationError: error.details
     //   })
     // }
-    // return Character.create(value)
-    return Character.create(payload)
+    // return Push_ups.create(value)
+    return Push_ups.create(payload)
   },
 
   async signup(_, { user }) {
