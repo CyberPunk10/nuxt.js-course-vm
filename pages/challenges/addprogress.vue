@@ -1,23 +1,31 @@
 <template>
-  <div class="">
-
-    <h1 class="mb3">Добавить прогресс</h1>
-
+  <div class="add-progress">
+    <h2 class="title-table font-how-h2">Добавить прогресс</h2>
     <div class="wrap-card-content">
       <form
         class="wrap-card-form"
         @submit.prevent="onSubmit"
       >
         <AppInputChallenge
-          v-model.trim="controls.value"
+          v-model.trim="controls.username"
+          class="label_bold"
+          placeholder="Username"
+          autofocus
+          :inputData="{ title: 'Имя пользователя' }"
+          :v="$v.controls.username"
+          :class="{invalid: $v.controls.username.$error}"
+        >Username:</AppInputChallenge>
+
+        <AppInputChallenge
+          v-model.trim="controls.count"
           class="label_bold"
           placeholder="Количество"
           autofocus
           :inputData="{ title: 'Количество отжиманий' }"
-          :v="$v.controls.value"
+          :v="$v.controls.count"
           type="number"
           min="0"
-          :class="{invalid: $v.controls.value.$error}"
+          :class="{invalid: $v.controls.count.$error}"
         >Количество отжиманий:</AppInputChallenge>
 
         <ButtonChallenge type="submit">Сохранить</ButtonChallenge>
@@ -76,46 +84,16 @@ export default {
       loading: false,
 
       controls: {
-        // title: 'challenge-1-Отжимания',
-        // color: '-ch1',
-        value: null,
-        // date: null,
+        count: null,
+        username: ''
       },
-
-
-      // controls: {
-      //   title: 'challenge-1',
-      //   date: null,
-      //   color: '-ch1',
-      //   count: 0,
-      // },
-      // rules: {
-      //   title: [
-      //     {required: true, message: 'Добавьте название поста', trigger: 'blur'}
-      //   ],
-      //   date: [
-      //     {required: false, message: 'Поле не должно быть пустым', trigger: 'blur'}
-      //   ],
-      //   color: [
-      //     {required: true, message: 'Поле не должно быть пустым', trigger: 'blur'}
-      //   ],
-      //   count: [
-      //     {required: true, message: 'Поле не должно быть пустым', trigger: 'blur'}
-      //   ]
-      // }
     }
   },
 
   validations: {
     controls: {
-      value: { required },
-      // password: {
-      //   // simpleValidation(value) {
-      //   //   console.log(value)
-      //   //   return value.length > 5
-      //   // }
-      //   required, minLength: minLength(6)
-      // }
+      count: { required },
+      username: { required, minLength: minLength(4) }
     }
   },
 
@@ -130,13 +108,13 @@ export default {
         this.loading = true
 
         const formData = {
-          value: this.controls.value,
-          // password: this.controls.password
+          count: this.controls.count,
+          username: this.controls.username
         }
         console.log(formData)
 
         try {
-          //   await this.$store.dispatch('authStore/login', formData)
+          await this.$store.dispatch('addProgress/addProgress', formData)
           //   this.$router.push('/challenges/my-profile')
           //   this.$message.success(`Добро пожаловать, ${this.controls.login}`)
         } catch (error) {

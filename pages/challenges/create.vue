@@ -3,16 +3,29 @@
     <div class="mw500">
       <h4 class="mb3">Создать Ch</h4>
       <form @submit.prevent="onSubmit">
-        <AppInput v-model="user.name" class="label-left">Название</AppInput>
-        <AppTextArea v-model="user.description" label="width: 250px" class="label-left">Описание</AppTextArea>
-        <AppInput v-model="user.category" class="label-left">Категория</AppInput>
-        <AppInput v-model="user.email" type="email">Email: </AppInput>
+        <!-- <AppInput
+          v-model="user.name"
+          class="label-left"
+        >Название</AppInput>
+        <AppTextArea
+          v-model="user.description"
+          label="width: 250px"
+          class="label-left"
+        >Описание</AppTextArea>
+        <AppInput
+          v-model="user.category"
+          class="label-left"
+        >Категория</AppInput>
+        <AppInput
+          v-model="user.email"
+          type="email"
+        >Email: </AppInput> -->
         <!-- <ButtonChallenge type="submit" class="btn-opacity">Создать Ch</ButtonChallenge> -->
       </form>
 
-      <Select id="select-1"/>
+      <!-- <Select id="select-1" /> -->
 
-      <el-form ref="form"
+      <!-- <el-form ref="form"
         :model="controls"
         :rules="rules"
         label-width="200px"
@@ -54,10 +67,10 @@
             :loading="loading"
           >Создать</el-button>
         </el-form-item>
-      </el-form>
+      </el-form> -->
 
-      <Btn />
-      <Checkbox title="title" id="21-mocup"/>
+      <!-- <Btn />
+      <Checkbox title="title" id="21-mocup"/> -->
     </div>
   </div>
 </template>
@@ -72,80 +85,79 @@ export default {
   data() {
     return {
       loading: false,
-      controls: {
-        title: 'Challenge-1',
-        description: null,
-        category: 'sport', // творчество
-        radioСolor: 'green',
-        planMin: null,
-        date: null,
-        count: null,
-        checked: true,
-        checkbox: true
-      },
-      rules: {
-        title: [
-          {required: true, message: 'Добавьте название поста', trigger: 'blur'}
-        ],
-        date: [
-          {required: false, message: 'Поле не должно быть пустым', trigger: 'blur'}
-        ],
-        radioСolor: [
-          {required: true, message: 'Поле не должно быть пустым', trigger: 'blur'}
-        ],
-        count: [
-          {required: true, message: 'Поле не должно быть пустым', trigger: 'blur'}
-        ]
-      },
+      // controls: {
+      //   title: 'Challenge-1',
+      //   description: null,
+      //   category: 'sport', // творчество
+      //   radioСolor: 'green',
+      //   planMin: null,
+      //   date: null,
+      //   count: null,
+      //   checked: true,
+      //   checkbox: true
+      // },
+      // rules: {
+      //   title: [
+      //     { required: true, message: 'Добавьте название поста', trigger: 'blur' }
+      //   ],
+      //   date: [
+      //     { required: false, message: 'Поле не должно быть пустым', trigger: 'blur' }
+      //   ],
+      //   radioСolor: [
+      //     { required: true, message: 'Поле не должно быть пустым', trigger: 'blur' }
+      //   ],
+      //   count: [
+      //     { required: true, message: 'Поле не должно быть пустым', trigger: 'blur' }
+      //   ]
+      // },
 
-      user: {
-        name: '',
-        description: '',
-        category: '',
-        email: '',
-      }
+      // user: {
+      //   name: '',
+      //   description: '',
+      //   category: '',
+      //   email: '',
+      // }
     }
   },
 
   methods: {
-    onSubmitCreateChallenge() {
-      this.$refs.form.validate(async valid => {
-        if (valid) {
-          this.loading = true
-          try {
-            const formData = {
-              title: this.controls.title,
-              date: this.controls.date,
-              color: this.controls.radioСolor,
-              count: this.controls.count
-            }
-            console.log(formData)
-            await this.$store.dispatch('challenge/create', formData)
-            this.$message.success('Challenge создан')
-            this.controls.title = ''
-          } catch (error) {
-            console.log(error)
-          } finally {
-            this.loading = false
-          }
-        } else {
-          this.$message.warning('Заполните все поля')
-        }
-      })
-    }
+    // onSubmitCreateChallenge() {
+    //   this.$refs.form.validate(async valid => {
+    //     if (valid) {
+    //       this.loading = true
+    //       try {
+    //         const formData = {
+    //           title: this.controls.title,
+    //           date: this.controls.date,
+    //           color: this.controls.radioСolor,
+    //           count: this.controls.count
+    //         }
+    //         console.log(formData)
+    //         await this.$store.dispatch('challenge/create', formData)
+    //         this.$message.success('Challenge создан')
+    //         this.controls.title = ''
+    //       } catch (error) {
+    //         console.log(error)
+    //       } finally {
+    //         this.loading = false
+    //       }
+    //     } else {
+    //       this.$message.warning('Заполните все поля')
+    //     }
+    //   })
+    // }
   }
 }
 </script>
 
 
 <style lang="sass">
-.mw500
-  max-width: 50rem
-  margin: 0 auto
-h4
-  text-align: center
+// .mw500
+//   max-width: 50rem
+//   margin: 0 auto
+// h4
+//   text-align: center
 
-.mb3
-  margin-bottom: 3rem
-
+// .mb3
+//   margin-bottom: 3rem
 </style>

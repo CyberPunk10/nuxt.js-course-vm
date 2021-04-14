@@ -116,18 +116,6 @@ export default {
     }
   },
 
-  computed: {
-    isDeveloper() {
-      return this.$store.getters['authStore/isDeveloper']
-    },
-    isChallenges() {
-      return this.$store.getters['authStore/isChallenges']
-    },
-    isMockupAdmin() {
-      return this.$store.getters['authStore/isMockupAdmin']
-    }
-  },
-
   validations: {
     formLogin: {
       login: { required, minLength: minLength(4) },
@@ -138,6 +126,18 @@ export default {
         // }
         required, minLength: minLength(6)
       }
+    }
+  },
+
+  computed: {
+    isDeveloper() {
+      return this.$store.getters['authStore/isDeveloper']
+    },
+    isChallenges() {
+      return this.$store.getters['authStore/isChallenges']
+    },
+    isMockupAdmin() {
+      return this.$store.getters['authStore/isMockupAdmin']
     }
   },
 
