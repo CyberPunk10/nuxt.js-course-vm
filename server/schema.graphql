@@ -34,6 +34,6 @@ type Query {
 }
 
 type Mutation {
-  addPush_ups(count: String!, creatorId: String!): Push_ups
+  addPush_ups(count: String!, creatorId: ID!): Push_ups
   signup(user: UserInput): AuthPayload
 }

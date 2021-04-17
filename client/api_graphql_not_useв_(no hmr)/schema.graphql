@@ -1,0 +1,39 @@
+type Push_ups {
+  id: ID
+  count: String!
+  createdDate: String
+  createdBy: User!
+  # status: String!
+  # origin: [Location]
+}
+
+type User {
+  id: ID
+  login: String!
+  email: String!
+  # password: String! // тут его не обязательно обозначать, мы его создаем из UserInput + bcrypt
+  name: String
+  emailVerified: Boolean
+}
+
+input UserInput {
+  login: String!
+  email: String!
+  password: String!
+  name: String
+}
+
+type AuthPayload {
+  token: String!
+  user: User
+}
+
+type Query {
+  severalPush_ups: [Push_ups]
+  push_ups(id: ID!): Push_ups
+}
+
+type Mutation {
+  addPush_ups(count: String!, creatorId: ID!): Push_ups
+  signup(user: UserInput): AuthPayload
+}

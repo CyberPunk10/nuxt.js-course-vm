@@ -1,0 +1,27 @@
+{
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#235a20",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#32802d",
+    "titleBar.activeBackground": "#235a20",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#235a2099",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#235a20",
+  "vetur.format.defaultFormatter.html": "js-beautify-html",
+  // "vetur.format.defaultFormatterOptions": {
+  //   "js-beautify-html": {
+  //     // js-beautify-html settings here
+  //     "semi": false
+  //   },
+  // },
+  // отменяет автодобавление в конце строки точки с запятой
+  "vetur.format.defaultFormatter.js": "vscode-typescript",
+  "editor.formatOnSave": true,
+  // This line will allow you to use emmet in your Vue templates
+  "emmet.syntaxProfiles": {
+    "vue-html": "html",
+    "vue": "html"
+  },
+}

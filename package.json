@@ -1,50 +1,35 @@
 {
-  "name": "nuxt.js-course-vm",
+  "name": "challenges",
   "version": "1.0.0",
   "private": true,
+  "description": "challenges for me",
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate",
-    "heroku-postbuild": "npm run build"
+    "server": "cd server && nodemon server/index.js",
+    "client": "cd client && npm run dev",
+    "dev": "concurrently --names \"server,client\" \"npm run server --silent\" \"npm run client --silent\""
   },
   "engines": {
     "node": "14.x"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CyberPunk10/nuxt.js-course-vm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CyberPunk10/nuxt.js-course-vm/issues"
+  },
+  "homepage": "https://github.com/CyberPunk10/nuxt.js-course-vm#readme",
   "dependencies": {
-    "@nuxtjs/apollo": "^4.0.1-rc.5",
-    "@nuxtjs/axios": "^5.12.5",
-    "@nuxtjs/pwa": "^3.2.2",
     "apollo-server": "^2.22.2",
-    "bcrypt-nodejs": "0.0.3",
-    "body-parser": "^1.19.0",
-    "chart.js": "^2.9.4",
-    "cookie": "^0.4.1",
-    "core-js": "^3.10.1",
-    "element-ui": "^2.13.2",
-    "express": "^4.17.1",
+    "bcrypt": "^5.0.1",
     "graphql": "^15.5.0",
-    "graphql-tag": "^2.11.0",
-    "js-cookie": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
-    "jwt-decode": "^3.0.0",
-    "moment": "^2.29.1",
-    "mongodb": "^3.6.6",
-    "mongoose": "^5.12.3",
-    "multer": "^1.4.2",
-    "nuxt": "^2.15.4",
-    "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0",
-    "vue-chartjs": "^3.5.1",
-    "vue-markdown": "^2.2.4",
-    "vuelidate": "^0.7.6"
+    "mongoose": "^5.12.3"
   },
   "devDependencies": {
-    "@nuxtjs/style-resources": "^1.0.0",
-    "fibers": "^5.0.0",
-    "node-sass": "^5.0.0",
-    "sass": "^1.27.0",
-    "sass-loader": "^10.1.1"
+    "concurrently": "^6.0.2",
+    "nodemon": "^2.0.7"
   }
 }

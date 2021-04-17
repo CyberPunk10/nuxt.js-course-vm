@@ -90,4 +90,4 @@ sw.*
 *.swp
 
 
-api_rest/keys/keys.dev.js
+client/api_rest/keys/keys.dev.js

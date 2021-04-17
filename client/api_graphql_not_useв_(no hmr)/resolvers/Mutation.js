@@ -8,7 +8,7 @@ const { Push_ups, validatePush_ups } = require('../model/Push_ups')
 const { User, validateUser } = require('../model/User')
 
 const Mutation = {
-  addPush_ups(_, payload) {
+  async addPush_ups(_, { count, creatorId }) {
     // const { value, error } = validatePush_ups(payload, { abortEarly: false })
     // if (error) {
     //   throw new UserInputError('Failed to create Push_ups due to validation errors', {
@@ -16,8 +16,27 @@ const Mutation = {
     //   })
     // }
     // return Push_ups.create(value)
-    return Push_ups.create(payload)
+    return await Push_ups.create({
+      count,
+      createdBy: creatorId
+    })
   },
+
+  // addPost: async (
+  //   _,
+  //   { title, imageUrl, categories, description, creatorId },
+  //   { Post }
+  // ) => {
+  //   const newPost = await new Post({
+  //     title,
+  //     imageUrl,
+  //     categories,
+  //     description,
+  //     createdBy: creatorId
+  //   }).save()
+
+  //   return newPost
+  // },
 
   async signup(_, { user }) {
     // const { value, error } = validateUser(user, { abortEarly: false })

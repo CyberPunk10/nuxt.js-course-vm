@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <!-- <div>
       <h1 class="text-4xl font-semibold text-gray-800 m-2 mb-8">
         DoingITeasyChannel - Nuxt-series
       </h1>
@@ -28,7 +28,7 @@
           <nuxt-child :key="$route.params.id"></nuxt-child>
         </div>
       </div>
-    </div>
+    </div> -->
     <FormLoginRegister
       :formLoginRegister="formLoginRegister"
       @onSubmit="checkForm"
@@ -79,25 +79,25 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { required, minLength } from 'vuelidate/lib/validators'
-import gql from 'graphql-tag'
+// import gql from 'graphql-tag'
 
 export default {
   mixins: [validationMixin],
-  async asyncData({ app, redirect }) {
-    const result = await app.apolloProvider.defaultClient.query({
-      query: gql`
-        query getSeveralPush_ups {
-          severalPush_ups {
-            id
-            count
-          }
-        }
-      `
-    })
+  // async asyncData({ app, redirect }) {
+  //   const result = await app.apolloProvider.defaultClient.query({
+  //     query: gql`
+  //       query getSeveralPush_ups {
+  //         severalPush_ups {
+  //           id
+  //           count
+  //         }
+  //       }
+  //     `
+  //   })
 
-    // redirect('/' + result.data.severalPush_ups[0].id)
-    return result.data
-  },
+  //   // redirect('/' + result.data.severalPush_ups[0].id)
+  //   return result.data
+  // },
   head: {
     title: `Вход на сайт | ${process.env.appName}`
   },
