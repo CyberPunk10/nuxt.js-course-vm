@@ -22,7 +22,9 @@ export default {
     // height: '5px'
   },
   serverMiddleware: [
-    '~/api_rest/index.js', // подключаем rest api
+    // '~/api_rest/index.js',
+    { route: '/api', handler: '~/api_rest/index.js' } // подключаем rest api
+
     // { path: '/graphql', handler: '@/api_graphql/index.js' }  // (?) он находится на другом домене: 4000! // ради HMR сделал сервер отдельно от nuxt
   ],
 
@@ -100,7 +102,7 @@ export default {
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    baseURL: process.env.BASE_URL || 'http://localhost:3000' // for heroku or other hosting
+    baseURL: process.env.BASE_URL || 'http://localhost:3000/' // for heroku or other hosting
   },
 
   apollo: {
@@ -126,7 +128,7 @@ export default {
   // https://webinmind.ru/nuxtjs/articles/razrabotka-nuxt-js-na-mobilnom-ustrojstve
   // перед deploy on heroku закомментировать!!!!
   // server: {
-  //   port: 3000, // (?) process.env.BASE_URL || 'http://localhost:3000' 
+  //   port: 3000, // (?) process.env.BASE_URL || 'http://localhost:3000'
   //   host: '0.0.0.0',
   // },
 }

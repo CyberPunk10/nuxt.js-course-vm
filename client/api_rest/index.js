@@ -1,7 +1,7 @@
 import bodyParser from 'body-parser'
 import passport from 'passport'
 
-const passportStrategy  = require('./middleware/passport-strategy')
+const passportStrategy = require('./middleware/passport-strategy')
 
 const app = require('express')()
 
@@ -14,7 +14,7 @@ const tablesRoutes = require('./routes/tables.routes')
 app.use(passport.initialize())
 passport.use(passportStrategy)
 
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 app.use('/auth', authRoutes)
@@ -29,6 +29,7 @@ app.get('/echo/:what', (req, res) => {
 })
 
 module.exports = {
-   path: '/api',
-   handler: app
+  //  path: '/api',
+  path: '/',
+  handler: app
 }
