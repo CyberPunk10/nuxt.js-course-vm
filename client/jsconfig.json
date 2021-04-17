@@ -16,11 +16,9 @@
       ]
     }
   },
-  // "exclude": ["node_modules", ".nuxt", "dist"]
   "exclude": [
     "node_modules",
-    "client/node_modules",
-    "client/.nuxt",
-    "client/dist"
+    ".nuxt",
+    "dist"
   ]
 }

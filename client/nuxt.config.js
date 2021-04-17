@@ -23,7 +23,7 @@ export default {
   },
   serverMiddleware: [
     '~/api_rest/index.js', // подключаем rest api
-    { path: '/graphql', handler: '@/api_graphql/index.js' }  // (?) он находится на другом домене: 4000!
+    // { path: '/graphql', handler: '@/api_graphql/index.js' }  // (?) он находится на другом домене: 4000! // ради HMR сделал сервер отдельно от nuxt
   ],
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
