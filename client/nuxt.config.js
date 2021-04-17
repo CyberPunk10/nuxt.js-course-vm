@@ -126,7 +126,7 @@ export default {
   // https://webinmind.ru/nuxtjs/articles/razrabotka-nuxt-js-na-mobilnom-ustrojstve
   // перед deploy on heroku закомментировать!!!!
   // server: {
-  //   port: 3000,
+  //   port: 3000, // (?) process.env.BASE_URL || 'http://localhost:3000' 
   //   host: '0.0.0.0',
   // },
 }
