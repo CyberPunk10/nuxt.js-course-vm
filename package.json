@@ -7,7 +7,7 @@
     "server": "cd server && nodemon server/index.js",
     "client": "cd client && npm run dev",
     "dev": "concurrently --names \"server,client\" \"npm run server --silent\" \"npm run client --silent\"",
-    "heroku-postbuild-client": "cd client && npm run heroku-postbuild",
+    "heroku-postbuild-client": "cd client && npm install && npm run heroku-postbuild",
     "heroku-postbuild": "concurrently --names \"server,client\" \"npm run server --silent\" \"npm run heroku-postbuild-client --silent\""
   },
   "engines": {
