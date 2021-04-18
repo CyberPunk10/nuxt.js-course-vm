@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt-nodejs'
 import jwt from 'jsonwebtoken'
-const keys = require('../keys')
+require('dotenv').config()
+
 const User = require('../models/user.model')
 
 
@@ -9,11 +10,11 @@ module.exports.login = async (req, res) => {
   const { loginOrEmail, password } = req.body
 
   // ищем по логину
-  let candidate = await User.findOne({login: loginOrEmail})
+  let candidate = await User.findOne({ login: loginOrEmail })
 
   // если по логину пользователя не нашлось, то ищем по email
   if (!candidate) {
-    candidate = await User.findOne({email: loginOrEmail})
+    candidate = await User.findOne({ email: loginOrEmail })
   }
 
   if (candidate) {
@@ -24,7 +25,7 @@ module.exports.login = async (req, res) => {
       const token = jwt.sign({
         login: candidate.login,
         userId: candidate._id
-      }, keys.JWT, {expiresIn: 60 * 60 * 24}) // 60 * 60 * 24 - 24 часа - время жизни токекна
+      }, process.env.JWT_SECRET_KEY, { expiresIn: 60 * 60 * 24 }) // 60 * 60 * 24 - 24 часа - время жизни токекна
 
       // дополнительно узнаем является ли пользователь разработчиком этого приложения
       const isDeveloper = candidate.isDeveloper ? true : false
@@ -49,13 +50,13 @@ module.exports.createUser = async (req, res) => {
   // под логином при входе может быть email, поэтому может получиться ситуация,
   // когда найдется другой пользователь,
   // и это требует дополнительных проверок при создании пользователя (?) (Например запрет на использование '@' в логине)
-  const candidateLogin = await User.findOne({login})
-  const candidateEmail = await User.findOne({email})
+  const candidateLogin = await User.findOne({ login })
+  const candidateEmail = await User.findOne({ email })
 
   if (candidateLogin) {
-    res.status(409).json({message: 'Такой login уже занят'})
+    res.status(409).json({ message: 'Такой login уже занят' })
   } else if (candidateEmail) {
-    res.status(409).json({message: 'Такой email уже занят'})
+    res.status(409).json({ message: 'Такой email уже занят' })
   } else {
     const salt = bcrypt.genSaltSync(10)
 
@@ -75,11 +76,11 @@ module.exports.updateUserPasword = async (req, res) => {
   const { loginOrEmail, password } = req.body
 
   // ищем по логину
-  let candidate = await User.findOne({login: loginOrEmail})
+  let candidate = await User.findOne({ login: loginOrEmail })
 
   // если по логину пользователя не нашлось, то ищем по email
   if (!candidate) {
-    candidate = await User.findOne({email: loginOrEmail})
+    candidate = await User.findOne({ email: loginOrEmail })
   }
 
   if (candidate) {
@@ -87,7 +88,7 @@ module.exports.updateUserPasword = async (req, res) => {
     const newPassword = bcrypt.hashSync(password, salt)
     try {
       const $set = { password: newPassword }
-      await User.findOneAndUpdate({_id: candidate._id}, {$set})
+      await User.findOneAndUpdate({ _id: candidate._id }, { $set })
       res.status(204).json({})
     } catch (error) {
       res.status(500).json(error)

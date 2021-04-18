@@ -1,3 +1,5 @@
+// import server from './api_graphql_not_used_(no hmr)/index'
+
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
@@ -22,8 +24,8 @@ export default {
     // height: '5px'
   },
   serverMiddleware: [
-    '~/api_rest/index.js', // подключаем rest api
-    // { path: '/graphql', handler: '@/api_graphql/index.js' }  // (?) он находится на другом домене: 4000! // ради HMR сделал сервер отдельно от nuxt
+    // '~/api_rest/index.js',
+    { path: '/api', handler: '~/api_rest/index.js' }, // подключаем rest api
   ],
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
@@ -67,7 +69,6 @@ export default {
     '@nuxtjs/style-resources',
     '@nuxtjs/axios',
     '~/modules/mongodb_setup.js',
-    // '@nuxtjs/auth-next',
     '@nuxtjs/apollo', // https://github.com/nuxt-community/apollo-module
   ],
 
@@ -100,13 +101,14 @@ export default {
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    baseURL: process.env.BASE_URL || 'http://localhost:3000' // for heroku or other hosting
+    baseURL: process.env.BASE_URL || 'http://localhost:3000/' // for heroku or other hosting
   },
 
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: process.env.BASE_URL || 'http://localhost:4000',
+        httpEndpoint: process.env.BASE_URL + '/graphql' || 'http://localhost:4000/graphql',
+        // httpEndpoint: process.env.BASE_URL || 'http://localhost:4000',
         // httpEndpoint: 'https://rickandmortyapi.com/graphql',
       }
     }
@@ -126,7 +128,7 @@ export default {
   // https://webinmind.ru/nuxtjs/articles/razrabotka-nuxt-js-na-mobilnom-ustrojstve
   // перед deploy on heroku закомментировать!!!!
   // server: {
-  //   port: 3000, // (?) process.env.BASE_URL || 'http://localhost:3000' 
+  //   port: 3000, // (?) process.env.BASE_URL || 'http://localhost:3000'
   //   host: '0.0.0.0',
   // },
 }
