@@ -23,13 +23,12 @@ app.use('/comment', commentRoutes)
 app.use('/challenge', challengeRoutes)
 app.use('/tables', tablesRoutes)
 
-// for test
+// for test (api/echo/что-нибудь)
 app.get('/echo/:what', (req, res) => {
   res.json(req.params)
 })
 
 module.exports = {
-  //  path: '/api',
-  path: '/',
+  path: '/api',
   handler: app
 }

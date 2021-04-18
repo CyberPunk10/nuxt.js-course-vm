@@ -1,11 +1,11 @@
 import { Strategy, ExtractJwt } from 'passport-jwt'
 // import { model } from 'mongoose'
-const keys = require('../keys')
+require('dotenv').config()
 const User = require('../models/user.model')
 
 const options = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: keys.JWT
+  secretOrKey: process.env.JWT_SECRET_KEY
 }
 
 module.exports = new Strategy(options, async (payload, done) => {

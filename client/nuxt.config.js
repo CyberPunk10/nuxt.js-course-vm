@@ -1,3 +1,5 @@
+// import server from './api_graphql_not_used_(no hmr)/index'
+
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
@@ -23,9 +25,7 @@ export default {
   },
   serverMiddleware: [
     // '~/api_rest/index.js',
-    { route: '/api', handler: '~/api_rest/index.js' } // подключаем rest api
-
-    // { path: '/graphql', handler: '@/api_graphql/index.js' }  // (?) он находится на другом домене: 4000! // ради HMR сделал сервер отдельно от nuxt
+    { path: '/api', handler: '~/api_rest/index.js' }, // подключаем rest api
   ],
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
@@ -69,7 +69,6 @@ export default {
     '@nuxtjs/style-resources',
     '@nuxtjs/axios',
     '~/modules/mongodb_setup.js',
-    // '@nuxtjs/auth-next',
     '@nuxtjs/apollo', // https://github.com/nuxt-community/apollo-module
   ],
 
@@ -108,7 +107,8 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: process.env.BASE_URL || 'http://localhost:4000',
+        httpEndpoint: process.env.BASE_URL + '/graphql' || 'http://localhost:4000/graphql',
+        // httpEndpoint: process.env.BASE_URL || 'http://localhost:4000',
         // httpEndpoint: 'https://rickandmortyapi.com/graphql',
       }
     }
