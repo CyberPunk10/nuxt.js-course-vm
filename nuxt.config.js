@@ -107,7 +107,8 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: process.env.BASE_URL + '/graphql' || 'http://localhost:4000/graphql',
+        httpEndpoint: process.env.BASE_URL_GRAPHQL,
+        // httpEndpoint: process.env.BASE_URL + '/graphql' || 'http://localhost:4000/graphql',
         // httpEndpoint: process.env.BASE_URL || 'http://localhost:4000',
         // httpEndpoint: 'https://rickandmortyapi.com/graphql',
       }
