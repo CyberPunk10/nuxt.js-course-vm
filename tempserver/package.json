@@ -1,0 +1,38 @@
+{
+  "name": "challenges",
+  "version": "1.0.0",
+  "private": true,
+  "description": "challenges for me",
+  "scripts": {
+    "server": "cd server && nodemon server/index.js",
+    "client": "cd client && npm run dev",
+    "dev": "concurrently --names \"server,client\" \"npm run server --silent\" \"npm run client --silent\"",
+    "heroku-postbuild-client": "cd client && npm install && npm run heroku-postbuild",
+    "heroku-postbuild": "concurrently --names \"server,client\" \"npm run server --silent\" \"npm run heroku-postbuild-client --silent\""
+  },
+  "engines": {
+    "node": "14.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CyberPunk10/nuxt.js-course-vm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CyberPunk10/nuxt.js-course-vm/issues"
+  },
+  "homepage": "https://github.com/CyberPunk10/nuxt.js-course-vm#readme",
+  "dependencies": {
+    "apollo-server": "^2.22.2",
+    "bcrypt": "^5.0.1",
+    "dotenv": "^8.2.0",
+    "graphql": "^15.5.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.3"
+  },
+  "devDependencies": {
+    "concurrently": "^6.0.2",
+    "nodemon": "^2.0.7"
+  }
+}
