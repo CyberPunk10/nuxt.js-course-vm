@@ -61,7 +61,8 @@ export default {
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/tailwindcss' // https://tailwindcss.su/docs/guides/nuxtjs
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -107,9 +108,7 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: process.env.BASE_URL_GRAPHQL,
-        // httpEndpoint: process.env.BASE_URL + '/graphql' || 'http://localhost:4000/graphql',
-        // httpEndpoint: process.env.BASE_URL || 'http://localhost:4000',
+        httpEndpoint: process.env.BASE_URL_GRAPHQL || 'http://localhost:4000/graphql', // for heroku or other hosting
         // httpEndpoint: 'https://rickandmortyapi.com/graphql',
       }
     }
