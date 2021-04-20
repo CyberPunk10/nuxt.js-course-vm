@@ -1,67 +1,82 @@
 <template>
-<div class="nesting-container-center">
-  <div class="page-wrap-mockup-create">
-    <h1 class="mb">Создать новый пост</h1>
+  <div class="nesting-container-center">
+    <div class="page-wrap-mockup-create">
+      <h1 class="mb">Создать новый пост</h1>
 
-    <el-form
-      ref="form"
-      :model="controls"
-      :rules="rules"
-      @submit.native.prevent="onSubmit"
-    >
-
-      <el-form-item label="Текст в формате .md или .html" prop="title">
-        <el-input
-          type="text"
-          v-model="controls.title"
-        />
-      </el-form-item>
-
-      <el-form-item label="Текст в формате .md или .html" prop="text">
-        <el-input
-          type="textarea"
-          resize="none"
-          :rows="10"
-          v-model="controls.text"
-        />
-      </el-form-item>
-
-      <el-button class="mb" type="success" plain @click="dialogVisible = true">Предпросмотр</el-button>
-
-      <el-dialog
-        title="Предпросмотр"
-        :visible.sync="dialogVisible"
-        width="30%">
-        <div :key="controls.text">
-          <vue-markdown>{{controls.text}}</vue-markdown>
-        </div>
-      </el-dialog>
-
-      <el-upload
-        class="mb"
-        ref="upload"
-        drag
-        action="https://jsonplaceholder.typicode.com/posts/"
-        :on-change="handleImageChange"
-        :auto-upload="false"
+      <el-form
+        ref="form"
+        :model="controls"
+        :rules="rules"
+        @submit.native.prevent="onSubmit"
       >
-        <i class="el-icon-upload"></i>
-        <div class="el-upload__text">Перетащите сюда картинку<br>или <em>кликните для загрузки</em></div>
-        <div class="el-upload__tip" slot="tip">файлы с расширением jpg/png</div>
-      </el-upload>
 
-      <el-form-item>
-        <el-button
-          type="primary"
-          native-type="submit"
-          round
-          :loading="loading"
+        <el-form-item
+          label="Текст в формате .md или .html"
+          prop="title"
         >
-          Создать пост
-        </el-button>
-      </el-form-item>
-    </el-form>
-  </div>
+          <el-input
+            type="text"
+            v-model="controls.title"
+          />
+        </el-form-item>
+
+        <el-form-item
+          label="Текст в формате .md или .html"
+          prop="text"
+        >
+          <el-input
+            type="textarea"
+            resize="none"
+            :rows="10"
+            v-model="controls.text"
+          />
+        </el-form-item>
+
+        <el-button
+          class="mb"
+          type="success"
+          plain
+          @click="dialogVisible = true"
+        >Предпросмотр</el-button>
+
+        <el-dialog
+          title="Предпросмотр"
+          :visible.sync="dialogVisible"
+          width="30%"
+        >
+          <div :key="controls.text">
+            <div v-html="$md.render(controls.text)"></div>
+          </div>
+        </el-dialog>
+
+        <el-upload
+          class="mb"
+          ref="upload"
+          drag
+          action="https://jsonplaceholder.typicode.com/posts/"
+          :on-change="handleImageChange"
+          :auto-upload="false"
+        >
+          <i class="el-icon-upload"></i>
+          <div class="el-upload__text">Перетащите сюда картинку<br>или <em>кликните для загрузки</em></div>
+          <div
+            class="el-upload__tip"
+            slot="tip"
+          >файлы с расширением jpg/png</div>
+        </el-upload>
+
+        <el-form-item>
+          <el-button
+            type="primary"
+            native-type="submit"
+            round
+            :loading="loading"
+          >
+            Создать пост
+          </el-button>
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
 </template>
 
@@ -84,10 +99,10 @@ export default {
       },
       rules: {
         title: [
-          {required: true, message: 'Добавьте название поста', trigger: 'blur'}
+          { required: true, message: 'Добавьте название поста', trigger: 'blur' }
         ],
         text: [
-          {required: true, message: 'Поле не должно быть пустым', trigger: 'blur'}
+          { required: true, message: 'Поле не должно быть пустым', trigger: 'blur' }
         ]
       }
     }

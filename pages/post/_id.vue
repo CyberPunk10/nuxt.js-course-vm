@@ -26,7 +26,7 @@
       </div>
     </header>
     <main class="post-content">
-      <vue-markdown>{{post.text}}</vue-markdown>
+      <div v-html="$md.render(post.text)"></div>
     </main>
     <footer>
       <AppCommentForm
@@ -34,14 +34,20 @@
         @created="crateCommentHandler"
         :postId="post._id"
       />
-      <div class="comments" v-if="true">
+      <div
+        class="comments"
+        v-if="true"
+      >
         <AppComment
           v-for="comment in post.comments"
           :key="comment._id"
           :comment="comment"
         />
       </div>
-      <p class="text-center" v-else>
+      <p
+        class="text-center"
+        v-else
+      >
         Комментариев нет
       </p>
     </footer>
@@ -61,7 +67,7 @@ export default {
     const post = await store.dispatch('post/fetchById', params.id)
     await store.dispatch('post/addView', post)
     return {
-      post: {...post, views: ++post.views}
+      post: { ...post, views: ++post.views }
     }
   },
   data() {
@@ -69,7 +75,7 @@ export default {
       canAddComment: true
     }
   },
-  validate({params}) {
+  validate({ params }) {
     return Boolean(params.id)
   },
   methods: {

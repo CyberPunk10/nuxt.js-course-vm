@@ -15,6 +15,7 @@
   "dependencies": {
     "@nuxtjs/apollo": "^4.0.1-rc.5",
     "@nuxtjs/axios": "^5.13.1",
+    "@nuxtjs/markdownit": "^2.0.0",
     "@nuxtjs/pwa": "^3.3.5",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.19.0",
@@ -36,7 +37,6 @@
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "vue-chartjs": "^3.5.1",
-    "vue-markdown": "^2.2.4",
     "vuelidate": "^0.7.6"
   },
   "devDependencies": {

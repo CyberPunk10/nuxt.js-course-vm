@@ -9,14 +9,20 @@
       @submit.native.prevent="onSubmit"
     >
 
-      <el-form-item label="Текст в формате .md или .html" prop="title">
+      <el-form-item
+        label="Текст в формате .md или .html"
+        prop="title"
+      >
         <el-input
           type="text"
           v-model="controls.title"
         />
       </el-form-item>
 
-      <el-form-item label="Текст в формате .md или .html" prop="text">
+      <el-form-item
+        label="Текст в формате .md или .html"
+        prop="text"
+      >
         <el-input
           type="textarea"
           resize="none"
@@ -25,14 +31,20 @@
         />
       </el-form-item>
 
-      <el-button class="mb" type="success" plain @click="dialogVisible = true">Предпросмотр</el-button>
+      <el-button
+        class="mb"
+        type="success"
+        plain
+        @click="dialogVisible = true"
+      >Предпросмотр</el-button>
 
       <el-dialog
         title="Предпросмотр"
         :visible.sync="dialogVisible"
-        width="30%">
+        width="30%"
+      >
         <div :key="controls.text">
-          <vue-markdown>{{controls.text}}</vue-markdown>
+          <div v-html="$md.render(controls.text)"></div>
         </div>
       </el-dialog>
 
@@ -46,7 +58,10 @@
       >
         <i class="el-icon-upload"></i>
         <div class="el-upload__text">Перетащите сюда картинку<br>или <em>кликните для загрузки</em></div>
-        <div class="el-upload__tip" slot="tip">файлы с расширением jpg/png</div>
+        <div
+          class="el-upload__tip"
+          slot="tip"
+        >файлы с расширением jpg/png</div>
       </el-upload>
 
       <el-form-item>
@@ -82,10 +97,10 @@ export default {
       },
       rules: {
         title: [
-          {required: true, message: 'Добавьте название поста', trigger: 'blur'}
+          { required: true, message: 'Добавьте название поста', trigger: 'blur' }
         ],
         text: [
-          {required: true, message: 'Поле не должно быть пустым', trigger: 'blur'}
+          { required: true, message: 'Поле не должно быть пустым', trigger: 'blur' }
         ]
       }
     }
@@ -130,5 +145,4 @@ export default {
 <style lang="sass">
 .page-wrap
   max-width: 600px
-
 </style>
