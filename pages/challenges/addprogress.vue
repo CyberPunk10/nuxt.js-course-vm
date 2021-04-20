@@ -20,7 +20,6 @@
           v-model.trim="controls.count"
           class="label_bold"
           placeholder="Количество"
-          autofocus
           :inputData="{ title: 'Количество отжиманий' }"
           :v="$v.controls.count"
           type="number"
@@ -70,6 +69,7 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { required, minLength } from 'vuelidate/lib/validators'
+import gql from 'graphql-tag'
 
 export default {
   mixins: [validationMixin],
@@ -111,17 +111,87 @@ export default {
           count: this.controls.count,
           username: this.controls.username
         }
-        console.log(formData)
+        // console.log(formData)
 
-        try {
-          await this.$store.dispatch('addProgress/addProgress', formData)
-          //   this.$router.push('/challenges/my-profile')
-          //   this.$message.success(`Добро пожаловать, ${this.controls.login}`)
-        } catch (error) {
-          console.log(error)
-        } finally {
-          this.loading = false
-        }
+        // try {
+        // await this.$store.dispatch('addProgress/addProgress', formData)
+        //   this.$router.push('/challenges/my-profile')
+        //   this.$message.success(`Добро пожаловать, ${this.controls.login}`)
+
+        // deleteItem(id) {
+        //   this.$apollo.mutate({
+        //     mutation: deleteItemMutation,
+        //     variables: { id }
+        //   });
+        // }
+
+
+
+        // addProgress() {
+        this.$apollo.query({
+          // mutation: gql`
+          //       mutation ($username: String!, $count: String!, $date: String!) {
+          //         signupUser(username: $username, count: $count, date: $date) {
+          //           # token
+          //           _id
+          //         }
+          //       }
+          //     `,
+          // variables: formData
+
+          query: gql`
+            query {
+              severalPush_ups {
+                id
+              }
+            }
+          `,
+
+        }).then(data => {
+          // event.target.reset()
+          // this.name = this.status = this.gender = this.image = ''
+          console.log('kjkjkj', data)
+
+        }).catch(error => {
+          this.errors = error.graphQLErrors
+        })
+        // }
+
+
+
+
+        //   let apolloClient = this.app.apolloProvider.defaultClient
+        //   apolloClient
+        //     .mutate({
+        //       mutation: gql`
+        //   mutation addProgress($username: String!, $count: String!, $date: String!) {
+        //     signupUser(username: $username, count: $count, date: $date) {
+        //       # token
+        //       _id
+        //     }
+        //   }
+        // `,
+        //       variables: payload
+        //     })
+        //     .then(({ data }) => {
+        //       // localStorage.setItem('token', data.signinUser.token)
+        //       // to make sure created method is run in main.js (we run getCurrentUser), reload the page
+        //       // router.go()
+        //       console.log('kjkjkj', data.addPost)
+        //     })
+        //     .catch(error => {
+        //       commit('setError', error)
+        //     })
+        //     .finally(() => {
+        //       commit('setLoading', false)
+        //     })
+
+
+        // } catch (error) {
+        //   console.log(error)
+        // } finally {
+        //   this.loading = false
+        // }
       }
     },
 

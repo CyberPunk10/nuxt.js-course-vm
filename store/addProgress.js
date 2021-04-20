@@ -1,6 +1,4 @@
-// import { GET_POSTS, SIGNIN_USER, GET_CURRENT_USER } from '../queries_for_client'
-// import { ADD_POST } from '../queries_for_client'
-// import { defaultClient as apolloClient } from '../main'
+// import { ADD_PROGRESS } from '../graphql/queries'
 
 export const state = () => ({
   // currentWidthWindow: 0,
@@ -17,27 +15,36 @@ export const mutations = {
 }
 
 export const actions = {
-  addPost: ({ commit }, payload) => {
-    console.log('payload', payload)
-    commit('setLoading', true)
-    apolloClient
-      .mutate({
-        mutation: ADD_POST,
-        variables: payload
-      })
-      .then(({ data }) => {
-        // localStorage.setItem('token', data.signinUser.token)
-        // to make sure created method is run in main.js (we run getCurrentUser), reload the page
-        // router.go()
-        console.log(data.addPost)
-      })
-      .catch(error => {
-        commit('setError', error)
-      })
-      .finally(() => {
-        commit('setLoading', false)
-      })
-  }
+  // addProgress: ({ commit }, payload) => {
+  //   commit('setLoading', true)
+  //   console.log('[apolloClient]: ', apolloClient)
+  //   console.log('[this]: ', this)
+  //   let apolloClient = this.app.apolloProvider.defaultClient
+  //   apolloClient
+  //     .mutate({
+  //       mutation: gql`
+  //         mutation addProgress($username: String!, $count: String!, $date: String!) {
+  //           signupUser(username: $username, count: $count, date: $date) {
+  //             # token
+  //             _id
+  //           }
+  //         }
+  //       `,
+  //       variables: payload
+  //     })
+  //     .then(({ data }) => {
+  //       // localStorage.setItem('token', data.signinUser.token)
+  //       // to make sure created method is run in main.js (we run getCurrentUser), reload the page
+  //       // router.go()
+  //       console.log('kjkjkj', data.addPost)
+  //     })
+  //     .catch(error => {
+  //       commit('setError', error)
+  //     })
+  //     .finally(() => {
+  //       commit('setLoading', false)
+  //     })
+  // }
   // updateCurrentWidthWindow({ commit }, value) { commit('updateCurrentWidthWindow', value) },
 
   // async addProgress({ commit }, fd) {
