@@ -71,6 +71,7 @@ export default {
     '@nuxtjs/axios',
     '~/modules/mongodb_setup.js',
     '@nuxtjs/apollo', // https://github.com/nuxt-community/apollo-module
+    '@nuxtjs/markdownit', // https://github.com/nuxt-community/markdownit-module
   ],
 
   pwa: {
@@ -112,6 +113,17 @@ export default {
         // httpEndpoint: 'https://rickandmortyapi.com/graphql',
       }
     }
+  },
+
+  markdownit: {
+    preset: 'default',
+    linkify: true,
+    breaks: true,
+    // use: [
+    //   'markdown-it-div',
+    //   'markdown-it-attrs'
+    // ],
+    runtime: true // Support `$md()`
   },
 
   env: {
