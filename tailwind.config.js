@@ -14,4 +14,8 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  corePlugins: {
+    // ...
+    outline: false,
+  }
 }
