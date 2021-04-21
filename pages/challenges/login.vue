@@ -1,34 +1,5 @@
 <template>
   <div>
-    <!-- <div>
-      <h1 class="text-4xl font-semibold text-gray-800 m-2 mb-8">
-        DoingITeasyChannel - Nuxt-series
-      </h1>
-      <nuxt-link
-        to="create"
-        class="bg-purple-700 rounded p-2 text-white font-semibold m-2"
-      >
-        Create Push_ups
-      </nuxt-link>
-      <div class="flex">
-        <ul class="w-64 px-2 text-gray-600">
-          <li
-            v-for="Push_ups in severalPush_ups"
-            :key="Push_ups.id"
-          >
-            <nuxt-link
-              :to="Push_ups.id"
-              class="hover:font-bold hover:text-gray-900 leading-loose"
-            >
-              {{ Push_ups.count }}
-            </nuxt-link>
-          </li>
-        </ul>
-        <div class="flex-grow bg-white min-h-full">
-          <nuxt-child :key="$route.params.id"></nuxt-child>
-        </div>
-      </div>
-    </div> -->
     <FormLoginRegister
       :formLoginRegister="formLoginRegister"
       @onSubmit="checkForm"
@@ -58,17 +29,41 @@
       <ButtonChallenge type="submit">Войти</ButtonChallenge>
 
       <template #afterCardContent>
-        <p>Создать новый аккаунт?
+        <p class="tac">Создать новый аккаунт?
           <NuxtLink to="/challenges/register-user">Регистрация</NuxtLink>
         </p>
 
-        <div class="temp">
-          <p>Войти под админом: </p>
-          <p>
-            <span>Login: 0000</span><br>
-            <span>Email: 0000@0000.ru</span><br>
-            <span>Пароль: Mountains</span>
-          </p>
+        <div class="info-login-wrap">
+          <p class="tac font-bold">Войти под админом: </p>
+          <div class="info-login-grid">
+            <span>Login: </span>
+            <span class="tac">0000</span>
+            <div class="tar">
+              <button
+                class="tac"
+                @click="clickClipboard"
+                data-copy-value="0000"
+              >copy</button>
+            </div>
+            <span>Пароль: </span>
+            <span class="tac">Mountains</span>
+            <div class="tar">
+              <button
+                class="tac"
+                @click="clickClipboard"
+                data-copy-value="Mountains"
+              >copy</button>
+            </div>
+            <span>Email: </span>
+            <span class="tac">0000@0000.ru</span>
+            <div class="tar">
+              <button
+                class="tac"
+                @click="clickClipboard"
+                data-copy-value="0000@0000.ru"
+              >copy</button>
+            </div>
+          </div>
         </div>
       </template>
     </FormLoginRegister>
@@ -79,25 +74,9 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { required, minLength } from 'vuelidate/lib/validators'
-// import gql from 'graphql-tag'
 
 export default {
   mixins: [validationMixin],
-  // async asyncData({ app, redirect }) {
-  //   const result = await app.apolloProvider.defaultClient.query({
-  //     query: gql`
-  //       query getSeveralPush_ups {
-  //         severalPush_ups {
-  //           id
-  //           count
-  //         }
-  //       }
-  //     `
-  //   })
-
-  //   // redirect('/' + result.data.severalPush_ups[0].id)
-  //   return result.data
-  // },
   head: {
     title: `Вход на сайт | ${process.env.appName}`
   },
@@ -185,8 +164,43 @@ export default {
           this.loading = false
         }
       }
+    },
+
+    clickClipboard(event) {
+      navigator.clipboard.writeText(event.target.dataset.copyValue)
     }
   }
 }
 </script>
+
+<style lang="sass">
+.info-login-wrap
+  border: 1px solid rgb(226,228,230)
+  border-radius: $borderRadius
+  margin: 1.5rem auto 1rem
+  padding: 2rem
+  opacity: 0.6
+  color: #606266
+  transition: $transitionDefaultHover
+  &:hover
+    opacity: 1
+.info-login-grid
+  margin-top: 1.5rem
+  display: grid
+  grid: repeat(3, 3rem) / 1fr minmax(auto, 2fr) 1fr
+  &>span
+    line-height: 3rem
+  button
+    height: 2.2rem
+    width: 6rem
+    margin: .4rem 0
+    background-color: rgb(236,238,240)
+    border: 1px solid rgb(226,228,230)
+    border-radius: $borderRadius
+    transition: $transitionDefaultHover
+    &:hover
+      background-color: $theme-color-yellow
+      border-color: $theme-color-yellow
+      color: #a76000
+</style>
 

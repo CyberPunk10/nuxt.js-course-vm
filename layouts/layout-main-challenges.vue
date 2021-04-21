@@ -1,5 +1,6 @@
 <template>
-  <div class="layout-wrapper main-container_transform-x"
+  <div
+    class="layout-wrapper main-container_transform-x"
     :data-sidebar-active="isSidebarActive"
     :data-header-out="isHeaderOut"
     ref="layout"
@@ -9,16 +10,20 @@
     <Sidebar />
 
     <div class="main-container">
-      <div class="main-content layout-scrollbar layout-cell" ref="mainContent">
+      <div
+        class="main-content layout-scrollbar layout-cell"
+        ref="mainContent"
+      >
         <Nuxt class="container" />
-        <div class="underlay-main-container"
+        <div
+          class="underlay-main-container"
           @click="closeSidebar"
         ></div>
       </div>
       <!-- <Nuxt class="main-content layout-scrollbar layout-cell container" /> -->
     </div>
 
-    <ProgressBar :value="progress"/>
+    <ProgressBar :value="progress" />
 
     <FooterMobile />
 
@@ -32,7 +37,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'layout-main-challenges', // Иначе ошибка: [Vue warn]: Invalid component name: "layouts/layout-main-challenges.vue". Component names should conform to valid custom element name in html5 specification.
-  data () {
+  data() {
     return {
       progress: 0, // for progressBar
     }
@@ -57,14 +62,14 @@ export default {
     }
   },
 
-  mounted(){
+  mounted() {
     /* Работа со скоролом */
     // взято отсюда: https://habr.com/ru/company/ruvds/blog/468405/
     // легкий простой код на проверку фиксированные ли scroll-ы у пользователя или нет
     // Scrollbar Width Test
     // Adds `layout-scrollbar-obtrusive` class to body if scrollbars use up screen real estate
 
-    function getScrollbar () {
+    function getScrollbar() {
 
       const parent = document.createElement("div")
       parent.setAttribute("style", "width:30px; height:30px;")
@@ -78,7 +83,7 @@ export default {
       // Measure the child element, if it is not
       // 30px wide the scrollbars are obtrusive.
       const scrollbarWidth = 30 - parent.firstChild.clientWidth
-      if(scrollbarWidth) {
+      if (scrollbarWidth) {
         document.body.classList.add("layout-scrollbar-obtrusive")
       }
       document.body.removeChild(parent)
@@ -88,7 +93,7 @@ export default {
     // Swipe
     // const $layout = document.querySelector('.layout-wrapper')
     const $layout = this.$refs.layout
-    swipe($layout, { maxTime: 1000, minTime: 10, maxDist: 150,  minDist: 60 })
+    swipe($layout, { maxTime: 1000, minTime: 10, maxDist: 150, minDist: 60 })
     $layout.addEventListener("swipe", this.handleSwipe)
 
     // Scroll (show/hidden header)
@@ -117,7 +122,7 @@ export default {
   // },
 
   methods: {
-    closeSidebar: function() {
+    closeSidebar: function () {
       if (document.documentElement.clientWidth < 768) {
         this.$store.dispatch('sidebarLayoutChallenges/closeSidebar')
       }
@@ -147,13 +152,13 @@ export default {
     handleScrollHiddenHeader(e) {
       // Оптимизация window scroll
       // https://gist.github.com/znamilya/f10fe9d8caf20a5e0e7f
-      if(window.justExecuted) {
+      if (window.justExecuted) {
         return
       }
       console.log('[scroll-hidden-header]', window.justExecuted)
 
       // your event handling logic here
-      if (document.documentElement.clientWidth < 480 ) {
+      if (document.documentElement.clientWidth < 480) {
         requestAnimationFrame(() => {
 
           let scrolled = e.target.scrollTop
@@ -170,13 +175,13 @@ export default {
 
       window.justExecuted = true
 
-      setTimeout(function() {
+      setTimeout(function () {
         window.justExecuted = false
       }, 50)
     },
 
 
-    handleScrollProgressBar (e) {
+    handleScrollProgressBar(e) {
       // console.log('[ProgressBar]')
       requestAnimationFrame(() => {
         let scrollPos = e.target.scrollTop
@@ -242,8 +247,6 @@ export default {
         margin-top: .5rem
         height: calc(100% - 1rem)
 
-
-
   &>.main-container
     right: 0
     width: 100%
@@ -284,7 +287,6 @@ export default {
       @media screen and (min-width: $phoneWidth)
         height: calc(100% - #{$header-height})
 
-
   // если sidebar not static (need add .transform-x)
   &>.sidebar.transform-x
     left: -$sidebarWidth
@@ -310,7 +312,6 @@ export default {
       // z-index: 0
       @media screen and (min-width: $tabletWidth)
         z-index: 1
-
 
   // show sidebar
   &[data-sidebar-active]
@@ -340,9 +341,8 @@ export default {
       @media screen and (min-width: $desktopWidth)
         width: $sidebarWidth
       @media screen and (max-width: calc(#{$smPhoneWidth} - 1px)) // < 320px
-        left:  calc(.5rem + .15rem)
+        left: calc(.5rem + .15rem)
         width: calc(100% - 1rem)
-
 
     &>.sidebar.transform-x
       left: 0
@@ -383,12 +383,11 @@ export default {
         .underlay-main-container
           left: $sidebarWidth
 
-
   // hover sidebar
   &.main-container_transform-x:not([data-sidebar-active]),
   &:not([data-sidebar-active])
     &>.sidebar
-      @media(hover: hover) and (pointer: fine) // https://webformyself.com/css-hover-na-sensornyx-ekranax/ (решение на чистом CSS для :hover на сенсорных экранах)
+      @media(hover: hover) and (pointer: fine) // https://webformyself.com/css-hover-na-sensornyx-ekranax/ (решение на чистом CSS для :hover на сенсорных экранах) #отменяет hover
         &:hover
           @media screen and (min-width: $tabletWidth)
             width: $sidebarWidthTable
@@ -406,7 +405,6 @@ export default {
             //   z-index: 0 !important
             //   left: $sidebarWidth
 
-
   &[data-header-out]
     @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
       &>header
@@ -423,8 +421,6 @@ export default {
         top: 0
         height: calc(100% - #{$header-height})
 
-
-
 // HEADER продолжает прыгать!!!
 
 // (решено) SWIPE продолжает работать на других layout!!!
@@ -440,5 +436,4 @@ export default {
 // Оптимизация window scroll
 // https://gist.github.com/znamilya/f10fe9d8caf20a5e0e7f
 // записываем переменные прямо в window, переделать или сделать аккуратнее
-
 </style>

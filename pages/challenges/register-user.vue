@@ -37,10 +37,10 @@
 
       <ButtonChallenge type="submit">Зарегистрироваться</ButtonChallenge>
 
-      <p class="agree">Нажимая кнопку «Зарегистрироваться», вы принимаете пользовательское соглашение и политику конфиденциальности.</p>
+      <p class="agree tac">Нажимая кнопку «Зарегистрироваться», вы принимаете пользовательское соглашение и политику конфиденциальности.</p>
 
       <template #afterCardContent>
-        <p>Уже есть аккаунт?
+        <p class="tac">Уже есть аккаунт?
           <NuxtLink to="/challenges/login">Войти</NuxtLink>
         </p>
       </template>

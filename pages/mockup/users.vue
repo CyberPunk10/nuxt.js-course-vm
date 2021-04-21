@@ -20,7 +20,6 @@
         :class="{invalid: $v.formLogin.login.$error}"
         :inputData="{ title: 'Логин или Email' }"
         :v="$v.formLogin.login"
-        autofocus
         placeholder="Логин или Email"
       >Логин или Email:</AppInputChallenge>
       <!-- :class="{invalid: ($v.formLogin.login.$dirty && !$v.formLogin.login.required)}" -->

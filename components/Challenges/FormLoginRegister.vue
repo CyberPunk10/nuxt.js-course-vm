@@ -26,8 +26,6 @@ export default {
   box-sizing: content-box
   margin: 0 auto
 
-  p
-    text-align: center
   h1
     margin: .5rem 0 1.5rem 0
     font-size: 2.1rem
