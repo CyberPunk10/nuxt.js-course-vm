@@ -1,3 +1,10 @@
+// Убрать стрелочки с <input type=“number”>
+.input_not-arrows[type="number"]
+  -moz-appearance: textfield
+.input_not-arrows::-webkit-outer-spin-button,
+.input_not-arrows::-webkit-inner-spin-button
+  -webkit-appearance: none
+
 .wrap-card-content
   background-color: #fff
   padding: 0 0 .5rem

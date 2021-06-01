@@ -20,12 +20,6 @@ const userSchema = new Schema({
     trim: true,
     minlength: 6,
   },
-  nickname: {
-    type: String,
-    unique: true,
-    defuaul: 'Default nickname',
-    trim: true
-  },
   emailVerified: {
     type: Boolean,
     default: false

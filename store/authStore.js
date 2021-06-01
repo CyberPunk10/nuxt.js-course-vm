@@ -47,20 +47,20 @@ export const mutations = {
 
 
 export const actions = {
-  async login({commit, dispatch}, formData) {
+  async login({ commit, dispatch }, formData) {
     try {
       const { token, userId, isDeveloper, isChallenges, isMockupAdmin } = await this.$axios.$post('/api/auth/admin/login', formData)
       // isDeveloper - является ли авторизованный user разработчиком этого приложения
       // isChallenges - является ли авторизованный user пользователем приложения challenges
       // isMockupAdmin - является ли авторизованный user админом mockup приложения
-      dispatch('setToken', { token, userId, isDeveloper, isChallenges, isMockupAdmin })
+      dispatch('setToken', { token, userId, isDeveloper, isChallenges, isMockupAdmin }) // (?) почему dispatch, а не commit?
     } catch (error) {
-      commit('setError', error, {root: true})
+      commit('setError', error, { root: true })
       throw error
     }
   },
 
-  setToken({commit}, { token, userId, isDeveloper, isChallenges, isMockupAdmin }) {
+  setToken({ commit }, { token, userId, isDeveloper, isChallenges, isMockupAdmin }) {
     this.$axios.setToken(token, 'Bearer')
 
     commit('setTokenMutation', token)
@@ -83,7 +83,7 @@ export const actions = {
     Cookies.set('isMockupAdmin', isMockupAdmin)
   },
 
-  logout({commit}) {
+  logout({ commit }) {
     this.$axios.setToken(false)
 
     commit('clearTokenMutation')
@@ -102,33 +102,33 @@ export const actions = {
     Cookies.remove('isMockupAdmin')
   },
 
-  async createUser({commit}, formData) {
+  async createUser({ commit }, formData) {
     try {
       await this.$axios.$post('/api/auth/admin/create', formData)
     } catch (error) {
-      commit('setError', error, {root: true})
+      commit('setError', error, { root: true })
       throw error
     }
   },
-  async createUserFree({commit}, formData) {
+  async createUserFree({ commit }, formData) {
     try {
       await this.$axios.$post('/api/auth/admin/create-free', formData)
     } catch (error) {
-      commit('setError', error, {root: true})
+      commit('setError', error, { root: true })
       throw error
     }
   },
 
-  async updatePassword({commit}, formData) {
+  async updatePassword({ commit }, formData) {
     try {
       await this.$axios.$post('/api/auth/admin/update-user-password', formData)
     } catch (error) {
-      commit('setError', error, {root: true})
+      commit('setError', error, { root: true })
       throw error
     }
   },
 
-  autoLogin({dispatch}) {
+  autoLogin({ dispatch }) {
     const cookieStr = process.browser
       ? document.cookie
       : this.app.context.req.headers.cookie
@@ -141,9 +141,9 @@ export const actions = {
     const isMockupAdmin = cookies['isMockupAdmin'] == 'true' ? true : false
 
     if (isJwtValid(token)) {
-      dispatch('setToken', { token, userId, isDeveloper, isChallenges, isMockupAdmin })
+      dispatch('setToken', { token, userId, isDeveloper, isChallenges, isMockupAdmin }) // (?) почему dispatch, а не commit?
     } else {
-      dispatch('logout')
+      dispatch('logout') // (?) почему dispatch, а не commit?
     }
   }
 }

@@ -201,6 +201,6 @@ export default {
     &:hover
       background-color: $theme-color-yellow
       border-color: $theme-color-yellow
-      color: #a76000
+      color: #92400e
 </style>
 
