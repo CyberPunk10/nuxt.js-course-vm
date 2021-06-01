@@ -60,10 +60,10 @@ import { gql } from 'graphql-tag'
 //   }
 // `
 export const ADD_PROGRESS = gql`
-  mutation addProgress($username: String!, $count: String!, $date: String!) {
-    signupUser(username: $username, count: $count, date: $date) {
-      # token
-      
+  mutation addPush_ups($count: String!, $username: String!) {
+    addPushUps(count: $count, username: $username) {
+      id
+      count
     }
   }
 `

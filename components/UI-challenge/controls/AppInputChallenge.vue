@@ -35,7 +35,10 @@ export default {
       type: Object,
       required: true
     },
-    inputData: Object,
+    inputData: {
+      type: Object,
+      default() { return {} },
+    },
   },
 
   data() {
