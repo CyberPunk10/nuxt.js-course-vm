@@ -7,9 +7,10 @@ module.exports = {
       './plugins/**/*.{js,ts}',
       './nuxt.config.{js,ts}',
     ],
+    // https://purgecss.com/configuration.html#options
     options: {
       keyframes: true,
-      // fontFace: true,
+      // fontFace: true, // если раскомментировать, то в prod на heroku font-awesome icons not render
     },
   },
   darkMode: false, // or 'media' or 'class'
