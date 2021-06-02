@@ -37,7 +37,7 @@ export default {
     '@/theme/index.sass'
   ],
 
-  cssSourceMap: true, // Ксли закомментировать, то: true for dev and false for production
+  // cssSourceMap: true, // Если закомментировать, то: true for dev and false for production
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
