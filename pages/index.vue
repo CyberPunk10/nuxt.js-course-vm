@@ -1,11 +1,17 @@
 <template>
-  <div class="container-flex-blog">
-    <AppPost
-      v-for="post in posts"
-      :key="post._id"
-      :post="post"
-      class="container-elem"
-    />
+  <div>
+    <div class="container-flex-blog">
+      <AppPost
+        v-for="post in posts"
+        :key="post._id"
+        :post="post"
+        class="container-elem"
+      />
+    </div>
+    <NuxtLink
+      to="/mockup/create"
+      class="create-new-post"
+    >Создать новый пост</NuxtLink>
   </div>
 </template>
 
@@ -31,6 +37,7 @@ export default {
   .container-elem
     max-width: 50rem
     width: 100%
-
-
+.create-new-post
+  display: flex
+  justify-content: center
 </style>
