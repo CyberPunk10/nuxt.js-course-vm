@@ -2,17 +2,26 @@
   <div class="info-block text">
     <div class="section">
       <p>Обо мне:</p>
+      <h2>Рязанов Константин Сергеевич</h2>
+      <a
+        href="tel: +7 (953) 165-56-21"
+        class="link-typical"
+      >+7 (953) 165-56-21</a>
       <ul>
-        <li>Рязанов Константин Сергеевич</li>
-        <li>
-          <a
-            href="tel: +7 (953) 165-56-21"
-            class="link-typical"
-          >+7 (953) 165-56-21</a>
+        <li><b>Telegram:</b> Konstantin_info <button
+            class="tac copy-btn"
+            @click="clickClipboard"
+            data-copy-value="Konstantin_info"
+          >copy</button>
         </li>
-        <li>telegram: Konstantin_info</li>
-        <li>watsapp: есть</li>
-        <li>Почта: arx5067@yandex.ru</li>
+        <li><b>Watsapp:</b> есть</li>
+        <li><b>Почта:</b> arx5067@yandex.ru
+          <button
+            class="tac copy-btn"
+            @click="clickClipboard"
+            data-copy-value="arx5067@yandex.ru"
+          >copy</button>
+        </li>
       </ul>
     </div>
 
@@ -54,7 +63,11 @@
 
 <script>
 export default {
-
+  methods: {
+    clickClipboard(event) {
+      navigator.clipboard.writeText(event.target.dataset.copyValue)
+    }
+  }
 }
 </script>
 
@@ -72,10 +85,30 @@ export default {
     @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
       min-width: 98%
 
+    &:first-child
+      ul
+        margin-top: 2rem
     &:last-child
       margin-bottom: .5rem
-  .section>p
-    border-bottom: 1px solid #ccc
-    margin-bottom: 1rem
-    padding-bottom: .5rem
+      li
+        line-height: 4rem
+    p
+      border-bottom: 1px solid #ccc
+      margin-bottom: 1rem
+      padding-bottom: .5rem
+    li
+      line-height: 3rem
+
+  .copy-btn
+    width: 6rem
+    line-height: 100%
+    margin-left: 1rem
+    background-color: rgb(236,238,240)
+    border: 1px solid rgb(226,228,230)
+    border-radius: $borderRadius
+    transition: $transitionDefaultHover
+    &:hover
+      background-color: $theme-color-yellow
+      border-color: $theme-color-yellow
+      color: #92400e
 </style>
