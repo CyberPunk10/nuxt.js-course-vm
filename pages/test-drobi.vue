@@ -99,6 +99,7 @@ export default {
 
 <style lang="sass">
 .wrap-test-drobi
+  margin-top: 2rem
   .row-formula
     display: flex
     flex-wrap: wrap
@@ -157,4 +158,5 @@ export default {
 
   button
     padding: .4rem 1rem
+    margin-bottom: 2rem
 </style>
