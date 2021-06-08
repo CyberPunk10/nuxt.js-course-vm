@@ -10,7 +10,7 @@
     </div>
     <NuxtLink
       to="/mockup/create"
-      class="create-new-post"
+      class="create-new-post link-typical"
     >Создать новый пост</NuxtLink>
   </div>
 </template>
