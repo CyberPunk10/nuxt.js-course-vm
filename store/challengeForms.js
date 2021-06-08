@@ -7,9 +7,9 @@ export const state = () => ({
       title: 'Отжимания',
       activeTab: '3',
       players: [
-        {id: 1, name: 'Player 1', result: [null, null, null, null], resultAll: 0},
-        {id: 2, name: 'Player 2', result: [null, null, null, null], resultAll: 0},
-        {id: 3, name: 'Player 3', result: [null, null, null, null], resultAll: 0}
+        { id: 1, name: 'Player 1', result: [null, null, null, null], resultAll: 0 },
+        { id: 2, name: 'Player 2', result: [null, null, null, null], resultAll: 0 },
+        { id: 3, name: 'Player 3', result: [null, null, null, null], resultAll: 0 }
       ],
       stats: {
 
@@ -26,9 +26,9 @@ export const state = () => ({
       title: 'Подтягивания с утяжелением',
       activeTab: '1',
       players: [
-        {id: 1, name: 'Player 1', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null]},
-        {id: 2, name: 'Player 2', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null]},
-        {id: 3, name: 'Player 3', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null]}
+        { id: 1, name: 'Player 1', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null] },
+        { id: 2, name: 'Player 2', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null] },
+        { id: 3, name: 'Player 3', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null] }
       ],
       stats: {
 
@@ -45,9 +45,9 @@ export const state = () => ({
       title: 'Брусья с утяжелением',
       activeTab: '1',
       players: [
-        {id: 1, name: 'Player 1', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null]},
-        {id: 2, name: 'Player 2', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null]},
-        {id: 3, name: 'Player 3', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null]}
+        { id: 1, name: 'Player 1', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null] },
+        { id: 2, name: 'Player 2', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null] },
+        { id: 3, name: 'Player 3', result: [null, null, null, null], resultAll: 0, result2: [null, null, null, null] }
       ],
       stats: {
 
@@ -89,7 +89,7 @@ export const mutations = {
           // if input value != 0
           if (+target.value !== 0) {
             addClassActiveBtnAddCol(indexForm)
-          // if input value == 0
+            // if input value == 0
           } else {
             // предполагаем что все крайние inputs пусты
             let emptyLastInputs = true
@@ -120,7 +120,7 @@ export const mutations = {
       // change resultAll
       changeResultAll(targetForm, player)
 
-    // rename player
+      // rename player
     } else if (target.dataset.namePlayer) {
       player.name = target.value
     }
@@ -171,27 +171,27 @@ export const mutations = {
 
 export const actions = {
 
-  setInput({commit}, data) {
+  setInput({ commit }, data) {
     commit('setInput', data)
   },
 
-  addCol({commit}, indexForm) {
+  addCol({ commit }, indexForm) {
     commit('addCol', indexForm)
   },
 
-  repeatLastResult({commit}, data) {
+  repeatLastResult({ commit }, data) {
     commit('repeatLastResult', data)
   },
 
-  changeActiveTab({commit}, data) {
+  changeActiveTab({ commit }, data) {
     commit('changeActiveTab', data)
   },
 
-  async addChallengeProgress({commit}, fd) {
+  async addChallengeProgress({ commit }, fd) {
     try {
       return await this.$axios.$post('/api/challenge/add-challenge-progress', fd)
     } catch (error) {
-      commit('setError', error, {root: true})
+      commit('setError', error, { root: true })
       throw error
     }
   }
@@ -212,15 +212,18 @@ function changeResultAll(targetForm, player) {
   }
 }
 
-function arraySum(array){
-  let sum = 0
-  for (let i = 0; i < array.length; i++) {
-    sum += array[i]
-  }
-  return sum
+// function arraySum(array){
+//   let sum = 0
+//   for (let i = 0; i < array.length; i++) {
+//     sum += array[i]
+//   }
+//   return sum
+// }
+function arraySum(array) {
+  return array.reduce((sum, current) => sum + current, 0)
 }
 
-function getResult2(arrayTop, arrayBottom){
+function getResult2(arrayTop, arrayBottom) {
   let sum = 0
   for (let i = 0; i < arrayTop.length; i++) {
     sum += arrayTop[i] * arrayBottom[i]
@@ -232,7 +235,7 @@ function addCol(targetForm) {
   targetForm.players.forEach(player => {
     player.result.push(null)
 
-    if(player.result2) {
+    if (player.result2) {
       player.result2.push(null)
     }
   })
@@ -240,12 +243,12 @@ function addCol(targetForm) {
 
 function addClassActiveBtnAddCol(indexForm) {
   const $btnAddCol = document.getElementById(`index-form-${indexForm}`)
-  .querySelector('.form-sport-main .btns-col .btn-add-col')
+    .querySelector('.form-sport-main .btns-col .btn-add-col')
   $btnAddCol.classList.add('active')
 }
 function removeClassActiveBtnAddCol(indexForm) {
   const $btnAddCol = document.getElementById(`index-form-${indexForm}`)
-  .querySelector('.form-sport-main .btns-col .btn-add-col')
+    .querySelector('.form-sport-main .btns-col .btn-add-col')
   $btnAddCol.classList.remove('active')
 }
 

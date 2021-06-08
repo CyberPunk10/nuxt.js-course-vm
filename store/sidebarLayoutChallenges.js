@@ -131,6 +131,14 @@ export const state = () => ({
       isDev: true,
       isMockup: true
     },
+    {
+      name: 'Тестовое с дробями',
+      icon: 'fas fa-heart',
+      url: '/test-drobi',
+      onSidenav: true,
+      isDev: true,
+      isMockup: true
+    },
 
     // mockupAdmin
     {
@@ -179,26 +187,26 @@ export const mutations = {
 }
 
 export const actions = {
-  toggleSidebar({commit}) { commit('toggleSidebar') },
-  closeSidebar({commit}) { commit('closeSidebar') },
-  openSidebar({commit}) { commit('openSidebar') },
+  toggleSidebar({ commit }) { commit('toggleSidebar') },
+  closeSidebar({ commit }) { commit('closeSidebar') },
+  openSidebar({ commit }) { commit('openSidebar') },
 }
 
 export const getters = {
   sidenavLinks: state => {
-    const sidenavLinks = state.navLinks.filter( el => el.onSidenav )
+    const sidenavLinks = state.navLinks.filter(el => el.onSidenav)
     return sidenavLinks
   },
   headerLinks: state => {
-    const headerLinks = state.navLinks.filter( el => el.onHeader )
+    const headerLinks = state.navLinks.filter(el => el.onHeader)
     return headerLinks
   },
   headerUserAvatarMenuLinks: state => {
-    const headerLinks = state.navLinks.filter( el => el.onHeaderUserAvatarMenu )
+    const headerLinks = state.navLinks.filter(el => el.onHeaderUserAvatarMenu)
     return headerLinks
   },
   footerMobileLinks: state => {
-    const footerMobileLinks = state.navLinks.filter( el => el.onFooterMobile )
+    const footerMobileLinks = state.navLinks.filter(el => el.onFooterMobile)
     return footerMobileLinks
   },
 
