@@ -1,5 +1,5 @@
 <template>
-<div class="">
+  <div class="">
     <h1>my profile</h1>
     <p>Статистика</p>
     <p>Достижения</p>
@@ -32,10 +32,4 @@ export default {
 </script>
 
 <style lang="sass">
-.text
-  margin: 0 auto
-  background-color: #fff
-  border: 1px solid $color-dark-shade-10
-  padding: 1rem
-  border-radius: 6px
 </style>
