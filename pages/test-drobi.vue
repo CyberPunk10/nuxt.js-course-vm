@@ -89,8 +89,9 @@ export default {
 .wrap-test-drobi
   .row-formula
     display: flex
+    flex-wrap: wrap
     align-items: center
-    margin-bottom: 1rem
+    margin-bottom: 2rem
 
   .fraction
     max-width: 4rem
@@ -115,4 +116,7 @@ export default {
     padding: 1rem
   .drobi__result
     padding-left: 0
+
+  button
+    padding: .4rem 1rem
 </style>
