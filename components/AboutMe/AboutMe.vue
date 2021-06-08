@@ -80,9 +80,12 @@ export default {
 <style lang="sass">
 .info-block.text
   margin-top: 2rem
-  margin-bottom: 2rem
+  margin-bottom: 1.5rem
   h2
     margin: 1%
+    @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
+      margin-bottom: 1.5rem
+
 .wrap-sections
   display: flex
   flex-wrap: wrap
@@ -90,29 +93,16 @@ export default {
     min-width: 200px
     width: 48%
     margin: 1%
-    margin-bottom: 2rem
+    margin-bottom: 1.5rem
     @media screen and (max-width: calc(#{$phoneWidth} - 1px)) // < 480px
       min-width: 98%
 
     &:last-child
       margin-bottom: .5rem
     p
-      border-bottom: 1px solid #ccc
+      border-bottom: 1px solid #e6e6e6
       margin-bottom: 1rem
       padding-bottom: .5rem
     li
       line-height: 3.5rem
-
-  .copy-btn
-    width: 6rem
-    line-height: 100%
-    margin-left: 1rem
-    background-color: rgb(236,238,240)
-    border: 1px solid rgb(226,228,230)
-    border-radius: $borderRadius
-    transition: $transitionDefaultHover
-    &:hover
-      background-color: $theme-color-yellow
-      border-color: $theme-color-yellow
-      color: #92400e
 </style>
