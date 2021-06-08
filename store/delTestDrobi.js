@@ -28,6 +28,9 @@ export const mutations = {
 
   addFraction(state) {
     state.allFractions.push(['', ''])
+  },
+  removeFraction(state, indexItem) {
+    state.allFractions.splice(indexItem, 1)
   }
 }
 
@@ -38,6 +41,9 @@ export const actions = {
 
   addFraction({ commit }) {
     commit('addFraction')
+  },
+  removeFraction({ commit }, indexItem) {
+    commit('removeFraction', indexItem)
   },
 }
 

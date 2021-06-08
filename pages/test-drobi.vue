@@ -22,6 +22,11 @@
             :v="$v.number"
             :data-index-fraction="index"
           >
+          <div
+            @click="removeFraction"
+            class="remove-fraction"
+            :data-index-fraction="index"
+          ></div>
         </div>
         <span
           v-if="index !== allFractions.length - 1"
@@ -82,6 +87,11 @@ export default {
       if (this.allFractions.length < 5) {
         this.$store.dispatch('delTestDrobi/addFraction')
       }
+    },
+    removeFraction(e) {
+      if (this.allFractions.length > 2) {
+        this.$store.dispatch('delTestDrobi/removeFraction', e.target.dataset.indexFraction)
+      }
     }
   }
 }
@@ -96,6 +106,7 @@ export default {
     margin-bottom: 2rem
 
   .fraction
+    position: relative
     max-width: 4rem
     background-color: $color-purple
     padding: 3px
@@ -109,6 +120,31 @@ export default {
       text-align: center
       &:last-child
         margin-bottom: 0
+    .remove-fraction
+      position: absolute
+      opacity: 0
+      top: -20px
+      left: calc(50% - 10px)
+      width: 20px
+      height: 20px
+      cursor: pointer
+      transition: opacity .2s ease-out
+      &:before,
+      &:after
+        content: ''
+        width: 20px
+        height: 1px
+        background: $color-purple
+        position: absolute
+        left: center
+        bottom: 14px
+      &:before
+        transform: rotate(45deg)
+      &:after
+        transform: rotate(-45deg)
+    &:hover
+      .remove-fraction
+        opacity: 1
 
   .drobi__plus,
   .drobi__equally,
