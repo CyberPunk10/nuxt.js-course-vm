@@ -51,6 +51,7 @@ export default {
     dirs: [
       '~/components',
       '~/components/Challenges',
+      '~/components/AboutMe',
       // '~/components/Challenges/CalendarGitHub',
       '~/components/Challenges/SportForm',
       '~/components/Challenges/TableResultChallenges',
