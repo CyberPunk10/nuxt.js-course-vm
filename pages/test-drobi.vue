@@ -33,6 +33,8 @@
       <span class="drobi__result">{{result}}</span>
     </div>
     <button @click="addFraction">Добавить дробь</button>
+
+    <AboutMe />
   </div>
 </template>
 
