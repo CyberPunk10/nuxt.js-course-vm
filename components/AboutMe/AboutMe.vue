@@ -8,11 +8,10 @@
         class="link-typical"
       >+7 (953) 165-56-21</a>
       <ul>
-        <li><b>Telegram:</b> Konstantin_info <button
-            class="tac copy-btn"
-            @click="clickClipboard"
-            data-copy-value="Konstantin_info"
-          >copy</button>
+        <li><b>Telegram:</b> <a
+            href="https://t.me/Konstantin_info"
+            class="link-typical"
+          >Konstantin_info</a>
         </li>
         <li><b>Watsapp:</b> есть</li>
         <li><b>Почта:</b> arx5067@yandex.ru
@@ -87,11 +86,11 @@ export default {
 
     &:first-child
       ul
-        margin-top: 2rem
+        margin-top: 1rem
     &:last-child
       margin-bottom: .5rem
       li
-        line-height: 4rem
+        line-height: 3.5rem
     p
       border-bottom: 1px solid #ccc
       margin-bottom: 1rem
