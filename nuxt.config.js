@@ -75,6 +75,7 @@ export default {
     '~/modules/mongodb_setup.js',
     '@nuxtjs/apollo', // https://github.com/nuxt-community/apollo-module
     '@nuxtjs/markdownit', // https://github.com/nuxt-community/markdownit-module
+    'nuxt-socket-io' // https://github.com/richardeschloss/nuxt-socket-io
   ],
 
   pwa: {
@@ -127,6 +128,14 @@ export default {
     //   'markdown-it-attrs'
     // ],
     runtime: true // Support `$md()`
+  },
+
+  io: {
+    // module options
+    sockets: [{
+      name: 'main',
+      url: 'http://localhost:3000'
+    }]
   },
 
   env: {
