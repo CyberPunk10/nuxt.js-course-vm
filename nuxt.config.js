@@ -65,7 +65,8 @@ export default {
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
     '@nuxtjs/pwa',
-    '@nuxtjs/tailwindcss' // https://tailwindcss.su/docs/guides/nuxtjs
+    '@nuxtjs/tailwindcss', // https://tailwindcss.su/docs/guides/nuxtjs
+    '@nuxt/typescript-build' // https://typescript.nuxtjs.org/guide/setup
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
