@@ -139,6 +139,14 @@ export const state = () => ({
       isDev: true,
       isMockup: true
     },
+    {
+      name: 'Тестовое NetDistance',
+      icon: 'fas fa-heart',
+      url: '/test-net-distance',
+      onSidenav: true,
+      isDev: true,
+      isMockup: true
+    },
 
     // mockupAdmin
     {

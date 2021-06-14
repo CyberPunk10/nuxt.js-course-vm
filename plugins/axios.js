@@ -9,8 +9,8 @@ export default function ({ $axios, redirect, store }) {
       const token = store.getters['authStore/token']
       request.headers.common['Authorization'] = `Bearer ${token}`
     }
-    console.log('[request.headers.common]: ', request.headers.common)
-    console.log('plugin/axios.js - Добавление заголовка с токеном для backend (т.к. axios не доступен при SSR)')
+    // console.log('[request.headers.common]: ', request.headers.common)
+    console.log('[plugins/axios.js] - Добавление заголовка с токеном для backend (т.к. axios не доступен при SSR)')
     return request
   })
 
