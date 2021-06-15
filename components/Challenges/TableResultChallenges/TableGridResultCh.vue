@@ -1,21 +1,26 @@
 <template>
-  <div class="wrap-card-content mb2 padding-0"
+  <div
+    class="wrap-card-content mb2 padding-0"
     ref="tableGrid"
   >
-    <div class="table-fixed-cols-grid"
+    <div
+      class="table-fixed-cols-grid"
       :style="gridMainColumns"
       @mouseover="mouseoverRows"
-      @mouseout ="mouseoutRows"
+      @mouseout="mouseoutRows"
       ref="table"
     >
       <!-- first-col -->
-      <div class="first-col"
+      <div
+        class="first-col"
         v-if="showFixedFirstCol"
         :class="{'shadow-active': shadowLeftActive}"
         :style="gridNestingRows"
       >
         <!-- header cell -->
-        <div v-if="fixed_first_col.sort" class="cell__header row"
+        <div
+          v-if="fixed_first_col.sort"
+          class="cell__header row"
           @click="sortBy( $event, fixed_first_col.sort, fixed_first_col.key )"
           :style="widthCellFirstCol"
         >
@@ -24,7 +29,9 @@
             <i class="material-icons">unfold_more</i>
           </div>
         </div>
-        <div v-else class="cell__header row"
+        <div
+          v-else
+          class="cell__header row"
           :style="widthCellFirstCol"
         >
           <div class="text-truncation-many-lines">
@@ -33,7 +40,9 @@
         </div>
 
         <!-- other cells -->
-        <div class="cell" data-first-col
+        <div
+          class="cell"
+          data-first-col
           v-for="(row, indexRow) in paginatedUsers"
           :key="row.id"
           :class="{'hover-active': currentElem == indexRow}"
@@ -47,21 +56,26 @@
       </div>
 
       <!-- center-cols -->
-      <div class="center-cols layout-cell-light-gray-border layout-scrollbar-light-gray-border layout-swipe-ignore"
+      <div
+        class="center-cols layout-cell-light-gray-border layout-scrollbar-light-gray-border layout-swipe-ignore"
         @scroll="scrollCenterCols"
         ref="centerCols"
         :style="[gridNestingRows, gridNestingCols]"
       >
         <!-- header cells -->
         <template v-for="(cell, indexCol) in namesColsForRowRender">
-          <p v-if="cell.sort" class="cell__header"
+          <p
+            v-if="cell.sort"
+            class="cell__header"
             :key="indexCol"
             @click="sortBy( $event, cell.sort, cell.key )"
             :class="{jcc: cell.align === 'center'}"
           >{{ cell.title || cell }}
             <i class="material-icons">unfold_more</i>
           </p>
-          <p v-else class="cell__header"
+          <p
+            v-else
+            class="cell__header"
             :key="indexCol"
             :class="{jcc: cell.align === 'center'}"
           >{{ cell.title || cell }}
@@ -69,20 +83,24 @@
         </template>
 
         <!-- other cells -->
-            <!-- :key="`${row.id || row._id}__${cell.key || cell}`" -->
+        <!-- :key="`${row.id || row._id}__${cell.key || cell}`" -->
         <template v-for="(row, indexRow) in paginatedUsers">
-          <div class="cell"
+          <div
+            class="cell"
             v-for="(cell, indexCol) in namesColsForRowRender"
             :key="`${indexRow}__${indexCol}`"
             :data-row="indexRow"
             :data-col="indexCol"
             :class="{'hover-active': currentElem == indexRow, jcc: cell.align === 'center'}"
           >
-            <slot v-if="!row[cell.key || cell]"
+            <slot
+              v-if="!row[cell.key || cell] && !cell.key"
               name="operations"
               :row_id="row._id"
             ></slot>
-            <slot v-else :name="(cell.key || cell)"
+            <slot
+              v-else
+              :name="(cell.key || cell)"
               :cell="row[cell.key || cell]"
             >{{ row[cell.key || cell] }}</slot>
           </div>
@@ -90,32 +108,40 @@
       </div>
 
       <!-- last-col -->
-      <div class="last-col"
+      <div
+        class="last-col"
         v-if="showFixedLastCol"
         :class="{'shadow-active': shadowRightActive}"
         :style="gridNestingRows"
       >
         <!-- header cell -->
-        <div v-if="fixed_last_col.sort" class="cell__header row"
+        <div
+          v-if="fixed_last_col.sort"
+          class="cell__header row"
           @click="sortBy( $event, fixed_last_col.sort, fixed_last_col.key )"
           :class="{jcc: fixed_last_col.align === 'center'}"
         >
           {{ fixed_last_col.title || fixed_last_col.key }}
           <i class="material-icons">unfold_more</i>
         </div>
-        <div v-else class="cell__header row"
+        <div
+          v-else
+          class="cell__header row"
           :class="{jcc: fixed_last_col.align === 'center'}"
         >{{ fixed_last_col.title || fixed_last_col.key }}
         </div>
 
         <!-- other cells -->
-        <div class="cell" data-last-col
+        <div
+          class="cell"
+          data-last-col
           v-for="(row, indexRow) in paginatedUsers"
           :key="row.id"
           :data-row="indexRow"
           :class="{'hover-active': currentElem == indexRow, jcc: fixed_last_col.align === 'center'}"
         >
-          <slot v-if="!fixed_last_col.key"
+          <slot
+            v-if="!fixed_last_col.key"
             name="operations"
             :row_id="row._id"
           ></slot>
@@ -128,10 +154,17 @@
     </div>
 
     <!-- footer -->
-    <div v-if="data_tables.length > 10" class="footer-table">
+    <div
+      v-if="data_tables.length > 10"
+      class="footer-table"
+    >
       <div class="footer-table-left-block"></div>
-      <div v-if="data_tables.length > userPerPages" class="v-table__pagination">
-        <div class="page"
+      <div
+        v-if="data_tables.length > userPerPages"
+        class="v-table__pagination"
+      >
+        <div
+          class="page"
           v-for="page in pages"
           :key="page"
           @click="pageClick(page)"
@@ -139,16 +172,20 @@
         >{{ page }}
         </div>
       </div>
-      <p class="count-row"
+      <p
+        class="count-row"
         @click="changeCountRow"
       >Показывать строк по:
-        <span :class="{'count-row_selected': 10 === userPerPages}"
+        <span
+          :class="{'count-row_selected': 10 === userPerPages}"
           data-count-row="10"
         >10</span>
-        <span :class="{'count-row_selected': 20 === userPerPages}"
+        <span
+          :class="{'count-row_selected': 20 === userPerPages}"
           data-count-row="20"
         >20</span>
-        <span :class="{'count-row_selected': 50 === userPerPages}"
+        <span
+          :class="{'count-row_selected': 50 === userPerPages}"
           data-count-row="50"
         >50</span>
       </p>
@@ -200,7 +237,7 @@ export default {
     showFixedFirstCol() {
       return this.isShowFixedCol(this.fixed_first_col)
     },
-    showFixedLastCol(){
+    showFixedLastCol() {
       return this.isShowFixedCol(this.fixed_last_col)
     },
 
@@ -241,7 +278,7 @@ export default {
         // узнаем сколько фиксированных столбцов
         let countFixedCol = 0
         countFixedCol = this.showFixedFirstCol ? ++countFixedCol : countFixedCol
-        countFixedCol = this.showFixedLastCol  ? ++countFixedCol : countFixedCol
+        countFixedCol = this.showFixedLastCol ? ++countFixedCol : countFixedCol
 
         const countCol = Object.keys(this.data_tables[0]).length - countFixedCol // вычетаем первый и последний столбцы (if они фиксрованные)
         return {
@@ -255,7 +292,7 @@ export default {
       else if (width >= 480 && width < 768) return { maxWidth: this.fixed_first_col.maxWidthPhone || '10rem' }
       else if (width >= 768 && width < 980) return { maxWidth: this.fixed_first_col.maxWidthTablet || '15rem' }
       else if (width >= 980 && width < 1280) return { maxWidth: this.fixed_first_col.maxWidthSmDesktop || '20rem' }
-      else if (width >= 1280) return  { maxWidth: 'none' } // здесь сбрасываем max-width (при этом в gridMainColumns() пользуемся 'maxWidthDesktop' если оно есть)
+      else if (width >= 1280) return { maxWidth: 'none' } // здесь сбрасываем max-width (при этом в gridMainColumns() пользуемся 'maxWidthDesktop' если оно есть)
       else if (width === 0) return {}
     },
 
@@ -369,7 +406,7 @@ export default {
     // проверка нужно ли отменить фиксирование col при каком-то размере таблицы
     isUnfixed(col) {
       const width = this.currentWidthTable
-      if ( col.phoneUnfixed && width < 480
+      if (col.phoneUnfixed && width < 480
         || col.tabletUnfixed && width < 768
         || col.smDesktopUnfixed && width < 980
         || col.desktopUnfixed && width < 1280
@@ -389,36 +426,36 @@ export default {
     },
 
     // sort
-    sortBy( event, type, key ) {
+    sortBy(event, type, key) {
       if (!type) return
 
       let directionSort = event.currentTarget.dataset.sort
       // если список в первичном рандомном или обратном порядке
-      if (!directionSort || directionSort === 'reversed' ) {
+      if (!directionSort || directionSort === 'reversed') {
         // то сортируем по возрастанию
         switch (type) {
           case 'text':
-            this.data_tables.sort((a,b) => a[`${key}`].localeCompare(b[`${key}`]))
+            this.data_tables.sort((a, b) => a[`${key}`].localeCompare(b[`${key}`]))
             break
           case 'numbers':
-            this.data_tables.sort((a,b) => a[`${key}`] - b[`${key}`])
+            this.data_tables.sort((a, b) => a[`${key}`] - b[`${key}`])
             break
-        case 'numbers-length':
-          this.data_tables.sort((a,b) => a[`${key}`].length - b[`${key}`].length)
-          break
+          case 'numbers-length':
+            this.data_tables.sort((a, b) => a[`${key}`].length - b[`${key}`].length)
+            break
         }
         event.currentTarget.dataset.sort = 'abc' // может возникнуть желание заменить эту строку на такую: "directionSort = 'abc'" - это не сработает
       } else {
         // иначе сортируем по убыванию
         switch (type) {
           case 'text':
-            this.data_tables.sort((a,b) => b[`${key}`].localeCompare(a[`${key}`]))
+            this.data_tables.sort((a, b) => b[`${key}`].localeCompare(a[`${key}`]))
             break
           case 'numbers':
-            this.data_tables.sort((a,b) => b[`${key}`] - a[`${key}`])
+            this.data_tables.sort((a, b) => b[`${key}`] - a[`${key}`])
             break
           case 'numbers-length':
-            this.data_tables.sort((a,b) => b[`${key}`].length - a[`${key}`].length)
+            this.data_tables.sort((a, b) => b[`${key}`].length - a[`${key}`].length)
             break
 
           // default:
@@ -456,7 +493,7 @@ export default {
       // переход на div[data-row], но вне нашей таблицы (возможно при вложенных таблицах)
       // игнорировать
       const $table = this.$refs.table
-      if(!$table) return // при переходе по ссылке этот компонент может быть уничтожен на момент выполнения этого кода, если это так, то выходим
+      if (!$table) return // при переходе по ссылке этот компонент может быть уничтожен на момент выполнения этого кода, если это так, то выходим
       if (!$table.contains(target)) return
 
       // ура, мы зашли на новый div[data-row]

@@ -1,17 +1,17 @@
 const posts = [
-  {title: 'Post1', date: new Date(), views: 22, comments: [1,2], _id: '1'},
-  {title: 'Post2', date: new Date(), views: 22, comments: [1,2], _id: '2'},
-  {title: 'Post3', date: new Date(), views: 22, comments: [1,2], _id: '3'}
+  { title: 'Post1', date: new Date(), views: 22, comments: [1, 2], _id: '1' },
+  { title: 'Post2', date: new Date(), views: 22, comments: [1, 2], _id: '2' },
+  { title: 'Post3', date: new Date(), views: 22, comments: [1, 2], _id: '3' }
 ]
 
 export const actions = {
 
   // admin
-  async fetchAdmin({commit}) {
+  async fetchAdmin({ commit }) {
     try {
       return await this.$axios.$get('/api/post/admin/list')
     } catch (error) {
-      commit('setError', error, {root: true})
+      commit('setError', error, { root: true })
       throw error
     }
     // return await new Promise(resolve => {
@@ -20,8 +20,16 @@ export const actions = {
     //   }, 500)
     // })
   },
+  async fetchAdminRemovedPosts({ commit }) {
+    try {
+      return await this.$axios.$get('/api/post/admin/list-removed')
+    } catch (error) {
+      commit('setError', error, { root: true })
+      throw error
+    }
+  },
 
-  async create({commit}, {title, text, image}) {
+  async create({ commit }, { title, text, image }) {
     try {
       const fd = new FormData()
 
@@ -36,34 +44,45 @@ export const actions = {
       //   }, 500)
       // })
     } catch (error) {
-      commit('setError', error, {root: true})
+      commit('setError', error, { root: true })
       throw error
     }
   },
 
-  async update({commit}, {id, text}) {
+  async update({ commit }, { id, text }) {
     try {
       return await this.$axios.$put(`/api/post/admin/${id}`, { text })
     } catch (error) {
-      commit('setError', error, {root: true})
+      commit('setError', error, { root: true })
       throw error
     }
   },
 
-  async remove({commit}, id) {
+  async remove({ commit }, id) {
     try {
-      return await this.$axios.$delete(`/api/post/admin/${id}`)
+      // добавляет дату удаления, но не удаляет (для последующего восстановления)
+      return await this.$axios.$put(`/api/post/admin/${id}`, { removedDate: Date.now() })
+      // return await this.$axios.$delete(`/api/post/admin/${id}`) // сразу удаляет
     } catch (error) {
-      commit('setError', error, {root: true})
+      commit('setError', error, { root: true })
       throw error
     }
   },
 
-  async fetchAdminById({commit}, id) {
+  async recovery({ commit }, id) {
+    try {
+      return await this.$axios.$put(`/api/post/admin/${id}`, { removedDate: null })
+    } catch (error) {
+      commit('setError', error, { root: true })
+      throw error
+    }
+  },
+
+  async fetchAdminById({ commit }, id) {
     try {
       return await this.$axios.$get(`/api/post/admin/${id}`)
     } catch (error) {
-      commit('setError', error, {root: true})
+      commit('setError', error, { root: true })
       throw error
     }
     // return await new Promise(resolve => {
@@ -73,40 +92,40 @@ export const actions = {
     // })
   },
 
-  async getAnalytics({commit}) {
+  async getAnalytics({ commit }) {
     try {
       return await this.$axios.$get('/api/post/admin/get/analytics')
     } catch (error) {
-      commit('setError', error, {root: true})
+      commit('setError', error, { root: true })
       throw error
     }
   },
 
   // other
-  async fetchById({commit}, id) {
+  async fetchById({ commit }, id) {
     try {
       return await this.$axios.$get(`/api/post/${id}`)
     } catch (error) {
-      commit('setError', error, {root: true})
+      commit('setError', error, { root: true })
       throw error
     }
   },
 
-  async fetch({commit}) {
+  async fetch({ commit }) {
     try {
       return await this.$axios.$get('/api/post/list')
     } catch (error) {
-      commit('setError', error, {root: true})
+      commit('setError', error, { root: true })
       throw error
     }
   },
 
-  async addView({commit}, { _id, views }) {
+  async addView({ commit }, { _id, views }) {
     try {
-      console.log('store/post.js')
-      return await this.$axios.$put(`/api/post/add/view/${_id}`, {views})
+      console.log('store/post.js. ПОХОЖЕ ТУТ НУЖНО ДОБАВИТЬ views +1')
+      return await this.$axios.$put(`/api/post/add/view/${_id}`, { views })
     } catch (error) {
-      commit('setError', error, {root: true})
+      commit('setError', error, { root: true })
       throw error
     }
   }

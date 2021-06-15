@@ -18,6 +18,9 @@ const postSchema = new Schema({
     default: 0
   },
   imageUrl: String,
+  removedDate: {
+    type: Date || null,
+  },
   comments: [
     {
       type: Schema.Types.ObjectId,

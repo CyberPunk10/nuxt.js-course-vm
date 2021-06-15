@@ -16,9 +16,22 @@ module.exports.create = async (req, res) => {
   }
 }
 
-module.exports.getAll = async (req, res) => {
+module.exports.getAll = async (req, res) => { // без удаленных
   try {
-    const posts = await Post.find().sort({date: -1})
+    const posts = await Post
+      .find({ removedDate: null })
+      .sort({ date: -1 })
+    res.json(posts)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+module.exports.getAllRemoved = async (req, res) => { // only удаленные
+  try {
+    const posts = await Post
+      .find({ removedDate: { $ne: null } })
+      .sort({ date: -1 })
     res.json(posts)
   } catch (error) {
     res.status(500).json(error)
@@ -38,9 +51,10 @@ module.exports.getById = async (req, res) => {
 module.exports.update = async (req, res) => {
   try {
     const $set = {
-      text: req.body.text
+      text: req.body.text,
+      removedDate: req.body.removedDate
     }
-    const post = await Post.findOneAndUpdate({_id: req.params.id}, {$set}, {new: true})
+    const post = await Post.findOneAndUpdate({ _id: req.params.id }, { $set }, { new: true })
     res.json(post)
   } catch (error) {
     res.status(500).json(error)
@@ -49,8 +63,8 @@ module.exports.update = async (req, res) => {
 
 module.exports.remove = async (req, res) => {
   try {
-    await Post.deleteOne({_id: req.params.id})
-    res.json({message: 'Пост удален'})
+    await Post.deleteOne({ _id: req.params.id })
+    res.json({ message: 'Пост удален' })
   } catch (error) {
     res.status(500).json(error)
   }
@@ -61,7 +75,7 @@ module.exports.addView = async (req, res) => {
     views: ++req.body.views
   }
   try {
-    const post = await Post.findOneAndUpdate({_id: req.params.id}, {$set})
+    await Post.findOneAndUpdate({ _id: req.params.id }, { $set })
     res.status(204).json({})
   } catch (error) {
     res.status(500).json(error)
