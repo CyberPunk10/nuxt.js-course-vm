@@ -185,8 +185,17 @@
 
 <script>
 export default {
-  head: {
-    title: `Challenges | ${process.env.appName}`
+  head() {
+    return {
+      title: `Challenges | ${process.env.appName}`,
+      // локальная установка шрифта
+      link: [
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Lobster&display=swap'
+        }
+      ]
+    }
   },
   layout: 'layout-main-challenges',
   computed: {
@@ -205,7 +214,6 @@ export default {
 </script>
 
 <style lang="sass">
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap')
 // @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap')
 
 .title-table
