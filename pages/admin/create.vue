@@ -109,6 +109,26 @@ export default {
   methods: {
     handleImageChange(file, fileList) {
       this.image = file.raw
+      console.log('[FILE INFO]: ', file)
+
+      // проверка размера файла
+      if (file.size > 1024 * 1024 * 5) { // на беке тоже есть ограничение размера файла
+        this.$message.warning('Размер картинки превышает допустимое значение')
+        this.image = null
+        this.$refs.upload.clearFiles()
+        return
+      }
+
+      // проверка типа файла
+      let fileExt = false
+      const parts = file.name.split('.')
+      if (parts.length > 1) fileExt = parts.pop()
+
+      if (!(fileExt === 'jpg' || fileExt === 'jpeg' || fileExt === 'png')) { // на беке тоже есть ограничение типа файла
+        this.$message.warning('Вы загружаете недопустимый тип файла. Загрузите JPG или PNG')
+        this.image = null
+        this.$refs.upload.clearFiles()
+      }
     },
 
     onSubmit() {
