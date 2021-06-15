@@ -19,6 +19,7 @@ module.exports = {
   },
   variants: {
     extend: {},
+    container: [] // Отключение адаптивных вариантов (https://tailwindcss.ru/docs/container#otklyuchenie-adaptivnyh-variantov)
   },
   plugins: [],
   corePlugins: {
@@ -26,5 +27,6 @@ module.exports = {
     outline: false,
     pointerEvents: false,
     preflight: false,
+    container: false, // Полное отключение (https://tailwindcss.ru/docs/container#otklyuchenie-adaptivnyh-variantov)
   }
 }
