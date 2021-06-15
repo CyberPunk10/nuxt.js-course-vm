@@ -205,17 +205,17 @@ export default {
 </script>
 
 <style lang="sass">
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap')
+// @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap')
+
 .title-table
   margin: 1rem .5rem
     // color: #2F4050
   @media screen and (min-width: $phoneWidth) // >= 480px
     margin: 1rem
 
-  @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap')
-  // @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap')
-
-  #table-price
-    padding-bottom: 35px
+#table-price
+  padding-bottom: 35px
 
   #table-Obvodny, #table-Ligovskiy
     margin-top: 30px
