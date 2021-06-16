@@ -21,6 +21,8 @@
       {{ resultSearch }}
     </el-tag>
 
+    <AboutMe :links="links" />
+
     <h2>Drag and Drop</h2>
 
     <div
@@ -76,6 +78,11 @@ export default {
         { id: 1, title: 'Item B', list: 1 },
         { id: 2, title: 'Item C', list: 2 },
       ],
+
+      // Other
+      links: [
+        { title: 'Вакансия', url: 'https://career.habr.com/vacancies/1000069398' },
+      ]
     }
   },
 
