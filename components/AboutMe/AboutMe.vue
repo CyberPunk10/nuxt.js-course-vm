@@ -38,13 +38,18 @@
       <div class="section">
         <p>Ссылки:</p>
         <ul>
-          <li>
-            <a
-              href="https://career.habr.com/vacancies/1000061913"
-              class="link-typical"
-            >Вакансия
-            </a>
-          </li>
+          <template v-if="links">
+            <li
+              v-for="(link, index) in links"
+              :key="index"
+            >
+              <a
+                :href="link.url"
+                class="link-typical"
+              >{{link.title}}
+              </a>
+            </li>
+          </template>
           <li>
             <a
               href="https://spb.hh.ru/resume/9475f2daff046359ed0039ed1f536978694a48"
@@ -74,6 +79,11 @@
 
 <script>
 export default {
+  props: {
+    links: {
+      type: Array
+    }
+  }
 }
 </script>
 

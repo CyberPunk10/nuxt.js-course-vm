@@ -39,7 +39,7 @@
     </div>
     <button @click="addFraction">Добавить дробь</button>
 
-    <AboutMe />
+    <AboutMe :links="links" />
   </div>
 </template>
 
@@ -58,7 +58,10 @@ export default {
 
   data() {
     return {
-      number: ''
+      number: '',
+      links: [
+        { title: 'Вакансия', url: 'https://career.habr.com/vacancies/1000061913' },
+      ]
     }
   },
 
