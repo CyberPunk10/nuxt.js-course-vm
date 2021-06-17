@@ -52,6 +52,17 @@ module.exports.update = async (req, res) => {
   try {
     const $set = {
       text: req.body.text,
+    }
+    const post = await Post.findOneAndUpdate({ _id: req.params.id }, { $set }, { new: true })
+    res.json(post)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+module.exports.removeOrRecovery = async (req, res) => {
+  try {
+    const $set = {
       removedDate: req.body.removedDate
     }
     const post = await Post.findOneAndUpdate({ _id: req.params.id }, { $set }, { new: true })
@@ -61,7 +72,7 @@ module.exports.update = async (req, res) => {
   }
 }
 
-module.exports.remove = async (req, res) => {
+module.exports.delete = async (req, res) => {
   try {
     await Post.deleteOne({ _id: req.params.id })
     res.json({ message: 'Пост удален' })
