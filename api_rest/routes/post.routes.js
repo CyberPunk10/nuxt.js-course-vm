@@ -39,12 +39,18 @@ router.put(
   passport.authenticate('jwt', { session: false }),
   ctr.update
 )
+// /api/post/admin/:id/remove-or-recovery
+router.put(
+  '/admin/:id/remove-or-recovery',
+  passport.authenticate('jwt', { session: false }),
+  ctr.removeOrRecovery
+)
 
 // /api/post/admin/:id
 router.delete(
   '/admin/:id',
   passport.authenticate('jwt', { session: false }),
-  ctr.remove
+  ctr.delete
 )
 
 // /api/post/admin/get/analytics

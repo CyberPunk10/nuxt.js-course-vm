@@ -60,9 +60,7 @@ export const actions = {
 
   async remove({ commit }, id) {
     try {
-      // добавляет дату удаления, но не удаляет (для последующего восстановления)
-      return await this.$axios.$put(`/api/post/admin/${id}`, { removedDate: Date.now() })
-      // return await this.$axios.$delete(`/api/post/admin/${id}`) // сразу удаляет
+      return await this.$axios.$put(`/api/post/admin/${id}/remove-or-recovery`, { removedDate: Date.now() })
     } catch (error) {
       commit('setError', error, { root: true })
       throw error
@@ -71,7 +69,16 @@ export const actions = {
 
   async recovery({ commit }, id) {
     try {
-      return await this.$axios.$put(`/api/post/admin/${id}`, { removedDate: null })
+      return await this.$axios.$put(`/api/post/admin/${id}/remove-or-recovery`, { removedDate: null })
+    } catch (error) {
+      commit('setError', error, { root: true })
+      throw error
+    }
+  },
+
+  async delete({ commit }, id) {
+    try {
+      return await this.$axios.$delete(`/api/post/admin/${id}`) // сразу удаляет
     } catch (error) {
       commit('setError', error, { root: true })
       throw error

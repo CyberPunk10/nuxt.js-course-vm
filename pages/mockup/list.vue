@@ -52,7 +52,7 @@
           <el-button
             size="mini"
             type="danger"
-            @click="handleDelete(row_id)"
+            @click="handleRemove(row_id)"
             circle
           >
             <i class="el-icon-delete"></i>
@@ -113,7 +113,7 @@ export default {
       this.$router.push(`/mockup/post/${id}`)
     },
 
-    async handleDelete(id) {
+    async handleRemove(id) {
       try {
         await this.$confirm('Пост будет удалён. Продолжить?', 'Внимание', {
           confirmButtonText: 'Да',
