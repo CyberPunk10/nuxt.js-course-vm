@@ -103,8 +103,8 @@ export default {
   },
 
   async asyncData({ store }) {
-    let posts = await store.dispatch('post/fetchAdmin')
-    let removedPosts = await store.dispatch('post/fetchAdminRemovedPosts')
+    let posts = await store.dispatch('post.actions/fetchAdmin')
+    let removedPosts = await store.dispatch('post.actions/fetchAdminRemovedPosts')
     return { posts, removedPosts }
   },
 
@@ -121,7 +121,7 @@ export default {
           type: 'warning'
         })
 
-        await this.$store.dispatch('post/remove', id)
+        await this.$store.dispatch('post.actions/remove', id)
         this.removedPosts.push(this.posts.find(p => p._id === id)) // копируем в локальный массив опубликованных постов
         this.posts = this.posts.filter(p => p._id !== id) // в массиве остются только те, что не равняются _id
         this.$message.success('Пост удалён')
@@ -137,7 +137,7 @@ export default {
           type: 'warning'
         })
 
-        await this.$store.dispatch('post/recovery', id)
+        await this.$store.dispatch('post.actions/recovery', id)
         this.posts.push(this.removedPosts.find(p => p._id === id)) // копируем в локальный массив удаленных постов
         this.removedPosts = this.removedPosts.filter(p => p._id !== id) // в массиве остются только те, что не равняются _id
         this.$message.success('Пост восстановлен')

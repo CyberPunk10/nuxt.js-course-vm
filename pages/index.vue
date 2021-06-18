@@ -23,7 +23,7 @@ export default {
   layout: 'layout-main-challenges',
 
   async asyncData({ store }) {
-    const posts = await store.dispatch('post/fetch')
+    const posts = await store.dispatch('post.actions/fetch')
     return { posts }
   }
 }

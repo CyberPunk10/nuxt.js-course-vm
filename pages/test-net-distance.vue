@@ -95,8 +95,6 @@ export default {
   methods: {
     // Search substr in 10 000 000 strings
     searchMethod() {
-      this.$store.dispatch('delTestSearch10000000/setArrStrings')
-
       if (this.input === '') {
         this.resultSearch = ''
         return

@@ -145,7 +145,7 @@ export default {
               image: this.image
             }
 
-            await this.$store.dispatch('post/create', formData)
+            await this.$store.dispatch('post.actions/create', formData)
             this.$message.success('Пост создан')
             this.controls.title = this.controls.text = ''
             this.image = null
