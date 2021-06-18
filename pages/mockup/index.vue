@@ -7,7 +7,6 @@
           title="Количество просмотров"
           :labels="sliceLabel"
           :data="views.data"
-
         />
       </div>
 
@@ -33,8 +32,8 @@ export default {
   middleware: ['admin-auth'],
   components: { AnalyticsChart },
 
-  async asyncData({store}) {
-    const { views, comments } = await store.dispatch('post/getAnalytics')
+  async asyncData({ store }) {
+    const { views, comments } = await store.dispatch('post.actions/getAnalytics')
     const sliceLabel = comments.labels.map(item => item.slice(0, 5))
     return { views, comments, sliceLabel }
   }

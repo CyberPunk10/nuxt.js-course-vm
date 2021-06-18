@@ -7,7 +7,6 @@
           title="Количество просмотров"
           :labels="views.labels"
           :data="views.data"
-
         />
       </div>
       <div class="wrap-card-content width-50">
@@ -32,8 +31,8 @@ export default {
   middleware: ['admin-auth'],
   components: { AnalyticsChart },
 
-  async asyncData({store}) {
-    const { views, comments } = await store.dispatch('post/getAnalytics')
+  async asyncData({ store }) {
+    const { views, comments } = await store.dispatch('post.actions/getAnalytics')
     return { views, comments }
   },
 

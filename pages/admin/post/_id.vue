@@ -1,6 +1,9 @@
 <template>
   <div class="page-wrap">
-    <el-breadcrumb separator-class="el-icon-arrow-right" class="mb">
+    <el-breadcrumb
+      separator-class="el-icon-arrow-right"
+      class="mb"
+    >
       <el-breadcrumb-item to="/admin/list">Посты</el-breadcrumb-item>
       <el-breadcrumb-item>{{post.title}}</el-breadcrumb-item>
     </el-breadcrumb>
@@ -13,7 +16,10 @@
       :rules="rules"
       @submit.native.prevent="onSubmit"
     >
-      <el-form-item label="Текст в формате .md или .html" prop="text">
+      <el-form-item
+        label="Текст в формате .md или .html"
+        prop="text"
+      >
         <el-input
           type="textarea"
           resize="none"
@@ -61,14 +67,14 @@ export default {
     this.controls.text = this.post.text
   },
 
-  validate({params}) {
+  validate({ params }) {
     return Boolean(params.id)
   },
 
-  async asyncData({store, params}) {
-    const post = await store.dispatch('post/fetchAdminById', params.id)
-    await store.dispatch('post/addView', post)
-    return {post}
+  async asyncData({ store, params }) {
+    const post = await store.dispatch('post.actions/fetchAdminById', params.id)
+    await store.dispatch('post.actions/addView', post)
+    return { post }
   },
 
   data() {
@@ -79,7 +85,7 @@ export default {
       },
       rules: {
         text: [
-          {required: true, message: 'Поле не должно быть пустым', trigger: 'blur'}
+          { required: true, message: 'Поле не должно быть пустым', trigger: 'blur' }
         ]
       }
     }
@@ -97,7 +103,7 @@ export default {
               id: this.post._id
             }
 
-            await this.$store.dispatch('post/update', formData)
+            await this.$store.dispatch('post.actions/update', formData)
             this.$message.success('Пост обновлен')
             this.loading = false
           } catch (error) {

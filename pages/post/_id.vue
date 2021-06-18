@@ -64,8 +64,8 @@ export default {
   layout: 'layout-main-challenges',
 
   async asyncData({ store, params }) {
-    const post = await store.dispatch('post/fetchById', params.id)
-    await store.dispatch('post/addView', post)
+    const post = await store.dispatch('post.actions/fetchById', params.id)
+    await store.dispatch('post.actions/addView', post)
     return {
       post: { ...post, views: ++post.views }
     }
