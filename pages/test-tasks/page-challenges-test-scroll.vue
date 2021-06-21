@@ -1,6 +1,15 @@
 <template>
   <div>
-
+    <div class="wrap-test">
+      <div class="text mb2">
+        <p>Страница с помощью которой проверяется как смотрится сайт на мобильном телефоне.</p>
+        <p>А именно:</p>
+        <ul>
+          <li>Не появляются ли сбоку ненужные белые поля, если контент не помещается в ширину</li>
+          <li>Как ведет себя header, корректно ли исчезает и появляется при скролле страницы</li>
+        </ul>
+      </div>
+    </div>
     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit provident alias eos quos quis suscipit, voluptas natus recusandae!</p> <br>
     <p>Non ad eius quo veniam sit alias, expedita cum quam voluptatum corporis dolores blanditiis doloribus repellat dicta sint praesentium officiis voluptatem facere!</p> <br>
     <p>Alias minima dolorem fugiat odit magnam dolore voluptas itaque reprehenderit unde saepe eius aut, officia neque commodi, maiores possimus veniam dolores deserunt adipisci tempora. Neque accusantium dolores sint itaque in soluta, officiis culpa</p> <br>

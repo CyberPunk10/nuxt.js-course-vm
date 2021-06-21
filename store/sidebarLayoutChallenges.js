@@ -126,7 +126,7 @@ export const state = () => ({
     {
       name: 'Страница для scroll-a',
       icon: 'fas fa-user-friends',
-      url: '/page-challenges-test-scroll',
+      url: '/test-tasks/page-challenges-test-scroll',
       onSidenav: true,
       isDev: true,
       isMockup: true
@@ -134,7 +134,7 @@ export const state = () => ({
     {
       name: 'Тестовое с дробями',
       icon: 'fas fa-heart',
-      url: '/test-drobi',
+      url: '/test-tasks/test-drobi',
       onSidenav: true,
       isDev: true,
       isMockup: true
@@ -142,7 +142,15 @@ export const state = () => ({
     {
       name: 'Тестовое NetDistance',
       icon: 'fas fa-heart',
-      url: '/test-net-distance',
+      url: '/test-tasks/test-net-distance',
+      onSidenav: true,
+      isDev: true,
+      isMockup: true
+    },
+    {
+      name: 'Тестовое Infinity-scroll',
+      icon: 'fas fa-infinity',
+      url: '/test-tasks/test-infinity-scroll',
       onSidenav: true,
       isDev: true,
       isMockup: true

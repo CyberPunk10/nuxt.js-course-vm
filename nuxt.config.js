@@ -76,7 +76,7 @@ export default {
     '~/modules/mongodb_setup.js',
     '@nuxtjs/apollo', // https://github.com/nuxt-community/apollo-module
     '@nuxtjs/markdownit', // https://github.com/nuxt-community/markdownit-module
-    'nuxt-socket-io' // https://github.com/richardeschloss/nuxt-socket-io
+    'nuxt-socket-io' // https://github.com/richardeschloss/nuxt-socket-io, https://javascript.plainenglish.io/introduction-to-nuxt-socket-io-b78c5322d389
   ],
 
   pwa: {
@@ -133,10 +133,35 @@ export default {
 
   io: {
     // module options
-    sockets: [{
-      name: 'main',
-      url: 'http://localhost:3000'
-    }]
+    sockets: [
+      {
+        name: 'main',
+        url: 'http://localhost:3000',
+        default: true,
+        vuex: {
+          mutations: [
+            { process: 'examples/SET_PROGRESS' }
+          ],
+          actions: [
+            { process: 'examples/FORMAT_MESSAGE' }
+          ],
+          emitBacks: ['examples/sample', { 'examples/sample2': 'sample2' }]
+        }
+      },
+      {
+        name: 'test',
+        url: 'http://localhost:3100',
+        vuex: {
+          mutations: [
+            { process: 'examples/SET_PROGRESS' }
+          ],
+          actions: [
+            { process: 'examples/FORMAT_MESSAGE' }
+          ],
+          emitBacks: ['examples/sample', { 'examples/sample2': 'sample2' }]
+        }
+      }
+    ]
   },
 
   env: {
