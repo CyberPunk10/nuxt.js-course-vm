@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap-net-distance">
+  <div class="wrap-test wrap-net-distance">
 
     <h2>Search substr in 10 000 000 strings</h2>
 
@@ -140,18 +140,6 @@ export default {
 
 <style lang="sass">
 .wrap-net-distance
-  h2
-    margin-top: 3rem
-    margin-bottom: 1rem
-    &:first-child
-      margin-top: 0
-
-  .style-list
-    margin: 2rem
-    li
-      list-style-type: disc
-      list-style-position: inside
-
   .input-search
     max-width: 21rem
   .drop-zone
