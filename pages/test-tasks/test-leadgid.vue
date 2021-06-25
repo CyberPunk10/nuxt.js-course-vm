@@ -204,7 +204,6 @@ export default {
 
 <style lang="sass">
 html body #test-leadgid
-  background-color: #e5e5e5
   margin: 0 auto
   min-height: 100vh
   width: 100%

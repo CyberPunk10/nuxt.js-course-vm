@@ -49,6 +49,7 @@ html body #test-leadgid
     left: 0
     min-height: 100%
     width: 100%
+    background-color: #e5e5e5
 
     .modal
       position: absolute
