@@ -155,6 +155,14 @@ export const state = () => ({
       isDev: true,
       isMockup: true
     },
+    {
+      name: 'Тестовое Верстка Формы',
+      icon: 'fab fa-wpforms',
+      url: '/test-tasks/test-leadgid',
+      onSidenav: true,
+      isDev: true,
+      isMockup: true
+    },
 
     // mockupAdmin
     {

@@ -3,7 +3,7 @@ export const state = () => ({
 })
 
 export const mutations = {
-  SetClass (state, bodyClass) {
+  SetClass(state, bodyClass) {
     state.bodyClass = bodyClass
   }
 }
