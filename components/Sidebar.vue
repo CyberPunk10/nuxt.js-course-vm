@@ -77,7 +77,6 @@ export default {
     },
 
     bodyClass() {
-      // console.log(this.$store.getters['class/bodyClassCurrent'])
       return this.$store.getters['class/bodyClassCurrent']
     },
 

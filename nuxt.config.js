@@ -59,6 +59,7 @@ export default {
       '~/components/main',
       '~/components/UI/Controls',
       '~/components/UI-challenge/controls',
+      '~/components/UI-test/leadgid',
     ]
   },
 
@@ -99,7 +100,8 @@ export default {
   styleResources: {
     sass: [
       'assets/sass/vars/_index.sass',
-      'assets/sass/mixins/_index.sass'
+      'assets/sass/mixins/_index.sass',
+      'assets/sass/utils/_px-to-rem.sass'
     ],
     scss: [
 
