@@ -1,6 +1,10 @@
 <template>
   <div id="test-leadgid">
-    <TheModalWindowLeadgid ref="modal">
+    <TheModalWindowLeadgid
+      ref="modal"
+      class="test-form-leadgid"
+      @closeModalWindow="closeModal"
+    >
       <div
         class="card-form__close-btn"
         @click="closeModal"
@@ -39,15 +43,59 @@
       >Forgot your password?</p>
     </TheModalWindowLeadgid>
     <p
-      v-if="!validationResult"
-      class="text-primary text-btn"
+      v-if="!showedModalWindow && !validationResult"
+      class="text-primary text-btn text-on-dashboard"
       @click="showModal"
     >{{ titleFormLogin ? 'Log In' : 'Sign Up' }}</p>
     <p
-      v-else
-      class="text-primary text-btn"
+      v-if="!showedModalWindow && validationResult"
+      class="text-primary text-btn text-on-dashboard"
       @click="validationResult = !validationResult"
     >Валидация прошла успешно</p>
+
+    <div
+      class="text"
+      v-if="!showedModalWindow"
+    >
+      <h3>Тестовое задание на вакансию HTML-верстальщик</h3><br>
+      <p>В этом задании нужно сверстать форму входа на сайт и внедрить ее в Nuxt.js.<br>
+        Можно сначала сверстать, потом внедрить в Nuxt, либо сразу верстать внутри фреймворка.<br>
+        В среднем на тестовое задание требуется 1-2 часа.<br><br>
+        Задание:</p>
+
+      <ul class="style-list">
+        <li>1. Сверстать <a
+            class="link-typical"
+            href="https://www.figma.com/file/QquaqC4hcvuhyyVzD3NbcU/Log-In-Page?node-id=0%3A1"
+          >макет</a></li>
+
+        <li>2. Развернуть проект Nuxt.js и внедрить верстку</li>
+        <li>2.1. Форма должна вызывать метод submit, где перед отправкой формы проверяются данные:</li>
+        <ul>
+          <li>- Логин: минимум 3 символа, максимум 15</li>
+          <li>- Логин: допускаются только буквы (кириллица, латиница)</li>
+          <li>- Пароль: минимум 6 символов, максимум 20</li>
+        </ul>
+        <li>2.2. При отправке формы, если все поля прошли валидацию, нужно вызвать метод api() (код метода ниже):
+          <div class="max-width-for-pre">
+            <pre>
+
+    api() {
+      return new Promise((resolve) => {
+        setTimeout(resolve('success'), 3000);
+      });
+    },
+            </pre>
+          </div>
+        </li>
+
+        <li>2.3. Выделить инпут красным, если данные не соответствуют валидации, приведенной выше (вывод текста ошибок - по желанию)</li>
+        <li>2.4. Крестик должен вызывать метод close</li>
+
+        <li>3. Загрузить проект в gitlab/github и выслать ссылку на почту</li>
+      </ul>
+
+    </div>
   </div>
 </template>
 
@@ -76,7 +124,8 @@ export default {
         login: '',
         password: '',
       },
-      validationResult: ''
+      validationResult: '',
+      showedModalWindow: false
     }
   },
 
@@ -112,6 +161,7 @@ export default {
       this.$nextTick(() => {
         if (this.$refs.modal) {
           this.$refs.modal.show = true
+          this.showedModalWindow = true
         } else if (count > 0) {
           this.initClientOnlyComp(count - 1)
         }
@@ -119,9 +169,11 @@ export default {
     },
     showModal() {
       this.$refs.modal.show = true
+      this.showedModalWindow = true
     },
     closeModal() {
       this.$refs.modal.show = false
+      this.showedModalWindow = false
     },
     checkForm() {
       if (this.$v.formLogin.$invalid) {
@@ -153,14 +205,16 @@ export default {
 <style lang="sass">
 html body #test-leadgid
   background-color: #e5e5e5
-  font-family: "Roboto", sans-serif
   margin: 0 auto
   min-height: 100vh
   width: 100%
-  display: flex
-  justify-content: center
-  align-items: center
-  text-align: center
+
+  .text.opacity
+    opacity: 0
+
+  .test-form-leadgid
+    font-family: "Roboto", sans-serif
+    text-align: center
 
   .card-form
     &__close-btn
@@ -208,13 +262,30 @@ html body #test-leadgid
     margin-bottom: 1.7rem
     font-family: "Roboto", sans-serif
     font-weight: 400
+    @media screen and (max-width: $phoneWidth) // < 480px
+      padding-left: 0
+      padding-right: 5px
 
   .text-primary
+    font-family: "Roboto", sans-serif
     color: $green-primary
   .text-btn
     cursor: pointer
+  .text-primary.text-btn
+    text-align: center
 
   .button.offset
     margin-top: 1.5rem
     margin-bottom: 1rem
+
+  .max-width-for-pre
+    max-width: calc(100vw - 3rem)
+    overflow-x: auto
+    padding: 0
+
+  .style-list > li
+    margin: rem(10) 0
+
+  .text-on-dashboard
+    margin: 1rem
 </style>

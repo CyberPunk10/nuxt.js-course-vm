@@ -29,4 +29,8 @@ export default {
   justify-content: center
   align-items: center
   width: 100%
+  @media screen and (max-width: $phoneWidth) // < 480px
+    display: block
+    .container
+      padding: .5rem
 </style>

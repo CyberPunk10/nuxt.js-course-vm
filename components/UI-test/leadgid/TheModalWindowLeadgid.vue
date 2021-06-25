@@ -28,6 +28,7 @@ export default {
   methods: {
     closeModal: function () {
       this.show = false
+      this.$emit('closeModalWindow')
     }
   }
 }
