@@ -8,7 +8,7 @@
         <Nuxt />
       </el-main>
     </el-container>
-    <TeleportMenu/>
+    <TeleportMenu />
   </div>
 </template>
 
@@ -31,7 +31,7 @@ export default {
     }
   },
 
-  mounted(){
+  mounted() {
     /* Работа со скоролом */
     // взято отсюда: https://habr.com/ru/company/ruvds/blog/468405/
     // легкий простой код на проверку фиксированные ли scroll-ы у пользователя или нет
@@ -49,7 +49,7 @@ export default {
     // Measure the child element, if it is not
     // 30px wide the scrollbars are obtrusive.
     const scrollbarWidth = 30 - parent.firstChild.clientWidth
-    if(scrollbarWidth) {
+    if (scrollbarWidth) {
       document.body.classList.add("layout-scrollbar-obtrusive")
     }
     document.body.removeChild(parent)

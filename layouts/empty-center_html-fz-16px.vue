@@ -18,7 +18,14 @@ export default {
     error(value) {
       this.$message.error(value.response.data.message)
     }
-  }
+  },
+
+  beforeMount() {
+    document.documentElement.style.fontSize = '16px'
+  },
+  beforeDestroy() {
+    document.documentElement.style.fontSize = '10px'
+  },
 }
 </script>
 

@@ -77,7 +77,8 @@ export default {
     '~/modules/mongodb_setup.js',
     '@nuxtjs/apollo', // https://github.com/nuxt-community/apollo-module
     '@nuxtjs/markdownit', // https://github.com/nuxt-community/markdownit-module
-    'nuxt-socket-io' // https://github.com/richardeschloss/nuxt-socket-io, https://javascript.plainenglish.io/introduction-to-nuxt-socket-io-b78c5322d389
+    'nuxt-socket-io', // https://github.com/richardeschloss/nuxt-socket-io, https://javascript.plainenglish.io/introduction-to-nuxt-socket-io-b78c5322d389
+    '@nuxtjs/proxy', // https://github.com/nuxt-community/proxy-module
   ],
 
   pwa: {
@@ -110,7 +111,9 @@ export default {
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    baseURL: process.env.BASE_URL || 'http://localhost:3000/' // for heroku or other hosting
+    // baseURL: process.env.BASE_URL || 'http://localhost:3000/' // for heroku or other hosting
+    prefix: '/rest-api/',
+    proxy: true
   },
 
   apollo: {
@@ -136,34 +139,45 @@ export default {
   io: {
     // module options
     sockets: [
-      {
-        name: 'main',
-        url: 'http://localhost:3000',
-        default: true,
-        vuex: {
-          mutations: [
-            { process: 'examples/SET_PROGRESS' }
-          ],
-          actions: [
-            { process: 'examples/FORMAT_MESSAGE' }
-          ],
-          emitBacks: ['examples/sample', { 'examples/sample2': 'sample2' }]
-        }
-      },
-      {
-        name: 'test',
-        url: 'http://localhost:3100',
-        vuex: {
-          mutations: [
-            { process: 'examples/SET_PROGRESS' }
-          ],
-          actions: [
-            { process: 'examples/FORMAT_MESSAGE' }
-          ],
-          emitBacks: ['examples/sample', { 'examples/sample2': 'sample2' }]
-        }
-      }
+      // {
+      //   name: 'main',
+      //   url: 'http://localhost:3000',
+      //   default: true,
+      //   vuex: {
+      //     mutations: [
+      //       { process: 'examples/SET_PROGRESS' }
+      //     ],
+      //     actions: [
+      //       { process: 'examples/FORMAT_MESSAGE' }
+      //     ],
+      //     emitBacks: ['examples/sample', { 'examples/sample2': 'sample2' }]
+      //   }
+      // },
+      // {
+      //   name: 'test',
+      //   url: 'http://localhost:3100',
+      //   vuex: {
+      //     mutations: [
+      //       { process: 'examples/SET_PROGRESS' }
+      //     ],
+      //     actions: [
+      //       { process: 'examples/FORMAT_MESSAGE' }
+      //     ],
+      //     emitBacks: ['examples/sample', { 'examples/sample2': 'sample2' }]
+      //   }
+      // }
     ]
+  },
+
+  proxy: {
+    '/rest-api/': {
+      target: process.env.BASE_URL || 'http://localhost:3000/',
+      pathRewrite: { '^/rest-api/': '' },
+    },
+    '/jokeapi/': {
+      target: 'https://v2.jokeapi.dev/',
+      pathRewrite: { '^/jokeapi/': '' },
+    }
   },
 
   env: {
