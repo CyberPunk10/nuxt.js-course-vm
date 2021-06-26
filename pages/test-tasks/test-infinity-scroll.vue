@@ -3,6 +3,14 @@
 
     <h2>Загрузка контента с API по скроллу (infinity-scroll).</h2>
 
+    <p class="mb2">При переносе кода поменялась логика, нужно переделать (за контейнер скроллинга брать не window, а блок .main-container)</p>
+    <p class="mb2">Не реализована логика
+      <a
+        class="link-typical"
+        href="https://learn.javascript.ru/call-apply-decorators#dekorator-debounce"
+      >throttling / debounce</a>. + Поменять логику поиска.
+    </p>
+
     <div class="text mb2">
       <p>Тестовое задание по Vue.js + Nuxt (Front-end разработчик)</p>
       <p>Требуется реализовать простое SPA на Vue + Nuxt</p>
@@ -35,7 +43,7 @@
 
     <AboutMe />
 
-    <!-- <div class="info-array-liked">
+    <div class="info-array-liked">
       <p>Total Count Jokes: {{ totalCountJokes }}</p>
       <p>Indexes liked jokes: {{ idJokesLiked }}</p>
       <p>Current length list: {{ jokes.length }}</p>
@@ -44,7 +52,6 @@
       class="search-input"
       @input="searchJokeByValue"
       type="text"
-      autofocus
       placeholder="Введите слово для поиска среди анекдотов..."
     >
 
@@ -57,7 +64,7 @@
           <div
             class="card"
             :class="{liked: idJokesLiked.includes(joke.id)}"
-          >Анекдот {{index + 1}}
+          >{{ joke.joke || joke.setup || 'Анекдот отсутствует'}}
             <span
               @click="toggleLike(joke.id, $event)"
               class="material-icons md-dark"
@@ -87,7 +94,7 @@
       >
         <span class="text-error">Это все шутки, найденые на сервере по такому ключевому слову.</span>
       </li>
-    </ul> -->
+    </ul>
 
   </div>
 </template>
@@ -106,85 +113,187 @@ export default {
     await this.$store.dispatch('jokes/getData')
   },
   computed: {
-    //   totalCountJokes() {
-    //     return this.$store.getters['jokes/getTotalCountJokes']
-    //   },
-    //   jokes() {
-    //     return this.$store.getters['jokes/getJokes']
-    //   },
-    //   enough() {
-    //     return this.$store.getters['jokes/getEnough']
-    //   },
-    //   idJokesLiked() {
-    //     return this.$store.getters['jokes/getLikedJokes']
-    //   },
-    //   stateError() {
-    //     return this.$store.getters.getError
-    //   },
-    //   allJokesSavedLocal() {
-    //     return this.$store.getters['jokes/getAllJokesSavedLocal']
-    //   }
+    totalCountJokes() {
+      return this.$store.getters['jokes/getTotalCountJokes']
+    },
+    jokes() {
+      return this.$store.getters['jokes/getJokes']
+    },
+    enough() {
+      return this.$store.getters['jokes/getEnough']
+    },
+    idJokesLiked() {
+      return this.$store.getters['jokes/getLikedJokes']
+    },
+    stateError() {
+      return this.$store.getters.getError
+    },
+    allJokesSavedLocal() {
+      return this.$store.getters['jokes/getAllJokesSavedLocal']
+    }
   },
 
-  // watch: {
-  //   jokes() {
-  //     if (this.jokes.length < 10) {
-  //       this.getData()
-  //     }
-  //   },
-  //   stateError() {
-  //     if (this.stateError?.code === 106) {
-  //       this.getData()
-  //     }
-  //   }
-  // },
+  watch: {
+    jokes() {
+      if (this.jokes.length < 10) {
+        this.getData()
+      }
+    },
+    stateError() {
+      if (this.stateError?.code === 106) {
+        this.getData()
+      }
+    }
+  },
 
-  // beforeMount() {
-  //   window.addEventListener("scroll", this.handleScroll)
-  // },
+  beforeMount() {
+    window.addEventListener("scroll", this.handleScroll)
+  },
 
-  // mounted() {
-  //   if (localStorage.getItem('data-liked-jokes') !== null) {
-  //     this.$store.commit(
-  //       'jokes/setFromLocalstorageLikedJokes',
-  //       JSON.parse(localStorage.getItem('data-liked-jokes'))
-  //     )
-  //   }
-  // },
+  mounted() {
+    if (localStorage.getItem('data-liked-jokes') !== null) {
+      this.$store.commit(
+        'jokes/setFromLocalstorageLikedJokes',
+        JSON.parse(localStorage.getItem('data-liked-jokes'))
+      )
+    }
+  },
 
-  // beforeDestroy() {
-  //   window.removeEventListener("scroll", this.handleScroll)
-  // },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll)
+  },
 
   methods: {
-    // handleScroll() {
-    //   if (this.enough) return
-    //   let element_toTop = this.getElementOffset().top
-    //   let current_distance = document.documentElement.scrollTop + window.innerHeight
-    //   current_distance > element_toTop && this.getData()
-    // },
-    // getElementOffset() {
-    //   let top = 0
-    //   let element = this.$refs.loadMore
-    //   do {
-    //     top += element.offsetTop || 0
-    //     element = element.offsetParent
-    //   } while (element)
-    //   return { top }
-    // },
-    // async getData() {
-    //   await this.$store.dispatch('jokes/getData')
-    // },
-    // toggleLike(id, $event) {
-    //   $event.target.parentElement.classList.toggle('liked')
-    //   this.$store.dispatch('jokes/toggleLikedJoke', id)
-    // },
-    // searchJokeByValue($event) {
-    //   this.$store.dispatch('jokes/searchJokeByValue', $event.target.value)
-    // }
+    handleScroll() {
+      if (this.enough) return
+      let element_toTop = this.getElementOffset().top
+      let current_distance = document.documentElement.scrollTop + window.innerHeight
+      current_distance > element_toTop && this.getData()
+    },
+    getElementOffset() {
+      let top = 0
+      let element = this.$refs.loadMore
+      do {
+        top += element.offsetTop || 0
+        element = element.offsetParent
+      } while (element)
+      return { top }
+    },
+    async getData() {
+      await this.$store.dispatch('jokes/getData')
+    },
+    toggleLike(id, $event) {
+      $event.target.parentElement.classList.toggle('liked')
+      this.$store.dispatch('jokes/toggleLikedJoke', id)
+    },
+    searchJokeByValue($event) {
+      this.$store.dispatch('jokes/searchJokeByValue', $event.target.value)
+    }
   },
 }
 </script>
 
 <style lang="sass">
+.wrap-infinity-scroll
+  .material-icons.md-dark
+    user-select: none
+    color: rgba(0, 0, 0, 0.3)
+    transition: $transitionDefaultHover
+
+  .info-array-liked
+    padding: 1rem
+    margin-bottom: 2rem
+    color: #888
+    border: 1px solid $color-dark-shade-20
+    border-radius: 6px
+    p
+      margin-bottom: 1rem
+      &:last-child
+        margin-bottom: 0
+
+  .list,
+  .search-input
+    width: 100%
+
+  .search-input
+    margin-bottom: 1rem
+    border: 1px solid $color-dark-shade-20
+    padding: 1rem
+    border-radius: 6px
+    &:hover,
+    &:focus
+      border-color: #888
+      box-shadow: $borderShadow
+    &:hover
+      box-shadow: $borderShadowHover
+
+  .list
+    margin: 0 auto
+    background-color: #fff
+    border: 1px solid $color-dark-shade-10
+    padding: 1rem
+    border-radius: 6px
+  .search-input,
+  .card
+    transition: all .2s ease-out
+
+  .list li
+    margin-bottom: 1rem
+    &:last-child
+      margin-bottom: 0
+
+  .card
+    cursor: pointer
+    width: 100%
+    padding: 1.2rem
+    color: #555
+    background-color: #fff
+    border-radius: $borderRadius
+    border: 1px solid #e8e8e8
+    box-shadow: $borderShadow
+    display: flex
+    justify-content: space-between
+    align-items: center
+    transition: $transitionDefaultHover
+    &:hover
+      color: $colorBlue
+      box-shadow: $borderShadowHover
+      span.material-icons.md-dark:hover
+        color: $colorBlue
+    &.liked
+      background-color: $colorBlueLite
+      border-color: #409eff50
+      color: $colorBlue
+      &:hover
+        border-color: #409eff60
+      .material-icons.md-dark
+        color: #409effbb
+
+  .search-input,
+  .card
+    @media screen and (min-width: $phoneWidth)
+      padding: 1.5rem
+      font-size: 1.5rem
+    @media screen and (min-width: $tabletWidth)
+      padding: 2rem
+      font-size: 1.6rem
+
+  .text-error
+    color: $red
+
+  .error-to-print
+    display: inline-block
+    color: $red
+    background-color: #fff
+    border-bottom-right-radius: 1rem
+    border-bottom-left-radius: 1rem
+    height: 0
+    overflow: hidden
+    transition: $transitionDefault
+
+    &.show
+      border: 1px solid $red
+      border-top: 0
+      padding: 1rem
+      height: 100%
 </style>

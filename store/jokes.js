@@ -68,10 +68,9 @@ export const mutations = {
 
 export const actions = {
   async getData({ commit, state }) {
-    // get total count jokes
     if (!state.totalCountJokes) {
       try {
-        const data = await this.$axios.$get('/info')
+        const data = await this.$axios.$get('jokeapi/info')
         if (!data.error) {
           commit('setTotalCountJokes', data.jokes.totalCount)
           commit('setCountRequestMax', Math.ceil(state.totalCountJokes / state.pageSize))
@@ -104,7 +103,7 @@ export const actions = {
       commit('updateCountRequest')
 
       try {
-        const data = await this.$axios.$get('/joke/Any', { params })
+        const data = await this.$axios.$get('jokeapi/joke/Any', { params })
         if (!data.error) {
           commit('setJokes', data)
           if (state.searchValue) {
