@@ -1,9 +1,46 @@
-$baseFontSize: 16
+// Return value without unit of measurement
+@function strip-units($number)
+  @return $number / ($number * 0 + 1)
+
+// example
+// strip-units(10px) // вернет 10
+
+$baseFontSize: 16 // html font-size default
+
+// classic: if in html font-size: 16px --> перевести в rem
+// принимает либо px, либо числа без ед.изм
 @function rem($pixels, $context: $baseFontSize)
-  @if (unitless($pixels))
+  @if unitless($pixels) // если НЕ содержит единицы измерения
     $pixels: $pixels * 1px
 
-  @if (unitless($context))
+  @if unitless($context)
     $context: $context * 1px
 
   @return $pixels / $context * 1rem
+
+// example
+// rem(10) // вернет 0,625rem (10px/16px)
+
+$customFontSize: 10 // html font-size custom
+// If in html font-size: 10px и задача встроть код, написанный с учетом font-size: 16px
+// $size       - размер (число, подразумевающее пиксили или rem)
+// $context    - current font-size in html (10)
+// $oldContext - old font-size in html (or base font-size) (16)
+@function rem-increase($size, $context: $customFontSize, $oldContext: $baseFontSize)
+  $rem-to-rem: unit($size) == 'rem'
+
+  @if not unitless($size) // если содержит единицы измерения
+    $size: $size / ($size * 0 + 1)
+
+  @if not unitless($context)
+    $context: $context / ($context * 0 + 1)
+
+  @if $rem-to-rem
+    @return ($size * $oldContext / $context * 1rem)
+
+  @return ($size * $context * 1rem)
+
+// example
+// rem-increase(10) // вернет 1rem (10px*10px)
+
+// https://sass-guidelin.es/ru/ - guide sass

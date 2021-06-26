@@ -35,8 +35,7 @@ export default {
 </script>
 
 <style lang="sass">
-html body #test-leadgid
-
+.wrap-test-leadgid
   .modal-enter-active, .modal-leave-active
     transition: opacity .2s
   .modal-enter, .modal-leave-to
@@ -50,6 +49,8 @@ html body #test-leadgid
     min-height: 100%
     width: 100%
     background-color: #e5e5e5
+    @media screen and (max-width: $phoneWidth) // < 480px
+      background-color: #fff
 
     .modal
       position: absolute
@@ -58,7 +59,7 @@ html body #test-leadgid
       transform: translate(-50%, -50%)
       width: 100%
       max-width: 375px
-      padding: 1rem
+      padding: rem-increase(1rem)
       background-color: #fff
       @media screen and (max-width: $phoneWidth) // < 480px
         top: 0
