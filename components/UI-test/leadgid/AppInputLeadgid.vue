@@ -85,7 +85,7 @@ export default {
 .text-field
   position: relative
   max-width: 343px
-  margin-bottom: 1rem
+  margin-bottom: rem-increase(1rem)
   color: #606266
 
   &__input
@@ -93,7 +93,7 @@ export default {
     width: 100%
     background-color: $gray-01
     font-size: 16px
-    padding: 1rem 1rem 15px
+    padding: rem-increase(1rem) rem-increase(1rem) 15px
     border: 1px solid #E8E8E8
     border-radius: 8px
     color: #444
@@ -112,7 +112,7 @@ export default {
       background-color: #fff
 
   &.invalid
-    margin-bottom: .5rem
+    margin-bottom: rem-increase(.5rem)
     input
       border-color: $red
 

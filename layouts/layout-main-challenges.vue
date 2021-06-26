@@ -9,7 +9,10 @@
 
     <Sidebar />
 
-    <div class="main-container">
+    <div
+      class="main-container"
+      :class="{'z-index-for-fullscreen-modal-window': modalWindowActive}"
+    >
       <div
         class="main-content layout-scrollbar layout-cell"
         ref="mainContent"
@@ -26,8 +29,6 @@
     <ProgressBar :value="progress" />
 
     <FooterMobile />
-
-    <!-- <TeleportMenu /> -->
   </div>
 </template>
 
@@ -52,7 +53,8 @@ export default {
     // },
     ...mapGetters({
       isSidebarActive: 'sidebarLayoutChallenges/isSidebarActive',
-      isHeaderOut: 'headerLayoutChallenges/isHeaderOut'
+      isHeaderOut: 'headerLayoutChallenges/isHeaderOut',
+      modalWindowActive: 'modalWindow/getStateModalWindow'
     }),
   },
   watch: {
@@ -258,6 +260,9 @@ export default {
     @media screen and (min-width: $tabletWidth)
       width: auto
       left: $sidebarWidthIcon
+
+    &.z-index-for-fullscreen-modal-window
+      z-index: 21 // модальное окно теперь не будет перекрываться header & footer
 
     .main-content
       position: absolute

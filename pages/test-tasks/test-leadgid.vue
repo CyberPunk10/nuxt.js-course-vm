@@ -1,5 +1,5 @@
 <template>
-  <div id="test-leadgid">
+  <div class="wrap-test wrap-test-leadgid">
     <TheModalWindowLeadgid
       ref="modal"
       class="test-form-leadgid"
@@ -53,11 +53,12 @@
       @click="validationResult = !validationResult"
     >Валидация прошла успешно</p>
 
+    <h2 v-if="!showedModalWindow">Тестовое задание на вакансию HTML-верстальщик</h2>
+
     <div
       class="text"
       v-if="!showedModalWindow"
     >
-      <h3>Тестовое задание на вакансию HTML-верстальщик</h3><br>
       <p>В этом задании нужно сверстать форму входа на сайт и внедрить ее в Nuxt.js.<br>
         Можно сначала сверстать, потом внедрить в Nuxt, либо сразу верстать внутри фреймворка.<br>
         В среднем на тестовое задание требуется 1-2 часа.<br><br>
@@ -94,7 +95,6 @@
 
         <li>3. Загрузить проект в gitlab/github и выслать ссылку на почту</li>
       </ul>
-
     </div>
   </div>
 </template>
@@ -115,7 +115,7 @@ export default {
     ]
   },
 
-  layout: 'empty-center_html-fz-16px',
+  layout: 'layout-main-challenges',
 
   data() {
     return {
@@ -144,24 +144,15 @@ export default {
       }
     }
   },
-
-  beforeMount() {
-    document.documentElement.style.fontSize = '16px'
-  },
   mounted() {
     this.initClientOnlyComp()
-  },
-
-  beforeDestroy() {
-    document.documentElement.style.fontSize = '10px'
   },
 
   methods: {
     initClientOnlyComp(count = 10) {
       this.$nextTick(() => {
         if (this.$refs.modal) {
-          this.$refs.modal.show = true
-          this.showedModalWindow = true
+          this.showModal()
         } else if (count > 0) {
           this.initClientOnlyComp(count - 1)
         }
@@ -170,10 +161,12 @@ export default {
     showModal() {
       this.$refs.modal.show = true
       this.showedModalWindow = true
+      this.$store.commit('modalWindow/showModal')
     },
     closeModal() {
       this.$refs.modal.show = false
       this.showedModalWindow = false
+      this.$store.commit('modalWindow/closeModal')
     },
     checkForm() {
       if (this.$v.formLogin.$invalid) {
@@ -203,9 +196,8 @@ export default {
 </script>
 
 <style lang="sass">
-html body #test-leadgid
+.wrap-test-leadgid
   margin: 0 auto
-  min-height: 100vh
   width: 100%
 
   .text.opacity
@@ -220,8 +212,8 @@ html body #test-leadgid
       position: absolute
       top: 0
       left: 0
-      width: 4rem
-      height: 4rem
+      width: rem-increase(4rem)
+      height: rem-increase(4rem)
       cursor: pointer
       &:before,
       &:after
@@ -246,8 +238,8 @@ html body #test-leadgid
       position: absolute
       top: -2px
       right: 15px
-      padding-top: 1.8rem
-      height: 4.5rem
+      padding-top: rem-increase(1.8rem)
+      height: rem-increase(4.5rem)
       cursor: pointer
       color: $green-primary
       transition: $transitionDefaultHover
@@ -256,9 +248,9 @@ html body #test-leadgid
 
   h1.title
     font-size: 30px
-    line-height: 2.9rem
+    line-height: rem-increase(2.9rem)
     padding-left: 5px
-    margin-bottom: 1.7rem
+    margin-bottom: rem-increase(1.7rem)
     font-family: "Roboto", sans-serif
     font-weight: 400
     @media screen and (max-width: $phoneWidth) // < 480px
@@ -274,11 +266,11 @@ html body #test-leadgid
     text-align: center
 
   .button.offset
-    margin-top: 1.5rem
-    margin-bottom: 1rem
+    margin-top: rem-increase(1.5rem)
+    margin-bottom: rem-increase(1rem)
 
   .max-width-for-pre
-    max-width: calc(100vw - 3rem)
+    max-width: calc(100vw - rem-increase(3rem))
     overflow-x: auto
     padding: 0
 
@@ -286,5 +278,5 @@ html body #test-leadgid
     margin: rem(10) 0
 
   .text-on-dashboard
-    margin: 1rem
+    margin: rem-increase(1rem)
 </style>
